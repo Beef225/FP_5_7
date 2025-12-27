@@ -1,0 +1,64 @@
+############################
+# Unreal Engine (generated)
+############################
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Local shader cache / local DDC variants (belt + suspenders)
+**/DerivedDataCache/**
+**/Intermediate/**
+**/Saved/**
+
+############################
+# Unreal project files
+############################
+# If you want a code-only repo, ignore all assets:
+Content/
+
+# Optional: ignore local platform build products that sometimes appear
+*.target
+*.version
+
+############################
+# IDEs / tools
+############################
+.vs/
+.idea/
+.vscode/
+
+# Rider / JetBrains
+*.iml
+
+# Visual Studio / MSBuild user files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.VC.db
+*.opendb
+*.suo
+
+############################
+# Logs / crash / temp
+############################
+*.log
+*.tmp
+crashinfo*
+*.dmp
+
+############################
+# OS junk
+############################
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+############################
+# Keep these (do NOT ignore)
+############################
+# Config/*.ini should be committed (project settings)
+# Source/** should be committed (code)
+# *.uproject should be committed

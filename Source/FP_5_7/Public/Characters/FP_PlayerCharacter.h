@@ -61,4 +61,14 @@ private:
 
 	// Runtime state
 	float TargetArmLength = 800.f;
+	
+	// Mouse-facing
+	UPROPERTY(EditDefaultsOnly, Category="Facing|Mouse")
+	float FacingInterpSpeed = 0.f; // 0 = snap, >0 = smooth
+
+	UPROPERTY(EditDefaultsOnly, Category="Facing|Mouse")
+	float MinAimDistance = 3.f; // ignore tiny jitter when cursor is near feet
+
+	bool GetMouseWorldPoint(FVector& OutWorldPoint) const;
+	void FaceMouse(float DeltaTime);
 };

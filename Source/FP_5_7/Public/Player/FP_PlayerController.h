@@ -42,29 +42,5 @@ private:
 
 	void Zoom(const FInputActionValue& InputActionValue);
 	
-	// Camera zoom
-	UPROPERTY(EditDefaultsOnly, Category="Camera|Zoom")
-	float MinArmLength = 350.f;
-
-	UPROPERTY(EditDefaultsOnly, Category="Camera|Zoom")
-	float MaxArmLength =900.f;
-
-	UPROPERTY(EditDefaultsOnly, Category="Camera|Zoom")
-	float ZoomStep = 120.f; // how much one wheel "notch" changes target
-
-	UPROPERTY(EditDefaultsOnly, Category="Camera|Zoom")
-	float ZoomInterpSpeed = 12.f; // higher = snappier, lower = smoother
-
-	float TargetArmLength = 900.f;
-	
-	UPROPERTY(EditDefaultsOnly, Category="Camera|Zoom")
-	float FarPitch = -60.f;
-
-	UPROPERTY(EditDefaultsOnly, Category="Camera|Zoom")
-	float NearPitch = -35.f;
-
-	UPROPERTY(EditDefaultsOnly, Category="Camera|Zoom")
-	float PitchInterpSpeed = 10.f;
-
 };
 

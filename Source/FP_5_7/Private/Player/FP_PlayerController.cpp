@@ -47,16 +47,14 @@ void AFP_PlayerController::SetupInputComponent()
 void AFP_PlayerController::Move(const FInputActionValue& InputActionValue)
 {
 	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
-	const FRotator Rotation = GetControlRotation();
-	const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
 
-	const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+	const FVector ForwardDirection = FVector::ForwardVector; // world +X
+	const FVector RightDirection   = FVector::RightVector;   // world +Y
 
-	if (APawn* ControlledPawn = GetPawn<APawn>())
+	if (APawn* ControlledPawn = GetPawn())
 	{
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
-		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
+		ControlledPawn->AddMovementInput(RightDirection,   InputAxisVector.X);
 	}
 }
 

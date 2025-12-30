@@ -11,8 +11,10 @@ AFP_PlayerCharacter::AFP_PlayerCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Movement settings you already had
-	GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->RotationRate = FRotator(0.f, 400.f, 0.f);
+	//GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->bUseControllerDesiredRotation = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 1080.f, 0.f);
+	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->bConstrainToPlane = true;
 	GetCharacterMovement()->bSnapToPlaneAtStart = true;
 
@@ -102,4 +104,51 @@ void AFP_PlayerCharacter::Tick(float DeltaTime)
 	FRotator R = CameraBoom->GetRelativeRotation();
 	R.Pitch = FMath::FInterpTo(R.Pitch, DesiredPitch, DeltaTime, PitchInterpSpeed);
 	CameraBoom->SetRelativeRotation(R);
+	
+	FaceMouse(DeltaTime);
 }
+
+bool AFP_PlayerCharacter::GetMouseWorldPoint(FVector& OutWorldPoint) const
+{
+	const APlayerController* PC = Cast<APlayerController>(GetController());
+	if (!PC) return false;
+
+	FHitResult Hit;
+	// ECC_Visibility works if your floor blocks visibility.
+	// If it doesn't, create a custom trace channel for "Ground" and use that instead.
+	if (!PC->GetHitResultUnderCursor(ECC_Visibility, /*bTraceComplex=*/false, Hit))
+		return false;
+
+	if (!Hit.bBlockingHit) return false;
+
+	OutWorldPoint = Hit.ImpactPoint;
+	return true;
+}
+
+void AFP_PlayerCharacter::FaceMouse(float DeltaTime)
+{
+	FVector MouseWorld;
+	if (!GetMouseWorldPoint(MouseWorld))
+		return;
+
+	FVector ToMouse = MouseWorld - GetActorLocation();
+	ToMouse.Z = 0.f;
+
+	if (ToMouse.SizeSquared() < FMath::Square(MinAimDistance))
+		return;
+
+	const float TargetYaw = ToMouse.Rotation().Yaw;
+
+	if (APlayerController* PC = Cast<APlayerController>(GetController()))
+	{
+		const FRotator Current = PC->GetControlRotation();
+		const FRotator Desired(0.f, TargetYaw, 0.f);
+
+		const FRotator Smoothed = (FacingInterpSpeed <= 0.f)
+			? Desired
+			: FMath::RInterpTo(Current, Desired, DeltaTime, FacingInterpSpeed);
+
+		PC->SetControlRotation(Smoothed);
+	}
+}
+

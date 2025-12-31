@@ -8,6 +8,7 @@
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class IFP_EnemyInterface;
 
 /**
  * 
@@ -20,6 +21,7 @@ class FP_5_7_API AFP_PlayerController : public APlayerController
 public:
 
 	AFP_PlayerController();
+	virtual void PlayerTick(float DeltaTime) override;
 	
 
 protected:
@@ -41,6 +43,10 @@ private:
 	TObjectPtr<UInputAction> ZoomAction;
 
 	void Zoom(const FInputActionValue& InputActionValue);
+	
+	void CursorTrace();
+	TScriptInterface<IFP_EnemyInterface> LastActor;
+	TScriptInterface<IFP_EnemyInterface> ThisActor;
 	
 };
 

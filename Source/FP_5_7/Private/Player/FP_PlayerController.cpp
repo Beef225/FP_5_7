@@ -6,11 +6,112 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Characters/FP_PlayerCharacter.h"
+#include "Interaction/FP_EnemyInterface.h"
 
 
 AFP_PlayerController::AFP_PlayerController()
 {
 	bReplicates = true;
+}
+
+void AFP_PlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+	CursorTrace();
+}
+
+void AFP_PlayerController::CursorTrace()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+	
+	// ---------- DEBUG BLOCK ----------
+	/*if (GEngine)
+	{
+		if (CursorHit.bBlockingHit)
+		{
+			AActor* HitActor = CursorHit.GetActor();
+			UPrimitiveComponent* HitComp = CursorHit.GetComponent();
+
+			const FString ActorName = HitActor ? HitActor->GetName() : TEXT("NULL");
+			const FString CompName  = HitComp ? HitComp->GetName() : TEXT("NULL");
+
+			GEngine->AddOnScreenDebugMessage(
+				-1,
+				0.f, // 0 = update every frame
+				FColor::Green,
+				FString::Printf(
+					TEXT("HIT | Actor: %s | Component: %s | Distance: %.1f"),
+					*ActorName,
+					*CompName,
+					CursorHit.Distance
+				)
+			);
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(
+				-1,
+				0.f,
+				FColor::Red,
+				TEXT("NO BLOCKING HIT UNDER CURSOR")
+			);
+		}
+	}*/
+	// ---------- END DEBUG BLOCK ----------
+	
+	if (!CursorHit.bBlockingHit) return;
+	
+	LastActor=ThisActor;
+	ThisActor = CursorHit.GetActor();
+	
+	/**
+	 * Line trace from cursor. There are several scenarios:
+	 *  A. LastActor is null && ThisActor is null
+	 *		- Do nothing
+	 *	B. LastActor is null && ThisActor is valid
+	 *		- Highlight ThisActor
+	 *	C. LastActor is valid && ThisActor is null
+	 *		- UnHighlight LastActor
+	 *	D. Both actors are valid, but LastActor != ThisActor
+	 *		- UnHighlight LastActor, and Highlight ThisActor
+	 *	E. Both actors are valid, and are the same actor
+	 *		- Do nothing
+	 */
+	
+	if (LastActor == nullptr)
+	{
+		if (ThisActor != nullptr)
+		{
+			// Case B
+			ThisActor->HighlightActor();
+		}
+		else
+		{
+			// Case A - both are null, do nothing
+		}
+	}
+	else // LastActor is valid
+	{
+		if (ThisActor == nullptr)
+		{
+			// Case C
+			LastActor->UnHighlightActor();
+		}
+		else // both actors are valid
+		{
+			if (LastActor != ThisActor)
+			{
+				// Case D
+				LastActor->UnHighlightActor();
+				ThisActor->HighlightActor();
+			}
+			else
+			{
+				// Case E - do nothing
+			}
+		}
+	}
 }
 
 void AFP_PlayerController::BeginPlay()
@@ -72,3 +173,5 @@ void AFP_PlayerController::Zoom(const FInputActionValue& InputActionValue)
 		PC->AddCameraZoomInput(ZoomValue);
 	}
 }
+
+

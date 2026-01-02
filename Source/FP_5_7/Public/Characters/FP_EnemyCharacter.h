@@ -16,9 +16,12 @@ public:
 	// Sets default values for this character's properties
 	AFP_EnemyCharacter();
 	
+	
+	/** Enemy Interface */
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
-		
+	/** end Enemy Interface */	
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

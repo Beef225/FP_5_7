@@ -1,6 +1,8 @@
 ﻿// Copyright JG
 
 #include "Characters/FP_EnemyCharacter.h"
+#include "AbilitySystem/FP_AbilitySystemComponent.h"
+#include "AbilitySystem/FP_AttributeSet.h"
 #include "FP_5_7/FP_5_7.h"
 
 
@@ -11,6 +13,12 @@ AFP_EnemyCharacter::AFP_EnemyCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+	
+	AbilitySystemComponent = CreateDefaultSubobject<UFP_AbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+
+	AttributeSet = CreateDefaultSubobject<UFP_AttributeSet>("AttributeSet");
 }
 
 void AFP_EnemyCharacter::HighlightActor()
@@ -31,6 +39,7 @@ void AFP_EnemyCharacter::UnHighlightActor()
 void AFP_EnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	
 }
 

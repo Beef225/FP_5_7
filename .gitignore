@@ -7,6 +7,8 @@ DerivedDataCache/
 Intermediate/
 Saved/
 
+Tools/
+
 # Local shader cache / local DDC variants (belt + suspenders)
 **/DerivedDataCache/**
 **/Intermediate/**

@@ -19,6 +19,9 @@ public:
 
 	// Called by PlayerController when zoom input happens
 	void AddCameraZoomInput(float ZoomDelta);
+	
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -27,6 +30,10 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
+	
+	void InitAbilityActorInfo();
+	
+	
 	// Components
 	UPROPERTY(VisibleAnywhere, Category="Camera")
 	TObjectPtr<USpringArmComponent> CameraBoom;

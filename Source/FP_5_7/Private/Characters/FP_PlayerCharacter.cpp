@@ -1,9 +1,10 @@
 ﻿// Copyright JG
 
 #include "Characters/FP_PlayerCharacter.h"
-
+#include "AbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Player/FP_PlayerState.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 AFP_PlayerCharacter::AFP_PlayerCharacter()
@@ -74,6 +75,20 @@ void AFP_PlayerCharacter::AddCameraZoomInput(float ZoomDelta)
 	);
 }
 
+void AFP_PlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	// Init ability actor info for the Server
+	InitAbilityActorInfo();
+}
+
+void AFP_PlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	// Init ability actor info for the Client
+	InitAbilityActorInfo();
+}
+
 void AFP_PlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -106,6 +121,15 @@ void AFP_PlayerCharacter::Tick(float DeltaTime)
 	CameraBoom->SetRelativeRotation(R);
 	
 	FaceMouse(DeltaTime);
+}
+
+void AFP_PlayerCharacter::InitAbilityActorInfo()
+{
+	AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
+	check(FP_PlayerState);
+	FP_PlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(FP_PlayerState, this);
+	AbilitySystemComponent = FP_PlayerState->GetAbilitySystemComponent();
+	AttributeSet = FP_PlayerState->GetAttributeSet();
 }
 
 bool AFP_PlayerCharacter::GetMouseWorldPoint(FVector& OutWorldPoint) const

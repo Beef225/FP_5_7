@@ -12,6 +12,11 @@ AFP_CharacterBase::AFP_CharacterBase()
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+UAbilitySystemComponent* AFP_CharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 
 void AFP_CharacterBase::BeginPlay()
 {

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
 #include "AbilitySystemInterface.h"
+#include "AttributeSet.h"
 #include "FP_PlayerState.generated.h"
 
 /**

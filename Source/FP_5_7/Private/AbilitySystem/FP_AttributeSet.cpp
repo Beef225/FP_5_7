@@ -2,3 +2,692 @@
 
 
 #include "AbilitySystem/FP_AttributeSet.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
+#include "Skills/FP_AbilityTypes.h"
+#include "GameFramework/Character.h"
+#include "GameplayEffectExtension.h"
+#include "Net/UnrealNetwork.h"
+#include "FP_GameplayTags.h"
+#include "Libraries/FP_AbilitySystemLibrary.h"
+#include "Interaction/FP_CombatInterface.h"
+#include "Interaction/FP_PlayerInterface.h"
+#include "Player/FP_PlayerController.h"
+
+UFP_AttributeSet::UFP_AttributeSet()
+{
+	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
+	
+	InitHitPoints(100.f);
+	InitMaxHitPoints(100.f);
+	InitHeat(0.f);
+	InitMaxHeatThreshold(100.f);
+	InitMinHeatThreshold(-100.f);
+	
+	//Vital Attributes
+TagsToAttributes.Add(GameplayTags.Attributes_Vital_HitPoints, GetHitPointsAttribute);
+TagsToAttributes.Add(GameplayTags.Attributes_Vital_MaxHitPoints, GetMaxHitPointsAttribute);
+TagsToAttributes.Add(GameplayTags.Attributes_Vital_Heat, GetHeatAttribute);
+TagsToAttributes.Add(GameplayTags.Attributes_Vital_MaxHeatThreshold, GetMaxHeatThresholdAttribute);
+TagsToAttributes.Add(GameplayTags.Attributees_VitalMinHeatThreshold, GetMinHeatThresholdAttribute);
+
+
+//Primary Attributes
+TagsToAttributes.Add(GameplayTags.Attributes_Primary_Might, GetMightAttribute);
+TagsToAttributes.Add(GameplayTags.Attributes_Primary_Resonance, GetResonanceAttribute);
+TagsToAttributes.Add(GameplayTags.Attributes_Primary_Agility, GetAgilityAttribute);
+TagsToAttributes.Add(GameplayTags.Attributes_Primary_Fortitude, GetFortitudeAttribute);
+
+
+//Secondary Attributes
+//Damage
+TagsToAttributes.Add(GameplayTags.Damage_Added_Physical, GetAddedPhysicalDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Physical, GetIncreasedPhysicalDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Physical, GetMorePhysicalDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Added_Explosive, GetAddedExplosiveDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Explosive, GetIncreasedExplosiveDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Explosive, GetMoreExplosiveDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Added_Radiation, GetAddedRadiationDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Radiation, GetIncreasedRadiationDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Radiation, GetMoreRadiationDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Added_Chemical, GetAddedChemicalDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Chemical, GetIncreasedChemicalDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Chemical, GetMoreChemicalDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Added_Energy, GetAddedEnergyDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Energy, GetIncreasedEnergyDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Energy, GetMoreEnergyDamageAttribute);
+
+//Resistance
+TagsToAttributes.Add(GameplayTags.Resistance_Damage_Physical, GetPhysicalDamageResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Max_Physical, GetPhysicalMaxResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Damage_Explosive, GetExplosiveDamageResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Max_Explosive, GetExplosiveMaxResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Damage_Radiation, GetRadiationDamageResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Max_Radiation, GetRadiationMaxResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Damage_Chemical, GetChemicalDamageResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Max_Chemical, GetChemicalMaxResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Damage_Energy, GetEnergyDamageResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Max_Energy, GetEnergyMaxResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Damage_Overheat, GetOverheatDamageResistanceAttribute);
+TagsToAttributes.Add(GameplayTags.Resistance_Max_Overheat, GetOverheatMaxResistanceAttribute);
+
+//Critical
+TagsToAttributes.Add(GameplayTags.Critical_StrikeChance_Base, GetCriticalStrikeChanceAttribute);
+TagsToAttributes.Add(GameplayTags.Critical_StrikeChance_Increased, GetIncreasedCriticalStrikeChanceAttribute);
+TagsToAttributes.Add(GameplayTags.Critical_StrikeMultiplier, GetCriticalStrikeMultiplierAttribute);
+
+//Defence
+TagsToAttributes.Add(GameplayTags.Defence_Armour, GetArmourAttribute);
+TagsToAttributes.Add(GameplayTags.Defence_DodgeChance, GetChanceToDodgeAttribute);
+TagsToAttributes.Add(GameplayTags.Defence_BlockChance, GetBlockChanceAttribute);
+TagsToAttributes.Add(GameplayTags.Defence_BlockedDamage, GetBlockedDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Defence_DeferredDamageAmount, GetDeferredDamageAmountAttribute);
+TagsToAttributes.Add(GameplayTags.Defence_DeferredDamageTime, GetDeferredDamageTimeAttribute);
+TagsToAttributes.Add(GameplayTags.Defence_HealthRegeneration, GetHealthRegenerationAttribute);
+
+//Defense
+TagsToAttributes.Add(GameplayTags.Defense_CriticalHitResistance, GetCriticalHitResistanceAttribute);
+
+//Heat
+TagsToAttributes.Add(GameplayTags.Heat_AmbientTemperature, GetAmbientTemperatureAttribute);
+TagsToAttributes.Add(GameplayTags.Heat_ThermalMass, GetThermalMassAttribute);
+TagsToAttributes.Add(GameplayTags.Heat_CoolingCoefficient, GetCoolingCoefficientAttribute);
+
+//Debuff
+TagsToAttributes.Add(GameplayTags.Debuff_Effectiveness_Bruised, GetBruisedEffectivenessAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Effectiveness_Concussed, GetConcussedEffectivenessAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Effectiveness_Irradiated, GetIrradiatedEffectivenessAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Effectiveness_Corroded, GetCorrodedEffectivenessAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Effectiveness_ThermalDestabalization, GetThermalDestabalizationEffectivenessAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Threshold_Bruised, GetBruisedThresholdAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Threshold_Concussed, GetConcussedThresholdAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Threshold_Irradiated, GetIrradiatedThresholdAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Threshold_Corroded, GetCorrodedThresholdAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Duration_Bruised, GetBruisedDurationAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Duration_Concussed, GetConcussedDurationAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Duration_Irradiated, GetIrradiatedDurationAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_Duration_Corroded, GetCorrodedDurationAttribute);
+TagsToAttributes.Add(GameplayTags.Debuff_ThermalInsulation, GetThermalInsulationAttribute);
+
+//Item
+TagsToAttributes.Add(GameplayTags.Item_Quantity, GetItemQuantityAttribute);
+TagsToAttributes.Add(GameplayTags.Item_Rarity, GetItemRarityAttribute);
+TagsToAttributes.Add(GameplayTags.Item_WattsQuantity, GetWattsQuantityAttribute);
+	
+}
+
+void UFP_AttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	
+	//Vital Attributes
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, HitPoints, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MaxHitPoints, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, Heat, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MaxHeatThreshold, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MinHeatThreshold, COND_None, REPNOTIFY_Always)
+
+
+//Primary Attributes
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, Might, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, Resonance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, Agility, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, Fortitude, COND_None, REPNOTIFY_Always)
+
+
+//Secondary Attributes
+//Damage
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, AddedPhysicalDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedPhysicalDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MorePhysicalDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, AddedExplosiveDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedExplosiveDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreExplosiveDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, AddedRadiationDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedRadiationDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreRadiationDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, AddedChemicalDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedChemicalDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreChemicalDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, AddedEnergyDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedEnergyDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreEnergyDamage, COND_None, REPNOTIFY_Always)
+
+//Resistance
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, PhysicalDamageResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, PhysicalMaxResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ExplosiveDamageResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ExplosiveMaxResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, RadiationDamageResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, RadiationMaxResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ChemicalDamageResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ChemicalMaxResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, EnergyDamageResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, EnergyMaxResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, OverheatDamageResistance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, OverheatMaxResistance, COND_None, REPNOTIFY_Always)
+
+//Critical
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, CriticalStrikeChance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedCriticalStrikeChance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, CriticalStrikeMultiplier, COND_None, REPNOTIFY_Always)
+
+//Defence
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, Armour, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ChanceToDodge, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, BlockChance, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, BlockedDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, DeferredDamageAmount, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, DeferredDamageTime, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, HealthRegeneration, COND_None, REPNOTIFY_Always)
+
+//Defense
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, CriticalHitResistance, COND_None, REPNOTIFY_Always)
+
+//Heat
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, AmbientTemperature, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ThermalMass, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, CoolingCoefficient, COND_None, REPNOTIFY_Always)
+
+//Debuff
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, BruisedEffectiveness, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ConcussedEffectiveness, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IrradiatedEffectiveness, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, CorrodedEffectiveness, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ThermalDestabalizationEffectiveness, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, BruisedThreshold, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ConcussedThreshold, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IrradiatedThreshold, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, CorrodedThreshold, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, BruisedDuration, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ConcussedDuration, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IrradiatedDuration, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, CorrodedDuration, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ThermalInsulation, COND_None, REPNOTIFY_Always)
+
+//Item
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ItemQuantity, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ItemRarity, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, WattsQuantity, COND_None, REPNOTIFY_Always)
+
+}
+
+void UFP_AttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
+{
+	Super::PreAttributeChange(Attribute, NewValue);
+	
+	if (Attribute == GetHitPointsAttribute())
+	{
+		NewValue = FMath::Clamp(GetHitPoints(), 0.f, GetMaxHitPoints());
+	}
+}
+
+void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
+{
+	Super::PostGameplayEffectExecute(Data);
+}
+
+void UFP_AttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
+{
+	Super::PostAttributeChange(Attribute, OldValue, NewValue);
+}
+
+void UFP_AttributeSet::HandleIncomingDamage(const FEffectProperties& Props)
+{
+}
+
+void UFP_AttributeSet::HandleIncomingXP(const FEffectProperties& Props)
+{
+}
+
+void UFP_AttributeSet::Debuff(const FEffectProperties& Props)
+{
+}
+
+void UFP_AttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const
+{
+	// Source = causer of the effect, Target = target of the effect (owner of this AS)
+
+	Props.EffectContextHandle = Data.EffectSpec.GetContext();
+	Props.SourceASC = Props.EffectContextHandle.GetOriginalInstigatorAbilitySystemComponent();
+
+	if (IsValid(Props.SourceASC) && Props.SourceASC->AbilityActorInfo.IsValid() && Props.SourceASC->AbilityActorInfo->AvatarActor.IsValid())
+	{
+		Props.SourceAvatarActor = Props.SourceASC->AbilityActorInfo->AvatarActor.Get();
+		Props.SourceController = Props.SourceASC->AbilityActorInfo->PlayerController.Get();
+		if (Props.SourceController == nullptr && Props.SourceAvatarActor != nullptr)
+		{
+			if (const APawn* Pawn = Cast<APawn>(Props.SourceAvatarActor))
+			{
+				Props.SourceController = Pawn->GetController();
+			}
+		}
+		if (Props.SourceController)
+		{
+			Props.SourceCharacter = Cast<ACharacter>(Props.SourceController->GetPawn());
+		}
+	}
+
+	if (Data.Target.AbilityActorInfo.IsValid() && Data.Target.AbilityActorInfo->AvatarActor.IsValid())
+	{
+		Props.TargetAvatarActor = Data.Target.AbilityActorInfo->AvatarActor.Get();
+		Props.TargetController = Data.Target.AbilityActorInfo->PlayerController.Get();
+		Props.TargetCharacter = Cast<ACharacter>(Props.TargetAvatarActor);
+		Props.TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Props.TargetAvatarActor);
+	}
+}
+
+void UFP_AttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage, bool bBlockedHit,
+	bool bCriticalHit) const
+{
+}
+
+void UFP_AttributeSet::SendXPEvent(const FEffectProperties& Props)
+{
+}
+
+
+//Vital Attributes
+void UFP_AttributeSet::OnRep_HitPoints(const FGameplayAttributeData& OldHitPoints) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, HitPoints, OldHitPoints);
+}
+
+void UFP_AttributeSet::OnRep_MaxHitPoints(const FGameplayAttributeData& OldMaxHitPoints) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MaxHitPoints, OldMaxHitPoints);
+}
+
+void UFP_AttributeSet::OnRep_Heat(const FGameplayAttributeData& OldHeat) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, Heat, OldHeat);
+}
+
+void UFP_AttributeSet::OnRep_MaxHeatThreshold(const FGameplayAttributeData& OldMaxHeatThreshold) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MaxHeatThreshold, OldMaxHeatThreshold);
+}
+
+void UFP_AttributeSet::OnRep_MinHeatThreshold(const FGameplayAttributeData& OldMinHeatThreshold) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MinHeatThreshold, OldMinHeatThreshold);
+}
+
+
+//Primary Attributes
+void UFP_AttributeSet::OnRep_Might(const FGameplayAttributeData& OldMight) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, Might, OldMight);
+}
+
+void UFP_AttributeSet::OnRep_Resonance(const FGameplayAttributeData& OldResonance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, Resonance, OldResonance);
+}
+
+void UFP_AttributeSet::OnRep_Agility(const FGameplayAttributeData& OldAgility) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, Agility, OldAgility);
+}
+
+void UFP_AttributeSet::OnRep_Fortitude(const FGameplayAttributeData& OldFortitude) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, Fortitude, OldFortitude);
+}
+
+
+//Secondary Attributes
+//Damage
+void UFP_AttributeSet::OnRep_AddedPhysicalDamage(const FGameplayAttributeData& OldAddedPhysicalDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, AddedPhysicalDamage, OldAddedPhysicalDamage);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedPhysicalDamage(const FGameplayAttributeData& OldIncreasedPhysicalDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedPhysicalDamage, OldIncreasedPhysicalDamage);
+}
+
+void UFP_AttributeSet::OnRep_MorePhysicalDamage(const FGameplayAttributeData& OldMorePhysicalDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MorePhysicalDamage, OldMorePhysicalDamage);
+}
+
+void UFP_AttributeSet::OnRep_AddedExplosiveDamage(const FGameplayAttributeData& OldAddedExplosiveDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, AddedExplosiveDamage, OldAddedExplosiveDamage);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedExplosiveDamage(const FGameplayAttributeData& OldIncreasedExplosiveDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedExplosiveDamage, OldIncreasedExplosiveDamage);
+}
+
+void UFP_AttributeSet::OnRep_MoreExplosiveDamage(const FGameplayAttributeData& OldMoreExplosiveDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreExplosiveDamage, OldMoreExplosiveDamage);
+}
+
+void UFP_AttributeSet::OnRep_AddedRadiationDamage(const FGameplayAttributeData& OldAddedRadiationDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, AddedRadiationDamage, OldAddedRadiationDamage);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedRadiationDamage(const FGameplayAttributeData& OldIncreasedRadiationDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedRadiationDamage, OldIncreasedRadiationDamage);
+}
+
+void UFP_AttributeSet::OnRep_MoreRadiationDamage(const FGameplayAttributeData& OldMoreRadiationDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreRadiationDamage, OldMoreRadiationDamage);
+}
+
+void UFP_AttributeSet::OnRep_AddedChemicalDamage(const FGameplayAttributeData& OldAddedChemicalDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, AddedChemicalDamage, OldAddedChemicalDamage);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedChemicalDamage(const FGameplayAttributeData& OldIncreasedChemicalDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedChemicalDamage, OldIncreasedChemicalDamage);
+}
+
+void UFP_AttributeSet::OnRep_MoreChemicalDamage(const FGameplayAttributeData& OldMoreChemicalDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreChemicalDamage, OldMoreChemicalDamage);
+}
+
+void UFP_AttributeSet::OnRep_AddedEnergyDamage(const FGameplayAttributeData& OldAddedEnergyDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, AddedEnergyDamage, OldAddedEnergyDamage);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedEnergyDamage(const FGameplayAttributeData& OldIncreasedEnergyDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedEnergyDamage, OldIncreasedEnergyDamage);
+}
+
+void UFP_AttributeSet::OnRep_MoreEnergyDamage(const FGameplayAttributeData& OldMoreEnergyDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreEnergyDamage, OldMoreEnergyDamage);
+}
+
+//Resistance
+void UFP_AttributeSet::OnRep_PhysicalDamageResistance(const FGameplayAttributeData& OldPhysicalDamageResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, PhysicalDamageResistance, OldPhysicalDamageResistance);
+}
+
+void UFP_AttributeSet::OnRep_PhysicalMaxResistance(const FGameplayAttributeData& OldPhysicalMaxResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, PhysicalMaxResistance, OldPhysicalMaxResistance);
+}
+
+void UFP_AttributeSet::OnRep_ExplosiveDamageResistance(const FGameplayAttributeData& OldExplosiveDamageResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ExplosiveDamageResistance, OldExplosiveDamageResistance);
+}
+
+void UFP_AttributeSet::OnRep_ExplosiveMaxResistance(const FGameplayAttributeData& OldExplosiveMaxResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ExplosiveMaxResistance, OldExplosiveMaxResistance);
+}
+
+void UFP_AttributeSet::OnRep_RadiationDamageResistance(const FGameplayAttributeData& OldRadiationDamageResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, RadiationDamageResistance, OldRadiationDamageResistance);
+}
+
+void UFP_AttributeSet::OnRep_RadiationMaxResistance(const FGameplayAttributeData& OldRadiationMaxResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, RadiationMaxResistance, OldRadiationMaxResistance);
+}
+
+void UFP_AttributeSet::OnRep_ChemicalDamageResistance(const FGameplayAttributeData& OldChemicalDamageResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ChemicalDamageResistance, OldChemicalDamageResistance);
+}
+
+void UFP_AttributeSet::OnRep_ChemicalMaxResistance(const FGameplayAttributeData& OldChemicalMaxResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ChemicalMaxResistance, OldChemicalMaxResistance);
+}
+
+void UFP_AttributeSet::OnRep_EnergyDamageResistance(const FGameplayAttributeData& OldEnergyDamageResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, EnergyDamageResistance, OldEnergyDamageResistance);
+}
+
+void UFP_AttributeSet::OnRep_EnergyMaxResistance(const FGameplayAttributeData& OldEnergyMaxResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, EnergyMaxResistance, OldEnergyMaxResistance);
+}
+
+void UFP_AttributeSet::OnRep_OverheatDamageResistance(const FGameplayAttributeData& OldOverheatDamageResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, OverheatDamageResistance, OldOverheatDamageResistance);
+}
+
+void UFP_AttributeSet::OnRep_OverheatMaxResistance(const FGameplayAttributeData& OldOverheatMaxResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, OverheatMaxResistance, OldOverheatMaxResistance);
+}
+
+//Critical
+void UFP_AttributeSet::OnRep_CriticalStrikeChance(const FGameplayAttributeData& OldCriticalStrikeChance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, CriticalStrikeChance, OldCriticalStrikeChance);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedCriticalStrikeChance(const FGameplayAttributeData& OldIncreasedCriticalStrikeChance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedCriticalStrikeChance, OldIncreasedCriticalStrikeChance);
+}
+
+void UFP_AttributeSet::OnRep_CriticalStrikeMultiplier(const FGameplayAttributeData& OldCriticalStrikeMultiplier) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, CriticalStrikeMultiplier, OldCriticalStrikeMultiplier);
+}
+
+//Defence
+void UFP_AttributeSet::OnRep_Armour(const FGameplayAttributeData& OldArmour) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, Armour, OldArmour);
+}
+
+void UFP_AttributeSet::OnRep_ChanceToDodge(const FGameplayAttributeData& OldChanceToDodge) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ChanceToDodge, OldChanceToDodge);
+}
+
+void UFP_AttributeSet::OnRep_BlockChance(const FGameplayAttributeData& OldBlockChance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, BlockChance, OldBlockChance);
+}
+
+void UFP_AttributeSet::OnRep_BlockedDamage(const FGameplayAttributeData& OldBlockedDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, BlockedDamage, OldBlockedDamage);
+}
+
+void UFP_AttributeSet::OnRep_DeferredDamageAmount(const FGameplayAttributeData& OldDeferredDamageAmount) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, DeferredDamageAmount, OldDeferredDamageAmount);
+}
+
+void UFP_AttributeSet::OnRep_DeferredDamageTime(const FGameplayAttributeData& OldDeferredDamageTime) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, DeferredDamageTime, OldDeferredDamageTime);
+}
+
+void UFP_AttributeSet::OnRep_HealthRegeneration(const FGameplayAttributeData& OldHealthRegeneration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, HealthRegeneration, OldHealthRegeneration);
+}
+
+//Defense
+void UFP_AttributeSet::OnRep_CriticalHitResistance(const FGameplayAttributeData& OldCriticalHitResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, CriticalHitResistance, OldCriticalHitResistance);
+}
+
+//Heat
+void UFP_AttributeSet::OnRep_AmbientTemperature(const FGameplayAttributeData& OldAmbientTemperature) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, AmbientTemperature, OldAmbientTemperature);
+}
+
+void UFP_AttributeSet::OnRep_ThermalMass(const FGameplayAttributeData& OldThermalMass) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ThermalMass, OldThermalMass);
+}
+
+void UFP_AttributeSet::OnRep_CoolingCoefficient(const FGameplayAttributeData& OldCoolingCoefficient) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, CoolingCoefficient, OldCoolingCoefficient);
+}
+
+//Debuff
+void UFP_AttributeSet::OnRep_BruisedEffectiveness(const FGameplayAttributeData& OldBruisedEffectiveness) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, BruisedEffectiveness, OldBruisedEffectiveness);
+}
+
+void UFP_AttributeSet::OnRep_ConcussedEffectiveness(const FGameplayAttributeData& OldConcussedEffectiveness) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ConcussedEffectiveness, OldConcussedEffectiveness);
+}
+
+void UFP_AttributeSet::OnRep_IrradiatedEffectiveness(const FGameplayAttributeData& OldIrradiatedEffectiveness) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IrradiatedEffectiveness, OldIrradiatedEffectiveness);
+}
+
+void UFP_AttributeSet::OnRep_CorrodedEffectiveness(const FGameplayAttributeData& OldCorrodedEffectiveness) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, CorrodedEffectiveness, OldCorrodedEffectiveness);
+}
+
+void UFP_AttributeSet::OnRep_ThermalDestabalizationEffectiveness(const FGameplayAttributeData& OldThermalDestabalizationEffectiveness) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ThermalDestabalizationEffectiveness, OldThermalDestabalizationEffectiveness);
+}
+
+void UFP_AttributeSet::OnRep_BruisedThreshold(const FGameplayAttributeData& OldBruisedThreshold) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, BruisedThreshold, OldBruisedThreshold);
+}
+
+void UFP_AttributeSet::OnRep_ConcussedThreshold(const FGameplayAttributeData& OldConcussedThreshold) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ConcussedThreshold, OldConcussedThreshold);
+}
+
+void UFP_AttributeSet::OnRep_IrradiatedThreshold(const FGameplayAttributeData& OldIrradiatedThreshold) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IrradiatedThreshold, OldIrradiatedThreshold);
+}
+
+void UFP_AttributeSet::OnRep_CorrodedThreshold(const FGameplayAttributeData& OldCorrodedThreshold) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, CorrodedThreshold, OldCorrodedThreshold);
+}
+
+void UFP_AttributeSet::OnRep_BruisedDuration(const FGameplayAttributeData& OldBruisedDuration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, BruisedDuration, OldBruisedDuration);
+}
+
+void UFP_AttributeSet::OnRep_ConcussedDuration(const FGameplayAttributeData& OldConcussedDuration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ConcussedDuration, OldConcussedDuration);
+}
+
+void UFP_AttributeSet::OnRep_IrradiatedDuration(const FGameplayAttributeData& OldIrradiatedDuration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IrradiatedDuration, OldIrradiatedDuration);
+}
+
+void UFP_AttributeSet::OnRep_CorrodedDuration(const FGameplayAttributeData& OldCorrodedDuration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, CorrodedDuration, OldCorrodedDuration);
+}
+
+void UFP_AttributeSet::OnRep_ThermalInsulation(const FGameplayAttributeData& OldThermalInsulation) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ThermalInsulation, OldThermalInsulation);
+}
+
+//Item
+void UFP_AttributeSet::OnRep_ItemQuantity(const FGameplayAttributeData& OldItemQuantity) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ItemQuantity, OldItemQuantity);
+}
+
+void UFP_AttributeSet::OnRep_ItemRarity(const FGameplayAttributeData& OldItemRarity) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ItemRarity, OldItemRarity);
+}
+
+void UFP_AttributeSet::OnRep_WattsQuantity(const FGameplayAttributeData& OldWattsQuantity) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, WattsQuantity, OldWattsQuantity);
+}

@@ -18,11 +18,12 @@ UFP_AttributeSet::UFP_AttributeSet()
 {
 	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
 	
-	InitHitPoints(100.f);
+	InitHitPoints(50.f);
 	InitMaxHitPoints(100.f);
-	InitHeat(0.f);
-	InitMaxHeatThreshold(100.f);
-	InitMinHeatThreshold(-100.f);
+	InitHeat(60.f);
+	InitMaxHeatThreshold(80.f);
+	InitMinHeatThreshold(-50.f);
+	
 	
 	//Vital Attributes
 TagsToAttributes.Add(GameplayTags.Attributes_Vital_HitPoints, GetHitPointsAttribute);

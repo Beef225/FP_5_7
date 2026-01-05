@@ -2,10 +2,12 @@
 
 #include "Characters/FP_PlayerCharacter.h"
 #include "AbilitySystemComponent.h"
+#include "Player/FP_PlayerController.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Player/FP_PlayerState.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "UI/HUD/FP_HUD.h"
 
 AFP_PlayerCharacter::AFP_PlayerCharacter()
 {
@@ -130,6 +132,14 @@ void AFP_PlayerCharacter::InitAbilityActorInfo()
 	FP_PlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(FP_PlayerState, this);
 	AbilitySystemComponent = FP_PlayerState->GetAbilitySystemComponent();
 	AttributeSet = FP_PlayerState->GetAttributeSet();
+	
+	if (AFP_PlayerController* FP_PlayerController = Cast<AFP_PlayerController>(GetController()))
+	{
+		if (AFP_HUD* FP_HUD = Cast<AFP_HUD>(FP_PlayerController->GetHUD()))
+		{
+			FP_HUD->InitOverlay(FP_PlayerController, FP_PlayerState, AbilitySystemComponent, AttributeSet);
+		}
+	}
 }
 
 bool AFP_PlayerCharacter::GetMouseWorldPoint(FVector& OutWorldPoint) const

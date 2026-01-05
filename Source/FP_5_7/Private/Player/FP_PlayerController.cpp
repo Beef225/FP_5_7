@@ -121,8 +121,10 @@ void AFP_PlayerController::BeginPlay()
 	check(FPContext);
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 
-	check(Subsystem);
-	Subsystem->AddMappingContext(FPContext, 0);
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(FPContext, 0);
+	}
 
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;

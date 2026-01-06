@@ -219,7 +219,6 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData HealthRegeneration;
 
-//Defense
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData CriticalHitResistance;
 
@@ -276,6 +275,20 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData ThermalInsulation;
 
+//AoE
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData AreaOfEffectMulitplier;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData AreaOfEffectAdditionalRadius;
+
+//Speed
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData MovementSpeed;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData SkillSpeed;
+
 //Item
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData ItemQuantity;
@@ -285,6 +298,9 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData WattsQuantity;
+
+
+//Meta Attributes
 	
 	//Vital Attributes
 UFUNCTION()
@@ -479,7 +495,6 @@ UFUNCTION()
 	void OnRep_HealthRegeneration(const FGameplayAttributeData& OldHealthRegeneration) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, HealthRegeneration)
 
-//Defense
 UFUNCTION()
 	void OnRep_CriticalHitResistance(const FGameplayAttributeData& OldCriticalHitResistance) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, CriticalHitResistance)
@@ -554,6 +569,24 @@ UFUNCTION()
 	void OnRep_ThermalInsulation(const FGameplayAttributeData& OldThermalInsulation) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ThermalInsulation)
 
+//AoE
+UFUNCTION()
+	void OnRep_AreaOfEffectMulitplier(const FGameplayAttributeData& OldAreaOfEffectMulitplier) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, AreaOfEffectMulitplier)
+
+UFUNCTION()
+	void OnRep_AreaOfEffectAdditionalRadius(const FGameplayAttributeData& OldAreaOfEffectAdditionalRadius) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, AreaOfEffectAdditionalRadius)
+
+//Speed
+UFUNCTION()
+	void OnRep_MovementSpeed(const FGameplayAttributeData& OldMovementSpeed) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MovementSpeed)
+
+UFUNCTION()
+	void OnRep_SkillSpeed(const FGameplayAttributeData& OldSkillSpeed) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, SkillSpeed)
+
 //Item
 UFUNCTION()
 	void OnRep_ItemQuantity(const FGameplayAttributeData& OldItemQuantity) const;
@@ -566,6 +599,9 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_WattsQuantity(const FGameplayAttributeData& OldWattsQuantity) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, WattsQuantity)
+
+
+//Meta Attributes
 	
 	
 private:

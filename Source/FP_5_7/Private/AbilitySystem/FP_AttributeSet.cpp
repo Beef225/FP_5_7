@@ -17,13 +17,12 @@
 UFP_AttributeSet::UFP_AttributeSet()
 {
 	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
-	
-	InitHitPoints(50.f);
+
+InitHitPoints(100.f);
 	InitMaxHitPoints(100.f);
-	InitHeat(60.f);
-	InitMaxHeatThreshold(80.f);
-	InitMinHeatThreshold(-50.f);
-	
+	InitHeat(0.f);
+	InitMaxHeatThreshold(100.f);
+	InitMinHeatThreshold(-100.f);
 	
 	//Vital Attributes
 TagsToAttributes.Add(GameplayTags.Attributes_Vital_HitPoints, GetHitPointsAttribute);
@@ -85,8 +84,6 @@ TagsToAttributes.Add(GameplayTags.Defence_BlockedDamage, GetBlockedDamageAttribu
 TagsToAttributes.Add(GameplayTags.Defence_DeferredDamageAmount, GetDeferredDamageAmountAttribute);
 TagsToAttributes.Add(GameplayTags.Defence_DeferredDamageTime, GetDeferredDamageTimeAttribute);
 TagsToAttributes.Add(GameplayTags.Defence_HealthRegeneration, GetHealthRegenerationAttribute);
-
-//Defense
 TagsToAttributes.Add(GameplayTags.Defense_CriticalHitResistance, GetCriticalHitResistanceAttribute);
 
 //Heat
@@ -110,10 +107,21 @@ TagsToAttributes.Add(GameplayTags.Debuff_Duration_Irradiated, GetIrradiatedDurat
 TagsToAttributes.Add(GameplayTags.Debuff_Duration_Corroded, GetCorrodedDurationAttribute);
 TagsToAttributes.Add(GameplayTags.Debuff_ThermalInsulation, GetThermalInsulationAttribute);
 
+//AoE
+TagsToAttributes.Add(GameplayTags.AoE_Multiplier, GetAreaOfEffectMulitplierAttribute);
+TagsToAttributes.Add(GameplayTags.AoE_AdditionalRadius, GetAreaOfEffectAdditionalRadiusAttribute);
+
+//Speed
+TagsToAttributes.Add(GameplayTags.Speed_Movement, GetMovementSpeedAttribute);
+TagsToAttributes.Add(GameplayTags.Speed_Skill, GetSkillSpeedAttribute);
+
 //Item
 TagsToAttributes.Add(GameplayTags.Item_Quantity, GetItemQuantityAttribute);
 TagsToAttributes.Add(GameplayTags.Item_Rarity, GetItemRarityAttribute);
 TagsToAttributes.Add(GameplayTags.Item_WattsQuantity, GetWattsQuantityAttribute);
+
+
+//Meta Attributes
 	
 }
 
@@ -222,7 +230,6 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, DeferredDamageTime, COND_None, 
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, HealthRegeneration, COND_None, REPNOTIFY_Always)
 
-//Defense
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, CriticalHitResistance, COND_None, REPNOTIFY_Always)
 
 //Heat
@@ -261,12 +268,25 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, CorrodedDuration, COND_None, RE
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ThermalInsulation, COND_None, REPNOTIFY_Always)
 
+//AoE
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, AreaOfEffectMulitplier, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, AreaOfEffectAdditionalRadius, COND_None, REPNOTIFY_Always)
+
+//Speed
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MovementSpeed, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, SkillSpeed, COND_None, REPNOTIFY_Always)
+
 //Item
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ItemQuantity, COND_None, REPNOTIFY_Always)
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ItemRarity, COND_None, REPNOTIFY_Always)
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, WattsQuantity, COND_None, REPNOTIFY_Always)
+
+
+//Meta Attributes
 
 }
 
@@ -283,6 +303,9 @@ void UFP_AttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, f
 void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);
+	
+	FEffectProperties Props;
+	SetEffectProperties(Data, Props);
 }
 
 void UFP_AttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
@@ -584,7 +607,6 @@ void UFP_AttributeSet::OnRep_HealthRegeneration(const FGameplayAttributeData& Ol
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, HealthRegeneration, OldHealthRegeneration);
 }
 
-//Defense
 void UFP_AttributeSet::OnRep_CriticalHitResistance(const FGameplayAttributeData& OldCriticalHitResistance) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, CriticalHitResistance, OldCriticalHitResistance);
@@ -677,6 +699,28 @@ void UFP_AttributeSet::OnRep_ThermalInsulation(const FGameplayAttributeData& Old
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ThermalInsulation, OldThermalInsulation);
 }
 
+//AoE
+void UFP_AttributeSet::OnRep_AreaOfEffectMulitplier(const FGameplayAttributeData& OldAreaOfEffectMulitplier) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, AreaOfEffectMulitplier, OldAreaOfEffectMulitplier);
+}
+
+void UFP_AttributeSet::OnRep_AreaOfEffectAdditionalRadius(const FGameplayAttributeData& OldAreaOfEffectAdditionalRadius) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, AreaOfEffectAdditionalRadius, OldAreaOfEffectAdditionalRadius);
+}
+
+//Speed
+void UFP_AttributeSet::OnRep_MovementSpeed(const FGameplayAttributeData& OldMovementSpeed) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MovementSpeed, OldMovementSpeed);
+}
+
+void UFP_AttributeSet::OnRep_SkillSpeed(const FGameplayAttributeData& OldSkillSpeed) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, SkillSpeed, OldSkillSpeed);
+}
+
 //Item
 void UFP_AttributeSet::OnRep_ItemQuantity(const FGameplayAttributeData& OldItemQuantity) const
 {
@@ -692,3 +736,6 @@ void UFP_AttributeSet::OnRep_WattsQuantity(const FGameplayAttributeData& OldWatt
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, WattsQuantity, OldWattsQuantity);
 }
+
+
+//Meta Attributes

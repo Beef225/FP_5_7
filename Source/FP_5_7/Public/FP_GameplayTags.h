@@ -77,8 +77,6 @@ FGameplayTag Defence_BlockedDamage;
 FGameplayTag Defence_DeferredDamageAmount;
 FGameplayTag Defence_DeferredDamageTime;
 FGameplayTag Defence_HealthRegeneration;
-
-//Defense
 FGameplayTag Defense_CriticalHitResistance;
 
 //Heat
@@ -101,6 +99,14 @@ FGameplayTag Debuff_Duration_Concussed;
 FGameplayTag Debuff_Duration_Irradiated;
 FGameplayTag Debuff_Duration_Corroded;
 FGameplayTag Debuff_ThermalInsulation;
+
+//AoE
+FGameplayTag AoE_Multiplier;
+FGameplayTag AoE_AdditionalRadius;
+
+//Speed
+FGameplayTag Speed_Movement;
+FGameplayTag Speed_Skill;
 
 //Item
 FGameplayTag Item_Quantity;

@@ -209,8 +209,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Defence.HealthRegeneration"), 
 		FString("Regenerate a Portion of Health Per Second")
 		);
-
-	//Defense
 	GameplayTags.Defense_CriticalHitResistance = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Defense.CriticalHitResistance"), 
 		FString("Reduced Damage Taken from Critical Strikes")
@@ -288,6 +286,26 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Change the amount of heat damage")
 		);
 
+	//AoE
+	GameplayTags.AoE_Multiplier = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.Multiplier"), 
+		FString("Increase the Area of Effect")
+		);
+	GameplayTags.AoE_AdditionalRadius = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.AdditionalRadius"), 
+		FString("Increase the base radius of AoE")
+		);
+
+	//Speed
+	GameplayTags.Speed_Movement = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Movement"), 
+		FString("Movement Speed")
+		);
+	GameplayTags.Speed_Skill = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Skill"), 
+		FString("Skill Speed")
+		);
+
 	//Item
 	GameplayTags.Item_Quantity = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Item.Quantity"), 
@@ -302,6 +320,8 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Drop More Watts")
 		);
 
+
+	//Meta Attributes
 
 	//Misc Gameplay Tags
 	//Skills Meta

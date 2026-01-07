@@ -2,7 +2,7 @@
 
 
 #include "UI/WidgetController/FP_OverlayWidgetController.h"
-
+#include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 
 void UFP_OverlayWidgetController::BroadcastInitialValues()
@@ -22,43 +22,42 @@ void UFP_OverlayWidgetController::BindCallbacksToDependancies()
 {
 	const UFP_AttributeSet* FP_AttributeSet = CastChecked<UFP_AttributeSet>(AttributeSet);
 	
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		FP_AttributeSet->GetHitPointsAttribute()).AddUObject(this, &UFP_OverlayWidgetController::HitPointsChanged);
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AttributeSet->GetHitPointsAttribute()).AddLambda(
+	[this](const FOnAttributeChangeData& Data)
+				{OnHitPointsChanged.Broadcast(Data.NewValue);});
 
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		FP_AttributeSet->GetMaxHitPointsAttribute()).AddUObject(this, &UFP_OverlayWidgetController::MaxHitPointsChanged);
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AttributeSet->GetMaxHitPointsAttribute()).AddLambda(
+	[this](const FOnAttributeChangeData& Data)
+				{OnMaxHitPointsChanged.Broadcast(Data.NewValue);});
+		
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AttributeSet->GetHeatAttribute()).AddLambda(
+	[this](const FOnAttributeChangeData& Data)
+				{OnHeatChanged.Broadcast(Data.NewValue);});
 	
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		FP_AttributeSet->GetHeatAttribute()).AddUObject(this, &UFP_OverlayWidgetController::HeatChanged);
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AttributeSet->GetMaxHeatThresholdAttribute()).AddLambda(
+	[this](const FOnAttributeChangeData& Data)
+				{OnMaxHeatThresholdChanged.Broadcast(Data.NewValue);});
 	
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		FP_AttributeSet->GetMaxHeatThresholdAttribute()).AddUObject(this, &UFP_OverlayWidgetController::MaxHeatThresholdChanged);
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AttributeSet->GetMinHeatThresholdAttribute()).AddLambda(
+	[this](const FOnAttributeChangeData& Data)
+				{OnMinHeatThresholdChanged.Broadcast(Data.NewValue);});
 	
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		FP_AttributeSet->GetMinHeatThresholdAttribute()).AddUObject(this, &UFP_OverlayWidgetController::MinHeatThresholdChanged);
-}
+	Cast<UFP_AbilitySystemComponent>(AbilitySystemComponent)->EffectAssetTags.AddLambda(
+		[this](const FGameplayTagContainer& AssetTags)
+		{
+			for (const FGameplayTag& Tag : AssetTags)
+			{
+				// For example, say that Tag = Message.HealthPotion
+				// "Message.HealthPotion".MatchesTag("Message") will return True, "Message".MatchesTag("Message.HealthPotion") will return False
+				FGameplayTag MessageTag = FGameplayTag::RequestGameplayTag(FName("Message"));
+				if (Tag.MatchesTag(MessageTag))
+				{
+					const FUIWidgetRow* Row = GetDataTableRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
+					MessageWidgetRowDelegate.Broadcast(*Row);
+				}
+			}
+		}
+	);
 
-void UFP_OverlayWidgetController::HitPointsChanged(const FOnAttributeChangeData& Data) const
-{
-	OnHitPointsChanged.Broadcast(Data.NewValue);
-}
 
-void UFP_OverlayWidgetController::MaxHitPointsChanged(const FOnAttributeChangeData& Data) const
-{
-	OnMaxHitPointsChanged.Broadcast(Data.NewValue);
-}
-
-void UFP_OverlayWidgetController::HeatChanged(const FOnAttributeChangeData& Data) const
-{
-	OnHeatChanged.Broadcast(Data.NewValue);
-}
-
-void UFP_OverlayWidgetController::MaxHeatThresholdChanged(const FOnAttributeChangeData& Data) const
-{
-	OnMaxHeatThresholdChanged.Broadcast(Data.NewValue);
-}
-
-void UFP_OverlayWidgetController::MinHeatThresholdChanged(const FOnAttributeChangeData& Data) const
-{
-	OnMinHeatThresholdChanged.Broadcast(Data.NewValue);
 }

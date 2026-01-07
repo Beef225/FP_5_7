@@ -4,14 +4,36 @@
 
 #include "CoreMinimal.h"
 #include "FP_WidgetController.h"
+#include "Libraries/FP_EnumDefs.h"
 #include "FP_OverlayWidgetController.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHitPointsChangedSignature, float, NewHitPoints);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHitPointsChangedSignature, float, NewMaxHitPoints);
+USTRUCT(BluePrintType)
+struct FUIWidgetRow: public FTableRowBase
+{
+	GENERATED_BODY();
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FGameplayTag MessageTag = FGameplayTag();
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHeatChangedSignature, float, NewHeat);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHeatThresholdChangedSignature, float, NewMaxHeatThreshold);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMinHeatThresholdChangedSignature, float, NewMinHeatThreshold);
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText Message = FText();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<class UFP_UserWidget> MessageWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UTexture2D* Image = nullptr;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	EDisplayType DisplayType = EDisplayType::Numerical;
+	
+};
+
+class UFP_UserWidget;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChangedSignature, float, NewValue);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature, FUIWidgetRow, Row);
+
 
 /**
  * 
@@ -26,26 +48,39 @@ public:
 	virtual void BindCallbacksToDependancies() override;
 	
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
-	FOnHitPointsChangedSignature OnHitPointsChanged;
+	FOnAttributeChangedSignature OnHitPointsChanged;
 
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
-	FOnMaxHitPointsChangedSignature OnMaxHitPointsChanged;
+	FOnAttributeChangedSignature OnMaxHitPointsChanged;
 	
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
-	FOnHeatChangedSignature OnHeatChanged;
+	FOnAttributeChangedSignature OnHeatChanged;
 	
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
-	FOnMaxHeatThresholdChangedSignature OnMaxHeatThresholdChanged;
+	FOnAttributeChangedSignature OnMaxHeatThresholdChanged;
 	
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
-	FOnMinHeatThresholdChangedSignature OnMinHeatThresholdChanged;
+	FOnAttributeChangedSignature OnMinHeatThresholdChanged;
+	
+	UPROPERTY(BlueprintAssignable, Category="GAS|Messages")
+	FMessageWidgetRowSignature MessageWidgetRowDelegate;
 	
 	
 protected:
-	void HitPointsChanged(const FOnAttributeChangeData& Data) const;
-	void MaxHitPointsChanged(const FOnAttributeChangeData& Data) const;
-	void HeatChanged(const FOnAttributeChangeData& Data) const;
-	void MaxHeatThresholdChanged(const FOnAttributeChangeData& Data) const;
-	void MinHeatThresholdChanged(const FOnAttributeChangeData& Data) const;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widget Data")
+	TObjectPtr<UDataTable> MessageWidgetDataTable;
+	
+		
+	template<typename T>
+	T* GetDataTableRowByTag(UDataTable* DataTable, const FGameplayTag& Tag);
 	
 };
+
+template <typename T>
+
+
+T* UFP_OverlayWidgetController::GetDataTableRowByTag(UDataTable* DataTable, const FGameplayTag& Tag)
+{
+	return DataTable->FindRow<T>(Tag.GetTagName(), TEXT(""));
+}

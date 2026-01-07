@@ -39,8 +39,15 @@ void AFP_EnemyCharacter::UnHighlightActor()
 void AFP_EnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	InitAbilityActorInfo();
 	
+}
+
+void AFP_EnemyCharacter::InitAbilityActorInfo()
+{
+	
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	Cast<UFP_AbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 }
 
 // Called every frame

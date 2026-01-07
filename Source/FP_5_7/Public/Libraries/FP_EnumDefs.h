@@ -43,3 +43,11 @@ enum class ELocomotionMode : uint8
 	Crawl       UMETA(DisplayName="Crawl"),
 	Leap        UMETA(DisplayName="Leap"),
 };
+
+UENUM(BlueprintType)
+enum class EDisplayType : uint8
+{
+	Numerical   UMETA(DisplayName="Numerical"),
+	Percentage  UMETA(DisplayName="Percentage"),
+	
+};

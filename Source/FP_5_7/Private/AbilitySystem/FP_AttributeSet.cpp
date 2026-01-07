@@ -306,6 +306,12 @@ void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	
 	FEffectProperties Props;
 	SetEffectProperties(Data, Props);
+	
+	if (Data.EvaluatedData.Attribute == GetHitPointsAttribute())
+	{
+		SetHitPoints(FMath::Clamp(GetHitPoints(), 0.f, GetMaxHitPoints()));
+	}
+	
 }
 
 void UFP_AttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)

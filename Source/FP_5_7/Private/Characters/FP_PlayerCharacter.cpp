@@ -3,6 +3,7 @@
 #include "Characters/FP_PlayerCharacter.h"
 #include "AbilitySystemComponent.h"
 #include "Player/FP_PlayerController.h"
+#include "Abilitysystem\FP_AbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Player/FP_PlayerState.h"
@@ -130,6 +131,7 @@ void AFP_PlayerCharacter::InitAbilityActorInfo()
 	AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
 	check(FP_PlayerState);
 	FP_PlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(FP_PlayerState, this);
+	Cast<UFP_AbilitySystemComponent>(FP_PlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 	AbilitySystemComponent = FP_PlayerState->GetAbilitySystemComponent();
 	AttributeSet = FP_PlayerState->GetAttributeSet();
 	

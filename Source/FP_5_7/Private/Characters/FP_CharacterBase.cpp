@@ -24,4 +24,9 @@ void AFP_CharacterBase::BeginPlay()
 	
 }
 
+void AFP_CharacterBase::InitAbilityActorInfo()
+{
+}
+
+
 

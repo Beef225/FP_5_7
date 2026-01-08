@@ -43,8 +43,8 @@ void AFP_CharacterBase::InitializeDefaultAttributes() const
 {
 	
 	ApplyEffectToSelf(DefaultPrimaryAttributes,1.0f);
-	ApplyEffectToSelf(PrimaryAttributeDerivedBonuses,1.0f);
 	ApplyEffectToSelf(SecondaryAttributes,1.0f);
+	ApplyEffectToSelf(PrimaryAttributeDerivedBonuses,1.0f);
 	
 }
 

@@ -1,5 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
+// FP_5_7.Build.cs
 using UnrealBuildTool;
 
 public class FP_5_7 : ModuleRules
@@ -7,17 +6,37 @@ public class FP_5_7 : ModuleRules
 	public FP_5_7(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+		PublicDependencyModuleNames.AddRange(new[]
+		{
+			"Core",
+			"CoreUObject",
+			"Engine",
+			"GameplayAbilities",
+			"GameplayTags",
+			"GameplayTasks"
+		});
+
+		PrivateDependencyModuleNames.AddRange(new[]
+		{
+			"InputCore",
+			"EnhancedInput"
+		});
+
+		if (Target.bBuildEditor)
+		{
+			PrivateDependencyModuleNames.AddRange(new[]
+			{
+				"UnrealEd",
+				"AssetRegistry",
+				"AssetTools",
+				"Json",
+				"JsonUtilities",
+				"DesktopPlatform",
+				"Slate",
+				"SlateCore"
+			});
+		}
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "GameplayAbilities", "EnhancedInput" });
-
-		PrivateDependencyModuleNames.AddRange(new string[] {   "GameplayTags", "GameplayTasks" });
-
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-		
-		// Uncomment if you are using online features
-		// PrivateDependencyModuleNames.Add("OnlineSubsystem");
-
-		// To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
 	}
 }

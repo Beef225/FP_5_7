@@ -114,11 +114,16 @@ TagsToAttributes.Add(GameplayTags.AoE_AdditionalRadius, GetAreaOfEffectAdditiona
 //Speed
 TagsToAttributes.Add(GameplayTags.Speed_Movement, GetMovementSpeedAttribute);
 TagsToAttributes.Add(GameplayTags.Speed_Skill, GetSkillSpeedAttribute);
+TagsToAttributes.Add(GameplayTags.Speed_Projectile, GetProjectileSpeedAttribute);
 
 //Item
 TagsToAttributes.Add(GameplayTags.Item_Quantity, GetItemQuantityAttribute);
 TagsToAttributes.Add(GameplayTags.Item_Rarity, GetItemRarityAttribute);
 TagsToAttributes.Add(GameplayTags.Item_WattsQuantity, GetWattsQuantityAttribute);
+
+//DoT
+TagsToAttributes.Add(GameplayTags.DoT_Increased, GetIncreasedDamageOverTimeAttribute);
+TagsToAttributes.Add(GameplayTags.DoT_Multiplier, GetDamageOverTimeMultiplierAttribute);
 
 
 //Meta Attributes
@@ -278,12 +283,19 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MovementSpeed, COND_None, REPNO
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, SkillSpeed, COND_None, REPNOTIFY_Always)
 
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ProjectileSpeed, COND_None, REPNOTIFY_Always)
+
 //Item
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ItemQuantity, COND_None, REPNOTIFY_Always)
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ItemRarity, COND_None, REPNOTIFY_Always)
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, WattsQuantity, COND_None, REPNOTIFY_Always)
+
+//DoT
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageOverTime, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, DamageOverTimeMultiplier, COND_None, REPNOTIFY_Always)
 
 
 //Meta Attributes
@@ -311,7 +323,6 @@ void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	{
 		SetHitPoints(FMath::Clamp(GetHitPoints(), 0.f, GetMaxHitPoints()));
 	}
-	
 }
 
 void UFP_AttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
@@ -727,6 +738,11 @@ void UFP_AttributeSet::OnRep_SkillSpeed(const FGameplayAttributeData& OldSkillSp
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, SkillSpeed, OldSkillSpeed);
 }
 
+void UFP_AttributeSet::OnRep_ProjectileSpeed(const FGameplayAttributeData& OldProjectileSpeed) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ProjectileSpeed, OldProjectileSpeed);
+}
+
 //Item
 void UFP_AttributeSet::OnRep_ItemQuantity(const FGameplayAttributeData& OldItemQuantity) const
 {
@@ -741,6 +757,17 @@ void UFP_AttributeSet::OnRep_ItemRarity(const FGameplayAttributeData& OldItemRar
 void UFP_AttributeSet::OnRep_WattsQuantity(const FGameplayAttributeData& OldWattsQuantity) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, WattsQuantity, OldWattsQuantity);
+}
+
+//DoT
+void UFP_AttributeSet::OnRep_IncreasedDamageOverTime(const FGameplayAttributeData& OldIncreasedDamageOverTime) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageOverTime, OldIncreasedDamageOverTime);
+}
+
+void UFP_AttributeSet::OnRep_DamageOverTimeMultiplier(const FGameplayAttributeData& OldDamageOverTimeMultiplier) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, DamageOverTimeMultiplier, OldDamageOverTimeMultiplier);
 }
 
 

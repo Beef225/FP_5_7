@@ -289,6 +289,9 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData SkillSpeed;
 
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ProjectileSpeed;
+
 //Item
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData ItemQuantity;
@@ -298,6 +301,13 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData WattsQuantity;
+
+//DoT
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageOverTime;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData DamageOverTimeMultiplier;
 
 
 //Meta Attributes
@@ -587,6 +597,10 @@ UFUNCTION()
 	void OnRep_SkillSpeed(const FGameplayAttributeData& OldSkillSpeed) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, SkillSpeed)
 
+UFUNCTION()
+	void OnRep_ProjectileSpeed(const FGameplayAttributeData& OldProjectileSpeed) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ProjectileSpeed)
+
 //Item
 UFUNCTION()
 	void OnRep_ItemQuantity(const FGameplayAttributeData& OldItemQuantity) const;
@@ -599,6 +613,15 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_WattsQuantity(const FGameplayAttributeData& OldWattsQuantity) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, WattsQuantity)
+
+//DoT
+UFUNCTION()
+	void OnRep_IncreasedDamageOverTime(const FGameplayAttributeData& OldIncreasedDamageOverTime) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageOverTime)
+
+UFUNCTION()
+	void OnRep_DamageOverTimeMultiplier(const FGameplayAttributeData& OldDamageOverTimeMultiplier) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, DamageOverTimeMultiplier)
 
 
 //Meta Attributes

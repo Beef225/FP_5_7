@@ -305,6 +305,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Speed.Skill"), 
 		FString("Skill Speed")
 		);
+	GameplayTags.Speed_Projectile = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Projectile"), 
+		FString("Increased Projectile Speed")
+		);
 
 	//Item
 	GameplayTags.Item_Quantity = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -318,6 +322,16 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Item_WattsQuantity = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Item.WattsQuantity"), 
 		FString("Drop More Watts")
+		);
+
+	//DoT
+	GameplayTags.DoT_Increased = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("DoT.Increased"), 
+		FString("Increased Damage OverTime")
+		);
+	GameplayTags.DoT_Multiplier = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("DoT.Multiplier"), 
+		FString("Damage Over Time Multiplier")
 		);
 
 

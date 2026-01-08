@@ -107,11 +107,16 @@ FGameplayTag AoE_AdditionalRadius;
 //Speed
 FGameplayTag Speed_Movement;
 FGameplayTag Speed_Skill;
+FGameplayTag Speed_Projectile;
 
 //Item
 FGameplayTag Item_Quantity;
 FGameplayTag Item_Rarity;
 FGameplayTag Item_WattsQuantity;
+
+//DoT
+FGameplayTag DoT_Increased;
+FGameplayTag DoT_Multiplier;
 
 
 //Meta Attributes

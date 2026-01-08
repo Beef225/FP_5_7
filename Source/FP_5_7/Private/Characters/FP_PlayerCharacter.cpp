@@ -142,6 +142,8 @@ void AFP_PlayerCharacter::InitAbilityActorInfo()
 			FP_HUD->InitOverlay(FP_PlayerController, FP_PlayerState, AbilitySystemComponent, AttributeSet);
 		}
 	}
+	InitializeDefaultAttributes();
+	
 }
 
 bool AFP_PlayerCharacter::GetMouseWorldPoint(FVector& OutWorldPoint) const

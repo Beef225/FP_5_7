@@ -35,6 +35,11 @@ void AFP_EnemyCharacter::UnHighlightActor()
 	Weapon->SetRenderCustomDepth(false);
 }
 
+int32 AFP_EnemyCharacter::GetPlayerLevel()
+{
+	return Level;
+}
+
 // Called when the game starts or when spawned
 void AFP_EnemyCharacter::BeginPlay()
 {

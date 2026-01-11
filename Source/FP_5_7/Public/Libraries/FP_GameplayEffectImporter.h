@@ -10,7 +10,7 @@ class FP_5_7_API UFPGameplayEffectImporter : public UBlueprintFunctionLibrary
 
 public:
 	/**
-	 * Editor-only: Reads a CSV/JSON file and creates/updates a GameplayEffect asset with Override modifiers.
+	 * Editor-only: Reads a CSV/JSON file and creates/updates a Blueprint GameplayEffect class with Override modifiers.
 	 *
 	 * CSV requires headers:
 	 *   Name, InitialValue
@@ -34,8 +34,7 @@ public:
 	);
 
 	/**
-	 * Editor-only: Opens a file picker (CSV/JSON) and then imports to a GameplayEffect asset.
-	 * This avoids pasting absolute paths.
+	 * Editor-only: Opens a file picker (CSV/JSON) and then imports to a GameplayEffect Blueprint class.
 	 *
 	 * @param DefaultDirectory Optional start directory for the dialog (can be empty)
 	 */

@@ -18,11 +18,6 @@ UFP_AttributeSet::UFP_AttributeSet()
 {
 	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
 
-InitHitPoints(100.f);
-	InitMaxHitPoints(100.f);
-	InitHeat(0.f);
-	InitMaxHeatThreshold(100.f);
-	InitMinHeatThreshold(-100.f);
 	
 	//Vital Attributes
 TagsToAttributes.Add(GameplayTags.Attributes_Vital_HitPoints, GetHitPointsAttribute);
@@ -308,7 +303,7 @@ void UFP_AttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, f
 	
 	if (Attribute == GetHitPointsAttribute())
 	{
-		NewValue = FMath::Clamp(GetHitPoints(), 0.f, GetMaxHitPoints());
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHitPoints());
 	}
 }
 

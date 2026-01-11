@@ -92,6 +92,14 @@ void AFP_PlayerCharacter::OnRep_PlayerState()
 	InitAbilityActorInfo();
 }
 
+int32 AFP_PlayerCharacter::GetPlayerLevel()
+{
+	const AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
+	check(FP_PlayerState);
+	return FP_PlayerState->GetPlayerLevel();
+	
+}
+
 void AFP_PlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

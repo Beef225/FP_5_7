@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
+#include "Interaction/FP_CombatInterface.h"
 #include "FP_CharacterBase.generated.h"
 
 class UAbilitySystemComponent;
@@ -12,7 +13,7 @@ class UAttributeSet;
 class UGameplayEffect;
 
 UCLASS(Abstract)
-class FP_5_7_API AFP_CharacterBase : public ACharacter, public IAbilitySystemInterface
+class FP_5_7_API AFP_CharacterBase : public ACharacter, public IAbilitySystemInterface, public IFP_CombatInterface
 {
 	GENERATED_BODY()
 
@@ -44,7 +45,10 @@ protected:
 	TSubclassOf<UGameplayEffect> PrimaryAttributeDerivedBonuses;
 	
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
-	TSubclassOf<UGameplayEffect> SecondaryAttributes;
+	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
+	
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
+	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
 	
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
 

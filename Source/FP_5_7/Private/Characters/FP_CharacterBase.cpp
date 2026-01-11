@@ -1,6 +1,7 @@
 ﻿// Copyright JG
 #include "Characters/FP_CharacterBase.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/FP_AbilitySystemComponent.h"
 
 // Sets default values
 AFP_CharacterBase::AFP_CharacterBase()
@@ -47,6 +48,16 @@ void AFP_CharacterBase::InitializeDefaultAttributes() const
 	ApplyEffectToSelf(DefaultSecondaryAttributes,1.0f);
 	ApplyEffectToSelf(PrimaryAttributeDerivedBonuses,1.0f);
 	ApplyEffectToSelf(DefaultVitalAttributes,1.0f);
+	
+	
+}
+
+void AFP_CharacterBase::AddCharacterAbilities()
+{
+	UFP_AbilitySystemComponent* FP_ASC = CastChecked<UFP_AbilitySystemComponent>(AbilitySystemComponent);
+	if (!HasAuthority()) return;
+
+	FP_ASC->AddCharacterAbilities(StartupAbilities);
 	
 	
 }

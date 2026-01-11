@@ -374,4 +374,60 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Block Input Released callback for input")
 		);
 
+	//Input Tags
+	GameplayTags.InputTag_LMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.LMB"), 
+		FString("InputTag for Left Mouse Button")
+		);
+	GameplayTags.InputTag_RMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.RMB"), 
+		FString("InputTag for Right Mouse Button")
+		);
+	GameplayTags.InputTag_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.1"), 
+		FString("InputTag for Key 1")
+		);
+	GameplayTags.InputTag_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.2"), 
+		FString("InputTag for Key 2")
+		);
+	GameplayTags.InputTag_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.3"), 
+		FString("InputTag for Key 3")
+		);
+	GameplayTags.InputTag_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.4"), 
+		FString("InputTag for Key 4")
+		);
+	GameplayTags.InputTag_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.5"), 
+		FString("InputTag for Key 5")
+		);
+	GameplayTags.InputTag_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.6"), 
+		FString("InputTag for Key 6")
+		);
+	GameplayTags.InputTag_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.7"), 
+		FString("InputTag for Key 7")
+		);
+	GameplayTags.InputTag_8 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.8"), 
+		FString("InputTag for Key 8")
+		);
+	GameplayTags.InputTag_9 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.9"), 
+		FString("InputTag for Key 9")
+		);
+	GameplayTags.InputTag_10 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.10"), 
+		FString("InputTag for Key 10")
+		);
+
+	//InputTags
+	GameplayTags.InputTag_MMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.MMB"), 
+		FString("InputTag for Middle Mouse Button")
+		);
+
 }

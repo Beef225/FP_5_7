@@ -133,6 +133,23 @@ FGameplayTag Skill_Slot_5;
 FGameplayTag Player_Block_CursorTrace;
 FGameplayTag Player_Block_InputHeld;
 FGameplayTag Player_Block_InputReleased;
+
+//Input Tags
+FGameplayTag InputTag_LMB;
+FGameplayTag InputTag_RMB;
+FGameplayTag InputTag_1;
+FGameplayTag InputTag_2;
+FGameplayTag InputTag_3;
+FGameplayTag InputTag_4;
+FGameplayTag InputTag_5;
+FGameplayTag InputTag_6;
+FGameplayTag InputTag_7;
+FGameplayTag InputTag_8;
+FGameplayTag InputTag_9;
+FGameplayTag InputTag_10;
+
+//InputTags
+FGameplayTag InputTag_MMB;
 	
 	
 	

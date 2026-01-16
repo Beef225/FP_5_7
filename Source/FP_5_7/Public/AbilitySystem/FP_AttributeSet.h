@@ -290,6 +290,9 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 	FGameplayAttributeData SkillSpeed;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData SkillMoveSpeedModifier;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData ProjectileSpeed;
 
 //Item
@@ -308,6 +311,25 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData DamageOverTimeMultiplier;
+
+//Penetration
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ArmourPenetration;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData PhysicalResistancePenetration;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ExplosiveResistancePenetration;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData RadiationResistancePenetration;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ChemicalResistancePenetration;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData EnergyResistancePenetration;
 
 
 //Meta Attributes
@@ -598,6 +620,10 @@ UFUNCTION()
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, SkillSpeed)
 
 UFUNCTION()
+	void OnRep_SkillMoveSpeedModifier(const FGameplayAttributeData& OldSkillMoveSpeedModifier) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, SkillMoveSpeedModifier)
+
+UFUNCTION()
 	void OnRep_ProjectileSpeed(const FGameplayAttributeData& OldProjectileSpeed) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ProjectileSpeed)
 
@@ -622,6 +648,31 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_DamageOverTimeMultiplier(const FGameplayAttributeData& OldDamageOverTimeMultiplier) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, DamageOverTimeMultiplier)
+
+//Penetration
+UFUNCTION()
+	void OnRep_ArmourPenetration(const FGameplayAttributeData& OldArmourPenetration) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ArmourPenetration)
+
+UFUNCTION()
+	void OnRep_PhysicalResistancePenetration(const FGameplayAttributeData& OldPhysicalResistancePenetration) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, PhysicalResistancePenetration)
+
+UFUNCTION()
+	void OnRep_ExplosiveResistancePenetration(const FGameplayAttributeData& OldExplosiveResistancePenetration) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ExplosiveResistancePenetration)
+
+UFUNCTION()
+	void OnRep_RadiationResistancePenetration(const FGameplayAttributeData& OldRadiationResistancePenetration) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, RadiationResistancePenetration)
+
+UFUNCTION()
+	void OnRep_ChemicalResistancePenetration(const FGameplayAttributeData& OldChemicalResistancePenetration) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ChemicalResistancePenetration)
+
+UFUNCTION()
+	void OnRep_EnergyResistancePenetration(const FGameplayAttributeData& OldEnergyResistancePenetration) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, EnergyResistancePenetration)
 
 
 //Meta Attributes

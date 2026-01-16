@@ -107,6 +107,7 @@ FGameplayTag AoE_AdditionalRadius;
 //Speed
 FGameplayTag Speed_Movement;
 FGameplayTag Speed_Skill;
+FGameplayTag Speed_Movement_DuringSkill;
 FGameplayTag Speed_Projectile;
 
 //Item
@@ -117,6 +118,14 @@ FGameplayTag Item_WattsQuantity;
 //DoT
 FGameplayTag DoT_Increased;
 FGameplayTag DoT_Multiplier;
+
+//Penetration
+FGameplayTag Penetration_Armour;
+FGameplayTag Penetration_Physical;
+FGameplayTag Penetration_Explosive;
+FGameplayTag Penetration_Radiation;
+FGameplayTag Penetration_Chemical;
+FGameplayTag Penetration_Energy;
 
 
 //Meta Attributes
@@ -150,6 +159,14 @@ FGameplayTag InputTag_10;
 
 //InputTags
 FGameplayTag InputTag_MMB;
+FGameplayTag InputTag_CharacterMenu;
+FGameplayTag InputTag_SkillsMenu;
+FGameplayTag InputTag_OptionsMenu;
+FGameplayTag InputTagInventoryMenu;
+FGameplayTag InputTag_PassiveTreeMenu;
+FGameplayTag InputTag_WorldMapMenu;
+FGameplayTag InputTag_LocalMap;
+FGameplayTag InputTag_StashMenu;
 	
 	
 	

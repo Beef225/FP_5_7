@@ -15,6 +15,6 @@ void UFP_WidgetController::BroadcastInitialValues()
 {
 }
 
-void UFP_WidgetController::BindCallbacksToDependancies()
+void UFP_WidgetController::BindCallbacksToDependencies()
 {
 }

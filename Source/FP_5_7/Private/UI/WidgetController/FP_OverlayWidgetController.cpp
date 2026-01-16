@@ -18,7 +18,7 @@ void UFP_OverlayWidgetController::BroadcastInitialValues()
 	OnMinHeatThresholdChanged.Broadcast(FP_AttributeSet->GetMinHeatThreshold());
 }
 
-void UFP_OverlayWidgetController::BindCallbacksToDependancies()
+void UFP_OverlayWidgetController::BindCallbacksToDependencies()
 {
 	const UFP_AttributeSet* FP_AttributeSet = CastChecked<UFP_AttributeSet>(AttributeSet);
 	

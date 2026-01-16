@@ -45,7 +45,7 @@ class FP_5_7_API UFP_OverlayWidgetController : public UFP_WidgetController
 	
 public:
 	virtual void BroadcastInitialValues() override;
-	virtual void BindCallbacksToDependancies() override;
+	virtual void BindCallbacksToDependencies() override;
 	
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FOnAttributeChangedSignature OnHitPointsChanged;

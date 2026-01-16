@@ -18,7 +18,8 @@ UFP_AttributeSet::UFP_AttributeSet()
 {
 	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
 
-	
+
+		
 	//Vital Attributes
 TagsToAttributes.Add(GameplayTags.Attributes_Vital_HitPoints, GetHitPointsAttribute);
 TagsToAttributes.Add(GameplayTags.Attributes_Vital_MaxHitPoints, GetMaxHitPointsAttribute);
@@ -108,7 +109,9 @@ TagsToAttributes.Add(GameplayTags.AoE_AdditionalRadius, GetAreaOfEffectAdditiona
 
 //Speed
 TagsToAttributes.Add(GameplayTags.Speed_Movement, GetMovementSpeedAttribute);
+	
 TagsToAttributes.Add(GameplayTags.Speed_Skill, GetSkillSpeedAttribute);
+TagsToAttributes.Add(GameplayTags.Speed_Movement_DuringSkill, GetSkillMoveSpeedModifierAttribute);
 TagsToAttributes.Add(GameplayTags.Speed_Projectile, GetProjectileSpeedAttribute);
 
 //Item
@@ -119,6 +122,14 @@ TagsToAttributes.Add(GameplayTags.Item_WattsQuantity, GetWattsQuantityAttribute)
 //DoT
 TagsToAttributes.Add(GameplayTags.DoT_Increased, GetIncreasedDamageOverTimeAttribute);
 TagsToAttributes.Add(GameplayTags.DoT_Multiplier, GetDamageOverTimeMultiplierAttribute);
+
+//Penetration
+TagsToAttributes.Add(GameplayTags.Penetration_Armour, GetArmourPenetrationAttribute);
+TagsToAttributes.Add(GameplayTags.Penetration_Physical, GetPhysicalResistancePenetrationAttribute);
+TagsToAttributes.Add(GameplayTags.Penetration_Explosive, GetExplosiveResistancePenetrationAttribute);
+TagsToAttributes.Add(GameplayTags.Penetration_Radiation, GetRadiationResistancePenetrationAttribute);
+TagsToAttributes.Add(GameplayTags.Penetration_Chemical, GetChemicalResistancePenetrationAttribute);
+TagsToAttributes.Add(GameplayTags.Penetration_Energy, GetEnergyResistancePenetrationAttribute);
 
 
 //Meta Attributes
@@ -278,6 +289,8 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MovementSpeed, COND_None, REPNO
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, SkillSpeed, COND_None, REPNOTIFY_Always)
 
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, SkillMoveSpeedModifier, COND_None, REPNOTIFY_Always)
+
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ProjectileSpeed, COND_None, REPNOTIFY_Always)
 
 //Item
@@ -291,6 +304,19 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, WattsQuantity, COND_None, REPNO
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageOverTime, COND_None, REPNOTIFY_Always)
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, DamageOverTimeMultiplier, COND_None, REPNOTIFY_Always)
+
+//Penetration
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ArmourPenetration, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, PhysicalResistancePenetration, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ExplosiveResistancePenetration, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, RadiationResistancePenetration, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ChemicalResistancePenetration, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, EnergyResistancePenetration, COND_None, REPNOTIFY_Always)
 
 
 //Meta Attributes
@@ -733,6 +759,11 @@ void UFP_AttributeSet::OnRep_SkillSpeed(const FGameplayAttributeData& OldSkillSp
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, SkillSpeed, OldSkillSpeed);
 }
 
+void UFP_AttributeSet::OnRep_SkillMoveSpeedModifier(const FGameplayAttributeData& OldSkillMoveSpeedModifier) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, SkillMoveSpeedModifier, OldSkillMoveSpeedModifier);
+}
+
 void UFP_AttributeSet::OnRep_ProjectileSpeed(const FGameplayAttributeData& OldProjectileSpeed) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ProjectileSpeed, OldProjectileSpeed);
@@ -763,6 +794,37 @@ void UFP_AttributeSet::OnRep_IncreasedDamageOverTime(const FGameplayAttributeDat
 void UFP_AttributeSet::OnRep_DamageOverTimeMultiplier(const FGameplayAttributeData& OldDamageOverTimeMultiplier) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, DamageOverTimeMultiplier, OldDamageOverTimeMultiplier);
+}
+
+//Penetration
+void UFP_AttributeSet::OnRep_ArmourPenetration(const FGameplayAttributeData& OldArmourPenetration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ArmourPenetration, OldArmourPenetration);
+}
+
+void UFP_AttributeSet::OnRep_PhysicalResistancePenetration(const FGameplayAttributeData& OldPhysicalResistancePenetration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, PhysicalResistancePenetration, OldPhysicalResistancePenetration);
+}
+
+void UFP_AttributeSet::OnRep_ExplosiveResistancePenetration(const FGameplayAttributeData& OldExplosiveResistancePenetration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ExplosiveResistancePenetration, OldExplosiveResistancePenetration);
+}
+
+void UFP_AttributeSet::OnRep_RadiationResistancePenetration(const FGameplayAttributeData& OldRadiationResistancePenetration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, RadiationResistancePenetration, OldRadiationResistancePenetration);
+}
+
+void UFP_AttributeSet::OnRep_ChemicalResistancePenetration(const FGameplayAttributeData& OldChemicalResistancePenetration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ChemicalResistancePenetration, OldChemicalResistancePenetration);
+}
+
+void UFP_AttributeSet::OnRep_EnergyResistancePenetration(const FGameplayAttributeData& OldEnergyResistancePenetration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, EnergyResistancePenetration, OldEnergyResistancePenetration);
 }
 
 

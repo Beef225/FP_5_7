@@ -305,6 +305,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Speed.Skill"), 
 		FString("Skill Speed")
 		);
+	GameplayTags.Speed_Movement_DuringSkill = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Movement.DuringSkill"), 
+		FString("Multiplier of Movment speed during Skills that allow Movement")
+		);
 	GameplayTags.Speed_Projectile = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Speed.Projectile"), 
 		FString("Increased Projectile Speed")
@@ -332,6 +336,32 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.DoT_Multiplier = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("DoT.Multiplier"), 
 		FString("Damage Over Time Multiplier")
+		);
+
+	//Penetration
+	GameplayTags.Penetration_Armour = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Armour"), 
+		FString("Ignores Armour during damage Calc")
+		);
+	GameplayTags.Penetration_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Physical"), 
+		FString("Subtract from Max of Physical Res")
+		);
+	GameplayTags.Penetration_Explosive = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Explosive"), 
+		FString("Subtract from Max of Explosive Res")
+		);
+	GameplayTags.Penetration_Radiation = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Radiation"), 
+		FString("Subtract from Max of Radiation Res")
+		);
+	GameplayTags.Penetration_Chemical = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Chemical"), 
+		FString("Subtract from Max of Chemical Res")
+		);
+	GameplayTags.Penetration_Energy = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Energy"), 
+		FString("Subtract from Max of Energy Res")
 		);
 
 
@@ -428,6 +458,38 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.InputTag_MMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("InputTag.MMB"), 
 		FString("InputTag for Middle Mouse Button")
+		);
+	GameplayTags.InputTag_CharacterMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.CharacterMenu"), 
+		FString("Open Character Menu")
+		);
+	GameplayTags.InputTag_SkillsMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.SkillsMenu"), 
+		FString("Open Skills Menu")
+		);
+	GameplayTags.InputTag_OptionsMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.OptionsMenu"), 
+		FString("Open Option Menu")
+		);
+	GameplayTags.InputTagInventoryMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTagInventoryMenu"), 
+		FString("Open Inventory")
+		);
+	GameplayTags.InputTag_PassiveTreeMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.PassiveTreeMenu"), 
+		FString("Open Passive Tree")
+		);
+	GameplayTags.InputTag_WorldMapMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.WorldMapMenu"), 
+		FString("Open World Map ")
+		);
+	GameplayTags.InputTag_LocalMap = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.LocalMap"), 
+		FString("Toggle Local Map overlay")
+		);
+	GameplayTags.InputTag_StashMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.StashMenu"), 
+		FString("Open Stash ")
 		);
 
 }

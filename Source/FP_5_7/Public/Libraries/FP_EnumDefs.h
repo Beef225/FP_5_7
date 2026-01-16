@@ -51,3 +51,15 @@ enum class EDisplayType : uint8
 	Percentage  UMETA(DisplayName="Percentage"),
 	
 };
+
+UENUM(BlueprintType)
+enum class EMenu : uint8
+{
+	Character		UMETA(DisplayName="Character"),
+	Skills			UMETA(DisplayName="Skills"),
+	PassiveTree		UMETA(DisplayName="PassiveTree"),
+	Inventory		UMETA(DisplayName="Inventory"),
+	Settings		UMETA(DisplayName="Settings"),
+	CloseGame		UMETA(DisplayName="CloseGame")
+	
+};

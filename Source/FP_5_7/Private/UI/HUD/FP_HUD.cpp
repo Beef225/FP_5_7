@@ -4,6 +4,7 @@
 #include "UI/HUD/FP_HUD.h"
 #include "UI/Widget/FP_UserWidget.h"
 #include "UI/WidgetController/FP_OverlayWidgetController.h"
+#include "UI/WidgetController/FP_CharacterMenuWidgetController.h"
 
 UFP_OverlayWidgetController* AFP_HUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
 {
@@ -12,9 +13,19 @@ UFP_OverlayWidgetController* AFP_HUD::GetOverlayWidgetController(const FWidgetCo
 		OverlayWidgetController = NewObject<UFP_OverlayWidgetController>(this, OverlayWidgetControllerClass);
 		OverlayWidgetController->SetWidgetControllerParams(WCParams);
 		OverlayWidgetController->BindCallbacksToDependencies();
-		return OverlayWidgetController;
 	}
 	return OverlayWidgetController;
+}
+
+UFP_CharacterMenuWidgetController* AFP_HUD::GetCharacterMenuWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (CharacterWidgetController == nullptr)
+	{
+		CharacterWidgetController = NewObject<UFP_CharacterMenuWidgetController>(this, CharacterWidgetControllerClass);
+		CharacterWidgetController->SetWidgetControllerParams(WCParams);
+		CharacterWidgetController->BindCallbacksToDependencies();
+	}
+	return CharacterWidgetController;
 }
 
 void AFP_HUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)

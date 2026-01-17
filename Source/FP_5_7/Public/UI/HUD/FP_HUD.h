@@ -8,6 +8,7 @@
 #include "FP_HUD.generated.h"
 
 
+class UFP_CharacterMenuWidgetController;
 class UAttributeSet;
 class UAbilitySystemComponent;
 class UFP_WidgetController;
@@ -24,11 +25,9 @@ class FP_5_7_API AFP_HUD : public AHUD
 	GENERATED_BODY()
 	
 public:
-	
-	UPROPERTY()
-	TObjectPtr<UFP_UserWidget> OverlayWidget;
-	
+		
 	UFP_OverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);
+	UFP_CharacterMenuWidgetController* GetCharacterMenuWidgetController(const FWidgetControllerParams& WCParams);
 
 	void InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS);
 	
@@ -36,6 +35,8 @@ protected:
 	
 	
 private:
+	UPROPERTY()
+	TObjectPtr<UFP_UserWidget> OverlayWidget;
 	
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UFP_UserWidget> OverlayWidgetClass;
@@ -45,4 +46,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UFP_OverlayWidgetController> OverlayWidgetControllerClass;
+	
+	UPROPERTY()
+	TObjectPtr<UFP_CharacterMenuWidgetController> CharacterWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UFP_CharacterMenuWidgetController> CharacterWidgetControllerClass;
 };

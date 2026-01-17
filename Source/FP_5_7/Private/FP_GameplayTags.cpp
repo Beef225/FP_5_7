@@ -475,7 +475,7 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("InputTagInventoryMenu"), 
 		FString("Open Inventory")
 		);
-	GameplayTags.InputTag_PassiveTreeMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
+	GameplayTags.InputTag_PassiveTreeMenu = UGameplayTagsManager::Get().AddNativeGameplayTag
 		FName("InputTag.PassiveTreeMenu"), 
 		FString("Open Passive Tree")
 		);

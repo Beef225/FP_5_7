@@ -31,6 +31,9 @@ struct FAttributeInfo
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	EDisplayType DisplayType = EDisplayType::Numerical;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	int DecimalRoundTo = 0;
 };
 
 UCLASS(BlueprintType)
@@ -57,6 +60,7 @@ public:
 	void ImportFromJson_Append();
 
 private:
+	static bool TryParseDecimalRoundTo(const TSharedPtr<FJsonObject>& Obj, int32& OutValue);
 	/** Returns true if it imported at least one row. */
 	bool ImportFromJsonFile(const FString& JsonFileAbsolutePath, bool bClearExisting);
 	bool PickJsonFile(FString& OutAbsolutePath) const;

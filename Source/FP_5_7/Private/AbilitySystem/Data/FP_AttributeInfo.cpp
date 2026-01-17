@@ -77,6 +77,8 @@ void UFP_AttributeInfo::ImportFromJson_Append()
 #endif
 }
 
+
+
 // -------------------------
 // Private helpers
 // -------------------------
@@ -271,6 +273,13 @@ bool UFP_AttributeInfo::ImportFromJsonFile(const FString& JsonFileAbsolutePath, 
 		{
 			NewInfo.DisplayType = DT;
 		}
+		
+		// Optional: DecimalRoundTo
+		int32 Decimals = 0;
+		if (TryParseDecimalRoundTo(Obj, Decimals))
+		{
+			NewInfo.DecimalRoundTo = Decimals;
+		}
 
 		AttributeInformation.Add(NewInfo);
 		++Added;
@@ -288,3 +297,35 @@ bool UFP_AttributeInfo::ImportFromJsonFile(const FString& JsonFileAbsolutePath, 
 	return (Added > 0);
 #endif
 }
+
+
+bool UFP_AttributeInfo::TryParseDecimalRoundTo(const TSharedPtr<FJsonObject>& Obj, int32& OutValue)
+{
+	if (!Obj.IsValid())
+	{
+		return false;
+	}
+
+	// Accept number
+	double Num = 0.0;
+	if (Obj->TryGetNumberField(TEXT("DecimalRoundTo"), Num))
+	{
+		OutValue = FMath::Max(0, static_cast<int32>(Num)); // clamp non-negative
+		return true;
+	}
+
+	// Accept string
+	FString S;
+	if (Obj->TryGetStringField(TEXT("DecimalRoundTo"), S))
+	{
+		S = S.TrimStartAndEnd();
+		if (!S.IsEmpty())
+		{
+			OutValue = FMath::Max(0, FCString::Atoi(*S));
+			return true;
+		}
+	}
+
+	return false;
+}
+

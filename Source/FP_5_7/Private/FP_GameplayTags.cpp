@@ -459,36 +459,36 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("InputTag.MMB"), 
 		FString("InputTag for Middle Mouse Button")
 		);
-	GameplayTags.InputTag_CharacterMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("InputTag.CharacterMenu"), 
+	GameplayTags.InputTag_Menu_Character = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.Menu.Character"), 
 		FString("Open Character Menu")
 		);
-	GameplayTags.InputTag_SkillsMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("InputTag.SkillsMenu"), 
+	GameplayTags.InputTag_Menu_Skills = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.Menu.Skills"), 
 		FString("Open Skills Menu")
 		);
-	GameplayTags.InputTag_OptionsMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("InputTag.OptionsMenu"), 
+	GameplayTags.InputTag_Menu_Options = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.Menu.Options"), 
 		FString("Open Option Menu")
 		);
-	GameplayTags.InputTagInventoryMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("InputTagInventoryMenu"), 
+	GameplayTags.InputTag_Menu_Inventory = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.Menu.Inventory"), 
 		FString("Open Inventory")
 		);
-	GameplayTags.InputTag_PassiveTreeMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("InputTag.PassiveTreeMenu"), 
+	GameplayTags.InputTag_Menu_PassiveTree = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.Menu.PassiveTree"), 
 		FString("Open Passive Tree")
 		);
-	GameplayTags.InputTag_WorldMapMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("InputTag.WorldMapMenu"), 
+	GameplayTags.InputTag_Menu_WorldMap = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.Menu.WorldMap"), 
 		FString("Open World Map ")
 		);
-	GameplayTags.InputTag_LocalMap = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("InputTag.LocalMap"), 
+	GameplayTags.InputTag_Menu_LocalMap = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.Menu.LocalMap"), 
 		FString("Toggle Local Map overlay")
 		);
-	GameplayTags.InputTag_StashMenu = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("InputTag.StashMenu"), 
+	GameplayTags.InputTag_Menu_Stash = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.Menu.Stash"), 
 		FString("Open Stash ")
 		);
 

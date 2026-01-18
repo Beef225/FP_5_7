@@ -5,6 +5,7 @@
 #include "UI/Widget/FP_UserWidget.h"
 #include "UI/WidgetController/FP_OverlayWidgetController.h"
 #include "UI/WidgetController/FP_CharacterMenuWidgetController.h"
+#include "UI/WidgetController/FP_InventoryWidgetController.h"
 
 UFP_OverlayWidgetController* AFP_HUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
 {
@@ -26,6 +27,17 @@ UFP_CharacterMenuWidgetController* AFP_HUD::GetCharacterMenuWidgetController(con
 		CharacterWidgetController->BindCallbacksToDependencies();
 	}
 	return CharacterWidgetController;
+}
+
+UFP_InventoryWidgetController* AFP_HUD::GetInventoryWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (InventoryWidgetController = nullptr)
+	{
+		InventoryWidgetController = NewObject<UFP_InventoryWidgetController>(this, InventoryWidgetControllerClass);
+		InventoryWidgetController->SetWidgetControllerParams(WCParams);
+		InventoryWidgetController->BindCallbacksToDependencies();		
+	}
+	return InventoryWidgetController;
 }
 
 void AFP_HUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)

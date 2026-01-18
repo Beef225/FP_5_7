@@ -3,13 +3,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "GameplayTagContainer.h"
 #include "FP_PlayerController.generated.h"
 
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 class IFP_EnemyInterface;
+class UFP_InputConfig;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUIInputTagSignature, FGameplayTag, InputTag);
 /**
  * 
  */
@@ -22,6 +25,13 @@ public:
 
 	AFP_PlayerController();
 	virtual void PlayerTick(float DeltaTime) override;
+	
+	UPROPERTY(BlueprintAssignable, Category="Input|UI")
+	FOnUIInputTagSignature OnUIInputTagPressed;
+
+	UPROPERTY(BlueprintAssignable, Category="Input|UI")
+	FOnUIInputTagSignature OnUIInputTagReleased;
+
 	
 
 protected:
@@ -47,6 +57,14 @@ private:
 	void CursorTrace();
 	TScriptInterface<IFP_EnemyInterface> LastActor;
 	TScriptInterface<IFP_EnemyInterface> ThisActor;
+	
+	
+	void AbilityInputTagPressed(FGameplayTag InputTag);
+	void AbilityInputTagReleased(FGameplayTag InputTag);
+	void AbilityInputTagHeld(FGameplayTag InputTag);
+
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UFP_InputConfig> InputConfig;
 	
 };
 

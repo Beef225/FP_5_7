@@ -7,6 +7,7 @@
 #include "FP_AbilitySystemLibrary.generated.h"
 
 class UFP_OverlayWidgetController;
+class UFP_InventoryWidgetController;
 class UCharacterMenuWidgetController;
 /**
  * 
@@ -21,4 +22,7 @@ class FP_5_7_API UFP_AbilitySystemLibrary : public UBlueprintFunctionLibrary
 	
 	UFUNCTION(BlueprintPure, Category="AuraAbilitySystemLibrary|WidgetController")
 	static UFP_CharacterMenuWidgetController* GetCharacterWidgetController(const UObject* WorldContextObject);
+	
+	UFUNCTION(BlueprintPure, Category="AuraAbilitySystemLibrary|WidgetController")
+	static UFP_InventoryWidgetController* GetInventoryWidgetController(const UObject* WorldContextObject);
 };

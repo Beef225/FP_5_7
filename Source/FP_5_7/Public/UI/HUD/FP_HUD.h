@@ -9,6 +9,7 @@
 
 
 class UFP_CharacterMenuWidgetController;
+class UFP_InventoryWidgetController;
 class UAttributeSet;
 class UAbilitySystemComponent;
 class UFP_WidgetController;
@@ -28,6 +29,7 @@ public:
 		
 	UFP_OverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);
 	UFP_CharacterMenuWidgetController* GetCharacterMenuWidgetController(const FWidgetControllerParams& WCParams);
+	UFP_InventoryWidgetController* GetInventoryWidgetController(const FWidgetControllerParams& WCParams);
 
 	void InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS);
 	
@@ -52,4 +54,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UFP_CharacterMenuWidgetController> CharacterWidgetControllerClass;
+	
+	UPROPERTY()
+	TObjectPtr<UFP_InventoryWidgetController> InventoryWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UFP_InventoryWidgetController> InventoryWidgetControllerClass;
 };

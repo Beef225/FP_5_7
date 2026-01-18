@@ -159,14 +159,14 @@ FGameplayTag InputTag_10;
 
 //InputTags
 FGameplayTag InputTag_MMB;
-FGameplayTag InputTag_CharacterMenu;
-FGameplayTag InputTag_SkillsMenu;
-FGameplayTag InputTag_OptionsMenu;
-FGameplayTag InputTagInventoryMenu;
-FGameplayTag InputTag_PassiveTreeMenu;
-FGameplayTag InputTag_WorldMapMenu;
-FGameplayTag InputTag_LocalMap;
-FGameplayTag InputTag_StashMenu;
+FGameplayTag InputTag_Menu_Character;
+FGameplayTag InputTag_Menu_Skills;
+FGameplayTag InputTag_Menu_Options;
+FGameplayTag InputTag_Menu_Inventory;
+FGameplayTag InputTag_Menu_PassiveTree;
+FGameplayTag InputTag_Menu_WorldMap;
+FGameplayTag InputTag_Menu_LocalMap;
+FGameplayTag InputTag_Menu_Stash;
 	
 	
 	

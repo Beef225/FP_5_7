@@ -4,6 +4,7 @@
 
 #include "Player/FP_PlayerController.h"
 #include "EnhancedInputComponent.h"
+#include "Input\FP_InputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Characters/FP_PlayerCharacter.h"
 #include "Interaction/FP_EnemyInterface.h"
@@ -114,6 +115,29 @@ void AFP_PlayerController::CursorTrace()
 	}
 }
 
+void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
+	
+	
+	const FGameplayTag MenuRoot = FGameplayTag::RequestGameplayTag(FName("InputTag.Menu"));
+	if (InputTag.MatchesTag(MenuRoot))
+	{
+		OnUIInputTagPressed.Broadcast(InputTag);
+		return; // stop here so “menu tags” don’t also try to drive abilities later
+	}
+}
+
+void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Blue, *InputTag.ToString());
+}
+
+void AFP_PlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Green, *InputTag.ToString());
+}
+
 void AFP_PlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -141,10 +165,10 @@ void AFP_PlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 	
-	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
-	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFP_PlayerController::Move);
-	
-	EnhancedInputComponent->BindAction(ZoomAction, ETriggerEvent::Triggered, this, &AFP_PlayerController::Zoom);
+	UFP_InputComponent* FP_InputComponent = CastChecked<UFP_InputComponent>(InputComponent);
+	FP_InputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFP_PlayerController::Move);
+	FP_InputComponent->BindAction(ZoomAction, ETriggerEvent::Triggered, this, &AFP_PlayerController::Zoom);
+	FP_InputComponent->BindAbilityActions(InputConfig,this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 
 void AFP_PlayerController::Move(const FInputActionValue& InputActionValue)

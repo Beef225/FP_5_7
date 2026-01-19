@@ -83,6 +83,7 @@ void AFP_PlayerCharacter::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 	// Init ability actor info for the Server
 	InitAbilityActorInfo();
+	AddCharacterAbilities();
 }
 
 void AFP_PlayerCharacter::OnRep_PlayerState()
@@ -90,7 +91,7 @@ void AFP_PlayerCharacter::OnRep_PlayerState()
 	Super::OnRep_PlayerState();
 	// Init ability actor info for the Client
 	InitAbilityActorInfo();
-	AddCharacterAbilities();
+	
 }
 
 int32 AFP_PlayerCharacter::GetPlayerLevel()

@@ -13,4 +13,9 @@ UCLASS()
 class FP_5_7_API UFP_GameplayAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
+	
+public:
+	
+	UPROPERTY(EditDefaultsOnly, Category="Input", meta = (Categories = "InputTag"))
+	FGameplayTag StartupInputTag;
 };

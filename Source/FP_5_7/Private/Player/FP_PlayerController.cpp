@@ -8,6 +8,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "Characters/FP_PlayerCharacter.h"
 #include "Interaction/FP_EnemyInterface.h"
+#include "AbilitySystemBlueprintLibrary.h"
+#include"AbilitySystem/FP_AbilitySystemComponent.h"
 
 
 AFP_PlayerController::AFP_PlayerController()
@@ -117,25 +119,40 @@ void AFP_PlayerController::CursorTrace()
 
 void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
-	
-	
+	//GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
+		
 	const FGameplayTag MenuRoot = FGameplayTag::RequestGameplayTag(FName("InputTag.Menu"));
 	if (InputTag.MatchesTag(MenuRoot))
 	{
 		OnUIInputTagPressed.Broadcast(InputTag);
 		return; // stop here so “menu tags” don’t also try to drive abilities later
 	}
+	
+	
+	
 }
 
 void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Blue, *InputTag.ToString());
+	//GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Blue, *InputTag.ToString());
+	if (GetASC() == nullptr) return;
+	GetASC()->AbilityInputTagReleased(InputTag);
 }
 
 void AFP_PlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Green, *InputTag.ToString());
+	//GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Green, *InputTag.ToString());
+	if (GetASC() == nullptr) return;
+	GetASC()->AbilityInputTagHeld(InputTag);
+}
+
+UFP_AbilitySystemComponent* AFP_PlayerController::GetASC()
+{
+	if (FP_AbilitySystemComponent==nullptr)
+	{
+		FP_AbilitySystemComponent = Cast<UFP_AbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn<APawn>()));		
+	}
+	return FP_AbilitySystemComponent;
 }
 
 void AFP_PlayerController::BeginPlay()

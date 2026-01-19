@@ -11,6 +11,7 @@ class UInputAction;
 struct FInputActionValue;
 class IFP_EnemyInterface;
 class UFP_InputConfig;
+class UFP_AbilitySystemComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUIInputTagSignature, FGameplayTag, InputTag);
 /**
@@ -65,6 +66,11 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UFP_InputConfig> InputConfig;
+	
+	UPROPERTY()
+	TObjectPtr<UFP_AbilitySystemComponent> FP_AbilitySystemComponent;
+	
+	UFP_AbilitySystemComponent* GetASC();
 	
 };
 

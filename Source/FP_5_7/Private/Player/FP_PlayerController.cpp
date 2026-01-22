@@ -4,10 +4,14 @@
 
 #include "Player/FP_PlayerController.h"
 #include "EnhancedInputComponent.h"
+#include "FP_GameplayTags.h"
 #include "Input\FP_InputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Characters/FP_PlayerCharacter.h"
 #include "Interaction/FP_EnemyInterface.h"
+#include "NavigationPath.h"
+#include "NavigationSystem.h"
+#include "Components/SplineComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include"AbilitySystem/FP_AbilitySystemComponent.h"
 
@@ -15,17 +19,20 @@
 AFP_PlayerController::AFP_PlayerController()
 {
 	bReplicates = true;
+	Spline = CreateDefaultSubobject<USplineComponent>("Spline");
 }
 
 void AFP_PlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 	CursorTrace();
+	AutoRun();
+	//GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, bAutoRunning));
 }
 
 void AFP_PlayerController::CursorTrace()
 {
-	FHitResult CursorHit;
+
 	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
 	
 	// ---------- DEBUG BLOCK ----------
@@ -63,58 +70,32 @@ void AFP_PlayerController::CursorTrace()
 	}*/
 	// ---------- END DEBUG BLOCK ----------
 	
-	if (!CursorHit.bBlockingHit) return;
-	
-	LastActor=ThisActor;
-	ThisActor = CursorHit.GetActor();
-	
-	/**
-	 * Line trace from cursor. There are several scenarios:
-	 *  A. LastActor is null && ThisActor is null
-	 *		- Do nothing
-	 *	B. LastActor is null && ThisActor is valid
-	 *		- Highlight ThisActor
-	 *	C. LastActor is valid && ThisActor is null
-	 *		- UnHighlight LastActor
-	 *	D. Both actors are valid, but LastActor != ThisActor
-	 *		- UnHighlight LastActor, and Highlight ThisActor
-	 *	E. Both actors are valid, and are the same actor
-	 *		- Do nothing
-	 */
-	
-	if (LastActor == nullptr)
+	AActor* HitActor = CursorHit.bBlockingHit ? CursorHit.GetActor() : nullptr;
+	AActor* NewActor = (HitActor && HitActor->Implements<UFP_EnemyInterface>()) ? HitActor : nullptr;
+
+
+	// If nothing changed, do nothing
+	if (NewActor == ThisActor.Get())
 	{
-		if (ThisActor != nullptr)
-		{
-			// Case B
-			ThisActor->HighlightActor();
-		}
-		else
-		{
-			// Case A - both are null, do nothing
-		}
+		return;
 	}
-	else // LastActor is valid
+
+	// Unhighlight previous
+	if (IFP_EnemyInterface* Old = Cast<IFP_EnemyInterface>(ThisActor.Get()))
 	{
-		if (ThisActor == nullptr)
-		{
-			// Case C
-			LastActor->UnHighlightActor();
-		}
-		else // both actors are valid
-		{
-			if (LastActor != ThisActor)
-			{
-				// Case D
-				LastActor->UnHighlightActor();
-				ThisActor->HighlightActor();
-			}
-			else
-			{
-				// Case E - do nothing
-			}
-		}
+		Old->UnHighlightActor();
 	}
+
+	// Highlight new
+	if (IFP_EnemyInterface* New = Cast<IFP_EnemyInterface>(NewActor))
+	{
+		New->HighlightActor();
+	}
+
+	// Update state
+	LastActor = ThisActor;
+	ThisActor = NewActor;
+
 }
 
 void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
@@ -128,6 +109,12 @@ void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 		return; // stop here so “menu tags” don’t also try to drive abilities later
 	}
 	
+	if (InputTag.MatchesTagExact(FFP_GameplayTags::Get().InputTag_LMB))
+	{
+		bTargeting = ThisActor.IsValid();
+		bAutoRunning = false;
+	}
+	
 	
 	
 }
@@ -135,15 +122,75 @@ void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 {
 	//GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Blue, *InputTag.ToString());
-	if (GetASC() == nullptr) return;
-	GetASC()->AbilityInputTagReleased(InputTag);
+	if (!InputTag.MatchesTagExact(FFP_GameplayTags::Get().InputTag_LMB))
+	{
+		if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
+		return;
+	}
+
+	if (bTargeting)
+	{
+		if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
+	}
+	else
+	{
+		if (!bMouseMoveEnabled)
+		{
+			return;
+		}
+		const APawn* ControlledPawn = GetPawn();
+		if (FollowTime <= ShortPressThreshold && ControlledPawn)
+		{
+			if (UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CachedDestination))
+			{
+				Spline->ClearSplinePoints();
+				for (const FVector& PointLoc : NavPath->PathPoints)
+				{
+					Spline->AddSplinePoint(PointLoc, ESplineCoordinateSpace::World);
+				}
+				CachedDestination = NavPath->PathPoints[NavPath->PathPoints.Num() - 1];
+				bAutoRunning = true;
+			}
+		}
+		FollowTime = 0.f;
+		bTargeting = false;
+	}
+	
 }
 
 void AFP_PlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
 	//GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Green, *InputTag.ToString());
-	if (GetASC() == nullptr) return;
-	GetASC()->AbilityInputTagHeld(InputTag);
+	
+	if (!InputTag.MatchesTagExact(FFP_GameplayTags::Get().InputTag_LMB))
+	{
+		if (GetASC()) GetASC()->AbilityInputTagHeld(InputTag);
+		return;
+	}
+
+	if (bTargeting)
+	{
+		if (GetASC()) GetASC()->AbilityInputTagHeld(InputTag);
+	}
+	else
+	{
+		if (!bMouseMoveEnabled)
+		{
+			return;
+		}
+		FollowTime += GetWorld()->GetDeltaSeconds();
+		if (CursorHit.bBlockingHit) CachedDestination = CursorHit.ImpactPoint;
+
+		if (APawn* ControlledPawn = GetPawn())
+		{
+			const FVector WorldDirection = (CachedDestination - ControlledPawn->GetActorLocation()).GetSafeNormal();
+			ControlledPawn->AddMovementInput(WorldDirection);
+		}
+	}
+	
+	
+	
+	
 }
 
 UFP_AbilitySystemComponent* AFP_PlayerController::GetASC()
@@ -153,6 +200,33 @@ UFP_AbilitySystemComponent* AFP_PlayerController::GetASC()
 		FP_AbilitySystemComponent = Cast<UFP_AbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn<APawn>()));		
 	}
 	return FP_AbilitySystemComponent;
+}
+
+void AFP_PlayerController::AutoRun()
+{
+	if (!bMouseMoveEnabled) return;
+	if (!bAutoRunning) return;
+	if (APawn* ControlledPawn = GetPawn())
+	{
+		const FVector LocationOnSpline = Spline->FindLocationClosestToWorldLocation(ControlledPawn->GetActorLocation(), ESplineCoordinateSpace::World);
+		const FVector Direction = Spline->FindDirectionClosestToWorldLocation(LocationOnSpline, ESplineCoordinateSpace::World);
+		ControlledPawn->AddMovementInput(Direction);
+
+		const float DistanceToDestination = (LocationOnSpline - CachedDestination).Length();
+		if (DistanceToDestination <= AutoRunAcceptanceRadius)
+		{
+			bAutoRunning = false;
+		}
+	}
+}
+
+void AFP_PlayerController::SetMouseMoveEnabled(bool bEnabled)
+{
+	if (bMouseMoveEnabled == bEnabled)
+	{
+		return;
+	}
+	bMouseMoveEnabled = bEnabled;
 }
 
 void AFP_PlayerController::BeginPlay()
@@ -190,6 +264,11 @@ void AFP_PlayerController::SetupInputComponent()
 
 void AFP_PlayerController::Move(const FInputActionValue& InputActionValue)
 {
+	if (bMouseMoveEnabled)
+	{
+		return; // mouse-only mode
+	}
+
 	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
 
 	const FVector ForwardDirection = FVector::ForwardVector; // world +X
@@ -200,6 +279,7 @@ void AFP_PlayerController::Move(const FInputActionValue& InputActionValue)
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection,   InputAxisVector.X);
 	}
+	
 }
 
 void AFP_PlayerController::Zoom(const FInputActionValue& InputActionValue)

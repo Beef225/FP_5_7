@@ -12,6 +12,7 @@ struct FInputActionValue;
 class IFP_EnemyInterface;
 class UFP_InputConfig;
 class UFP_AbilitySystemComponent;
+class USplineComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUIInputTagSignature, FGameplayTag, InputTag);
 /**
@@ -33,6 +34,11 @@ public:
 	UPROPERTY(BlueprintAssignable, Category="Input|UI")
 	FOnUIInputTagSignature OnUIInputTagReleased;
 
+	UFUNCTION(BlueprintCallable, Category="Input")
+	void SetMouseMoveEnabled(bool bEnabled);
+
+	UFUNCTION(BlueprintPure, Category="Input")
+	bool IsMouseMoveEnabled() const { return bMouseMoveEnabled; }
 	
 
 protected:
@@ -56,8 +62,9 @@ private:
 	void Zoom(const FInputActionValue& InputActionValue);
 	
 	void CursorTrace();
-	TScriptInterface<IFP_EnemyInterface> LastActor;
-	TScriptInterface<IFP_EnemyInterface> ThisActor;
+	TWeakObjectPtr<AActor> LastActor;
+	TWeakObjectPtr<AActor> ThisActor;
+	FHitResult CursorHit;
 	
 	
 	void AbilityInputTagPressed(FGameplayTag InputTag);
@@ -71,6 +78,23 @@ private:
 	TObjectPtr<UFP_AbilitySystemComponent> FP_AbilitySystemComponent;
 	
 	UFP_AbilitySystemComponent* GetASC();
+	
+	UPROPERTY(EditAnywhere, Category="Input")
+	bool bMouseMoveEnabled = false;
+	
+	FVector CachedDestination = FVector::ZeroVector;
+	float FollowTime = 0.f;
+	float ShortPressThreshold = 0.5f;
+	bool bAutoRunning = false;
+	bool bTargeting = false;
+
+	UPROPERTY(EditDefaultsOnly)
+	float AutoRunAcceptanceRadius = 50.f;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<USplineComponent> Spline;
+	
+	void AutoRun();
 	
 };
 

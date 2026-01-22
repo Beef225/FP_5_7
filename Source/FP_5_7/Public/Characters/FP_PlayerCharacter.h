@@ -9,6 +9,7 @@
 class USpringArmComponent;
 class UCameraComponent;
 
+
 UCLASS()
 class FP_5_7_API AFP_PlayerCharacter : public AFP_CharacterBase
 {

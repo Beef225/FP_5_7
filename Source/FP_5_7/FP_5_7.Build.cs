@@ -34,7 +34,8 @@ public class FP_5_7 : ModuleRules
 				"JsonUtilities",
 				"DesktopPlatform",
 				"Slate",
-				"SlateCore"
+				"SlateCore",
+				"NavigationSystem"
 			});
 		}
 	

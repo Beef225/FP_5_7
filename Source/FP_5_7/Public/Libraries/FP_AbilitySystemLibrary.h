@@ -25,4 +25,6 @@ class FP_5_7_API UFP_AbilitySystemLibrary : public UBlueprintFunctionLibrary
 	
 	UFUNCTION(BlueprintPure, Category="AuraAbilitySystemLibrary|WidgetController")
 	static UFP_InventoryWidgetController* GetInventoryWidgetController(const UObject* WorldContextObject);
+	
+	
 };

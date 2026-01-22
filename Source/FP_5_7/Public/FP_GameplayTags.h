@@ -167,6 +167,13 @@ FGameplayTag InputTag_Menu_PassiveTree;
 FGameplayTag InputTag_Menu_WorldMap;
 FGameplayTag InputTag_Menu_LocalMap;
 FGameplayTag InputTag_Menu_Stash;
+
+//Events
+FGameplayTag Event_Montage_1;
+FGameplayTag Event_Montage_2;
+FGameplayTag Event_Montage_3;
+FGameplayTag Event_Montage_4;
+FGameplayTag Event_Montage_5;
 	
 	
 	

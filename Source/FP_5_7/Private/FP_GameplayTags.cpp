@@ -492,4 +492,26 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Open Stash ")
 		);
 
+	//Events
+	GameplayTags.Event_Montage_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Event.Montage.1"), 
+		FString("Notify Montage 1")
+		);
+	GameplayTags.Event_Montage_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Event.Montage.2"), 
+		FString("Notify Montage 2")
+		);
+	GameplayTags.Event_Montage_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Event.Montage.3"), 
+		FString("Notify Montage 3")
+		);
+	GameplayTags.Event_Montage_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Event.Montage.4"), 
+		FString("Notify Montage 4")
+		);
+	GameplayTags.Event_Montage_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Event.Montage.5"), 
+		FString("Notify Montage 5")
+		);
+
 }

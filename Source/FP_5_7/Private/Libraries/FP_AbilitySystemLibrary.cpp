@@ -2,11 +2,15 @@
 
 
 #include "Libraries/FP_AbilitySystemLibrary.h"
+
+#include "AbilitySystem/FP_AttributeSet.h"
 #include "UI/WidgetController/FP_WidgetController.h"
 #include "UI\WidgetController/FP_InventoryWidgetController.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FP_PlayerState.h"
 #include "UI/HUD/FP_HUD.h"
+
+DEFINE_LOG_CATEGORY_STATIC(LogFPAbilitySystemLibrary, Log, All);
 
 UFP_OverlayWidgetController* UFP_AbilitySystemLibrary::GetOverlayWidgetController(const UObject* WorldContextObject)
 {

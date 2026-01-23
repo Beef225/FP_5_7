@@ -134,7 +134,7 @@ void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 	}
 	else
 	{
-		if (!bMouseMoveEnabled)
+		if (!bMouseMoveEnabled && !bShiftKeyDown)
 		{
 			return;
 		}
@@ -168,13 +168,13 @@ void AFP_PlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 		return;
 	}
 
-	if (bTargeting)
+	if (bTargeting || bShiftKeyDown)
 	{
 		if (GetASC()) GetASC()->AbilityInputTagHeld(InputTag);
 	}
 	else
 	{
-		if (!bMouseMoveEnabled)
+		if (!bMouseMoveEnabled && !bShiftKeyDown)
 		{
 			return;
 		}
@@ -259,6 +259,8 @@ void AFP_PlayerController::SetupInputComponent()
 	UFP_InputComponent* FP_InputComponent = CastChecked<UFP_InputComponent>(InputComponent);
 	FP_InputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AFP_PlayerController::Move);
 	FP_InputComponent->BindAction(ZoomAction, ETriggerEvent::Triggered, this, &AFP_PlayerController::Zoom);
+	FP_InputComponent->BindAction(ShiftAction, ETriggerEvent::Started, this, &AFP_PlayerController::ShiftPressed);
+	FP_InputComponent->BindAction(ShiftAction, ETriggerEvent::Completed, this, &AFP_PlayerController::ShiftReleased);
 	FP_InputComponent->BindAbilityActions(InputConfig,this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 

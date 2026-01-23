@@ -26,7 +26,7 @@ protected:
 
 	/** Spawns and initializes the projectile. Intended to be called from ActivateAbility (server only). */
 	UFUNCTION(BlueprintCallable, Category="Projectile")
-	void SpawnProjectile();
+	void SpawnProjectile(const FVector& ProjectileTargetLocation);
 
 	/** Which projectile to spawn. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Projectile")

@@ -154,6 +154,8 @@ void AFP_PlayerCharacter::InitAbilityActorInfo()
 	}
 	InitializeDefaultAttributes();
 	
+	Super::InitAbilityActorInfo();
+	
 }
 
 bool AFP_PlayerCharacter::GetMouseWorldPoint(FVector& OutWorldPoint) const

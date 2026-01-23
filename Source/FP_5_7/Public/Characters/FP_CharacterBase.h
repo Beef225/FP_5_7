@@ -5,14 +5,29 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
+#include "GameplayTagContainer.h"
 #include "Interaction/FP_CombatInterface.h"
+#include "GameplayEffectTypes.h"
 #include "FP_CharacterBase.generated.h"
 
 class UAbilitySystemComponent;
 class UAttributeSet;
 class UGameplayEffect;
 class UGameplayAbility;
+struct FOnAttributeChangeData;
 
+/**
+ * Base character for FP (player + enemies).
+ * Owns common GAS initialization hooks and shared combat sockets.
+ *
+ * Movement Speed:
+ * - MovementSpeed is treated as a *delta percent* (e.g. 0.5 == +50%).
+ * - FinalSpeed = BaseWalkSpeed * (1 + MovementSpeedDelta)
+ * - Optional skill-move modifier:
+ *    If a gameplay tag is present (TODO), apply:
+ *      FinalSpeed *= SkillSpeedMovementModifier
+ *    where SkillSpeedMovementModifier is also intended as a multiplier (e.g. 0.5 == 50%).
+ */
 UCLASS(Abstract)
 class FP_5_7_API AFP_CharacterBase : public ACharacter, public IAbilitySystemInterface, public IFP_CombatInterface
 {
@@ -21,50 +36,92 @@ class FP_5_7_API AFP_CharacterBase : public ACharacter, public IAbilitySystemInt
 public:
 	// Sets default values for this character's properties
 	AFP_CharacterBase();
-	
+
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 protected:
-	
 	virtual void BeginPlay() override;
+
+	/**
+	 * Child classes are responsible for setting:
+	 * - AbilitySystemComponent
+	 * - AttributeSet
+	 * and calling GAS InitAbilityActorInfo(...) on their ASC.
+	 *
+	 * After those are valid, they should call Super::InitAbilityActorInfo()
+	 * or explicitly call:
+	 *  - InitializeDefaultAttributes()
+	 *  - AddCharacterAbilities()
+	 *  - BindMovementSpeedCallbacks()
+	 *  - RefreshMovementSpeed()
+	 */
 	virtual void InitAbilityActorInfo();
-	
+
+	/** Combat */
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
-	
+
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName WeaponTipSocketName;
 
 	virtual FVector GetCombatSocketLocation() override;
-	
+
+	/** GAS */
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 
+	/** Default Attributes */
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
 	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributes;
-	
+
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
 	TSubclassOf<UGameplayEffect> PrimaryAttributeDerivedBonuses;
-	
+
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
 	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
-	
+
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
 	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
-	
+
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
 	void InitializeDefaultAttributes() const;
 
 	void AddCharacterAbilities();
 
+	/** Movement speed plumbing */
+	void BindMovementSpeedCallbacks();
+	void RefreshMovementSpeed();
+
+	/** Attribute-change delegate signature */
+	void OnMoveSpeedAttributeChanged(const FOnAttributeChangeData& Data);
+
+	/** Tag-event delegate signature */
+	UFUNCTION()
+	void OnSkillMoveSpeedTagChanged(FGameplayTag Tag, int32 NewCount);
+
+	/** Baseline MaxWalkSpeed before any attribute scaling (captured once). */
+	UPROPERTY(Transient)
+	float CachedBaseWalkSpeed = 0.f;
+
+	/** Whether we already captured the base speed. */
+	UPROPERTY(Transient)
+	bool bCachedBaseWalkSpeed = false;
+
+	/**
+	 * TODO: Choose / define a gameplay tag that indicates "skill movement mode".
+	 * When present, we apply SkillSpeedMovementModifier as a final multiplier.
+	 *
+	 * Example:
+	 *   SkillMoveSpeedTag = FFP_GameplayTags::Get().State_SkillAllowsMovement;
+	 */
+	UPROPERTY(EditDefaultsOnly, Category="Movement|GAS")
+	FGameplayTag SkillMoveSpeedTag;
+
 private:
-	
 	UPROPERTY(EditAnywhere, Category = "Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
-
-
 };

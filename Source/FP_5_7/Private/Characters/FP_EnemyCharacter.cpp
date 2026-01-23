@@ -53,6 +53,10 @@ void AFP_EnemyCharacter::InitAbilityActorInfo()
 	
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<UFP_AbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
+	
+	//InitializeDefaultAttributes();
+
+	//Super::InitAbilityActorInfo();
 }
 
 // Called every frame

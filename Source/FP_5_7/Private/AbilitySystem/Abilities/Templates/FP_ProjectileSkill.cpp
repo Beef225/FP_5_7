@@ -19,7 +19,7 @@ void UFP_ProjectileSkill::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 	
 }
 
-void UFP_ProjectileSkill::SpawnProjectile()
+void UFP_ProjectileSkill::SpawnProjectile(const FVector& ProjectileTargetLocation)
 {
 	AActor* Avatar = GetAvatarActorFromActorInfo();
 	if (!Avatar) return;
@@ -33,11 +33,13 @@ void UFP_ProjectileSkill::SpawnProjectile()
 	if (!CombatInterface) return;
 
 	const FVector SocketLocation = CombatInterface->GetCombatSocketLocation();
+	FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
+	Rotation.Pitch = 0.f;
 
 	FTransform SpawnTransform;
 	SpawnTransform.SetLocation(SocketLocation);
 
-	// TODO: rotation (e.g., aim direction). For now, inherit avatar rotation.
+	SpawnTransform.SetRotation(Rotation.Quaternion());
 	SpawnTransform.SetRotation(Avatar->GetActorQuat());
 
 	AFP_Projectile* Projectile = GetWorld()->SpawnActorDeferred<AFP_Projectile>(

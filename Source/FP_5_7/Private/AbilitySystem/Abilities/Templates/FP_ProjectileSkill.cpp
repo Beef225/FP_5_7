@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/Abilities/Templates/FP_ProjectileSkill.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
 #include "Actor/Skills/FP_Projectile.h"
 #include "Interaction/FP_CombatInterface.h"
 
@@ -66,8 +67,11 @@ void UFP_ProjectileSkill::SpawnProjectile(const FVector& ProjectileTargetLocatio
 
 	// Apply to projectile before FinishSpawning (your projectile should implement this)
 	Projectile->InitSpeedFromDelta(SpeedDelta);
+	Projectile->SetSourceActor(Avatar);
 
-	// TODO: give projectile effect spec, set damage data, etc.
+	const UAbilitySystemComponent* SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());
+	const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), SourceASC->MakeEffectContext());
+	Projectile->DamageEffectSpecHandle = SpecHandle;
 
 	Projectile->FinishSpawning(SpawnTransform);
 }

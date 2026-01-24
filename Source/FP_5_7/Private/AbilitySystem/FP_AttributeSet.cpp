@@ -343,6 +343,7 @@ void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	if (Data.EvaluatedData.Attribute == GetHitPointsAttribute())
 	{
 		SetHitPoints(FMath::Clamp(GetHitPoints(), 0.f, GetMaxHitPoints()));
+		UE_LOG(LogTemp, Warning, TEXT("Changed Health on %s, Health: %f, MaxHealth: %f"), *Props.TargetAvatarActor->GetName(), GetHitPoints(),GetMaxHitPoints());
 	}
 }
 

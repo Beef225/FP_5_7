@@ -7,6 +7,7 @@
 #include "FP_ProjectileSkill.generated.h"
 
 class AFP_Projectile;
+class UGameplayEffect;
 
 /**
  * Template GA for spawning projectiles.
@@ -31,4 +32,7 @@ protected:
 	/** Which projectile to spawn. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Projectile")
 	TSubclassOf<AFP_Projectile> ProjectileClass;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UGameplayEffect> DamageEffectClass;
 };

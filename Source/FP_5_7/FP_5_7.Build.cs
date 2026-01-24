@@ -35,7 +35,8 @@ public class FP_5_7 : ModuleRules
 				"DesktopPlatform",
 				"Slate",
 				"SlateCore",
-				"NavigationSystem"
+				"NavigationSystem",
+				"Niagara"
 			});
 		}
 	

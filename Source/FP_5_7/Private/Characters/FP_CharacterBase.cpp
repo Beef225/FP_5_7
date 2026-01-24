@@ -6,6 +6,7 @@
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "FP_5_7/FP_5_7.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 
 // If you want to use your tag singleton here, uncomment and set SkillMoveSpeedTag in ctor or BP defaults.
@@ -17,7 +18,10 @@ AFP_CharacterBase::AFP_CharacterBase()
 	PrimaryActorTick.bCanEverTick = false;
 	
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetCapsuleComponent()->SetGenerateOverlapEvents(false);
 	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetMesh()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
+	GetMesh()->SetGenerateOverlapEvents(true);
 
 
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");

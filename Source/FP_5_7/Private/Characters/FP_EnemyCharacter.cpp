@@ -5,6 +5,7 @@
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "Components/WidgetComponent.h"
 #include "FP_5_7/FP_5_7.h"
+#include "Libraries/FP_AbilitySystemLibrary.h"
 #include "UI/Widget/FP_UserWidget.h"
 
 static void FP_DebugAttr(UWorld* World, const FString& Label, float OldValue, float NewValue, const FColor& Color, float Time = 2.0f)
@@ -90,6 +91,11 @@ void AFP_EnemyCharacter::InitAbilityActorInfo()
 	// IMPORTANT:
 	// Do NOT call InitializeDefaultAttributes() here.
 	// We bind delegates in BeginPlay(), then apply defaults, then broadcast initial values.
+}
+
+void AFP_EnemyCharacter::InitializeDefaultAttributes() const
+{
+	UFP_AbilitySystemLibrary::InitializeDefaultAttributes(this, CharacterClass, Level, AbilitySystemComponent);
 }
 
 void AFP_EnemyCharacter::BindAttributeDelegates()

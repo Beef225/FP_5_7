@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "FP_CharacterBase.h"
+#include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "Interaction/FP_EnemyInterface.h"
 #include "UI/WidgetController/FP_OverlayWidgetController.h"
 #include "FP_EnemyCharacter.generated.h"
@@ -45,6 +46,10 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo() override;
+	virtual void InitializeDefaultAttributes() const override;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
+	ECharacterClass CharacterClass = ECharacterClass::Warrior;
 
 private:
 	/** Bind ASC attribute change delegates (bind BEFORE we apply default attribute effects). */

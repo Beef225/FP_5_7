@@ -4,6 +4,7 @@
 #include "Libraries/FP_AbilitySystemLibrary.h"
 
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "Game/FP_GameModeBase.h"
 #include "UI/WidgetController/FP_WidgetController.h"
 #include "UI\WidgetController/FP_InventoryWidgetController.h"
 #include "Kismet/GameplayStatics.h"
@@ -59,4 +60,38 @@ UFP_InventoryWidgetController* UFP_AbilitySystemLibrary::GetInventoryWidgetContr
 		}
 	}
 	return nullptr;
+}
+
+void UFP_AbilitySystemLibrary::InitializeDefaultAttributes(const UObject* WorldContextObject,
+	ECharacterClass CharacterClass, float Level, UAbilitySystemComponent* ASC)
+{
+	AFP_GameModeBase* AuraGameMode = Cast<AFP_GameModeBase>(UGameplayStatics::GetGameMode(WorldContextObject));
+	if (AuraGameMode == nullptr) return;
+
+	AActor* AvatarActor = ASC->GetAvatarActor();
+
+	UCharacterClassInfo* CharacterClassInfo = AuraGameMode->CharacterClassInfo;
+	FCharacterClassDefaultInfo ClassDefaultInfo = CharacterClassInfo->GetClassDefaultInfo(CharacterClass);
+
+	FGameplayEffectContextHandle PrimaryAttributesContextHandle = ASC->MakeEffectContext();
+	PrimaryAttributesContextHandle.AddSourceObject(AvatarActor);
+	const FGameplayEffectSpecHandle PrimaryAttributesSpecHandle = ASC->MakeOutgoingSpec(ClassDefaultInfo.PrimaryAttributes, Level, PrimaryAttributesContextHandle);
+	ASC->ApplyGameplayEffectSpecToSelf(*PrimaryAttributesSpecHandle.Data.Get());
+
+	FGameplayEffectContextHandle SecondaryAttributesContextHandle = ASC->MakeEffectContext();
+	SecondaryAttributesContextHandle.AddSourceObject(AvatarActor);
+	const FGameplayEffectSpecHandle SecondaryAttributesSpecHandle = ASC->MakeOutgoingSpec(CharacterClassInfo->SecondaryAttributes, Level, SecondaryAttributesContextHandle);
+	ASC->ApplyGameplayEffectSpecToSelf(*SecondaryAttributesSpecHandle.Data.Get());
+	
+	FGameplayEffectContextHandle PrimaryDerivedAttributeBonusesContextHandle = ASC->MakeEffectContext();
+	PrimaryDerivedAttributeBonusesContextHandle.AddSourceObject(AvatarActor);
+	const FGameplayEffectSpecHandle PrimaryDerivedAttributeBonusesSpecHandle = ASC->MakeOutgoingSpec(CharacterClassInfo->PrimaryDerivedAttributeBonuses, Level, PrimaryDerivedAttributeBonusesContextHandle);
+	ASC->ApplyGameplayEffectSpecToSelf(*PrimaryDerivedAttributeBonusesSpecHandle.Data.Get());
+
+
+	FGameplayEffectContextHandle VitalAttributesContextHandle = ASC->MakeEffectContext();
+	VitalAttributesContextHandle.AddSourceObject(AvatarActor);
+	const FGameplayEffectSpecHandle VitalAttributesSpecHandle = ASC->MakeOutgoingSpec(CharacterClassInfo->VitalAttributes, Level, VitalAttributesContextHandle);
+	ASC->ApplyGameplayEffectSpecToSelf(*VitalAttributesSpecHandle.Data.Get());
+
 }

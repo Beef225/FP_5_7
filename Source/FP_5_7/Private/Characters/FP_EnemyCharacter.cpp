@@ -3,22 +3,38 @@
 #include "Characters/FP_EnemyCharacter.h"
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "Components/WidgetComponent.h"
 #include "FP_5_7/FP_5_7.h"
+#include "UI/Widget/FP_UserWidget.h"
 
+static void FP_DebugAttr(UWorld* World, const FString& Label, float OldValue, float NewValue, const FColor& Color, float Time = 2.0f)
+{
+	if (GEngine && World)
+	{
+		GEngine->AddOnScreenDebugMessage(
+			-1,
+			Time,
+			Color,
+			FString::Printf(TEXT("[Enemy ASC] %s: Old=%.2f  New=%.2f"), *Label, OldValue, NewValue)
+		);
+	}
+}
 
 // Sets default values
 AFP_EnemyCharacter::AFP_EnemyCharacter()
 {
-	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
+
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
-	
+
 	AbilitySystemComponent = CreateDefaultSubobject<UFP_AbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
 	AttributeSet = CreateDefaultSubobject<UFP_AttributeSet>("AttributeSet");
+
+	HP_HeatBar = CreateDefaultSubobject<UWidgetComponent>("HP_HeatBar");
+	HP_HeatBar->SetupAttachment(GetRootComponent());
 }
 
 void AFP_EnemyCharacter::HighlightActor()
@@ -40,26 +56,116 @@ int32 AFP_EnemyCharacter::GetPlayerLevel()
 	return Level;
 }
 
-// Called when the game starts or when spawned
 void AFP_EnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// 1) Init ActorInfo (DO NOT apply defaults inside InitAbilityActorInfo anymore)
 	InitAbilityActorInfo();
-	
+
+	// 2) Set widget controller
+	if (UFP_UserWidget* FP_UserWidget = Cast<UFP_UserWidget>(HP_HeatBar->GetUserWidgetObject()))
+	{
+		FP_UserWidget->SetWidgetController(this);
+	}
+
+	// 3) Bind delegates BEFORE we apply defaults
+	BindAttributeDelegates();
+
+	// 4) Apply default attributes on the SERVER (clients will receive via replication)
+	if (HasAuthority())
+	{
+		InitializeDefaultAttributes();
+	}
+
+	// 5) Push initial values so UI is correct immediately (even if initial changes were missed)
+	BroadcastInitialAttributeValues();
 }
 
 void AFP_EnemyCharacter::InitAbilityActorInfo()
 {
-	
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<UFP_AbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
-	
-	InitializeDefaultAttributes();
 
-	//Super::InitAbilityActorInfo();
+	// IMPORTANT:
+	// Do NOT call InitializeDefaultAttributes() here.
+	// We bind delegates in BeginPlay(), then apply defaults, then broadcast initial values.
 }
 
-// Called every frame
+void AFP_EnemyCharacter::BindAttributeDelegates()
+{
+	const UFP_AttributeSet* FP_AS = Cast<UFP_AttributeSet>(AttributeSet);
+	if (!FP_AS || !AbilitySystemComponent) return;
+
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AS->GetHitPointsAttribute()).AddLambda(
+		[this](const FOnAttributeChangeData& Data)
+		{
+			FP_DebugAttr(GetWorld(), TEXT("HitPoints"), Data.OldValue, Data.NewValue, FColor::Green);
+			OnHitPointsChanged.Broadcast(Data.NewValue);
+		});
+
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AS->GetMaxHitPointsAttribute()).AddLambda(
+		[this](const FOnAttributeChangeData& Data)
+		{
+			FP_DebugAttr(GetWorld(), TEXT("MaxHitPoints"), Data.OldValue, Data.NewValue, FColor::Yellow);
+			OnMaxHitPointsChanged.Broadcast(Data.NewValue);
+		});
+
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AS->GetHeatAttribute()).AddLambda(
+		[this](const FOnAttributeChangeData& Data)
+		{
+			FP_DebugAttr(GetWorld(), TEXT("Heat"), Data.OldValue, Data.NewValue, FColor::Cyan);
+			OnHeatChanged.Broadcast(Data.NewValue);
+		});
+
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AS->GetMaxHeatThresholdAttribute()).AddLambda(
+		[this](const FOnAttributeChangeData& Data)
+		{
+			FP_DebugAttr(GetWorld(), TEXT("MaxHeatThreshold"), Data.OldValue, Data.NewValue, FColor(255, 165, 0)); // orange-ish
+			OnMaxHeatThresholdChanged.Broadcast(Data.NewValue);
+		});
+
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AS->GetMinHeatThresholdAttribute()).AddLambda(
+		[this](const FOnAttributeChangeData& Data)
+		{
+			FP_DebugAttr(GetWorld(), TEXT("MinHeatThreshold"), Data.OldValue, Data.NewValue, FColor(128, 0, 128)); // purple-ish
+			OnMinHeatThresholdChanged.Broadcast(Data.NewValue);
+		});
+}
+
+void AFP_EnemyCharacter::BroadcastInitialAttributeValues()
+{
+	const UFP_AttributeSet* FP_AS = Cast<UFP_AttributeSet>(AttributeSet);
+	if (!FP_AS || !AbilitySystemComponent) return;
+
+	const float HP      = AbilitySystemComponent->GetNumericAttribute(FP_AS->GetHitPointsAttribute());
+	const float MaxHP   = AbilitySystemComponent->GetNumericAttribute(FP_AS->GetMaxHitPointsAttribute());
+	const float Heat    = AbilitySystemComponent->GetNumericAttribute(FP_AS->GetHeatAttribute());
+	const float MinHeat = AbilitySystemComponent->GetNumericAttribute(FP_AS->GetMinHeatThresholdAttribute());
+	const float MaxHeat = AbilitySystemComponent->GetNumericAttribute(FP_AS->GetMaxHeatThresholdAttribute());
+
+	// Push to UI/controller once (solves "missed initial change" due to bind order)
+	OnHitPointsChanged.Broadcast(HP);
+	OnMaxHitPointsChanged.Broadcast(MaxHP);
+	OnHeatChanged.Broadcast(Heat);
+	OnMinHeatThresholdChanged.Broadcast(MinHeat);
+	OnMaxHeatThresholdChanged.Broadcast(MaxHeat);
+
+	// 10s summary debug (optional, but you asked for it)
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(
+			-1,
+			10.0f,
+			FColor::White,
+			FString::Printf(
+				TEXT("[Enemy ASC INIT] HP=%.2f | MaxHP=%.2f | Heat=%.2f | MinHeat=%.2f | MaxHeat=%.2f"),
+				HP, MaxHP, Heat, MinHeat, MaxHeat
+			)
+		);
+	}
+}
+
 void AFP_EnemyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

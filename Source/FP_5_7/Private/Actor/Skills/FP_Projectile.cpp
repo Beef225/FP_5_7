@@ -10,15 +10,18 @@
 #include "Components/SphereComponent.h"
 #include "FP_5_7/FP_5_7.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Engine/World.h"
+#include "CollisionQueryParams.h"
 
 // Sets default values
 AFP_Projectile::AFP_Projectile()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true; // needed for sweep-assist
 	bReplicates = true;
 
 	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");
 	SetRootComponent(Sphere);
+
 	Sphere->SetCollisionObjectType(ECC_Projectile);
 	Sphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	Sphere->SetCollisionResponseToAllChannels(ECR_Ignore);
@@ -32,6 +35,37 @@ AFP_Projectile::AFP_Projectile()
 	// Use the base defaults
 	ProjectileMovement->InitialSpeed = BaseInitialSpeed;
 	ProjectileMovement->MaxSpeed = BaseMaxSpeed;
+}
+
+void AFP_Projectile::BeginPlay()
+{
+	Super::BeginPlay();
+
+	SetLifeSpan(LifeSpan);
+
+	// Prevent overlaps/hits against the spawning actor at the collision level when possible.
+	if (SourceActor)
+	{
+		Sphere->IgnoreActorWhenMoving(SourceActor, true);
+	}
+
+	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AFP_Projectile::OnSphereOverlap);
+	LoopingSoundComponent = UGameplayStatics::SpawnSoundAttached(LoopingSound, GetRootComponent());
+
+	PrevLocation = GetActorLocation();
+}
+
+void AFP_Projectile::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	// Only the server should authoritatively decide hits + apply effects + destroy.
+	if (HasAuthority() && bEnableSweepAssist && !bHit)
+	{
+		Server_TrySweepAssist();
+	}
+
+	PrevLocation = GetActorLocation();
 }
 
 void AFP_Projectile::InitSpeedFromDelta(float SpeedDelta)
@@ -66,34 +100,118 @@ void AFP_Projectile::SetSourceActor(AActor* InSourceActor)
 }
 
 void AFP_Projectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-                                     UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                                     UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,
+                                     const FHitResult& SweepResult)
 {
-	/*if (GEngine)
+	HandleImpact(OtherActor, SweepResult);
+}
+
+void AFP_Projectile::Server_TrySweepAssist()
+{
+	UWorld* World = GetWorld();
+	if (!World || !Sphere) return;
+
+	const FVector CurrentLocation = GetActorLocation();
+
+	// Avoid doing work if we haven't moved meaningfully.
+	if ((CurrentLocation - PrevLocation).SizeSquared() < 1.0f)
 	{
-		GEngine->AddOnScreenDebugMessage(
-			-1,
-			10.0f,
-			FColor::Yellow,
-			FString::Printf(TEXT("Overlap: OtherActor=%s | Instigator=%s | SourceActor=%s | Owner=%s"),
-				*GetNameSafe(OtherActor),
-				*GetNameSafe(GetInstigator()),
-				*GetNameSafe(SourceActor),
-				*GetNameSafe(GetOwner()))
+		return;
+	}
+
+	const float BaseRadius = Sphere->GetScaledSphereRadius();
+	const float SweepRadius = FMath::Max(1.f, BaseRadius * SweepRadiusScale);
+
+	FCollisionQueryParams Params(SCENE_QUERY_STAT(FP_Projectile_SweepAssist), /*bTraceComplex=*/false);
+	Params.AddIgnoredActor(this);
+	if (SourceActor) { Params.AddIgnoredActor(SourceActor); }
+	if (GetOwner())  { Params.AddIgnoredActor(GetOwner()); }
+	if (GetInstigator()) { Params.AddIgnoredActor(GetInstigator()); }
+
+	// 1) Forward sweep: catches thin meshes / high speed tunneling.
+	{
+		TArray<FHitResult> Hits;
+		const FCollisionShape Shape = FCollisionShape::MakeSphere(SweepRadius);
+
+		const bool bHitSomething = World->SweepMultiByChannel(
+			Hits,
+			PrevLocation,
+			CurrentLocation,
+			FQuat::Identity,
+			ECC_Pawn,     // matches your overlap response target grouping (enemy mesh commonly lives here)
+			Shape,
+			Params
 		);
-	}*/
+
+		if (bHitSomething)
+		{
+			for (const FHitResult& Hit : Hits)
+			{
+				AActor* HitActor = Hit.GetActor();
+				if (!HitActor) continue;
+
+				// Only treat as an impact if the actor can actually receive an ASC (your existing logic).
+				if (UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(HitActor))
+				{
+					HandleImpact(HitActor, Hit);
+					return; // impact consumed
+				}
+			}
+		}
+	}
+
+	// 2) Downward sweep: catches “projectile is above the mesh in top-down”
+	{
+		const FVector DownEnd = CurrentLocation - FVector(0.f, 0.f, DownSweepDistance);
+
+		TArray<FHitResult> Hits;
+		const FCollisionShape Shape = FCollisionShape::MakeSphere(SweepRadius);
+
+		const bool bHitSomething = World->SweepMultiByChannel(
+			Hits,
+			CurrentLocation,
+			DownEnd,
+			FQuat::Identity,
+			ECC_Pawn,
+			Shape,
+			Params
+		);
+
+		if (bHitSomething)
+		{
+			for (const FHitResult& Hit : Hits)
+			{
+				AActor* HitActor = Hit.GetActor();
+				if (!HitActor) continue;
+
+				if (UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(HitActor))
+				{
+					HandleImpact(HitActor, Hit);
+					return;
+				}
+			}
+		}
+	}
+}
+
+void AFP_Projectile::HandleImpact(AActor* HitActor, const FHitResult& Hit)
+{
+	if (bHit) return;
+	if (!HitActor) return;
 
 	// Ignore the spawning/firing actor (preferred) and Owner (often the same)
-	if (OtherActor == SourceActor || OtherActor == GetOwner())
+	if (HitActor == SourceActor || HitActor == GetOwner())
 	{
 		return;
 	}
 
 	// Fallback: if someone still sets Instigator correctly, also ignore it
-	if (OtherActor == GetInstigator())
+	if (HitActor == GetInstigator())
 	{
 		return;
 	}
 
+	// Cosmetic (can be done server-side; you already replicate destroy + can do client-side too)
 	UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation(), FRotator::ZeroRotator);
 	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, ImpactEffect, GetActorLocation());
 
@@ -102,34 +220,21 @@ void AFP_Projectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, A
 		LoopingSoundComponent->Stop();
 	}
 
+	bHit = true;
+
+	// Server applies effect + destroys
 	if (HasAuthority())
 	{
-		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor))
+		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(HitActor))
 		{
-			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpecHandle.Data.Get());
+			if (DamageEffectSpecHandle.Data.IsValid())
+			{
+				TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpecHandle.Data.Get());
+			}
 		}
+
 		Destroy();
 	}
-	else
-	{
-		bHit = true;
-	}
-}
-
-void AFP_Projectile::BeginPlay()
-{
-	Super::BeginPlay();
-
-	SetLifeSpan(LifeSpan);
-
-	// Prevent overlaps/hits against the spawning actor at the collision level when possible.
-	if (SourceActor)
-	{
-		Sphere->IgnoreActorWhenMoving(SourceActor, true);
-	}
-
-	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AFP_Projectile::OnSphereOverlap);
-	LoopingSoundComponent = UGameplayStatics::SpawnSoundAttached(LoopingSound, GetRootComponent());
 }
 
 void AFP_Projectile::Destroyed()
@@ -146,5 +251,4 @@ void AFP_Projectile::Destroyed()
 	}
 
 	Super::Destroyed();
-
 }

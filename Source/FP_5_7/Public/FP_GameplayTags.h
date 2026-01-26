@@ -127,17 +127,21 @@ FGameplayTag Penetration_Radiation;
 FGameplayTag Penetration_Chemical;
 FGameplayTag Penetration_Energy;
 
+//Projectile
+FGameplayTag Projectile_Pierce;
+FGameplayTag Projectile_Bounce;
+FGameplayTag Projectile_Count;
+
 
 //Meta Attributes
+//Damage
+FGameplayTag MetaAttribute_IncomingDamage;
+
+//XP
+FGameplayTag MetaAttribute_IncomingXP;
+
 
 //Misc Gameplay Tags
-//Skills Meta
-FGameplayTag Skill_Slot_1;
-FGameplayTag Skill_Slot_2;
-FGameplayTag Skill_Slot_3;
-FGameplayTag Skill_Slot_4;
-FGameplayTag Skill_Slot_5;
-
 //Player Tags
 FGameplayTag Player_Block_CursorTrace;
 FGameplayTag Player_Block_InputHeld;
@@ -174,6 +178,9 @@ FGameplayTag Event_Montage_2;
 FGameplayTag Event_Montage_3;
 FGameplayTag Event_Montage_4;
 FGameplayTag Event_Montage_5;
+
+//Damage
+FGameplayTag Damage;
 	
 	
 	

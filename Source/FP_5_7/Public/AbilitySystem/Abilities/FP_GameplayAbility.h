@@ -14,6 +14,10 @@ class FP_5_7_API UFP_GameplayAbility : public UGameplayAbility
 public:
 	UPROPERTY(EditDefaultsOnly, Category="Input", meta = (Categories = "InputTag"))
 	FGameplayTag StartupInputTag;
+	
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage")
+	FScalableFloat Damage;
 
 protected:
 	UFUNCTION(BlueprintPure, Category="FP|GAS")

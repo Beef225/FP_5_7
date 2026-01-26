@@ -364,32 +364,36 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Subtract from Max of Energy Res")
 		);
 
+	//Projectile
+	GameplayTags.Projectile_Pierce = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Projectile.Pierce"), 
+		FString("How many targets Projectile can peirce before being absorbed")
+		);
+	GameplayTags.Projectile_Bounce = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Projectile.Bounce"), 
+		FString("How man targets Projectile changes to within AoE Radius")
+		);
+	GameplayTags.Projectile_Count = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Projectile.Count"), 
+		FString("How many added Projectiles to Skill")
+		);
+
 
 	//Meta Attributes
+	//Damage
+	GameplayTags.MetaAttribute_IncomingDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("MetaAttribute.IncomingDamage"), 
+		FString("Used for Calculating Incoming Damage")
+		);
+
+	//XP
+	GameplayTags.MetaAttribute_IncomingXP = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("MetaAttribute.IncomingXP"), 
+		FString("Used to add to Player Experience")
+		);
+
 
 	//Misc Gameplay Tags
-	//Skills Meta
-	GameplayTags.Skill_Slot_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Skill.Slot.1"), 
-		FString("Tag of Skill 1")
-		);
-	GameplayTags.Skill_Slot_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Skill.Slot.2"), 
-		FString("Tag of Skill 2")
-		);
-	GameplayTags.Skill_Slot_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Skill.Slot.3"), 
-		FString("Tag of Skill 3")
-		);
-	GameplayTags.Skill_Slot_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Skill.Slot.4"), 
-		FString("Tag of Skill 4")
-		);
-	GameplayTags.Skill_Slot_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Skill.Slot.5"), 
-		FString("Tag of Skill 5")
-		);
-
 	//Player Tags
 	GameplayTags.Player_Block_CursorTrace = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Player.Block.CursorTrace"), 
@@ -512,6 +516,12 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Event_Montage_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Event.Montage.5"), 
 		FString("Notify Montage 5")
+		);
+
+	//Damage
+	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage"), 
+		FString("Damage")
 		);
 
 }

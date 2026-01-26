@@ -109,7 +109,6 @@ TagsToAttributes.Add(GameplayTags.AoE_AdditionalRadius, GetAreaOfEffectAdditiona
 
 //Speed
 TagsToAttributes.Add(GameplayTags.Speed_Movement, GetMovementSpeedAttribute);
-	
 TagsToAttributes.Add(GameplayTags.Speed_Skill, GetSkillSpeedAttribute);
 TagsToAttributes.Add(GameplayTags.Speed_Movement_DuringSkill, GetSkillMoveSpeedModifierAttribute);
 TagsToAttributes.Add(GameplayTags.Speed_Projectile, GetProjectileSpeedAttribute);
@@ -131,8 +130,18 @@ TagsToAttributes.Add(GameplayTags.Penetration_Radiation, GetRadiationResistanceP
 TagsToAttributes.Add(GameplayTags.Penetration_Chemical, GetChemicalResistancePenetrationAttribute);
 TagsToAttributes.Add(GameplayTags.Penetration_Energy, GetEnergyResistancePenetrationAttribute);
 
+//Projectile
+TagsToAttributes.Add(GameplayTags.Projectile_Pierce, GetProjectileTargetsPiercedAttribute);
+TagsToAttributes.Add(GameplayTags.Projectile_Bounce, GetProjectileTargetsBouncedAttribute);
+TagsToAttributes.Add(GameplayTags.Projectile_Count, GetProjectileCountAttribute);
+
 
 //Meta Attributes
+//Damage
+TagsToAttributes.Add(GameplayTags.MetaAttribute_IncomingDamage, GetIncomingDamageAttribute);
+
+//XP
+TagsToAttributes.Add(GameplayTags.MetaAttribute_IncomingXP, GetIncomingXPAttribute);
 	
 }
 
@@ -318,8 +327,20 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ChemicalResistancePenetration, 
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, EnergyResistancePenetration, COND_None, REPNOTIFY_Always)
 
+//Projectile
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ProjectileTargetsPierced, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ProjectileTargetsBounced, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ProjectileCount, COND_None, REPNOTIFY_Always)
+
 
 //Meta Attributes
+//Damage
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncomingDamage, COND_None, REPNOTIFY_Always)
+
+//XP
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncomingXP, COND_None, REPNOTIFY_Always)
 
 }
 
@@ -343,8 +364,21 @@ void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	if (Data.EvaluatedData.Attribute == GetHitPointsAttribute())
 	{
 		SetHitPoints(FMath::Clamp(GetHitPoints(), 0.f, GetMaxHitPoints()));
-		UE_LOG(LogTemp, Warning, TEXT("Changed Health on %s, Health: %f, MaxHealth: %f"), *Props.TargetAvatarActor->GetName(), GetHitPoints(),GetMaxHitPoints());
 	}
+	
+	if (Data.EvaluatedData.Attribute == GetIncomingDamageAttribute())
+	{
+		const float LocalIncomingDamage = GetIncomingDamage();
+		SetIncomingDamage(0.f);
+		if (LocalIncomingDamage > 0.f)
+		{
+			const float NewHealth = GetHitPoints() - LocalIncomingDamage;
+			SetHitPoints(FMath::Clamp(NewHealth, 0.f, GetMaxHitPoints()));
+
+			const bool bFatal = NewHealth <= 0.f;
+		}
+	}
+	
 }
 
 void UFP_AttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
@@ -828,5 +862,32 @@ void UFP_AttributeSet::OnRep_EnergyResistancePenetration(const FGameplayAttribut
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, EnergyResistancePenetration, OldEnergyResistancePenetration);
 }
 
+//Projectile
+void UFP_AttributeSet::OnRep_ProjectileTargetsPierced(const FGameplayAttributeData& OldProjectileTargetsPierced) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ProjectileTargetsPierced, OldProjectileTargetsPierced);
+}
+
+void UFP_AttributeSet::OnRep_ProjectileTargetsBounced(const FGameplayAttributeData& OldProjectileTargetsBounced) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ProjectileTargetsBounced, OldProjectileTargetsBounced);
+}
+
+void UFP_AttributeSet::OnRep_ProjectileCount(const FGameplayAttributeData& OldProjectileCount) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ProjectileCount, OldProjectileCount);
+}
+
 
 //Meta Attributes
+//Damage
+void UFP_AttributeSet::OnRep_IncomingDamage(const FGameplayAttributeData& OldIncomingDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncomingDamage, OldIncomingDamage);
+}
+
+//XP
+void UFP_AttributeSet::OnRep_IncomingXP(const FGameplayAttributeData& OldIncomingXP) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncomingXP, OldIncomingXP);
+}

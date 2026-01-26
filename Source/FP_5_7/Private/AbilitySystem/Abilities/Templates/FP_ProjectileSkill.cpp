@@ -5,7 +5,7 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Actor/Skills/FP_Projectile.h"
 #include "Interaction/FP_CombatInterface.h"
-
+#include "FP_GameplayTags.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "GameFramework/Pawn.h"
@@ -71,6 +71,13 @@ void UFP_ProjectileSkill::SpawnProjectile(const FVector& ProjectileTargetLocatio
 
 	const UAbilitySystemComponent* SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());
 	const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), SourceASC->MakeEffectContext());
+	
+	const FFP_GameplayTags GameplayTags = FFP_GameplayTags::Get();
+	const float ScaledDamage = Damage.GetValueAtLevel(GetAbilityLevel());
+		
+	UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, GameplayTags.Damage, ScaledDamage);
+
+	
 	Projectile->DamageEffectSpecHandle = SpecHandle;
 
 	Projectile->FinishSpawning(SpawnTransform);

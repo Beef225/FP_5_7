@@ -331,8 +331,25 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData EnergyResistancePenetration;
 
+//Projectile
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ProjectileTargetsPierced;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ProjectileTargetsBounced;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ProjectileCount;
+
 
 //Meta Attributes
+//Damage
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+
+//XP
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingXP;
 	
 	//Vital Attributes
 UFUNCTION()
@@ -674,8 +691,30 @@ UFUNCTION()
 	void OnRep_EnergyResistancePenetration(const FGameplayAttributeData& OldEnergyResistancePenetration) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, EnergyResistancePenetration)
 
+//Projectile
+UFUNCTION()
+	void OnRep_ProjectileTargetsPierced(const FGameplayAttributeData& OldProjectileTargetsPierced) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ProjectileTargetsPierced)
+
+UFUNCTION()
+	void OnRep_ProjectileTargetsBounced(const FGameplayAttributeData& OldProjectileTargetsBounced) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ProjectileTargetsBounced)
+
+UFUNCTION()
+	void OnRep_ProjectileCount(const FGameplayAttributeData& OldProjectileCount) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ProjectileCount)
+
 
 //Meta Attributes
+//Damage
+UFUNCTION()
+	void OnRep_IncomingDamage(const FGameplayAttributeData& OldIncomingDamage) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncomingDamage)
+
+//XP
+UFUNCTION()
+	void OnRep_IncomingXP(const FGameplayAttributeData& OldIncomingXP) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncomingXP)
 	
 	
 private:

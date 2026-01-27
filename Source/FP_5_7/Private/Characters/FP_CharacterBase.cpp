@@ -40,6 +40,11 @@ UAbilitySystemComponent* AFP_CharacterBase::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+UAnimMontage* AFP_CharacterBase::GetHitReactMontage_Implementation()
+{
+	return HitReactMontage;
+}
+
 void AFP_CharacterBase::BeginPlay()
 {
 	Super::BeginPlay();

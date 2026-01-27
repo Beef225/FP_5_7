@@ -7,7 +7,7 @@
 #include "FP_CombatInterface.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE()
+UINTERFACE(MinimalAPI, BlueprintType)
 class UFP_CombatInterface : public UInterface
 {
 	GENERATED_BODY()
@@ -24,5 +24,8 @@ class FP_5_7_API IFP_CombatInterface
 public:
 	virtual int32 GetPlayerLevel();
 	virtual FVector GetCombatSocketLocation();
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	UAnimMontage* GetHitReactMontage();
 };
 

@@ -181,6 +181,9 @@ FGameplayTag Event_Montage_5;
 
 //Damage
 FGameplayTag Damage;
+
+//Effects
+FGameplayTag Effects_HitReact;
 	
 	
 	

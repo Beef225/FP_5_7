@@ -6,6 +6,8 @@
 #include "Components/WidgetComponent.h"
 #include "FP_5_7/FP_5_7.h"
 #include "Libraries/FP_AbilitySystemLibrary.h"
+#include "FP_GameplayTags.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "UI/Widget/FP_UserWidget.h"
 
 static void FP_DebugAttr(UWorld* World, const FString& Label, float OldValue, float NewValue, const FColor& Color, float Time = 2.0f)
@@ -57,12 +59,20 @@ int32 AFP_EnemyCharacter::GetPlayerLevel()
 	return Level;
 }
 
+void AFP_EnemyCharacter::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
+{
+	bHitReacting = NewCount > 0;
+	GetCharacterMovement()->MaxWalkSpeed = bHitReacting ? 0.f : BaseWalkSpeed;
+}
+
 void AFP_EnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed;
 
 	// 1) Init ActorInfo (DO NOT apply defaults inside InitAbilityActorInfo anymore)
 	InitAbilityActorInfo();
+	UFP_AbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
 
 	// 2) Set widget controller
 	if (UFP_UserWidget* FP_UserWidget = Cast<UFP_UserWidget>(HP_HeatBar->GetUserWidgetObject()))
@@ -78,6 +88,15 @@ void AFP_EnemyCharacter::BeginPlay()
 	{
 		InitializeDefaultAttributes();
 	}
+
+	if (const UFP_AttributeSet* FP_AS=Cast<UFP_AttributeSet>(AttributeSet))
+	{
+		AbilitySystemComponent->RegisterGameplayTagEvent(FFP_GameplayTags::Get().Effects_HitReact, EGameplayTagEventType::NewOrRemoved).AddUObject(
+			this,
+			&AFP_EnemyCharacter::HitReactTagChanged
+		);
+	}
+
 
 	// 5) Push initial values so UI is correct immediately (even if initial changes were missed)
 	BroadcastInitialAttributeValues();

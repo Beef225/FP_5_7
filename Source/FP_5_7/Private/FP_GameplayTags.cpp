@@ -524,4 +524,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Damage")
 		);
 
+	//Effects
+	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Effects.HitReact"), 
+		FString("Hit React Montage")
+		);
+
 }

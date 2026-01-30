@@ -42,7 +42,17 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 	
+	
+	virtual UAnimMontage* GetDeathMontage_Implementation() override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+	
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastPlayDeathMontage(UAnimMontage* Montage);
+	
+	virtual void Die() override;
+
+	UFUNCTION(NetMulticast, Reliable)
+	virtual void MulticastHandleDeath();
 
 protected:
 	virtual void BeginPlay() override;
@@ -124,6 +134,33 @@ protected:
 	 */
 	UPROPERTY(EditDefaultsOnly, Category="Movement|GAS")
 	FGameplayTag SkillMoveSpeedTag;
+	
+	float GetDeathRagdollDelay() const;
+
+	UPROPERTY(EditAnywhere, Category="Combat")
+	TObjectPtr<UAnimMontage> DeathMontage;
+
+	UPROPERTY(EditAnywhere, Category="Combat")
+	float DeathMontagePlayRate = 1.f;
+
+	UPROPERTY(Transient)
+	bool bDead = false;
+	
+	/* Dissolve Effects */
+
+	void Dissolve();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartDissolveTimeline(UMaterialInstanceDynamic* DynamicMaterialInstance);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartWeaponDissolveTimeline(UMaterialInstanceDynamic* DynamicMaterialInstance);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UMaterialInstance> DissolveMaterialInstance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UMaterialInstance> WeaponDissolveMaterialInstance;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Abilities")

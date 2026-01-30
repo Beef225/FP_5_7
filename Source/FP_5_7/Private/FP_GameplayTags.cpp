@@ -55,6 +55,14 @@ void FFP_GameplayTags::InitializeGameplayTags()
 
 	//Secondary Attributes
 	//Damage
+	GameplayTags.Damage_Increased_Generic = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Generic"), 
+		FString("Increases all damage")
+		);
+	GameplayTags.Damage_More_Generic = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Generic"), 
+		FString("More Damage")
+		);
 	GameplayTags.Damage_Added_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Damage.Added.Physical"), 
 		FString("Adds flat physical damage")
@@ -212,6 +220,24 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Defense_CriticalHitResistance = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Defense.CriticalHitResistance"), 
 		FString("Reduced Damage Taken from Critical Strikes")
+		);
+	GameplayTags.Defense_ReducedDamage_Projectiles = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Defense.ReducedDamage.Projectiles"), 
+		FString("Reduced Damage From Projectiles")
+		);
+
+	//Defense
+	GameplayTags.Defense_IncreasedArmour = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Defense.IncreasedArmour"), 
+		FString("Increased Armour")
+		);
+	GameplayTags.Defense_ReducedDamage_AoE = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Defense.ReducedDamage.AoE"), 
+		FString("Reduced Damaged from Area of Effect Skills")
+		);
+	GameplayTags.Defense_ReduceeDamage_Melee = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Defense.ReduceeDamage.Melee"), 
+		FString("Reduced Damage from Melee")
 		);
 
 	//Heat
@@ -378,6 +404,68 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("How many added Projectiles to Skill")
 		);
 
+	//Conversion
+	GameplayTags.Conversion_Damage_PhysicalToEnergy = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conversion.Damage.PhysicalToEnergy"), 
+		FString("Convert Physical Damage Dealt to Energy Damage")
+		);
+	GameplayTags.Conversion_Damage_ChemicalToRadiation = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conversion.Damage.ChemicalToRadiation"), 
+		FString("Convert Chemical Damage to Radiation Damage")
+		);
+	GameplayTags.Conversion_Damage_ExplosiveToPhysical = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conversion.Damage.ExplosiveToPhysical"), 
+		FString("Convert Explosive Damage to Physical Damage")
+		);
+	GameplayTags.Conversion_Defense_EnergyToRadiation = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conversion.Defense.EnergyToRadiation"), 
+		FString("Convert Incoming Energy Damage as Radiation Damage ")
+		);
+	GameplayTags.Conversion_Defense_ChemicalToExplosive = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conversion.Defense.ChemicalToExplosive"), 
+		FString("Convert Incoming Chemical Damage asExplosive Damage")
+		);
+
+	//Conditional
+	GameplayTags.Conditional_Damage_IncreasedAgainstBruised = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstBruised"), 
+		FString("Deal Increased Damage if Target is Bruised")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstConcussed = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstConcussed"), 
+		FString("Deal Increased Damage if Target is Concussed")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstIrradiated = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstIrradiated"), 
+		FString("Deal Increased Damage if Target is Irradiated")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstCorroded = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstCorroded"), 
+		FString("Deal Increased Damage if Target is Corroded")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstOverheated = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstOverheated"), 
+		FString("Deal Increased Damage if Target is Overheated")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstFrozen = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstFrozen"), 
+		FString("Deal Increased Damage if Target is Frozen")
+		);
+	GameplayTags.Conditional_Damage_PerHeat = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.PerHeat"), 
+		FString("Deal Increased Damage Per Heat Away From Stable Tempurature")
+		);
+
+	//Recovery
+	GameplayTags.Recovery_Life_OnHit = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Recovery.Life.OnHit"), 
+		FString("Gain Life on Hit")
+		);
+	GameplayTags.Recovery_Life_OnKill = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Recovery.Life.OnKill"), 
+		FString("Gain Life on Kill")
+		);
+
 
 	//Meta Attributes
 	//Damage
@@ -528,6 +616,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Effects.HitReact"), 
 		FString("Hit React Montage")
+		);
+	GameplayTags.Effects_DeathReact = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Effects.DeathReact"), 
+		FString("Death React Montage")
 		);
 
 }

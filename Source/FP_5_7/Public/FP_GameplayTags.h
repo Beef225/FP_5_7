@@ -34,6 +34,8 @@ FGameplayTag Attributes_Primary_Fortitude;
 
 //Secondary Attributes
 //Damage
+FGameplayTag Damage_Increased_Generic;
+FGameplayTag Damage_More_Generic;
 FGameplayTag Damage_Added_Physical;
 FGameplayTag Damage_Increased_Physical;
 FGameplayTag Damage_More_Physical;
@@ -78,6 +80,12 @@ FGameplayTag Defence_DeferredDamageAmount;
 FGameplayTag Defence_DeferredDamageTime;
 FGameplayTag Defence_HealthRegeneration;
 FGameplayTag Defense_CriticalHitResistance;
+FGameplayTag Defense_ReducedDamage_Projectiles;
+
+//Defense
+FGameplayTag Defense_IncreasedArmour;
+FGameplayTag Defense_ReducedDamage_AoE;
+FGameplayTag Defense_ReduceeDamage_Melee;
 
 //Heat
 FGameplayTag Heat_AmbientTemperature;
@@ -132,6 +140,26 @@ FGameplayTag Projectile_Pierce;
 FGameplayTag Projectile_Bounce;
 FGameplayTag Projectile_Count;
 
+//Conversion
+FGameplayTag Conversion_Damage_PhysicalToEnergy;
+FGameplayTag Conversion_Damage_ChemicalToRadiation;
+FGameplayTag Conversion_Damage_ExplosiveToPhysical;
+FGameplayTag Conversion_Defense_EnergyToRadiation;
+FGameplayTag Conversion_Defense_ChemicalToExplosive;
+
+//Conditional
+FGameplayTag Conditional_Damage_IncreasedAgainstBruised;
+FGameplayTag Conditional_Damage_IncreasedAgainstConcussed;
+FGameplayTag Conditional_Damage_IncreasedAgainstIrradiated;
+FGameplayTag Conditional_Damage_IncreasedAgainstCorroded;
+FGameplayTag Conditional_Damage_IncreasedAgainstOverheated;
+FGameplayTag Conditional_Damage_IncreasedAgainstFrozen;
+FGameplayTag Conditional_Damage_PerHeat;
+
+//Recovery
+FGameplayTag Recovery_Life_OnHit;
+FGameplayTag Recovery_Life_OnKill;
+
 
 //Meta Attributes
 //Damage
@@ -184,6 +212,7 @@ FGameplayTag Damage;
 
 //Effects
 FGameplayTag Effects_HitReact;
+FGameplayTag Effects_DeathReact;
 	
 	
 	

@@ -40,9 +40,121 @@ UAbilitySystemComponent* AFP_CharacterBase::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+UAnimMontage* AFP_CharacterBase::GetDeathMontage_Implementation()
+{
+	return DeathMontage;
+}
+
 UAnimMontage* AFP_CharacterBase::GetHitReactMontage_Implementation()
 {
 	return HitReactMontage;
+}
+
+void AFP_CharacterBase::Die()
+{
+	if (bDead)
+	{
+		return;
+	}
+	bDead = true;
+
+	// Detach weapon immediately so montage doesn't drag it around (optional)
+	if (Weapon)
+	{
+		Weapon->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
+	}
+
+	// If no montage (or no anim instance), ragdoll immediately
+	const float Delay = GetDeathRagdollDelay();
+	if (Delay <= 0.f)
+	{
+		MulticastHandleDeath();
+		return;
+	}
+
+	// Play montage everywhere
+	MulticastPlayDeathMontage(DeathMontage);
+
+	// Server schedules the ragdoll moment
+	if (HasAuthority())
+	{
+		FTimerHandle TimerHandle;
+		GetWorldTimerManager().SetTimer(
+			TimerHandle,
+			this,
+			&AFP_CharacterBase::MulticastHandleDeath,
+			Delay,
+			false
+		);
+	}
+}
+
+float AFP_CharacterBase::GetDeathRagdollDelay() const
+{
+	if (!DeathMontage) return 0.f;
+
+	USkeletalMeshComponent* MeshComp = GetMesh();
+	if (!MeshComp) return 0.f;
+
+	UAnimInstance* AnimInst = MeshComp->GetAnimInstance();
+	if (!AnimInst) return 0.f;
+
+	const float Rate = FMath::Max(0.01f, DeathMontagePlayRate);
+	return DeathMontage->GetPlayLength() / Rate;
+}
+
+void AFP_CharacterBase::Dissolve()
+{
+	if (IsValid(DissolveMaterialInstance))
+	{
+		UMaterialInstanceDynamic* DynamicMatInst = UMaterialInstanceDynamic::Create(DissolveMaterialInstance, this);
+		GetMesh()->SetMaterial(0, DynamicMatInst);
+		StartDissolveTimeline(DynamicMatInst);
+	}
+	if (IsValid(WeaponDissolveMaterialInstance))
+	{
+		UMaterialInstanceDynamic* DynamicMatInst = UMaterialInstanceDynamic::Create(WeaponDissolveMaterialInstance, this);
+		Weapon->SetMaterial(0, DynamicMatInst);
+		StartWeaponDissolveTimeline(DynamicMatInst);
+	}
+
+}
+
+void AFP_CharacterBase::MulticastPlayDeathMontage_Implementation(UAnimMontage* Montage)
+{
+	if (!Montage) return;
+
+	USkeletalMeshComponent* MeshComp = GetMesh();
+	if (!MeshComp) return;
+
+	// If already ragdolled, montage won't play
+	if (MeshComp->IsSimulatingPhysics())
+	{
+		return;
+	}
+
+	UAnimInstance* AnimInst = MeshComp->GetAnimInstance();
+	if (!AnimInst) return;
+
+	AnimInst->Montage_Play(Montage, DeathMontagePlayRate);
+}
+
+void AFP_CharacterBase::MulticastHandleDeath_Implementation()
+{
+	if (Weapon!=nullptr)
+	{
+		Weapon->SetSimulatePhysics(true);
+		Weapon->SetEnableGravity(true);
+		Weapon->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	}
+	
+	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->SetEnableGravity(true);
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	GetMesh()->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+	
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	Dissolve();
 }
 
 void AFP_CharacterBase::BeginPlay()

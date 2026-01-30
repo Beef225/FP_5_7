@@ -106,6 +106,12 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Prim
 //Secondary Attributes
 //Damage
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamage;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData MoreDamage;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData AddedPhysicalDamage;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
@@ -221,6 +227,19 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData CriticalHitResistance;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ReducedDamageFromProjectiles;
+
+//Defense
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedArmour;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ReducedDamageFromAoE;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ReducedDamageFromMelee;
 
 //Heat
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
@@ -341,6 +360,51 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData ProjectileCount;
 
+//Conversion
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData PhysicalDamageToEnergy;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ChemicalDamageToRadiation;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ExplosiveDamageToPhysical;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData EnergyTakenAsRadiation;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData ChemicalTakenAsExplosive;
+
+//Conditional
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageAgainstBruised;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageAgainstConcussed;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageAgainstIrradiated;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageAgainstCorroded;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageAgainstOverheated;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageAgainstFrozen;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamagePerHeatFromEquilibrium;
+
+//Recovery
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData LifeGainedOnHit;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData LifeGainedOnKill;
+
 
 //Meta Attributes
 //Damage
@@ -393,6 +457,14 @@ UFUNCTION()
 
 //Secondary Attributes
 //Damage
+UFUNCTION()
+	void OnRep_IncreasedDamage(const FGameplayAttributeData& OldIncreasedDamage) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamage)
+
+UFUNCTION()
+	void OnRep_MoreDamage(const FGameplayAttributeData& OldMoreDamage) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamage)
+
 UFUNCTION()
 	void OnRep_AddedPhysicalDamage(const FGameplayAttributeData& OldAddedPhysicalDamage) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, AddedPhysicalDamage)
@@ -547,6 +619,23 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_CriticalHitResistance(const FGameplayAttributeData& OldCriticalHitResistance) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, CriticalHitResistance)
+
+UFUNCTION()
+	void OnRep_ReducedDamageFromProjectiles(const FGameplayAttributeData& OldReducedDamageFromProjectiles) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ReducedDamageFromProjectiles)
+
+//Defense
+UFUNCTION()
+	void OnRep_IncreasedArmour(const FGameplayAttributeData& OldIncreasedArmour) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedArmour)
+
+UFUNCTION()
+	void OnRep_ReducedDamageFromAoE(const FGameplayAttributeData& OldReducedDamageFromAoE) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ReducedDamageFromAoE)
+
+UFUNCTION()
+	void OnRep_ReducedDamageFromMelee(const FGameplayAttributeData& OldReducedDamageFromMelee) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ReducedDamageFromMelee)
 
 //Heat
 UFUNCTION()
@@ -703,6 +792,65 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_ProjectileCount(const FGameplayAttributeData& OldProjectileCount) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ProjectileCount)
+
+//Conversion
+UFUNCTION()
+	void OnRep_PhysicalDamageToEnergy(const FGameplayAttributeData& OldPhysicalDamageToEnergy) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, PhysicalDamageToEnergy)
+
+UFUNCTION()
+	void OnRep_ChemicalDamageToRadiation(const FGameplayAttributeData& OldChemicalDamageToRadiation) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ChemicalDamageToRadiation)
+
+UFUNCTION()
+	void OnRep_ExplosiveDamageToPhysical(const FGameplayAttributeData& OldExplosiveDamageToPhysical) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ExplosiveDamageToPhysical)
+
+UFUNCTION()
+	void OnRep_EnergyTakenAsRadiation(const FGameplayAttributeData& OldEnergyTakenAsRadiation) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, EnergyTakenAsRadiation)
+
+UFUNCTION()
+	void OnRep_ChemicalTakenAsExplosive(const FGameplayAttributeData& OldChemicalTakenAsExplosive) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ChemicalTakenAsExplosive)
+
+//Conditional
+UFUNCTION()
+	void OnRep_IncreasedDamageAgainstBruised(const FGameplayAttributeData& OldIncreasedDamageAgainstBruised) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageAgainstBruised)
+
+UFUNCTION()
+	void OnRep_IncreasedDamageAgainstConcussed(const FGameplayAttributeData& OldIncreasedDamageAgainstConcussed) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageAgainstConcussed)
+
+UFUNCTION()
+	void OnRep_IncreasedDamageAgainstIrradiated(const FGameplayAttributeData& OldIncreasedDamageAgainstIrradiated) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageAgainstIrradiated)
+
+UFUNCTION()
+	void OnRep_IncreasedDamageAgainstCorroded(const FGameplayAttributeData& OldIncreasedDamageAgainstCorroded) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageAgainstCorroded)
+
+UFUNCTION()
+	void OnRep_IncreasedDamageAgainstOverheated(const FGameplayAttributeData& OldIncreasedDamageAgainstOverheated) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageAgainstOverheated)
+
+UFUNCTION()
+	void OnRep_IncreasedDamageAgainstFrozen(const FGameplayAttributeData& OldIncreasedDamageAgainstFrozen) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageAgainstFrozen)
+
+UFUNCTION()
+	void OnRep_IncreasedDamagePerHeatFromEquilibrium(const FGameplayAttributeData& OldIncreasedDamagePerHeatFromEquilibrium) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamagePerHeatFromEquilibrium)
+
+//Recovery
+UFUNCTION()
+	void OnRep_LifeGainedOnHit(const FGameplayAttributeData& OldLifeGainedOnHit) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, LifeGainedOnHit)
+
+UFUNCTION()
+	void OnRep_LifeGainedOnKill(const FGameplayAttributeData& OldLifeGainedOnKill) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, LifeGainedOnKill)
 
 
 //Meta Attributes

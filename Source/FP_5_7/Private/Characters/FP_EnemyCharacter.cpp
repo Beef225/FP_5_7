@@ -59,6 +59,13 @@ int32 AFP_EnemyCharacter::GetPlayerLevel()
 	return Level;
 }
 
+void AFP_EnemyCharacter::Die()
+{
+	const float Extra = GetDeathRagdollDelay(); // protected in base; if private, expose a protected getter
+	SetLifeSpan(LifeSpan + Extra);
+	Super::Die();
+}
+
 void AFP_EnemyCharacter::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
 {
 	bHitReacting = NewCount > 0;
@@ -125,35 +132,35 @@ void AFP_EnemyCharacter::BindAttributeDelegates()
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AS->GetHitPointsAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data)
 		{
-			FP_DebugAttr(GetWorld(), TEXT("HitPoints"), Data.OldValue, Data.NewValue, FColor::Green);
+			//FP_DebugAttr(GetWorld(), TEXT("HitPoints"), Data.OldValue, Data.NewValue, FColor::Green);
 			OnHitPointsChanged.Broadcast(Data.NewValue);
 		});
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AS->GetMaxHitPointsAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data)
 		{
-			FP_DebugAttr(GetWorld(), TEXT("MaxHitPoints"), Data.OldValue, Data.NewValue, FColor::Yellow);
+			//FP_DebugAttr(GetWorld(), TEXT("MaxHitPoints"), Data.OldValue, Data.NewValue, FColor::Yellow);
 			OnMaxHitPointsChanged.Broadcast(Data.NewValue);
 		});
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AS->GetHeatAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data)
 		{
-			FP_DebugAttr(GetWorld(), TEXT("Heat"), Data.OldValue, Data.NewValue, FColor::Cyan);
+			//FP_DebugAttr(GetWorld(), TEXT("Heat"), Data.OldValue, Data.NewValue, FColor::Cyan);
 			OnHeatChanged.Broadcast(Data.NewValue);
 		});
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AS->GetMaxHeatThresholdAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data)
 		{
-			FP_DebugAttr(GetWorld(), TEXT("MaxHeatThreshold"), Data.OldValue, Data.NewValue, FColor(255, 165, 0)); // orange-ish
+			//FP_DebugAttr(GetWorld(), TEXT("MaxHeatThreshold"), Data.OldValue, Data.NewValue, FColor(255, 165, 0)); // orange-ish
 			OnMaxHeatThresholdChanged.Broadcast(Data.NewValue);
 		});
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AS->GetMinHeatThresholdAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data)
 		{
-			FP_DebugAttr(GetWorld(), TEXT("MinHeatThreshold"), Data.OldValue, Data.NewValue, FColor(128, 0, 128)); // purple-ish
+			//FP_DebugAttr(GetWorld(), TEXT("MinHeatThreshold"), Data.OldValue, Data.NewValue, FColor(128, 0, 128)); // purple-ish
 			OnMinHeatThresholdChanged.Broadcast(Data.NewValue);
 		});
 }
@@ -176,8 +183,8 @@ void AFP_EnemyCharacter::BroadcastInitialAttributeValues()
 	OnMinHeatThresholdChanged.Broadcast(MinHeat);
 	OnMaxHeatThresholdChanged.Broadcast(MaxHeat);
 
-	// 10s summary debug (optional, but you asked for it)
-	if (GEngine)
+	// 10s summary debug 
+	/*if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(
 			-1,
@@ -188,7 +195,7 @@ void AFP_EnemyCharacter::BroadcastInitialAttributeValues()
 				HP, MaxHP, Heat, MinHeat, MaxHeat
 			)
 		);
-	}
+	}*/
 }
 
 void AFP_EnemyCharacter::Tick(float DeltaTime)

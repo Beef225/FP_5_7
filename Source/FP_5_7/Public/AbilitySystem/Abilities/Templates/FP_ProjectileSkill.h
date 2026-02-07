@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/Abilities/FP_GameplayAbility.h"
+#include "AbilitySystem/Abilities/FP_DamageGameplayAbility.h"
 #include "FP_ProjectileSkill.generated.h"
 
 class AFP_Projectile;
@@ -14,7 +14,7 @@ class UGameplayEffect;
  * Server-authoritative spawn and initialization (speed, etc.) based on the ability owner's ASC.
  */
 UCLASS()
-class FP_5_7_API UFP_ProjectileSkill : public UFP_GameplayAbility
+class FP_5_7_API UFP_ProjectileSkill : public UFP_DamageGameplayAbility
 {
 	GENERATED_BODY()
 
@@ -32,7 +32,4 @@ protected:
 	/** Which projectile to spawn. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Projectile")
 	TSubclassOf<AFP_Projectile> ProjectileClass;
-	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UGameplayEffect> DamageEffectClass;
 };

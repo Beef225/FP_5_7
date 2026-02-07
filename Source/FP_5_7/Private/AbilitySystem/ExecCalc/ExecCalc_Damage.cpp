@@ -4,6 +4,8 @@
 #include "AbilitySystem/ExecCalc/ExecCalc_Damage.h"
 #include "AbilitySystemComponent.h"
 #include "FP_GameplayTags.h"
+#include "FP_AbilityTypes.h"
+#include "Libraries/FP_AbilitySystemLibrary.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 
 struct FP_DamageStatics
@@ -322,6 +324,9 @@ void UExecCalc_Damage::Execute_Implementation(
 	const float DodgeRoll = FMath::FRand();
 	const bool bDodged = (DodgeChance > 0.f) && (DodgeRoll < DodgeChance);
 
+	FGameplayEffectContextHandle EffectContectHandle = Spec.GetContext();
+	UFP_AbilitySystemLibrary::SetIsDodgedHit(EffectContectHandle, bDodged);
+	
 	LogStep(TEXT("0) DodgeCheck"),
 		0.f,
 		FString::Printf(TEXT("DodgeChanceRaw=%.4f DodgeChance=%.4f Roll=%.4f Dodged=%s"),
@@ -342,7 +347,7 @@ void UExecCalc_Damage::Execute_Implementation(
 	// 1) BASE DAMAGE + ADDED
 	// -------------------------------------------------------
 	const float SetByCallerDamage = Spec.GetSetByCallerMagnitude(FFP_GameplayTags::Get().Damage, false, 0.f);
-
+	
 	const float AddedPhys = GetCaptured(DamageStatics().AddedPhysicalDamageDef, 0.f);
 	const float AddedExpl = GetCaptured(DamageStatics().AddedExplosiveDamageDef, 0.f);
 	const float AddedRad  = GetCaptured(DamageStatics().AddedRadiationDamageDef, 0.f);
@@ -413,6 +418,8 @@ void UExecCalc_Damage::Execute_Implementation(
 	const float BlockRoll = FMath::FRand();
 	const bool bBlocked = (BlockChance > 0.f) && (BlockRoll < BlockChance);
 
+	UFP_AbilitySystemLibrary::SetIsBlockedHit(EffectContectHandle, bDodged);
+	
 	float BlockedDamageRaw = 0.f;
 	float BlockedDamage = 0.f;
 
@@ -440,6 +447,8 @@ void UExecCalc_Damage::Execute_Implementation(
 	const float CritRoll = FMath::FRand();
 	const bool bCritical = (FinalCritChance > 0.f) && (CritRoll < FinalCritChance);
 
+	UFP_AbilitySystemLibrary::SetIsCriticalHit(EffectContectHandle, bDodged);
+	
 	const float DamageBeforeCrit = Damage;
 
 	if (bCritical)

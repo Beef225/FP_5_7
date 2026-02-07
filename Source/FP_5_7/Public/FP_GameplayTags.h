@@ -209,12 +209,18 @@ FGameplayTag Event_Montage_5;
 
 //Damage
 FGameplayTag Damage;
+FGameplayTag Damage_Physical;
+FGameplayTag Damage_Explosive;
+FGameplayTag Damage_Radiation;
+FGameplayTag Damage_Chemical;
+FGameplayTag Damage_Energy;
+FGameplayTag Damage_Overheat;
 
 //Effects
 FGameplayTag Effects_HitReact;
 FGameplayTag Effects_DeathReact;
 	
-	
+	TArray<FGameplayTag> DamageTypes;	
 	
 private:
 	static FFP_GameplayTags GameplayTags;

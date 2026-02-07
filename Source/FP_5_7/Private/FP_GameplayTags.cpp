@@ -611,6 +611,30 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Damage"), 
 		FString("Damage")
 		);
+	GameplayTags.Damage_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Physical"), 
+		FString("Physical Damage")
+		);
+	GameplayTags.Damage_Explosive = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Explosive"), 
+		FString("Explosive Damage")
+		);
+	GameplayTags.Damage_Radiation = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Radiation"), 
+		FString("Radiation Damage")
+		);
+	GameplayTags.Damage_Chemical = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Chemical"), 
+		FString("Chemical Damage")
+		);
+	GameplayTags.Damage_Energy = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Energy"), 
+		FString("Energy Damage")
+		);
+	GameplayTags.Damage_Overheat = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Overheat"), 
+		FString("Overheat Damage")
+		);
 
 	//Effects
 	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(

@@ -344,22 +344,87 @@ void UExecCalc_Damage::Execute_Implementation(
 	}
 
 	// -------------------------------------------------------
-	// 1) BASE DAMAGE + ADDED
+	// 1) BASE DAMAGE + ADDED + TYPE SCALING
 	// -------------------------------------------------------
 	const float SetByCallerDamage = Spec.GetSetByCallerMagnitude(FFP_GameplayTags::Get().Damage, false, 0.f);
 	
+	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
+
+	// SetByCaller base per type (plus legacy generic Damage for backwards compatibility).
+	const float SetByCallerGeneric = Spec.GetSetByCallerMagnitude(GameplayTags.Damage, false, 0.f);
+	const float SetByCallerPhysical  = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Added_Physical, false, 0.f);
+	const float SetByCallerExplosive = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Added_Explosive, false, 0.f);
+	const float SetByCallerRadiation = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Added_Radiation, false, 0.f);
+	const float SetByCallerChemical  = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Added_Chemical, false, 0.f);
+	const float SetByCallerEnergy    = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Added_Energy, false, 0.f);
+
 	const float AddedPhys = GetCaptured(DamageStatics().AddedPhysicalDamageDef, 0.f);
 	const float AddedExpl = GetCaptured(DamageStatics().AddedExplosiveDamageDef, 0.f);
 	const float AddedRad  = GetCaptured(DamageStatics().AddedRadiationDamageDef, 0.f);
 	const float AddedChem = GetCaptured(DamageStatics().AddedChemicalDamageDef, 0.f);
 	const float AddedEng  = GetCaptured(DamageStatics().AddedEnergyDamageDef, 0.f);
 
-	float Damage = SetByCallerDamage + AddedPhys + AddedExpl + AddedRad + AddedChem + AddedEng;
+	const float IncreasedGeneric = GetCaptured(DamageStatics().IncreasedDamageDef, 0.f);
+	const float IncreasedPhys = GetCaptured(DamageStatics().IncreasedPhysicalDamageDef, 0.f);
+	const float IncreasedExpl = GetCaptured(DamageStatics().IncreasedExplosiveDamageDef, 0.f);
+	const float IncreasedRad  = GetCaptured(DamageStatics().IncreasedRadiationDamageDef, 0.f);
+	const float IncreasedChem = GetCaptured(DamageStatics().IncreasedChemicalDamageDef, 0.f);
+	const float IncreasedEng  = GetCaptured(DamageStatics().IncreasedEnergyDamageDef, 0.f);
 
-	LogStep(TEXT("1) BaseDamage+Added"),
-		Damage,
-		FString::Printf(TEXT("SetByCaller=%.4f Added(Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f)"),
-			SetByCallerDamage, AddedPhys, AddedExpl, AddedRad, AddedChem, AddedEng));
+	const float MoreGeneric = GetCaptured(DamageStatics().MoreDamageDef, 0.f);
+	const float MorePhys = GetCaptured(DamageStatics().MorePhysicalDamageDef, 0.f);
+	const float MoreExpl = GetCaptured(DamageStatics().MoreExplosiveDamageDef, 0.f);
+	const float MoreRad  = GetCaptured(DamageStatics().MoreRadiationDamageDef, 0.f);
+	const float MoreChem = GetCaptured(DamageStatics().MoreChemicalDamageDef, 0.f);
+	const float MoreEng  = GetCaptured(DamageStatics().MoreEnergyDamageDef, 0.f);
+
+	const float TargetHeat  = GetCaptured(DamageStatics().HeatDef, 0.f);
+	const float AmbientTemp = GetCaptured(DamageStatics().AmbientTemperatureDef, 0.f);
+	const float TempDelta   = FMath::Abs(TargetHeat - AmbientTemp);
+	const float IncPerHeat = GetCaptured(DamageStatics().IncreasedDamagePerHeatFromEquilibriumDef, 0.f);
+	const float TempDeltaIncrease = TempDelta * IncPerHeat;
+
+
+	auto ComputeTypeDamage =
+		[](float BaseSetByCaller, float FlatAdded, float GenericInc, float TypeInc, float TempInc, float GenericMore, float TypeMore)
+		{
+			const float Flat = BaseSetByCaller + FlatAdded;
+			if (Flat <= 0.f)
+			{
+				return 0.f;
+			}
+
+			float Out = Flat;
+			Out *= (1.f + GenericInc + TypeInc + TempInc);
+			Out *= (1.f + GenericMore);
+			Out *= (1.f + TypeMore);
+			return Out;
+		};
+
+	// Legacy generic damage only gets generic scaling.
+	const float GenericDamage = ComputeTypeDamage(SetByCallerGeneric, 0.f, IncreasedGeneric, 0.f, TempDeltaIncrease, MoreGeneric, 0.f);
+	const float PhysicalDamage  = ComputeTypeDamage(SetByCallerPhysical, AddedPhys, IncreasedGeneric, IncreasedPhys, TempDeltaIncrease, MoreGeneric, MorePhys);
+	const float ExplosiveDamage = ComputeTypeDamage(SetByCallerExplosive, AddedExpl, IncreasedGeneric, IncreasedExpl, TempDeltaIncrease, MoreGeneric, MoreExpl);
+	const float RadiationDamage = ComputeTypeDamage(SetByCallerRadiation, AddedRad, IncreasedGeneric, IncreasedRad, TempDeltaIncrease, MoreGeneric, MoreRad);
+	const float ChemicalDamage  = ComputeTypeDamage(SetByCallerChemical, AddedChem, IncreasedGeneric, IncreasedChem, TempDeltaIncrease, MoreGeneric, MoreChem);
+	const float EnergyDamage    = ComputeTypeDamage(SetByCallerEnergy, AddedEng, IncreasedGeneric, IncreasedEng, TempDeltaIncrease, MoreGeneric, MoreEng);
+
+	
+	const float PhysicalRes = GetCaptured(DamageStatics().PhysicalDamageResistanceDef, 0.f);
+	const float MaxPhysicalRex = GetCaptured(DamageStatics().PhysicalMaxResistanceDef, 0.f);
+	const float PhysResPen = GetCaptured(DamageStatics().PhysicalResistancePenetrationDef, 0.f);
+		
+	//replace this with the other damage +res combos types
+	
+	
+	const float ResPhysDam = (1-FMath::Max((PhysicalRes-PhysResPen),MaxPhysicalRex));
+	//replace this with the resisted damage values
+	
+	
+	
+	float Damage = GenericDamage + ResPhysDam + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage;
+	//edit the above line to calculate damage after all the resistances are factored in
+	
 
 	if (Damage <= 0.f)
 	{
@@ -372,43 +437,7 @@ void UExecCalc_Damage::Execute_Implementation(
 		return;
 	}
 
-	// -------------------------------------------------------
-	// 2) INCREASED
-	// -------------------------------------------------------
-	const float IncreasedGeneric = GetCaptured(DamageStatics().IncreasedDamageDef, 0.f);
-
-	const float TargetHeat  = GetCaptured(DamageStatics().HeatDef, 0.f);
-	const float AmbientTemp = GetCaptured(DamageStatics().AmbientTemperatureDef, 0.f);
-	const float TempDelta   = FMath::Abs(TargetHeat - AmbientTemp);
-
-	// This is your rare scaling stat (e.g. 0.01 or 0.02)
-	const float IncPerHeat = GetCaptured(DamageStatics().IncreasedDamagePerHeatFromEquilibriumDef, 0.f);
-
-	// Delta contribution is scaled, not raw
-	const float TempDeltaIncrease = TempDelta * IncPerHeat;
-
-	const float TotalIncreased = IncreasedGeneric + TempDeltaIncrease;
-
-	const float DamageBeforeIncreased = Damage;
-	Damage *= (1.f + TotalIncreased);
-
-	LogStep(TEXT("2) Increased"),
-		Damage,
-		FString::Printf(TEXT("IncreasedGeneric=%.4f Heat=%.4f Ambient=%.4f Delta=%.4f IncPerHeat=%.4f TempDeltaIncrease=%.4f TotalIncreased=%.4f (%.4f->%.4f)"),
-			IncreasedGeneric, TargetHeat, AmbientTemp, TempDelta, IncPerHeat, TempDeltaIncrease, TotalIncreased,
-			DamageBeforeIncreased, Damage));
-	// -------------------------------------------------------
-	// 3) MORE
-	// -------------------------------------------------------
-	const float MoreGeneric = GetCaptured(DamageStatics().MoreDamageDef, 0.f);
-	const float DamageBeforeMore = Damage;
-	Damage *= (1.f + MoreGeneric);
-
-	LogStep(TEXT("3) More"),
-		Damage,
-		FString::Printf(TEXT("MoreGeneric=%.4f (%.4f->%.4f)"),
-			MoreGeneric, DamageBeforeMore, Damage));
-
+	
 	// -------------------------------------------------------
 	// 4) BLOCK
 	// -------------------------------------------------------

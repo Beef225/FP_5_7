@@ -1,7 +1,7 @@
 ﻿// Copyright JG
 
 
-#include "AbilitySystemExecCalc/ExecCalc_Damage.h"
+#include "AbilitySystem/ExecCalc/ExecCalc_Damage.h"
 #include "AbilitySystemComponent.h"
 #include "FP_GameplayTags.h"
 #include "AbilitySystem/FP_AttributeSet.h"

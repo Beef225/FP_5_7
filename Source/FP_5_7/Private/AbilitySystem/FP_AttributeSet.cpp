@@ -4,7 +4,7 @@
 #include "AbilitySystem/FP_AttributeSet.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
-#include "Skills/FP_AbilityTypes.h"
+#include "FP_AbilityTypes.h"
 #include "GameFramework/Character.h"
 #include "GameplayEffectExtension.h"
 #include "Net/UnrealNetwork.h"

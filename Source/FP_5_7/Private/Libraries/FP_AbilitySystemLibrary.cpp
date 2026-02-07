@@ -3,6 +3,7 @@
 
 #include "Libraries/FP_AbilitySystemLibrary.h"
 
+#include "FP_AbilityTypes.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "Game/FP_GameModeBase.h"
 #include "UI/WidgetController/FP_WidgetController.h"
@@ -98,13 +99,69 @@ void UFP_AbilitySystemLibrary::InitializeDefaultAttributes(const UObject* WorldC
 
 void UFP_AbilitySystemLibrary::GiveStartupAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC)
 {
-	AFP_GameModeBase* AuraGameMode = Cast<AFP_GameModeBase>(UGameplayStatics::GetGameMode(WorldContextObject));
-	if (AuraGameMode == nullptr) return;
-
-	UCharacterClassInfo* CharacterClassInfo = AuraGameMode->CharacterClassInfo;
+	UCharacterClassInfo* CharacterClassInfo = GetCharacterClassInfo(WorldContextObject);
 	for (TSubclassOf<UGameplayAbility> AbilityClass : CharacterClassInfo->CommonAbilities)
 	{
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
 		ASC->GiveAbility(AbilitySpec);
+	}
+}
+
+UCharacterClassInfo* UFP_AbilitySystemLibrary::GetCharacterClassInfo(const UObject* WorldContextObject)
+{
+	AFP_GameModeBase* FP_GameMode = Cast<AFP_GameModeBase>(UGameplayStatics::GetGameMode(WorldContextObject));
+	if (FP_GameMode == nullptr) return nullptr;
+	return FP_GameMode->CharacterClassInfo;
+}
+
+bool UFP_AbilitySystemLibrary::IsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle)
+{
+	if (const FFP_GameplayEffectContext* FP_EffectContext = static_cast<const FFP_GameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		return FP_EffectContext->IsBlockedHit();
+	}
+	return false;
+}
+
+bool UFP_AbilitySystemLibrary::IsCriticalHit(const FGameplayEffectContextHandle& EffectContextHandle)
+{
+	if (const FFP_GameplayEffectContext* FP_EffectContext = static_cast<const FFP_GameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		return FP_EffectContext->IsCriticalHit();
+	}
+	return false;
+}
+
+bool UFP_AbilitySystemLibrary::IsDodgedHit(const FGameplayEffectContextHandle& EffectContextHandle)
+{
+	if (const FFP_GameplayEffectContext* FP_EffectContext = static_cast<const FFP_GameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		return FP_EffectContext->IsDodgedHit();
+	}
+	return false;
+}
+
+void UFP_AbilitySystemLibrary::SetIsBlockedHit(FGameplayEffectContextHandle& EffectContextHandle, bool bInIsBlockedHit)
+{
+	if ( FFP_GameplayEffectContext* FP_EffectContext = static_cast<FFP_GameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		FP_EffectContext->SetIsBlockedHit(bInIsBlockedHit);
+	}
+}
+
+void UFP_AbilitySystemLibrary::SetIsCriticalHit(FGameplayEffectContextHandle& EffectContextHandle,
+	bool bInIsCriticalHit)
+{
+	if ( FFP_GameplayEffectContext* FP_EffectContext = static_cast<FFP_GameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		FP_EffectContext->SetIsCriticalHit(bInIsCriticalHit);
+	}
+}
+
+void UFP_AbilitySystemLibrary::SetIsDodgedHit(FGameplayEffectContextHandle& EffectContextHandle, bool bInIsDodgedHit)
+{
+	if ( FFP_GameplayEffectContext* FP_EffectContext = static_cast<FFP_GameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		FP_EffectContext->SetIsDodgedHit(bInIsDodgedHit);
 	}
 }

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "UI/WidgetController/FP_CharacterMenuWidgetController.h"
 #include "FP_AbilitySystemLibrary.generated.h"
 
 class UAbilitySystemComponent;
@@ -19,21 +20,41 @@ class FP_5_7_API UFP_AbilitySystemLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 public: 
-	UFUNCTION(BlueprintPure, Category="AuraAbilitySystemLibrary|WidgetController")
+	UFUNCTION(BlueprintPure, Category="FP_AbilitySystemLibrary|WidgetController")
 	static UFP_OverlayWidgetController* GetOverlayWidgetController(const UObject* WorldContextObject);
 	
-	UFUNCTION(BlueprintPure, Category="AuraAbilitySystemLibrary|WidgetController")
+	UFUNCTION(BlueprintPure, Category="FP_AbilitySystemLibrary|WidgetController")
 	static UFP_CharacterMenuWidgetController* GetCharacterWidgetController(const UObject* WorldContextObject);
 	
-	UFUNCTION(BlueprintPure, Category="AuraAbilitySystemLibrary|WidgetController")
+	UFUNCTION(BlueprintPure, Category="FP_AbilitySystemLibrary|WidgetController")
 	static UFP_InventoryWidgetController* GetInventoryWidgetController(const UObject* WorldContextObject);
 	
-	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|CharacterClassDefaults")
+	UFUNCTION(BlueprintCallable, Category="FP_AbilitySystemLibrary|CharacterClassDefaults")
 	static void InitializeDefaultAttributes(const UObject* WorldContextObject, ECharacterClass CharacterClass, float Level, UAbilitySystemComponent* ASC);
 	
-	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|CharacterClassDefaults")
+	UFUNCTION(BlueprintCallable, Category="FP_AbilitySystemLibrary|CharacterClassDefaults")
 	static void GiveStartupAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC);
-
+	
+	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|CharacterClassDefaults")
+	static UCharacterClassInfo* GetCharacterClassInfo(const UObject* WorldContextObject);
+	
+	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
+	static bool IsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle);
+	
+	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
+	static bool IsCriticalHit(const FGameplayEffectContextHandle& EffectContextHandle);
+	
+	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
+	static bool IsDodgedHit(const FGameplayEffectContextHandle& EffectContextHandle);
+	
+	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
+	static void SetIsBlockedHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsBlockedHit);
+	
+	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
+	static void SetIsCriticalHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsCriticalHit);
+	
+	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
+	static void SetIsDodgedHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsDodgedHit);
 	
 	
 };

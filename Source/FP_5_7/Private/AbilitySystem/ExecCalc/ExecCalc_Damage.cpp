@@ -350,11 +350,11 @@ void UExecCalc_Damage::Execute_Implementation(
 
 	// SetByCaller base per type (plus legacy generic Damage for backwards compatibility).
 	const float SetByCallerGeneric = Spec.GetSetByCallerMagnitude(GameplayTags.Damage, false, 0.f);
-	const float SetByCallerPhysical  = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Added_Physical, false, 0.f);
-	const float SetByCallerExplosive = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Added_Explosive, false, 0.f);
-	const float SetByCallerRadiation = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Added_Radiation, false, 0.f);
-	const float SetByCallerChemical  = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Added_Chemical, false, 0.f);
-	const float SetByCallerEnergy    = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Added_Energy, false, 0.f);
+	const float SetByCallerPhysical  = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Physical, false, 0.f);
+	const float SetByCallerExplosive = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Explosive, false, 0.f);
+	const float SetByCallerRadiation = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Radiation, false, 0.f);
+	const float SetByCallerChemical  = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Chemical, false, 0.f);
+	const float SetByCallerEnergy    = Spec.GetSetByCallerMagnitude(GameplayTags.Damage_Energy, false, 0.f);
 
 	const float AddedPhys = GetCaptured(DamageStatics().AddedPhysicalDamageDef, 0.f);
 	const float AddedExpl = GetCaptured(DamageStatics().AddedExplosiveDamageDef, 0.f);

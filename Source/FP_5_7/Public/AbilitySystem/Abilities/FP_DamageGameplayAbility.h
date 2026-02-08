@@ -6,6 +6,19 @@
 #include "FP_GameplayAbility.h"
 #include "FP_DamageGameplayAbility.generated.h"
 
+USTRUCT(BlueprintType)
+struct FDamageRange
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage")
+	FScalableFloat DamageMin = FScalableFloat();
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Damage")
+	FScalableFloat DamageMax = FScalableFloat();
+};
+
+
+
 /**
  * 
  */
@@ -19,6 +32,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UGameplayEffect> DamageEffectClass;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	UPROPERTY(EditDefaultsOnly, Category = "Damage", meta=(Categories="Damage"))
 	TMap<FGameplayTag, FScalableFloat> DamageTypes;
+	
+	//UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	//TMap<FGameplayTag, FDamageRange> DamageTypes;
 };

@@ -346,8 +346,6 @@ void UExecCalc_Damage::Execute_Implementation(
 	// -------------------------------------------------------
 	// 1) BASE DAMAGE + ADDED + TYPE SCALING
 	// -------------------------------------------------------
-	const float SetByCallerDamage = Spec.GetSetByCallerMagnitude(FFP_GameplayTags::Get().Damage, false, 0.f);
-	
 	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
 
 	// SetByCaller base per type (plus legacy generic Damage for backwards compatibility).
@@ -384,7 +382,6 @@ void UExecCalc_Damage::Execute_Implementation(
 	const float IncPerHeat = GetCaptured(DamageStatics().IncreasedDamagePerHeatFromEquilibriumDef, 0.f);
 	const float TempDeltaIncrease = TempDelta * IncPerHeat;
 
-
 	auto ComputeTypeDamage =
 		[](float BaseSetByCaller, float FlatAdded, float GenericInc, float TypeInc, float TempInc, float GenericMore, float TypeMore)
 		{
@@ -402,29 +399,66 @@ void UExecCalc_Damage::Execute_Implementation(
 		};
 
 	// Legacy generic damage only gets generic scaling.
-	const float GenericDamage = ComputeTypeDamage(SetByCallerGeneric, 0.f, IncreasedGeneric, 0.f, TempDeltaIncrease, MoreGeneric, 0.f);
-	const float PhysicalDamage  = ComputeTypeDamage(SetByCallerPhysical, AddedPhys, IncreasedGeneric, IncreasedPhys, TempDeltaIncrease, MoreGeneric, MorePhys);
-	const float ExplosiveDamage = ComputeTypeDamage(SetByCallerExplosive, AddedExpl, IncreasedGeneric, IncreasedExpl, TempDeltaIncrease, MoreGeneric, MoreExpl);
-	const float RadiationDamage = ComputeTypeDamage(SetByCallerRadiation, AddedRad, IncreasedGeneric, IncreasedRad, TempDeltaIncrease, MoreGeneric, MoreRad);
-	const float ChemicalDamage  = ComputeTypeDamage(SetByCallerChemical, AddedChem, IncreasedGeneric, IncreasedChem, TempDeltaIncrease, MoreGeneric, MoreChem);
-	const float EnergyDamage    = ComputeTypeDamage(SetByCallerEnergy, AddedEng, IncreasedGeneric, IncreasedEng, TempDeltaIncrease, MoreGeneric, MoreEng);
+	float GenericDamage = ComputeTypeDamage(SetByCallerGeneric, 0.f, IncreasedGeneric, 0.f, TempDeltaIncrease, MoreGeneric, 0.f);
+	float PhysicalDamage  = ComputeTypeDamage(SetByCallerPhysical, AddedPhys, IncreasedGeneric, IncreasedPhys, TempDeltaIncrease, MoreGeneric, MorePhys);
+	float ExplosiveDamage = ComputeTypeDamage(SetByCallerExplosive, AddedExpl, IncreasedGeneric, IncreasedExpl, TempDeltaIncrease, MoreGeneric, MoreExpl);
+	float RadiationDamage = ComputeTypeDamage(SetByCallerRadiation, AddedRad, IncreasedGeneric, IncreasedRad, TempDeltaIncrease, MoreGeneric, MoreRad);
+	float ChemicalDamage  = ComputeTypeDamage(SetByCallerChemical, AddedChem, IncreasedGeneric, IncreasedChem, TempDeltaIncrease, MoreGeneric, MoreChem);
+	float EnergyDamage    = ComputeTypeDamage(SetByCallerEnergy, AddedEng, IncreasedGeneric, IncreasedEng, TempDeltaIncrease, MoreGeneric, MoreEng);
 
-	
-	const float PhysicalRes = GetCaptured(DamageStatics().PhysicalDamageResistanceDef, 0.f);
-	const float MaxPhysicalRex = GetCaptured(DamageStatics().PhysicalMaxResistanceDef, 0.f);
-	const float PhysResPen = GetCaptured(DamageStatics().PhysicalResistancePenetrationDef, 0.f);
-		
-	//replace this with the other damage +res combos types
-	
-	
-	const float ResPhysDam = (1-FMath::Max((PhysicalRes-PhysResPen),MaxPhysicalRex));
-	//replace this with the resisted damage values
-	
-	
-	
-	float Damage = GenericDamage + ResPhysDam + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage;
-	//edit the above line to calculate damage after all the resistances are factored in
-	
+	LogStep(TEXT("1) PerTypeOffense"),
+		GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage,
+		FString::Printf(TEXT("SBCC(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f) | Offense(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f)"),
+			SetByCallerGeneric, SetByCallerPhysical, SetByCallerExplosive, SetByCallerRadiation, SetByCallerChemical, SetByCallerEnergy,
+			GenericDamage, PhysicalDamage, ExplosiveDamage, RadiationDamage, ChemicalDamage, EnergyDamage));
+
+	// -------------------------------------------------------
+	// 2) RESISTANCES (per type, before block)
+	// -------------------------------------------------------
+	auto ApplyResistance = [](float InDamage, float Resistance, float MaxResistance, float Penetration)
+	{
+		if (InDamage <= 0.f)
+		{
+			return 0.f;
+		}
+
+		const float CappedResistance = FMath::Min(Resistance, MaxResistance);
+		const float EffectiveResistance = FMath::Clamp(CappedResistance - Penetration, 0.f, 1.f);
+		return InDamage * (1.f - EffectiveResistance);
+	};
+
+	const float PhysRes = GetCaptured(DamageStatics().PhysicalDamageResistanceDef, 0.f);
+	const float PhysMaxRes = GetCaptured(DamageStatics().PhysicalMaxResistanceDef, 1.f);
+	const float PhysPen = GetCaptured(DamageStatics().PhysicalResistancePenetrationDef, 0.f);
+
+	const float ExplRes = GetCaptured(DamageStatics().ExplosiveDamageResistanceDef, 0.f);
+	const float ExplMaxRes = GetCaptured(DamageStatics().ExplosiveMaxResistanceDef, 1.f);
+	const float ExplPen = GetCaptured(DamageStatics().ExplosiveResistancePenetrationDef, 0.f);
+
+	const float RadRes = GetCaptured(DamageStatics().RadiationDamageResistanceDef, 0.f);
+	const float RadMaxRes = GetCaptured(DamageStatics().RadiationMaxResistanceDef, 1.f);
+	const float RadPen = GetCaptured(DamageStatics().RadiationResistancePenetrationDef, 0.f);
+
+	const float ChemRes = GetCaptured(DamageStatics().ChemicalDamageResistanceDef, 0.f);
+	const float ChemMaxRes = GetCaptured(DamageStatics().ChemicalMaxResistanceDef, 1.f);
+	const float ChemPen = GetCaptured(DamageStatics().ChemicalResistancePenetrationDef, 0.f);
+
+	const float EngRes = GetCaptured(DamageStatics().EnergyDamageResistanceDef, 0.f);
+	const float EngMaxRes = GetCaptured(DamageStatics().EnergyMaxResistanceDef, 1.f);
+	const float EngPen = GetCaptured(DamageStatics().EnergyResistancePenetrationDef, 0.f);
+
+	PhysicalDamage = ApplyResistance(PhysicalDamage, PhysRes, PhysMaxRes, PhysPen);
+	ExplosiveDamage = ApplyResistance(ExplosiveDamage, ExplRes, ExplMaxRes, ExplPen);
+	RadiationDamage = ApplyResistance(RadiationDamage, RadRes, RadMaxRes, RadPen);
+	ChemicalDamage = ApplyResistance(ChemicalDamage, ChemRes, ChemMaxRes, ChemPen);
+	EnergyDamage = ApplyResistance(EnergyDamage, EngRes, EngMaxRes, EngPen);
+
+	float Damage = GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage;
+
+	LogStep(TEXT("2) PerTypeResisted"),
+		Damage,
+		FString::Printf(TEXT("Resisted(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f)"),
+			GenericDamage, PhysicalDamage, ExplosiveDamage, RadiationDamage, ChemicalDamage, EnergyDamage));
 
 	if (Damage <= 0.f)
 	{

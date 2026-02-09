@@ -6,6 +6,9 @@
 #include "UObject/Interface.h"
 #include "FP_CombatInterface.generated.h"
 
+class UAnimMontage;
+class USoundBase;
+
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI, BlueprintType)
 class UFP_CombatInterface : public UInterface
@@ -30,6 +33,13 @@ public:
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UAnimMontage* GetDeathMontage();
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	USoundBase* GetHitReactSound();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	USoundBase* GetDeathSound();
+
 	
 	virtual void Die() = 0;
 };

@@ -36,7 +36,8 @@ public class FP_5_7 : ModuleRules
 				"Slate",
 				"SlateCore",
 				"NavigationSystem",
-				"Niagara"
+				"Niagara",
+				"AIModule"
 			});
 		}
 	

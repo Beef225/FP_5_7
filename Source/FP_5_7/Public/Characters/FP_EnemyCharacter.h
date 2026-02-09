@@ -10,6 +10,8 @@
 #include "FP_EnemyCharacter.generated.h"
 
 class UWidgetComponent;
+class UBehaviorTree;
+class AFP_AIController;
 
 UCLASS()
 class FP_5_7_API AFP_EnemyCharacter : public AFP_CharacterBase, public IFP_EnemyInterface
@@ -18,6 +20,7 @@ class FP_5_7_API AFP_EnemyCharacter : public AFP_CharacterBase, public IFP_Enemy
 
 public:
 	AFP_EnemyCharacter();
+	virtual void PossessedBy(AController* NewController) override;
 
 	/** Enemy Interface */
 	virtual void HighlightActor() override;
@@ -50,7 +53,7 @@ public:
 	bool bHitReacting = false;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Combat")
-	float BaseWalkSpeed = 350.f;
+	float BaseWalkSpeed = 250.f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
 	float LifeSpan = 5.f;
@@ -62,6 +65,12 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
 	ECharacterClass CharacterClass = ECharacterClass::Warrior;
+	
+	UPROPERTY(EditAnywhere, Category = "AI")
+	TObjectPtr<UBehaviorTree> BehaviorTree;
+
+	UPROPERTY()
+	TObjectPtr<AFP_AIController> FP_AIController;
 
 private:
 	/** Bind ASC attribute change delegates (bind BEFORE we apply default attribute effects). */

@@ -7,6 +7,9 @@
 #include "FP_5_7/FP_5_7.h"
 #include "Libraries/FP_AbilitySystemLibrary.h"
 #include "FP_GameplayTags.h"
+#include "AI/FP_AIController.h"
+#include "BehaviorTree/BehaviorTree.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "UI/Widget/FP_UserWidget.h"
 
@@ -33,11 +36,27 @@ AFP_EnemyCharacter::AFP_EnemyCharacter()
 	AbilitySystemComponent = CreateDefaultSubobject<UFP_AbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+	
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationRoll = false;
+	bUseControllerRotationYaw = false;
+	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 
 	AttributeSet = CreateDefaultSubobject<UFP_AttributeSet>("AttributeSet");
 
 	HP_HeatBar = CreateDefaultSubobject<UWidgetComponent>("HP_HeatBar");
 	HP_HeatBar->SetupAttachment(GetRootComponent());
+}
+
+void AFP_EnemyCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	
+	if (!HasAuthority()) return;
+	FP_AIController = Cast<AFP_AIController>(NewController);
+	FP_AIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
+	FP_AIController->RunBehaviorTree(BehaviorTree);
+	
 }
 
 void AFP_EnemyCharacter::HighlightActor()

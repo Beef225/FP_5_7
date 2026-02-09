@@ -15,6 +15,7 @@ class UAttributeSet;
 class UGameplayEffect;
 class UGameplayAbility;
 class UAnimMontage;
+class USoundBase;
 struct FOnAttributeChangeData;
 
 
@@ -45,9 +46,16 @@ public:
 	
 	virtual UAnimMontage* GetDeathMontage_Implementation() override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+	virtual USoundBase* GetHitReactSound_Implementation() override;
+	virtual USoundBase* GetDeathSound_Implementation() override;
+
 	
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastPlayDeathMontage(UAnimMontage* Montage);
+	
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastPlayDeathSound();
+
 	
 	virtual void Die() override;
 
@@ -139,6 +147,10 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category="Combat")
 	TObjectPtr<UAnimMontage> DeathMontage;
+	
+	UPROPERTY(EditAnywhere, Category="Combat")
+	TObjectPtr<USoundBase> DeathSound;
+
 
 	UPROPERTY(EditAnywhere, Category="Combat")
 	float DeathMontagePlayRate = 1.f;
@@ -168,4 +180,9 @@ private:
 	
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<UAnimMontage> HitReactMontage;
+	
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TObjectPtr<USoundBase> HitReactSound;
+
+	
 };

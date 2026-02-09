@@ -8,6 +8,7 @@
 #include "Components/CapsuleComponent.h"
 #include "FP_5_7/FP_5_7.h"
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "Kismet/GameplayStatics.h"
 
 // If you want to use your tag singleton here, uncomment and set SkillMoveSpeedTag in ctor or BP defaults.
 // #include "FP_GameplayTags.h"
@@ -50,6 +51,27 @@ UAnimMontage* AFP_CharacterBase::GetHitReactMontage_Implementation()
 	return HitReactMontage;
 }
 
+USoundBase* AFP_CharacterBase::GetHitReactSound_Implementation()
+{
+	return HitReactSound;
+}
+
+USoundBase* AFP_CharacterBase::GetDeathSound_Implementation()
+{
+	return DeathSound;
+}
+
+void AFP_CharacterBase::MulticastPlayDeathSound_Implementation()
+{
+	if (!DeathSound)
+	{
+		return;
+	}
+
+	UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation());
+
+}
+
 void AFP_CharacterBase::Die()
 {
 	if (bDead)
@@ -63,6 +85,8 @@ void AFP_CharacterBase::Die()
 	{
 		Weapon->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
 	}
+	
+	MulticastPlayDeathSound();
 
 	// If no montage (or no anim instance), ragdoll immediately
 	const float Delay = GetDeathRagdollDelay();

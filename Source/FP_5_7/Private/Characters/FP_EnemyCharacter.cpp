@@ -56,6 +56,8 @@ void AFP_EnemyCharacter::PossessedBy(AController* NewController)
 	FP_AIController = Cast<AFP_AIController>(NewController);
 	FP_AIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
 	FP_AIController->RunBehaviorTree(BehaviorTree);
+	FP_AIController->GetBlackboardComponent()->SetValueAsBool(FName("HitReacting"), false);
+	FP_AIController->GetBlackboardComponent()->SetValueAsBool(FName("RangedAttacker"), CharacterClass != ECharacterClass::Warrior);
 	
 }
 
@@ -87,8 +89,7 @@ void AFP_EnemyCharacter::Die()
 
 void AFP_EnemyCharacter::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
 {
-	bHitReacting = NewCount > 0;
-	GetCharacterMovement()->MaxWalkSpeed = bHitReacting ? 0.f : BaseWalkSpeed;
+	SetHitReactState(NewCount > 0);
 }
 
 void AFP_EnemyCharacter::BeginPlay()
@@ -122,6 +123,10 @@ void AFP_EnemyCharacter::BeginPlay()
 			&AFP_EnemyCharacter::HitReactTagChanged
 		);
 	}
+	
+	AbilitySystemComponent->AbilityActivatedCallbacks.AddUObject(this, &AFP_EnemyCharacter::OnAbilityActivated);
+	AbilitySystemComponent->OnAbilityEnded.AddUObject(this, &AFP_EnemyCharacter::OnAbilityEnded);
+
 
 
 	// 5) Push initial values so UI is correct immediately (even if initial changes were missed)
@@ -216,6 +221,46 @@ void AFP_EnemyCharacter::BroadcastInitialAttributeValues()
 		);
 	}*/
 }
+
+void AFP_EnemyCharacter::OnAbilityActivated(UGameplayAbility* ActivatedAbility)
+{
+	if (!ActivatedAbility)
+	{
+		return;
+	}
+
+	if (ActivatedAbility->AbilityTags.HasTagExact(FFP_GameplayTags::Get().Effects_HitReact))
+	{
+		++ActiveHitReactAbilities;
+		SetHitReactState(true);
+	}
+}
+
+void AFP_EnemyCharacter::OnAbilityEnded(const FAbilityEndedData& AbilityEndedData)
+{
+	if (!AbilityEndedData.AbilityThatEnded)
+	{
+		return;
+	}
+
+	if (AbilityEndedData.AbilityThatEnded->AbilityTags.HasTagExact(FFP_GameplayTags::Get().Effects_HitReact))
+	{
+		ActiveHitReactAbilities = FMath::Max(0, ActiveHitReactAbilities - 1);
+		if (ActiveHitReactAbilities == 0)
+		{
+			SetHitReactState(false);
+		}
+	}
+}
+
+void AFP_EnemyCharacter::SetHitReactState(bool bInHitReact)
+{
+	bHitReacting = bInHitReact;
+	GetCharacterMovement()->MaxWalkSpeed = bHitReacting ? 0.f : BaseWalkSpeed;
+	FP_AIController->GetBlackboardComponent()->SetValueAsBool(FName("HitReacting"), bHitReacting);
+}
+
+
 
 void AFP_EnemyCharacter::Tick(float DeltaTime)
 {

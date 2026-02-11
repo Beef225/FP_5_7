@@ -12,6 +12,8 @@
 class UWidgetComponent;
 class UBehaviorTree;
 class AFP_AIController;
+class UGameplayAbility;
+struct FAbilityEndedData;
 
 UCLASS()
 class FP_5_7_API AFP_EnemyCharacter : public AFP_CharacterBase, public IFP_EnemyInterface
@@ -57,6 +59,17 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
 	float LifeSpan = 5.f;
+	
+	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
+	int32 Level = 1;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UWidgetComponent> HP_HeatBar;
+
+	UPROPERTY(EditAnywhere, Category="Settings")
+	bool bEnemyBarsEnabled = true;
 
 protected:
 	virtual void BeginPlay() override;
@@ -73,21 +86,18 @@ protected:
 	TObjectPtr<AFP_AIController> FP_AIController;
 
 private:
+	void OnAbilityActivated(UGameplayAbility* ActivatedAbility);
+	void OnAbilityEnded(const FAbilityEndedData& AbilityEndedData);
+	void SetHitReactState(bool bInHitReact);
+	
 	/** Bind ASC attribute change delegates (bind BEFORE we apply default attribute effects). */
 	void BindAttributeDelegates();
 
 	/** Push initial values once (so UI is correct even if the initial set happened before binding). */
 	void BroadcastInitialAttributeValues();
+	
+	int32 ActiveHitReactAbilities = 0;
 
-public:
-	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
-	int32 Level = 1;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<UWidgetComponent> HP_HeatBar;
-
-	UPROPERTY(EditAnywhere, Category="Settings")
-	bool bEnemyBarsEnabled = true;
+	
 };

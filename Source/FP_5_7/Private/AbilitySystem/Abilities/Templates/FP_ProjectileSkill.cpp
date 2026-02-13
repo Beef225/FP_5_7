@@ -33,7 +33,8 @@ void UFP_ProjectileSkill::SpawnProjectile(const FVector& ProjectileTargetLocatio
 	IFP_CombatInterface* CombatInterface = Cast<IFP_CombatInterface>(Avatar);
 	if (!CombatInterface) return;
 
-	const FVector SocketLocation = CombatInterface->GetCombatSocketLocation();
+	const FVector SocketLocation = IFP_CombatInterface::Execute_GetCombatSocketLocation(GetAvatarActorFromActorInfo(), 
+		FFP_GameplayTags::Get().Montage_Skill_Weapon);
 	FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
 	Rotation.Pitch = 0.f;
 

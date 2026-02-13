@@ -219,6 +219,18 @@ FGameplayTag Damage_Overheat;
 //Effects
 FGameplayTag Effects_HitReact;
 FGameplayTag Effects_DeathReact;
+
+//Skills
+FGameplayTag Skills_Melee;
+FGameplayTag Skill_Ranged;
+FGameplayTag Skill_Summon;
+
+//Montage
+FGameplayTag Montage_Skill_Weapon;
+FGameplayTag Montage_Skill_LeftHand;
+FGameplayTag Montage_Skill_RightHand;
+FGameplayTag Montage_Skill_Tail;
+FGameplayTag Montage_Skill_Mouth;
 	
 	TArray<FGameplayTag> DamageTypes;	
 	

@@ -87,6 +87,16 @@ void AFP_EnemyCharacter::Die()
 	Super::Die();
 }
 
+void AFP_EnemyCharacter::SetCombatTarget_Implementation(AActor* InCombatTarget)
+{
+	CombatTarget = InCombatTarget;
+}
+
+AActor* AFP_EnemyCharacter::GetCombatTarget_Implementation() const
+{
+	return CombatTarget;
+}
+
 void AFP_EnemyCharacter::HitReactTagChanged(const FGameplayTag CallbackTag, int32 NewCount)
 {
 	SetHitReactState(NewCount > 0);
@@ -99,7 +109,7 @@ void AFP_EnemyCharacter::BeginPlay()
 
 	// 1) Init ActorInfo (DO NOT apply defaults inside InitAbilityActorInfo anymore)
 	InitAbilityActorInfo();
-	UFP_AbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
+	UFP_AbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent, CharacterClass);
 
 	// 2) Set widget controller
 	if (UFP_UserWidget* FP_UserWidget = Cast<UFP_UserWidget>(HP_HeatBar->GetUserWidgetObject()))

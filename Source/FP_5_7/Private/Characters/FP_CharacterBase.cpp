@@ -3,6 +3,7 @@
 #include "Characters/FP_CharacterBase.h"
 
 #include "AbilitySystemComponent.h"
+#include "FP_GameplayTags.h"
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -217,10 +218,45 @@ void AFP_CharacterBase::InitAbilityActorInfo()
 	RefreshMovementSpeed();
 }
 
-FVector AFP_CharacterBase::GetCombatSocketLocation()
+FVector AFP_CharacterBase::GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag)
 {
-	check(Weapon);
-	return Weapon->GetSocketLocation(WeaponTipSocketName);
+	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Skill_Weapon) && IsValid(Weapon))
+	{
+		return Weapon->GetSocketLocation(WeaponTipSocketName);
+	}
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Skill_LeftHand))
+	{
+		return GetMesh()->GetSocketLocation(LeftHandSocketName);
+	}
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Skill_RightHand))
+	{
+		return GetMesh()->GetSocketLocation(RightHandSocketName);
+	}
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Skill_Tail))
+	{
+		return GetMesh()->GetSocketLocation(TailTipSocketName);
+	}
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Skill_Mouth))
+	{
+		return GetMesh()->GetSocketLocation(MouthSocketName);
+	}
+	return FVector();
+}
+
+bool AFP_CharacterBase::IsDead_Implementation() const
+{
+	return bDead;
+}
+
+AActor* AFP_CharacterBase::GetAvatar_Implementation()
+{
+	return this;
+}
+
+TArray<FTaggedMontage> AFP_CharacterBase::GetAttackMontages_Implementation()
+{
+	return AttackMontages;
 }
 
 void AFP_CharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const

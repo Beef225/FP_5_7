@@ -646,4 +646,40 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Death React Montage")
 		);
 
+	//Skills
+	GameplayTags.Skills_Melee = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Melee"), 
+		FString("Melee Skill")
+		);
+	GameplayTags.Skill_Ranged = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skill.Ranged"), 
+		FString("Ranged Skill")
+		);
+	GameplayTags.Skill_Summon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skill.Summon"), 
+		FString("Summon Skill")
+		);
+
+	//Montage
+	GameplayTags.Montage_Skill_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Montage.Skill.Weapon"), 
+		FString("Weapon Montage")
+		);
+	GameplayTags.Montage_Skill_LeftHand = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Montage.Skill.LeftHand"), 
+		FString("LeftHand Montage")
+		);
+	GameplayTags.Montage_Skill_RightHand = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Montage.Skill.RightHand"), 
+		FString("RightHand Montage")
+		);
+	GameplayTags.Montage_Skill_Tail = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Montage.Skill.Tail"), 
+		FString("Tail Montage")
+		);
+	GameplayTags.Montage_Skill_Mouth = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Montage.Skill.Mouth"), 
+		FString("Mouth Montage")
+		);
+
 }

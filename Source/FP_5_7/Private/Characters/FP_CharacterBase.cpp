@@ -171,6 +171,7 @@ void AFP_CharacterBase::MulticastHandleDeath_Implementation()
 		Weapon->SetSimulatePhysics(true);
 		Weapon->SetEnableGravity(true);
 		Weapon->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+		Weapon->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
 	}
 	
 	GetMesh()->SetSimulatePhysics(true);

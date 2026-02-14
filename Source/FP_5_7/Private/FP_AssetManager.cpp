@@ -2,7 +2,7 @@
 
 
 #include "FP_AssetManager.h"
-#include "AbilitySystemGlobals.h"
+//#include "AbilitySystemGlobals.h"
 #include "FP_GameplayTags.h"
 
 UFP_AssetManager& UFP_AssetManager::Get()
@@ -19,7 +19,7 @@ void UFP_AssetManager::StartInitialLoading()
 	FFP_GameplayTags::InitializeGameplayTags();
 
 
-	UAbilitySystemGlobals::Get().InitGlobalData();
+	//UAbilitySystemGlobals::Get().InitGlobalData();
 
 
 }

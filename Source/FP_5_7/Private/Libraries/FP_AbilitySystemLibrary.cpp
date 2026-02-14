@@ -9,6 +9,7 @@
 #include "Interaction/FP_CombatInterface.h"
 #include "UI/WidgetController/FP_WidgetController.h"
 #include "UI\WidgetController/FP_InventoryWidgetController.h"
+#include "Engine/OverlapResult.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/FP_PlayerState.h"
 #include "UI/HUD/FP_HUD.h"
@@ -191,9 +192,9 @@ void UFP_AbilitySystemLibrary::GetLivePlayersWithinRadius(const UObject* WorldCo
 		World->OverlapMultiByObjectType(Overlaps, SphereOrigin, FQuat::Identity, FCollisionObjectQueryParams(FCollisionObjectQueryParams::InitType::AllDynamicObjects), FCollisionShape::MakeSphere(Radius), SphereParams);
 		for (FOverlapResult& Overlap : Overlaps)
 		{
-			if (Overlap.GetActor()->Implements<UFP_CombatInterface>() && !UFP_CombatInterface::Execute_IsDead(Overlap.GetActor()))
+			if (Overlap.GetActor()->Implements<UFP_CombatInterface>() && !IFP_CombatInterface::Execute_IsDead(Overlap.GetActor()))
 			{
-				OutOverlappingActors.AddUnique(UFP_CombatInterface::Execute_GetAvatar(Overlap.GetActor()));
+				OutOverlappingActors.AddUnique(IFP_CombatInterface::Execute_GetAvatar(Overlap.GetActor()));
 			}
 		}
 	}

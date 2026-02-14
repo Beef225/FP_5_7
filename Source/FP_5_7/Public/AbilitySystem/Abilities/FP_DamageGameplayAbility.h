@@ -31,14 +31,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CauseDamage(AActor* TargetActor);
 	
-protected: 
+protected:
+	void AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UGameplayEffect> DamageEffectClass;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Damage", meta=(Categories="Damage"))
-	TMap<FGameplayTag, FScalableFloat> DamageTypes;
-	
-	//UPROPERTY(EditDefaultsOnly, Category = "Damage")
-	//TMap<FGameplayTag, FDamageRange> DamageTypes;
+	TMap<FGameplayTag, FDamageRange> DamageTypes;
 };

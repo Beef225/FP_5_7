@@ -7,12 +7,22 @@
 #include "AbilitySystemComponent.h"
 
 void UFP_DamageGameplayAbility::CauseDamage(AActor* TargetActor)
+{FGameplayEffectSpecHandle DamageSpecHandle = MakeOutgoingGameplayEffectSpec(DamageEffectClass, 1.f);
+	AssignRolledDamageMagnitudes(DamageSpecHandle);
+	GetAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(*DamageSpecHandle.Data.Get(), 
+		UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor));
+	
+}
+
+void UFP_DamageGameplayAbility::AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const
 {
-	FGameplayEffectSpecHandle DamageSpecHandle = MakeOutgoingGameplayEffectSpec(DamageEffectClass, 1.f);
-	for (TTuple<FGameplayTag, FScalableFloat> Pair : DamageTypes)
+	for (const TTuple<FGameplayTag, FDamageRange>& Pair : DamageTypes)
 	{
-		const float ScaledDamage = Pair.Value.GetValueAtLevel(GetAbilityLevel());
+		const float MinScaledDamage = Pair.Value.DamageMin.GetValueAtLevel(GetAbilityLevel());
+		const float MaxScaledDamage = Pair.Value.DamageMax.GetValueAtLevel(GetAbilityLevel());
+		const float LowerBoundDamage = FMath::Min(MinScaledDamage, MaxScaledDamage);
+		const float UpperBoundDamage = FMath::Max(MinScaledDamage, MaxScaledDamage);
+		const float ScaledDamage = FMath::FRandRange(LowerBoundDamage, UpperBoundDamage);
 		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(DamageSpecHandle, Pair.Key, ScaledDamage);
 	}
-	GetAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(*DamageSpecHandle.Data.Get(), UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor));
 }

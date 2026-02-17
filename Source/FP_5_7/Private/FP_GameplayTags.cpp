@@ -659,6 +659,18 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Skill.Summon"), 
 		FString("Summon Skill")
 		);
+	GameplayTags.Skill_Movement = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skill.Movement"), 
+		FString("Movement Skill")
+		);
+	GameplayTags.Skill_MoveSpeed_Diminished = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skill.MoveSpeed.Diminished"), 
+		FString("Reduce Skill Speed by Attribute")
+		);
+	GameplayTags.Skill_MoveSpeed_None = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skill.MoveSpeed.None"), 
+		FString("No Movement Speed When Tag Applied")
+		);
 
 	//Montage
 	GameplayTags.Montage_Skill_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(

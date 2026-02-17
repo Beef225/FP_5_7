@@ -224,6 +224,9 @@ FGameplayTag Effects_DeathReact;
 FGameplayTag Skills_Melee;
 FGameplayTag Skill_Ranged;
 FGameplayTag Skill_Summon;
+FGameplayTag Skill_Movement;
+FGameplayTag Skill_MoveSpeed_Diminished;
+FGameplayTag Skill_MoveSpeed_None;
 
 //Montage
 FGameplayTag Montage_Skill_Weapon;

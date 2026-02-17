@@ -22,6 +22,7 @@ void AFP_PlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AFP_PlayerState, Level);
+	DOREPLIFETIME(AFP_PlayerState, GripStance);
 }
 
 UAbilitySystemComponent* AFP_PlayerState::GetAbilitySystemComponent() const
@@ -29,7 +30,24 @@ UAbilitySystemComponent* AFP_PlayerState::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+void AFP_PlayerState::SetGripStance(EWeaponGripStyle InGripStance)
+{
+	if (GripStance == InGripStance)
+	{
+		return;
+	}
+
+	GripStance = InGripStance;
+	ForceNetUpdate();
+
+}
+
 void AFP_PlayerState::OnRep_Level(int32 OldLevel)
+{
+	
+}
+
+void AFP_PlayerState::OnRep_GripStance(EWeaponGripStyle OldGripStance)
 {
 	
 }

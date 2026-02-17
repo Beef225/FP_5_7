@@ -24,6 +24,11 @@ public:
 	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
 	
 	
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Animation")
+	EWeaponGripStyle GetGripStance() const { return GripStance; }
+
+	UFUNCTION(BlueprintCallable, Category = "Animation")
+	void SetGripStance(EWeaponGripStyle InGripStance);
 
 	
 	
@@ -39,10 +44,14 @@ private:
 
 	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_Level)
 	int32 Level = 1;
-	
-	UPROPERTY(EditAnywhere)
-	EWeaponGripStyle GripStance = EWeaponGripStyle::Unarmed;
 
 	UFUNCTION()
 	void OnRep_Level(int32 OldLevel);
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_GripStance, Category = "Animation", meta = (AllowPrivateAccess = "true"))
+	EWeaponGripStyle GripStance = EWeaponGripStyle::Unarmed;
+	
+	UFUNCTION()
+	void OnRep_GripStance(EWeaponGripStyle OldGripStance);
+
 };

@@ -13,4 +13,17 @@ UCLASS()
 class FP_5_7_API UFP_MMC_HeatDissapation : public UGameplayModMagnitudeCalculation
 {
 	GENERATED_BODY()
+	
+public:
+	UFP_MMC_HeatDissapation();
+
+	virtual float CalculateBaseMagnitude_Implementation(const FGameplayEffectSpec& Spec) const override;
+
+private:
+
+	FGameplayEffectAttributeCaptureDefinition AmbientTemperatureDef;
+	FGameplayEffectAttributeCaptureDefinition ThermalMassDef;
+	FGameplayEffectAttributeCaptureDefinition CoolingCoefficientDef;
+	FGameplayEffectAttributeCaptureDefinition HeatDef;
+
 };

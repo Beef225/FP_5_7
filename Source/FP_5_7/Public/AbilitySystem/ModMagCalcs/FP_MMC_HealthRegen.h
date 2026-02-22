@@ -13,4 +13,15 @@ UCLASS()
 class FP_5_7_API UFP_MMC_HealthRegen : public UGameplayModMagnitudeCalculation
 {
 	GENERATED_BODY()
+	
+public:
+	UFP_MMC_HealthRegen();
+
+	virtual float CalculateBaseMagnitude_Implementation(const FGameplayEffectSpec& Spec) const override;
+
+private:
+
+	FGameplayEffectAttributeCaptureDefinition MaxHitPointsDef;
+	FGameplayEffectAttributeCaptureDefinition HealthRegenerationDef;
+
 };

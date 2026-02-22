@@ -227,6 +227,7 @@ FGameplayTag Skill_Summon;
 FGameplayTag Skill_Movement;
 FGameplayTag Skill_MoveSpeed_Diminished;
 FGameplayTag Skill_MoveSpeed_None;
+FGameplayTag Skills_Status_Equipped;
 
 //Montage
 FGameplayTag Montage_Skill_Weapon;

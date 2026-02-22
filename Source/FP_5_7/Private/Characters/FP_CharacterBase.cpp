@@ -282,6 +282,7 @@ void AFP_CharacterBase::AddCharacterAbilities()
 	if (!HasAuthority()) return;
 
 	FP_ASC->AddCharacterAbilities(StartupAbilities);
+	FP_ASC->AddCharacterPassiveAbilities(StartupPassiveAbilities);
 }
 
 void AFP_CharacterBase::BindMovementSpeedCallbacks()

@@ -671,6 +671,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Skill.MoveSpeed.None"), 
 		FString("No Movement Speed When Tag Applied")
 		);
+	GameplayTags.Skills_Status_Equipped = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Status.Equipped"), 
+		FString("Added Tag to Equipped Skills")
+		);
 
 	//Montage
 	GameplayTags.Montage_Skill_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(

@@ -3,6 +3,7 @@
 
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 
+#include "FP_GameplayTags.h"
 #include "AbilitySystem/Abilities/FP_GameplayAbility.h"
 
 void UFP_AbilitySystemComponent::AbilityActorInfoSet()
@@ -18,8 +19,20 @@ void UFP_AbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf<
 		if (const UFP_GameplayAbility* AuraAbility = Cast<UFP_GameplayAbility>(AbilitySpec.Ability))
 		{
 			AbilitySpec.GetDynamicSpecSourceTags().AddTag(AuraAbility->StartupInputTag);
+			AbilitySpec.GetDynamicSpecSourceTags().AddTag(FFP_GameplayTags::Get().Skills_Status_Equipped);
 			GiveAbility(AbilitySpec);
 		}
+	}
+}
+
+void UFP_AbilitySystemComponent::AddCharacterPassiveAbilities(
+	const TArray<TSubclassOf<UGameplayAbility>>& StartupPassiveAbilities)
+{
+	for (const TSubclassOf<UGameplayAbility> AbilityClass : StartupPassiveAbilities)
+	{
+		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
+		AbilitySpec.GetDynamicSpecSourceTags().AddTag(FFP_GameplayTags::Get().Skills_Status_Equipped);
+		GiveAbilityAndActivateOnce(AbilitySpec);
 	}
 }
 

@@ -11,8 +11,6 @@
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "Kismet/GameplayStatics.h"
 
-// If you want to use your tag singleton here, uncomment and set SkillMoveSpeedTag in ctor or BP defaults.
-// #include "FP_GameplayTags.h"
 
 // Sets default values
 AFP_CharacterBase::AFP_CharacterBase()
@@ -30,11 +28,6 @@ AFP_CharacterBase::AFP_CharacterBase()
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-	// Option A: set in BP defaults per character class (recommended while iterating)
-	// SkillMoveSpeedTag = ...;
-
-	// Option B: set from your singleton (if you have the tag defined)
-	// SkillMoveSpeedTag = FFP_GameplayTags::Get().State_SkillAllowsMovement;
 }
 
 UAbilitySystemComponent* AFP_CharacterBase::GetAbilitySystemComponent() const
@@ -314,22 +307,29 @@ void AFP_CharacterBase::BindMovementSpeedCallbacks()
 		->GetGameplayAttributeValueChangeDelegate(UFP_AttributeSet::GetSkillMoveSpeedModifierAttribute())
 		.AddUObject(this, &AFP_CharacterBase::OnMoveSpeedAttributeChanged);
 
+	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
+
 	// Tag add/remove delegate (signature: void(FGameplayTag, int32))
-	if (SkillMoveSpeedTag.IsValid())
-	{
-		AbilitySystemComponent
-			->RegisterGameplayTagEvent(SkillMoveSpeedTag, EGameplayTagEventType::NewOrRemoved)
-			.AddUObject(this, &AFP_CharacterBase::OnSkillMoveSpeedTagChanged);
-	}
+	AbilitySystemComponent
+		->RegisterGameplayTagEvent(GameplayTags.Skill_MoveSpeed_Diminished, EGameplayTagEventType::NewOrRemoved)
+		.AddUObject(this, &AFP_CharacterBase::OnSkillMoveSpeedTagChanged);
+
+	AbilitySystemComponent
+		->RegisterGameplayTagEvent(GameplayTags.Skill_MoveSpeed_None, EGameplayTagEventType::NewOrRemoved)
+		.AddUObject(this, &AFP_CharacterBase::OnSkillMoveSpeedTagChanged);
+
 }
 
 void AFP_CharacterBase::OnMoveSpeedAttributeChanged(const FOnAttributeChangeData& Data)
 {
+	(void)Data;
 	RefreshMovementSpeed();
 }
 
 void AFP_CharacterBase::OnSkillMoveSpeedTagChanged(FGameplayTag Tag, int32 NewCount)
 {
+	(void)Tag;
+	(void)NewCount;
 	RefreshMovementSpeed();
 }
 
@@ -362,15 +362,17 @@ void AFP_CharacterBase::RefreshMovementSpeed()
 	// Prevent weird negatives (you can clamp tighter if desired).
 	FinalSpeed = FMath::Max(0.0f, FinalSpeed);
 
-	// Optional skill movement modifier:
-	// - SkillSpeedMovementModifier is intended as a multiplier (e.g. 0.5 = 50% speed while performing skill movement)
-	// - Apply only when a gameplay tag indicates "skill allows movement" (you’ll decide the tag + when to apply it).
-	if (AbilitySystemComponent && SkillMoveSpeedTag.IsValid())
+	if (AbilitySystemComponent)
 	{
-		const bool bInSkillMoveMode = AbilitySystemComponent->HasMatchingGameplayTag(SkillMoveSpeedTag);
-		if (bInSkillMoveMode)
+		const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
+
+		if (AbilitySystemComponent->HasMatchingGameplayTag(GameplayTags.Skill_MoveSpeed_None))
 		{
-			// Example: FinalSpeed(900) * 0.5 = 450
+			FinalSpeed = 0.0f;
+		}
+		else if (AbilitySystemComponent->HasMatchingGameplayTag(GameplayTags.Skill_MoveSpeed_Diminished))
+
+		{
 			const float SkillMoveMultiplier = FPAS->GetSkillMoveSpeedModifier();
 			FinalSpeed *= SkillMoveMultiplier;
 		}

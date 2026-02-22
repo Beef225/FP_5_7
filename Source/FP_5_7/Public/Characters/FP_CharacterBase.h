@@ -22,14 +22,6 @@ struct FOnAttributeChangeData;
 /**
  * Base character for FP (player + enemies).
  * Owns common GAS initialization hooks and shared combat sockets.
- *
- * Movement Speed:
- * - MovementSpeed is treated as a *delta percent* (e.g. 0.5 == +50%).
- * - FinalSpeed = BaseWalkSpeed * (1 + MovementSpeedDelta)
- * - Optional skill-move modifier:
- *    If a gameplay tag is present (TODO), apply:
- *      FinalSpeed *= SkillSpeedMovementModifier
- *    where SkillSpeedMovementModifier is also intended as a multiplier (e.g. 0.5 == 50%).
  */
 UCLASS(Abstract)
 class FP_5_7_API AFP_CharacterBase : public ACharacter, public IAbilitySystemInterface, public IFP_CombatInterface
@@ -152,16 +144,6 @@ protected:
 	UPROPERTY(Transient)
 	bool bCachedBaseWalkSpeed = false;
 
-	/**
-	 * TODO: Choose / define a gameplay tag that indicates "skill movement mode".
-	 * When present, we apply SkillSpeedMovementModifier as a final multiplier.
-	 *
-	 * Example:
-	 *   SkillMoveSpeedTag = FFP_GameplayTags::Get().State_SkillAllowsMovement;
-	 */
-	UPROPERTY(EditDefaultsOnly, Category="Movement|GAS")
-	FGameplayTag SkillMoveSpeedTag;
-	
 	float GetDeathRagdollDelay() const;
 
 	UPROPERTY(EditAnywhere, Category="Combat")

@@ -4,6 +4,8 @@
 #include "UI/WidgetController/FP_OverlayWidgetController.h"
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "AbilitySystem/Data/FP_LevelUpInfo.h"
+#include "Player/FP_PlayerState.h"
 
 void UFP_OverlayWidgetController::BroadcastInitialValues()
 {
@@ -20,6 +22,10 @@ void UFP_OverlayWidgetController::BroadcastInitialValues()
 
 void UFP_OverlayWidgetController::BindCallbacksToDependencies()
 {
+	
+	AFP_PlayerState* FPPlayerState = CastChecked<AFP_PlayerState>(PlayerState);
+	FPPlayerState->OnXPChangedDelegate.AddUObject(this, &UFP_OverlayWidgetController::OnXPChanged);
+	
 	const UFP_AttributeSet* FP_AttributeSet = CastChecked<UFP_AttributeSet>(AttributeSet);
 	
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(FP_AttributeSet->GetHitPointsAttribute()).AddLambda(
@@ -60,4 +66,27 @@ void UFP_OverlayWidgetController::BindCallbacksToDependencies()
 	);
 
 
+}
+
+void UFP_OverlayWidgetController::OnXPChanged(int32 NewXP) const
+{
+	const AFP_PlayerState* AuraPlayerState = CastChecked<AFP_PlayerState>(PlayerState);
+	const UFP_LevelUpInfo* LevelUpInfo = AuraPlayerState->LevelUpInfo;
+	checkf(LevelUpInfo, TEXT("Unabled to find LevelUpInfo. Please fill out AuraPlayerState Blueprint"));
+
+	const int32 Level = LevelUpInfo->FindLevelForXP(NewXP);
+	const int32 MaxLevel = LevelUpInfo->LevelUpInformation.Num();
+
+	if (Level <= MaxLevel && Level > 0)
+	{
+		const int32 LevelUpRequirement = LevelUpInfo->LevelUpInformation[Level].LevelUpRequirement;
+		const int32 PreviousLevelUpRequirement = LevelUpInfo->LevelUpInformation[Level - 1].LevelUpRequirement;
+
+		const int32 DeltaLevelRequirement = LevelUpRequirement - PreviousLevelUpRequirement;
+		const int32 XPForThisLevel = NewXP - PreviousLevelUpRequirement;
+
+		const float XPBarPercent = static_cast<float>(XPForThisLevel) / static_cast<float>(DeltaLevelRequirement);
+
+		OnXPPercentChangedDelegate.Broadcast(XPBarPercent);
+	}
 }

@@ -65,11 +65,16 @@ public:
 	UPROPERTY(BlueprintAssignable, Category="GAS|Messages")
 	FMessageWidgetRowSignature MessageWidgetRowDelegate;
 	
+	UPROPERTY(BlueprintAssignable, Category="GAS|XP")
+	FOnAttributeChangedSignature OnXPPercentChangedDelegate;
+	
 	
 protected:
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widget Data")
 	TObjectPtr<UDataTable> MessageWidgetDataTable;
+	
+	void OnXPChanged(int32 NewXP) const;
 	
 		
 	template<typename T>

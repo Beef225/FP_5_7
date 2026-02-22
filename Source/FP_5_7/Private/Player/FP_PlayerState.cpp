@@ -42,9 +42,38 @@ void AFP_PlayerState::SetGripStance(EWeaponGripStyle InGripStance)
 
 }
 
+void AFP_PlayerState::AddToXP(int32 InXP)
+{
+	XP += InXP;
+	OnXPChangedDelegate.Broadcast(XP);
+}
+
+void AFP_PlayerState::AddToLevel(int32 InLevel)
+{
+	Level += InLevel;
+	OnLevelChangedDelegate.Broadcast(Level);
+}
+
+void AFP_PlayerState::SetXP(int32 InXP)
+{
+	XP = InXP;
+	OnXPChangedDelegate.Broadcast(XP);
+}
+
+void AFP_PlayerState::SetLevel(int32 InLevel)
+{
+	Level = InLevel;
+	OnLevelChangedDelegate.Broadcast(Level);
+}
+
 void AFP_PlayerState::OnRep_Level(int32 OldLevel)
 {
-	
+	OnLevelChangedDelegate.Broadcast(Level);
+}
+
+void AFP_PlayerState::OnRep_XP(int32 OldXP)
+{
+	OnXPChangedDelegate.Broadcast(XP);
 }
 
 void AFP_PlayerState::OnRep_GripStance(EWeaponGripStyle OldGripStance)

@@ -63,3 +63,14 @@ enum class EMenu : uint8
 	CloseGame		UMETA(DisplayName="CloseGame")
 	
 };
+
+UENUM(BlueprintType)
+enum class ESkillGrantedBy : uint8
+{
+	Equipment		UMETA(DisplayName="Equipment"),
+	Startup			UMETA(DisplayName="Statup"),
+	PassiveTree		UMETA(DisplayName="PassiveTree"),
+	SkillTree		UMETA(DisplayName="SkillTree"),
+	Quest			UMETA(DisplayName="Quest"),
+	Injector		UMETA(DisplayName="Injector"),
+};

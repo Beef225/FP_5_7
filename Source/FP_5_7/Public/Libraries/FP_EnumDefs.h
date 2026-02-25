@@ -68,7 +68,7 @@ UENUM(BlueprintType)
 enum class ESkillGrantedBy : uint8
 {
 	Equipment		UMETA(DisplayName="Equipment"),
-	Startup			UMETA(DisplayName="Statup"),
+	Startup			UMETA(DisplayName="Startup"),
 	PassiveTree		UMETA(DisplayName="PassiveTree"),
 	SkillTree		UMETA(DisplayName="SkillTree"),
 	Quest			UMETA(DisplayName="Quest"),

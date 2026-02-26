@@ -1,9 +1,9 @@
 ﻿// Copyright JG
 
 
-#include "AbilitySystem/Data/FP_AbilityLibrary.h"
+#include "AbilitySystem/Data/FP_SkillLibrary.h"
 
-FFP_AbilityEntry UFP_AbilityLibrary::FindAbilityEntryForTag(const FGameplayTag& InSkillTag, bool bLogNotFound) const
+FFP_AbilityEntry UFP_SkillLibrary::FindAbilityEntryForTag(const FGameplayTag& InSkillTag, bool bLogNotFound) const
 {
 	for (const FFP_AbilityEntry& Entry : AbilityEntries)
 	{

@@ -7,7 +7,7 @@
 #include "Engine/DataAsset.h"
 #include "Engine/DataTable.h"
 #include "Libraries/FP_EnumDefs.h"
-#include "FP_AbilityLibrary.generated.h"
+#include "FP_SkillLibrary.generated.h"
 
 class UFP_GameplayAbility;
 class UTexture2D;
@@ -59,7 +59,7 @@ struct FFP_AbilityEntry
  * 
  */
 UCLASS()
-class FP_5_7_API UFP_AbilityLibrary : public UDataAsset
+class FP_5_7_API UFP_SkillLibrary : public UDataAsset
 {
 	GENERATED_BODY()
 	

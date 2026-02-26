@@ -5,6 +5,7 @@
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "AbilitySystem/Data/FP_LevelUpInfo.h"
+#include "AbilitySystem/Data/FP_SkillLibrary.h"
 #include "Player/FP_PlayerState.h"
 
 void UFP_OverlayWidgetController::BroadcastInitialValues()
@@ -48,23 +49,54 @@ void UFP_OverlayWidgetController::BindCallbacksToDependencies()
 	[this](const FOnAttributeChangeData& Data)
 				{OnMinHeatThresholdChanged.Broadcast(Data.NewValue);});
 	
-	Cast<UFP_AbilitySystemComponent>(AbilitySystemComponent)->EffectAssetTags.AddLambda(
-		[this](const FGameplayTagContainer& AssetTags)
+	if (UFP_AbilitySystemComponent* FP_ASC = Cast<UFP_AbilitySystemComponent>(AbilitySystemComponent))
+	{
+		if (FP_ASC->bStartupAbilitiesGiven)
 		{
-			for (const FGameplayTag& Tag : AssetTags)
-			{
-				// For example, say that Tag = Message.HealthPotion
-				// "Message.HealthPotion".MatchesTag("Message") will return True, "Message".MatchesTag("Message.HealthPotion") will return False
-				FGameplayTag MessageTag = FGameplayTag::RequestGameplayTag(FName("Message"));
-				if (Tag.MatchesTag(MessageTag))
-				{
-					const FUIWidgetRow* Row = GetDataTableRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
-					MessageWidgetRowDelegate.Broadcast(*Row);
-				}
-			}
+			OnInitializeStartupAbilities(FP_ASC);
 		}
-	);
+		else
+		{
+			FP_ASC->AbilitiesGivenDelegate.AddUObject(this, &UFP_OverlayWidgetController::OnInitializeStartupAbilities);
+		}
+		
+		FP_ASC->EffectAssetTags.AddLambda([this]
+			(const FGameplayTagContainer& AssetTags)
+			{
+				for (const FGameplayTag& Tag: AssetTags)
+				{
+					// For example, say that Tag = Message.HealthPotion
+					// "Message.HealthPotion".MatchesTag("Message") will return True, "Message".MatchesTag("Message.HealthPotion") will return False
+					FGameplayTag MessageTag = FGameplayTag::RequestGameplayTag(FName("Message"));
+					if (Tag.MatchesTag(MessageTag))
+					{
+						const FUIWidgetRow* Row = GetDataTableRowByTag<FUIWidgetRow>(MessageWidgetDataTable, Tag);
+						MessageWidgetRowDelegate.Broadcast(*Row);
+					}
+				}
+			
+			}
+		);
+		
+	}
+}
 
+void UFP_OverlayWidgetController::OnInitializeStartupAbilities(UFP_AbilitySystemComponent* FPAbilitySystemComponent)
+{
+	//TODO Get information about all given abilities, look up their Ability Info, and broadcast it to widgets. this lives on the SkillLibrary sotred on the playerstate.
+	if (!FPAbilitySystemComponent->bStartupAbilitiesGiven) return;
+	
+	FForEachAbilty BroadcastDelegate;
+	BroadcastDelegate.BindLambda([this, FPAbilitySystemComponent](const FGameplayAbilitySpec& AbilitySpec)
+	{
+		//TODO need a way to figure out the ability tag for a given ability spec. would be on the skilllibrary
+		//something like below, but we need the abilityEntry from that player state:
+		FFP_AbilityEntry Info = FP_AbilityEntry->FindAbilityEntryForTag(FPAbilitySystemComponent->GetAbilityTagFromSpec(AbilitySpec));
+		Info.InputTag = FPAbilitySystemComponent->GetInputTagFromSpec(AbilitySpec);
+		SkillLibraryInfoDelegate.Broadcast(Info);
+		
+		
+	});
 
 }
 
@@ -90,3 +122,5 @@ void UFP_OverlayWidgetController::OnXPChanged(int32 NewXP) const
 		OnXPPercentChangedDelegate.Broadcast(XPBarPercent);
 	}
 }
+
+

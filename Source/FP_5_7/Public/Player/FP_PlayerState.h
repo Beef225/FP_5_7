@@ -11,6 +11,7 @@
 class UAbilitySystemComponent;
 class UAttributeSet;
 class UFP_LevelUpInfo;
+class UFP_SkillLibrary;
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnPlayerStatChanged, int32 /*StatValue*/)
 /**
@@ -32,6 +33,9 @@ public:
 	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
 	FORCEINLINE int32 GetXP() const { return XP; }
 	
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Abilities")
+	UFP_SkillLibrary* GetSkillLibrary() const { return SkillLibrary; }
+	
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Animation")
 	EWeaponGripStyle GetGripStance() const { return GripStance; }
 
@@ -47,7 +51,9 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UFP_LevelUpInfo> LevelUpInfo;
 
-	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Abilities", meta=(AllowPrivateAccess = "true"))
+	TObjectPtr<UFP_SkillLibrary> SkillLibrary;
+
 	
 protected:
 

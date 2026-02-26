@@ -12,6 +12,7 @@ class UAbilitySystemComponent;
 class UFP_OverlayWidgetController;
 class UFP_InventoryWidgetController;
 class UCharacterMenuWidgetController;
+class UFP_SkillLibrary;
 /**
  * 
  */
@@ -37,6 +38,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|CharacterClassDefaults")
 	static UCharacterClassInfo* GetCharacterClassInfo(const UObject* WorldContextObject);
+	
+	UFUNCTION(BlueprintPure, Category="FP_AbilitySystemLibrary|Abilities")
+	static UFP_SkillLibrary* GetSkillLibrary(const UObject* WorldContextObject);
 	
 	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
 	static bool IsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle);

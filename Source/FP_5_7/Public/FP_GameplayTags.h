@@ -235,6 +235,11 @@ FGameplayTag Montage_Skill_LeftHand;
 FGameplayTag Montage_Skill_RightHand;
 FGameplayTag Montage_Skill_Tail;
 FGameplayTag Montage_Skill_Mouth;
+
+
+//Skills
+//Skills
+FGameplayTag Skills_Energy_Firebolt;
 	
 	TArray<FGameplayTag> DamageTypes;	
 	

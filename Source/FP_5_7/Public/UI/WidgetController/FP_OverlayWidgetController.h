@@ -7,6 +7,8 @@
 #include "Libraries/FP_EnumDefs.h"
 #include "FP_OverlayWidgetController.generated.h"
 
+struct FFP_AbilityEntry;
+
 USTRUCT(BluePrintType)
 struct FUIWidgetRow: public FTableRowBase
 {
@@ -30,9 +32,12 @@ struct FUIWidgetRow: public FTableRowBase
 };
 
 class UFP_UserWidget;
+class UFP_AbilitySystemComponent;
+
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChangedSignature, float, NewValue);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature, FUIWidgetRow, Row);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSkillLibraryInfosignature, const FFP_AbilityEntry&, Info);
 
 
 /**
@@ -74,11 +79,16 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widget Data")
 	TObjectPtr<UDataTable> MessageWidgetDataTable;
 	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widget Data")
+	FSkillLibraryInfosignature SkillLibraryInfoDelegate;
+	
 	void OnXPChanged(int32 NewXP) const;
 	
 		
 	template<typename T>
 	T* GetDataTableRowByTag(UDataTable* DataTable, const FGameplayTag& Tag);
+	
+	void OnInitializeStartupAbilities(UFP_AbilitySystemComponent* FPAbilitySystemComponent);
 	
 };
 

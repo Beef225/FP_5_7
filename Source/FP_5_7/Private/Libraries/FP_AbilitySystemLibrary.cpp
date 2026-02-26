@@ -127,6 +127,20 @@ UCharacterClassInfo* UFP_AbilitySystemLibrary::GetCharacterClassInfo(const UObje
 	return FP_GameMode->CharacterClassInfo;
 }
 
+UFP_SkillLibrary* UFP_AbilitySystemLibrary::GetSkillLibrary(const UObject* WorldContextObject)
+{
+	if (const APlayerController* PC = UGameplayStatics::GetPlayerController(WorldContextObject, 0))
+	{
+		if (const AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>())
+		{
+			return PS->GetSkillLibrary();
+		}
+	}
+
+	return nullptr;
+}
+
+
 bool UFP_AbilitySystemLibrary::IsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle)
 {
 	if (const FFP_GameplayEffectContext* FP_EffectContext = static_cast<const FFP_GameplayEffectContext*>(EffectContextHandle.Get()))

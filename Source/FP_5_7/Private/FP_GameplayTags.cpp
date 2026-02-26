@@ -698,4 +698,12 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Mouth Montage")
 		);
 
+
+	//Skills
+	//Skills
+	GameplayTags.Skills_Energy_Firebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Energy.Firebolt"), 
+		FString("Skill Name Firebolt")
+		);
+
 }

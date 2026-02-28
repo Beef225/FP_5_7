@@ -84,9 +84,14 @@ FGameplayTag UFP_AbilitySystemComponent::GetAbilityTagFromSpec(const FGameplayAb
 {
 	if (AbilitySpec.Ability)
 	{
-		for (FGameplayTag Tag : AbilitySpec.Ability.Get()->AbilityTags)
+		const FGameplayTag SkillTag = FGameplayTag::RequestGameplayTag(FName("Skill"));
+		const FGameplayTag SkillsTag = FGameplayTag::RequestGameplayTag(FName("Skills"));
+		const FGameplayTagContainer& AssetTags = AbilitySpec.Ability->GetAssetTags();
+		for (const FGameplayTag& Tag : AssetTags)
+
 		{
-			if (Tag.MatchesTag(FGameplayTag::RequestGameplayTag(FName("Skill"))))
+			
+			if (Tag.MatchesTag(SkillTag) || Tag.MatchesTag(SkillsTag))
 			{
 				return Tag;
 			}

@@ -83,20 +83,59 @@ void UFP_OverlayWidgetController::BindCallbacksToDependencies()
 
 void UFP_OverlayWidgetController::OnInitializeStartupAbilities(UFP_AbilitySystemComponent* FPAbilitySystemComponent)
 {
-	//TODO Get information about all given abilities, look up their Ability Info, and broadcast it to widgets. this lives on the SkillLibrary sotred on the playerstate.
 	if (!FPAbilitySystemComponent->bStartupAbilitiesGiven) return;
+
+	const AFP_PlayerState* FPPlayerState = Cast<AFP_PlayerState>(PlayerState);
+	if (FPPlayerState == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%hs: PlayerState is invalid while initializing startup abilities."), __FUNCTION__);
+		return;
+	}
+
+	const UFP_SkillLibrary* SkillLibrary = FPPlayerState->GetSkillLibrary();
+	if (SkillLibrary == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%hs: SkillLibrary is null on PlayerState [%s]."), __FUNCTION__, *GetNameSafe(FPPlayerState));
+		return;
+	}
+
+	TSet<FGameplayTag> GrantedSkillTags;
 	
 	FForEachAbilty BroadcastDelegate;
-	BroadcastDelegate.BindLambda([this, FPAbilitySystemComponent](const FGameplayAbilitySpec& AbilitySpec)
+	BroadcastDelegate.BindLambda([&GrantedSkillTags, FPAbilitySystemComponent](const FGameplayAbilitySpec& AbilitySpec)
 	{
-		//TODO need a way to figure out the ability tag for a given ability spec. would be on the skilllibrary
-		//something like below, but we need the abilityEntry from that player state:
-		FFP_AbilityEntry Info = FP_AbilityEntry->FindAbilityEntryForTag(FPAbilitySystemComponent->GetAbilityTagFromSpec(AbilitySpec));
-		Info.InputTag = FPAbilitySystemComponent->GetInputTagFromSpec(AbilitySpec);
-		SkillLibraryInfoDelegate.Broadcast(Info);
-		
-		
+		const FGameplayTag AbilityTag = FPAbilitySystemComponent->GetAbilityTagFromSpec(AbilitySpec);
+		if (AbilityTag.IsValid())
+		{
+			GrantedSkillTags.Add(AbilityTag);
+		}
 	});
+
+	FPAbilitySystemComponent->ForEachAbility(BroadcastDelegate);
+
+	for (const FFP_AbilityEntry& AbilityEntry : SkillLibrary->AbilityEntries)
+	{
+		FFP_AbilityEntry Info = AbilityEntry;
+		Info.bGranted = GrantedSkillTags.Contains(AbilityEntry.SkillTag);
+
+		if (Info.bGranted)
+		{
+			const FGameplayTag MatchedGrantedTag = AbilityEntry.SkillTag;
+			FForEachAbilty InputTagDelegate;
+			InputTagDelegate.BindLambda([&Info, FPAbilitySystemComponent, MatchedGrantedTag](const FGameplayAbilitySpec& AbilitySpec)
+			{
+				if (FPAbilitySystemComponent->GetAbilityTagFromSpec(AbilitySpec).MatchesTagExact(MatchedGrantedTag))
+				{
+					Info.InputTag = FPAbilitySystemComponent->GetInputTagFromSpec(AbilitySpec);
+				}
+			});
+
+			FPAbilitySystemComponent->ForEachAbility(InputTagDelegate);
+		}
+
+		SkillLibraryInfoDelegate.Broadcast(Info);
+	}
+
 
 }
 

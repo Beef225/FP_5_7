@@ -26,10 +26,10 @@ struct FFP_AbilityEntry
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	ESkillGrantedBy SkillGrantedBy;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,meta = (Categories = "Skills"))
 	FGameplayTag SkillTag = FGameplayTag();
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "InputTag"))
 	FGameplayTag InputTag = FGameplayTag();
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
@@ -43,6 +43,12 @@ struct FFP_AbilityEntry
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float DamagePerSecond = 0.f;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float BaseSkillSpeed = 1.f;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float BaseRadius = 50.f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayTagContainer SkillModifierTags;

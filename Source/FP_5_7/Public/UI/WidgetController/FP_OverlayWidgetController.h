@@ -79,7 +79,7 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widget Data")
 	TObjectPtr<UDataTable> MessageWidgetDataTable;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Widget Data")
+	UPROPERTY(BlueprintAssignable, Category = "Widget Data")
 	FSkillLibraryInfosignature SkillLibraryInfoDelegate;
 	
 	void OnXPChanged(int32 NewXP) const;

@@ -31,6 +31,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CauseDamage(AActor* TargetActor);
 	
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Damage|Skill")
+	float GetSkillSpeedAttributeModifier() const;
+	
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Damage|Skill")
+	float GetAoEAttributeModifier() const;
+
+
+	
 protected:
 	void AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const;
 	

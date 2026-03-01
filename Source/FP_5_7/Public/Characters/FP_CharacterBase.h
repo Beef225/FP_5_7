@@ -136,6 +136,9 @@ protected:
 	UFUNCTION()
 	void OnSkillMoveSpeedTagChanged(FGameplayTag Tag, int32 NewCount);
 
+	UFUNCTION()
+	void OnFrozenTagChanged(FGameplayTag Tag, int32 NewCount);
+
 	/** Baseline MaxWalkSpeed before any attribute scaling (captured once). */
 	UPROPERTY(Transient)
 	float CachedBaseWalkSpeed = 0.f;

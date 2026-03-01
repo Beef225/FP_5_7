@@ -7,6 +7,7 @@
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "AbilitySystem/Data/FP_SkillLibrary.h"
+#include "Characters/FP_CharacterBase.h"
 #include "GameFramework/Pawn.h"
 #include "Player/FP_PlayerState.h"
 
@@ -80,7 +81,15 @@ float UFP_DamageGameplayAbility::GetSkillSpeedAttributeModifier() const
 	const float SkillSpeedModifier = GetSourceAttributeValue(UFP_AttributeSet::GetSkillSpeedAttribute(), bFoundSkillSpeed);
 	const float AttributeMultiplier = bFoundSkillSpeed ? (1.f + SkillSpeedModifier) : 1.f;
 
-	return BaseSkillSpeed * AttributeMultiplier;
+	// Apply freeze ramp as a final independent multiplier so stacked skill speed
+	// cannot resist the chill effect.
+	float FreezeMultiplier = 1.f;
+	if (const AFP_CharacterBase* CharBase = Cast<AFP_CharacterBase>(GetAvatarActorFromActorInfo()))
+	{
+		FreezeMultiplier = 1.f - CharBase->GetFreezeRamp();
+	}
+
+	return BaseSkillSpeed * AttributeMultiplier * FreezeMultiplier;
 }
 
 

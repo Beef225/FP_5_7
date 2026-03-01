@@ -155,6 +155,7 @@ protected:
 
 public:
 	void SetFreezeRamp(float NewRamp);
+	float GetFreezeRamp() const { return FreezeMovementRamp; }
 
 protected:
 

@@ -262,6 +262,11 @@ FGameplayTag Montage_Skill_RightHand;
 FGameplayTag Montage_Skill_Tail;
 FGameplayTag Montage_Skill_Mouth;
 
+//State
+FGameplayTag State_Frozen;
+FGameplayTag State_Chilled;
+FGameplayTag State_Overheat;
+
 
 //SkillTagMods
 //SkillTagMod
@@ -296,6 +301,7 @@ FGameplayTag SkillTagMod_Duration;
 FGameplayTag SkillTagMod_Cooldown;
 FGameplayTag SkillTagMod_Trigger;
 FGameplayTag SkillTagMod_Movement;
+FGameplayTag SkillTagMod_Buff;
 
 
 //Skills

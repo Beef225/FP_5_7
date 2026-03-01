@@ -227,14 +227,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Damage.More.AoE"), 
 		FString("More Area damage")
 		);
-	GameplayTags.Damage_Increased_Drone = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Damage.Increased.Drone"), 
-		FString("Increased Drone damage")
-		);
-	GameplayTags.Damage_More_Drone = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Damage.More.Drone"), 
-		FString("More Drone damage")
-		);
 
 	//Resistance
 	GameplayTags.Resistance_Damage_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -810,6 +802,20 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Mouth Montage")
 		);
 
+	//State
+	GameplayTags.State_Frozen = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("State.Frozen"), 
+		FString("Frozen Flag for Anims and ASC")
+		);
+	GameplayTags.State_Chilled = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("State.Chilled"), 
+		FString("Chilled Flag  for Anims and ASC")
+		);
+	GameplayTags.State_Overheat = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("State.Overheat"), 
+		FString("Overheat Flag  for Anims and ASC")
+		);
+
 
 	//SkillTagMods
 	//SkillTagMod
@@ -935,6 +941,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		);
 	GameplayTags.SkillTagMod_Movement = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SkillTagMod.Movement"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Buff = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Buff"), 
 		FString("")
 		);
 

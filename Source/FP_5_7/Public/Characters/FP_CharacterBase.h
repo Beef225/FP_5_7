@@ -147,6 +147,17 @@ protected:
 	UPROPERTY(Transient)
 	bool bCachedBaseWalkSpeed = false;
 
+	/**
+	 * Freeze ramp multiplier set by FP_GA_FreezePassive (0 = no freeze, 1 = fully frozen).
+	 * Applied as a final multiplier on FinalSpeed, independent of all other speed modifiers.
+	 */
+	float FreezeMovementRamp = 0.f;
+
+public:
+	void SetFreezeRamp(float NewRamp);
+
+protected:
+
 	float GetDeathRagdollDelay() const;
 
 	UPROPERTY(EditAnywhere, Category="Combat")

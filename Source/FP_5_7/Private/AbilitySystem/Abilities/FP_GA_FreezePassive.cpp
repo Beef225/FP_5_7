@@ -60,8 +60,8 @@ void UFP_GA_FreezePassive::EndAbility(const FGameplayAbilitySpecHandle Handle,
 		}
 
 		const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
-		if (bIsChilled) { ASC->RemoveReplicatedLooseGameplayTag(Tags.State_Chilled); }
-		if (bIsFrozen)  { ASC->RemoveReplicatedLooseGameplayTag(Tags.State_Frozen);  }
+		if (bIsChilled) { ASC->RemoveLooseGameplayTag(Tags.State_Chilled); }
+		if (bIsFrozen)  { ASC->RemoveLooseGameplayTag(Tags.State_Frozen);  }
 	}
 
 	bIsChilled = false;
@@ -119,17 +119,17 @@ void UFP_GA_FreezePassive::UpdateFreezeState(float FreezeRamp)
 		bIsFrozen = bShouldBeFrozen;
 		if (bIsFrozen)
 		{
-			ASC->AddReplicatedLooseGameplayTag(Tags.State_Frozen);
+			ASC->AddLooseGameplayTag(Tags.State_Frozen);
 			// Ensure Chilled is cleared when fully frozen.
 			if (bIsChilled)
 			{
-				ASC->RemoveReplicatedLooseGameplayTag(Tags.State_Chilled);
+				ASC->RemoveLooseGameplayTag(Tags.State_Chilled);
 				bIsChilled = false;
 			}
 		}
 		else
 		{
-			ASC->RemoveReplicatedLooseGameplayTag(Tags.State_Frozen);
+			ASC->RemoveLooseGameplayTag(Tags.State_Frozen);
 		}
 	}
 
@@ -138,11 +138,11 @@ void UFP_GA_FreezePassive::UpdateFreezeState(float FreezeRamp)
 		bIsChilled = bShouldBeChilled;
 		if (bIsChilled)
 		{
-			ASC->AddReplicatedLooseGameplayTag(Tags.State_Chilled);
+			ASC->AddLooseGameplayTag(Tags.State_Chilled);
 		}
 		else
 		{
-			ASC->RemoveReplicatedLooseGameplayTag(Tags.State_Chilled);
+			ASC->RemoveLooseGameplayTag(Tags.State_Chilled);
 		}
 	}
 }

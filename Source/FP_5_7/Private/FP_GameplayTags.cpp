@@ -816,6 +816,12 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Overheat Flag  for Anims and ASC")
 		);
 
+	//SetByCaller
+	GameplayTags.SetByCaller_FreezeRamp = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.FreezeRamp"), 
+		FString("Set By Caller Tag for Freeze Ramping")
+		);
+
 
 	//SkillTagMods
 	//SkillTagMod

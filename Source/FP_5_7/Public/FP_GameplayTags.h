@@ -267,6 +267,9 @@ FGameplayTag State_Frozen;
 FGameplayTag State_Chilled;
 FGameplayTag State_Overheat;
 
+//SetByCaller
+FGameplayTag SetByCaller_FreezeRamp;
+
 
 //SkillTagMods
 //SkillTagMod

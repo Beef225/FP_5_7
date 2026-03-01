@@ -27,7 +27,7 @@ class FP_5_7_API UFP_DamageGameplayAbility : public UFP_GameplayAbility
 {
 	GENERATED_BODY()
 	
-public: 
+public:
 	UFUNCTION(BlueprintCallable)
 	void CauseDamage(AActor* TargetActor);
 	
@@ -40,6 +40,8 @@ public:
 
 	
 protected:
+	void AppendSkillModifierTagsToDamageSpec(FGameplayEffectSpecHandle& DamageSpecHandle) const;
+	
 	void AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)

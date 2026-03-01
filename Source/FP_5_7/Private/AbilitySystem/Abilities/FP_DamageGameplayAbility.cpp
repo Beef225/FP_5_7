@@ -58,9 +58,10 @@ namespace
 
 
 void UFP_DamageGameplayAbility::CauseDamage(AActor* TargetActor)
-{FGameplayEffectSpecHandle DamageSpecHandle = MakeOutgoingGameplayEffectSpec(DamageEffectClass, 1.f);
+{
+	FGameplayEffectSpecHandle DamageSpecHandle = MakeOutgoingGameplayEffectSpec(DamageEffectClass, 1.f);
 	AssignRolledDamageMagnitudes(DamageSpecHandle);
-	GetAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(*DamageSpecHandle.Data.Get(), 
+	GetAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(*DamageSpecHandle.Data.Get(),
 		UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor));
 	
 }
@@ -104,11 +105,52 @@ float UFP_DamageGameplayAbility::GetAoEAttributeModifier() const
 	return (BaseRadius + AdditionalRadiusScaled) * FMath::Sqrt(MultiplierTerm);
 }
 
+void UFP_DamageGameplayAbility::AppendSkillModifierTagsToDamageSpec(FGameplayEffectSpecHandle& DamageSpecHandle) const
+{
+	if (!DamageSpecHandle.Data.IsValid())
+	{
+		return;
+	}
+
+	FGameplayTag SkillTag;
+	const FGameplayTag SkillTagRoot = FGameplayTag::RequestGameplayTag(FName("Skill"));
+	const FGameplayTag SkillsTagRoot = FGameplayTag::RequestGameplayTag(FName("Skills"));
+	for (const FGameplayTag& Tag : GetAssetTags())
+	{
+		if (Tag.MatchesTag(SkillTagRoot) || Tag.MatchesTag(SkillsTagRoot))
+		{
+			SkillTag = Tag;
+			DamageSpecHandle.Data->AddDynamicAssetTag(Tag);
+			break;
+		}
+	}
+
+	if (!SkillTag.IsValid())
+	{
+		return;
+	}
+
+	FFP_AbilityEntry AbilityEntry;
+	if (!ResolveSkillAbilityEntry(this, AbilityEntry))
+	{
+		return;
+	}
+
+	for (const FGameplayTag& ModifierTag : AbilityEntry.SkillModifierTags)
+	{
+		DamageSpecHandle.Data->AddDynamicAssetTag(ModifierTag);
+	}
+}
+
+
 
 void UFP_DamageGameplayAbility::AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const
 {
+	AppendSkillModifierTagsToDamageSpec(DamageSpecHandle);
+
 	for (const TTuple<FGameplayTag, FDamageRange>& Pair : DamageTypes)
 	{
+		
 		const float MinScaledDamage = Pair.Value.DamageMin.GetValueAtLevel(GetAbilityLevel());
 		const float MaxScaledDamage = Pair.Value.DamageMax.GetValueAtLevel(GetAbilityLevel());
 		const float LowerBoundDamage = FMath::Min(MinScaledDamage, MaxScaledDamage);

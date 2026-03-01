@@ -20,7 +20,7 @@ public:
 	// If true, bypasses the GAS cost check that blocks activation when the cost would take an attribute below 0.
 	// Use this for abilities whose cost attribute (e.g. Heat) is designed to go negative.
 	UPROPERTY(EditDefaultsOnly, Category="Cost")
-	bool bAllowNegativeCost = false;
+	bool bAllowNegativeCost = true;
 
 	virtual bool CheckCost(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, FGameplayTagContainer* OptionalRelevantTags = nullptr) const override;
 

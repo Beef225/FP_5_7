@@ -1,5 +1,4 @@
 ﻿// Copyright JG
-//GitTest
 
 #pragma once
 

@@ -319,6 +319,9 @@ void AFP_CharacterBase::BindMovementSpeedCallbacks()
 		->RegisterGameplayTagEvent(GameplayTags.Skill_MoveSpeed_None, EGameplayTagEventType::NewOrRemoved)
 		.AddUObject(this, &AFP_CharacterBase::OnSkillMoveSpeedTagChanged);
 
+	AbilitySystemComponent
+		->RegisterGameplayTagEvent(GameplayTags.State_Frozen, EGameplayTagEventType::NewOrRemoved)
+		.AddUObject(this, &AFP_CharacterBase::OnFrozenTagChanged);
 }
 
 void AFP_CharacterBase::OnMoveSpeedAttributeChanged(const FOnAttributeChangeData& Data)
@@ -328,6 +331,13 @@ void AFP_CharacterBase::OnMoveSpeedAttributeChanged(const FOnAttributeChangeData
 }
 
 void AFP_CharacterBase::OnSkillMoveSpeedTagChanged(FGameplayTag Tag, int32 NewCount)
+{
+	(void)Tag;
+	(void)NewCount;
+	RefreshMovementSpeed();
+}
+
+void AFP_CharacterBase::OnFrozenTagChanged(FGameplayTag Tag, int32 NewCount)
 {
 	(void)Tag;
 	(void)NewCount;
@@ -366,6 +376,12 @@ void AFP_CharacterBase::RefreshMovementSpeed()
 	if (AbilitySystemComponent)
 	{
 		const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
+
+		if (AbilitySystemComponent->HasMatchingGameplayTag(GameplayTags.State_Frozen))
+		{
+			GetCharacterMovement()->MaxWalkSpeed = 0.0f;
+			return;
+		}
 
 		if (AbilitySystemComponent->HasMatchingGameplayTag(GameplayTags.Skill_MoveSpeed_None))
 		{

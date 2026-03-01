@@ -6,6 +6,7 @@
 #include "AbilitySystemComponent.h"
 #include "FP_GameplayTags.h"
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "Characters/FP_CharacterBase.h"
 
 void UFP_GA_FreezePassive::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	const FGameplayAbilityActorInfo* ActorInfo,
@@ -67,6 +68,11 @@ void UFP_GA_FreezePassive::EndAbility(const FGameplayAbilitySpecHandle Handle,
 	bIsChilled = false;
 	bIsFrozen  = false;
 
+	if (AFP_CharacterBase* CharBase = Cast<AFP_CharacterBase>(GetAvatarActorFromActorInfo()))
+	{
+		CharBase->SetFreezeRamp(0.f);
+	}
+
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }
 
@@ -94,12 +100,19 @@ void UFP_GA_FreezePassive::OnFreezeTimerTick()
 	// 0 when Heat >= ChillStart, ramps to 1 when Heat <= MinThreshold.
 	const float FreezeRamp = FMath::Clamp(FMath::GetRangePct(ChillStart, MinThreshold, Heat), 0.f, 1.f);
 
-	// Push the negated ramp to the GE (-0 to -1 as additive modifier on speed attributes).
+	// Push the negated ramp to the GE for SkillSpeed.
 	ASC->UpdateActiveGameplayEffectSetByCallerMagnitude(
 		FreezeGEHandle,
 		FFP_GameplayTags::Get().SetByCaller_FreezeRamp,
 		-FreezeRamp
 	);
+
+	// Apply movement ramp directly on CharacterBase as a final multiplier,
+	// independent of all other speed modifiers.
+	if (AFP_CharacterBase* CharBase = Cast<AFP_CharacterBase>(GetAvatarActorFromActorInfo()))
+	{
+		CharBase->SetFreezeRamp(FreezeRamp);
+	}
 
 	UpdateFreezeState(FreezeRamp);
 }
@@ -119,7 +132,7 @@ void UFP_GA_FreezePassive::UpdateFreezeState(float FreezeRamp)
 		bIsFrozen = bShouldBeFrozen;
 		if (bIsFrozen)
 		{
-			ASC->AddLooseGameplayTag(Tags.State_Frozen);
+			ASC->RemoveLooseGameplayTag(Tags.State_Frozen);
 			// Ensure Chilled is cleared when fully frozen.
 			if (bIsChilled)
 			{
@@ -138,7 +151,7 @@ void UFP_GA_FreezePassive::UpdateFreezeState(float FreezeRamp)
 		bIsChilled = bShouldBeChilled;
 		if (bIsChilled)
 		{
-			ASC->AddLooseGameplayTag(Tags.State_Chilled);
+			ASC->RemoveLooseGameplayTag(Tags.State_Chilled);
 		}
 		else
 		{

@@ -344,6 +344,12 @@ void AFP_CharacterBase::OnFrozenTagChanged(FGameplayTag Tag, int32 NewCount)
 	RefreshMovementSpeed();
 }
 
+void AFP_CharacterBase::SetFreezeRamp(float NewRamp)
+{
+	FreezeMovementRamp = FMath::Clamp(NewRamp, 0.f, 1.f);
+	RefreshMovementSpeed();
+}
+
 void AFP_CharacterBase::RefreshMovementSpeed()
 {
 	if (!GetCharacterMovement())
@@ -372,6 +378,10 @@ void AFP_CharacterBase::RefreshMovementSpeed()
 
 	// Prevent weird negatives (you can clamp tighter if desired).
 	FinalSpeed = FMath::Max(0.0f, FinalSpeed);
+
+	// Freeze ramp scales FinalSpeed down to 0 independently of all other modifiers.
+	// (1 - 0) = no effect, (1 - 1) = zero. Applied before tag overrides so State_Frozen hard zero still fires.
+	FinalSpeed *= (1.0f - FreezeMovementRamp);
 
 	if (AbilitySystemComponent)
 	{

@@ -41,7 +41,6 @@ float UFP_MMC_HeatDissapation::CalculateBaseMagnitude_Implementation(const FGame
 
 	float AmbientTemperature = 0.f;
 	GetCapturedAttributeMagnitude(AmbientTemperatureDef, Spec, EvaluationParameters, AmbientTemperature);
-	AmbientTemperature = FMath::Max(0.f, AmbientTemperature);
 
 	float ThermalMass = 0.f;
 	GetCapturedAttributeMagnitude(ThermalMassDef, Spec, EvaluationParameters, ThermalMass);

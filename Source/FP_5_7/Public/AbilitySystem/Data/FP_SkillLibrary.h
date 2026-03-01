@@ -50,7 +50,7 @@ struct FFP_AbilityEntry
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float BaseRadius = 50.f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,  meta = (Categories = "SkillTagMod"))
 	FGameplayTagContainer SkillModifierTags;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)

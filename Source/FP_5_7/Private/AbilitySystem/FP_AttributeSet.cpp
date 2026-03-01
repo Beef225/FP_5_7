@@ -55,6 +55,32 @@ TagsToAttributes.Add(GameplayTags.Damage_More_Chemical, GetMoreChemicalDamageAtt
 TagsToAttributes.Add(GameplayTags.Damage_Added_Energy, GetAddedEnergyDamageAttribute);
 TagsToAttributes.Add(GameplayTags.Damage_Increased_Energy, GetIncreasedEnergyDamageAttribute);
 TagsToAttributes.Add(GameplayTags.Damage_More_Energy, GetMoreEnergyDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Pistol, GetIncreasedDamagePistolAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Pistol, GetMoreDamagePistolAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Rifle, GetIncreasedDamageRifleAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Rifle, GetMoreDamageRifleAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Grenade, GetIncreasedDamageGrenadeAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Grenade, GetMoreDamageGrenadeAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Shotgun, GetIncreasedDamageShotgunAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Shotgun, GetMoreDamageShotgunAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Drone, GetIncreasedDamageDroneAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Drone, GetMoreDamageDroneAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Axe, GetIncreasedDamageAxeAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Axe, GetMoreDamageAxeAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Sword, GetIncreasedDamageSwordAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Sword, GetMoreDamageSwordAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Club, GetIncreasedDamageClubAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Club, GetMoreDamageClubAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Unarmed, GetIncreasedDamageUnarmedAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Unarmed, GetMoreDamageUnarmedAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Launcher, GetIncreasedDamageLauncherAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Launcher, GetMoreDamageLauncherAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Melee, GetIncreasedDamageMeleeAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Melee, GetMoreDamageMeleeAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_Projectile, GetIncreasedDamageProjectileAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_Projectile, GetMoreDamageProjectileAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_Increased_AoE, GetIncreasedDamageAoEAttribute);
+TagsToAttributes.Add(GameplayTags.Damage_More_AoE, GetMoreDamageAoEAttribute);
 
 //Resistance
 TagsToAttributes.Add(GameplayTags.Resistance_Damage_Physical, GetPhysicalDamageResistanceAttribute);
@@ -235,6 +261,58 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, AddedEnergyDamage, COND_None, R
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedEnergyDamage, COND_None, REPNOTIFY_Always)
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreEnergyDamage, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamagePistol, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamagePistol, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageRifle, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageRifle, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageGrenade, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageGrenade, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageShotgun, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageShotgun, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageDrone, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageDrone, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageAxe, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageAxe, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageSword, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageSword, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageClub, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageClub, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageUnarmed, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageUnarmed, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageLauncher, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageLauncher, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageMelee, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageMelee, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageProjectile, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageProjectile, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageAoE, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreDamageAoE, COND_None, REPNOTIFY_Always)
 
 //Resistance
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, PhysicalDamageResistance, COND_None, REPNOTIFY_Always)
@@ -666,6 +744,136 @@ void UFP_AttributeSet::OnRep_IncreasedEnergyDamage(const FGameplayAttributeData&
 void UFP_AttributeSet::OnRep_MoreEnergyDamage(const FGameplayAttributeData& OldMoreEnergyDamage) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreEnergyDamage, OldMoreEnergyDamage);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamagePistol(const FGameplayAttributeData& OldIncreasedDamagePistol) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamagePistol, OldIncreasedDamagePistol);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamagePistol(const FGameplayAttributeData& OldMoreDamagePistol) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamagePistol, OldMoreDamagePistol);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageRifle(const FGameplayAttributeData& OldIncreasedDamageRifle) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageRifle, OldIncreasedDamageRifle);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageRifle(const FGameplayAttributeData& OldMoreDamageRifle) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageRifle, OldMoreDamageRifle);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageGrenade(const FGameplayAttributeData& OldIncreasedDamageGrenade) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageGrenade, OldIncreasedDamageGrenade);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageGrenade(const FGameplayAttributeData& OldMoreDamageGrenade) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageGrenade, OldMoreDamageGrenade);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageShotgun(const FGameplayAttributeData& OldIncreasedDamageShotgun) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageShotgun, OldIncreasedDamageShotgun);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageShotgun(const FGameplayAttributeData& OldMoreDamageShotgun) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageShotgun, OldMoreDamageShotgun);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageDrone(const FGameplayAttributeData& OldIncreasedDamageDrone) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageDrone, OldIncreasedDamageDrone);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageDrone(const FGameplayAttributeData& OldMoreDamageDrone) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageDrone, OldMoreDamageDrone);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageAxe(const FGameplayAttributeData& OldIncreasedDamageAxe) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageAxe, OldIncreasedDamageAxe);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageAxe(const FGameplayAttributeData& OldMoreDamageAxe) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageAxe, OldMoreDamageAxe);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageSword(const FGameplayAttributeData& OldIncreasedDamageSword) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageSword, OldIncreasedDamageSword);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageSword(const FGameplayAttributeData& OldMoreDamageSword) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageSword, OldMoreDamageSword);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageClub(const FGameplayAttributeData& OldIncreasedDamageClub) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageClub, OldIncreasedDamageClub);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageClub(const FGameplayAttributeData& OldMoreDamageClub) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageClub, OldMoreDamageClub);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageUnarmed(const FGameplayAttributeData& OldIncreasedDamageUnarmed) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageUnarmed, OldIncreasedDamageUnarmed);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageUnarmed(const FGameplayAttributeData& OldMoreDamageUnarmed) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageUnarmed, OldMoreDamageUnarmed);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageLauncher(const FGameplayAttributeData& OldIncreasedDamageLauncher) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageLauncher, OldIncreasedDamageLauncher);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageLauncher(const FGameplayAttributeData& OldMoreDamageLauncher) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageLauncher, OldMoreDamageLauncher);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageMelee(const FGameplayAttributeData& OldIncreasedDamageMelee) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageMelee, OldIncreasedDamageMelee);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageMelee(const FGameplayAttributeData& OldMoreDamageMelee) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageMelee, OldMoreDamageMelee);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageProjectile(const FGameplayAttributeData& OldIncreasedDamageProjectile) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageProjectile, OldIncreasedDamageProjectile);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageProjectile(const FGameplayAttributeData& OldMoreDamageProjectile) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageProjectile, OldMoreDamageProjectile);
+}
+
+void UFP_AttributeSet::OnRep_IncreasedDamageAoE(const FGameplayAttributeData& OldIncreasedDamageAoE) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedDamageAoE, OldIncreasedDamageAoE);
+}
+
+void UFP_AttributeSet::OnRep_MoreDamageAoE(const FGameplayAttributeData& OldMoreDamageAoE) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreDamageAoE, OldMoreDamageAoE);
 }
 
 //Resistance

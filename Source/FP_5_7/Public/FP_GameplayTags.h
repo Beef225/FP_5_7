@@ -51,6 +51,32 @@ FGameplayTag Damage_More_Chemical;
 FGameplayTag Damage_Added_Energy;
 FGameplayTag Damage_Increased_Energy;
 FGameplayTag Damage_More_Energy;
+FGameplayTag Damage_Increased_Pistol;
+FGameplayTag Damage_More_Pistol;
+FGameplayTag Damage_Increased_Rifle;
+FGameplayTag Damage_More_Rifle;
+FGameplayTag Damage_Increased_Grenade;
+FGameplayTag Damage_More_Grenade;
+FGameplayTag Damage_Increased_Shotgun;
+FGameplayTag Damage_More_Shotgun;
+FGameplayTag Damage_Increased_Drone;
+FGameplayTag Damage_More_Drone;
+FGameplayTag Damage_Increased_Axe;
+FGameplayTag Damage_More_Axe;
+FGameplayTag Damage_Increased_Sword;
+FGameplayTag Damage_More_Sword;
+FGameplayTag Damage_Increased_Club;
+FGameplayTag Damage_More_Club;
+FGameplayTag Damage_Increased_Unarmed;
+FGameplayTag Damage_More_Unarmed;
+FGameplayTag Damage_Increased_Launcher;
+FGameplayTag Damage_More_Launcher;
+FGameplayTag Damage_Increased_Melee;
+FGameplayTag Damage_More_Melee;
+FGameplayTag Damage_Increased_Projectile;
+FGameplayTag Damage_More_Projectile;
+FGameplayTag Damage_Increased_AoE;
+FGameplayTag Damage_More_AoE;
 
 //Resistance
 FGameplayTag Resistance_Damage_Physical;
@@ -237,9 +263,45 @@ FGameplayTag Montage_Skill_Tail;
 FGameplayTag Montage_Skill_Mouth;
 
 
+//SkillTagMods
+//SkillTagMod
+FGameplayTag SkillTagMod_Pistol;
+FGameplayTag SkillTagMod_Rifle;
+FGameplayTag SkillTagMod_Shotgun;
+FGameplayTag SkillTagMod_Grenade;
+FGameplayTag SkillTagMod_Drone;
+FGameplayTag SkillTagMod_Axe;
+FGameplayTag SkillTagMod_Sword;
+FGameplayTag SkillTagMod_Club;
+FGameplayTag SkillTagMod_Unarmed;
+FGameplayTag SkillTagMod_Launcher;
+FGameplayTag SkillTagMod_Projectile;
+FGameplayTag SkillTagMod_Melee;
+FGameplayTag SkillTagMod_AoE;
+FGameplayTag SkillTagMod_DamageOverTime;
+FGameplayTag SkillTagMod_Bomb;
+FGameplayTag SkillTagMod_Physical;
+FGameplayTag SkillTagMod_Explosive;
+FGameplayTag SkillTagMod_Chemical;
+FGameplayTag SkillTagMod_Radiation;
+FGameplayTag SkillTagMod_Energy;
+FGameplayTag SkillTagMod_Bruising;
+FGameplayTag SkillTagMod_Concussing;
+FGameplayTag SkillTagMod_Irradiating;
+FGameplayTag SkillTagMod_Corroding;
+FGameplayTag SkillTagMod_ThermalDestabilizing;
+FGameplayTag SkillTagMod_Piercing;
+FGameplayTag SkillTagMod_Channeling;
+FGameplayTag SkillTagMod_Duration;
+FGameplayTag SkillTagMod_Cooldown;
+FGameplayTag SkillTagMod_Trigger;
+FGameplayTag SkillTagMod_Movement;
+
+
 //Skills
 //Skills
 FGameplayTag Skills_Energy_Firebolt;
+FGameplayTag Skills_Radiation_Microwave;
 	
 	TArray<FGameplayTag> DamageTypes;	
 	

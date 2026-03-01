@@ -123,6 +123,118 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Damage.More.Energy"), 
 		FString("More Energy damage")
 		);
+	GameplayTags.Damage_Increased_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Pistol"), 
+		FString("Increased Pistol Damage")
+		);
+	GameplayTags.Damage_More_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Pistol"), 
+		FString("More Pistol Damage")
+		);
+	GameplayTags.Damage_Increased_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Rifle"), 
+		FString("Increased Rifle damage")
+		);
+	GameplayTags.Damage_More_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Rifle"), 
+		FString("More Rifle damage")
+		);
+	GameplayTags.Damage_Increased_Grenade = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Grenade"), 
+		FString("Increased Grenade damage")
+		);
+	GameplayTags.Damage_More_Grenade = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Grenade"), 
+		FString("More Grenade damage")
+		);
+	GameplayTags.Damage_Increased_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Shotgun"), 
+		FString("Increased Shotgun damage")
+		);
+	GameplayTags.Damage_More_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Shotgun"), 
+		FString("More Shotgun damage")
+		);
+	GameplayTags.Damage_Increased_Drone = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Drone"), 
+		FString("Increased Drone damage")
+		);
+	GameplayTags.Damage_More_Drone = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Drone"), 
+		FString("More Drone damage")
+		);
+	GameplayTags.Damage_Increased_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Axe"), 
+		FString("Increased Axe damage")
+		);
+	GameplayTags.Damage_More_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Axe"), 
+		FString("More Axe damage")
+		);
+	GameplayTags.Damage_Increased_Sword = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Sword"), 
+		FString("Increased Sword damage")
+		);
+	GameplayTags.Damage_More_Sword = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Sword"), 
+		FString("More Sword damage")
+		);
+	GameplayTags.Damage_Increased_Club = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Club"), 
+		FString("Increased Club damage")
+		);
+	GameplayTags.Damage_More_Club = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Club"), 
+		FString("More Club damage")
+		);
+	GameplayTags.Damage_Increased_Unarmed = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Unarmed"), 
+		FString("Increased Unarmed damage")
+		);
+	GameplayTags.Damage_More_Unarmed = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Unarmed"), 
+		FString("More Unarmed damage")
+		);
+	GameplayTags.Damage_Increased_Launcher = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Launcher"), 
+		FString("Increased Launcher damage")
+		);
+	GameplayTags.Damage_More_Launcher = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Launcher"), 
+		FString("More Launcher damage")
+		);
+	GameplayTags.Damage_Increased_Melee = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Melee"), 
+		FString("Increased Melee Damage")
+		);
+	GameplayTags.Damage_More_Melee = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Melee"), 
+		FString("More Melee damage")
+		);
+	GameplayTags.Damage_Increased_Projectile = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Projectile"), 
+		FString("Increased Projectile damage")
+		);
+	GameplayTags.Damage_More_Projectile = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Projectile"), 
+		FString("More Projectile damage")
+		);
+	GameplayTags.Damage_Increased_AoE = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.AoE"), 
+		FString("Increased Area damage")
+		);
+	GameplayTags.Damage_More_AoE = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.AoE"), 
+		FString("More Area damage")
+		);
+	GameplayTags.Damage_Increased_Drone = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Drone"), 
+		FString("Increased Drone damage")
+		);
+	GameplayTags.Damage_More_Drone = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.Drone"), 
+		FString("More Drone damage")
+		);
 
 	//Resistance
 	GameplayTags.Resistance_Damage_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -699,11 +811,143 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		);
 
 
+	//SkillTagMods
+	//SkillTagMod
+	GameplayTags.SkillTagMod_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Pistol"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Rifle"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Shotgun"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Grenade = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Grenade"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Drone = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Drone"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Axe"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Sword = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Sword"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Club = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Club"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Unarmed = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Unarmed"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Launcher = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Launcher"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Projectile = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Projectile"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Melee = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Melee"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_AoE = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.AoE"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_DamageOverTime = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.DamageOverTime"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Bomb = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Bomb"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Physical = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Physical"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Explosive = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Explosive"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Chemical = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Chemical"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Radiation = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Radiation"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Energy = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Energy"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Bruising = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Bruising"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Concussing = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Concussing"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Irradiating = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Irradiating"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Corroding = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Corroding"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_ThermalDestabilizing = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.ThermalDestabilizing"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Piercing = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Piercing"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Channeling = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Channeling"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Duration = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Duration"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Cooldown = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Cooldown"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Trigger = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Trigger"), 
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Movement = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Movement"), 
+		FString("")
+		);
+
+
 	//Skills
 	//Skills
 	GameplayTags.Skills_Energy_Firebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Skills.Energy.Firebolt"), 
 		FString("Skill Name Firebolt")
+		);
+	GameplayTags.Skills_Radiation_Microwave = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Radiation.Microwave"), 
+		FString("Skill Name Microwave")
 		);
 
 }

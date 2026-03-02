@@ -38,8 +38,8 @@ void UFP_GA_FreezePassive::OnFreezeTimerTick()
 	const float Heat         = AS->GetHeat();
 	const float MinThreshold = AS->GetMinHeatThreshold();
 
-	// ChillStart is 75% of MinHeatThreshold (e.g. MinThreshold=-100 -> ChillStart=-75).
-	const float ChillStart = MinThreshold * 0.75f;
+	// ChillStart is 25% of MinHeatThreshold from 0 (e.g. MinThreshold=-100 -> ChillStart=-25).
+	const float ChillStart = MinThreshold * 0.25f;
 
 	// Guard: if the two are identical (e.g. MinThreshold==0) there is no valid range.
 	if (FMath::IsNearlyEqual(ChillStart, MinThreshold))

@@ -2,6 +2,7 @@
 
 #include "Characters/FP_PlayerCharacter.h"
 #include "AbilitySystemComponent.h"
+#include "FP_GameplayTags.h"
 #include "Player/FP_PlayerController.h"
 #include "Abilitysystem\FP_AbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
@@ -153,9 +154,14 @@ void AFP_PlayerCharacter::InitAbilityActorInfo()
 		}
 	}
 	InitializeDefaultAttributes();
-	
+
 	Super::InitAbilityActorInfo();
-	
+
+	// Bind frozen tag so FaceMouse can be disabled while frozen.
+	AbilitySystemComponent->RegisterGameplayTagEvent(
+		FFP_GameplayTags::Get().State_Frozen,
+		EGameplayTagEventType::NewOrRemoved)
+		.AddUObject(this, &AFP_PlayerCharacter::OnFrozenTagChangedForFacing);
 }
 
 bool AFP_PlayerCharacter::GetMouseWorldPoint(FVector& OutWorldPoint) const
@@ -175,8 +181,15 @@ bool AFP_PlayerCharacter::GetMouseWorldPoint(FVector& OutWorldPoint) const
 	return true;
 }
 
+void AFP_PlayerCharacter::OnFrozenTagChangedForFacing(FGameplayTag Tag, int32 NewCount)
+{
+	bIsFrozen = NewCount > 0;
+}
+
 void AFP_PlayerCharacter::FaceMouse(float DeltaTime)
 {
+	if (bIsFrozen) return;
+
 	FVector MouseWorld;
 	if (!GetMouseWorldPoint(MouseWorld))
 		return;

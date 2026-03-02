@@ -84,4 +84,9 @@ private:
 
 	bool GetMouseWorldPoint(FVector& OutWorldPoint) const;
 	void FaceMouse(float DeltaTime);
+
+	bool bIsFrozen = false;
+
+	UFUNCTION()
+	void OnFrozenTagChangedForFacing(FGameplayTag Tag, int32 NewCount);
 };

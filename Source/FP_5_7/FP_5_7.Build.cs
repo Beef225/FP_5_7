@@ -20,7 +20,8 @@ public class FP_5_7 : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new[]
 		{
 			"InputCore",
-			"EnhancedInput"
+			"EnhancedInput",
+			"Niagara"
 		});
 
 		if (Target.bBuildEditor)
@@ -36,7 +37,6 @@ public class FP_5_7 : ModuleRules
 				"Slate",
 				"SlateCore",
 				"NavigationSystem",
-				"Niagara",
 				"AIModule"
 			});
 		}

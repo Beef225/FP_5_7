@@ -16,6 +16,8 @@ class UGameplayEffect;
 class UGameplayAbility;
 class UAnimMontage;
 class USoundBase;
+class UNiagaraSystem;
+class UNiagaraComponent;
 struct FOnAttributeChangeData;
 
 
@@ -158,6 +160,65 @@ public:
 	float GetFreezeRamp() const { return FreezeMovementRamp; }
 
 protected:
+
+	/** Status FX — Niagara assets. Leave unset to skip that effect entirely. */
+
+	UPROPERTY(EditAnywhere, Category="FX|Chill")
+	TObjectPtr<UNiagaraSystem> ChillFXSystem;
+
+	/** Offset from mesh origin where the chill effect spawns (relative to mesh). */
+	UPROPERTY(EditAnywhere, Category="FX|Chill")
+	FVector ChillFXOffset = FVector::ZeroVector;
+
+	/** Name of the float parameter in ChillFXSystem that controls particle intensity (0-1). */
+	UPROPERTY(EditAnywhere, Category="FX|Chill")
+	FName ChillIntensityParamName = FName("Intensity");
+
+	UPROPERTY(EditAnywhere, Category="FX|Frozen")
+	TObjectPtr<UNiagaraSystem> FrozenFXSystem;
+
+	/** Offset from mesh origin where the frozen effect spawns (relative to mesh). */
+	UPROPERTY(EditAnywhere, Category="FX|Frozen")
+	FVector FrozenFXOffset = FVector::ZeroVector;
+
+	UPROPERTY(EditAnywhere, Category="FX|Overheat")
+	TObjectPtr<UNiagaraSystem> OverheatFXSystem;
+
+	/** Offset from mesh origin where the overheat effect spawns (relative to mesh). */
+	UPROPERTY(EditAnywhere, Category="FX|Overheat")
+	FVector OverheatFXOffset = FVector::ZeroVector;
+
+	/** Optional second overheat effect (e.g. steam) spawned at a specific socket. */
+	UPROPERTY(EditAnywhere, Category="FX|Overheat")
+	TObjectPtr<UNiagaraSystem> OverheatSteamFXSystem;
+
+	/** Socket to attach OverheatSteamFXSystem to. Leave NAME_None to attach to mesh root. */
+	UPROPERTY(EditAnywhere, Category="FX|Overheat")
+	FName OverheatSteamSocketName = NAME_None;
+
+private:
+
+	/** Runtime Niagara components — created from the assets above, deactivated by default. */
+
+	UPROPERTY(Transient)
+	TObjectPtr<UNiagaraComponent> ChillFXComponent;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UNiagaraComponent> FrozenFXComponent;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UNiagaraComponent> OverheatFXComponent;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UNiagaraComponent> OverheatSteamFXComponent;
+
+	void InitializeStatusFX();
+	void UpdateChillFX(float FreezeRamp);
+
+	UFUNCTION()
+	void OnOverheatTagChanged(FGameplayTag Tag, int32 NewCount);
+
+public:
 
 	float GetDeathRagdollDelay() const;
 

@@ -10,6 +10,8 @@
 #include "FP_5_7/FP_5_7.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "Kismet/GameplayStatics.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 
 
 // Sets default values
@@ -186,6 +188,8 @@ void AFP_CharacterBase::BeginPlay()
 		CachedBaseWalkSpeed = GetCharacterMovement()->MaxWalkSpeed;
 		bCachedBaseWalkSpeed = true;
 	}
+
+	InitializeStatusFX();
 }
 
 void AFP_CharacterBase::InitAbilityActorInfo()
@@ -322,6 +326,10 @@ void AFP_CharacterBase::BindMovementSpeedCallbacks()
 	AbilitySystemComponent
 		->RegisterGameplayTagEvent(GameplayTags.State_Frozen, EGameplayTagEventType::NewOrRemoved)
 		.AddUObject(this, &AFP_CharacterBase::OnFrozenTagChanged);
+
+	AbilitySystemComponent
+		->RegisterGameplayTagEvent(GameplayTags.State_Overheat, EGameplayTagEventType::NewOrRemoved)
+		.AddUObject(this, &AFP_CharacterBase::OnOverheatTagChanged);
 }
 
 void AFP_CharacterBase::OnMoveSpeedAttributeChanged(const FOnAttributeChangeData& Data)
@@ -340,14 +348,20 @@ void AFP_CharacterBase::OnSkillMoveSpeedTagChanged(FGameplayTag Tag, int32 NewCo
 void AFP_CharacterBase::OnFrozenTagChanged(FGameplayTag Tag, int32 NewCount)
 {
 	(void)Tag;
-	(void)NewCount;
 	RefreshMovementSpeed();
+
+	if (FrozenFXComponent)
+	{
+		if (NewCount > 0) FrozenFXComponent->Activate();
+		else              FrozenFXComponent->DeactivateImmediate();
+	}
 }
 
 void AFP_CharacterBase::SetFreezeRamp(float NewRamp)
 {
 	FreezeMovementRamp = FMath::Clamp(NewRamp, 0.f, 1.f);
 	RefreshMovementSpeed();
+	UpdateChillFX(FreezeMovementRamp);
 }
 
 void AFP_CharacterBase::RefreshMovementSpeed()
@@ -406,4 +420,80 @@ void AFP_CharacterBase::RefreshMovementSpeed()
 	}
 
 	GetCharacterMovement()->MaxWalkSpeed = FinalSpeed;
+}
+
+void AFP_CharacterBase::InitializeStatusFX()
+{
+	USkeletalMeshComponent* MeshComp = GetMesh();
+	if (!MeshComp) return;
+
+	if (ChillFXSystem)
+	{
+		ChillFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+			ChillFXSystem, MeshComp, NAME_None,
+			ChillFXOffset, FRotator::ZeroRotator,
+			EAttachLocation::KeepRelativeOffset, /*bAutoDestroy=*/false, /*bAutoActivate=*/false);
+	}
+
+	if (FrozenFXSystem)
+	{
+		FrozenFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+			FrozenFXSystem, MeshComp, NAME_None,
+			FrozenFXOffset, FRotator::ZeroRotator,
+			EAttachLocation::KeepRelativeOffset, false, false);
+	}
+
+	if (OverheatFXSystem)
+	{
+		OverheatFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+			OverheatFXSystem, MeshComp, NAME_None,
+			OverheatFXOffset, FRotator::ZeroRotator,
+			EAttachLocation::KeepRelativeOffset, false, false);
+	}
+
+	if (OverheatSteamFXSystem)
+	{
+		const bool bSocketValid = OverheatSteamSocketName != NAME_None
+			&& MeshComp->DoesSocketExist(OverheatSteamSocketName);
+		const FName Socket = bSocketValid ? OverheatSteamSocketName : NAME_None;
+
+		OverheatSteamFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+			OverheatSteamFXSystem, MeshComp, Socket,
+			FVector::ZeroVector, FRotator::ZeroRotator,
+			EAttachLocation::SnapToTarget, false, false);
+	}
+}
+
+void AFP_CharacterBase::UpdateChillFX(float FreezeRamp)
+{
+	if (!ChillFXComponent) return;
+
+	// Active only in the chill zone — not when fully frozen (frozen FX takes over at 1.0).
+	const bool bShouldBeActive = FreezeRamp > 0.f && FreezeRamp < 1.f;
+
+	if (bShouldBeActive)
+	{
+		if (!ChillFXComponent->IsActive()) ChillFXComponent->Activate();
+		ChillFXComponent->SetFloatParameter(ChillIntensityParamName, FreezeRamp);
+	}
+	else
+	{
+		ChillFXComponent->Deactivate();
+	}
+}
+
+void AFP_CharacterBase::OnOverheatTagChanged(FGameplayTag Tag, int32 NewCount)
+{
+	(void)Tag;
+	const bool bOverheated = NewCount > 0;
+
+	if (OverheatFXComponent)
+	{
+		bOverheated ? OverheatFXComponent->Activate() : OverheatFXComponent->Deactivate();
+	}
+
+	if (OverheatSteamFXComponent)
+	{
+		bOverheated ? OverheatSteamFXComponent->Activate() : OverheatSteamFXComponent->Deactivate();
+	}
 }

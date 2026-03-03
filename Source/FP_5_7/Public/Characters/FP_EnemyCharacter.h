@@ -34,6 +34,7 @@ public:
 	virtual void Die() override;
 	virtual void SetCombatTarget_Implementation(AActor* InCombatTarget) override;
 	virtual AActor* GetCombatTarget_Implementation() const override;
+	virtual int32 GetXPReward_Implementation() const override;
 	/** end Combat Interface */
 	
 	UPROPERTY(BlueprintReadWrite, Category = "Combat")
@@ -69,6 +70,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
 	int32 Level = 1;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
+	int32 BaseXP = 0;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UWidgetComponent> HP_HeatBar;

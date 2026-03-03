@@ -535,6 +535,7 @@ void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 					{
 						CombatInterface->Die();
 					}
+					SendXPEvent(Props);
 				}
 			}
 			else
@@ -607,8 +608,20 @@ void UFP_AttributeSet::ShowFloatingText(const FEffectProperties& Props, float Da
 
 void UFP_AttributeSet::SendXPEvent(const FEffectProperties& Props)
 {
-}
+	if (!Props.TargetCharacter || !Props.SourceCharacter) return;
 
+	const int32 XPReward = IFP_CombatInterface::Execute_GetXPReward(Props.TargetCharacter);
+
+	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
+	FGameplayEventData Payload;
+	Payload.EventTag = GameplayTags.MetaAttribute_IncomingXP;
+	Payload.EventMagnitude = XPReward;
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
+		Props.SourceCharacter,
+		GameplayTags.MetaAttribute_IncomingXP,
+		Payload);
+
+}
 
 //Vital Attributes
 void UFP_AttributeSet::OnRep_HitPoints(const FGameplayAttributeData& OldHitPoints) const

@@ -276,3 +276,8 @@ void AFP_EnemyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
+
+int32 AFP_EnemyCharacter::GetXPReward_Implementation() const
+{
+	return UFP_AbilitySystemLibrary::GetXPReward(this, BaseXP, Level);
+}

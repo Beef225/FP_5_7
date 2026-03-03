@@ -56,6 +56,14 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Common Class Defaults")
 	TArray<TSubclassOf<UGameplayAbility>> CommonAbilities;
+
+	/**
+	 * Controls how steeply XP scales with enemy level.
+	 * Formula: BaseXP * (1 + Coefficient * (Level - 1)^2)
+	 * e.g. 0.01 → L1=1x, L10=1.8x, L15=3x, L20=4.6x, L30=9.4x
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "XP")
+	float XPLevelCoefficient = 0.01f;
 	
 	
 

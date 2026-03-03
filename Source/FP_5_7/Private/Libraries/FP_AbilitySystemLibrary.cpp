@@ -221,3 +221,13 @@ bool UFP_AbilitySystemLibrary::IsNotFriend(AActor* FirstActor, AActor* SecondAct
 	const bool bFriends = bBothArePlayers || bBothAreEnemies;
 	return !bFriends;
 }
+
+int32 UFP_AbilitySystemLibrary::GetXPReward(const UObject* WorldContextObject, int32 BaseXP, int32 CharacterLevel)
+{
+	const UCharacterClassInfo* ClassInfo = GetCharacterClassInfo(WorldContextObject);
+	if (!ClassInfo) return BaseXP;
+
+	const float Coefficient = ClassInfo->XPLevelCoefficient;
+	const float LevelScale = 1.f + Coefficient * FMath::Square(static_cast<float>(CharacterLevel - 1));
+	return FMath::RoundToInt(static_cast<float>(BaseXP) * LevelScale);
+}

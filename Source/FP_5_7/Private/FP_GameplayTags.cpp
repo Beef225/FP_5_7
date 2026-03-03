@@ -817,9 +817,9 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		);
 
 	//SetByCaller
-	GameplayTags.SetByCaller_FreezeRamp = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SetByCaller.FreezeRamp"), 
-		FString("Set By Caller Tag for Freeze Ramping")
+	GameplayTags.SetByCaller_Attribute_IncomingXP = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.Attribute.IncomingXP"), 
+		FString("Set By Caller Tag for IncomingXP")
 		);
 
 

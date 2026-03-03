@@ -623,6 +623,7 @@ void UFP_AttributeSet::SendXPEvent(const FEffectProperties& Props)
 
 }
 
+
 //Vital Attributes
 void UFP_AttributeSet::OnRep_HitPoints(const FGameplayAttributeData& OldHitPoints) const
 {

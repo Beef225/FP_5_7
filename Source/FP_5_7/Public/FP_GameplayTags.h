@@ -268,7 +268,7 @@ FGameplayTag State_Chilled;
 FGameplayTag State_Overheat;
 
 //SetByCaller
-FGameplayTag SetByCaller_FreezeRamp;
+FGameplayTag SetByCaller_Attribute_IncomingXP;
 
 
 //SkillTagMods

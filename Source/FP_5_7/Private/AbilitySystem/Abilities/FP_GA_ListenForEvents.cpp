@@ -40,7 +40,7 @@ void UFP_GA_ListenForEvents::OnXPEventReceived(FGameplayEventData Payload)
 
 	UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(
 		SpecHandle,
-		FFP_GameplayTags::Get().MetaAttribute_IncomingXP,
+		FFP_GameplayTags::Get().SetByCaller_Attribute_IncomingXP,
 		Payload.EventMagnitude);
 
 	ASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());

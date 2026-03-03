@@ -20,6 +20,25 @@ class FP_5_7_API IFP_PlayerInterface
 {
 	GENERATED_BODY()
 
-	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void AddToXP(int32 InXP);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	int32 GetXP() const;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	int32 FindLevelForXP(int32 InXP) const;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	int32 GetAttributePointsReward(int32 Level) const;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void AddToPlayerLevel(int32 InLevel);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void AddToAttributePoints(int32 InPoints);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void LevelUp();
 };

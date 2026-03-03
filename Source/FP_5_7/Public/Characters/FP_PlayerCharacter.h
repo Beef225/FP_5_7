@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "FP_CharacterBase.h"
+#include "Interaction/FP_PlayerInterface.h"
 #include "FP_PlayerCharacter.generated.h"
 
 class USpringArmComponent;
@@ -11,7 +12,7 @@ class UCameraComponent;
 
 
 UCLASS()
-class FP_5_7_API AFP_PlayerCharacter : public AFP_CharacterBase
+class FP_5_7_API AFP_PlayerCharacter : public AFP_CharacterBase, public IFP_PlayerInterface
 {
 	GENERATED_BODY()
 
@@ -28,6 +29,16 @@ public:
 	/** Combat Interface */
 	virtual int32 GetPlayerLevel() override;
 	/** end Combat Interface */
+
+	/** Player Interface */
+	virtual void AddToXP_Implementation(int32 InXP) override;
+	virtual int32 GetXP_Implementation() const override;
+	virtual int32 FindLevelForXP_Implementation(int32 InXP) const override;
+	virtual int32 GetAttributePointsReward_Implementation(int32 Level) const override;
+	virtual void AddToPlayerLevel_Implementation(int32 InLevel) override;
+	virtual void AddToAttributePoints_Implementation(int32 InPoints) override;
+	virtual void LevelUp_Implementation() override;
+	/** end Player Interface */
 
 protected:
 	virtual void BeginPlay() override;

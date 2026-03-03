@@ -23,6 +23,7 @@ void AFP_PlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AFP_PlayerState, Level);
 	DOREPLIFETIME(AFP_PlayerState, XP);
+	DOREPLIFETIME(AFP_PlayerState, AttributePoints);
 	DOREPLIFETIME(AFP_PlayerState, GripStance);
 }
 
@@ -75,6 +76,17 @@ void AFP_PlayerState::OnRep_Level(int32 OldLevel)
 void AFP_PlayerState::OnRep_XP(int32 OldXP)
 {
 	OnXPChangedDelegate.Broadcast(XP);
+}
+
+void AFP_PlayerState::AddToAttributePoints(int32 InPoints)
+{
+	AttributePoints += InPoints;
+	OnAttributePointsChangedDelegate.Broadcast(AttributePoints);
+}
+
+void AFP_PlayerState::OnRep_AttributePoints(int32 OldAttributePoints)
+{
+	OnAttributePointsChangedDelegate.Broadcast(AttributePoints);
 }
 
 void AFP_PlayerState::OnRep_GripStance(EWeaponGripStyle OldGripStance)

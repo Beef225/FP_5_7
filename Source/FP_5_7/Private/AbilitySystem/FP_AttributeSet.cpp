@@ -508,10 +508,8 @@ void UFP_AttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, f
 void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);
-	
 	FEffectProperties Props;
 	SetEffectProperties(Data, Props);
-	
 	if (Data.EvaluatedData.Attribute == GetHitPointsAttribute())
 	{
 		SetHitPoints(FMath::Clamp(GetHitPoints(), 0.f, GetMaxHitPoints()));
@@ -543,12 +541,14 @@ void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 				FGameplayTagContainer TagContainer;
 				TagContainer.AddTag(FFP_GameplayTags::Get().Effects_HitReact);
 				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
-			
 			}
 
 		}
 	}
-	
+	if (Data.EvaluatedData.Attribute == GetIncomingXPAttribute())
+	{
+		HandleIncomingXP(Props);
+	}
 }
 
 void UFP_AttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
@@ -562,7 +562,32 @@ void UFP_AttributeSet::HandleIncomingDamage(const FEffectProperties& Props)
 
 void UFP_AttributeSet::HandleIncomingXP(const FEffectProperties& Props)
 {
+	const float LocalIncomingXP = GetIncomingXP();
+	SetIncomingXP(0.f);
+
+	if (!Props.SourceCharacter) return;
+	if (!Props.SourceCharacter->Implements<UFP_PlayerInterface>()) return;
+
+	IFP_CombatInterface* CombatInterface = Cast<IFP_CombatInterface>(Props.SourceCharacter);
+	if (!CombatInterface) return;
+
+	const int32 CurrentLevel = CombatInterface->GetPlayerLevel();
+	const int32 CurrentXP = IFP_PlayerInterface::Execute_GetXP(Props.SourceCharacter);
+	const int32 NewLevel = IFP_PlayerInterface::Execute_FindLevelForXP(Props.SourceCharacter, CurrentXP + static_cast<int32>(LocalIncomingXP));
+	const int32 NumLevelUps = NewLevel - CurrentLevel;
+
+	if (NumLevelUps > 0)
+	{
+		const int32 AttributePointsReward = IFP_PlayerInterface::Execute_GetAttributePointsReward(Props.SourceCharacter, CurrentLevel);
+		IFP_PlayerInterface::Execute_AddToPlayerLevel(Props.SourceCharacter, NumLevelUps);
+		IFP_PlayerInterface::Execute_AddToAttributePoints(Props.SourceCharacter, AttributePointsReward);
+		SetHitPoints(GetMaxHitPoints());
+		IFP_PlayerInterface::Execute_LevelUp(Props.SourceCharacter);
+	}
+
+	IFP_PlayerInterface::Execute_AddToXP(Props.SourceCharacter, static_cast<int32>(LocalIncomingXP));
 }
+
 
 void UFP_AttributeSet::Debuff(const FEffectProperties& Props)
 {

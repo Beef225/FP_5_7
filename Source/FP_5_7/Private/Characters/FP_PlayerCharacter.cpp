@@ -100,7 +100,54 @@ int32 AFP_PlayerCharacter::GetPlayerLevel()
 	const AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
 	check(FP_PlayerState);
 	return FP_PlayerState->GetPlayerLevel();
-	
+}
+
+void AFP_PlayerCharacter::AddToXP_Implementation(int32 InXP)
+{
+	AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
+	check(FP_PlayerState);
+	FP_PlayerState->AddToXP(InXP);
+}
+
+int32 AFP_PlayerCharacter::GetXP_Implementation() const
+{
+	const AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
+	check(FP_PlayerState);
+	return FP_PlayerState->GetXP();
+}
+
+int32 AFP_PlayerCharacter::FindLevelForXP_Implementation(int32 InXP) const
+{
+	const AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
+	check(FP_PlayerState);
+	return FP_PlayerState->LevelUpInfo->FindLevelForXP(InXP);
+}
+
+int32 AFP_PlayerCharacter::GetAttributePointsReward_Implementation(int32 Level) const
+{
+	const AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
+	check(FP_PlayerState);
+	check(FP_PlayerState->LevelUpInfo);
+	return FP_PlayerState->LevelUpInfo->LevelUpInformation[Level].AttributePointAward;
+}
+
+void AFP_PlayerCharacter::AddToPlayerLevel_Implementation(int32 InLevel)
+{
+	AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
+	check(FP_PlayerState);
+	FP_PlayerState->AddToLevel(InLevel);
+}
+
+void AFP_PlayerCharacter::AddToAttributePoints_Implementation(int32 InPoints)
+{
+	AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
+	check(FP_PlayerState);
+	FP_PlayerState->AddToAttributePoints(InPoints);
+}
+
+void AFP_PlayerCharacter::LevelUp_Implementation()
+{
+	// Multicast VFX / sound can be triggered here via a multicast RPC if needed later.
 }
 
 void AFP_PlayerCharacter::Tick(float DeltaTime)

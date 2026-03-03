@@ -143,7 +143,7 @@ void UFP_OverlayWidgetController::OnXPChanged(int32 NewXP) const
 {
 	const AFP_PlayerState* AuraPlayerState = CastChecked<AFP_PlayerState>(PlayerState);
 	const UFP_LevelUpInfo* LevelUpInfo = AuraPlayerState->LevelUpInfo;
-	checkf(LevelUpInfo, TEXT("Unabled to find LevelUpInfo. Please fill out AuraPlayerState Blueprint"));
+	checkf(LevelUpInfo, TEXT("Unabled to find LevelUpInfo. Please fill out PlayerState Blueprint"));
 
 	const int32 Level = LevelUpInfo->FindLevelForXP(NewXP);
 	const int32 MaxLevel = LevelUpInfo->LevelUpInformation.Num();

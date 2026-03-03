@@ -22,6 +22,7 @@ void AFP_PlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(AFP_PlayerState, Level);
+	DOREPLIFETIME(AFP_PlayerState, XP);
 	DOREPLIFETIME(AFP_PlayerState, GripStance);
 }
 

@@ -71,9 +71,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
 	int32 Level = 1;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
-	int32 BaseXP = 0;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UWidgetComponent> HP_HeatBar;
 

@@ -279,5 +279,8 @@ void AFP_EnemyCharacter::Tick(float DeltaTime)
 
 int32 AFP_EnemyCharacter::GetXPReward_Implementation() const
 {
-	return UFP_AbilitySystemLibrary::GetXPReward(this, BaseXP, Level);
+	UCharacterClassInfo* ClassInfo = UFP_AbilitySystemLibrary::GetCharacterClassInfo(this);
+	if (!ClassInfo) return 0;
+	const int32 ClassBaseXP = ClassInfo->GetClassDefaultInfo(CharacterClass).BaseXP;
+	return UFP_AbilitySystemLibrary::GetXPReward(this, ClassBaseXP, Level);
 }

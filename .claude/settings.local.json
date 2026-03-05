@@ -4,7 +4,9 @@
       "WebSearch",
       "WebFetch(domain:github.com)",
       "Bash(sed:*)",
-      "Bash(awk NR==537{print; print \"\"\\\\t\\\\t\\\\t\\\\t\\\\tSendXPEvent\\(Props\\);\"\"; next}1:*)"
+      "Bash(awk NR==537{print; print \"\"\\\\t\\\\t\\\\t\\\\t\\\\tSendXPEvent\\(Props\\);\"\"; next}1:*)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

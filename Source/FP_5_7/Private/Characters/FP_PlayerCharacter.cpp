@@ -8,6 +8,9 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Player/FP_PlayerState.h"
+#include "AbilitySystem/Data/FP_LevelUpInfo.h"
+#include "NiagaraComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "UI/HUD/FP_HUD.h"
 
@@ -53,6 +56,10 @@ AFP_PlayerCharacter::AFP_PlayerCharacter()
 
 	// Initialize target to match defaults
 	TargetArmLength = MaxArmLength;
+
+	LevelUpNiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>("LevelUpNiagaraComponent");
+	LevelUpNiagaraComponent->SetupAttachment(GetRootComponent());
+	LevelUpNiagaraComponent->bAutoActivate = false;
 }
 
 void AFP_PlayerCharacter::BeginPlay()
@@ -145,9 +152,33 @@ void AFP_PlayerCharacter::AddToAttributePoints_Implementation(int32 InPoints)
 	FP_PlayerState->AddToAttributePoints(InPoints);
 }
 
+int32 AFP_PlayerCharacter::GetAttributePoints_Implementation() const
+{
+	const AFP_PlayerState* FP_PlayerState = GetPlayerState<AFP_PlayerState>();
+	check(FP_PlayerState);
+	return FP_PlayerState->GetAttributePoints();
+}
+
 void AFP_PlayerCharacter::LevelUp_Implementation()
 {
-	// Multicast VFX / sound can be triggered here via a multicast RPC if needed later.
+	MulticastLevelUpParticles();
+}
+
+void AFP_PlayerCharacter::MulticastLevelUpParticles_Implementation() const
+{
+	if (IsValid(LevelUpNiagaraComponent))
+	{
+		const FVector CameraLocation = FollowCamera->GetComponentLocation();
+		const FVector NiagaraLocation = LevelUpNiagaraComponent->GetComponentLocation();
+		const FRotator ToCameraRotation = (CameraLocation - NiagaraLocation).Rotation();
+		LevelUpNiagaraComponent->SetWorldRotation(ToCameraRotation);
+		LevelUpNiagaraComponent->Activate(true);
+	}
+
+	if (LevelUpSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, LevelUpSound, GetActorLocation());
+	}
 }
 
 void AFP_PlayerCharacter::Tick(float DeltaTime)

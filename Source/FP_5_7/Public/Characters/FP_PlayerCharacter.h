@@ -9,6 +9,8 @@
 
 class USpringArmComponent;
 class UCameraComponent;
+class UNiagaraComponent;
+class USoundBase;
 
 
 UCLASS()
@@ -37,6 +39,7 @@ public:
 	virtual int32 GetAttributePointsReward_Implementation(int32 Level) const override;
 	virtual void AddToPlayerLevel_Implementation(int32 InLevel) override;
 	virtual void AddToAttributePoints_Implementation(int32 InPoints) override;
+	virtual int32 GetAttributePoints_Implementation() const override;
 	virtual void LevelUp_Implementation() override;
 	/** end Player Interface */
 
@@ -57,6 +60,15 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category="Camera")
 	TObjectPtr<UCameraComponent> FollowCamera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="FX", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<UNiagaraComponent> LevelUpNiagaraComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category="FX", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<USoundBase> LevelUpSound;
+
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastLevelUpParticles() const;
 
 	// Zoom tuning
 	UPROPERTY(EditDefaultsOnly, Category="Camera|Zoom")

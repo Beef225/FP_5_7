@@ -20,9 +20,15 @@ class FP_5_7_API UFP_CharacterMenuWidgetController : public UFP_WidgetController
 public:
 	virtual void BindCallbacksToDependencies() override;
 	virtual void BroadcastInitialValues() override;
-	
-	UPROPERTY(BlueprintAssignable, Category="GAS| Attributues")
+
+	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FAttributeInfoSignature AttributeInfoDelegate;
+
+	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
+	FOnAttributePointsChangedSignature AttributePointsChangedDelegate;
+
+	UFUNCTION(BlueprintCallable, Category="GAS|Attributes")
+	void UpgradeAttribute(const FGameplayTag& AttributeTag);
 	
 protected:
 	UPROPERTY(EditDefaultsOnly)

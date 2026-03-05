@@ -2,14 +2,15 @@
 
 int32 UFP_LevelUpInfo::FindLevelForXP(int32 XP) const
 {
+	const int32 MaxLevel = GetMaxLevel();
 	int32 Level = 1;
 	bool bSearching = true;
 
 	while (bSearching)
 	{
-		if (LevelUpInformation.Num() - 1 <= Level) return Level;
+		if (Level >= MaxLevel) return MaxLevel;
 
-		if (XP >= LevelUpInformation[Level].LevelUpRequirement)
+		if (XP >= LevelUpInformation[Level + 1].LevelUpRequirement)
 		{
 			++Level;
 		}

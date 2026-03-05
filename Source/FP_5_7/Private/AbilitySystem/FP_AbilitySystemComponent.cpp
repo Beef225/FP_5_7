@@ -5,6 +5,9 @@
 
 #include "FP_GameplayTags.h"
 #include "AbilitySystem/Abilities/FP_GameplayAbility.h"
+#include "Interaction/FP_PlayerInterface.h"
+#include "AbilitySystem/FP_AttributeSet.h"
+#include "Player/FP_PlayerState.h"
 
 void UFP_AbilitySystemComponent::AbilityActorInfoSet()
 {
@@ -123,6 +126,39 @@ void UFP_AbilitySystemComponent::OnRep_ActivateAbilities()
 	}
 }
 
+
+void UFP_AbilitySystemComponent::UpgradeAttribute(const FGameplayTag& AttributeTag)
+{
+	if (GetAvatarActor()->Implements<UFP_PlayerInterface>())
+	{
+		if (IFP_PlayerInterface::Execute_GetAttributePoints(GetAvatarActor()) > 0)
+		{
+			ServerUpgradeAttribute(AttributeTag);
+		}
+	}
+}
+
+void UFP_AbilitySystemComponent::ServerUpgradeAttribute_Implementation(const FGameplayTag& AttributeTag)
+{
+	if (const UFP_AttributeSet* AS = GetSet<UFP_AttributeSet>())
+	{
+		if (const TStaticFuncPtr<FGameplayAttribute()>* FuncPtr = AS->TagsToAttributes.Find(AttributeTag))
+		{
+			const FGameplayAttribute Attribute = (*FuncPtr)();
+			SetNumericAttributeBase(Attribute, GetNumericAttributeBase(Attribute) + 1.f);
+		}
+	}
+
+	if (GetAvatarActor()->Implements<UFP_PlayerInterface>())
+	{
+		IFP_PlayerInterface::Execute_AddToAttributePoints(GetAvatarActor(), -1);
+	}
+
+	if (AFP_PlayerState* PS = Cast<AFP_PlayerState>(GetOwner()))
+	{
+		PS->AddToPassivePoints(AttributeTag, 1);
+	}
+}
 
 void UFP_AbilitySystemComponent::ClientEffectApplied_Implementation(UAbilitySystemComponent* AbilitySystemComponent,
                                                                     const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle)

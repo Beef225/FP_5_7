@@ -40,5 +40,8 @@ public:
 	void AddToAttributePoints(int32 InPoints);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	int32 GetAttributePoints() const;
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void LevelUp();
 };

@@ -239,7 +239,7 @@ void AFP_EnemyCharacter::OnAbilityActivated(UGameplayAbility* ActivatedAbility)
 		return;
 	}
 
-	if (ActivatedAbility->AbilityTags.HasTagExact(FFP_GameplayTags::Get().Effects_HitReact))
+	if (ActivatedAbility->GetAssetTags().HasTagExact(FFP_GameplayTags::Get().Effects_HitReact))
 	{
 		++ActiveHitReactAbilities;
 		SetHitReactState(true);
@@ -253,7 +253,7 @@ void AFP_EnemyCharacter::OnAbilityEnded(const FAbilityEndedData& AbilityEndedDat
 		return;
 	}
 
-	if (AbilityEndedData.AbilityThatEnded->AbilityTags.HasTagExact(FFP_GameplayTags::Get().Effects_HitReact))
+	if (AbilityEndedData.AbilityThatEnded->GetAssetTags().HasTagExact(FFP_GameplayTags::Get().Effects_HitReact))
 	{
 		ActiveHitReactAbilities = FMath::Max(0, ActiveHitReactAbilities - 1);
 		if (ActiveHitReactAbilities == 0)

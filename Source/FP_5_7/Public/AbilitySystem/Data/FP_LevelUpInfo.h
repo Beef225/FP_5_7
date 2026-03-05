@@ -35,6 +35,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category="LevelUp")
 	int32 FindLevelForXP(int32 XP) const;
 
+	// Derived from asset size: Num - 1 (placeholder at [0]) - 1 (sentinel at end)
+	UFUNCTION(BlueprintCallable, Category="LevelUp")
+	int32 GetMaxLevel() const { return FMath::Max(1, LevelUpInformation.Num() - 2); }
+
 #if WITH_EDITOR
 	UFUNCTION(CallInEditor, Category="Import")
 	void ImportFromJson();

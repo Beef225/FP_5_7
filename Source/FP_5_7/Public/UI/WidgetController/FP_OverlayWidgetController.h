@@ -36,6 +36,7 @@ class UFP_AbilitySystemComponent;
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChangedSignature, float, NewValue);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayerLevelChangedSignature, int32, NewLevel);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature, FUIWidgetRow, Row);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSkillLibraryInfosignature, const FFP_AbilityEntry&, Info);
 
@@ -72,6 +73,15 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, Category="GAS|XP")
 	FOnAttributeChangedSignature OnXPPercentChangedDelegate;
+
+	UPROPERTY(BlueprintAssignable, Category="GAS|XP")
+	FOnPlayerLevelChangedSignature OnPlayerLevelChangedDelegate;
+
+	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
+	FOnAttributePointsChangedSignature OnAttributePointsChangedDelegate;
+
+	UPROPERTY(BlueprintAssignable, Category="GAS|Passives")
+	FOnPassivePointsChangedSignature OnPassivePointsChangedDelegate;
 	
 		
 protected:

@@ -4,12 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemComponent.h"
+#include "GameplayTagContainer.h"
 #include "UObject/Object.h"
 #include "UObject/NoExportTypes.h"
 #include "FP_WidgetController.generated.h"
 
 class UAttributeSet;
 class UAbilitySystemComponent;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributePointsChangedSignature, int32, NewPoints);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnPassivePointsChangedSignature, FGameplayTag, AttributeTag, int32, Points);
 
 USTRUCT(BlueprintType)
 

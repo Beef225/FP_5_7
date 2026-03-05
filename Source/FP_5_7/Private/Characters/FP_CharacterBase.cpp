@@ -76,6 +76,12 @@ void AFP_CharacterBase::Die()
 	}
 	bDead = true;
 
+	// Disable collision immediately so projectiles stop hitting during the death animation.
+	// MulticastHandleDeath will set the final physics-only state once the anim finishes.
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetMesh()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Ignore);
+	GetMesh()->SetGenerateOverlapEvents(false);
+
 	// Detach weapon immediately so montage doesn't drag it around (optional)
 	if (Weapon)
 	{

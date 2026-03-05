@@ -1055,6 +1055,7 @@ private:
 	void ShowFloatingText(const FEffectProperties& Props, float Damage, bool bBlockedHit, bool bCriticalHit) const;
 	void SendXPEvent(const FEffectProperties& Props);
 	bool bTopOffHealth = false;
+	bool bDebugXP = true;
 	
 	
 };

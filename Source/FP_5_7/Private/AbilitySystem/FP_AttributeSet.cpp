@@ -531,9 +531,12 @@ void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 				{
 					if (IFP_CombatInterface* CombatInterface = Cast<IFP_CombatInterface>(Props.TargetAvatarActor))
 					{
-						CombatInterface->Die();
+						if (!IFP_CombatInterface::Execute_IsDead(Props.TargetAvatarActor))
+						{
+							CombatInterface->Die();
+							SendXPEvent(Props);
+						}
 					}
-					SendXPEvent(Props);
 				}
 			}
 			else
@@ -564,6 +567,11 @@ void UFP_AttributeSet::HandleIncomingXP(const FEffectProperties& Props)
 {
 	const float LocalIncomingXP = GetIncomingXP();
 	SetIncomingXP(0.f);
+
+	if (bDebugXP)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[XP Debug] Incoming XP: %f"), LocalIncomingXP);
+	}
 
 	if (!Props.SourceCharacter) return;
 	if (!Props.SourceCharacter->Implements<UFP_PlayerInterface>()) return;

@@ -4,6 +4,8 @@
 #include "Player/FP_PlayerState.h"
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "AbilitySystem/Data/FP_LevelUpInfo.h"
+#include "FP_GameplayTags.h"
 #include "Net/UnrealNetwork.h"
 
 AFP_PlayerState::AFP_PlayerState()
@@ -24,6 +26,10 @@ void AFP_PlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutL
 	DOREPLIFETIME(AFP_PlayerState, Level);
 	DOREPLIFETIME(AFP_PlayerState, XP);
 	DOREPLIFETIME(AFP_PlayerState, AttributePoints);
+	DOREPLIFETIME(AFP_PlayerState, MightPassivePoints);
+	DOREPLIFETIME(AFP_PlayerState, ResonancePassivePoints);
+	DOREPLIFETIME(AFP_PlayerState, AgilityPassivePoints);
+	DOREPLIFETIME(AFP_PlayerState, FortitudePassivePoints);
 	DOREPLIFETIME(AFP_PlayerState, GripStance);
 }
 
@@ -46,7 +52,16 @@ void AFP_PlayerState::SetGripStance(EWeaponGripStyle InGripStance)
 
 void AFP_PlayerState::AddToXP(int32 InXP)
 {
-	XP += InXP;
+	if (LevelUpInfo)
+	{
+		const int32 MaxLevel = LevelUpInfo->GetMaxLevel();
+		const int32 MaxXP = LevelUpInfo->LevelUpInformation[MaxLevel].LevelUpRequirement;
+		XP = FMath::Min(XP + InXP, MaxXP);
+	}
+	else
+	{
+		XP += InXP;
+	}
 	OnXPChangedDelegate.Broadcast(XP);
 }
 
@@ -89,9 +104,54 @@ void AFP_PlayerState::OnRep_AttributePoints(int32 OldAttributePoints)
 	OnAttributePointsChangedDelegate.Broadcast(AttributePoints);
 }
 
+void AFP_PlayerState::AddToPassivePoints(const FGameplayTag& AttributeTag, int32 InPoints)
+{
+	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();
+	if (AttributeTag.MatchesTagExact(GameplayTags.Attributes_Primary_Might))
+	{
+		MightPassivePoints += InPoints;
+		OnPassivePointsChangedDelegate.Broadcast(GameplayTags.Attributes_Primary_Might, MightPassivePoints);
+	}
+	else if (AttributeTag.MatchesTagExact(GameplayTags.Attributes_Primary_Resonance))
+	{
+		ResonancePassivePoints += InPoints;
+		OnPassivePointsChangedDelegate.Broadcast(GameplayTags.Attributes_Primary_Resonance, ResonancePassivePoints);
+	}
+	else if (AttributeTag.MatchesTagExact(GameplayTags.Attributes_Primary_Agility))
+	{
+		AgilityPassivePoints += InPoints;
+		OnPassivePointsChangedDelegate.Broadcast(GameplayTags.Attributes_Primary_Agility, AgilityPassivePoints);
+	}
+	else if (AttributeTag.MatchesTagExact(GameplayTags.Attributes_Primary_Fortitude))
+	{
+		FortitudePassivePoints += InPoints;
+		OnPassivePointsChangedDelegate.Broadcast(GameplayTags.Attributes_Primary_Fortitude, FortitudePassivePoints);
+	}
+}
+
+void AFP_PlayerState::OnRep_MightPassivePoints(int32 OldPoints)
+{
+	OnPassivePointsChangedDelegate.Broadcast(FFP_GameplayTags::Get().Attributes_Primary_Might, MightPassivePoints);
+}
+
+void AFP_PlayerState::OnRep_ResonancePassivePoints(int32 OldPoints)
+{
+	OnPassivePointsChangedDelegate.Broadcast(FFP_GameplayTags::Get().Attributes_Primary_Resonance, ResonancePassivePoints);
+}
+
+void AFP_PlayerState::OnRep_AgilityPassivePoints(int32 OldPoints)
+{
+	OnPassivePointsChangedDelegate.Broadcast(FFP_GameplayTags::Get().Attributes_Primary_Agility, AgilityPassivePoints);
+}
+
+void AFP_PlayerState::OnRep_FortitudePassivePoints(int32 OldPoints)
+{
+	OnPassivePointsChangedDelegate.Broadcast(FFP_GameplayTags::Get().Attributes_Primary_Fortitude, FortitudePassivePoints);
+}
+
 void AFP_PlayerState::OnRep_GripStance(EWeaponGripStyle OldGripStance)
 {
-	
+
 }
 
 

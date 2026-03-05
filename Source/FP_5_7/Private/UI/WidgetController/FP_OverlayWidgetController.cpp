@@ -6,19 +6,31 @@
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "AbilitySystem/Data/FP_LevelUpInfo.h"
 #include "AbilitySystem/Data/FP_SkillLibrary.h"
+#include "FP_GameplayTags.h"
 #include "Player/FP_PlayerState.h"
 
 void UFP_OverlayWidgetController::BroadcastInitialValues()
 {
 	Super::BroadcastInitialValues();
-	
+
 	const UFP_AttributeSet* FP_AttributeSet = CastChecked<UFP_AttributeSet>(AttributeSet);
-	
+
 	OnHitPointsChanged.Broadcast(FP_AttributeSet->GetHitPoints());
 	OnMaxHitPointsChanged.Broadcast(FP_AttributeSet->GetMaxHitPoints());
 	OnHeatChanged.Broadcast(FP_AttributeSet->GetHeat());
 	OnMaxHeatThresholdChanged.Broadcast(FP_AttributeSet->GetMaxHeatThreshold());
 	OnMinHeatThresholdChanged.Broadcast(FP_AttributeSet->GetMinHeatThreshold());
+
+	const AFP_PlayerState* FPPlayerState = CastChecked<AFP_PlayerState>(PlayerState);
+	OnXPChanged(FPPlayerState->GetXP());
+	OnPlayerLevelChangedDelegate.Broadcast(FPPlayerState->GetPlayerLevel());
+	OnAttributePointsChangedDelegate.Broadcast(FPPlayerState->GetAttributePoints());
+
+	const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
+	OnPassivePointsChangedDelegate.Broadcast(Tags.Attributes_Primary_Might, FPPlayerState->GetMightPassivePoints());
+	OnPassivePointsChangedDelegate.Broadcast(Tags.Attributes_Primary_Resonance, FPPlayerState->GetResonancePassivePoints());
+	OnPassivePointsChangedDelegate.Broadcast(Tags.Attributes_Primary_Agility, FPPlayerState->GetAgilityPassivePoints());
+	OnPassivePointsChangedDelegate.Broadcast(Tags.Attributes_Primary_Fortitude, FPPlayerState->GetFortitudePassivePoints());
 }
 
 void UFP_OverlayWidgetController::BindCallbacksToDependencies()
@@ -26,6 +38,18 @@ void UFP_OverlayWidgetController::BindCallbacksToDependencies()
 	
 	AFP_PlayerState* FPPlayerState = CastChecked<AFP_PlayerState>(PlayerState);
 	FPPlayerState->OnXPChangedDelegate.AddUObject(this, &UFP_OverlayWidgetController::OnXPChanged);
+	FPPlayerState->OnLevelChangedDelegate.AddLambda([this](int32 NewLevel)
+	{
+		OnPlayerLevelChangedDelegate.Broadcast(NewLevel);
+	});
+	FPPlayerState->OnAttributePointsChangedDelegate.AddLambda([this](int32 NewPoints)
+	{
+		OnAttributePointsChangedDelegate.Broadcast(NewPoints);
+	});
+	FPPlayerState->OnPassivePointsChangedDelegate.AddLambda([this](FGameplayTag Tag, int32 Points)
+	{
+		OnPassivePointsChangedDelegate.Broadcast(Tag, Points);
+	});
 	
 	const UFP_AttributeSet* FP_AttributeSet = CastChecked<UFP_AttributeSet>(AttributeSet);
 	
@@ -146,20 +170,24 @@ void UFP_OverlayWidgetController::OnXPChanged(int32 NewXP) const
 	checkf(LevelUpInfo, TEXT("Unabled to find LevelUpInfo. Please fill out PlayerState Blueprint"));
 
 	const int32 Level = LevelUpInfo->FindLevelForXP(NewXP);
-	const int32 MaxLevel = LevelUpInfo->LevelUpInformation.Num();
+	const int32 MaxLevel = LevelUpInfo->GetMaxLevel();
 
-	if (Level <= MaxLevel && Level > 0)
+	if (Level <= 0) return;
+
+	if (Level >= MaxLevel)
 	{
-		const int32 LevelUpRequirement = LevelUpInfo->LevelUpInformation[Level].LevelUpRequirement;
-		const int32 PreviousLevelUpRequirement = LevelUpInfo->LevelUpInformation[Level - 1].LevelUpRequirement;
-
-		const int32 DeltaLevelRequirement = LevelUpRequirement - PreviousLevelUpRequirement;
-		const int32 XPForThisLevel = NewXP - PreviousLevelUpRequirement;
-
-		const float XPBarPercent = static_cast<float>(XPForThisLevel) / static_cast<float>(DeltaLevelRequirement);
-
-		OnXPPercentChangedDelegate.Broadcast(XPBarPercent);
+		OnXPPercentChangedDelegate.Broadcast(1.f);
+		return;
 	}
+
+	const int32 NextLevelRequirement = LevelUpInfo->LevelUpInformation[Level + 1].LevelUpRequirement;
+	const int32 ThisLevelRequirement = LevelUpInfo->LevelUpInformation[Level].LevelUpRequirement;
+
+	const int32 DeltaLevelRequirement = NextLevelRequirement - ThisLevelRequirement;
+	const int32 XPForThisLevel = NewXP - ThisLevelRequirement;
+
+	const float XPBarPercent = static_cast<float>(XPForThisLevel) / static_cast<float>(DeltaLevelRequirement);
+	OnXPPercentChangedDelegate.Broadcast(XPBarPercent);
 }
 
 

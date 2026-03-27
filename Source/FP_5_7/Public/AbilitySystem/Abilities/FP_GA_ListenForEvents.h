@@ -14,6 +14,7 @@ struct FGameplayEventData;
  * meta attribute pipeline. Will be expanded to handle additional event-based rewards.
  *
  * Add to StartupPassiveAbilities. Never calls EndAbility — runs for character lifetime.
+ * 
  * Set IncomingXPEffectClass on the Blueprint child class.
  */
 UCLASS()

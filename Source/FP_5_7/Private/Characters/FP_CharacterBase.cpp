@@ -10,8 +10,7 @@
 #include "FP_5_7/FP_5_7.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "Kismet/GameplayStatics.h"
-#include "NiagaraFunctionLibrary.h"
-#include "NiagaraComponent.h"
+#include "Materials/MaterialInstanceDynamic.h"
 
 
 // Sets default values
@@ -184,6 +183,12 @@ void AFP_CharacterBase::MulticastHandleDeath_Implementation()
 	Dissolve();
 }
 
+void AFP_CharacterBase::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	TickOverheatFade(DeltaTime);
+}
+
 void AFP_CharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
@@ -195,7 +200,15 @@ void AFP_CharacterBase::BeginPlay()
 		bCachedBaseWalkSpeed = true;
 	}
 
-	InitializeStatusFX();
+	if (ChillOverlayMaterial)
+	{
+		ChillOverlayMID = UMaterialInstanceDynamic::Create(ChillOverlayMaterial, this);
+	}
+	if (OverheatOverlayMaterial)
+	{
+		OverheatOverlayMID = UMaterialInstanceDynamic::Create(OverheatOverlayMaterial, this);
+		OverheatOverlayMID->SetScalarParameterValue(OverheatIntensityParamName, 0.f);
+	}
 }
 
 void AFP_CharacterBase::InitAbilityActorInfo()
@@ -356,10 +369,20 @@ void AFP_CharacterBase::OnFrozenTagChanged(FGameplayTag Tag, int32 NewCount)
 	(void)Tag;
 	RefreshMovementSpeed();
 
-	if (FrozenFXComponent)
+	if (NewCount > 0)
 	{
-		if (NewCount > 0) FrozenFXComponent->Activate();
-		else              FrozenFXComponent->DeactivateImmediate();
+		if (FrozenOverlayMaterial)
+		{
+			ApplyOverlayToAllMeshes(FrozenOverlayMaterial);
+			ActiveOverlay = EStatusOverlay::Frozen;
+		}
+	}
+	else if (ActiveOverlay == EStatusOverlay::Frozen)
+	{
+		ClearOverlayFromAllMeshes();
+		ActiveOverlay = EStatusOverlay::None;
+		// Restore chill if ramp still active
+		UpdateChillOverlay(FreezeMovementRamp);
 	}
 }
 
@@ -367,7 +390,7 @@ void AFP_CharacterBase::SetFreezeRamp(float NewRamp)
 {
 	FreezeMovementRamp = FMath::Clamp(NewRamp, 0.f, 1.f);
 	RefreshMovementSpeed();
-	UpdateChillFX(FreezeMovementRamp);
+	UpdateChillOverlay(FreezeMovementRamp);
 }
 
 void AFP_CharacterBase::RefreshMovementSpeed()
@@ -428,78 +451,91 @@ void AFP_CharacterBase::RefreshMovementSpeed()
 	GetCharacterMovement()->MaxWalkSpeed = FinalSpeed;
 }
 
-void AFP_CharacterBase::InitializeStatusFX()
+void AFP_CharacterBase::ApplyOverlayToAllMeshes(UMaterialInterface* OverlayMat)
 {
-	USkeletalMeshComponent* MeshComp = GetMesh();
-	if (!MeshComp) return;
-
-	if (ChillFXSystem)
+	TArray<USkeletalMeshComponent*> Meshes;
+	GetComponents<USkeletalMeshComponent>(Meshes);
+	for (USkeletalMeshComponent* SkelMesh : Meshes)
 	{
-		ChillFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
-			ChillFXSystem, MeshComp, NAME_None,
-			ChillFXOffset, FRotator::ZeroRotator,
-			EAttachLocation::KeepRelativeOffset, /*bAutoDestroy=*/false, /*bAutoActivate=*/false);
-	}
-
-	if (FrozenFXSystem)
-	{
-		FrozenFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
-			FrozenFXSystem, MeshComp, NAME_None,
-			FrozenFXOffset, FRotator::ZeroRotator,
-			EAttachLocation::KeepRelativeOffset, false, false);
-	}
-
-	if (OverheatFXSystem)
-	{
-		OverheatFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
-			OverheatFXSystem, MeshComp, NAME_None,
-			OverheatFXOffset, FRotator::ZeroRotator,
-			EAttachLocation::KeepRelativeOffset, false, false);
-	}
-
-	if (OverheatSteamFXSystem)
-	{
-		const bool bSocketValid = OverheatSteamSocketName != NAME_None
-			&& MeshComp->DoesSocketExist(OverheatSteamSocketName);
-		const FName Socket = bSocketValid ? OverheatSteamSocketName : NAME_None;
-
-		OverheatSteamFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
-			OverheatSteamFXSystem, MeshComp, Socket,
-			FVector::ZeroVector, FRotator::ZeroRotator,
-			EAttachLocation::SnapToTarget, false, false);
+		SkelMesh->SetOverlayMaterial(OverlayMat);
 	}
 }
 
-void AFP_CharacterBase::UpdateChillFX(float FreezeRamp)
+void AFP_CharacterBase::ClearOverlayFromAllMeshes()
 {
-	if (!ChillFXComponent) return;
+	ApplyOverlayToAllMeshes(nullptr);
+}
 
-	// Active only in the chill zone — not when fully frozen (frozen FX takes over at 1.0).
-	const bool bShouldBeActive = FreezeRamp > 0.f && FreezeRamp < 1.f;
-
-	if (bShouldBeActive)
+void AFP_CharacterBase::UpdateChillOverlay(float FreezeRamp)
+{
+	// Chill is active only between 0 and 1 — frozen overlay takes over at 1.
+	if (FreezeRamp > 0.f && FreezeRamp < 1.f)
 	{
-		if (!ChillFXComponent->IsActive()) ChillFXComponent->Activate();
-		ChillFXComponent->SetFloatParameter(ChillIntensityParamName, FreezeRamp);
+		if (ChillOverlayMID)
+		{
+			// Always update the intensity parameter (cheap float set)
+			ChillOverlayMID->SetScalarParameterValue(ChillIntensityParamName, FreezeRamp);
+
+			// Only apply to meshes on transition into Chill state
+			if (ActiveOverlay != EStatusOverlay::Chill)
+			{
+				ApplyOverlayToAllMeshes(ChillOverlayMID);
+				ActiveOverlay = EStatusOverlay::Chill;
+			}
+		}
 	}
-	else
+	else if (ActiveOverlay == EStatusOverlay::Chill)
 	{
-		ChillFXComponent->Deactivate();
+		// Only clear if we own the overlay
+		ClearOverlayFromAllMeshes();
+		ActiveOverlay = EStatusOverlay::None;
 	}
 }
 
 void AFP_CharacterBase::OnOverheatTagChanged(FGameplayTag Tag, int32 NewCount)
 {
 	(void)Tag;
-	const bool bOverheated = NewCount > 0;
+	if (!OverheatOverlayMID) return;
 
-	if (OverheatFXComponent)
+	if (NewCount > 0)
 	{
-		bOverheated ? OverheatFXComponent->Activate() : OverheatFXComponent->Deactivate();
+		// Apply overlay if not already active (handles case where we were mid-fade-out)
+		if (ActiveOverlay != EStatusOverlay::Overheat)
+		{
+			ApplyOverlayToAllMeshes(OverheatOverlayMID);
+			ActiveOverlay = EStatusOverlay::Overheat;
+		}
+		OverheatFadeTarget = 1.f;
+	}
+	else if (ActiveOverlay == EStatusOverlay::Overheat)
+	{
+		// Start fade out — tick will clear the overlay once alpha hits 0
+		OverheatFadeTarget = 0.f;
+	}
+}
+
+void AFP_CharacterBase::TickOverheatFade(float DeltaTime)
+{
+	if (FMath::IsNearlyEqual(OverheatFadeAlpha, OverheatFadeTarget, 0.001f))
+		return;
+
+	const float FadeSpeed = OverheatFadeDuration > 0.f ? 1.f / OverheatFadeDuration : 999.f;
+	OverheatFadeAlpha = FMath::FInterpConstantTo(OverheatFadeAlpha, OverheatFadeTarget, DeltaTime, FadeSpeed);
+
+	if (OverheatOverlayMID)
+	{
+		OverheatOverlayMID->SetScalarParameterValue(OverheatIntensityParamName, OverheatFadeAlpha);
 	}
 
-	if (OverheatSteamFXComponent)
+	// Check if we've reached the target
+	if (FMath::IsNearlyEqual(OverheatFadeAlpha, OverheatFadeTarget, 0.001f))
 	{
-		bOverheated ? OverheatSteamFXComponent->Activate() : OverheatSteamFXComponent->Deactivate();
+		OverheatFadeAlpha = OverheatFadeTarget;
+
+		if (OverheatFadeTarget == 0.f && ActiveOverlay == EStatusOverlay::Overheat)
+		{
+			ClearOverlayFromAllMeshes();
+			ActiveOverlay = EStatusOverlay::None;
+		}
 	}
 }

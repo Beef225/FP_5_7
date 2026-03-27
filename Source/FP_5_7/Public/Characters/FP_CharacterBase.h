@@ -16,8 +16,8 @@ class UGameplayEffect;
 class UGameplayAbility;
 class UAnimMontage;
 class USoundBase;
-class UNiagaraSystem;
-class UNiagaraComponent;
+class UMaterialInterface;
+class UMaterialInstanceDynamic;
 struct FOnAttributeChangeData;
 
 
@@ -73,6 +73,8 @@ protected:
 	 *  - RefreshMovementSpeed()
 	 */
 	virtual void InitAbilityActorInfo();
+
+	virtual void Tick(float DeltaTime) override;
 
 	/** Combat */
 	UPROPERTY(EditAnywhere, Category = "Combat")
@@ -161,59 +163,45 @@ public:
 
 protected:
 
-	/** Status FX — Niagara assets. Leave unset to skip that effect entirely. */
+	/** Status FX — overlay materials applied across all skeletal mesh components. */
+
+	UPROPERTY(EditAnywhere, Category="FX|Overheat")
+	TObjectPtr<UMaterialInterface> OverheatOverlayMaterial;
+
+	UPROPERTY(EditAnywhere, Category="FX|Overheat")
+	FName OverheatIntensityParamName = FName("OverheatIntensity");
+
+	UPROPERTY(EditAnywhere, Category="FX|Overheat")
+	float OverheatFadeDuration = 0.3f;
 
 	UPROPERTY(EditAnywhere, Category="FX|Chill")
-	TObjectPtr<UNiagaraSystem> ChillFXSystem;
+	TObjectPtr<UMaterialInterface> ChillOverlayMaterial;
 
-	/** Offset from mesh origin where the chill effect spawns (relative to mesh). */
-	UPROPERTY(EditAnywhere, Category="FX|Chill")
-	FVector ChillFXOffset = FVector::ZeroVector;
-
-	/** Name of the float parameter in ChillFXSystem that controls particle intensity (0-1). */
+	/** Scalar parameter name in ChillOverlayMaterial that controls intensity (0-1). */
 	UPROPERTY(EditAnywhere, Category="FX|Chill")
 	FName ChillIntensityParamName = FName("Intensity");
 
 	UPROPERTY(EditAnywhere, Category="FX|Frozen")
-	TObjectPtr<UNiagaraSystem> FrozenFXSystem;
-
-	/** Offset from mesh origin where the frozen effect spawns (relative to mesh). */
-	UPROPERTY(EditAnywhere, Category="FX|Frozen")
-	FVector FrozenFXOffset = FVector::ZeroVector;
-
-	UPROPERTY(EditAnywhere, Category="FX|Overheat")
-	TObjectPtr<UNiagaraSystem> OverheatFXSystem;
-
-	/** Offset from mesh origin where the overheat effect spawns (relative to mesh). */
-	UPROPERTY(EditAnywhere, Category="FX|Overheat")
-	FVector OverheatFXOffset = FVector::ZeroVector;
-
-	/** Optional second overheat effect (e.g. steam) spawned at a specific socket. */
-	UPROPERTY(EditAnywhere, Category="FX|Overheat")
-	TObjectPtr<UNiagaraSystem> OverheatSteamFXSystem;
-
-	/** Socket to attach OverheatSteamFXSystem to. Leave NAME_None to attach to mesh root. */
-	UPROPERTY(EditAnywhere, Category="FX|Overheat")
-	FName OverheatSteamSocketName = NAME_None;
+	TObjectPtr<UMaterialInterface> FrozenOverlayMaterial;
 
 private:
 
-	/** Runtime Niagara components — created from the assets above, deactivated by default. */
+	enum class EStatusOverlay : uint8 { None, Overheat, Chill, Frozen };
+	EStatusOverlay ActiveOverlay = EStatusOverlay::None;
 
 	UPROPERTY(Transient)
-	TObjectPtr<UNiagaraComponent> ChillFXComponent;
+	TObjectPtr<UMaterialInstanceDynamic> ChillOverlayMID;
 
 	UPROPERTY(Transient)
-	TObjectPtr<UNiagaraComponent> FrozenFXComponent;
+	TObjectPtr<UMaterialInstanceDynamic> OverheatOverlayMID;
 
-	UPROPERTY(Transient)
-	TObjectPtr<UNiagaraComponent> OverheatFXComponent;
+	float OverheatFadeAlpha = 0.f;
+	float OverheatFadeTarget = 0.f;
 
-	UPROPERTY(Transient)
-	TObjectPtr<UNiagaraComponent> OverheatSteamFXComponent;
-
-	void InitializeStatusFX();
-	void UpdateChillFX(float FreezeRamp);
+	void ApplyOverlayToAllMeshes(UMaterialInterface* OverlayMat);
+	void ClearOverlayFromAllMeshes();
+	void UpdateChillOverlay(float FreezeRamp);
+	void TickOverheatFade(float DeltaTime);
 
 	UFUNCTION()
 	void OnOverheatTagChanged(FGameplayTag Tag, int32 NewCount);

@@ -6,7 +6,8 @@
       "Bash(sed:*)",
       "Bash(awk NR==537{print; print \"\"\\\\t\\\\t\\\\t\\\\t\\\\tSendXPEvent\\(Props\\);\"\"; next}1:*)",
       "WebFetch(domain:api.github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(\"C:/Program Files/Epic Games/UE_5.7/Engine/Build/BatchFiles/Build.bat\" FP_5_7 Win64 Development \"C:/Unreal/FP_5_7/FP_5_7.uproject\" -waitmutex)"
     ]
   }
 }

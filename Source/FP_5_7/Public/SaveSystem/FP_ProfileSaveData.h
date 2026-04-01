@@ -42,6 +42,9 @@ struct FFP_CharacterSaveRecord
 	FDateTime LastPlayed;
 
 	bool IsValid() const { return CharacterID.IsValid(); }
+
+	bool operator==(const FFP_CharacterSaveRecord& Other) const { return CharacterID == Other.CharacterID; }
+	bool operator!=(const FFP_CharacterSaveRecord& Other) const { return CharacterID != Other.CharacterID; }
 };
 
 

@@ -86,6 +86,10 @@
 			"Enabled": true
 		},
 		{
+			"Name": "ModelViewViewModel",
+			"Enabled": true
+		},
+		{
 			"Name": "GameplayStateTree",
 			"Enabled": true
 		},

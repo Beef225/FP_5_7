@@ -14,7 +14,9 @@ public class FP_5_7 : ModuleRules
 			"Engine",
 			"GameplayAbilities",
 			"GameplayTags",
-			"GameplayTasks"
+			"GameplayTasks",
+			"UMG",
+			"ModelViewViewModel"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new[]

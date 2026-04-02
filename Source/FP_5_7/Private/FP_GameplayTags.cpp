@@ -958,12 +958,34 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	//Skills
 	//Skills
 	GameplayTags.Skills_Energy_Firebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Skills.Energy.Firebolt"), 
+		FName("Skills.Energy.Firebolt"),
 		FString("Skill Name Firebolt")
 		);
 	GameplayTags.Skills_Radiation_Microwave = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Skills.Radiation.Microwave"), 
+		FName("Skills.Radiation.Microwave"),
 		FString("Skill Name Microwave")
 		);
+
+	//Locations
+	GameplayTags.Location_The_Aurora = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.The_Aurora"), FString("The Aurora"));
+	GameplayTags.Location_Colony = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.Colony"), FString("Colony"));
+	GameplayTags.Location_Lunar_Base = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.Lunar_Base"), FString("Lunar Base"));
+	GameplayTags.Location_Void_Domain = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.Void_Domain"), FString("Void Domain"));
+	GameplayTags.Location_Derelict_Station = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.Derelict_Station"), FString("Derelict Station"));
+	GameplayTags.Location_Crystalline_Depths = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.Crystalline_Depths"), FString("Crystalline Depths"));
+	GameplayTags.Location_Frozen_Orbit = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.Frozen_Orbit"), FString("Frozen Orbit"));
+	GameplayTags.Location_Ash_Fields = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.Ash_Fields"), FString("Ash Fields"));
+	GameplayTags.Location_Titans_Hollow = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.Titans_Hollow"), FString("Titan's Hollow"));
+	GameplayTags.Location_Shattered_Reach = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.Shattered_Reach"), FString("Shattered Reach"));
 
 }

@@ -307,6 +307,18 @@ FGameplayTag SkillTagMod_Movement;
 FGameplayTag SkillTagMod_Buff;
 
 
+//Locations
+FGameplayTag Location_The_Aurora;
+FGameplayTag Location_Colony;
+FGameplayTag Location_Lunar_Base;
+FGameplayTag Location_Void_Domain;
+FGameplayTag Location_Derelict_Station;
+FGameplayTag Location_Crystalline_Depths;
+FGameplayTag Location_Frozen_Orbit;
+FGameplayTag Location_Ash_Fields;
+FGameplayTag Location_Titans_Hollow;
+FGameplayTag Location_Shattered_Reach;
+
 //Skills
 //Skills
 FGameplayTag Skills_Energy_Firebolt;

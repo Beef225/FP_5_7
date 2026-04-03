@@ -67,6 +67,9 @@ public:
 
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 
+	/** Saves the active character's runtime state before shutdown. Fires in PIE and packaged builds. */
+	virtual void Deinitialize() override;
+
 
 	// --- User Identity ---
 
@@ -182,6 +185,16 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category="Save", meta=(WorldContext="WorldContextObject"))
 	void OpenLevelForPendingCharacter(const UObject* WorldContextObject);
+
+
+	/**
+	 * Reads XP and Level from the active PlayerState and writes them into the
+	 * save record for LastPlayedCharacterID, then saves the profile.
+	 * No-op if there is no active character or no valid player state.
+	 * Call this explicitly before quitting or transitioning levels.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Save")
+	void SaveActiveCharacter();
 
 
 	// --- Helpers ---

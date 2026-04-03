@@ -16,7 +16,10 @@ public class FP_5_7 : ModuleRules
 			"GameplayTags",
 			"GameplayTasks",
 			"UMG",
-			"ModelViewViewModel"
+			"ModelViewViewModel",
+			"Slate",
+			"SlateCore",
+			"MoviePlayer"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new[]
@@ -36,8 +39,6 @@ public class FP_5_7 : ModuleRules
 				"Json",
 				"JsonUtilities",
 				"DesktopPlatform",
-				"Slate",
-				"SlateCore",
 				"NavigationSystem",
 				"AIModule"
 			});

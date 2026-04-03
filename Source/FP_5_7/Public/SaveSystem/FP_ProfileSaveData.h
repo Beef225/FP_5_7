@@ -24,7 +24,7 @@ struct FFP_CharacterSaveRecord
 	int32 CharacterLevel = 1;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	float ExperiencePoints = 0.f;
+	int32 ExperiencePoints = 0;
 
 	/** Identifies the character class (e.g. Player.Class.Warrior). */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -36,6 +36,23 @@ struct FFP_CharacterSaveRecord
 	 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FGameplayTag LastCheckpointTag;
+
+	/** Unspent attribute points awarded on level-up but not yet allocated. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 UnspentAttributePoints = 0;
+
+	/** Points the player has allocated into each primary attribute. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 MightPoints = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 ResonancePoints = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 AgilityPoints = 0;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 FortitudePoints = 0;
 
 	/** Used to sort cards by most-recently-played. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)

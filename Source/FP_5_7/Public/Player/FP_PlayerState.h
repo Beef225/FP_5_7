@@ -55,9 +55,18 @@ public:
 	void AddToLevel(int32 InLevel);
 	void AddToAttributePoints(int32 InPoints);
 	void AddToPassivePoints(const FGameplayTag& AttributeTag, int32 InPoints);
-	
+
 	void SetXP(int32 InXP);
 	void SetLevel(int32 InLevel);
+
+	/**
+	 * Restores attribute point allocation from a save record.
+	 * Sets the unspent pool and per-attribute passive point counters,
+	 * then adds the saved points as base value increases on top of the
+	 * defaults already applied by InitializeDefaultAttributes.
+	 * Call this from OnPossess, after InitializeDefaultAttributes has run.
+	 */
+	void LoadAllocatedPoints(int32 InUnspent, int32 InMight, int32 InResonance, int32 InAgility, int32 InFortitude);
 	
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UFP_LevelUpInfo> LevelUpInfo;

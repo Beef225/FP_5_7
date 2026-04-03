@@ -16,6 +16,7 @@
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "Blueprint/UserWidget.h"
 #include "SaveSystem/FP_SaveGameSubsystem.h"
+#include "Player/FP_PlayerState.h"
 
 
 AFP_PlayerController::AFP_PlayerController()
@@ -267,10 +268,20 @@ void AFP_PlayerController::OnPossess(APawn* InPawn)
 
 	if (UFP_SaveGameSubsystem* SaveSys = UFP_SaveGameSubsystem::Get(this))
 	{
-		if (FFP_CharacterSaveRecord* Record = SaveSys->GetPendingCharacterRecord())
+		if (const FFP_CharacterSaveRecord* Record = SaveSys->GetPendingCharacterRecord())
 		{
-			// TODO: pass Record to the character/GAS init here
-			// e.g. Cast<AFP_PlayerCharacter>(InPawn)->InitFromSaveRecord(*Record);
+			if (AFP_PlayerState* PS = GetPlayerState<AFP_PlayerState>())
+			{
+				PS->SetXP(Record->ExperiencePoints);
+				PS->SetLevel(Record->CharacterLevel);
+				PS->LoadAllocatedPoints(
+					Record->UnspentAttributePoints,
+					Record->MightPoints,
+					Record->ResonancePoints,
+					Record->AgilityPoints,
+					Record->FortitudePoints
+				);
+			}
 		}
 		SaveSys->ClearPendingCharacter();
 	}

@@ -7,6 +7,7 @@
 #include "AbilitySystem/Data/FP_LevelUpInfo.h"
 #include "FP_GameplayTags.h"
 #include "Net/UnrealNetwork.h"
+#include "AbilitySystemComponent.h"
 
 AFP_PlayerState::AFP_PlayerState()
 {
@@ -152,6 +153,43 @@ void AFP_PlayerState::OnRep_FortitudePassivePoints(int32 OldPoints)
 void AFP_PlayerState::OnRep_GripStance(EWeaponGripStyle OldGripStance)
 {
 
+}
+
+void AFP_PlayerState::LoadAllocatedPoints(int32 InUnspent, int32 InMight, int32 InResonance, int32 InAgility, int32 InFortitude)
+{
+	// Restore unspent pool
+	AttributePoints = InUnspent;
+	OnAttributePointsChangedDelegate.Broadcast(AttributePoints);
+
+	// Restore per-attribute counters and broadcast so UI refreshes
+	MightPassivePoints     = InMight;
+	ResonancePassivePoints = InResonance;
+	AgilityPassivePoints   = InAgility;
+	FortitudePassivePoints = InFortitude;
+
+	const FFP_GameplayTags& FPTags = FFP_GameplayTags::Get();
+	OnPassivePointsChangedDelegate.Broadcast(FPTags.Attributes_Primary_Might,     MightPassivePoints);
+	OnPassivePointsChangedDelegate.Broadcast(FPTags.Attributes_Primary_Resonance, ResonancePassivePoints);
+	OnPassivePointsChangedDelegate.Broadcast(FPTags.Attributes_Primary_Agility,   AgilityPassivePoints);
+	OnPassivePointsChangedDelegate.Broadcast(FPTags.Attributes_Primary_Fortitude, FortitudePassivePoints);
+
+	// Apply the saved points as base value increases on top of the defaults
+	// already set by InitializeDefaultAttributes.
+	UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
+	if (!ASC) return;
+
+	auto AddBase = [ASC](FGameplayAttribute Attr, int32 Points)
+	{
+		if (Points > 0)
+		{
+			ASC->SetNumericAttributeBase(Attr, ASC->GetNumericAttributeBase(Attr) + static_cast<float>(Points));
+		}
+	};
+
+	AddBase(UFP_AttributeSet::GetMightAttribute(),     InMight);
+	AddBase(UFP_AttributeSet::GetResonanceAttribute(), InResonance);
+	AddBase(UFP_AttributeSet::GetAgilityAttribute(),   InAgility);
+	AddBase(UFP_AttributeSet::GetFortitudeAttribute(), InFortitude);
 }
 
 

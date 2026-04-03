@@ -6,6 +6,15 @@
 #include "FP_GameplayTags.h"
 #include "Locations/FP_LocationRegistry.h"
 #include "Locations/FP_LocationDataAsset.h"
+#include "Player/FP_PlayerState.h"
+#include "GameFramework/PlayerController.h"
+#include "MoviePlayer.h"
+#include "Widgets/SOverlay.h"
+#include "Widgets/SBoxPanel.h"
+#include "Widgets/Images/SImage.h"
+#include "Widgets/Text/STextBlock.h"
+#include "Widgets/Layout/SBox.h"
+#include "Widgets/Colors/SColorBlock.h"
 
 
 const FString UFP_SaveGameSubsystem::IdentitySlotName = TEXT("FP_LocalUser");
@@ -213,7 +222,64 @@ void UFP_SaveGameSubsystem::OpenLevelForPendingCharacter(const UObject* WorldCon
 		return;
 	}
 
+	// Show loading screen on a background thread while OpenLevel blocks the game thread
+	FLoadingScreenAttributes LoadingScreen;
+	LoadingScreen.bAutoCompleteWhenLoadingCompletes = true;
+	LoadingScreen.MinimumLoadingScreenDisplayTime   = 0.5f;
+	LoadingScreen.WidgetLoadingScreen = SNew(SOverlay)
+		+ SOverlay::Slot()
+		.HAlign(HAlign_Fill)
+		.VAlign(VAlign_Fill)
+		[
+			SNew(SColorBlock)
+			.Color(FLinearColor::Black)
+		]
+		+ SOverlay::Slot()
+		.HAlign(HAlign_Center)
+		.VAlign(VAlign_Center)
+		[
+			SNew(STextBlock)
+			.Text(FText::FromString(TEXT("Loading...")))
+			.ColorAndOpacity(FLinearColor::White)
+		];
+
+	GetMoviePlayer()->SetupLoadingScreen(LoadingScreen);
+	GetMoviePlayer()->PlayMovie();
+
 	UGameplayStatics::OpenLevel(WorldContextObject, LevelName);
+}
+
+void UFP_SaveGameSubsystem::Deinitialize()
+{
+	SaveActiveCharacter();
+	Super::Deinitialize();
+}
+
+void UFP_SaveGameSubsystem::SaveActiveCharacter()
+{
+	if (!ProfileData || !ProfileData->LastPlayedCharacterID.IsValid()) return;
+
+	const UWorld* World = GetGameInstance()->GetWorld();
+	if (!World) return;
+
+	const APlayerController* PC = World->GetFirstPlayerController();
+	if (!PC) return;
+
+	const AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>();
+	if (!PS) return;
+
+	FFP_CharacterSaveRecord* Record = ProfileData->FindCharacter(ProfileData->LastPlayedCharacterID);
+	if (!Record) return;
+
+	Record->ExperiencePoints       = PS->GetXP();
+	Record->CharacterLevel         = PS->GetPlayerLevel();
+	Record->UnspentAttributePoints = PS->GetAttributePoints();
+	Record->MightPoints            = PS->GetMightPassivePoints();
+	Record->ResonancePoints        = PS->GetResonancePassivePoints();
+	Record->AgilityPoints          = PS->GetAgilityPassivePoints();
+	Record->FortitudePoints        = PS->GetFortitudePassivePoints();
+
+	SaveProfile();
 }
 
 // --- Helpers ---

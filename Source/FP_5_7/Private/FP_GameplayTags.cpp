@@ -967,6 +967,8 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		);
 
 	//Locations
+	GameplayTags.Location_Startup = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.Startup"), FString("Startup / new character level"));
 	GameplayTags.Location_The_Aurora = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Location.The_Aurora"), FString("The Aurora"));
 	GameplayTags.Location_Colony = UGameplayTagsManager::Get().AddNativeGameplayTag(

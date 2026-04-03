@@ -308,6 +308,7 @@ FGameplayTag SkillTagMod_Buff;
 
 
 //Locations
+FGameplayTag Location_Startup;
 FGameplayTag Location_The_Aurora;
 FGameplayTag Location_Colony;
 FGameplayTag Location_Lunar_Base;

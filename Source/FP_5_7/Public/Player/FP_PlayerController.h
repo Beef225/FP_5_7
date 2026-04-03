@@ -13,6 +13,7 @@ class IFP_EnemyInterface;
 class UFP_InputConfig;
 class UFP_AbilitySystemComponent;
 class USplineComponent;
+class UUserWidget;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUIInputTagSignature, FGameplayTag, InputTag);
 /**
@@ -45,6 +46,7 @@ protected:
 
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
+	virtual void OnPossess(APawn* InPawn) override;
 	
 private:
 
@@ -79,6 +81,12 @@ private:
 	
 	UFP_AbilitySystemComponent* GetASC();
 	
+	UPROPERTY(EditDefaultsOnly, Category="HUD")
+	TSubclassOf<UUserWidget> GameplayHUDClass;
+
+	UPROPERTY()
+	TObjectPtr<UUserWidget> GameplayHUDWidget;
+
 	UPROPERTY(EditAnywhere, Category="Input")
 	bool bMouseMoveEnabled = false;
 	

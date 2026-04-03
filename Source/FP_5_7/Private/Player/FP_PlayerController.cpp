@@ -13,7 +13,9 @@
 #include "NavigationSystem.h"
 #include "Components/SplineComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
-#include"AbilitySystem/FP_AbilitySystemComponent.h"
+#include "AbilitySystem/FP_AbilitySystemComponent.h"
+#include "Blueprint/UserWidget.h"
+#include "SaveSystem/FP_SaveGameSubsystem.h"
 
 
 AFP_PlayerController::AFP_PlayerController()
@@ -252,7 +254,26 @@ void AFP_PlayerController::BeginPlay()
 	InputModeData.SetHideCursorDuringCapture(false);
 	SetInputMode(InputModeData);
 
+	if (IsLocalController() && GameplayHUDClass)
+	{
+		GameplayHUDWidget = CreateWidget<UUserWidget>(this, GameplayHUDClass);
+		GameplayHUDWidget->AddToViewport();
+	}
+}
 
+void AFP_PlayerController::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
+
+	if (UFP_SaveGameSubsystem* SaveSys = UFP_SaveGameSubsystem::Get(this))
+	{
+		if (FFP_CharacterSaveRecord* Record = SaveSys->GetPendingCharacterRecord())
+		{
+			// TODO: pass Record to the character/GAS init here
+			// e.g. Cast<AFP_PlayerCharacter>(InPawn)->InitFromSaveRecord(*Record);
+		}
+		SaveSys->ClearPendingCharacter();
+	}
 }
 
 void AFP_PlayerController::SetupInputComponent()

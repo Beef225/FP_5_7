@@ -8,6 +8,8 @@
 #include "SaveSystem/FP_LocalUserSaveData.h"
 #include "FP_SaveGameSubsystem.generated.h"
 
+class UFP_LocationRegistry;
+
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFP_OnProfileLoaded);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFP_OnProfileSaved);
@@ -136,6 +138,20 @@ public:
 	bool HasAvailableSlot() const;
 
 
+	// --- Location Registry ---
+
+	/**
+	 * Assign your UFP_LocationRegistry data asset here.
+	 * Call this from your GameInstance Blueprint's Init event.
+	 * The subsystem survives level transitions, so it only needs to be set once.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Locations")
+	void SetLocationRegistry(UFP_LocationRegistry* InRegistry) { LocationRegistry = InRegistry; }
+
+	UFUNCTION(BlueprintPure, Category="Locations")
+	UFP_LocationRegistry* GetLocationRegistry() const { return LocationRegistry; }
+
+
 	// --- Level Transition ---
 
 	/**
@@ -158,6 +174,14 @@ public:
 	/** Clears the pending character (called by the game level after loading). */
 	UFUNCTION(BlueprintCallable, Category="Save")
 	void ClearPendingCharacter() { PendingCharacterID.Invalidate(); }
+
+	/**
+	 * Resolves the pending character's LastCheckpointTag through the registry
+	 * and calls OpenLevel. Call this after SetPendingCharacter.
+	 * No-op if the registry is not set or the tag doesn't resolve to a level.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Save", meta=(WorldContext="WorldContextObject"))
+	void OpenLevelForPendingCharacter(const UObject* WorldContextObject);
 
 
 	// --- Helpers ---
@@ -185,6 +209,9 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<UFP_ProfileSaveData> ProfileData;
+
+	UPROPERTY()
+	TObjectPtr<UFP_LocationRegistry> LocationRegistry;
 
 	FGuid PendingCharacterID;
 

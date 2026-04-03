@@ -3,6 +3,9 @@
 #include "SaveSystem/FP_SaveGameSubsystem.h"
 #include "Kismet/GameplayStatics.h"
 #include "Misc/App.h"
+#include "FP_GameplayTags.h"
+#include "Locations/FP_LocationRegistry.h"
+#include "Locations/FP_LocationDataAsset.h"
 
 
 const FString UFP_SaveGameSubsystem::IdentitySlotName = TEXT("FP_LocalUser");
@@ -117,6 +120,7 @@ bool UFP_SaveGameSubsystem::CreateCharacter(const FString& Name, const FGameplay
 	if (!ProfileData->HasAvailableSlot()) return false;
 
 	FFP_CharacterSaveRecord& New = ProfileData->AddCharacter(Name, ClassTag);
+	New.LastCheckpointTag = FFP_GameplayTags::Get().Location_Startup;
 	OutCharacterID = New.CharacterID;
 
 	SaveProfile();
@@ -177,6 +181,39 @@ FFP_CharacterSaveRecord* UFP_SaveGameSubsystem::GetPendingCharacterRecord()
 {
 	if (!ProfileData || !PendingCharacterID.IsValid()) return nullptr;
 	return ProfileData->FindCharacter(PendingCharacterID);
+}
+
+void UFP_SaveGameSubsystem::OpenLevelForPendingCharacter(const UObject* WorldContextObject)
+{
+	if (!LocationRegistry)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("FP_SaveGameSubsystem: OpenLevelForPendingCharacter called but LocationRegistry is not set."));
+		return;
+	}
+
+	const FFP_CharacterSaveRecord* Record = GetPendingCharacterRecord();
+	if (!Record)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("FP_SaveGameSubsystem: OpenLevelForPendingCharacter called but no pending character is set."));
+		return;
+	}
+
+	const UFP_LocationDataAsset* Location = LocationRegistry->ResolveLocationForCharacter(Record->LastCheckpointTag);
+	if (!Location)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("FP_SaveGameSubsystem: Could not resolve location for tag '%s'. Check the registry DefaultLocationTag."),
+			*Record->LastCheckpointTag.ToString());
+		return;
+	}
+
+	const FName LevelName = Location->GetLevelName();
+	if (LevelName.IsNone())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("FP_SaveGameSubsystem: Location '%s' has no level assigned."), *Location->GetDisplayName().ToString());
+		return;
+	}
+
+	UGameplayStatics::OpenLevel(WorldContextObject, LevelName);
 }
 
 // --- Helpers ---

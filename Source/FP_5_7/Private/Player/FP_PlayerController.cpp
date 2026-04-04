@@ -9,6 +9,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Characters/FP_PlayerCharacter.h"
 #include "Interaction/FP_EnemyInterface.h"
+#include "Interaction/FP_HighlightInterface.h"
 #include "NavigationPath.h"
 #include "NavigationSystem.h"
 #include "Components/SplineComponent.h"
@@ -74,31 +75,36 @@ void AFP_PlayerController::CursorTrace()
 	// ---------- END DEBUG BLOCK ----------
 	
 	AActor* HitActor = CursorHit.bBlockingHit ? CursorHit.GetActor() : nullptr;
-	AActor* NewActor = (HitActor && HitActor->Implements<UFP_EnemyInterface>()) ? HitActor : nullptr;
-
+	AActor* NewActor = (IsValid(HitActor) && HitActor->Implements<UFP_HighlightInterface>()) ? HitActor : nullptr;
 
 	// If nothing changed, do nothing
-	if (NewActor == ThisActor.Get())
+	if (NewActor == ThisActor)
 	{
 		return;
 	}
 
-	// Unhighlight previous
-	if (IFP_EnemyInterface* Old = Cast<IFP_EnemyInterface>(ThisActor.Get()))
-	{
-		Old->UnHighlightActor();
-	}
+	UnHighlightActor(ThisActor);
+	HighlightActor(NewActor);
 
-	// Highlight new
-	if (IFP_EnemyInterface* New = Cast<IFP_EnemyInterface>(NewActor))
-	{
-		New->HighlightActor();
-	}
-
-	// Update state
 	LastActor = ThisActor;
 	ThisActor = NewActor;
 
+}
+
+void AFP_PlayerController::HighlightActor(AActor* InActor)
+{
+	if (IsValid(InActor) && InActor->Implements<UFP_HighlightInterface>())
+	{
+		IFP_HighlightInterface::Execute_HighlightActor(InActor);
+	}
+}
+
+void AFP_PlayerController::UnHighlightActor(AActor* InActor)
+{
+	if (IsValid(InActor) && InActor->Implements<UFP_HighlightInterface>())
+	{
+		IFP_HighlightInterface::Execute_UnHighlightActor(InActor);
+	}
 }
 
 void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
@@ -114,7 +120,16 @@ void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 	
 	if (InputTag.MatchesTagExact(FFP_GameplayTags::Get().InputTag_LMB))
 	{
-		bTargeting = ThisActor.IsValid();
+		if (IsValid(ThisActor))
+		{
+			TargetingStatus = ThisActor->Implements<UFP_EnemyInterface>()
+				? EFP_TargetingStatus::TargetingEnemy
+				: EFP_TargetingStatus::TargetingNonEnemy;
+		}
+		else
+		{
+			TargetingStatus = EFP_TargetingStatus::NotTargeting;
+		}
 		bAutoRunning = false;
 	}
 	
@@ -131,7 +146,7 @@ void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 		return;
 	}
 
-	if (bTargeting)
+	if (TargetingStatus == EFP_TargetingStatus::TargetingEnemy)
 	{
 		if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
 	}
@@ -159,7 +174,7 @@ void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 			}
 		}
 		FollowTime = 0.f;
-		bTargeting = false;
+		TargetingStatus = EFP_TargetingStatus::NotTargeting;
 	}
 	
 }
@@ -174,7 +189,7 @@ void AFP_PlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 		return;
 	}
 
-	if (bTargeting || bShiftKeyDown)
+	if (TargetingStatus == EFP_TargetingStatus::TargetingEnemy || bShiftKeyDown)
 	{
 		if (GetASC()) GetASC()->AbilityInputTagHeld(InputTag);
 	}

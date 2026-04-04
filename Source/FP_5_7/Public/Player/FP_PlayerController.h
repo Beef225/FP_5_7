@@ -9,13 +9,20 @@
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
-class IFP_EnemyInterface;
 class UFP_InputConfig;
 class UFP_AbilitySystemComponent;
 class USplineComponent;
 class UUserWidget;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUIInputTagSignature, FGameplayTag, InputTag);
+
+UENUM()
+enum class EFP_TargetingStatus : uint8
+{
+	TargetingEnemy,
+	TargetingNonEnemy,
+	NotTargeting
+};
 /**
  * 
  */
@@ -64,8 +71,11 @@ private:
 	void Zoom(const FInputActionValue& InputActionValue);
 	
 	void CursorTrace();
-	TWeakObjectPtr<AActor> LastActor;
-	TWeakObjectPtr<AActor> ThisActor;
+	static void HighlightActor(AActor* InActor);
+	static void UnHighlightActor(AActor* InActor);
+
+	TObjectPtr<AActor> LastActor;
+	TObjectPtr<AActor> ThisActor;
 	FHitResult CursorHit;
 	
 	
@@ -94,7 +104,7 @@ private:
 	float FollowTime = 0.f;
 	float ShortPressThreshold = 0.5f;
 	bool bAutoRunning = false;
-	bool bTargeting = false;
+	EFP_TargetingStatus TargetingStatus = EFP_TargetingStatus::NotTargeting;
 	
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> ShiftAction;

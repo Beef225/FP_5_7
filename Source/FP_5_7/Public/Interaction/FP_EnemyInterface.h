@@ -20,9 +20,6 @@ class FP_5_7_API IFP_EnemyInterface
 {
 	GENERATED_BODY()
 public:
-	
-	virtual void HighlightActor() = 0;
-	virtual void UnHighlightActor() = 0;
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	void SetCombatTarget(AActor* InCombatTarget);

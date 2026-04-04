@@ -61,7 +61,7 @@ void AFP_EnemyCharacter::PossessedBy(AController* NewController)
 	
 }
 
-void AFP_EnemyCharacter::HighlightActor()
+void AFP_EnemyCharacter::HighlightActor_Implementation()
 {
 	GetMesh()->SetRenderCustomDepth(true);
 	GetMesh()->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
@@ -69,7 +69,7 @@ void AFP_EnemyCharacter::HighlightActor()
 	Weapon->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
 }
 
-void AFP_EnemyCharacter::UnHighlightActor()
+void AFP_EnemyCharacter::UnHighlightActor_Implementation()
 {
 	GetMesh()->SetRenderCustomDepth(false);
 	Weapon->SetRenderCustomDepth(false);

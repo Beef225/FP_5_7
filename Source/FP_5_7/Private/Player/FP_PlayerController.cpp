@@ -10,6 +10,7 @@
 #include "Characters/FP_PlayerCharacter.h"
 #include "Interaction/FP_EnemyInterface.h"
 #include "Interaction/FP_HighlightInterface.h"
+#include "Interaction/FP_InteractableInterface.h"
 #include "NavigationPath.h"
 #include "NavigationSystem.h"
 #include "Components/SplineComponent.h"
@@ -149,6 +150,14 @@ void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 	if (TargetingStatus == EFP_TargetingStatus::TargetingEnemy)
 	{
 		if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
+	}
+	else if (TargetingStatus == EFP_TargetingStatus::TargetingNonEnemy)
+	{
+		// Short press on a non-enemy highlightable = interact
+		if (FollowTime <= ShortPressThreshold && IsValid(ThisActor) && ThisActor->Implements<UFP_InteractableInterface>())
+		{
+			IFP_InteractableInterface::Execute_Interact(ThisActor, GetPawn());
+		}
 	}
 	else
 	{

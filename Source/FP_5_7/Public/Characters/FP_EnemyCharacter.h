@@ -14,6 +14,7 @@ class UWidgetComponent;
 class UBehaviorTree;
 class AFP_AIController;
 class UGameplayAbility;
+class UFP_LootDropComponent;
 struct FAbilityEndedData;
 
 UCLASS()
@@ -92,6 +93,9 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<AFP_AIController> FP_AIController;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Loot")
+	TObjectPtr<UFP_LootDropComponent> LootDropComponent;
 
 private:
 	void OnAbilityActivated(UGameplayAbility* ActivatedAbility);

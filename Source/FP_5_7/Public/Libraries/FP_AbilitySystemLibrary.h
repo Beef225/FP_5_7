@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystem/Data/CharacterClassInfo.h"
+#include "Inventory/Loot/Data/FP_LootTiers.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "UI/WidgetController/FP_CharacterMenuWidgetController.h"
 #include "FP_AbilitySystemLibrary.generated.h"
@@ -68,4 +69,14 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|XP")
 	static int32 GetXPReward(const UObject* WorldContextObject, int32 BaseXP, int32 CharacterLevel);
+
+	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|LootTiers", meta = (WorldContext = "WorldContextObject"))
+	static UFP_LootTiers* GetLootTiers(const UObject* WorldContextObject);
+
+	/**
+	 * Rolls the global loot table plus any extra tables assigned to the enemy,
+	 * and returns the combined list of items to spawn.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|LootTiers", meta = (WorldContext = "WorldContextObject"))
+	static TArray<FLootItem> GetLootItemsForEnemy(const UObject* WorldContextObject, const TArray<UFP_LootTiers*>& ExtraLootTiers);
 };

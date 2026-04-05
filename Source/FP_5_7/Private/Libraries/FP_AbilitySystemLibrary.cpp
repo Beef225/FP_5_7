@@ -231,3 +231,32 @@ int32 UFP_AbilitySystemLibrary::GetXPReward(const UObject* WorldContextObject, i
 	const float LevelScale = 1.f + Coefficient * FMath::Square(static_cast<float>(CharacterLevel - 1));
 	return FMath::RoundToInt(static_cast<float>(BaseXP) * LevelScale);
 }
+
+UFP_LootTiers* UFP_AbilitySystemLibrary::GetLootTiers(const UObject* WorldContextObject)
+{
+	const AFP_GameModeBase* GameMode = Cast<AFP_GameModeBase>(UGameplayStatics::GetGameMode(WorldContextObject));
+	if (!GameMode) return nullptr;
+	return GameMode->LootTiers;
+}
+
+TArray<FLootItem> UFP_AbilitySystemLibrary::GetLootItemsForEnemy(const UObject* WorldContextObject, const TArray<UFP_LootTiers*>& ExtraLootTiers)
+{
+	TArray<FLootItem> Result;
+
+	// Roll global pool (every enemy)
+	if (UFP_LootTiers* GlobalTiers = GetLootTiers(WorldContextObject))
+	{
+		Result.Append(GlobalTiers->GetLootItems());
+	}
+
+	// Roll any extra tables assigned to this specific enemy
+	for (UFP_LootTiers* Extra : ExtraLootTiers)
+	{
+		if (Extra)
+		{
+			Result.Append(Extra->GetLootItems());
+		}
+	}
+
+	return Result;
+}

@@ -9,6 +9,8 @@
 #include "Interaction/FP_InteractableInterface.h"
 #include "FP_LevelTransitionActor.generated.h"
 
+class USphereComponent;
+
 
 /**
  * A placeable actor (door, portal, exit point) that highlights in tan when hovered
@@ -36,6 +38,7 @@ public:
 	/** Highlight Interface */
 	virtual void HighlightActor_Implementation() override;
 	virtual void UnHighlightActor_Implementation() override;
+	virtual void SetMoveToLocation_Implementation(FVector& OutDestination) override;
 	/** end Highlight Interface */
 
 	/** Interactable Interface */
@@ -44,6 +47,20 @@ public:
 
 protected:
 
+	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components")
 	TObjectPtr<UStaticMeshComponent> Mesh;
+
+	/** Move the player walks to when they click this actor. Position it in front of the door. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components")
+	TObjectPtr<USceneComponent> MoveToComponent;
+
+	/** When the player enters this sphere the level transition fires. Attach it to MoveToComponent. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components")
+	TObjectPtr<USphereComponent> TriggerSphere;
 };

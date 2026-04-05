@@ -75,6 +75,11 @@ void AFP_EnemyCharacter::UnHighlightActor_Implementation()
 	Weapon->SetRenderCustomDepth(false);
 }
 
+void AFP_EnemyCharacter::SetMoveToLocation_Implementation(FVector& OutDestination)
+{
+	// Do not redirect — player moves to wherever they clicked near the enemy
+}
+
 int32 AFP_EnemyCharacter::GetPlayerLevel()
 {
 	return Level;

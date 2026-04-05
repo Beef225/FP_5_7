@@ -40,4 +40,12 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent)
 	void UnHighlightActor();
+
+	/**
+	 * Optionally redirects where the player walks when this actor is clicked.
+	 * Leave OutDestination unchanged for default cursor-hit behaviour (enemies).
+	 * Set OutDestination to a specific world position to override (doors, portals).
+	 */
+	UFUNCTION(BlueprintNativeEvent)
+	void SetMoveToLocation(FVector& OutDestination);
 };

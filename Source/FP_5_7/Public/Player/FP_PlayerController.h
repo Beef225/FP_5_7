@@ -47,6 +47,9 @@ public:
 
 	UFUNCTION(BlueprintPure, Category="Input")
 	bool IsMouseMoveEnabled() const { return bMouseMoveEnabled; }
+
+	bool IsPendingLevelTransition() const { return bPendingLevelTransition; }
+	void ConsumePendingLevelTransition() { bPendingLevelTransition = false; }
 	
 
 protected:
@@ -105,6 +108,10 @@ private:
 	float ShortPressThreshold = 0.5f;
 	bool bAutoRunning = false;
 	EFP_TargetingStatus TargetingStatus = EFP_TargetingStatus::NotTargeting;
+
+	/** Set when the player intentionally clicks a level transition actor. Cleared by any other input. */
+	bool bPendingLevelTransition = false;
+
 	
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> ShiftAction;

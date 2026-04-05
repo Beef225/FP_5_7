@@ -115,12 +115,14 @@ void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 	const FGameplayTag MenuRoot = FGameplayTag::RequestGameplayTag(FName("InputTag.Menu"));
 	if (InputTag.MatchesTag(MenuRoot))
 	{
+		bPendingLevelTransition = false;
 		OnUIInputTagPressed.Broadcast(InputTag);
-		return; // stop here so “menu tags” don’t also try to drive abilities later
+		return; // stop here so "menu tags" don’t also try to drive abilities later
 	}
-	
+
 	if (InputTag.MatchesTagExact(FFP_GameplayTags::Get().InputTag_LMB))
 	{
+		bPendingLevelTransition = false;
 		if (IsValid(ThisActor))
 		{
 			TargetingStatus = ThisActor->Implements<UFP_EnemyInterface>()
@@ -132,6 +134,11 @@ void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 			TargetingStatus = EFP_TargetingStatus::NotTargeting;
 		}
 		bAutoRunning = false;
+	}
+	else
+	{
+		// Any non-LMB ability (skills, etc.) cancels a pending transition
+		bPendingLevelTransition = false;
 	}
 	
 	
@@ -151,23 +158,28 @@ void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 	{
 		if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
 	}
-	else if (TargetingStatus == EFP_TargetingStatus::TargetingNonEnemy)
-	{
-		// Short press on a non-enemy highlightable = interact
-		if (FollowTime <= ShortPressThreshold && IsValid(ThisActor) && ThisActor->Implements<UFP_InteractableInterface>())
-		{
-			IFP_InteractableInterface::Execute_Interact(ThisActor, GetPawn());
-		}
-	}
 	else
 	{
-		if (!bMouseMoveEnabled && !bShiftKeyDown)
+		// Allow movement when targeting a non-enemy interactable even if mouse-move is off
+		const bool bTargetingInteractable = TargetingStatus == EFP_TargetingStatus::TargetingNonEnemy;
+		if (!bMouseMoveEnabled && !bShiftKeyDown && !bTargetingInteractable)
 		{
 			return;
 		}
+
 		const APawn* ControlledPawn = GetPawn();
 		if (FollowTime <= ShortPressThreshold && ControlledPawn)
 		{
+			// Let the clicked actor redirect the destination (e.g. door's MoveToComponent)
+			if (IsValid(ThisActor) && ThisActor->Implements<UFP_HighlightInterface>())
+			{
+				IFP_HighlightInterface::Execute_SetMoveToLocation(ThisActor, CachedDestination);
+				if (bTargetingInteractable)
+				{
+					bPendingLevelTransition = true;
+				}
+			}
+
 			if (UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CachedDestination))
 			{
 				Spline->ClearSplinePoints();
@@ -234,7 +246,6 @@ UFP_AbilitySystemComponent* AFP_PlayerController::GetASC()
 
 void AFP_PlayerController::AutoRun()
 {
-	if (!bMouseMoveEnabled) return;
 	if (!bAutoRunning) return;
 	if (APawn* ControlledPawn = GetPawn())
 	{
@@ -329,6 +340,9 @@ void AFP_PlayerController::Move(const FInputActionValue& InputActionValue)
 	{
 		return; // mouse-only mode
 	}
+
+	bAutoRunning = false;
+	bPendingLevelTransition = false;
 
 	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
 

@@ -249,6 +249,24 @@ void UFP_SaveGameSubsystem::OpenLevelForPendingCharacter(const UObject* WorldCon
 	UGameplayStatics::OpenLevel(WorldContextObject, LevelName);
 }
 
+void UFP_SaveGameSubsystem::TravelToLocation(const UObject* WorldContextObject, const FGameplayTag& LocationTag)
+{
+	if (!ProfileData || !ProfileData->LastPlayedCharacterID.IsValid()) return;
+
+	// Flush XP, level, attributes to the record and write to disk
+	SaveActiveCharacter();
+
+	// Update checkpoint to the destination so OnPossess in the new level loads here
+	FFP_CharacterSaveRecord* Record = ProfileData->FindCharacter(ProfileData->LastPlayedCharacterID);
+	if (!Record) return;
+
+	Record->LastCheckpointTag = LocationTag;
+	PendingCharacterID = ProfileData->LastPlayedCharacterID;
+	SaveProfile();
+
+	OpenLevelForPendingCharacter(WorldContextObject);
+}
+
 void UFP_SaveGameSubsystem::Deinitialize()
 {
 	SaveActiveCharacter();

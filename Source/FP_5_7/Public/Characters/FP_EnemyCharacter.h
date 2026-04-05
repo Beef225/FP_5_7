@@ -6,6 +6,7 @@
 #include "FP_CharacterBase.h"
 #include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "Interaction/FP_EnemyInterface.h"
+#include "Interaction/FP_HighlightInterface.h"
 #include "UI/WidgetController/FP_OverlayWidgetController.h"
 #include "FP_EnemyCharacter.generated.h"
 
@@ -16,7 +17,7 @@ class UGameplayAbility;
 struct FAbilityEndedData;
 
 UCLASS()
-class FP_5_7_API AFP_EnemyCharacter : public AFP_CharacterBase, public IFP_EnemyInterface
+class FP_5_7_API AFP_EnemyCharacter : public AFP_CharacterBase, public IFP_EnemyInterface, public IFP_HighlightInterface
 {
 	GENERATED_BODY()
 
@@ -24,10 +25,11 @@ public:
 	AFP_EnemyCharacter();
 	virtual void PossessedBy(AController* NewController) override;
 
-	/** Enemy Interface */
-	virtual void HighlightActor() override;
-	virtual void UnHighlightActor() override;
-	/** end Enemy Interface */
+	/** Highlight Interface */
+	virtual void HighlightActor_Implementation() override;
+	virtual void UnHighlightActor_Implementation() override;
+	virtual void SetMoveToLocation_Implementation(FVector& OutDestination) override;
+	/** end Highlight Interface */
 
 	/** Combat Interface */
 	virtual int32 GetPlayerLevel() override;

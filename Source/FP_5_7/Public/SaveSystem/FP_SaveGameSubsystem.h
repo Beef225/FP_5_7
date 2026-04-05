@@ -186,6 +186,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Save", meta=(WorldContext="WorldContextObject"))
 	void OpenLevelForPendingCharacter(const UObject* WorldContextObject);
 
+	/**
+	 * Full level-transition flow for in-game travel (doors, portals, etc.):
+	 *   1. Saves current runtime state (XP, level, attributes) to disk.
+	 *   2. Updates the active character's LastCheckpointTag to LocationTag.
+	 *   3. Sets the pending character and saves the profile.
+	 *   4. Shows the loading screen and opens the resolved level.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Save", meta=(WorldContext="WorldContextObject"))
+	void TravelToLocation(const UObject* WorldContextObject, const FGameplayTag& LocationTag);
+
 
 	/**
 	 * Reads XP and Level from the active PlayerState and writes them into the

@@ -61,7 +61,7 @@ void AFP_EnemyCharacter::PossessedBy(AController* NewController)
 	
 }
 
-void AFP_EnemyCharacter::HighlightActor()
+void AFP_EnemyCharacter::HighlightActor_Implementation()
 {
 	GetMesh()->SetRenderCustomDepth(true);
 	GetMesh()->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
@@ -69,10 +69,15 @@ void AFP_EnemyCharacter::HighlightActor()
 	Weapon->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
 }
 
-void AFP_EnemyCharacter::UnHighlightActor()
+void AFP_EnemyCharacter::UnHighlightActor_Implementation()
 {
 	GetMesh()->SetRenderCustomDepth(false);
 	Weapon->SetRenderCustomDepth(false);
+}
+
+void AFP_EnemyCharacter::SetMoveToLocation_Implementation(FVector& OutDestination)
+{
+	// Do not redirect — player moves to wherever they clicked near the enemy
 }
 
 int32 AFP_EnemyCharacter::GetPlayerLevel()

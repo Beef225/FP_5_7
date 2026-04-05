@@ -11,6 +11,7 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/FP_LootDropComponent.h"
 #include "UI/Widget/FP_UserWidget.h"
 
 static void FP_DebugAttr(UWorld* World, const FString& Label, float OldValue, float NewValue, const FColor& Color, float Time = 2.0f)
@@ -46,6 +47,8 @@ AFP_EnemyCharacter::AFP_EnemyCharacter()
 
 	HP_HeatBar = CreateDefaultSubobject<UWidgetComponent>("HP_HeatBar");
 	HP_HeatBar->SetupAttachment(GetRootComponent());
+
+	LootDropComponent = CreateDefaultSubobject<UFP_LootDropComponent>("LootDropComponent");
 }
 
 void AFP_EnemyCharacter::PossessedBy(AController* NewController)
@@ -89,6 +92,7 @@ void AFP_EnemyCharacter::Die()
 {
 	const float Extra = GetDeathRagdollDelay(); // protected in base; if private, expose a protected getter
 	SetLifeSpan(LifeSpan + Extra);
+	LootDropComponent->SpawnLoot();
 	Super::Die();
 }
 

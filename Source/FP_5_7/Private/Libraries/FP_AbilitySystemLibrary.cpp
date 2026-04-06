@@ -4,6 +4,7 @@
 #include "Libraries/FP_AbilitySystemLibrary.h"
 
 #include "FP_AbilityTypes.h"
+#include "Inventory/InventoryManagement/Components/FP_InventoryComponent.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "Game/FP_GameModeBase.h"
 #include "Interaction/FP_CombatInterface.h"
@@ -259,4 +260,10 @@ TArray<FLootItem> UFP_AbilitySystemLibrary::GetLootItemsForEnemy(const UObject* 
 	}
 
 	return Result;
+}
+
+UFP_InventoryComponent* UFP_AbilitySystemLibrary::GetInventoryComponent(const APlayerController* PlayerController)
+{
+	if (!IsValid(PlayerController)) return nullptr;
+	return PlayerController->FindComponentByClass<UFP_InventoryComponent>();
 }

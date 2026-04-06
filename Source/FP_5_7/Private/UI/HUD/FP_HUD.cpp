@@ -31,7 +31,7 @@ UFP_CharacterMenuWidgetController* AFP_HUD::GetCharacterMenuWidgetController(con
 
 UFP_InventoryWidgetController* AFP_HUD::GetInventoryWidgetController(const FWidgetControllerParams& WCParams)
 {
-	if (InventoryWidgetController = nullptr)
+	if (InventoryWidgetController == nullptr)
 	{
 		InventoryWidgetController = NewObject<UFP_InventoryWidgetController>(this, InventoryWidgetControllerClass);
 		InventoryWidgetController->SetWidgetControllerParams(WCParams);

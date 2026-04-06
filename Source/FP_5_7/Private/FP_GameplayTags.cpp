@@ -966,6 +966,31 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Skill Name Microwave")
 		);
 
+	// -------------------------------------------------------------------------
+	// Inventory
+	// -------------------------------------------------------------------------
+
+	// Equippable
+	GameplayTags.Inventory_Equippable_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Weapon"), FString("A weapon item that can be equipped"));
+
+	// Consumable
+	GameplayTags.Inventory_Consumable_Potion = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Consumable.Potion"), FString("A consumable potion item"));
+
+	// Craftable
+	GameplayTags.Inventory_Craftable_Material = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Craftable.Material"), FString("A raw material used in crafting"));
+
+	// Quest
+	GameplayTags.Inventory_Quest_Item = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Quest.Item"), FString("A quest-related item"));
+
+	// Misc
+	GameplayTags.Inventory_Misc_Junk = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Misc.Junk"), FString("A miscellaneous or low-value item"));
+
+	// -------------------------------------------------------------------------
 	//Locations
 	GameplayTags.Location_Startup = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Location.Startup"), FString("Startup / new character level"));

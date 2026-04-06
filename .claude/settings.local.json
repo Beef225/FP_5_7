@@ -12,7 +12,13 @@
       "Bash(grep -r InitializeDefaultAttributes C:UnrealFP_5_7SourceFP_5_7 --include=*.cpp)",
       "Bash(curl:*)",
       "WebFetch(domain:patch-diff.githubusercontent.com)",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)",
+      "Bash(git stash:*)",
+      "Bash(git push:*)",
+      "Bash(git branch:*)",
+      "Bash(python -m json.tool)"
     ]
   }
 }

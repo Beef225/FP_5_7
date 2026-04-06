@@ -58,6 +58,17 @@ enum class EMenu : uint8
 };
 
 UENUM(BlueprintType)
+enum class EItemCategory : uint8
+{
+	Equippable  UMETA(DisplayName="Equippable"),
+	Consumable  UMETA(DisplayName="Consumable"),
+	Craftable   UMETA(DisplayName="Craftable"),
+	Quest       UMETA(DisplayName="Quest"),
+	Misc        UMETA(DisplayName="Misc"),
+	None        UMETA(DisplayName="None"),
+};
+
+UENUM(BlueprintType)
 enum class ESkillGrantedBy : uint8
 {
 	Equipment		UMETA(DisplayName="Equipment"),

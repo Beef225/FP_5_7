@@ -19,7 +19,9 @@ public class FP_5_7 : ModuleRules
 			"ModelViewViewModel",
 			"Slate",
 			"SlateCore",
-			"MoviePlayer"
+			"MoviePlayer",
+			"NetCore",
+			"StructUtils"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new[]

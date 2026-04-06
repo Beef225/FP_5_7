@@ -307,6 +307,26 @@ FGameplayTag SkillTagMod_Movement;
 FGameplayTag SkillTagMod_Buff;
 
 
+// -------------------------------------------------------------------------
+// Inventory
+// -------------------------------------------------------------------------
+
+// Equippable
+FGameplayTag Inventory_Equippable_Weapon;
+
+// Consumable
+FGameplayTag Inventory_Consumable_Potion;
+
+// Craftable
+FGameplayTag Inventory_Craftable_Material;
+
+// Quest
+FGameplayTag Inventory_Quest_Item;
+
+// Misc
+FGameplayTag Inventory_Misc_Junk;
+
+// -------------------------------------------------------------------------
 //Locations
 FGameplayTag Location_Startup;
 FGameplayTag Location_The_Aurora;

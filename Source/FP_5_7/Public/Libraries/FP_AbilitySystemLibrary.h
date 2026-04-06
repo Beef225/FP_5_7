@@ -14,6 +14,7 @@ class UFP_OverlayWidgetController;
 class UFP_InventoryWidgetController;
 class UCharacterMenuWidgetController;
 class UFP_SkillLibrary;
+class UFP_InventoryComponent;
 /**
  * 
  */
@@ -79,4 +80,8 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|LootTiers", meta = (WorldContext = "WorldContextObject"))
 	static TArray<FLootItem> GetLootItemsForEnemy(const UObject* WorldContextObject, const TArray<UFP_LootTiers*>& ExtraLootTiers);
+
+	/** Returns the UFP_InventoryComponent on the given PlayerController, or nullptr. */
+	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|Inventory")
+	static UFP_InventoryComponent* GetInventoryComponent(const APlayerController* PlayerController);
 };

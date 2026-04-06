@@ -19,9 +19,14 @@ class FP_5_7_API UFP_InventoryItem : public UObject
 
 public:
 
+	virtual bool IsSupportedForNetworking() const override { return true; }
+
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	void SetItemManifest(const FFP_ItemManifest& Manifest);
+
+	const FFP_ItemManifest& GetItemManifest() const { return ItemManifest.Get<FFP_ItemManifest>(); }
+	FFP_ItemManifest& GetItemManifestMutable() { return ItemManifest.GetMutable<FFP_ItemManifest>(); }
 
 private:
 

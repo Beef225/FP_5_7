@@ -8,6 +8,8 @@
 
 class UCanvasPanel;
 class UFP_GridSlot;
+class UFP_InventoryItem;
+class UFP_InventoryComponent;
 
 /**
  * The single inventory grid that holds all items regardless of category.
@@ -22,9 +24,14 @@ public:
 
 	virtual void NativeOnInitialized() override;
 
+	UFUNCTION()
+	void AddItem(UFP_InventoryItem* Item);
+
 private:
 
 	void ConstructGrid();
+
+	TWeakObjectPtr<UFP_InventoryComponent> InventoryComponent;
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UCanvasPanel> CanvasPanel;

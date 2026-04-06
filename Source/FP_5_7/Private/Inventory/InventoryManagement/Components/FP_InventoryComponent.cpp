@@ -104,7 +104,15 @@ void UFP_InventoryComponent::TryAddItem(UFP_ItemComponent* ItemComponent)
 
 void UFP_InventoryComponent::Server_AddNewItem_Implementation(UFP_ItemComponent* ItemComponent, int32 StackCount)
 {
-	InventoryList.AddEntry(ItemComponent);
+	UFP_InventoryItem* NewItem = InventoryList.AddEntry(ItemComponent);
+
+	// On listen-server / standalone the PostReplicatedAdd callback never fires for the server's own copy,
+	// so we broadcast the delegate manually here.
+	const ENetMode NetMode = GetOwner()->GetNetMode();
+	if (NetMode == NM_ListenServer || NetMode == NM_Standalone)
+	{
+		OnItemAdded.Broadcast(NewItem);
+	}
 }
 
 void UFP_InventoryComponent::Server_AddStacksToItem_Implementation(UFP_ItemComponent* ItemComponent, int32 StackCount, int32 Remainder)

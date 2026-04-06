@@ -4,6 +4,9 @@
 
 FFP_SlotAvailabilityResult UFP_SpatialInventory::HasRoomForItem(UFP_ItemComponent* ItemComponent) const
 {
-	// Full implementation comes once item data (stack size, dimensions) is defined.
-	return FFP_SlotAvailabilityResult();
+	// Stub: always report one slot available so the pickup pipeline can be tested end-to-end.
+	// Replace once item dimensions and stack rules are defined.
+	FFP_SlotAvailabilityResult Result;
+	Result.TotalRoomToFill = 1;
+	return Result;
 }

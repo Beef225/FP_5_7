@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "Libraries/FP_EnumDefs.h"
 #include "FP_ItemManifest.generated.h"
 
@@ -21,9 +22,14 @@ struct FP_5_7_API FFP_ItemManifest
 	UFP_InventoryItem* Manifest(UObject* NewOuter);
 
 	EItemCategory GetItemCategory() const { return ItemCategory; }
+	FGameplayTag GetItemType() const { return ItemType; }
 
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	EItemCategory ItemCategory{ EItemCategory::None };
+
+	/** Specific item type tag, e.g. Inventory.Equippable.Weapon. Used for filtering, sorting, and rules. */
+	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "Inventory"))
+	FGameplayTag ItemType;
 };

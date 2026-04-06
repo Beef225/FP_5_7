@@ -4,13 +4,33 @@
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
+#include "Inventory/InventoryManagement/Components/FP_InventoryComponent.h"
+#include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
+#include "Libraries/FP_AbilitySystemLibrary.h"
 #include "Libraries/FP_WidgetUtils.h"
 #include "UI/Widget/Inventory/GridSlots/FP_GridSlot.h"
 
 void UFP_InventoryGrid::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
+
+	APlayerController* PC = GetOwningPlayer();
+	InventoryComponent = UFP_AbilitySystemLibrary::GetInventoryComponent(PC);
+
+	if (InventoryComponent.IsValid())
+	{
+		InventoryComponent->OnItemAdded.AddDynamic(this, &ThisClass::AddItem);
+	}
+
 	ConstructGrid();
+}
+
+void UFP_InventoryGrid::AddItem(UFP_InventoryItem* Item)
+{
+	if (!IsValid(Item)) return;
+
+	UE_LOG(LogTemp, Log, TEXT("UFP_InventoryGrid::AddItem — received item type: %s"),
+		*Item->GetItemManifest().GetItemType().ToString());
 }
 
 void UFP_InventoryGrid::ConstructGrid()

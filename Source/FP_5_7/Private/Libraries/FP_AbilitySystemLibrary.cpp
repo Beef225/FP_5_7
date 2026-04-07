@@ -267,3 +267,9 @@ UFP_InventoryComponent* UFP_AbilitySystemLibrary::GetInventoryComponent(const AP
 	if (!IsValid(PlayerController)) return nullptr;
 	return PlayerController->FindComponentByClass<UFP_InventoryComponent>();
 }
+
+EItemCategory UFP_AbilitySystemLibrary::GetItemCategoryFromItemComp(UFP_ItemComponent* ItemComp)
+{
+	if (!IsValid(ItemComp)) return EItemCategory::None;
+	return ItemComp->GetItemManifest().GetItemCategory();
+}

@@ -21,14 +21,14 @@ public class FP_5_7 : ModuleRules
 			"SlateCore",
 			"MoviePlayer",
 			"NetCore",
-			"StructUtils"
+			"StructUtils",
+			"Niagara"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new[]
 		{
 			"InputCore",
-			"EnhancedInput",
-			"Niagara"
+			"EnhancedInput"
 		});
 
 		if (Target.bBuildEditor)

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "UObject/Object.h"
 #include "Inventory/Items/Manifest/FP_ItemManifest.h"
 #include "StructUtils/InstancedStruct.h"
@@ -34,3 +35,15 @@ private:
 		meta = (BaseStruct = "/Script/FP_5_7.FP_ItemManifest"))
 	FInstancedStruct ItemManifest;
 };
+
+/**
+ * Convenience free function: retrieves the first fragment of type FragmentType
+ * from the item's manifest whose tag matches the given FragmentTag.
+ * Returns nullptr if the item is invalid or no matching fragment exists.
+ */
+template<typename FragmentType>
+const FragmentType* GetFragment(const UFP_InventoryItem* Item, const FGameplayTag& Tag)
+{
+	if (!IsValid(Item)) return nullptr;
+	return Item->GetItemManifest().GetFragmentOfTypeWithTag<FragmentType>(Tag);
+}

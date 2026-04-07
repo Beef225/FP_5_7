@@ -991,6 +991,19 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Inventory.Misc.Junk"), FString("A miscellaneous or low-value item"));
 
 	// -------------------------------------------------------------------------
+	// Inventory — Fragments
+	// -------------------------------------------------------------------------
+
+	GameplayTags.Fragment_Grid = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Grid"), FString("Identifies the grid fragment: defines tile footprint on the inventory grid"));
+
+	GameplayTags.Fragment_Icon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Icon"), FString("Identifies the image fragment: stores item icon texture and display dimensions"));
+
+	GameplayTags.Fragment_Stackable = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Stackable"), FString("Identifies the stackable fragment: defines max stack size and current stack count"));
+
+	// -------------------------------------------------------------------------
 	//Locations
 	GameplayTags.Location_Startup = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Location.Startup"), FString("Startup / new character level"));

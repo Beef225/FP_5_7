@@ -327,6 +327,19 @@ FGameplayTag Inventory_Quest_Item;
 FGameplayTag Inventory_Misc_Junk;
 
 // -------------------------------------------------------------------------
+// Inventory — Fragments
+// -------------------------------------------------------------------------
+
+/** Identifies FFP_GridFragment: defines the tile footprint of an item on the grid. */
+FGameplayTag Fragment_Grid;
+
+/** Identifies FFP_ImageFragment: stores the item's icon texture and display dimensions. */
+FGameplayTag Fragment_Icon;
+
+/** Identifies FFP_StackableFragment: defines max stack size and current stack count. */
+FGameplayTag Fragment_Stackable;
+
+// -------------------------------------------------------------------------
 //Locations
 FGameplayTag Location_Startup;
 FGameplayTag Location_The_Aurora;

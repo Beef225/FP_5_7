@@ -10,6 +10,8 @@ class UImage;
 class UTextBlock;
 class UFP_InventoryItem;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFP_SlottedItemClicked, int32, GridIndex, const FPointerEvent&, MouseEvent);
+
 /**
  * Widget representing a single item placed on the inventory grid.
  * Holds a reference to the backing UFP_InventoryItem, the grid index it occupies,
@@ -21,6 +23,10 @@ class FP_5_7_API UFP_SlottedItem : public UUserWidget
 	GENERATED_BODY()
 
 public:
+
+	virtual FReply NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
+
+	FFP_SlottedItemClicked OnSlottedItemClicked;
 
 	bool IsStackable() const { return bIsStackable; }
 	void SetIsStackable(bool bStackable) { bIsStackable = bStackable; }

@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Inventory/Items/FP_ItemComponent.h"
 #include "Inventory/InventoryManagement/FastArray/FP_FastArray.h"
+#include "Inventory/Types/FP_InventoryTypes.h"
 #include "FP_InventoryComponent.generated.h"
 
 class UFP_InventoryBase;
@@ -13,6 +14,7 @@ class UFP_InventoryItem;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFP_InventoryItemChange, UFP_InventoryItem*, Item);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFP_NoRoomInInventory);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFP_StackChange, const FFP_SlotAvailabilityResult&, Result);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class FP_5_7_API UFP_InventoryComponent : public UActorComponent
@@ -31,6 +33,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "Inventory")
 	FFP_NoRoomInInventory NoRoomInInventory;
+
+	UPROPERTY(BlueprintAssignable, Category = "Inventory")
+	FFP_StackChange OnStackChange;
 
 	/** Server-only. Attempts to add the item held by ItemComponent to this inventory. */
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")

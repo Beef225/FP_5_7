@@ -5,6 +5,15 @@
 #include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
 #include "Inventory/Items/FP_ItemComponent.h"
 
+UFP_InventoryItem* FFP_InventoryFastArray::FindFirstItemByType(const FGameplayTag& ItemType)
+{
+	const FFP_InventoryEntry* FoundEntry = Entries.FindByPredicate([&ItemType](const FFP_InventoryEntry& Entry)
+	{
+		return IsValid(Entry.Item) && Entry.Item->GetItemManifest().GetItemType().MatchesTagExact(ItemType);
+	});
+	return FoundEntry ? FoundEntry->Item : nullptr;
+}
+
 TArray<UFP_InventoryItem*> FFP_InventoryFastArray::GetAllItems() const
 {
 	TArray<UFP_InventoryItem*> Results;
@@ -49,7 +58,7 @@ UFP_InventoryItem* FFP_InventoryFastArray::AddEntry(UFP_ItemComponent* ItemCompo
 	check(IC);
 
 	FFP_InventoryEntry& NewEntry = Entries.AddDefaulted_GetRef();
-	NewEntry.Item = ItemComponent->GetItemManifest().Manifest(OwningActor);
+	NewEntry.Item = ItemComponent->GetItemManifestMutable().Manifest(OwningActor);
 
 	IC->AddRepSubObj(NewEntry.Item);
 	MarkItemDirty(NewEntry);

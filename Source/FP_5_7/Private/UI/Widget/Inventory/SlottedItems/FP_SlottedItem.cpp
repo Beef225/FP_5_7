@@ -5,6 +5,12 @@
 #include "Components/TextBlock.h"
 #include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
 
+FReply UFP_SlottedItem::NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
+	OnSlottedItemClicked.Broadcast(GridIndex, MouseEvent);
+	return FReply::Handled();
+}
+
 void UFP_SlottedItem::SetInventoryItem(UFP_InventoryItem* Item)
 {
 	InventoryItem = Item;

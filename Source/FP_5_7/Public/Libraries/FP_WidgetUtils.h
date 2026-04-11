@@ -20,4 +20,16 @@ public:
 	/** Inverse of GetIndexFromPosition — converts a flat 1D index back to a 2D tile coordinate. */
 	UFUNCTION(BlueprintPure, Category = "Inventory|Utils")
 	static FIntPoint GetPositionFromIndex(int32 Index, int32 Columns);
+
+	/** Converts a widget's local top-left to viewport space coordinates. */
+	UFUNCTION(BlueprintCallable, Category = "Inventory|Utils")
+	static FVector2D GetWidgetPosition(UWidget* Widget);
+
+	/** Returns the local size of a widget from its cached geometry. */
+	UFUNCTION(BlueprintCallable, Category = "Inventory|Utils")
+	static FVector2D GetWidgetSize(UWidget* Widget);
+
+	/** Returns true if MousePos falls within the rectangle defined by BoundaryPos and WidgetSize. */
+	UFUNCTION(BlueprintCallable, Category = "Inventory|Utils")
+	static bool IsWithinBounds(const FVector2D& BoundaryPos, const FVector2D& WidgetSize, const FVector2D& MousePos);
 };

@@ -28,8 +28,16 @@ public:
 
 	const FFP_ItemManifest& GetItemManifest() const { return ItemManifest.Get<FFP_ItemManifest>(); }
 	FFP_ItemManifest& GetItemManifestMutable() { return ItemManifest.GetMutable<FFP_ItemManifest>(); }
+	bool IsStackable() const;
+	bool IsConsumable() const;
+
+	int32 GetTotalStackCount() const { return TotalStackCount; }
+	void SetTotalStackCount(int32 Count) { TotalStackCount = Count; }
 
 private:
+
+	UPROPERTY(Replicated, VisibleAnywhere, Category = "Inventory")
+	int32 TotalStackCount{ 0 };
 
 	UPROPERTY(Replicated, VisibleAnywhere, Category = "Inventory",
 		meta = (BaseStruct = "/Script/FP_5_7.FP_ItemManifest"))

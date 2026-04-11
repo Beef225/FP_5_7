@@ -36,6 +36,7 @@ struct FFP_InventoryFastArray : public FFastArraySerializer
 	FFP_InventoryFastArray(UActorComponent* InOwnerComponent) : OwnerComponent(InOwnerComponent) {}
 
 	TArray<UFP_InventoryItem*> GetAllItems() const;
+	UFP_InventoryItem* FindFirstItemByType(const FGameplayTag& ItemType);
 
 	// FFastArraySerializer contract
 	void PreReplicatedRemove(const TArrayView<int32> RemovedIndices, int32 FinalSize);

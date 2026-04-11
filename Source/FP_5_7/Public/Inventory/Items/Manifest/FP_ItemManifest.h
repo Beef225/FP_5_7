@@ -33,6 +33,14 @@ struct FP_5_7_API FFP_ItemManifest
 	template<typename T> requires std::derived_from<T, FFP_ItemFragment>
 	const T* GetFragmentOfTypeWithTag(const FGameplayTag& FragmentTag) const;
 
+	/** Returns a const pointer to the first fragment of type T, regardless of tag. */
+	template<typename T> requires std::derived_from<T, FFP_ItemFragment>
+	const T* GetFragmentOfType() const;
+
+	/** Returns a mutable pointer to the first fragment of type T — use to write back to live fragments. */
+	template<typename T> requires std::derived_from<T, FFP_ItemFragment>
+	T* GetFragmentOfTypeMutable();
+
 private:
 
 	/**
@@ -60,6 +68,34 @@ const T* FFP_ItemManifest::GetFragmentOfTypeWithTag(const FGameplayTag& Fragment
 		if (const T* FragmentPtr = Fragment.GetPtr<T>())
 		{
 			if (!FragmentPtr->GetFragmentTag().MatchesTagExact(FragmentTag)) continue;
+			return FragmentPtr;
+		}
+	}
+	return nullptr;
+}
+
+template<typename T>
+requires std::derived_from<T, FFP_ItemFragment>
+const T* FFP_ItemManifest::GetFragmentOfType() const
+{
+	for (const TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
+	{
+		if (const T* FragmentPtr = Fragment.GetPtr<T>())
+		{
+			return FragmentPtr;
+		}
+	}
+	return nullptr;
+}
+
+template<typename T>
+requires std::derived_from<T, FFP_ItemFragment>
+T* FFP_ItemManifest::GetFragmentOfTypeMutable()
+{
+	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
+	{
+		if (T* FragmentPtr = Fragment.GetMutablePtr<T>())
+		{
 			return FragmentPtr;
 		}
 	}

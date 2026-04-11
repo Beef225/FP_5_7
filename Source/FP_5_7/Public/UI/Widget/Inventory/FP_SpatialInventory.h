@@ -18,6 +18,7 @@ class FP_5_7_API UFP_SpatialInventory : public UFP_InventoryBase
 
 public:
 
+	virtual void NativeOnInitialized() override;
 	virtual FFP_SlotAvailabilityResult HasRoomForItem(UFP_ItemComponent* ItemComponent) const override;
 
 private:

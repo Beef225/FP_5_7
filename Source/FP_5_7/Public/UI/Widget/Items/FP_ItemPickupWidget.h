@@ -25,6 +25,9 @@ public:
 	/** Called by the owning ItemActor after it spawns so the widget knows who to talk to. */
 	void SetItemActor(AFP_ItemActor* InItemActor);
 
+	/** Tints the background image — use for conveying item rarity, state, etc. */
+	void SetBackgroundTint(const FLinearColor& Tint);
+
 protected:
 
 	virtual void NativeOnInitialized() override;

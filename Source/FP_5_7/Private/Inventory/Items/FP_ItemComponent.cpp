@@ -8,3 +8,9 @@ void UFP_ItemComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(UFP_ItemComponent, ItemManifest);
 }
+
+void UFP_ItemComponent::PickedUp()
+{
+	OnPickedUp();
+	GetOwner()->Destroy();
+}

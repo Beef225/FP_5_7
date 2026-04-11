@@ -4,6 +4,24 @@
 #include "Components/Image.h"
 #include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
 
+void UFP_GridSlot::NativeOnMouseEnter(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
+	Super::NativeOnMouseEnter(MyGeometry, MouseEvent);
+	GridSlotHovered.Broadcast(TileIndex, MouseEvent);
+}
+
+void UFP_GridSlot::NativeOnMouseLeave(const FPointerEvent& MouseEvent)
+{
+	Super::NativeOnMouseLeave(MouseEvent);
+	GridSlotUnhovered.Broadcast(TileIndex, MouseEvent);
+}
+
+FReply UFP_GridSlot::NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
+	GridSlotClicked.Broadcast(TileIndex, MouseEvent);
+	return FReply::Handled();
+}
+
 void UFP_GridSlot::SetInventoryItem(UFP_InventoryItem* Item)
 {
 	InventoryItem = Item;

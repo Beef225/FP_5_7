@@ -1,6 +1,8 @@
 // Copyright JG
 
 #include "Inventory/InventoryManagement/Components/FP_InventoryComponent.h"
+#include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
+#include "Inventory/Items/Fragments/FP_ItemFragment.h"
 #include "Inventory/Types/FP_InventoryTypes.h"
 #include "Net/UnrealNetwork.h"
 #include "UI/Widget/Inventory/FP_InventoryBase.h"
@@ -82,7 +84,8 @@ void UFP_InventoryComponent::TryAddItem(UFP_ItemComponent* ItemComponent)
 {
 	if (!InventoryMenu) return;
 
-	const FFP_SlotAvailabilityResult Result = InventoryMenu->HasRoomForItem(ItemComponent);
+	FFP_SlotAvailabilityResult Result = InventoryMenu->HasRoomForItem(ItemComponent);
+	Result.Item = InventoryList.FindFirstItemByType(ItemComponent->GetItemManifest().GetItemType());
 
 	if (Result.TotalRoomToFill == 0)
 	{
@@ -93,6 +96,7 @@ void UFP_InventoryComponent::TryAddItem(UFP_ItemComponent* ItemComponent)
 	if (Result.Item.IsValid() && Result.bStackable)
 	{
 		// Item already exists in inventory — just add stacks, don't create a new entry.
+		OnStackChange.Broadcast(Result);
 		Server_AddStacksToItem(ItemComponent, Result.TotalRoomToFill, Result.Remainder);
 	}
 	else if (Result.TotalRoomToFill > 0)
@@ -113,9 +117,23 @@ void UFP_InventoryComponent::Server_AddNewItem_Implementation(UFP_ItemComponent*
 	{
 		OnItemAdded.Broadcast(NewItem);
 	}
+
+	ItemComponent->PickedUp();
 }
 
 void UFP_InventoryComponent::Server_AddStacksToItem_Implementation(UFP_ItemComponent* ItemComponent, int32 StackCount, int32 Remainder)
 {
-	// TODO: Find existing item entry in FastArray, increment stack count.
+	UFP_InventoryItem* Item = InventoryList.FindFirstItemByType(ItemComponent->GetItemManifest().GetItemType());
+	if (!IsValid(Item)) return;
+
+	Item->SetTotalStackCount(Item->GetTotalStackCount() + StackCount);
+
+	if (Remainder == 0)
+	{
+		ItemComponent->PickedUp();
+	}
+	else if (FFP_StackableFragment* StackableFragment = ItemComponent->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_StackableFragment>())
+	{
+		StackableFragment->SetStackCount(Remainder);
+	}
 }

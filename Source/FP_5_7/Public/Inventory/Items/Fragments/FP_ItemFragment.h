@@ -89,6 +89,7 @@ struct FP_5_7_API FFP_StackableFragment : public FFP_ItemFragment
 
 	int32 GetMaxStackSize() const { return MaxStackSize; }
 	int32 GetStackCount() const { return StackCount; }
+	void SetStackCount(int32 Count) { StackCount = Count; }
 
 private:
 

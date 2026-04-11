@@ -20,7 +20,17 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	FFP_ItemManifest GetItemManifest() const { return ItemManifest; }
+	const FFP_ItemManifest& GetItemManifest() const { return ItemManifest; }
+	FFP_ItemManifest& GetItemManifestMutable() { return ItemManifest; }
+
+	/** Called server-side when the item is fully picked up. Fires OnPickedUp then destroys the owning actor. */
+	void PickedUp();
+
+protected:
+
+	/** Override in Blueprint to play a pickup effect or sound before the actor is destroyed. */
+	UFUNCTION(BlueprintImplementableEvent, Category = "Inventory")
+	void OnPickedUp();
 
 private:
 

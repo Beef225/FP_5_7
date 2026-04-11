@@ -5,6 +5,15 @@
 #include "Libraries/FP_EnumDefs.h"
 #include "UI/Widget/Inventory/FP_InventoryGrid.h"
 
+void UFP_SpatialInventory::NativeOnInitialized()
+{
+	Super::NativeOnInitialized();
+	if (IsValid(Grid))
+	{
+		Grid->ShowCursor();
+	}
+}
+
 FFP_SlotAvailabilityResult UFP_SpatialInventory::HasRoomForItem(UFP_ItemComponent* ItemComponent) const
 {
 	const EItemCategory Category = UFP_AbilitySystemLibrary::GetItemCategoryFromItemComp(ItemComponent);

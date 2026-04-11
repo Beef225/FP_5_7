@@ -2,6 +2,7 @@
 
 #include "UI/Widget/Inventory/FP_InventoryGrid.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
+#include "UI/Widget/Inventory/FP_InventoryBase.h"
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
 #include "FP_GameplayTags.h"
@@ -410,6 +411,12 @@ bool UFP_InventoryGrid::IsLeftClick(const FPointerEvent& MouseEvent) const
 
 void UFP_InventoryGrid::OnSlottedItemClicked(int32 GridIndex, const FPointerEvent& MouseEvent)
 {
+	// Hide item description when the player clicks an item.
+	if (OwningInventoryBase.IsValid())
+	{
+		OwningInventoryBase->OnItemUnhovered(SlottedItems.FindRef(GridIndex));
+	}
+
 	check(GridSlots.IsValidIndex(GridIndex));
 	UFP_InventoryItem* ClickedInventoryItem = GridSlots[GridIndex]->GetInventoryItem().Get();
 
@@ -549,6 +556,7 @@ UFP_SlottedItem* UFP_InventoryGrid::CreateSlottedItem(UFP_InventoryItem* Item, c
 	const int32 StackUpdateAmount = bStackable ? StackAmount : 0;
 	SlottedItem->UpdateStackCount(StackUpdateAmount);
 	SlottedItem->OnSlottedItemClicked.AddDynamic(this, &ThisClass::OnSlottedItemClicked);
+	SlottedItem->SetOwningInventory(OwningInventoryBase.Get());
 	return SlottedItem;
 }
 
@@ -734,6 +742,18 @@ void UFP_InventoryGrid::OnGridSlotClicked(int32 GridIndex, const FPointerEvent& 
 	}
 }
 
+void UFP_InventoryGrid::DropItem()
+{
+	if (!IsValid(HoverItem)) return;
+	if (!IsValid(HoverItem->GetInventoryItem())) return;
+	if (!InventoryComponent.IsValid()) return;
+
+	InventoryComponent->Server_DropItem(HoverItem->GetInventoryItem(), HoverItem->GetStackCount());
+
+	ClearHoverItem();
+	ShowCursor();
+}
+
 void UFP_InventoryGrid::CreateSplitStackWidget(const int32 GridIndex)
 {
 	UFP_InventoryItem* Item = GridSlots[GridIndex]->GetInventoryItem().Get();
@@ -765,10 +785,21 @@ void UFP_InventoryGrid::TryConsumeItem(const int32 GridIndex)
 	UFP_InventoryItem* Item = GridSlots[GridIndex]->GetInventoryItem().Get();
 	if (!IsValid(Item)) return;
 	if (!Item->IsConsumable()) return;
+	if (!InventoryComponent.IsValid()) return;
 
-	// TODO: Trigger per-item consume effect
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green,
-		FString::Printf(TEXT("%s consumed!"), *Item->GetItemManifest().GetItemType().ToString()));
+	const int32 UpperLeftIndex = GridSlots[GridIndex]->GetUpperLeftIndex();
+	UFP_GridSlot* UpperLeftGridSlot = GridSlots[UpperLeftIndex];
+	const int32 NewStackCount = UpperLeftGridSlot->GetStackCount() - 1;
+
+	UpperLeftGridSlot->SetStackCount(NewStackCount);
+	SlottedItems.FindChecked(UpperLeftIndex)->UpdateStackCount(NewStackCount);
+
+	InventoryComponent->Server_ConsumeItem(Item);
+
+	if (NewStackCount <= 0)
+	{
+		RemoveItemFromGrid(Item, UpperLeftIndex);
+	}
 }
 
 void UFP_InventoryGrid::OnSplitStackConfirmed(int32 SplitAmount, int32 GridIndex)

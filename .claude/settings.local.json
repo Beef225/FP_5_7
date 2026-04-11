@@ -21,7 +21,8 @@
       "Bash(python -m json.tool)",
       "Bash(wget:*)",
       "Bash(powershell:*)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(python3:*)"
     ]
   }
 }

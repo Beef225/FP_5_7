@@ -1003,6 +1003,9 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Fragment_Stackable = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Fragment.Stackable"), FString("Identifies the stackable fragment: defines max stack size and current stack count"));
 
+	GameplayTags.Fragment_Consumable = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Consumable"), FString("Identifies the consumable fragment: defines consume behaviour per item type"));
+
 	// -------------------------------------------------------------------------
 	//Locations
 	GameplayTags.Location_Startup = UGameplayTagsManager::Get().AddNativeGameplayTag(

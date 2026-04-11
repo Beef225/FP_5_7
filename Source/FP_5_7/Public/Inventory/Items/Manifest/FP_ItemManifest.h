@@ -23,6 +23,9 @@ struct FP_5_7_API FFP_ItemManifest
 	/** Factory: spawns and returns a fully initialised UFP_InventoryItem. */
 	UFP_InventoryItem* Manifest(UObject* NewOuter);
 
+	/** Spawns the pickup actor for this manifest at the given location/rotation. */
+	void SpawnPickupActor(const UObject* WorldContextObject, const FVector& SpawnLocation, const FRotator& SpawnRotation);
+
 	EItemCategory GetItemCategory() const { return ItemCategory; }
 	FGameplayTag GetItemType() const { return ItemType; }
 
@@ -48,6 +51,9 @@ private:
 	 * ExcludeBaseStruct prevents the raw FFP_ItemFragment base from appearing in the editor picker —
 	 * only concrete subclasses such as FFP_GridFragment are selectable.
 	 */
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	TSubclassOf<AActor> PickupActorClass;
+
 	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (ExcludeBaseStruct))
 	TArray<TInstancedStruct<FFP_ItemFragment>> Fragments;
 

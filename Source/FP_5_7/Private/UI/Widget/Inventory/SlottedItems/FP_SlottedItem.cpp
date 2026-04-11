@@ -4,11 +4,30 @@
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
 #include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
+#include "UI/Widget/Inventory/FP_InventoryBase.h"
 
 FReply UFP_SlottedItem::NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {
 	OnSlottedItemClicked.Broadcast(GridIndex, MouseEvent);
 	return FReply::Handled();
+}
+
+void UFP_SlottedItem::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
+	if (OwningInventory.IsValid())
+	{
+		OwningInventory->OnItemHovered(this);
+	}
+}
+
+void UFP_SlottedItem::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseLeave(InMouseEvent);
+	if (OwningInventory.IsValid())
+	{
+		OwningInventory->OnItemUnhovered(this);
+	}
 }
 
 void UFP_SlottedItem::SetInventoryItem(UFP_InventoryItem* Item)

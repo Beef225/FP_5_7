@@ -8,6 +8,7 @@
 
 class UImage;
 class UTextBlock;
+class UFP_InventoryBase;
 class UFP_InventoryItem;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFP_SlottedItemClicked, int32, GridIndex, const FPointerEvent&, MouseEvent);
@@ -25,6 +26,10 @@ class FP_5_7_API UFP_SlottedItem : public UUserWidget
 public:
 
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
+	virtual void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	virtual void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
+
+	void SetOwningInventory(UFP_InventoryBase* Inventory) { OwningInventory = Inventory; }
 
 	FFP_SlottedItemClicked OnSlottedItemClicked;
 
@@ -56,5 +61,6 @@ private:
 	int32 GridIndex{ 0 };
 	FIntPoint GridDimensions{ 1, 1 };
 	TWeakObjectPtr<UFP_InventoryItem> InventoryItem;
+	TWeakObjectPtr<UFP_InventoryBase> OwningInventory;
 	bool bIsStackable{ false };
 };

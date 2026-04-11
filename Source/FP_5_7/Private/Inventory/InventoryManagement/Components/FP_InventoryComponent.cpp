@@ -137,3 +137,57 @@ void UFP_InventoryComponent::Server_AddStacksToItem_Implementation(UFP_ItemCompo
 		StackableFragment->SetStackCount(Remainder);
 	}
 }
+
+void UFP_InventoryComponent::Server_ConsumeItem_Implementation(UFP_InventoryItem* Item)
+{
+	const FString ItemName = Item->GetItemManifest().GetItemType().ToString();
+
+	const int32 NewStackCount = Item->GetTotalStackCount() - 1;
+	if (NewStackCount <= 0)
+	{
+		InventoryList.RemoveEntry(Item);
+	}
+	else
+	{
+		Item->SetTotalStackCount(NewStackCount);
+	}
+
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green,
+		FString::Printf(TEXT("%s consumed!"), *ItemName));
+
+	// TODO: Call ConsumableFragment->OnConsume(PC) for GAS/stats integration
+}
+
+void UFP_InventoryComponent::Server_DropItem_Implementation(UFP_InventoryItem* Item, int32 StackCount)
+{
+	const int32 NewStackCount = Item->GetTotalStackCount() - StackCount;
+	if (NewStackCount <= 0)
+	{
+		InventoryList.RemoveEntry(Item);
+	}
+	else
+	{
+		Item->SetTotalStackCount(NewStackCount);
+	}
+
+	SpawnDroppedItem(Item, StackCount);
+}
+
+void UFP_InventoryComponent::SpawnDroppedItem(UFP_InventoryItem* Item, int32 StackCount)
+{
+	const APawn* OwningPawn = OwningController->GetPawn();
+	FVector RotatedForward = OwningPawn->GetActorForwardVector();
+	RotatedForward = RotatedForward.RotateAngleAxis(
+		FMath::FRandRange(DropSpawnAngleMin, DropSpawnAngleMax), FVector::UpVector);
+	FVector SpawnLocation = OwningPawn->GetActorLocation()
+		+ RotatedForward * FMath::FRandRange(DropSpawnDistanceMin, DropSpawnDistanceMax);
+	SpawnLocation.Z -= RelativeSpawnElevation;
+	const FRotator SpawnRotation = FRotator::ZeroRotator;
+
+	FFP_ItemManifest& ItemManifest = Item->GetItemManifestMutable();
+	if (FFP_StackableFragment* StackableFragment = ItemManifest.GetFragmentOfTypeMutable<FFP_StackableFragment>())
+	{
+		StackableFragment->SetStackCount(StackCount);
+	}
+	ItemManifest.SpawnPickupActor(this, SpawnLocation, SpawnRotation);
+}

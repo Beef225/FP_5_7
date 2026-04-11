@@ -47,6 +47,14 @@ public:
 	UFUNCTION(Server, Reliable)
 	void Server_AddStacksToItem(UFP_ItemComponent* ItemComponent, int32 StackCount, int32 Remainder);
 
+	UFUNCTION(Server, Reliable)
+	void Server_DropItem(UFP_InventoryItem* Item, int32 StackCount);
+
+	UFUNCTION(Server, Reliable)
+	void Server_ConsumeItem(UFP_InventoryItem* Item);
+
+	void SpawnDroppedItem(UFP_InventoryItem* Item, int32 StackCount);
+
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	void AddRepSubObj(UObject* SubObj);
@@ -65,6 +73,21 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Inventory")
 	bool IsInventoryVisible() const;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory|Drop")
+	float DropSpawnAngleMin = -85.f;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory|Drop")
+	float DropSpawnAngleMax = 85.f;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory|Drop")
+	float DropSpawnDistanceMin = 10.f;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory|Drop")
+	float DropSpawnDistanceMax = 50.f;
+
+	UPROPERTY(EditAnywhere, Category = "Inventory|Drop")
+	float RelativeSpawnElevation = 70.f;
 
 protected:
 

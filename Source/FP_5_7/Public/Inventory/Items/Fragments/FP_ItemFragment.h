@@ -6,6 +6,8 @@
 #include "GameplayTagContainer.h"
 #include "FP_ItemFragment.generated.h"
 
+class APlayerController;
+
 /**
  * Base struct for all item fragments.
  * Fragments are composable data blobs stored on FFP_ItemManifest via TInstancedStruct.
@@ -28,7 +30,7 @@ struct FP_5_7_API FFP_ItemFragment
 
 private:
 
-	UPROPERTY(EditAnywhere, Category = "Inventory")
+	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "Fragment"))
 	FGameplayTag FragmentTag = FGameplayTag::EmptyTag;
 };
 
@@ -98,4 +100,16 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	int32 StackCount{ 1 };
+};
+
+/**
+ * Marker fragment for consumable items.
+ * OnConsume is a virtual hook for future GAS/stats integration — currently unused.
+ */
+USTRUCT(BlueprintType)
+struct FP_5_7_API FFP_ConsumableFragment : public FFP_ItemFragment
+{
+	GENERATED_BODY()
+
+	virtual void OnConsume(APlayerController* PC) {}
 };

@@ -8,6 +8,7 @@
 #include "FP_InventoryBase.generated.h"
 
 class UFP_ItemComponent;
+class UFP_SlottedItem;
 
 /**
  * Base class for all inventory UI widgets.
@@ -23,4 +24,8 @@ public:
 	{
 		return FFP_SlotAvailabilityResult();
 	}
+
+	virtual void OnItemHovered(UFP_SlottedItem* SlottedItem) {}
+	virtual void OnItemUnhovered(UFP_SlottedItem* SlottedItem) {}
+	virtual bool HasHoverItem() const { return false; }
 };

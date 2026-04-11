@@ -339,6 +339,9 @@ FGameplayTag Fragment_Icon;
 /** Identifies FFP_StackableFragment: defines max stack size and current stack count. */
 FGameplayTag Fragment_Stackable;
 
+/** Identifies FFP_ConsumableFragment: defines consume behaviour per item type. */
+FGameplayTag Fragment_Consumable;
+
 // -------------------------------------------------------------------------
 //Locations
 FGameplayTag Location_Startup;

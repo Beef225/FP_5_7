@@ -32,4 +32,11 @@ public:
 	/** Returns true if MousePos falls within the rectangle defined by BoundaryPos and WidgetSize. */
 	UFUNCTION(BlueprintCallable, Category = "Inventory|Utils")
 	static bool IsWithinBounds(const FVector2D& BoundaryPos, const FVector2D& WidgetSize, const FVector2D& MousePos);
+
+	/**
+	 * Returns a position clamped so that a widget of WidgetSize stays fully inside a boundary of size Boundary.
+	 * MousePos is the desired position (e.g. cursor location in viewport space).
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Inventory|Utils")
+	static FVector2D GetClampedWidgetPosition(const FVector2D& Boundary, const FVector2D& WidgetSize, const FVector2D& MousePos);
 };

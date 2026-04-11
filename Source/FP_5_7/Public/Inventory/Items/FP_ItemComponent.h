@@ -18,6 +18,7 @@ class FP_5_7_API UFP_ItemComponent : public UActorComponent
 
 public:
 
+	UFP_ItemComponent();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	const FFP_ItemManifest& GetItemManifest() const { return ItemManifest; }
@@ -25,6 +26,9 @@ public:
 
 	/** Called server-side when the item is fully picked up. Fires OnPickedUp then destroys the owning actor. */
 	void PickedUp();
+
+	/** Initialises the manifest from a copy — used when spawning a dropped item actor. */
+	void InitItemManifest(FFP_ItemManifest CopyOfManifest);
 
 protected:
 

@@ -11,6 +11,7 @@
 enum class EFP_GridSlotState : uint8;
 
 class UFP_HoverItem;
+class UFP_InventoryBase;
 class UFP_SplitStackWidget;
 class UCanvasPanel;
 class UFP_GridSlot;
@@ -56,6 +57,11 @@ public:
 
 	UFUNCTION()
 	void OnGridSlotUnhovered(int32 GridIndex, const FPointerEvent& MouseEvent);
+
+	void SetOwningInventoryBase(UFP_InventoryBase* InventoryBase) { OwningInventoryBase = InventoryBase; }
+	bool HasHoverItem() const { return IsValid(HoverItem); }
+	void DropItem();
+	void ShowCursor();
 
 private:
 
@@ -123,7 +129,6 @@ private:
 	void ConsumeHoverItemStacks(int32 ClickedStackCount, int32 HoveredStackCount, int32 Index);
 	bool ShouldFillInStack(int32 RoomInClickedSlot, int32 HoveredStackCount) const;
 	void FillInStack(int32 FillAmount, int32 Remainder, int32 Index);
-	void ShowCursor();
 	void HideCursor();
 	UUserWidget* GetVisibleCursorWidget();
 	UUserWidget* GetHiddenCursorWidget();
@@ -131,6 +136,7 @@ private:
 		const FFP_ImageFragment* ImageFragment) const;
 
 	TWeakObjectPtr<UFP_InventoryComponent> InventoryComponent;
+	TWeakObjectPtr<UFP_InventoryBase> OwningInventoryBase;
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UCanvasPanel> CanvasPanel;

@@ -38,7 +38,7 @@ public:
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 	FFP_SlotAvailabilityResult HasRoomForItem(const UFP_ItemComponent* ItemComponent);
-	FFP_SlotAvailabilityResult HasRoomForItem(const UFP_InventoryItem* Item);
+	FFP_SlotAvailabilityResult HasRoomForItem(const UFP_InventoryItem* Item, const int32 StackAmountOverride = -1);
 
 	UFUNCTION()
 	void AddItem(UFP_InventoryItem* Item);
@@ -59,14 +59,19 @@ public:
 	void OnGridSlotUnhovered(int32 GridIndex, const FPointerEvent& MouseEvent);
 
 	void SetOwningInventoryBase(UFP_InventoryBase* InventoryBase) { OwningInventoryBase = InventoryBase; }
-	bool HasHoverItem() const { return IsValid(HoverItem); }
+	bool HasHoverItem() const { return HoverItem != nullptr; }
+	UFP_HoverItem* GetHoverItem() const { return HoverItem; }
+	float GetTileSize() const { return TileSize; }
 	void DropItem();
 	void ShowCursor();
+	void ClearHoverItem();
+	void AssignHoverItem(UFP_InventoryItem* InventoryItem);
+	void OnHide();
 
 private:
 
 	void ConstructGrid();
-	FFP_SlotAvailabilityResult HasRoomForItem(const FFP_ItemManifest& Manifest);
+	FFP_SlotAvailabilityResult HasRoomForItem(const FFP_ItemManifest& Manifest, const int32 StackAmountOverride = -1);
 	bool IsIndexClaimed(const TSet<int32>& CheckedIndices, int32 Index) const;
 	bool IsInGridBounds(int32 StartIndex, const FIntPoint& ItemDimensions) const;
 	bool HasRoomAtIndex(const UFP_GridSlot* GridSlot,
@@ -89,7 +94,6 @@ private:
 	bool IsRightClick(const FPointerEvent& MouseEvent) const;
 	bool IsLeftClick(const FPointerEvent& MouseEvent) const;
 	void PickUp(UFP_InventoryItem* ClickedInventoryItem, int32 GridIndex);
-	void AssignHoverItem(UFP_InventoryItem* InventoryItem);
 	void AssignHoverItem(UFP_InventoryItem* InventoryItem, int32 GridIndex, int32 PreviousGridIndex);
 	void RemoveItemFromGrid(UFP_InventoryItem* InventoryItem, int32 GridIndex);
 	FIntPoint GetItemDimensions(const FFP_ItemManifest& Manifest) const;
@@ -112,7 +116,6 @@ private:
 	void UnHighlightSlots(int32 Index, const FIntPoint& Dimensions);
 	void ChangeHoverType(int32 Index, const FIntPoint& Dimensions, EFP_GridSlotState GridSlotState);
 	void PutDownOnIndex(int32 Index);
-	void ClearHoverItem();
 	void CreateSplitStackWidget(int32 GridIndex);
 	void TryConsumeItem(int32 GridIndex);
 
@@ -134,6 +137,10 @@ private:
 	UUserWidget* GetHiddenCursorWidget();
 	void SetSlottedItemImage(const UFP_SlottedItem* SlottedItem, const FFP_GridFragment* GridFragment,
 		const FFP_ImageFragment* ImageFragment) const;
+	void PutHoverItemBack();
+
+	UFUNCTION()
+	void OnInventoryMenuToggled(bool bOpen);
 
 	TWeakObjectPtr<UFP_InventoryComponent> InventoryComponent;
 	TWeakObjectPtr<UFP_InventoryBase> OwningInventoryBase;

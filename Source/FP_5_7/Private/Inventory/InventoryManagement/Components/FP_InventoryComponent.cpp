@@ -73,6 +73,7 @@ void UFP_InventoryComponent::ToggleInventory()
 	{
 		ShowInventory();
 	}
+	OnInventoryMenuToggled.Broadcast(IsInventoryVisible());
 }
 
 bool UFP_InventoryComponent::IsInventoryVisible() const
@@ -155,7 +156,21 @@ void UFP_InventoryComponent::Server_ConsumeItem_Implementation(UFP_InventoryItem
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green,
 		FString::Printf(TEXT("%s consumed!"), *ItemName));
 
-	// TODO: Call ConsumableFragment->OnConsume(PC) for GAS/stats integration
+	if (FFP_ConsumableFragment* ConsumableFragment = Item->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_ConsumableFragment>())
+	{
+		ConsumableFragment->OnConsume(OwningController.Get());
+	}
+}
+
+void UFP_InventoryComponent::Server_EquipSlotClicked_Implementation(UFP_InventoryItem* ItemToEquip, UFP_InventoryItem* ItemToUnequip)
+{
+	Multicast_EquipSlotClicked(ItemToEquip, ItemToUnequip);
+}
+
+void UFP_InventoryComponent::Multicast_EquipSlotClicked_Implementation(UFP_InventoryItem* ItemToEquip, UFP_InventoryItem* ItemToUnequip)
+{
+	OnItemEquipped.Broadcast(ItemToEquip);
+	OnItemUnequipped.Broadcast(ItemToUnequip);
 }
 
 void UFP_InventoryComponent::Server_DropItem_Implementation(UFP_InventoryItem* Item, int32 StackCount)

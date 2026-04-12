@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "UI/Widget/Inventory/FP_InventoryBase.h"
 #include "FP_SlottedItem.generated.h"
 
 class UImage;
 class UTextBlock;
-class UFP_InventoryBase;
 class UFP_InventoryItem;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFP_SlottedItemClicked, int32, GridIndex, const FPointerEvent&, MouseEvent);

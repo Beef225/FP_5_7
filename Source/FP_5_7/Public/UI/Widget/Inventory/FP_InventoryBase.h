@@ -7,6 +7,7 @@
 #include "Inventory/Types/FP_InventoryTypes.h"
 #include "FP_InventoryBase.generated.h"
 
+class UFP_HoverItem;
 class UFP_ItemComponent;
 class UFP_SlottedItem;
 
@@ -28,4 +29,5 @@ public:
 	virtual void OnItemHovered(UFP_SlottedItem* SlottedItem) {}
 	virtual void OnItemUnhovered(UFP_SlottedItem* SlottedItem) {}
 	virtual bool HasHoverItem() const { return false; }
+	virtual UFP_HoverItem* GetHoverItem() const { return nullptr; }
 };

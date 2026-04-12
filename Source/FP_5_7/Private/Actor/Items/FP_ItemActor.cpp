@@ -33,6 +33,11 @@ void AFP_ItemActor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Notify all fragments that the item has spawned. For editor-placed items the manifest
+	// is already populated from Blueprint defaults; for code-spawned items InitItemManifest
+	// was called before FinishSpawning (deferred spawn), so both cases are safe here.
+	ItemComponent->GetItemManifestMutable().NotifyItemSpawned();
+
 	InitialisePickupWidget();
 
 	if (SpawnEffect)

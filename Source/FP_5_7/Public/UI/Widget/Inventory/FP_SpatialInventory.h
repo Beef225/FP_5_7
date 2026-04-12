@@ -6,6 +6,8 @@
 #include "UI/Widget/Inventory/FP_InventoryBase.h"
 #include "FP_SpatialInventory.generated.h"
 
+class UFP_EquippedGridSlot;
+class UFP_EquippedSlottedItem;
 class UFP_InventoryGrid;
 class UFP_ItemDescription;
 class UCanvasPanel;
@@ -28,14 +30,30 @@ public:
 	virtual void OnItemHovered(UFP_SlottedItem* SlottedItem) override;
 	virtual void OnItemUnhovered(UFP_SlottedItem* SlottedItem) override;
 	virtual bool HasHoverItem() const override;
+	virtual UFP_HoverItem* GetHoverItem() const override;
+
+	UFUNCTION()
+	void EquippedGridSlotClicked(UFP_EquippedGridSlot* EquippedGridSlot, const FGameplayTag& EquipmentTypeTag);
+
+	UFUNCTION()
+	void EquippedSlottedItemClicked(UFP_EquippedSlottedItem* EquippedSlottedItem);
 
 private:
 
 	UFP_ItemDescription* GetItemDescription();
 	void SetItemDescriptionSizeAndPosition();
+	bool CanEquipHoverItem(UFP_EquippedGridSlot* EquippedGridSlot, const FGameplayTag& EquipmentTypeTag) const;
+	UFP_EquippedGridSlot* FindSlotWithEquippedItem(UFP_InventoryItem* EquippedItem) const;
+	void ClearSlotOfItem(UFP_EquippedGridSlot* EquippedGridSlot);
+	void RemoveEquippedSlottedItem(UFP_EquippedSlottedItem* EquippedSlottedItem);
+	void MakeEquippedSlottedItem(UFP_EquippedSlottedItem* EquippedSlottedItem, UFP_EquippedGridSlot* EquippedGridSlot, UFP_InventoryItem* ItemToEquip);
+	void BroadcastSlotClickedDelegates(UFP_InventoryItem* ItemToEquip, UFP_InventoryItem* ItemToUnequip) const;
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UFP_InventoryGrid> Grid;
+
+	UPROPERTY()
+	TArray<TObjectPtr<UFP_EquippedGridSlot>> EquippedGridSlots;
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UCanvasPanel> CanvasPanel;

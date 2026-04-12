@@ -29,6 +29,7 @@ void UFP_InventoryGrid::NativeOnInitialized()
 	{
 		InventoryComponent->OnItemAdded.AddDynamic(this, &ThisClass::AddItem);
 		InventoryComponent->OnStackChange.AddDynamic(this, &ThisClass::AddStacks);
+		InventoryComponent->OnInventoryMenuToggled.AddDynamic(this, &ThisClass::OnInventoryMenuToggled);
 	}
 
 	ConstructGrid();
@@ -286,12 +287,12 @@ FFP_SlotAvailabilityResult UFP_InventoryGrid::HasRoomForItem(const UFP_ItemCompo
 	return HasRoomForItem(ItemComponent->GetItemManifest());
 }
 
-FFP_SlotAvailabilityResult UFP_InventoryGrid::HasRoomForItem(const UFP_InventoryItem* Item)
+FFP_SlotAvailabilityResult UFP_InventoryGrid::HasRoomForItem(const UFP_InventoryItem* Item, const int32 StackAmountOverride)
 {
-	return HasRoomForItem(Item->GetItemManifest());
+	return HasRoomForItem(Item->GetItemManifest(), StackAmountOverride);
 }
 
-FFP_SlotAvailabilityResult UFP_InventoryGrid::HasRoomForItem(const FFP_ItemManifest& Manifest)
+FFP_SlotAvailabilityResult UFP_InventoryGrid::HasRoomForItem(const FFP_ItemManifest& Manifest, const int32 StackAmountOverride)
 {
 	FFP_SlotAvailabilityResult Result;
 
@@ -302,6 +303,10 @@ FFP_SlotAvailabilityResult UFP_InventoryGrid::HasRoomForItem(const FFP_ItemManif
 	// 2. If stackable, determine how much total stack room is needed (TotalRoomToFill)
 	const int32 MaxStackSize = StackableFragment ? StackableFragment->GetMaxStackSize() : 1;
 	int32 AmountToFill = StackableFragment ? StackableFragment->GetStackCount() : 1;
+	if (StackAmountOverride != -1 && Result.bStackable)
+	{
+		AmountToFill = StackAmountOverride;
+	}
 
 	// 3. Iterate through each grid slot
 	TSet<int32> CheckedIndices;
@@ -399,6 +404,11 @@ void UFP_InventoryGrid::AssignHoverItem(UFP_InventoryItem* InventoryItem)
 	HoverItem->AddToViewport();
 }
 
+void UFP_InventoryGrid::OnHide()
+{
+	PutHoverItemBack();
+}
+
 bool UFP_InventoryGrid::IsRightClick(const FPointerEvent& MouseEvent) const
 {
 	return MouseEvent.GetEffectingButton() == EKeys::RightMouseButton;
@@ -473,8 +483,12 @@ void UFP_InventoryGrid::OnSlottedItemClicked(int32 GridIndex, const FPointerEven
 		}
 	}
 
-	// Swap with the hover item.
-	SwapWithHoverItem(ClickedInventoryItem, GridIndex);
+	// Make sure we can swap with a valid item
+	if (CurrentQueryResult.ValidItem.IsValid())
+	{
+		// Swap with the hover item.
+		SwapWithHoverItem(ClickedInventoryItem, GridIndex);
+	}
 }
 
 void UFP_InventoryGrid::AddStacks(const FFP_SlotAvailabilityResult& Result)
@@ -739,6 +753,25 @@ void UFP_InventoryGrid::OnGridSlotClicked(int32 GridIndex, const FPointerEvent& 
 	if (!GridSlot->GetInventoryItem().IsValid())
 	{
 		PutDownOnIndex(ItemDropIndex);
+	}
+}
+
+void UFP_InventoryGrid::PutHoverItemBack()
+{
+	if (!IsValid(HoverItem)) return;
+
+	FFP_SlotAvailabilityResult Result = HasRoomForItem(HoverItem->GetInventoryItem(), HoverItem->GetStackCount());
+	Result.Item = HoverItem->GetInventoryItem();
+
+	AddStacks(Result);
+	ClearHoverItem();
+}
+
+void UFP_InventoryGrid::OnInventoryMenuToggled(bool bOpen)
+{
+	if (!bOpen)
+	{
+		PutHoverItemBack();
 	}
 }
 

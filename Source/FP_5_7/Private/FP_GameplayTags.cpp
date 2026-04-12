@@ -1006,6 +1006,46 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Fragment_Consumable = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Fragment.Consumable"), FString("Identifies the consumable fragment: defines consume behaviour per item type"));
 
+	GameplayTags.Fragment_ItemName = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.ItemName"), FString("Identifies the text fragment: stores item name or other display text"));
+
+	GameplayTags.Fragment_PrimaryStat = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.PrimaryStat"), FString("Identifies a labeled numeric stat fragment (e.g. damage, armour)"));
+
+	GameplayTags.Fragment_ItemType = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.ItemType"), FString("Identifies a text leaf displaying the item's type/category"));
+
+	GameplayTags.Fragment_FlavorText = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.FlavorText"), FString("Identifies a text leaf displaying flavour/lore text"));
+
+	GameplayTags.Fragment_SellValue = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.SellValue"), FString("Identifies a labeled-value leaf displaying the item's sell value"));
+
+	GameplayTags.Fragment_RequiredLevel = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.RequiredLevel"), FString("Identifies a labeled-value leaf displaying the item's required level"));
+
+	// -------------------------------------------------------------------------
+	// Equipment Types
+	// -------------------------------------------------------------------------
+	GameplayTags.Equipment_BodyArmour = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.BodyArmour"), FString("Body armour equipment slot"));
+	GameplayTags.Equipment_Headwear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Headwear"), FString("Headwear equipment slot"));
+	GameplayTags.Equipment_Gloves = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Gloves"), FString("Gloves equipment slot"));
+	GameplayTags.Equipment_Boots = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Boots"), FString("Boots equipment slot"));
+	GameplayTags.Equipment_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Weapon"), FString("Weapon equipment slot"));
+	GameplayTags.Equipment_Injector = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Injector"), FString("Injector equipment slot"));
+	GameplayTags.Equipment_Belt = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Belt"), FString("Belt equipment slot"));
+	GameplayTags.Equipment_Ring = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Ring"), FString("Ring equipment slot"));
+	GameplayTags.Equipment_Amulet = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Amulet"), FString("Amulet equipment slot"));
+
 	// -------------------------------------------------------------------------
 	//Locations
 	GameplayTags.Location_Startup = UGameplayTagsManager::Get().AddNativeGameplayTag(

@@ -13,6 +13,7 @@
 #include "FP_AbilitySystemLibrary.generated.h"
 
 class UAbilitySystemComponent;
+class UFP_HoverItem;
 class UFP_OverlayWidgetController;
 class UFP_InventoryWidgetController;
 class UCharacterMenuWidgetController;
@@ -91,6 +92,9 @@ public:
 	/** Reads the item category directly from the ItemComponent's manifest. Returns None if invalid. */
 	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|Inventory")
 	static EItemCategory GetItemCategoryFromItemComp(UFP_ItemComponent* ItemComp);
+
+	/** Returns the hover item currently held in the player's inventory UI, or nullptr. */
+	static UFP_HoverItem* GetHoverItem(APlayerController* PC);
 
 	/**
 	 * Iterates over a 2D rectangular region of a flat array starting at Index,

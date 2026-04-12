@@ -5,6 +5,8 @@
 
 #include "FP_AbilityTypes.h"
 #include "Inventory/InventoryManagement/Components/FP_InventoryComponent.h"
+#include "UI/Widget/Inventory/FP_InventoryBase.h"
+#include "UI/Widget/Inventory/HoverItem/FP_HoverItem.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "Game/FP_GameModeBase.h"
 #include "Interaction/FP_CombatInterface.h"
@@ -272,4 +274,13 @@ EItemCategory UFP_AbilitySystemLibrary::GetItemCategoryFromItemComp(UFP_ItemComp
 {
 	if (!IsValid(ItemComp)) return EItemCategory::None;
 	return ItemComp->GetItemManifest().GetItemCategory();
+}
+
+UFP_HoverItem* UFP_AbilitySystemLibrary::GetHoverItem(APlayerController* PC)
+{
+	UFP_InventoryComponent* IC = GetInventoryComponent(PC);
+	if (!IsValid(IC)) return nullptr;
+	UFP_InventoryBase* InventoryMenu = IC->GetInventoryMenu();
+	if (!IsValid(InventoryMenu)) return nullptr;
+	return InventoryMenu->GetHoverItem();
 }

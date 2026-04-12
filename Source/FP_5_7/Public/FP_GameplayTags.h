@@ -342,6 +342,37 @@ FGameplayTag Fragment_Stackable;
 /** Identifies FFP_ConsumableFragment: defines consume behaviour per item type. */
 FGameplayTag Fragment_Consumable;
 
+/** Identifies FFP_TextFragment: stores a text string for display in the item description (e.g. item name). */
+FGameplayTag Fragment_ItemName;
+
+/** Identifies FFP_LabeledNumberFragment: stores a labeled numeric stat (e.g. damage, armour). */
+FGameplayTag Fragment_PrimaryStat;
+
+/** Identifies a text leaf displaying the item's type/category (e.g. "Weapon", "Consumable"). */
+FGameplayTag Fragment_ItemType;
+
+/** Identifies a text leaf displaying flavour/lore text for the item. */
+FGameplayTag Fragment_FlavorText;
+
+/** Identifies a labeled-value leaf displaying the item's sell value. */
+FGameplayTag Fragment_SellValue;
+
+/** Identifies a labeled-value leaf displaying the item's required level. */
+FGameplayTag Fragment_RequiredLevel;
+
+// -------------------------------------------------------------------------
+// Equipment Types
+// -------------------------------------------------------------------------
+FGameplayTag Equipment_BodyArmour;
+FGameplayTag Equipment_Headwear;
+FGameplayTag Equipment_Gloves;
+FGameplayTag Equipment_Boots;
+FGameplayTag Equipment_Weapon;
+FGameplayTag Equipment_Injector;
+FGameplayTag Equipment_Belt;
+FGameplayTag Equipment_Ring;
+FGameplayTag Equipment_Amulet;
+
 // -------------------------------------------------------------------------
 //Locations
 FGameplayTag Location_Startup;

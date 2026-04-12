@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
 #include "FP_SplitStackWidget.generated.h"
 
 class UButton;
 class USlider;
 class UTextBlock;
-class UFP_InventoryItem;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FFP_SplitStackConfirmed, int32, SplitAmount, int32, GridIndex);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFP_SplitStackCancelled);

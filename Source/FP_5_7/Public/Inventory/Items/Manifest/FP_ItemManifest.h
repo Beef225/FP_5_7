@@ -10,6 +10,7 @@
 #include "FP_ItemManifest.generated.h"
 
 class UFP_InventoryItem;
+class UFP_CompositeBase;
 
 /**
  * Holds all the data required to create a new UFP_InventoryItem.
@@ -20,6 +21,8 @@ struct FP_5_7_API FFP_ItemManifest
 {
 	GENERATED_BODY()
 
+	TArray<TInstancedStruct<FFP_ItemFragment>>& GetFragmentsMutable() { return Fragments; }
+
 	/** Factory: spawns and returns a fully initialised UFP_InventoryItem. */
 	UFP_InventoryItem* Manifest(UObject* NewOuter);
 
@@ -28,6 +31,24 @@ struct FP_5_7_API FFP_ItemManifest
 
 	EItemCategory GetItemCategory() const { return ItemCategory; }
 	FGameplayTag GetItemType() const { return ItemType; }
+
+	/**
+	 * Iterates all FFP_InventoryItemFragment-derived fragments and calls Assimilate on each
+	 * leaf of the composite widget tree, expanding leaves whose tags match.
+	 */
+	void AssimilateInventoryFragments(UFP_CompositeBase* Composite) const;
+
+	/**
+	 * Calls OnSpawned() on every fragment. Invoked from AFP_ItemActor::BeginPlay so
+	 * fragments can roll random values or do one-time setup at world-spawn time.
+	 */
+	void NotifyItemSpawned();
+
+	/**
+	 * Returns all fragments of type T (or any type derived from T).
+	 */
+	template<typename T> requires std::derived_from<T, FFP_ItemFragment>
+	TArray<const T*> GetAllFragmentsOfType() const;
 
 	/**
 	 * Returns a const pointer to the first fragment of type T whose FragmentTag matches,
@@ -63,6 +84,9 @@ private:
 	/** Specific item type tag, e.g. Inventory.Equippable.Weapon. Used for filtering, sorting, and rules. */
 	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "Inventory"))
 	FGameplayTag ItemType;
+
+	/** Resets and empties the Fragments array — called after Manifest() copies fragments to the inventory item. */
+	void ClearFragments();
 };
 
 template<typename T>
@@ -106,4 +130,19 @@ T* FFP_ItemManifest::GetFragmentOfTypeMutable()
 		}
 	}
 	return nullptr;
+}
+
+template<typename T>
+requires std::derived_from<T, FFP_ItemFragment>
+TArray<const T*> FFP_ItemManifest::GetAllFragmentsOfType() const
+{
+	TArray<const T*> Result;
+	for (const TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
+	{
+		if (const T* FragmentPtr = Fragment.GetPtr<T>())
+		{
+			Result.Add(FragmentPtr);
+		}
+	}
+	return Result;
 }

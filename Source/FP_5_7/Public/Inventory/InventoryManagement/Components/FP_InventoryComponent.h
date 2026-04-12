@@ -15,6 +15,8 @@ class UFP_InventoryItem;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFP_InventoryItemChange, UFP_InventoryItem*, Item);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FFP_NoRoomInInventory);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFP_StackChange, const FFP_SlotAvailabilityResult&, Result);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFP_InventoryItemEquip, UFP_InventoryItem*, Item);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FFP_InventoryMenuToggled, bool, bOpen);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class FP_5_7_API UFP_InventoryComponent : public UActorComponent
@@ -37,6 +39,15 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Inventory")
 	FFP_StackChange OnStackChange;
 
+	UPROPERTY(BlueprintAssignable, Category = "Inventory")
+	FFP_InventoryItemEquip OnItemEquipped;
+
+	UPROPERTY(BlueprintAssignable, Category = "Inventory")
+	FFP_InventoryItemEquip OnItemUnequipped;
+
+	UPROPERTY(BlueprintAssignable, Category = "Inventory")
+	FFP_InventoryMenuToggled OnInventoryMenuToggled;
+
 	/** Server-only. Attempts to add the item held by ItemComponent to this inventory. */
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "Inventory")
 	void TryAddItem(UFP_ItemComponent* ItemComponent);
@@ -52,6 +63,12 @@ public:
 
 	UFUNCTION(Server, Reliable)
 	void Server_ConsumeItem(UFP_InventoryItem* Item);
+
+	UFUNCTION(Server, Reliable)
+	void Server_EquipSlotClicked(UFP_InventoryItem* ItemToEquip, UFP_InventoryItem* ItemToUnequip);
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_EquipSlotClicked(UFP_InventoryItem* ItemToEquip, UFP_InventoryItem* ItemToUnequip);
 
 	void SpawnDroppedItem(UFP_InventoryItem* Item, int32 StackCount);
 
@@ -73,6 +90,8 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Inventory")
 	bool IsInventoryVisible() const;
+
+	UFP_InventoryBase* GetInventoryMenu() const { return InventoryMenu; }
 
 	UPROPERTY(EditAnywhere, Category = "Inventory|Drop")
 	float DropSpawnAngleMin = -85.f;

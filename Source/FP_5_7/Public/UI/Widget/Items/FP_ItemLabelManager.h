@@ -40,11 +40,9 @@ private:
 	{
 		TWeakObjectPtr<AFP_ItemActor> ItemActor;
 		TObjectPtr<UFP_ItemPickupWidget> Widget;
-		FVector2D CurrentPos{ FVector2D::ZeroVector };
-		bool bPositionInitialized{ false };
 	};
 
-	void UpdateEntries(APlayerController* PC, APawn* PlayerPawn, float DeltaTime);
+	void UpdateEntries(APlayerController* PC, APawn* PlayerPawn);
 	static void ResolveOverlaps(TArray<TPair<FLabelEntry*, FVector2D>>& SortedEntries, const FVector2D& LabelSize, float Padding);
 
 	UPROPERTY(meta = (BindWidget))
@@ -56,10 +54,6 @@ private:
 	/** World-space distance beyond which labels are hidden. */
 	UPROPERTY(EditAnywhere, Category = "Labels")
 	float MaxDistance = 1500.f;
-
-	/** Interpolation speed for label position tracking — higher feels snappier. */
-	UPROPERTY(EditAnywhere, Category = "Labels")
-	float PositionInterpSpeed = 12.f;
 
 	/** Extra gap (in slate units) added between stacked labels during overlap resolution. */
 	UPROPERTY(EditAnywhere, Category = "Labels")

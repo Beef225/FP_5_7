@@ -88,6 +88,12 @@ void UFP_InventoryComponent::TryAddItem(UFP_ItemComponent* ItemComponent)
 	FFP_SlotAvailabilityResult Result = InventoryMenu->HasRoomForItem(ItemComponent);
 	Result.Item = InventoryList.FindFirstItemByType(ItemComponent->GetItemManifest().GetItemType());
 
+	UE_LOG(LogTemp, Warning, TEXT("TryAddItem — TotalRoomToFill: %d | bStackable: %d | ItemType: %s | ItemCategory: %d"),
+		Result.TotalRoomToFill,
+		Result.bStackable,
+		*ItemComponent->GetItemManifest().GetItemType().ToString(),
+		static_cast<int32>(ItemComponent->GetItemManifest().GetItemCategory()));
+
 	if (Result.TotalRoomToFill == 0)
 	{
 		NoRoomInInventory.Broadcast();

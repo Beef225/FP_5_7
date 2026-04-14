@@ -55,10 +55,10 @@ void UFP_ItemLabelManager::NativeTick(const FGeometry& MyGeometry, float InDelta
 	APawn* PlayerPawn = PC->GetPawn();
 	if (!IsValid(PlayerPawn)) return;
 
-	UpdateEntries(PC, PlayerPawn, InDeltaTime);
+	UpdateEntries(PC, PlayerPawn);
 }
 
-void UFP_ItemLabelManager::UpdateEntries(APlayerController* PC, APawn* PlayerPawn, float DeltaTime)
+void UFP_ItemLabelManager::UpdateEntries(APlayerController* PC, APawn* PlayerPawn)
 {
 	const float MaxDistSq = MaxDistance * MaxDistance;
 	const float ViewportScale = UWidgetLayoutLibrary::GetViewportScale(GetWorld());
@@ -92,7 +92,7 @@ void UFP_ItemLabelManager::UpdateEntries(APlayerController* PC, APawn* PlayerPaw
 		// Use the widget's actual rendered width so centering is accurate regardless of text length or font size.
 		// Falls back to EstimatedLabelSize on the first frame before geometry is computed.
 		FVector2D TargetPos = ScreenPos / ViewportScale;
-		const float ActualWidth = Entry->Widget->GetCachedGeometry().GetLocalSize().X;
+		const float ActualWidth = Entry.Widget->GetCachedGeometry().GetLocalSize().X;
 		TargetPos.X -= (ActualWidth > 0.f ? ActualWidth : EstimatedLabelSize.X) * 0.5f;
 		TargetPos.Y -= LabelVerticalOffset;
 
@@ -111,24 +111,15 @@ void UFP_ItemLabelManager::UpdateEntries(APlayerController* PC, APawn* PlayerPaw
 
 	ResolveOverlaps(VisibleEntries, EstimatedLabelSize, OverlapPadding);
 
-	// Lerp each label toward its resolved position and make it visible
+	// Set each label to its resolved position directly — the projected world position already
+	// moves smoothly with the camera, so interpolation only adds lag.
 	for (auto& [Entry, TargetPos] : VisibleEntries)
 	{
-		if (!Entry->bPositionInitialized)
-		{
-			Entry->CurrentPos = TargetPos;
-			Entry->bPositionInitialized = true;
-		}
-		else
-		{
-			Entry->CurrentPos = FMath::Vector2DInterpTo(Entry->CurrentPos, TargetPos, DeltaTime, PositionInterpSpeed);
-		}
-
 		Entry->Widget->SetVisibility(ESlateVisibility::Visible);
 
 		if (UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(Entry->Widget->Slot))
 		{
-			CanvasSlot->SetPosition(Entry->CurrentPos);
+			CanvasSlot->SetPosition(TargetPos);
 		}
 	}
 }

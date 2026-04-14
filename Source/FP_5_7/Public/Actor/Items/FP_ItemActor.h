@@ -7,23 +7,22 @@
 #include "FP_ItemActor.generated.h"
 
 class UFP_ItemComponent;
-class UFP_ItemPickupWidget;
 class UStaticMeshComponent;
-class UWidgetComponent;
 class UNiagaraSystem;
 class UNiagaraComponent;
+struct FFP_ItemManifest;
 
 /**
  * World actor representing a dropped or placed inventory item.
  *
  * Components:
  *  - Static mesh for the item's visual representation
- *  - Widget component hosting UFP_ItemPickupWidget in world space
  *  - UFP_ItemComponent carrying the FFP_ItemManifest (item data)
  *  - Optional Niagara component for spawn / idle VFX
  *
- * When the player clicks the pickup widget button, OnPickupRequested is called,
- * which routes the item into the inventory via UFP_InventoryComponent::TryAddItem.
+ * Registers itself with UFP_ItemLabelManager on BeginPlay so a screen-space
+ * pickup label is created and tracked automatically. The label calls
+ * OnPickupRequested when the player clicks it.
  */
 UCLASS()
 class FP_5_7_API AFP_ItemActor : public AActor
@@ -37,19 +36,20 @@ public:
 	/** Called by UFP_ItemPickupWidget when the player presses the pickup button. */
 	void OnPickupRequested();
 
+	const FFP_ItemManifest& GetItemManifest() const;
+
 protected:
 
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
 
-	void InitialisePickupWidget();
+	void RegisterWithLabelManager();
+	void UnregisterFromLabelManager();
 
 	UPROPERTY(VisibleAnywhere, Category = "Item")
 	TObjectPtr<UStaticMeshComponent> Mesh;
-
-	UPROPERTY(VisibleAnywhere, Category = "Item")
-	TObjectPtr<UWidgetComponent> WidgetComponent;
 
 	/** Carries the FFP_ItemManifest — set this up in the Blueprint Details panel. */
 	UPROPERTY(VisibleAnywhere, Category = "Item")
@@ -61,7 +61,4 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Item|VFX")
 	TObjectPtr<UNiagaraComponent> NiagaraComponent;
-
-	UPROPERTY(EditAnywhere, Category = "Item")
-	TSubclassOf<UFP_ItemPickupWidget> PickupWidgetClass;
 };

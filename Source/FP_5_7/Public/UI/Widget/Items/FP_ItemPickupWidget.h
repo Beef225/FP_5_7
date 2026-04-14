@@ -12,8 +12,9 @@ class UTextBlock;
 class AFP_ItemActor;
 
 /**
- * World-space hover widget attached to AFP_ItemActor via UWidgetComponent.
- * Shows the item name and an interact button the player presses to pick up.
+ * Screen-space pickup label managed by UFP_ItemLabelManager.
+ * Shows the item name (resolved from FFP_TextFragment tagged Fragment_ItemName)
+ * and a pickup button. Background tint and font are configurable for future rarity display.
  */
 UCLASS()
 class FP_5_7_API UFP_ItemPickupWidget : public UUserWidget

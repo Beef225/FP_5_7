@@ -966,8 +966,6 @@ void UFP_InventoryGrid::OnGridSlotHovered(int32 GridIndex, const FPointerEvent& 
 
 void UFP_InventoryGrid::OnGridSlotUnhovered(int32 GridIndex, const FPointerEvent& MouseEvent)
 {
-	if (IsValid(HoverItem)) return;
-
 	UFP_GridSlot* GridSlot = GridSlots[GridIndex];
 	if (GridSlot->IsAvailable())
 	{

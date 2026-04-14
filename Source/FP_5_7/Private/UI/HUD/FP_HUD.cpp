@@ -3,6 +3,7 @@
 
 #include "UI/HUD/FP_HUD.h"
 #include "UI/Widget/FP_UserWidget.h"
+#include "UI/Widget/Items/FP_ItemLabelManager.h"
 #include "UI/WidgetController/FP_OverlayWidgetController.h"
 #include "UI/WidgetController/FP_CharacterMenuWidgetController.h"
 #include "UI/WidgetController/FP_InventoryWidgetController.h"
@@ -55,7 +56,12 @@ void AFP_HUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyste
 	OverlayWidget->SetWidgetController(WidgetController);
 	WidgetController->BroadcastInitialValues();
 	Widget->AddToViewport();
-	
+
+	if (ItemLabelManagerClass)
+	{
+		ItemLabelManager = CreateWidget<UFP_ItemLabelManager>(PC, ItemLabelManagerClass);
+		ItemLabelManager->AddToViewport(1);
+	}
 }
 
 

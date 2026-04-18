@@ -91,6 +91,7 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Inventory")
 	bool IsInventoryVisible() const;
 
+	UFUNCTION(BlueprintPure, Category = "Inventory")
 	UFP_InventoryBase* GetInventoryMenu() const { return InventoryMenu; }
 
 	UPROPERTY(EditAnywhere, Category = "Inventory|Drop")

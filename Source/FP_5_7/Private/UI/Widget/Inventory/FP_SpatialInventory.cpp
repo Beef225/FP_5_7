@@ -2,6 +2,7 @@
 
 #include "UI/Widget/Inventory/FP_SpatialInventory.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
+#include "Framework/Application/SlateApplication.h"
 #include "Blueprint/WidgetTree.h"
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
@@ -45,6 +46,32 @@ void UFP_SpatialInventory::NativeTick(const FGeometry& MyGeometry, float InDelta
 	if (IsValid(ItemDescription) && ItemDescription->IsVisible())
 	{
 		SetItemDescriptionSizeAndPosition();
+	}
+
+	if (HasHoverItem())
+	{
+		const bool bIsLMBDown = FSlateApplication::Get().GetPressedMouseButtons().Contains(EKeys::LeftMouseButton);
+		if (bIsLMBDown && !bWasLMBDown)
+		{
+			const FVector2D AbsCursorPos = FSlateApplication::Get().GetCursorPos();
+
+			const bool bOverGrid = IsValid(Grid) && Grid->GetCachedGeometry().IsUnderLocation(AbsCursorPos);
+
+			const bool bOverEquipSlot = EquippedGridSlots.ContainsByPredicate([&AbsCursorPos](const UFP_EquippedGridSlot* EquipSlot)
+			{
+				return IsValid(EquipSlot) && EquipSlot->GetCachedGeometry().IsUnderLocation(AbsCursorPos);
+			});
+
+			if (!bOverGrid && !bOverEquipSlot)
+			{
+				Grid->DropItem();
+			}
+		}
+		bWasLMBDown = bIsLMBDown;
+	}
+	else
+	{
+		bWasLMBDown = false;
 	}
 }
 
@@ -107,8 +134,9 @@ UFP_ItemDescription* UFP_SpatialInventory::GetItemDescription()
 		ItemDescription = CreateWidget<UFP_ItemDescription>(GetOwningPlayer(), ItemDescriptionClass);
 		ItemDescription->SetVisibility(ESlateVisibility::Collapsed);
 
-		UCanvasPanelSlot* CanvasSlot = CanvasPanel->AddChildToCanvas(ItemDescription);
-		CanvasSlot->SetAutoSize(true);
+		UCanvasPanelSlot* DescSlot = CanvasPanel->AddChildToCanvas(ItemDescription);
+		DescSlot->SetAutoSize(true);
+		DescSlot->SetZOrder(99);
 	}
 	return ItemDescription;
 }
@@ -117,6 +145,11 @@ UFP_HoverItem* UFP_SpatialInventory::GetHoverItem() const
 {
 	if (!IsValid(Grid)) return nullptr;
 	return Grid->GetHoverItem();
+}
+
+void UFP_SpatialInventory::DropHoverItem()
+{
+	if (IsValid(Grid)) Grid->DropItem();
 }
 
 void UFP_SpatialInventory::EquippedGridSlotClicked(UFP_EquippedGridSlot* EquippedGridSlot, const FGameplayTag& EquipmentTypeTag)
@@ -247,19 +280,38 @@ bool UFP_SpatialInventory::CanEquipHoverItem(UFP_EquippedGridSlot* EquippedGridS
 	return HasHoverItem() && IsValid(HeldItem) &&
 		!HoverItem->IsStackable() &&
 			HeldItem->GetItemManifest().GetItemCategory() == EItemCategory::Equippable &&
-				HeldItem->GetItemManifest().GetItemType().MatchesTag(EquipmentTypeTag);
+				EquipmentTypeTag.MatchesTag(HeldItem->GetItemManifest().GetItemType());
 }
 
 void UFP_SpatialInventory::SetItemDescriptionSizeAndPosition()
 {
-	UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(ItemDescription->Slot);
-	if (!CanvasSlot) return;
+	UCanvasPanelSlot* DescSlot = Cast<UCanvasPanelSlot>(ItemDescription->Slot);
+	if (!DescSlot) return;
 
 	const FVector2D DescSize = ItemDescription->GetBoxSize();
-	CanvasSlot->SetSize(DescSize);
+	const FGeometry& CanvasGeometry = CanvasPanel->GetCachedGeometry();
 
-	const FVector2D MousePos = UWidgetLayoutLibrary::GetMousePositionOnViewport(GetOwningPlayer());
-	const FVector2D CanvasSize = UFP_WidgetUtils::GetWidgetSize(CanvasPanel);
-	const FVector2D ClampedPos = UFP_WidgetUtils::GetClampedWidgetPosition(CanvasSize, DescSize, MousePos);
-	CanvasSlot->SetPosition(ClampedPos);
+	// Derive the viewport's absolute Slate origin from the two cursor representations.
+	// This correctly handles both PIE (window at arbitrary screen position) and standalone (window at 0,0).
+	const FVector2D AbsCursorPos = FSlateApplication::Get().GetCursorPos();
+	const FVector2D ViewportCursorPos = UWidgetLayoutLibrary::GetMousePositionOnViewport(GetOwningPlayer());
+	const float DPIScale = UWidgetLayoutLibrary::GetViewportScale(GetWorld());
+	const FVector2D ViewportAbsOrigin = AbsCursorPos - ViewportCursorPos * DPIScale;
+
+	// Cursor in canvas-local space
+	const FVector2D LocalCursorPos = CanvasGeometry.AbsoluteToLocal(AbsCursorPos);
+	const FVector2D DesiredPos(LocalCursorPos.X - DescSize.X * 0.5f, LocalCursorPos.Y - DescSize.Y);
+
+	// Viewport bounds in canvas-local space for clamping
+	int32 VX, VY;
+	GetOwningPlayer()->GetViewportSize(VX, VY);
+	const FVector2D LocalViewportMin = CanvasGeometry.AbsoluteToLocal(ViewportAbsOrigin);
+	const FVector2D LocalViewportMax = CanvasGeometry.AbsoluteToLocal(ViewportAbsOrigin + FVector2D(VX, VY));
+
+	const FVector2D ClampedPos = FVector2D(
+		FMath::Clamp(DesiredPos.X, LocalViewportMin.X, LocalViewportMax.X - DescSize.X),
+		FMath::Clamp(DesiredPos.Y, LocalViewportMin.Y, LocalViewportMax.Y - DescSize.Y)
+	);
+
+	DescSlot->SetPosition(ClampedPos);
 }

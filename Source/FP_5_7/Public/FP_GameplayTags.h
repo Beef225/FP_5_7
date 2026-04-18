@@ -369,9 +369,22 @@ FGameplayTag Equipment_Gloves;
 FGameplayTag Equipment_Boots;
 FGameplayTag Equipment_Weapon;
 FGameplayTag Equipment_Injector;
+FGameplayTag Equipment_Injector_One;
+FGameplayTag Equipment_Injector_Two;
+FGameplayTag Equipment_Injector_Three;
 FGameplayTag Equipment_Belt;
 FGameplayTag Equipment_Ring;
+FGameplayTag Equipment_Ring_One;
+FGameplayTag Equipment_Ring_Two;
 FGameplayTag Equipment_Amulet;
+
+// -------------------------------------------------------------------------
+// Item Types
+// -------------------------------------------------------------------------
+FGameplayTag Item_Headwear_CombatHelm;
+FGameplayTag Item_Gloves_CombatGloves;
+FGameplayTag Item_BodyArmour_CombatArmour;
+FGameplayTag Item_Boots_CombatBoots;
 
 // -------------------------------------------------------------------------
 //Locations

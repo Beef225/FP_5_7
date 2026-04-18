@@ -401,7 +401,7 @@ void UFP_InventoryGrid::AssignHoverItem(UFP_InventoryItem* InventoryItem)
 	HoverItem->SetInventoryItem(InventoryItem);
 	HoverItem->SetIsStackable(InventoryItem->IsStackable());
 
-	HoverItem->AddToViewport();
+	GetOwningPlayer()->SetMouseCursorWidget(EMouseCursor::Default, HoverItem);
 }
 
 void UFP_InventoryGrid::OnHide()
@@ -750,7 +750,7 @@ void UFP_InventoryGrid::OnGridSlotClicked(int32 GridIndex, const FPointerEvent& 
 	}
 
 	UFP_GridSlot* GridSlot = GridSlots[ItemDropIndex];
-	if (!GridSlot->GetInventoryItem().IsValid())
+	if (!GridSlot->GetInventoryItem().IsValid() && CurrentQueryResult.bHasSpace)
 	{
 		PutDownOnIndex(ItemDropIndex);
 	}
@@ -875,8 +875,8 @@ void UFP_InventoryGrid::ClearHoverItem()
 	HoverItem->UpdateStackCount(0);
 	HoverItem->SetImageBrush(FSlateNoResource());
 
-	HoverItem->RemoveFromParent();
 	HoverItem = nullptr;
+	ShowCursor();
 }
 
 void UFP_InventoryGrid::SwapStackCounts(const int32 ClickedStackCount, const int32 HoveredStackCount, const int32 Index)

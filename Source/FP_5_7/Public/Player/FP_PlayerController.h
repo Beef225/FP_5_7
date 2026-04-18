@@ -13,6 +13,7 @@ class UFP_InputConfig;
 class UFP_AbilitySystemComponent;
 class USplineComponent;
 class UUserWidget;
+class AFP_ItemActor;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUIInputTagSignature, FGameplayTag, InputTag);
 
@@ -50,6 +51,14 @@ public:
 
 	bool IsPendingLevelTransition() const { return bPendingLevelTransition; }
 	void ConsumePendingLevelTransition() { bPendingLevelTransition = false; }
+
+	UFUNCTION(BlueprintPure, Category = "Inventory")
+	bool IsInPickupRange(const AFP_ItemActor* ItemActor) const;
+
+	void AutoRunToItem(AFP_ItemActor* ItemActor);
+
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	float PickupRange = 400.f;
 	
 
 protected:
@@ -126,7 +135,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USplineComponent> Spline;
-	
+
+	TWeakObjectPtr<AFP_ItemActor> PendingPickupItem;
+
 	void AutoRun();
 	
 };

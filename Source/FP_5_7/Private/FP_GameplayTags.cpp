@@ -1039,12 +1039,34 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Equipment.Weapon"), FString("Weapon equipment slot"));
 	GameplayTags.Equipment_Injector = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Equipment.Injector"), FString("Injector equipment slot"));
+	GameplayTags.Equipment_Injector_One = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Injector.One"), FString("Injector slot one"));
+	GameplayTags.Equipment_Injector_Two = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Injector.Two"), FString("Injector slot two"));
+	GameplayTags.Equipment_Injector_Three = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Injector.Three"), FString("Injector slot three"));
 	GameplayTags.Equipment_Belt = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Equipment.Belt"), FString("Belt equipment slot"));
 	GameplayTags.Equipment_Ring = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Equipment.Ring"), FString("Ring equipment slot"));
+	GameplayTags.Equipment_Ring_One = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Ring.One"), FString("Ring slot one"));
+	GameplayTags.Equipment_Ring_Two = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Equipment.Ring.Two"), FString("Ring slot two"));
 	GameplayTags.Equipment_Amulet = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Equipment.Amulet"), FString("Amulet equipment slot"));
+
+	// -------------------------------------------------------------------------
+	// Item Types
+	// -------------------------------------------------------------------------
+	GameplayTags.Item_Headwear_CombatHelm = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Item.Headwear.CombatHelm"), FString("Combat Helm headwear item"));
+	GameplayTags.Item_Gloves_CombatGloves = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Item.Gloves.CombatGloves"), FString("Combat Gloves item"));
+	GameplayTags.Item_BodyArmour_CombatArmour = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Item.BodyArmour.CombatArmour"), FString("Combat Armour body armour item"));
+	GameplayTags.Item_Boots_CombatBoots = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Item.Boots.CombatBoots"), FString("Combat Boots item"));
 
 	// -------------------------------------------------------------------------
 	//Locations

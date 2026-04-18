@@ -42,9 +42,6 @@ void UFP_InventoryComponent::ConstructInventory()
 	if (!OwningController->IsLocalController()) return;
 
 	InventoryMenu = CreateWidget<UFP_InventoryBase>(OwningController.Get(), InventoryMenuClass);
-	// Start hidden — player opens it explicitly
-	InventoryMenu->SetVisibility(ESlateVisibility::Collapsed);
-	InventoryMenu->AddToViewport();
 }
 
 void UFP_InventoryComponent::ShowInventory()
@@ -87,12 +84,6 @@ void UFP_InventoryComponent::TryAddItem(UFP_ItemComponent* ItemComponent)
 
 	FFP_SlotAvailabilityResult Result = InventoryMenu->HasRoomForItem(ItemComponent);
 	Result.Item = InventoryList.FindFirstItemByType(ItemComponent->GetItemManifest().GetItemType());
-
-	UE_LOG(LogTemp, Warning, TEXT("TryAddItem — TotalRoomToFill: %d | bStackable: %d | ItemType: %s | ItemCategory: %d"),
-		Result.TotalRoomToFill,
-		Result.bStackable,
-		*ItemComponent->GetItemManifest().GetItemType().ToString(),
-		static_cast<int32>(ItemComponent->GetItemManifest().GetItemCategory()));
 
 	if (Result.TotalRoomToFill == 0)
 	{

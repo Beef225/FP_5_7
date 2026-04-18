@@ -8,6 +8,7 @@
 #include "Libraries/FP_AbilitySystemLibrary.h"
 #include "NiagaraComponent.h"
 #include "NiagaraFunctionLibrary.h"
+#include "Player/FP_PlayerController.h"
 #include "UI/HUD/FP_HUD.h"
 #include "UI/Widget/Items/FP_ItemLabelManager.h"
 
@@ -55,6 +56,15 @@ void AFP_ItemActor::OnPickupRequested()
 {
 	APlayerController* PC = GetWorld()->GetFirstPlayerController();
 	if (!IsValid(PC)) return;
+
+	AFP_PlayerController* FP_PC = Cast<AFP_PlayerController>(PC);
+	if (!IsValid(FP_PC)) return;
+
+	if (!FP_PC->IsInPickupRange(this))
+	{
+		FP_PC->AutoRunToItem(this);
+		return;
+	}
 
 	UFP_InventoryComponent* IC = UFP_AbilitySystemLibrary::GetInventoryComponent(PC);
 	if (!IsValid(IC)) return;

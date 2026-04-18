@@ -31,6 +31,7 @@ public:
 	virtual void OnItemUnhovered(UFP_SlottedItem* SlottedItem) override;
 	virtual bool HasHoverItem() const override;
 	virtual UFP_HoverItem* GetHoverItem() const override;
+	virtual void DropHoverItem() override;
 
 	UFUNCTION()
 	void EquippedGridSlotClicked(UFP_EquippedGridSlot* EquippedGridSlot, const FGameplayTag& EquipmentTypeTag);
@@ -69,4 +70,6 @@ private:
 	/** Delay (seconds) before the item description tooltip appears on hover. */
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	float ItemDescriptionDelay{ 0.5f };
+
+	bool bWasLMBDown = false;
 };

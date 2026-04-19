@@ -970,10 +970,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	// Inventory
 	// -------------------------------------------------------------------------
 
-	// Equippable
-	GameplayTags.Inventory_Equippable_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Inventory.Equippable.Weapon"), FString("A weapon item that can be equipped"));
-
 	// Consumable
 	GameplayTags.Inventory_Consumable_Potion = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Inventory.Consumable.Potion"), FString("A consumable potion item"));
@@ -1024,49 +1020,42 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Fragment_RequiredLevel = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Fragment.RequiredLevel"), FString("Identifies a labeled-value leaf displaying the item's required level"));
 
+	GameplayTags.Fragment_Mesh = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Mesh"), FString("Identifies FFP_MeshFragment: mesh replacement/attachment operations applied on equip"));
+
 	// -------------------------------------------------------------------------
-	// Equipment Types
+	// Equipment Slot Types  (parent tags — items use child tags under these)
 	// -------------------------------------------------------------------------
-	GameplayTags.Equipment_BodyArmour = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.BodyArmour"), FString("Body armour equipment slot"));
-	GameplayTags.Equipment_Headwear = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Headwear"), FString("Headwear equipment slot"));
-	GameplayTags.Equipment_Gloves = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Gloves"), FString("Gloves equipment slot"));
-	GameplayTags.Equipment_Boots = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Boots"), FString("Boots equipment slot"));
-	GameplayTags.Equipment_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Weapon"), FString("Weapon equipment slot"));
-	GameplayTags.Equipment_Injector = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Injector"), FString("Injector equipment slot"));
-	GameplayTags.Equipment_Injector_One = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Injector.One"), FString("Injector slot one"));
-	GameplayTags.Equipment_Injector_Two = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Injector.Two"), FString("Injector slot two"));
-	GameplayTags.Equipment_Injector_Three = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Injector.Three"), FString("Injector slot three"));
-	GameplayTags.Equipment_Belt = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Belt"), FString("Belt equipment slot"));
-	GameplayTags.Equipment_Ring = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Ring"), FString("Ring equipment slot"));
-	GameplayTags.Equipment_Ring_One = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Ring.One"), FString("Ring slot one"));
-	GameplayTags.Equipment_Ring_Two = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Ring.Two"), FString("Ring slot two"));
-	GameplayTags.Equipment_Amulet = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Equipment.Amulet"), FString("Amulet equipment slot"));
+	GameplayTags.Inventory_Equippable_BodyArmour = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.BodyArmour"), FString("Body armour equipment slot"));
+	GameplayTags.Inventory_Equippable_Headwear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Headwear"), FString("Headwear equipment slot"));
+	GameplayTags.Inventory_Equippable_Gloves = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Gloves"), FString("Gloves equipment slot"));
+	GameplayTags.Inventory_Equippable_Boots = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Boots"), FString("Boots equipment slot"));
+	GameplayTags.Inventory_Equippable_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Weapon"), FString("Weapon equipment slot"));
+	GameplayTags.Inventory_Equippable_Injector = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Injector"), FString("Injector equipment slot (any of the 3 injector slots)"));
+	GameplayTags.Inventory_Equippable_Belt = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Belt"), FString("Belt equipment slot"));
+	GameplayTags.Inventory_Equippable_Ring = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Ring"), FString("Ring equipment slot (any of the 2 ring slots)"));
+	GameplayTags.Inventory_Equippable_Amulet = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Amulet"), FString("Amulet equipment slot"));
 
 	// -------------------------------------------------------------------------
 	// Item Types
 	// -------------------------------------------------------------------------
-	GameplayTags.Item_Headwear_CombatHelm = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Item.Headwear.CombatHelm"), FString("Combat Helm headwear item"));
-	GameplayTags.Item_Gloves_CombatGloves = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Item.Gloves.CombatGloves"), FString("Combat Gloves item"));
-	GameplayTags.Item_BodyArmour_CombatArmour = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Item.BodyArmour.CombatArmour"), FString("Combat Armour body armour item"));
-	GameplayTags.Item_Boots_CombatBoots = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Item.Boots.CombatBoots"), FString("Combat Boots item"));
+	GameplayTags.Inventory_Equippable_Headwear_CombatHelm = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Headwear.CombatHelm"), FString("Combat Helm headwear item"));
+	GameplayTags.Inventory_Equippable_Gloves_CombatGloves = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Gloves.CombatGloves"), FString("Combat Gloves item"));
+	GameplayTags.Inventory_Equippable_BodyArmour_CombatArmour = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.BodyArmour.CombatArmour"), FString("Combat Armour body armour item"));
+	GameplayTags.Inventory_Equippable_Boots_CombatBoots = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Boots.CombatBoots"), FString("Combat Boots item"));
 
 	// -------------------------------------------------------------------------
 	//Locations

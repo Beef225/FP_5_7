@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
+#include "Libraries/FP_EnumDefs.h"
 #include "StructUtils/InstancedStruct.h"
 #include "FP_ItemFragment.generated.h"
 
@@ -245,6 +246,86 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (ExcludeBaseStruct))
 	TArray<TInstancedStruct<FFP_ConsumeModifier>> Modifiers;
+};
+
+// -------------------------------------------------------------------------
+// Mesh
+// -------------------------------------------------------------------------
+
+/**
+ * One entry in a mesh fragment — describes a single mesh operation to perform when the item
+ * is equipped. Entries are processed in array order; blank fields are safely ignored.
+ *
+ * Two modes, selected by bReplaceMesh:
+ *
+ *  bReplaceMesh = true  — body-part replacement / hide.
+ *      BodyPart  : which character sub-mesh to affect.
+ *      Mesh      : the replacement skeletal mesh. Leave null to simply hide that body part
+ *                  without adding a new mesh (e.g. hide Arms under a full-sleeve chest piece).
+ *      Socket    : ignored.
+ *
+ *  bReplaceMesh = false — socket attachment.
+ *      Socket    : FName of the socket on GetMesh() to attach to (e.g. "RightShoulderSocket").
+ *      Mesh      : the skeletal mesh to spawn and attach. Must be set.
+ *      BodyPart  : ignored (no body part is hidden).
+ */
+USTRUCT(BlueprintType)
+struct FP_5_7_API FFP_MeshEntry
+{
+	GENERATED_BODY()
+
+	/** The skeletal mesh to use. Null is valid when bReplaceMesh=true and you only want to hide. */
+	UPROPERTY(EditAnywhere, Category = "Mesh")
+	TObjectPtr<USkeletalMesh> Mesh{ nullptr };
+
+	/**
+	 * True  → replace (or hide) the body part identified by BodyPart.
+	 * False → attach Mesh to Socket on the main character mesh.
+	 */
+	UPROPERTY(EditAnywhere, Category = "Mesh")
+	bool bReplaceMesh{ true };
+
+	/** Which body part sub-mesh this entry targets. Only used when bReplaceMesh=true. */
+	UPROPERTY(EditAnywhere, Category = "Mesh", meta = (EditCondition = "bReplaceMesh"))
+	EBodyPart BodyPart{ EBodyPart::None };
+
+	/** Socket name for attachment. Only used when bReplaceMesh=false. */
+	UPROPERTY(EditAnywhere, Category = "Mesh", meta = (EditCondition = "!bReplaceMesh"))
+	FName Socket{ NAME_None };
+};
+
+/**
+ * Mesh fragment. Holds an array of FFP_MeshEntry operations applied when the item is
+ * equipped and reversed when unequipped. Supports body-part replacement, body-part hiding,
+ * and socket-attached add-on meshes — any combination per item.
+ */
+USTRUCT(BlueprintType)
+struct FP_5_7_API FFP_MeshFragment : public FFP_ItemFragment
+{
+	GENERATED_BODY()
+
+	const TArray<FFP_MeshEntry>& GetMeshEntries() const { return MeshEntries; }
+
+	/** Called when the owning item is equipped. Applies all mesh entries to the character. */
+	void OnEquip(APlayerController* PC);
+
+	/** Called when the owning item is unequipped. Restores the character to its previous state. */
+	void OnUnequip(APlayerController* PC);
+
+private:
+
+	UPROPERTY(EditAnywhere, Category = "Mesh")
+	TArray<FFP_MeshEntry> MeshEntries;
+
+	// ---- Runtime state (not serialized, rebuilt each equip) ----
+
+	bool bEquipped{ false };
+
+	/** Original meshes for each replaced body part, cached on equip so we can restore them. */
+	TMap<EBodyPart, TObjectPtr<USkeletalMesh>> CachedOriginalMeshes;
+
+	/** Socket-attached components spawned on equip, destroyed on unequip. */
+	TArray<TWeakObjectPtr<USkeletalMeshComponent>> SpawnedSocketComponents;
 };
 
 // -------------------------------------------------------------------------

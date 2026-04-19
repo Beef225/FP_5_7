@@ -81,7 +81,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	EItemCategory ItemCategory{ EItemCategory::None };
 
-	/** Specific item type tag, e.g. Inventory.Equippable.Weapon. Used for filtering, sorting, and rules. */
+	/** Specific item type tag, e.g. Inventory.Equippable.Headwear.CombatHelm. Used for filtering, sorting, slot matching, and rules. */
 	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "Inventory"))
 	FGameplayTag ItemType;
 

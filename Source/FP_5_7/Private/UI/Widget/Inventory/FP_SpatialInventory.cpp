@@ -234,6 +234,7 @@ void UFP_SpatialInventory::RemoveEquippedSlottedItem(UFP_EquippedSlottedItem* Eq
 void UFP_SpatialInventory::MakeEquippedSlottedItem(UFP_EquippedSlottedItem* EquippedSlottedItem, UFP_EquippedGridSlot* EquippedGridSlot, UFP_InventoryItem* ItemToEquip)
 {
 	if (!IsValid(EquippedGridSlot)) return;
+	if (!IsValid(ItemToEquip)) return;
 
 	UFP_EquippedSlottedItem* SlottedItem = EquippedGridSlot->OnItemEquipped(
 		ItemToEquip,
@@ -280,7 +281,7 @@ bool UFP_SpatialInventory::CanEquipHoverItem(UFP_EquippedGridSlot* EquippedGridS
 	return HasHoverItem() && IsValid(HeldItem) &&
 		!HoverItem->IsStackable() &&
 			HeldItem->GetItemManifest().GetItemCategory() == EItemCategory::Equippable &&
-				EquipmentTypeTag.MatchesTag(HeldItem->GetItemManifest().GetItemType());
+				HeldItem->GetItemManifest().GetItemType().MatchesTag(EquipmentTypeTag);
 }
 
 void UFP_SpatialInventory::SetItemDescriptionSizeAndPosition()

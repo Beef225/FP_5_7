@@ -251,7 +251,7 @@ bool UFP_InventoryGrid::CursorExitedCanvas(const FVector2D& BoundaryPos, const F
 	bMouseWithinCanvas = UFP_WidgetUtils::IsWithinBounds(BoundaryPos, BoundarySize, Location);
 	if (!bMouseWithinCanvas && bLastMouseWithinCanvas)
 	{
-		// TODO: UnhighlightSlots()
+		UnHighlightSlots(LastHighlightedIndex, LastHighlightedDimensions);
 		return true;
 	}
 	return false;

@@ -69,6 +69,18 @@ enum class EItemCategory : uint8
 };
 
 UENUM(BlueprintType)
+enum class EBodyPart : uint8
+{
+	None   UMETA(DisplayName="None"),
+	Head   UMETA(DisplayName="Head"),
+	Torso  UMETA(DisplayName="Torso"),
+	Arms   UMETA(DisplayName="Arms"),
+	Hands  UMETA(DisplayName="Hands"),
+	Legs   UMETA(DisplayName="Legs"),
+	Feet   UMETA(DisplayName="Feet"),
+};
+
+UENUM(BlueprintType)
 enum class ESkillGrantedBy : uint8
 {
 	Equipment		UMETA(DisplayName="Equipment"),

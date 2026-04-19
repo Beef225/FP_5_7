@@ -311,9 +311,6 @@ FGameplayTag SkillTagMod_Buff;
 // Inventory
 // -------------------------------------------------------------------------
 
-// Equippable
-FGameplayTag Inventory_Equippable_Weapon;
-
 // Consumable
 FGameplayTag Inventory_Consumable_Potion;
 
@@ -360,31 +357,29 @@ FGameplayTag Fragment_SellValue;
 /** Identifies a labeled-value leaf displaying the item's required level. */
 FGameplayTag Fragment_RequiredLevel;
 
+/** Identifies FFP_MeshFragment: defines mesh replacement/attachment operations applied on equip. */
+FGameplayTag Fragment_Mesh;
+
 // -------------------------------------------------------------------------
-// Equipment Types
+// Equipment Slot Types  (parent tags — items use child tags under these)
 // -------------------------------------------------------------------------
-FGameplayTag Equipment_BodyArmour;
-FGameplayTag Equipment_Headwear;
-FGameplayTag Equipment_Gloves;
-FGameplayTag Equipment_Boots;
-FGameplayTag Equipment_Weapon;
-FGameplayTag Equipment_Injector;
-FGameplayTag Equipment_Injector_One;
-FGameplayTag Equipment_Injector_Two;
-FGameplayTag Equipment_Injector_Three;
-FGameplayTag Equipment_Belt;
-FGameplayTag Equipment_Ring;
-FGameplayTag Equipment_Ring_One;
-FGameplayTag Equipment_Ring_Two;
-FGameplayTag Equipment_Amulet;
+FGameplayTag Inventory_Equippable_BodyArmour;
+FGameplayTag Inventory_Equippable_Headwear;
+FGameplayTag Inventory_Equippable_Gloves;
+FGameplayTag Inventory_Equippable_Boots;
+FGameplayTag Inventory_Equippable_Weapon;
+FGameplayTag Inventory_Equippable_Injector;
+FGameplayTag Inventory_Equippable_Belt;
+FGameplayTag Inventory_Equippable_Ring;
+FGameplayTag Inventory_Equippable_Amulet;
 
 // -------------------------------------------------------------------------
 // Item Types
 // -------------------------------------------------------------------------
-FGameplayTag Item_Headwear_CombatHelm;
-FGameplayTag Item_Gloves_CombatGloves;
-FGameplayTag Item_BodyArmour_CombatArmour;
-FGameplayTag Item_Boots_CombatBoots;
+FGameplayTag Inventory_Equippable_Headwear_CombatHelm;
+FGameplayTag Inventory_Equippable_Gloves_CombatGloves;
+FGameplayTag Inventory_Equippable_BodyArmour_CombatArmour;
+FGameplayTag Inventory_Equippable_Boots_CombatBoots;
 
 // -------------------------------------------------------------------------
 //Locations

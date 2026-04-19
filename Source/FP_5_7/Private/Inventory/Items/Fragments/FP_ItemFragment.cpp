@@ -1,6 +1,8 @@
 // Copyright JG
 
 #include "Inventory/Items/Fragments/FP_ItemFragment.h"
+#include "Characters/FP_PlayerCharacter.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "UI/Widget/Inventory/Composite/FP_CompositeBase.h"
 #include "UI/Widget/Inventory/Composite/FP_Leaf_Image.h"
 #include "UI/Widget/Inventory/Composite/FP_Leaf_LabeledValue.h"
@@ -99,6 +101,87 @@ void FFP_ConsumableFragment::OnSpawned()
 			Ptr->OnSpawned();
 		}
 	}
+}
+
+void FFP_MeshFragment::OnEquip(APlayerController* PC)
+{
+	if (bEquipped) return;
+
+	AFP_PlayerCharacter* Character = PC ? Cast<AFP_PlayerCharacter>(PC->GetPawn()) : nullptr;
+	if (!Character) return;
+
+	for (const FFP_MeshEntry& Entry : MeshEntries)
+	{
+		if (Entry.bReplaceMesh)
+		{
+			// Body-part replacement / hide
+			if (Entry.BodyPart == EBodyPart::None) continue;
+
+			USkeletalMeshComponent* BodyMesh = Character->GetBodyPartMesh(Entry.BodyPart);
+			if (!BodyMesh) continue;
+
+			// Cache the original only once per body part (guard against duplicate entries)
+			if (!CachedOriginalMeshes.Contains(Entry.BodyPart))
+			{
+				CachedOriginalMeshes.Add(Entry.BodyPart, BodyMesh->GetSkeletalMeshAsset());
+			}
+
+			// Null mesh = hide; non-null = replace
+			BodyMesh->SetSkeletalMeshAsset(Entry.Mesh);
+		}
+		else
+		{
+			// Socket attachment — Mesh_Torso is the source of truth for all sockets.
+			if (!IsValid(Entry.Mesh) || Entry.Socket == NAME_None) continue;
+
+			USkeletalMeshComponent* AttachParent = Character->GetBodyPartMesh(EBodyPart::Torso);
+			if (!AttachParent) continue;
+
+			USkeletalMeshComponent* SocketMesh = NewObject<USkeletalMeshComponent>(Character);
+			SocketMesh->SetSkeletalMeshAsset(Entry.Mesh);
+			SocketMesh->RegisterComponent();
+			SocketMesh->AttachToComponent(
+				AttachParent,
+				FAttachmentTransformRules::SnapToTargetNotIncludingScale,
+				Entry.Socket);
+
+			SpawnedSocketComponents.Add(SocketMesh);
+		}
+	}
+
+	bEquipped = true;
+}
+
+void FFP_MeshFragment::OnUnequip(APlayerController* PC)
+{
+	if (!bEquipped) return;
+
+	AFP_PlayerCharacter* Character = PC ? Cast<AFP_PlayerCharacter>(PC->GetPawn()) : nullptr;
+	if (!Character) return;
+
+	// Restore all replaced body part meshes to their originals
+	for (const TTuple<EBodyPart, TObjectPtr<USkeletalMesh>>& Cached : CachedOriginalMeshes)
+	{
+		USkeletalMeshComponent* BodyMesh = Character->GetBodyPartMesh(Cached.Key);
+		if (BodyMesh)
+		{
+			BodyMesh->SetSkeletalMeshAsset(Cached.Value);
+		}
+	}
+	CachedOriginalMeshes.Empty();
+
+	// Destroy all socket-attached add-on meshes
+	for (TWeakObjectPtr<USkeletalMeshComponent>& WeakComp : SpawnedSocketComponents)
+	{
+		if (WeakComp.IsValid())
+		{
+			WeakComp->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+			WeakComp->DestroyComponent();
+		}
+	}
+	SpawnedSocketComponents.Empty();
+
+	bEquipped = false;
 }
 
 void FFP_StrengthModifier::OnEquip(APlayerController* PC)

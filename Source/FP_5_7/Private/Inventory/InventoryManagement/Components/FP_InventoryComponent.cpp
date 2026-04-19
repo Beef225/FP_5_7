@@ -166,6 +166,32 @@ void UFP_InventoryComponent::Server_EquipSlotClicked_Implementation(UFP_Inventor
 
 void UFP_InventoryComponent::Multicast_EquipSlotClicked_Implementation(UFP_InventoryItem* ItemToEquip, UFP_InventoryItem* ItemToUnequip)
 {
+	APlayerController* PC = OwningController.Get();
+
+	if (IsValid(ItemToUnequip))
+	{
+		if (FFP_MeshFragment* MeshFrag = ItemToUnequip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_MeshFragment>())
+		{
+			MeshFrag->OnUnequip(PC);
+		}
+		if (FFP_EquipmentFragment* EquipFrag = ItemToUnequip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_EquipmentFragment>())
+		{
+			EquipFrag->OnUnequip(PC);
+		}
+	}
+
+	if (IsValid(ItemToEquip))
+	{
+		if (FFP_MeshFragment* MeshFrag = ItemToEquip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_MeshFragment>())
+		{
+			MeshFrag->OnEquip(PC);
+		}
+		if (FFP_EquipmentFragment* EquipFrag = ItemToEquip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_EquipmentFragment>())
+		{
+			EquipFrag->OnEquip(PC);
+		}
+	}
+
 	OnItemEquipped.Broadcast(ItemToEquip);
 	OnItemUnequipped.Broadcast(ItemToUnequip);
 }

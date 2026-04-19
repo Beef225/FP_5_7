@@ -60,6 +60,40 @@ AFP_PlayerCharacter::AFP_PlayerCharacter()
 	LevelUpNiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>("LevelUpNiagaraComponent");
 	LevelUpNiagaraComponent->SetupAttachment(GetRootComponent());
 	LevelUpNiagaraComponent->bAutoActivate = false;
+
+	// Body part meshes — all attached to the main mesh so transforms stay in sync.
+	// Assign skeletal meshes and call SetLeaderPoseComponent(GetMesh()) in Blueprint BeginPlay.
+	Mesh_Head  = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Head"));
+	Mesh_Head->SetupAttachment(GetMesh());
+
+	Mesh_Torso = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Torso"));
+	Mesh_Torso->SetupAttachment(GetMesh());
+
+	Mesh_Arms  = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Arms"));
+	Mesh_Arms->SetupAttachment(GetMesh());
+
+	Mesh_Hands = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Hands"));
+	Mesh_Hands->SetupAttachment(GetMesh());
+
+	Mesh_Legs  = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Legs"));
+	Mesh_Legs->SetupAttachment(GetMesh());
+
+	Mesh_Feet  = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Feet"));
+	Mesh_Feet->SetupAttachment(GetMesh());
+}
+
+USkeletalMeshComponent* AFP_PlayerCharacter::GetBodyPartMesh(EBodyPart BodyPart) const
+{
+	switch (BodyPart)
+	{
+	case EBodyPart::Head:  return Mesh_Head;
+	case EBodyPart::Torso: return Mesh_Torso;
+	case EBodyPart::Arms:  return Mesh_Arms;
+	case EBodyPart::Hands: return Mesh_Hands;
+	case EBodyPart::Legs:  return Mesh_Legs;
+	case EBodyPart::Feet:  return Mesh_Feet;
+	default:               return nullptr;
+	}
 }
 
 void AFP_PlayerCharacter::BeginPlay()

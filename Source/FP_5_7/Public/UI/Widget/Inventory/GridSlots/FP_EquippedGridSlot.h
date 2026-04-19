@@ -40,7 +40,7 @@ public:
 private:
 
 	/** Identifies what equipment category this slot accepts (set per-slot in the Blueprint Details panel). */
-	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "Equipment"))
+	UPROPERTY(EditAnywhere, Category = "Inventory", meta = (Categories = "Inventory"))
 	FGameplayTag EquipmentTypeTag;
 
 	/** Grayed-out silhouette icon shown when no matching hover item is held over this slot. */

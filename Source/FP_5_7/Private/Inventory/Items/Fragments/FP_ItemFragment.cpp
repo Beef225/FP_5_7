@@ -3,6 +3,10 @@
 #include "Inventory/Items/Fragments/FP_ItemFragment.h"
 #include "Characters/FP_PlayerCharacter.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Inventory/Loot/Data/FP_RarityTable.h"
+#include "AbilitySystemComponent.h"
+#include "AbilitySystem/FP_AttributeSet.h"
+#include "Player/FP_PlayerState.h"
 #include "UI/Widget/Inventory/Composite/FP_CompositeBase.h"
 #include "UI/Widget/Inventory/Composite/FP_Leaf_Image.h"
 #include "UI/Widget/Inventory/Composite/FP_Leaf_LabeledValue.h"
@@ -251,4 +255,50 @@ void FFP_ImageFragment::Assimilate(UFP_CompositeBase* Composite) const
 	Image->SetImage(Icon);
 	Image->SetBoxSize(IconDimensions);
 	Image->SetImageSize(IconDimensions);
+}
+
+void FFP_RarityFragment::Assimilate(UFP_CompositeBase* Composite) const
+{
+	FFP_InventoryItemFragment::Assimilate(Composite);
+	if (!MatchesWidgetTag(Composite)) return;
+
+	UFP_Leaf_Text* LeafText = Cast<UFP_Leaf_Text>(Composite);
+	if (!IsValid(LeafText)) return;
+
+	const FString RarityString = StaticEnum<EFP_ItemRarity>()
+		->GetDisplayNameTextByValue(static_cast<int64>(Rarity)).ToString().ToUpper();
+	LeafText->SetText(FText::FromString(RarityString));
+}
+
+void FFP_RarityFragment::OnSpawned()
+{
+	if (bRolled || !IsValid(RarityTable)) return;
+	bRolled = true;
+
+	float TotalIIR = 0.f;
+
+	if (const APlayerController* PC = GWorld ? GWorld->GetFirstPlayerController() : nullptr)
+	{
+		if (const AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>())
+		{
+			if (const UAbilitySystemComponent* ASC = PS->GetAbilitySystemComponent())
+			{
+				TotalIIR += ASC->GetNumericAttribute(UFP_AttributeSet::GetItemRarityAttribute());
+			}
+		}
+	}
+
+	// TODO: add monster difficulty IIR modifier
+	// TODO: add area level IIR modifier
+
+	Rarity = RarityTable->Roll(TotalIIR);
+
+	if (Rarity == EFP_ItemRarity::Legendary)
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Orange,
+				TEXT("CONGRATULATIONS! YOU DROPPED A LEGENDARY!"));
+		}
+	}
 }

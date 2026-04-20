@@ -360,6 +360,9 @@ FGameplayTag Fragment_RequiredLevel;
 /** Identifies FFP_MeshFragment: defines mesh replacement/attachment operations applied on equip. */
 FGameplayTag Fragment_Mesh;
 
+/** Identifies FFP_RarityFragment: holds the item's rarity and its drop-weight table. */
+FGameplayTag Fragment_Rarity;
+
 // -------------------------------------------------------------------------
 // Equipment Slot Types  (parent tags — items use child tags under these)
 // -------------------------------------------------------------------------

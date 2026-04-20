@@ -1023,6 +1023,9 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Fragment_Mesh = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Fragment.Mesh"), FString("Identifies FFP_MeshFragment: mesh replacement/attachment operations applied on equip"));
 
+	GameplayTags.Fragment_Rarity = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Rarity"), FString("Identifies FFP_RarityFragment: item rarity and drop-weight table"));
+
 	// -------------------------------------------------------------------------
 	// Equipment Slot Types  (parent tags — items use child tags under these)
 	// -------------------------------------------------------------------------

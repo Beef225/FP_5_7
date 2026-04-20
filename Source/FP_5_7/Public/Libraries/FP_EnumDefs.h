@@ -81,6 +81,16 @@ enum class EBodyPart : uint8
 };
 
 UENUM(BlueprintType)
+enum class EFP_ItemRarity : uint8
+{
+	Common     UMETA(DisplayName="Common"),
+	Uncommon   UMETA(DisplayName="Uncommon"),
+	Rare       UMETA(DisplayName="Rare"),
+	Legendary  UMETA(DisplayName="Legendary"),
+	Mythic     UMETA(DisplayName="Mythic"),
+};
+
+UENUM(BlueprintType)
 enum class ESkillGrantedBy : uint8
 {
 	Equipment		UMETA(DisplayName="Equipment"),

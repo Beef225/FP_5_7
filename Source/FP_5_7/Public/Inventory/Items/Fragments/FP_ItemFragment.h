@@ -329,6 +329,44 @@ private:
 };
 
 // -------------------------------------------------------------------------
+// Rarity
+// -------------------------------------------------------------------------
+
+class UFP_RarityTable;
+
+/**
+ * Stores the item's rarity and the weighted table used to roll it at world-spawn time.
+ *
+ * If RarityTable is set, OnSpawned() rolls once and stores the result in Rarity.
+ * If RarityTable is null, Rarity is used as-is (allows hand-crafted predetermined items).
+ *
+ * IIR is sourced from the player's ItemRarity attribute at spawn time. Monster difficulty
+ * and area level modifiers are summed on top (TODOs in OnSpawned).
+ */
+USTRUCT(BlueprintType)
+struct FP_5_7_API FFP_RarityFragment : public FFP_InventoryItemFragment
+{
+	GENERATED_BODY()
+
+	EFP_ItemRarity GetRarity() const { return Rarity; }
+
+	virtual void Assimilate(UFP_CompositeBase* Composite) const override;
+	virtual void OnSpawned() override;
+
+private:
+
+	/** Drop-weight table for this item class. Leave null to use the fixed Rarity below. */
+	UPROPERTY(EditAnywhere, Category="Rarity")
+	TObjectPtr<UFP_RarityTable> RarityTable;
+
+	/** Predetermined rarity, or the result written here after a successful roll. */
+	UPROPERTY(EditAnywhere, Category="Rarity")
+	EFP_ItemRarity Rarity{ EFP_ItemRarity::Common };
+
+	bool bRolled{ false };
+};
+
+// -------------------------------------------------------------------------
 // Equipment
 // -------------------------------------------------------------------------
 

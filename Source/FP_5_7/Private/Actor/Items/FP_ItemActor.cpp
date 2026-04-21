@@ -2,6 +2,7 @@
 
 #include "Actor/Items/FP_ItemActor.h"
 #include "Inventory/Items/FP_ItemFragmentTemplate.h"
+#include "Misc/MessageDialog.h"
 #include "Components/StaticMeshComponent.h"
 #include "Inventory/Items/FP_ItemComponent.h"
 #include "Inventory/Items/Manifest/FP_ItemManifest.h"
@@ -143,16 +144,51 @@ void AFP_ItemActor::OnPickupRequested()
 	Destroy();
 }
 
+void AFP_ItemActor::SetItemLevel(int32 Level)
+{
+	if (FFP_ItemLevelFragment* Fragment = ItemComponent->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_ItemLevelFragment>())
+	{
+		Fragment->SetItemLevel(Level);
+	}
+}
+
 void AFP_ItemActor::ApplyFragmentTemplate()
 {
-	if (!IsValid(FragmentTemplate) || !IsValid(ItemComponent)) return;
+	auto Log = [](const FString& Msg)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ApplyFragmentTemplate: %s"), *Msg);
+		FMessageDialog::Open(EAppMsgType::Ok, FText::FromString(Msg));
+	};
 
-	Modify();
-	ItemComponent->Modify();
+	if (!IsValid(FragmentTemplate))
+	{
+		Log(TEXT("No FragmentTemplate set — assign one in Item|Setup first."));
+		return;
+	}
+
+	// Always write to the Blueprint CDO so the change persists in the asset.
+	// CallInEditor may run on a placed instance; targeting the CDO explicitly
+	// ensures the Blueprint itself is modified, not just the level instance.
+	AFP_ItemActor* CDO = GetClass()->GetDefaultObject<AFP_ItemActor>();
+	if (!IsValid(CDO))
+	{
+		Log(TEXT("Could not get CDO."));
+		return;
+	}
+	if (!IsValid(CDO->ItemComponent))
+	{
+		Log(TEXT("CDO ItemComponent is invalid."));
+		return;
+	}
+
+	CDO->Modify();
+	CDO->ItemComponent->Modify();
 
 	TArray<TInstancedStruct<FFP_ItemFragment>>& Existing =
-		ItemComponent->GetItemManifestMutable().GetFragmentsMutable();
+		CDO->ItemComponent->GetItemManifestMutable().GetFragmentsMutable();
 
+	int32 Added = 0;
+	int32 Skipped = 0;
 	for (const TInstancedStruct<FFP_ItemFragment>& TemplateFragment : FragmentTemplate->GetFragments())
 	{
 		const FFP_ItemFragment* FragPtr = TemplateFragment.GetPtr<FFP_ItemFragment>();
@@ -167,11 +203,16 @@ void AFP_ItemActor::ApplyFragmentTemplate()
 				return Ptr && Ptr->GetFragmentTag().MatchesTagExact(Tag);
 			});
 
-		if (!bAlreadyExists)
-		{
-			Existing.Add(TemplateFragment);
-		}
+		if (bAlreadyExists) { ++Skipped; continue; }
+
+		Existing.Add(TemplateFragment);
+		++Added;
 	}
+
+	CDO->ItemComponent->PostEditChange();
+
+	Log(FString::Printf(TEXT("Done — %d added, %d already present (skipped) on %s"),
+		Added, Skipped, *GetClass()->GetName()));
 }
 
 void AFP_ItemActor::RegisterWithLabelManager()

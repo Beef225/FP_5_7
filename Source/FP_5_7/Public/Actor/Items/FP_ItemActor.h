@@ -37,12 +37,9 @@ public:
 	/** Called by UFP_ItemPickupWidget when the player presses the pickup button. */
 	void OnPickupRequested();
 
-	/**
-	 * Stamps fragments from FragmentTemplate into this item's manifest.
-	 * Only adds fragments whose tag is not already present — existing data is never overwritten.
-	 * Appears as a button in the Blueprint Class Defaults panel.
-	 */
-	UFUNCTION(CallInEditor, Category="Item|Setup")
+	/** Sets the item level on the FFP_ItemLevelFragment, if present. Called by the loot spawner. */
+	void SetItemLevel(int32 Level);
+
 	void ApplyFragmentTemplate();
 
 	const FFP_ItemManifest& GetItemManifest() const;

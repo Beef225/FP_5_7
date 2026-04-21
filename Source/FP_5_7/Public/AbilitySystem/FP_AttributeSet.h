@@ -104,6 +104,13 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Prim
 
 
 //Secondary Attributes
+//Health
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedHitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedHitPoints;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreHitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData MoreHitPoints;
+
 //Damage
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamage;
@@ -534,6 +541,15 @@ UFUNCTION()
 
 
 //Secondary Attributes
+//Health
+UFUNCTION()
+	void OnRep_IncreasedHitPoints(const FGameplayAttributeData& OldIncreasedHitPoints) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedHitPoints)
+
+UFUNCTION()
+	void OnRep_MoreHitPoints(const FGameplayAttributeData& OldMoreHitPoints) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreHitPoints)
+
 //Damage
 UFUNCTION()
 	void OnRep_IncreasedDamage(const FGameplayAttributeData& OldIncreasedDamage) const;

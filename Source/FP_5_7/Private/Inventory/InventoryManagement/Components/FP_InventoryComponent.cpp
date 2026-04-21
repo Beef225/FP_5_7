@@ -168,6 +168,20 @@ void UFP_InventoryComponent::Multicast_EquipSlotClicked_Implementation(UFP_Inven
 {
 	APlayerController* PC = OwningController.Get();
 
+	// Guard before touching anything — if requirements fail, both items stay in their current state
+	if (IsValid(ItemToEquip))
+	{
+		if (const FFP_AttributeRequirementFragment* ReqFrag = ItemToEquip->GetItemManifest().GetFragmentOfType<FFP_AttributeRequirementFragment>())
+		{
+			if (!ReqFrag->MeetsRequirements(PC))
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Cannot equip %s: attribute requirements not met."),
+					*ItemToEquip->GetName());
+				return;
+			}
+		}
+	}
+
 	if (IsValid(ItemToUnequip))
 	{
 		if (FFP_MeshFragment* MeshFrag = ItemToUnequip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_MeshFragment>())

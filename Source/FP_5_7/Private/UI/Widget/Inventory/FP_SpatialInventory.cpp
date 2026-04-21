@@ -8,6 +8,7 @@
 #include "Components/CanvasPanelSlot.h"
 #include "Input/Reply.h"
 #include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
+#include "Inventory/Items/Fragments/FP_ItemFragment.h"
 #include "Libraries/FP_AbilitySystemLibrary.h"
 #include "Libraries/FP_EnumDefs.h"
 #include "Libraries/FP_WidgetUtils.h"
@@ -152,6 +153,13 @@ void UFP_SpatialInventory::DropHoverItem()
 	if (IsValid(Grid)) Grid->DropItem();
 }
 
+static bool MeetsAttributeRequirements(UFP_InventoryItem* Item, APlayerController* PC)
+{
+	if (!IsValid(Item)) return true;
+	const FFP_AttributeRequirementFragment* Frag = Item->GetItemManifest().GetFragmentOfType<FFP_AttributeRequirementFragment>();
+	return !Frag || Frag->MeetsRequirements(PC);
+}
+
 void UFP_SpatialInventory::EquippedGridSlotClicked(UFP_EquippedGridSlot* EquippedGridSlot, const FGameplayTag& EquipmentTypeTag)
 {
 	if (!CanEquipHoverItem(EquippedGridSlot, EquipmentTypeTag)) return;
@@ -159,11 +167,14 @@ void UFP_SpatialInventory::EquippedGridSlotClicked(UFP_EquippedGridSlot* Equippe
 	UFP_HoverItem* HoverItem = GetHoverItem();
 	UFP_InventoryItem* ItemToEquip = HoverItem->GetInventoryItem();
 
+	if (!MeetsAttributeRequirements(ItemToEquip, GetOwningPlayer())) return;
+
 	UFP_EquippedSlottedItem* EquippedSlottedItem = EquippedGridSlot->OnItemEquipped(
 		ItemToEquip,
 		EquipmentTypeTag,
 		Grid->GetTileSize()
 	);
+	EquippedSlottedItem->SetOwningInventory(this);
 	EquippedSlottedItem->OnEquippedSlottedItemClicked.AddDynamic(this, &ThisClass::EquippedSlottedItemClicked);
 
 	Grid->ClearHoverItem();
@@ -188,6 +199,9 @@ void UFP_SpatialInventory::EquippedSlottedItemClicked(UFP_EquippedSlottedItem* E
 
 	// Get Item to Equip
 	UFP_InventoryItem* ItemToEquip = IsValid(GetHoverItem()) ? GetHoverItem()->GetInventoryItem() : nullptr;
+
+	// Block before any visual changes — hover item stays on mouse, equipped item stays equipped
+	if (!MeetsAttributeRequirements(ItemToEquip, GetOwningPlayer())) return;
 
 	// Get Item to Unequip
 	UFP_InventoryItem* ItemToUnequip = EquippedSlottedItem->GetInventoryItem();
@@ -217,6 +231,7 @@ void UFP_SpatialInventory::ClearSlotOfItem(UFP_EquippedGridSlot* EquippedGridSlo
 	{
 		EquippedGridSlot->SetEquippedSlottedItem(nullptr);
 		EquippedGridSlot->SetInventoryItem(nullptr);
+		EquippedGridSlot->ResetVisuals();
 	}
 }
 
@@ -240,7 +255,11 @@ void UFP_SpatialInventory::MakeEquippedSlottedItem(UFP_EquippedSlottedItem* Equi
 		ItemToEquip,
 		EquippedSlottedItem->GetEquipmentTypeTag(),
 		Grid->GetTileSize());
-	if (IsValid(SlottedItem)) SlottedItem->OnEquippedSlottedItemClicked.AddDynamic(this, &ThisClass::EquippedSlottedItemClicked);
+	if (IsValid(SlottedItem))
+	{
+		SlottedItem->SetOwningInventory(this);
+		SlottedItem->OnEquippedSlottedItemClicked.AddDynamic(this, &ThisClass::EquippedSlottedItemClicked);
+	}
 
 	EquippedGridSlot->SetEquippedSlottedItem(SlottedItem);
 }

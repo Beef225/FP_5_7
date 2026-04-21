@@ -54,6 +54,16 @@ void FFP_GameplayTags::InitializeGameplayTags()
 
 
 	//Secondary Attributes
+	//Health
+	GameplayTags.Health_Increased = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Health.Increased"),
+		FString("Increased maximum hit points")
+		);
+	GameplayTags.Health_More = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Health.More"),
+		FString("More maximum hit points")
+		);
+
 	//Damage
 	GameplayTags.Damage_Increased_Generic = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Damage.Increased.Generic"), 
@@ -1025,6 +1035,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 
 	GameplayTags.Fragment_Rarity = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Fragment.Rarity"), FString("Identifies FFP_RarityFragment: item rarity and drop-weight table"));
+	GameplayTags.Fragment_ItemLevel = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.ItemLevel"), FString("Identifies FFP_ItemLevelFragment: item level set from the dropping enemy"));
+	GameplayTags.Fragment_AttributeRequirements = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.AttributeRequirements"), FString("Identifies FFP_AttributeRequirementFragment: primary stat minimums to equip"));
 
 	// -------------------------------------------------------------------------
 	// Equipment Slot Types  (parent tags — items use child tags under these)

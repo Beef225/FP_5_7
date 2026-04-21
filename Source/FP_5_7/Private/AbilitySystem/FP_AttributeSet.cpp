@@ -227,6 +227,11 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, Fortitude, COND_None, REPNOTIFY
 
 
 //Secondary Attributes
+//Health
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedHitPoints, COND_None, REPNOTIFY_Always)
+
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MoreHitPoints, COND_None, REPNOTIFY_Always)
+
 //Damage
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamage, COND_None, REPNOTIFY_Always)
 
@@ -707,6 +712,17 @@ void UFP_AttributeSet::OnRep_Fortitude(const FGameplayAttributeData& OldFortitud
 
 
 //Secondary Attributes
+//Health
+void UFP_AttributeSet::OnRep_IncreasedHitPoints(const FGameplayAttributeData& OldIncreasedHitPoints) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, IncreasedHitPoints, OldIncreasedHitPoints);
+}
+
+void UFP_AttributeSet::OnRep_MoreHitPoints(const FGameplayAttributeData& OldMoreHitPoints) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MoreHitPoints, OldMoreHitPoints);
+}
+
 //Damage
 void UFP_AttributeSet::OnRep_IncreasedDamage(const FGameplayAttributeData& OldIncreasedDamage) const
 {

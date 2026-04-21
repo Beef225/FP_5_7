@@ -22,5 +22,7 @@ public:
 private:
 
 	FGameplayEffectAttributeCaptureDefinition FortitudeDef;
+	FGameplayEffectAttributeCaptureDefinition IncreasedHitPointsDef;
+	FGameplayEffectAttributeCaptureDefinition MoreHitPointsDef;
 
 };

@@ -8,6 +8,7 @@
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "Player/FP_PlayerState.h"
 #include "UI/Widget/Inventory/Composite/FP_CompositeBase.h"
+#include "UI/Widget/Inventory/Composite/FP_Leaf_AttributeRequirements.h"
 #include "UI/Widget/Inventory/Composite/FP_Leaf_Image.h"
 #include "UI/Widget/Inventory/Composite/FP_Leaf_LabeledValue.h"
 #include "UI/Widget/Inventory/Composite/FP_Leaf_Text.h"
@@ -301,4 +302,86 @@ void FFP_RarityFragment::OnSpawned()
 				TEXT("CONGRATULATIONS! YOU DROPPED A LEGENDARY!"));
 		}
 	}
+}
+
+// -------------------------------------------------------------------------
+// Attribute Requirements
+// -------------------------------------------------------------------------
+
+bool FFP_AttributeRequirementFragment::MeetsRequirements(APlayerController* PC) const
+{
+	if (!IsValid(PC)) return false;
+
+	const AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>();
+	if (!PS) return false;
+
+	const UAbilitySystemComponent* ASC = PS->GetAbilitySystemComponent();
+	if (!ASC) return false;
+
+	auto Check = [&](int32 Required, FGameplayAttribute Attr) -> bool
+	{
+		return Required == 0 || ASC->GetNumericAttribute(Attr) >= static_cast<float>(Required);
+	};
+
+	return Check(RequiredMight,     UFP_AttributeSet::GetMightAttribute())
+		&& Check(RequiredResonance, UFP_AttributeSet::GetResonanceAttribute())
+		&& Check(RequiredAgility,   UFP_AttributeSet::GetAgilityAttribute())
+		&& Check(RequiredFortitude, UFP_AttributeSet::GetFortitudeAttribute());
+}
+
+void FFP_AttributeRequirementFragment::Assimilate(UFP_CompositeBase* Composite) const
+{
+	if (!MatchesWidgetTag(Composite)) return;
+
+	// All zeros — leave the leaf collapsed
+	if (RequiredMight == 0 && RequiredResonance == 0 && RequiredAgility == 0 && RequiredFortitude == 0)
+		return;
+
+	UFP_Leaf_AttributeRequirements* Leaf = Cast<UFP_Leaf_AttributeRequirements>(Composite);
+	if (!IsValid(Leaf)) return;
+
+	Composite->Expand();
+
+	int32 CurrentMight = 0, CurrentResonance = 0, CurrentAgility = 0, CurrentFortitude = 0;
+
+	if (const APlayerController* PC = GWorld ? GWorld->GetFirstPlayerController() : nullptr)
+	{
+		if (const AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>())
+		{
+			if (const UAbilitySystemComponent* ASC = PS->GetAbilitySystemComponent())
+			{
+				CurrentMight     = static_cast<int32>(ASC->GetNumericAttribute(UFP_AttributeSet::GetMightAttribute()));
+				CurrentResonance = static_cast<int32>(ASC->GetNumericAttribute(UFP_AttributeSet::GetResonanceAttribute()));
+				CurrentAgility   = static_cast<int32>(ASC->GetNumericAttribute(UFP_AttributeSet::GetAgilityAttribute()));
+				CurrentFortitude = static_cast<int32>(ASC->GetNumericAttribute(UFP_AttributeSet::GetFortitudeAttribute()));
+			}
+		}
+	}
+
+	Leaf->SetRequirements(
+		{ RequiredMight,     CurrentMight     },
+		{ RequiredResonance, CurrentResonance },
+		{ RequiredAgility,   CurrentAgility   },
+		{ RequiredFortitude, CurrentFortitude }
+	);
+}
+
+// -------------------------------------------------------------------------
+// Item Level
+// -------------------------------------------------------------------------
+
+void FFP_ItemLevelFragment::Assimilate(UFP_CompositeBase* Composite) const
+{
+	FFP_InventoryItemFragment::Assimilate(Composite);
+	if (!MatchesWidgetTag(Composite)) return;
+
+	UFP_Leaf_LabeledValue* LabeledValue = Cast<UFP_Leaf_LabeledValue>(Composite);
+	if (!IsValid(LabeledValue)) return;
+
+	LabeledValue->SetText_Label(NSLOCTEXT("FP_ItemLevel", "Label", "Item Level"), false);
+
+	FNumberFormattingOptions Options;
+	Options.MinimumFractionalDigits = 0;
+	Options.MaximumFractionalDigits = 0;
+	LabeledValue->SetText_Value(FText::AsNumber(ItemLevel, &Options), false);
 }

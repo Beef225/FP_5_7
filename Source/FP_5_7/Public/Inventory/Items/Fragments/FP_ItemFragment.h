@@ -367,6 +367,64 @@ private:
 };
 
 // -------------------------------------------------------------------------
+// Attribute Requirements
+// -------------------------------------------------------------------------
+
+/**
+ * Defines the primary attribute minimums a player must meet to equip this item.
+ * Any stat left at 0 is hidden in the description UI.
+ * Assimilate() colors each stat red when the player falls short.
+ * MeetsRequirements() is checked by the inventory component before equipping.
+ */
+USTRUCT(BlueprintType)
+struct FP_5_7_API FFP_AttributeRequirementFragment : public FFP_InventoryItemFragment
+{
+	GENERATED_BODY()
+
+	bool MeetsRequirements(APlayerController* PC) const;
+
+	virtual void Assimilate(UFP_CompositeBase* Composite) const override;
+
+private:
+
+	UPROPERTY(EditAnywhere, Category = "Requirements", meta = (ClampMin = 0))
+	int32 RequiredMight{ 0 };
+
+	UPROPERTY(EditAnywhere, Category = "Requirements", meta = (ClampMin = 0))
+	int32 RequiredResonance{ 0 };
+
+	UPROPERTY(EditAnywhere, Category = "Requirements", meta = (ClampMin = 0))
+	int32 RequiredAgility{ 0 };
+
+	UPROPERTY(EditAnywhere, Category = "Requirements", meta = (ClampMin = 0))
+	int32 RequiredFortitude{ 0 };
+};
+
+// -------------------------------------------------------------------------
+// Item Level
+// -------------------------------------------------------------------------
+
+/**
+ * Stores the item's level, assigned at spawn time to match the enemy that dropped it.
+ * Displayed in the item description via UFP_Leaf_LabeledValue.
+ */
+USTRUCT(BlueprintType)
+struct FP_5_7_API FFP_ItemLevelFragment : public FFP_InventoryItemFragment
+{
+	GENERATED_BODY()
+
+	int32 GetItemLevel() const { return ItemLevel; }
+	void SetItemLevel(int32 Level) { ItemLevel = Level; }
+
+	virtual void Assimilate(UFP_CompositeBase* Composite) const override;
+
+private:
+
+	UPROPERTY(VisibleAnywhere, Category = "Inventory")
+	int32 ItemLevel{ 1 };
+};
+
+// -------------------------------------------------------------------------
 // Equipment
 // -------------------------------------------------------------------------
 

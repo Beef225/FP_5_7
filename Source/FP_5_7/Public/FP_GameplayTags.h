@@ -33,6 +33,10 @@ FGameplayTag Attributes_Primary_Fortitude;
 
 
 //Secondary Attributes
+//Health
+FGameplayTag Health_Increased;
+FGameplayTag Health_More;
+
 //Damage
 FGameplayTag Damage_Increased_Generic;
 FGameplayTag Damage_More_Generic;
@@ -362,6 +366,8 @@ FGameplayTag Fragment_Mesh;
 
 /** Identifies FFP_RarityFragment: holds the item's rarity and its drop-weight table. */
 FGameplayTag Fragment_Rarity;
+FGameplayTag Fragment_ItemLevel;
+FGameplayTag Fragment_AttributeRequirements;
 
 // -------------------------------------------------------------------------
 // Equipment Slot Types  (parent tags — items use child tags under these)

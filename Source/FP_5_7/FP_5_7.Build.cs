@@ -36,6 +36,7 @@ public class FP_5_7 : ModuleRules
 			PrivateDependencyModuleNames.AddRange(new[]
 			{
 				"UnrealEd",
+				"PropertyEditor",
 				"AssetRegistry",
 				"AssetTools",
 				"Json",

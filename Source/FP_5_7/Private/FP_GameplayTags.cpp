@@ -1041,6 +1041,8 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Fragment.AttributeRequirements"), FString("Identifies FFP_AttributeRequirementFragment: primary stat minimums to equip"));
 	GameplayTags.Fragment_Affixes = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Fragment.Affixes"), FString("Identifies FFP_AffixFragment: all rolled affixes for an equippable item"));
+	GameplayTags.Fragment_Implicits = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Implicits"), FString("Identifies FFP_ImplicitFragment: fixed implicit modifiers present on all rarities"));
 
 	// -------------------------------------------------------------------------
 	// Equipment Slot Types  (parent tags — items use child tags under these)

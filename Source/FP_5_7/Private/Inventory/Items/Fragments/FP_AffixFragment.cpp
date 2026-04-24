@@ -5,6 +5,11 @@
 #include "Inventory/Items/Manifest/FP_ItemManifest.h"
 #include "Inventory/Items/Fragments/FP_ItemFragment.h"
 #include "UI/Widget/Inventory/Composite/FP_Leaf_Affixes.h"
+#include "AbilitySystemInterface.h"
+#include "AbilitySystemComponent.h"
+#include "GameplayEffect.h"
+#include "AbilitySystem/FP_AttributeSet.h"
+#include "GameFramework/PlayerController.h"
 
 void FFP_AffixFragment::OnSpawned(FFP_ItemManifest& Manifest)
 {
@@ -54,6 +59,63 @@ void FFP_AffixFragment::Assimilate(UFP_CompositeBase* Composite) const
 	});
 
 	Leaf->SetAffixes(Sorted);
+}
+
+void FFP_AffixFragment::OnEquip(APlayerController* PC)
+{
+	if (RolledAffixes.IsEmpty() || !PC) return;
+
+	IAbilitySystemInterface* ASI = Cast<IAbilitySystemInterface>(PC->GetPawn());
+	if (!ASI) return;
+
+	UAbilitySystemComponent* ASC = ASI->GetAbilitySystemComponent();
+	if (!ASC) return;
+
+	const UFP_AttributeSet* AS = Cast<UFP_AttributeSet>(ASC->GetAttributeSet(UFP_AttributeSet::StaticClass()));
+	if (!AS) return;
+
+	UGameplayEffect* DynamicGE = NewObject<UGameplayEffect>(GetTransientPackage(), NAME_None);
+	DynamicGE->DurationPolicy = EGameplayEffectDurationType::Infinite;
+
+	auto AddMod = [&](FGameplayTag StatTag, float Value)
+	{
+		if (!StatTag.IsValid()) return;
+		const TStaticFuncPtr<FGameplayAttribute()>* AttrFunc = AS->TagsToAttributes.Find(StatTag);
+		if (!AttrFunc) return;
+
+		FGameplayModifierInfo Mod;
+		Mod.Attribute   = (*AttrFunc)();
+		Mod.ModifierOp  = EGameplayModOp::Additive;
+		FScalableFloat SF;
+		SF.Value        = Value;
+		Mod.ModifierMagnitude = FGameplayEffectModifierMagnitude(SF);
+		DynamicGE->Modifiers.Add(Mod);
+	};
+
+	for (const FFP_AffixInstance& Affix : RolledAffixes)
+	{
+		AddMod(Affix.Stat1_Attr, Affix.Stat1_Value);
+		if (Affix.HasStat2())
+			AddMod(Affix.Stat2_Attr, Affix.Stat2_Value);
+	}
+
+	if (DynamicGE->Modifiers.IsEmpty()) return;
+
+	ActiveEffectHandle = ASC->ApplyGameplayEffectToSelf(DynamicGE, 1.f, ASC->MakeEffectContext());
+}
+
+void FFP_AffixFragment::OnUnequip(APlayerController* PC)
+{
+	if (!ActiveEffectHandle.IsValid() || !PC) return;
+
+	IAbilitySystemInterface* ASI = Cast<IAbilitySystemInterface>(PC->GetPawn());
+	if (!ASI) return;
+
+	UAbilitySystemComponent* ASC = ASI->GetAbilitySystemComponent();
+	if (!ASC) return;
+
+	ASC->RemoveActiveGameplayEffect(ActiveEffectHandle);
+	ActiveEffectHandle.Invalidate();
 }
 
 void FFP_AffixFragment::RollAffixes()

@@ -3,6 +3,8 @@
 #include "Inventory/InventoryManagement/Components/FP_InventoryComponent.h"
 #include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
 #include "Inventory/Items/Fragments/FP_ItemFragment.h"
+#include "Inventory/Items/Fragments/FP_AffixFragment.h"
+#include "Inventory/Items/Fragments/FP_ImplicitFragment.h"
 #include "Inventory/Types/FP_InventoryTypes.h"
 #include "Net/UnrealNetwork.h"
 #include "UI/Widget/Inventory/FP_InventoryBase.h"
@@ -87,7 +89,22 @@ void UFP_InventoryComponent::TryAddItem(UFP_ItemComponent* ItemComponent)
 
 	if (Result.TotalRoomToFill == 0)
 	{
-		NoRoomInInventory.Broadcast();
+		// Copy the manifest before destroying the source actor
+		FFP_ItemManifest ManifestCopy = ItemComponent->GetItemManifest();
+
+		ItemComponent->GetOwner()->Destroy();
+
+		if (const APawn* OwningPawn = OwningController->GetPawn())
+		{
+			FVector RotatedForward = OwningPawn->GetActorForwardVector();
+			RotatedForward = RotatedForward.RotateAngleAxis(
+				FMath::FRandRange(DropSpawnAngleMin, DropSpawnAngleMax), FVector::UpVector);
+			FVector SpawnLocation = OwningPawn->GetActorLocation()
+				+ RotatedForward * FMath::FRandRange(DropSpawnDistanceMin, DropSpawnDistanceMax);
+			SpawnLocation.Z -= RelativeSpawnElevation;
+
+			ManifestCopy.SpawnPickupActor(this, SpawnLocation, FRotator::ZeroRotator);
+		}
 		return;
 	}
 
@@ -192,6 +209,14 @@ void UFP_InventoryComponent::Multicast_EquipSlotClicked_Implementation(UFP_Inven
 		{
 			EquipFrag->OnUnequip(PC);
 		}
+		if (FFP_AffixFragment* AffixFrag = ItemToUnequip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_AffixFragment>())
+		{
+			AffixFrag->OnUnequip(PC);
+		}
+		if (FFP_ImplicitFragment* ImplicitFrag = ItemToUnequip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_ImplicitFragment>())
+		{
+			ImplicitFrag->OnUnequip(PC);
+		}
 	}
 
 	if (IsValid(ItemToEquip))
@@ -203,6 +228,14 @@ void UFP_InventoryComponent::Multicast_EquipSlotClicked_Implementation(UFP_Inven
 		if (FFP_EquipmentFragment* EquipFrag = ItemToEquip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_EquipmentFragment>())
 		{
 			EquipFrag->OnEquip(PC);
+		}
+		if (FFP_AffixFragment* AffixFrag = ItemToEquip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_AffixFragment>())
+		{
+			AffixFrag->OnEquip(PC);
+		}
+		if (FFP_ImplicitFragment* ImplicitFrag = ItemToEquip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_ImplicitFragment>())
+		{
+			ImplicitFrag->OnEquip(PC);
 		}
 	}
 

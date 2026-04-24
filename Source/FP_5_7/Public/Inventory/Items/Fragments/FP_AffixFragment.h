@@ -5,10 +5,12 @@
 #include "CoreMinimal.h"
 #include "Inventory/Items/Fragments/FP_ItemFragment.h"
 #include "Inventory/Items/Affixes/FP_AffixTypes.h"
+#include "GameplayEffectTypes.h"
 #include "FP_AffixFragment.generated.h"
 
 class UFP_AffixPool;
 class UFP_AffixRegistry;
+class APlayerController;
 
 /**
  * Fragment that drives affix rolling for equippable items.
@@ -31,6 +33,9 @@ struct FP_5_7_API FFP_AffixFragment : public FFP_InventoryItemFragment
 	virtual void OnSpawned(FFP_ItemManifest& Manifest) override;
 	virtual void Assimilate(UFP_CompositeBase* Composite) const override;
 
+	void OnEquip(APlayerController* PC);
+	void OnUnequip(APlayerController* PC);
+
 	UPROPERTY(EditAnywhere, Category="Affixes")
 	TObjectPtr<UFP_AffixPool> AffixPool;
 
@@ -52,6 +57,8 @@ private:
 	TArray<FFP_AffixInstance> RolledAffixes;
 
 	bool bRolled{ false };
+
+	FActiveGameplayEffectHandle ActiveEffectHandle;
 
 	void RollAffixes();
 };

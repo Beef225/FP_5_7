@@ -141,7 +141,6 @@ void AFP_ItemActor::OnPickupRequested()
 	if (!IsValid(IC)) return;
 
 	IC->TryAddItem(ItemComponent);
-	Destroy();
 }
 
 void AFP_ItemActor::SetItemLevel(int32 Level)

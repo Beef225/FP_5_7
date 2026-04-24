@@ -369,6 +369,9 @@ FGameplayTag Fragment_Rarity;
 FGameplayTag Fragment_ItemLevel;
 FGameplayTag Fragment_AttributeRequirements;
 
+/** Identifies FFP_AffixFragment: holds all rolled affixes for an equippable item. */
+FGameplayTag Fragment_Affixes;
+
 // -------------------------------------------------------------------------
 // Equipment Slot Types  (parent tags — items use child tags under these)
 // -------------------------------------------------------------------------

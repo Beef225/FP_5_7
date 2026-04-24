@@ -35,7 +35,7 @@ void FFP_TextFragment::Assimilate(UFP_CompositeBase* Composite) const
 	LeafText->SetText(FragmentText);
 }
 
-void FFP_LabeledNumberFragment::OnSpawned()
+void FFP_LabeledNumberFragment::OnSpawned(FFP_ItemManifest& Manifest)
 {
 	if (bRandomizeOnManifest)
 	{
@@ -97,13 +97,13 @@ void FFP_ConsumableFragment::Manifest()
 	}
 }
 
-void FFP_ConsumableFragment::OnSpawned()
+void FFP_ConsumableFragment::OnSpawned(FFP_ItemManifest& Manifest)
 {
 	for (TInstancedStruct<FFP_ConsumeModifier>& Modifier : Modifiers)
 	{
 		if (FFP_ConsumeModifier* Ptr = Modifier.GetMutablePtr<FFP_ConsumeModifier>())
 		{
-			Ptr->OnSpawned();
+			Ptr->OnSpawned(Manifest);
 		}
 	}
 }
@@ -271,7 +271,7 @@ void FFP_RarityFragment::Assimilate(UFP_CompositeBase* Composite) const
 	LeafText->SetText(FText::FromString(RarityString));
 }
 
-void FFP_RarityFragment::OnSpawned()
+void FFP_RarityFragment::OnSpawned(FFP_ItemManifest& Manifest)
 {
 	if (bRolled || !IsValid(RarityTable)) return;
 	bRolled = true;
@@ -293,6 +293,12 @@ void FFP_RarityFragment::OnSpawned()
 	// TODO: add area level IIR modifier
 
 	Rarity = RarityTable->Roll(TotalIIR);
+
+	if (const FFP_RarityWeight* Entry = RarityTable->GetEntry(Rarity))
+	{
+		RolledPrefixCount = FMath::RandRange(Entry->MinPrefixes, Entry->MaxPrefixes);
+		RolledSuffixCount = FMath::RandRange(Entry->MinSuffixes, Entry->MaxSuffixes);
+	}
 
 	if (Rarity == EFP_ItemRarity::Legendary)
 	{

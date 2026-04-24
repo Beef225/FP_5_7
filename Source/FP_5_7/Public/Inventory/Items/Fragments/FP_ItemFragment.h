@@ -8,6 +8,8 @@
 #include "StructUtils/InstancedStruct.h"
 #include "FP_ItemFragment.generated.h"
 
+struct FFP_ItemManifest;
+
 class APlayerController;
 class UFP_CompositeBase;
 
@@ -42,7 +44,7 @@ struct FP_5_7_API FFP_ItemFragment
 	 * (both for editor-placed and code-spawned actors). Override to roll random
 	 * values or do any one-time initialisation at spawn time.
 	 */
-	virtual void OnSpawned() {}
+	virtual void OnSpawned(FFP_ItemManifest& Manifest) {}
 
 private:
 
@@ -155,7 +157,7 @@ struct FP_5_7_API FFP_LabeledNumberFragment : public FFP_InventoryItemFragment
 	 * Rolls Value between Min and Max on first world spawn.
 	 * bRandomizeOnManifest is cleared afterward so re-pickups keep the same value.
 	 */
-	virtual void OnSpawned() override;
+	virtual void OnSpawned(FFP_ItemManifest& Manifest) override;
 
 	// bRandomizeOnManifest starts true so the first spawn always rolls a value.
 	// It is not a UPROPERTY so it is never reset by serialization — once false it stays false
@@ -240,7 +242,7 @@ struct FP_5_7_API FFP_ConsumableFragment : public FFP_InventoryItemFragment
 
 	virtual void Assimilate(UFP_CompositeBase* Composite) const override;
 	virtual void Manifest() override;
-	virtual void OnSpawned() override;
+	virtual void OnSpawned(FFP_ItemManifest& Manifest) override;
 
 private:
 
@@ -349,9 +351,11 @@ struct FP_5_7_API FFP_RarityFragment : public FFP_InventoryItemFragment
 	GENERATED_BODY()
 
 	EFP_ItemRarity GetRarity() const { return Rarity; }
+	int32 GetRolledPrefixCount() const { return RolledPrefixCount; }
+	int32 GetRolledSuffixCount() const { return RolledSuffixCount; }
 
 	virtual void Assimilate(UFP_CompositeBase* Composite) const override;
-	virtual void OnSpawned() override;
+	virtual void OnSpawned(FFP_ItemManifest& Manifest) override;
 
 private:
 
@@ -362,6 +366,13 @@ private:
 	/** Predetermined rarity, or the result written here after a successful roll. */
 	UPROPERTY(EditAnywhere, Category="Rarity")
 	EFP_ItemRarity Rarity{ EFP_ItemRarity::Common };
+
+	/** Affix budget rolled from the rarity table entry at spawn time. */
+	UPROPERTY(VisibleAnywhere, Category="Rarity")
+	int32 RolledPrefixCount{ 0 };
+
+	UPROPERTY(VisibleAnywhere, Category="Rarity")
+	int32 RolledSuffixCount{ 0 };
 
 	bool bRolled{ false };
 };

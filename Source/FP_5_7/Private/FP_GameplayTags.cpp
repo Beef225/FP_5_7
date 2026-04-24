@@ -1039,6 +1039,8 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Fragment.ItemLevel"), FString("Identifies FFP_ItemLevelFragment: item level set from the dropping enemy"));
 	GameplayTags.Fragment_AttributeRequirements = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Fragment.AttributeRequirements"), FString("Identifies FFP_AttributeRequirementFragment: primary stat minimums to equip"));
+	GameplayTags.Fragment_Affixes = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Affixes"), FString("Identifies FFP_AffixFragment: all rolled affixes for an equippable item"));
 
 	// -------------------------------------------------------------------------
 	// Equipment Slot Types  (parent tags — items use child tags under these)

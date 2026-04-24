@@ -100,3 +100,17 @@ enum class ESkillGrantedBy : uint8
 	Quest			UMETA(DisplayName="Quest"),
 	Injector		UMETA(DisplayName="Injector"),
 };
+
+UENUM(BlueprintType)
+enum class EFP_AffixType : uint8
+{
+	Prefix  UMETA(DisplayName="Prefix"),
+	Suffix  UMETA(DisplayName="Suffix"),
+};
+
+UENUM(BlueprintType)
+enum class EFP_AffixDisplayAs : uint8
+{
+	Flat     UMETA(DisplayName="Flat"),
+	Percent  UMETA(DisplayName="Percent"),
+};

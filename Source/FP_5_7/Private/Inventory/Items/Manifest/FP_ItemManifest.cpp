@@ -49,12 +49,17 @@ void FFP_ItemManifest::AssimilateInventoryFragments(UFP_CompositeBase* Composite
 
 void FFP_ItemManifest::NotifyItemSpawned()
 {
+	// Rarity must resolve before affixes roll so the budget is ready.
 	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
 	{
-		if (FFP_ItemFragment* FragPtr = Fragment.GetMutablePtr<FFP_ItemFragment>())
-		{
-			FragPtr->OnSpawned();
-		}
+		if (FFP_RarityFragment* Ptr = Fragment.GetMutablePtr<FFP_RarityFragment>())
+			Ptr->OnSpawned(*this);
+	}
+	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
+	{
+		if (Fragment.GetPtr<FFP_RarityFragment>()) continue;
+		if (FFP_ItemFragment* Ptr = Fragment.GetMutablePtr<FFP_ItemFragment>())
+			Ptr->OnSpawned(*this);
 	}
 }
 

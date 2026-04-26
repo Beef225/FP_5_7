@@ -117,6 +117,7 @@ void UFP_SpatialInventory::OnItemHovered(UFP_SlottedItem* SlottedItem)
 		if (WeakItem.IsValid())
 		{
 			WeakItem->GetItemManifest().AssimilateInventoryFragments(DescWidget);
+			DescWidget->UpdateWidth(ItemDescriptionWidth);
 		}
 		DescWidget->SetVisibility(ESlateVisibility::HitTestInvisible);
 	}, ItemDescriptionDelay, false);
@@ -138,6 +139,7 @@ UFP_ItemDescription* UFP_SpatialInventory::GetItemDescription()
 		UCanvasPanelSlot* DescSlot = CanvasPanel->AddChildToCanvas(ItemDescription);
 		DescSlot->SetAutoSize(true);
 		DescSlot->SetZOrder(99);
+		DescSlot->SetPosition(FVector2D::ZeroVector);
 	}
 	return ItemDescription;
 }
@@ -305,9 +307,6 @@ bool UFP_SpatialInventory::CanEquipHoverItem(UFP_EquippedGridSlot* EquippedGridS
 
 void UFP_SpatialInventory::SetItemDescriptionSizeAndPosition()
 {
-	UCanvasPanelSlot* DescSlot = Cast<UCanvasPanelSlot>(ItemDescription->Slot);
-	if (!DescSlot) return;
-
 	const FVector2D DescSize = ItemDescription->GetBoxSize();
 	const FGeometry& CanvasGeometry = CanvasPanel->GetCachedGeometry();
 
@@ -333,5 +332,7 @@ void UFP_SpatialInventory::SetItemDescriptionSizeAndPosition()
 		FMath::Clamp(DesiredPos.Y, LocalViewportMin.Y, LocalViewportMax.Y - DescSize.Y)
 	);
 
-	DescSlot->SetPosition(ClampedPos);
+	// Use render translation instead of slot position — purely visual, never affects layout
+	// so the canvas panel cannot grow or shift in response to the description's position.
+	ItemDescription->SetRenderTranslation(ClampedPos);
 }

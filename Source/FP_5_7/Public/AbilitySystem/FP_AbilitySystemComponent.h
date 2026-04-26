@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/Abilities/FP_GameplayAbility.h"
 #include "FP_AbilitySystemComponent.generated.h"
 
 
@@ -29,6 +30,13 @@ public:
 	
 	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
 	void AddCharacterPassiveAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupPassiveAbilities);
+
+	// Grants a skill sourced from an equipped item. No input tag is assigned here —
+	// the hotbar UI assigns one when the player slots the skill.
+	FGameplayAbilitySpecHandle GrantItemSkill(TSubclassOf<UFP_GameplayAbility> AbilityClass, int32 Level = 1);
+
+	// Removes a skill previously granted by GrantItemSkill.
+	void RevokeItemSkill(FGameplayAbilitySpecHandle Handle);
 	bool bStartupAbilitiesGiven = false;
 	
 	void AbilityInputTagHeld(const FGameplayTag& InputTag);

@@ -23,7 +23,6 @@ void UFP_EquippedGridSlot::NativeOnMouseEnter(const FGeometry& InGeometry, const
 
 	if (HoverItem->GetItemType().MatchesTag(EquipmentTypeTag))
 	{
-		SetOccupiedTexture();
 		Image_GrayedOutIcon->SetVisibility(ESlateVisibility::Collapsed);
 	}
 }
@@ -32,18 +31,17 @@ void UFP_EquippedGridSlot::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
 	Super::NativeOnMouseLeave(InMouseEvent);
 
-	// Only reset hover feedback when the slot is still empty.
-	// If an item was just equipped the hover item is already gone by leave time,
-	// so we can't rely on it — OnItemEquipped handles that reset instead.
-	if (GetInventoryItem().IsValid()) return;
+	// Only undo the hover highlight if we actually applied it on enter.
+	UFP_HoverItem* HoverItem = UFP_AbilitySystemLibrary::GetHoverItem(GetOwningPlayer());
+	if (!IsValid(HoverItem) || !HoverItem->GetItemType().MatchesTag(EquipmentTypeTag))
+		return;
 
-	SetUnoccupiedTexture();
-	Image_GrayedOutIcon->SetVisibility(ESlateVisibility::Visible);
+	if (!GetInventoryItem().IsValid())
+		Image_GrayedOutIcon->SetVisibility(ESlateVisibility::Visible);
 }
 
 void UFP_EquippedGridSlot::ResetVisuals()
 {
-	SetUnoccupiedTexture();
 	Image_GrayedOutIcon->SetVisibility(ESlateVisibility::Visible);
 }
 
@@ -90,7 +88,7 @@ UFP_EquippedSlottedItem* UFP_EquippedGridSlot::OnItemEquipped(UFP_InventoryItem*
 	UOverlaySlot* OverlaySlot = UWidgetLayoutLibrary::SlotAsOverlaySlot(EquippedSlottedItem);
 	OverlaySlot->SetPadding(FMargin(LeftPadding, TopPadding));
 
-	SetUnoccupiedTexture();
+	Image_GrayedOutIcon->SetVisibility(ESlateVisibility::Collapsed);
 
 	return EquippedSlottedItem;
 }

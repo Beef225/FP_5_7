@@ -616,8 +616,12 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("InputTag for Left Mouse Button")
 		);
 	GameplayTags.InputTag_RMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("InputTag.RMB"), 
+		FName("InputTag.RMB"),
 		FString("InputTag for Right Mouse Button")
+		);
+	GameplayTags.InputTag_Space = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.Space"),
+		FString("InputTag for Spacebar — movement abilities such as dodge roll")
 		);
 	GameplayTags.InputTag_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("InputTag.1"), 
@@ -774,9 +778,18 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Summon Skill")
 		);
 	GameplayTags.Skill_Movement = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Skill.Movement"), 
+		FName("Skill.Movement"),
 		FString("Movement Skill")
 		);
+	GameplayTags.Skills_Movement_DodgeRoll = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Movement.DodgeRoll"),
+		FString("Dodge Roll — burst movement in the player's input direction")
+		);
+	GameplayTags.Skills_Rotation_Cancelled = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Rotation.Cancelled"),
+		FString("Suppresses mouse-facing rotation while an ability is active")
+		);
+
 	GameplayTags.Skill_MoveSpeed_Diminished = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Skill.MoveSpeed.Diminished"), 
 		FString("Reduce Skill Speed by Attribute")
@@ -828,8 +841,12 @@ void FFP_GameplayTags::InitializeGameplayTags()
 
 	//SetByCaller
 	GameplayTags.SetByCaller_Attribute_IncomingXP = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SetByCaller.Attribute.IncomingXP"), 
+		FName("SetByCaller.Attribute.IncomingXP"),
 		FString("Set By Caller Tag for IncomingXP")
+		);
+	GameplayTags.SetByCaller_DodgeRoll_MoveSpeed = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.DodgeRoll.MoveSpeed"),
+		FString("SetByCaller tag driving the dodge roll movement speed ramp GE")
 		);
 
 
@@ -1043,6 +1060,8 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Fragment.Affixes"), FString("Identifies FFP_AffixFragment: all rolled affixes for an equippable item"));
 	GameplayTags.Fragment_Implicits = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Fragment.Implicits"), FString("Identifies FFP_ImplicitFragment: fixed implicit modifiers present on all rarities"));
+	GameplayTags.Fragment_Skills = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Skills"), FString("Identifies FFP_SkillFragment: skills rolled from a pool and granted to the player on equip"));
 
 	// -------------------------------------------------------------------------
 	// Equipment Slot Types  (parent tags — items use child tags under these)

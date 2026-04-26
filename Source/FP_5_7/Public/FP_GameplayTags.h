@@ -208,6 +208,7 @@ FGameplayTag Player_Block_InputReleased;
 //Input Tags
 FGameplayTag InputTag_LMB;
 FGameplayTag InputTag_RMB;
+FGameplayTag InputTag_Space;
 FGameplayTag InputTag_1;
 FGameplayTag InputTag_2;
 FGameplayTag InputTag_3;
@@ -255,6 +256,8 @@ FGameplayTag Skills_Melee;
 FGameplayTag Skill_Ranged;
 FGameplayTag Skill_Summon;
 FGameplayTag Skill_Movement;
+FGameplayTag Skills_Movement_DodgeRoll;
+FGameplayTag Skills_Rotation_Cancelled;
 FGameplayTag Skill_MoveSpeed_Diminished;
 FGameplayTag Skill_MoveSpeed_None;
 FGameplayTag Skills_Status_Equipped;
@@ -273,6 +276,7 @@ FGameplayTag State_Overheat;
 
 //SetByCaller
 FGameplayTag SetByCaller_Attribute_IncomingXP;
+FGameplayTag SetByCaller_DodgeRoll_MoveSpeed;
 
 
 //SkillTagMods
@@ -374,6 +378,10 @@ FGameplayTag Fragment_Affixes;
 
 /** Identifies FFP_ImplicitFragment: fixed implicit modifiers present on all rarities. */
 FGameplayTag Fragment_Implicits;
+
+/** Identifies FFP_SkillFragment: skills rolled from a pool and granted to the player on equip. */
+FGameplayTag Fragment_Skills;
+
 
 // -------------------------------------------------------------------------
 // Equipment Slot Types  (parent tags — items use child tags under these)

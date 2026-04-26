@@ -18,6 +18,7 @@ void UFP_AbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf<
 {
 	for (const TSubclassOf<UGameplayAbility> AbilityClass : StartupAbilities)
 	{
+		if (!AbilityClass) continue;
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
 		if (const UFP_GameplayAbility* AuraAbility = Cast<UFP_GameplayAbility>(AbilitySpec.Ability))
 		{
@@ -35,6 +36,7 @@ void UFP_AbilitySystemComponent::AddCharacterPassiveAbilities(
 {
 	for (const TSubclassOf<UGameplayAbility> AbilityClass : StartupPassiveAbilities)
 	{
+		if (!AbilityClass) continue;
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
 		AbilitySpec.GetDynamicSpecSourceTags().AddTag(FFP_GameplayTags::Get().Skills_Status_Equipped);
 		GiveAbilityAndActivateOnce(AbilitySpec);
@@ -69,6 +71,20 @@ void UFP_AbilitySystemComponent::AbilityInputTagReleased(const FGameplayTag& Inp
 			AbilitySpecInputReleased(AbilitySpec);
 		}
 	}
+}
+
+FGameplayAbilitySpecHandle UFP_AbilitySystemComponent::GrantItemSkill(TSubclassOf<UFP_GameplayAbility> AbilityClass, int32 Level)
+{
+	if (!AbilityClass) return FGameplayAbilitySpecHandle();
+	FGameplayAbilitySpec Spec(AbilityClass, FMath::Max(1, Level));
+	Spec.GetDynamicSpecSourceTags().AddTag(FFP_GameplayTags::Get().Skills_Status_Equipped);
+	return GiveAbility(Spec);
+}
+
+void UFP_AbilitySystemComponent::RevokeItemSkill(FGameplayAbilitySpecHandle Handle)
+{
+	if (Handle.IsValid())
+		ClearAbility(Handle);
 }
 
 void UFP_AbilitySystemComponent::ForEachAbility(const FForEachAbilty& Delegate)

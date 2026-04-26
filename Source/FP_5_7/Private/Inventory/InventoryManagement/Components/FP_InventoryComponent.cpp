@@ -5,6 +5,7 @@
 #include "Inventory/Items/Fragments/FP_ItemFragment.h"
 #include "Inventory/Items/Fragments/FP_AffixFragment.h"
 #include "Inventory/Items/Fragments/FP_ImplicitFragment.h"
+#include "Inventory/Items/Fragments/FP_SkillFragment.h"
 #include "Inventory/Types/FP_InventoryTypes.h"
 #include "Net/UnrealNetwork.h"
 #include "UI/Widget/Inventory/FP_InventoryBase.h"
@@ -217,6 +218,10 @@ void UFP_InventoryComponent::Multicast_EquipSlotClicked_Implementation(UFP_Inven
 		{
 			ImplicitFrag->OnUnequip(PC);
 		}
+		if (FFP_SkillFragment* SkillFrag = ItemToUnequip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_SkillFragment>())
+		{
+			SkillFrag->OnUnequip(PC);
+		}
 	}
 
 	if (IsValid(ItemToEquip))
@@ -236,6 +241,10 @@ void UFP_InventoryComponent::Multicast_EquipSlotClicked_Implementation(UFP_Inven
 		if (FFP_ImplicitFragment* ImplicitFrag = ItemToEquip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_ImplicitFragment>())
 		{
 			ImplicitFrag->OnEquip(PC);
+		}
+		if (FFP_SkillFragment* SkillFrag = ItemToEquip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_SkillFragment>())
+		{
+			SkillFrag->OnEquip(PC);
 		}
 	}
 

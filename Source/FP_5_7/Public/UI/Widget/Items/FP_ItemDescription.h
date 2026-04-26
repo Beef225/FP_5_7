@@ -24,6 +24,12 @@ public:
 	/** Returns the current desired size of the SizeBox wrapping the description content. */
 	FVector2D GetBoxSize() const;
 
+	/** Pins the SizeBox to a fixed width, preventing text-wrap feedback loops. */
+	void SetFixedWidth(float Width);
+
+	/** Measures natural content width then re-pins to max(MinWidth, measured). */
+	void UpdateWidth(float MinWidth);
+
 private:
 
 	UPROPERTY(meta = (BindWidget))

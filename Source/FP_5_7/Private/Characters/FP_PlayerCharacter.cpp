@@ -274,6 +274,16 @@ void AFP_PlayerCharacter::InitAbilityActorInfo()
 		FFP_GameplayTags::Get().State_Frozen,
 		EGameplayTagEventType::NewOrRemoved)
 		.AddUObject(this, &AFP_PlayerCharacter::OnFrozenTagChangedForFacing);
+
+	AbilitySystemComponent->RegisterGameplayTagEvent(
+		FFP_GameplayTags::Get().Skills_Rotation_Cancelled,
+		EGameplayTagEventType::NewOrRemoved)
+		.AddUObject(this, &AFP_PlayerCharacter::OnRotationCancelledTagChanged);
+
+	AbilitySystemComponent->RegisterGameplayTagEvent(
+		FFP_GameplayTags::Get().Skills_Movement_DodgeRoll,
+		EGameplayTagEventType::NewOrRemoved)
+		.AddUObject(this, &AFP_PlayerCharacter::OnDodgeRollTagChanged);
 }
 
 bool AFP_PlayerCharacter::GetMouseWorldPoint(FVector& OutWorldPoint) const
@@ -298,9 +308,30 @@ void AFP_PlayerCharacter::OnFrozenTagChangedForFacing(FGameplayTag Tag, int32 Ne
 	bIsFrozen = NewCount > 0;
 }
 
+void AFP_PlayerCharacter::OnRotationCancelledTagChanged(FGameplayTag Tag, int32 NewCount)
+{
+	bRotationCancelled = NewCount > 0;
+}
+
+void AFP_PlayerCharacter::OnDodgeRollTagChanged(FGameplayTag Tag, int32 NewCount)
+{
+	if (NewCount > 0)
+	{
+		FVector Dir = GetVelocity();
+		if (Dir.IsNearlyZero())
+			Dir = GetCharacterMovement()->GetLastInputVector();
+		Dir.Z = 0.f;
+		MovementLockDir = Dir.IsNearlyZero() ? GetActorForwardVector() : Dir.GetSafeNormal();
+	}
+	else
+	{
+		MovementLockDir = FVector::ZeroVector;
+	}
+}
+
 void AFP_PlayerCharacter::FaceMouse(float DeltaTime)
 {
-	if (bIsFrozen) return;
+	if (bIsFrozen || bRotationCancelled) return;
 
 	FVector MouseWorld;
 	if (!GetMouseWorldPoint(MouseWorld))

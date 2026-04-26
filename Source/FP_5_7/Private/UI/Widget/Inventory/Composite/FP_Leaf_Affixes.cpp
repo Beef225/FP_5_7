@@ -3,8 +3,10 @@
 #include "UI/Widget/Inventory/Composite/FP_Leaf_Affixes.h"
 #include "Components/RichTextBlock.h"
 
-static FString FormatStatValue(float Value, int32 DecimalCount, EFP_AffixDisplayAs /*DisplayAs*/)
+static FString FormatStatValue(float Value, int32 DecimalCount, EFP_AffixDisplayAs DisplayAs)
 {
+	if (DisplayAs == EFP_AffixDisplayAs::Percent)
+		Value *= 100.f;
 	FNumberFormattingOptions Opts;
 	Opts.MinimumFractionalDigits = DecimalCount;
 	Opts.MaximumFractionalDigits = DecimalCount;

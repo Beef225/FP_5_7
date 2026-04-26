@@ -114,3 +114,12 @@ enum class EFP_AffixDisplayAs : uint8
 	Flat     UMETA(DisplayName="Flat"),
 	Percent  UMETA(DisplayName="Percent"),
 };
+
+UENUM(BlueprintType)
+enum class EFP_RollDirection : uint8
+{
+	Forward  UMETA(DisplayName="Forward"),
+	Backward UMETA(DisplayName="Backward"),
+	Left     UMETA(DisplayName="Left"),
+	Right    UMETA(DisplayName="Right"),
+};

@@ -36,6 +36,9 @@ struct FP_5_7_API FFP_AffixFragment : public FFP_InventoryItemFragment
 	void OnEquip(APlayerController* PC);
 	void OnUnequip(APlayerController* PC);
 
+	/** Set to true to log before/after attribute values on equip and unequip. */
+	static bool bLogStatChanges;
+
 	UPROPERTY(EditAnywhere, Category="Affixes")
 	TObjectPtr<UFP_AffixPool> AffixPool;
 

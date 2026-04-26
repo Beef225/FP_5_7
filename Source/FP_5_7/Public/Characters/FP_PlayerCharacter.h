@@ -137,7 +137,20 @@ private:
 	void FaceMouse(float DeltaTime);
 
 	bool bIsFrozen = false;
+	bool bRotationCancelled = false;
 
+	FVector MovementLockDir = FVector::ZeroVector;
+
+public:
+	FVector GetMovementLockDir() const { return MovementLockDir; }
+
+private:
 	UFUNCTION()
 	void OnFrozenTagChangedForFacing(FGameplayTag Tag, int32 NewCount);
+
+	UFUNCTION()
+	void OnRotationCancelledTagChanged(FGameplayTag Tag, int32 NewCount);
+
+	UFUNCTION()
+	void OnDodgeRollTagChanged(FGameplayTag Tag, int32 NewCount);
 };

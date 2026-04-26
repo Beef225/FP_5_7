@@ -2,6 +2,7 @@
 
 #include "Inventory/Items/Fragments/FP_ImplicitFragment.h"
 #include "Inventory/Items/Affixes/FP_AffixDefinition.h"
+#include "Inventory/Items/Fragments/FP_AffixFragment.h"
 #include "UI/Widget/Inventory/Composite/FP_Leaf_Implicits.h"
 #include "AbilitySystemInterface.h"
 #include "AbilitySystemComponent.h"
@@ -22,6 +23,56 @@ void FFP_ImplicitFragment::Assimilate(UFP_CompositeBase* Composite) const
 	Leaf->SetImplicits(RolledImplicits);
 }
 
+struct FFP_ImplicitStatSnapshot
+{
+	FGameplayAttribute Attr;
+	FString            TagName;
+	float              Before{ 0.f };
+};
+
+static TArray<FFP_ImplicitStatSnapshot> SnapshotImplicitStats(
+	const TArray<FFP_AffixInstance>& Implicits,
+	const UFP_AttributeSet* AS,
+	const UAbilitySystemComponent* ASC)
+{
+	TArray<FFP_ImplicitStatSnapshot> Snaps;
+	for (const FFP_AffixInstance& Implicit : Implicits)
+	{
+		auto TrySnap = [&](FGameplayTag Tag)
+		{
+			if (!Tag.IsValid()) return;
+			const TStaticFuncPtr<FGameplayAttribute()>* Fn = AS->TagsToAttributes.Find(Tag);
+			if (!Fn)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("[IMPLICIT] Tag '%s' has no entry in TagsToAttributes — will not be logged"), *Tag.ToString());
+				return;
+			}
+			FFP_ImplicitStatSnapshot S;
+			S.Attr    = (*Fn)();
+			S.TagName = Tag.ToString();
+			S.Before  = ASC->GetNumericAttribute(S.Attr);
+			Snaps.Add(S);
+		};
+		TrySnap(Implicit.Stat1_Attr);
+		if (Implicit.HasStat2()) TrySnap(Implicit.Stat2_Attr);
+	}
+	return Snaps;
+}
+
+static void LogImplicitStatChanges(
+	const TCHAR* Phase,
+	const TArray<FFP_ImplicitStatSnapshot>& Snaps,
+	const UAbilitySystemComponent* ASC)
+{
+	UE_LOG(LogTemp, Log, TEXT("[IMPLICIT %s] Attribute changes:"), Phase);
+	for (const FFP_ImplicitStatSnapshot& S : Snaps)
+	{
+		const float After = ASC->GetNumericAttribute(S.Attr);
+		UE_LOG(LogTemp, Log, TEXT("  %-55s  %.4f  ->  %.4f  (delta %+.4f)"),
+			*S.TagName, S.Before, After, After - S.Before);
+	}
+}
+
 void FFP_ImplicitFragment::OnEquip(APlayerController* PC)
 {
 	if (RolledImplicits.IsEmpty() || !PC) return;
@@ -35,6 +86,8 @@ void FFP_ImplicitFragment::OnEquip(APlayerController* PC)
 	const UFP_AttributeSet* AS = Cast<UFP_AttributeSet>(ASC->GetAttributeSet(UFP_AttributeSet::StaticClass()));
 	if (!AS) return;
 
+	TArray<FFP_ImplicitStatSnapshot> Snaps = SnapshotImplicitStats(RolledImplicits, AS, ASC);
+
 	UGameplayEffect* DynamicGE = NewObject<UGameplayEffect>(GetTransientPackage(), NAME_None);
 	DynamicGE->DurationPolicy = EGameplayEffectDurationType::Infinite;
 
@@ -42,7 +95,11 @@ void FFP_ImplicitFragment::OnEquip(APlayerController* PC)
 	{
 		if (!StatTag.IsValid()) return;
 		const TStaticFuncPtr<FGameplayAttribute()>* AttrFunc = AS->TagsToAttributes.Find(StatTag);
-		if (!AttrFunc) return;
+		if (!AttrFunc)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("[IMPLICIT EQUIP] Tag '%s' has no entry in TagsToAttributes — stat will not be applied"), *StatTag.ToString());
+			return;
+		}
 
 		FGameplayModifierInfo Mod;
 		Mod.Attribute         = (*AttrFunc)();
@@ -63,6 +120,7 @@ void FFP_ImplicitFragment::OnEquip(APlayerController* PC)
 	if (DynamicGE->Modifiers.IsEmpty()) return;
 
 	ActiveEffectHandle = ASC->ApplyGameplayEffectToSelf(DynamicGE, 1.f, ASC->MakeEffectContext());
+	if (FFP_AffixFragment::bLogStatChanges) LogImplicitStatChanges(TEXT("EQUIP"), Snaps, ASC);
 }
 
 void FFP_ImplicitFragment::OnUnequip(APlayerController* PC)
@@ -75,8 +133,15 @@ void FFP_ImplicitFragment::OnUnequip(APlayerController* PC)
 	UAbilitySystemComponent* ASC = ASI->GetAbilitySystemComponent();
 	if (!ASC) return;
 
+	const UFP_AttributeSet* AS = Cast<UFP_AttributeSet>(ASC->GetAttributeSet(UFP_AttributeSet::StaticClass()));
+	if (!AS) return;
+
+	TArray<FFP_ImplicitStatSnapshot> Snaps = SnapshotImplicitStats(RolledImplicits, AS, ASC);
+
 	ASC->RemoveActiveGameplayEffect(ActiveEffectHandle);
 	ActiveEffectHandle.Invalidate();
+
+	if (FFP_AffixFragment::bLogStatChanges) LogImplicitStatChanges(TEXT("UNEQUIP"), Snaps, ASC);
 }
 
 void FFP_ImplicitFragment::OnSpawned(FFP_ItemManifest& Manifest)

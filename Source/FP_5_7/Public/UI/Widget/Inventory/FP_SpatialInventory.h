@@ -71,5 +71,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Inventory")
 	float ItemDescriptionDelay{ 0.5f };
 
+	/** Fixed pixel width of the item description tooltip. Prevents text-wrap size feedback loops. */
+	UPROPERTY(EditAnywhere, Category = "Inventory")
+	float ItemDescriptionWidth{ 320.f };
+
 	bool bWasLMBDown = false;
 };

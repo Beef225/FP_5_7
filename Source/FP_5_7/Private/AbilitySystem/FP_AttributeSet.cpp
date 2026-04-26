@@ -37,6 +37,10 @@ TagsToAttributes.Add(GameplayTags.Attributes_Primary_Fortitude, GetFortitudeAttr
 
 
 //Secondary Attributes
+//Health
+TagsToAttributes.Add(GameplayTags.Health_Increased, GetIncreasedHitPointsAttribute);
+TagsToAttributes.Add(GameplayTags.Health_More, GetMoreHitPointsAttribute);
+
 //Damage
 TagsToAttributes.Add(GameplayTags.Damage_Increased_Generic, GetIncreasedDamageAttribute);
 TagsToAttributes.Add(GameplayTags.Damage_More_Generic, GetMoreDamageAttribute);

@@ -413,6 +413,21 @@ void AFP_PlayerController::Move(const FInputActionValue& InputActionValue)
 
 	if (APawn* ControlledPawn = GetPawn())
 	{
+		if (AFP_PlayerCharacter* PC = Cast<AFP_PlayerCharacter>(ControlledPawn))
+		{
+			const FVector LockDir = PC->GetMovementLockDir();
+			if (!LockDir.IsZero())
+			{
+				const FVector WorldInput = ForwardDirection * InputAxisVector.Y + RightDirection * InputAxisVector.X;
+				if (!WorldInput.IsNearlyZero())
+				{
+					const float Dot = FVector::DotProduct(WorldInput.GetSafeNormal(), LockDir);
+					if (Dot < 0.7071f)
+						return;
+				}
+			}
+		}
+
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection,   InputAxisVector.X);
 	}

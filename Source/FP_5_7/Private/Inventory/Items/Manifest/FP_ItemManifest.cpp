@@ -4,6 +4,7 @@
 #include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
 #include "Inventory/Items/FP_ItemComponent.h"
 #include "Inventory/Items/Fragments/FP_ItemFragment.h"
+#include "Inventory/Items/Fragments/FP_ItemNameFragment.h"
 #include "UI/Widget/Inventory/Composite/FP_CompositeBase.h"
 
 UFP_InventoryItem* FFP_ItemManifest::Manifest(UObject* NewOuter)
@@ -49,16 +50,24 @@ void FFP_ItemManifest::AssimilateInventoryFragments(UFP_CompositeBase* Composite
 
 void FFP_ItemManifest::NotifyItemSpawned()
 {
-	// Rarity must resolve before affixes roll so the budget is ready.
+	// Pass 1: Rarity must resolve before affixes roll so the budget is ready.
 	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
 	{
 		if (FFP_RarityFragment* Ptr = Fragment.GetMutablePtr<FFP_RarityFragment>())
 			Ptr->OnSpawned(*this);
 	}
+	// Pass 2: All other fragments (includes affix rolling).
 	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
 	{
 		if (Fragment.GetPtr<FFP_RarityFragment>()) continue;
+		if (Fragment.GetPtr<FFP_ItemNameFragment>()) continue;
 		if (FFP_ItemFragment* Ptr = Fragment.GetMutablePtr<FFP_ItemFragment>())
+			Ptr->OnSpawned(*this);
+	}
+	// Pass 3: Name fragment last — needs rarity and rolled affixes to be ready.
+	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
+	{
+		if (FFP_ItemNameFragment* Ptr = Fragment.GetMutablePtr<FFP_ItemNameFragment>())
 			Ptr->OnSpawned(*this);
 	}
 }

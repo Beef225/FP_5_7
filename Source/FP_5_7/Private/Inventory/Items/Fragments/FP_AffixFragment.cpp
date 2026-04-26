@@ -30,6 +30,8 @@ void FFP_AffixFragment::OnSpawned(FFP_ItemManifest& Manifest)
 	RollAffixes();
 }
 
+bool FFP_AffixFragment::bLogStatChanges = false;
+
 void FFP_AffixFragment::Assimilate(UFP_CompositeBase* Composite) const
 {
 	FFP_InventoryItemFragment::Assimilate(Composite);
@@ -61,6 +63,57 @@ void FFP_AffixFragment::Assimilate(UFP_CompositeBase* Composite) const
 	Leaf->SetAffixes(Sorted);
 }
 
+// Snapshot of one attribute's value — used to log before/after on equip/unequip.
+struct FFP_AffixStatSnapshot
+{
+	FGameplayAttribute Attr;
+	FString            TagName;
+	float              Before{ 0.f };
+};
+
+static TArray<FFP_AffixStatSnapshot> SnapshotAffixStats(
+	const TArray<FFP_AffixInstance>& Affixes,
+	const UFP_AttributeSet* AS,
+	const UAbilitySystemComponent* ASC)
+{
+	TArray<FFP_AffixStatSnapshot> Snaps;
+	for (const FFP_AffixInstance& Affix : Affixes)
+	{
+		auto TrySnap = [&](FGameplayTag Tag)
+		{
+			if (!Tag.IsValid()) return;
+			const TStaticFuncPtr<FGameplayAttribute()>* Fn = AS->TagsToAttributes.Find(Tag);
+			if (!Fn)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("[AFFIX] Tag '%s' has no entry in TagsToAttributes — will not be logged"), *Tag.ToString());
+				return;
+			}
+			FFP_AffixStatSnapshot S;
+			S.Attr    = (*Fn)();
+			S.TagName = Tag.ToString();
+			S.Before  = ASC->GetNumericAttribute(S.Attr);
+			Snaps.Add(S);
+		};
+		TrySnap(Affix.Stat1_Attr);
+		if (Affix.HasStat2()) TrySnap(Affix.Stat2_Attr);
+	}
+	return Snaps;
+}
+
+static void LogAffixStatChanges(
+	const TCHAR* Phase,
+	const TArray<FFP_AffixStatSnapshot>& Snaps,
+	const UAbilitySystemComponent* ASC)
+{
+	UE_LOG(LogTemp, Log, TEXT("[AFFIX %s] Attribute changes:"), Phase);
+	for (const FFP_AffixStatSnapshot& S : Snaps)
+	{
+		const float After = ASC->GetNumericAttribute(S.Attr);
+		UE_LOG(LogTemp, Log, TEXT("  %-55s  %.4f  ->  %.4f  (delta %+.4f)"),
+			*S.TagName, S.Before, After, After - S.Before);
+	}
+}
+
 void FFP_AffixFragment::OnEquip(APlayerController* PC)
 {
 	if (RolledAffixes.IsEmpty() || !PC) return;
@@ -74,6 +127,8 @@ void FFP_AffixFragment::OnEquip(APlayerController* PC)
 	const UFP_AttributeSet* AS = Cast<UFP_AttributeSet>(ASC->GetAttributeSet(UFP_AttributeSet::StaticClass()));
 	if (!AS) return;
 
+	TArray<FFP_AffixStatSnapshot> Snaps = SnapshotAffixStats(RolledAffixes, AS, ASC);
+
 	UGameplayEffect* DynamicGE = NewObject<UGameplayEffect>(GetTransientPackage(), NAME_None);
 	DynamicGE->DurationPolicy = EGameplayEffectDurationType::Infinite;
 
@@ -81,7 +136,11 @@ void FFP_AffixFragment::OnEquip(APlayerController* PC)
 	{
 		if (!StatTag.IsValid()) return;
 		const TStaticFuncPtr<FGameplayAttribute()>* AttrFunc = AS->TagsToAttributes.Find(StatTag);
-		if (!AttrFunc) return;
+		if (!AttrFunc)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("[AFFIX EQUIP] Tag '%s' has no entry in TagsToAttributes — stat will not be applied"), *StatTag.ToString());
+			return;
+		}
 
 		FGameplayModifierInfo Mod;
 		Mod.Attribute   = (*AttrFunc)();
@@ -102,6 +161,7 @@ void FFP_AffixFragment::OnEquip(APlayerController* PC)
 	if (DynamicGE->Modifiers.IsEmpty()) return;
 
 	ActiveEffectHandle = ASC->ApplyGameplayEffectToSelf(DynamicGE, 1.f, ASC->MakeEffectContext());
+	if (bLogStatChanges) LogAffixStatChanges(TEXT("EQUIP"), Snaps, ASC);
 }
 
 void FFP_AffixFragment::OnUnequip(APlayerController* PC)
@@ -114,8 +174,15 @@ void FFP_AffixFragment::OnUnequip(APlayerController* PC)
 	UAbilitySystemComponent* ASC = ASI->GetAbilitySystemComponent();
 	if (!ASC) return;
 
+	const UFP_AttributeSet* AS = Cast<UFP_AttributeSet>(ASC->GetAttributeSet(UFP_AttributeSet::StaticClass()));
+	if (!AS) return;
+
+	TArray<FFP_AffixStatSnapshot> Snaps = SnapshotAffixStats(RolledAffixes, AS, ASC);
+
 	ASC->RemoveActiveGameplayEffect(ActiveEffectHandle);
 	ActiveEffectHandle.Invalidate();
+
+	if (bLogStatChanges) LogAffixStatChanges(TEXT("UNEQUIP"), Snaps, ASC);
 }
 
 void FFP_AffixFragment::RollAffixes()

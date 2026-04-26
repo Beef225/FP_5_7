@@ -4,6 +4,9 @@
 #include "Libraries/FP_AbilitySystemLibrary.h"
 
 #include "FP_AbilityTypes.h"
+#include "Inventory/InventoryManagement/Components/FP_InventoryComponent.h"
+#include "UI/Widget/Inventory/FP_InventoryBase.h"
+#include "UI/Widget/Inventory/HoverItem/FP_HoverItem.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "Game/FP_GameModeBase.h"
 #include "Interaction/FP_CombatInterface.h"
@@ -259,4 +262,25 @@ TArray<FLootItem> UFP_AbilitySystemLibrary::GetLootItemsForEnemy(const UObject* 
 	}
 
 	return Result;
+}
+
+UFP_InventoryComponent* UFP_AbilitySystemLibrary::GetInventoryComponent(const APlayerController* PlayerController)
+{
+	if (!IsValid(PlayerController)) return nullptr;
+	return PlayerController->FindComponentByClass<UFP_InventoryComponent>();
+}
+
+EItemCategory UFP_AbilitySystemLibrary::GetItemCategoryFromItemComp(UFP_ItemComponent* ItemComp)
+{
+	if (!IsValid(ItemComp)) return EItemCategory::None;
+	return ItemComp->GetItemManifest().GetItemCategory();
+}
+
+UFP_HoverItem* UFP_AbilitySystemLibrary::GetHoverItem(APlayerController* PC)
+{
+	UFP_InventoryComponent* IC = GetInventoryComponent(PC);
+	if (!IsValid(IC)) return nullptr;
+	UFP_InventoryBase* InventoryMenu = IC->GetInventoryMenu();
+	if (!IsValid(InventoryMenu)) return nullptr;
+	return InventoryMenu->GetHoverItem();
 }

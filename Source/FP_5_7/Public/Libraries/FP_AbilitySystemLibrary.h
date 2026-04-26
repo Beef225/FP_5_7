@@ -4,16 +4,21 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystem/Data/CharacterClassInfo.h"
+#include "Inventory/Items/FP_ItemComponent.h"
 #include "Inventory/Loot/Data/FP_LootTiers.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "Libraries/FP_EnumDefs.h"
+#include "Libraries/FP_WidgetUtils.h"
 #include "UI/WidgetController/FP_CharacterMenuWidgetController.h"
 #include "FP_AbilitySystemLibrary.generated.h"
 
 class UAbilitySystemComponent;
+class UFP_HoverItem;
 class UFP_OverlayWidgetController;
 class UFP_InventoryWidgetController;
 class UCharacterMenuWidgetController;
 class UFP_SkillLibrary;
+class UFP_InventoryComponent;
 /**
  * 
  */
@@ -79,4 +84,40 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|LootTiers", meta = (WorldContext = "WorldContextObject"))
 	static TArray<FLootItem> GetLootItemsForEnemy(const UObject* WorldContextObject, const TArray<UFP_LootTiers*>& ExtraLootTiers);
+
+	/** Returns the UFP_InventoryComponent on the given PlayerController, or nullptr. */
+	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|Inventory")
+	static UFP_InventoryComponent* GetInventoryComponent(const APlayerController* PlayerController);
+
+	/** Reads the item category directly from the ItemComponent's manifest. Returns None if invalid. */
+	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|Inventory")
+	static EItemCategory GetItemCategoryFromItemComp(UFP_ItemComponent* ItemComp);
+
+	/** Returns the hover item currently held in the player's inventory UI, or nullptr. */
+	static UFP_HoverItem* GetHoverItem(APlayerController* PC);
+
+	/**
+	 * Iterates over a 2D rectangular region of a flat array starting at Index,
+	 * spanning Range2D.X columns and Range2D.Y rows within a grid of GridColumns width.
+	 * Calls Function on each valid element.
+	 */
+	template<typename T, typename FuncT>
+	static void ForEach2D(TArray<T>& Array, int32 Index, const FIntPoint& Range2D, int32 GridColumns, const FuncT& Function);
 };
+
+template<typename T, typename FuncT>
+void UFP_AbilitySystemLibrary::ForEach2D(TArray<T>& Array, int32 Index, const FIntPoint& Range2D, int32 GridColumns, const FuncT& Function)
+{
+	for (int32 j = 0; j < Range2D.Y; ++j)
+	{
+		for (int32 i = 0; i < Range2D.X; ++i)
+		{
+			const FIntPoint Coordinates = UFP_WidgetUtils::GetPositionFromIndex(Index, GridColumns) + FIntPoint(i, j);
+			const int32 TileIndex = UFP_WidgetUtils::GetIndexFromPosition(Coordinates, GridColumns);
+			if (Array.IsValidIndex(TileIndex))
+			{
+				Function(Array[TileIndex]);
+			}
+		}
+	}
+}

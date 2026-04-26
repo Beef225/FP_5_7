@@ -58,6 +58,39 @@ enum class EMenu : uint8
 };
 
 UENUM(BlueprintType)
+enum class EItemCategory : uint8
+{
+	Equippable  UMETA(DisplayName="Equippable"),
+	Consumable  UMETA(DisplayName="Consumable"),
+	Craftable   UMETA(DisplayName="Craftable"),
+	Quest       UMETA(DisplayName="Quest"),
+	Misc        UMETA(DisplayName="Misc"),
+	None        UMETA(DisplayName="None"),
+};
+
+UENUM(BlueprintType)
+enum class EBodyPart : uint8
+{
+	None   UMETA(DisplayName="None"),
+	Head   UMETA(DisplayName="Head"),
+	Torso  UMETA(DisplayName="Torso"),
+	Arms   UMETA(DisplayName="Arms"),
+	Hands  UMETA(DisplayName="Hands"),
+	Legs   UMETA(DisplayName="Legs"),
+	Feet   UMETA(DisplayName="Feet"),
+};
+
+UENUM(BlueprintType)
+enum class EFP_ItemRarity : uint8
+{
+	Common     UMETA(DisplayName="Common"),
+	Uncommon   UMETA(DisplayName="Uncommon"),
+	Rare       UMETA(DisplayName="Rare"),
+	Legendary  UMETA(DisplayName="Legendary"),
+	Mythic     UMETA(DisplayName="Mythic"),
+};
+
+UENUM(BlueprintType)
 enum class ESkillGrantedBy : uint8
 {
 	Equipment		UMETA(DisplayName="Equipment"),
@@ -66,4 +99,27 @@ enum class ESkillGrantedBy : uint8
 	SkillTree		UMETA(DisplayName="SkillTree"),
 	Quest			UMETA(DisplayName="Quest"),
 	Injector		UMETA(DisplayName="Injector"),
+};
+
+UENUM(BlueprintType)
+enum class EFP_AffixType : uint8
+{
+	Prefix  UMETA(DisplayName="Prefix"),
+	Suffix  UMETA(DisplayName="Suffix"),
+};
+
+UENUM(BlueprintType)
+enum class EFP_AffixDisplayAs : uint8
+{
+	Flat     UMETA(DisplayName="Flat"),
+	Percent  UMETA(DisplayName="Percent"),
+};
+
+UENUM(BlueprintType)
+enum class EFP_RollDirection : uint8
+{
+	Forward  UMETA(DisplayName="Forward"),
+	Backward UMETA(DisplayName="Backward"),
+	Left     UMETA(DisplayName="Left"),
+	Right    UMETA(DisplayName="Right"),
 };

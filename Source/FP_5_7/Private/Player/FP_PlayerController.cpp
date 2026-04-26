@@ -3,6 +3,7 @@
 
 
 #include "Player/FP_PlayerController.h"
+#include "Actor/Items/FP_ItemActor.h"
 #include "EnhancedInputComponent.h"
 #include "FP_GameplayTags.h"
 #include "Input\FP_InputComponent.h"
@@ -17,6 +18,10 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "Blueprint/UserWidget.h"
+#include "Framework/Application/SlateApplication.h"
+#include "Inventory/InventoryManagement/Components/FP_InventoryComponent.h"
+#include "UI/Widget/Inventory/FP_InventoryBase.h"
+#include "Libraries/FP_AbilitySystemLibrary.h"
 #include "SaveSystem/FP_SaveGameSubsystem.h"
 #include "Player/FP_PlayerState.h"
 
@@ -122,7 +127,27 @@ void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 
 	if (InputTag.MatchesTagExact(FFP_GameplayTags::Get().InputTag_LMB))
 	{
+		// Drop hover item if clicking outside the inventory widget bounds.
+		// AbilityInputTagPressed fires after Slate processes the frame's input events, so if the
+		// click landed on the grid or an equipment slot, Slate already cleared the hover item —
+		// HasHoverItem() will be false and we skip this. If the hover item is still set, nothing
+		// in the UI consumed the click (world click), so we drop.
+		UFP_InventoryComponent* IC = UFP_AbilitySystemLibrary::GetInventoryComponent(this);
+		if (IsValid(IC) && IsValid(IC->GetInventoryMenu()) && IC->GetInventoryMenu()->HasHoverItem())
+		{
+			const FVector2D AbsCursorPos = FSlateApplication::Get().GetCursorPos();
+			if (!IC->GetInventoryMenu()->GetCachedGeometry().IsUnderLocation(AbsCursorPos))
+			{
+				IC->GetInventoryMenu()->DropHoverItem();
+				bAutoRunning = false;
+				bPendingLevelTransition = false;
+				PendingPickupItem = nullptr;
+				return;
+			}
+		}
+
 		bPendingLevelTransition = false;
+		PendingPickupItem = nullptr;
 		if (IsValid(ThisActor))
 		{
 			TargetingStatus = ThisActor->Implements<UFP_EnemyInterface>()
@@ -253,10 +278,47 @@ void AFP_PlayerController::AutoRun()
 		const FVector Direction = Spline->FindDirectionClosestToWorldLocation(LocationOnSpline, ESplineCoordinateSpace::World);
 		ControlledPawn->AddMovementInput(Direction);
 
+		if (PendingPickupItem.IsValid() && IsInPickupRange(PendingPickupItem.Get()))
+		{
+			bAutoRunning = false;
+			PendingPickupItem->OnPickupRequested();
+			PendingPickupItem = nullptr;
+			return;
+		}
+
 		const float DistanceToDestination = (LocationOnSpline - CachedDestination).Length();
 		if (DistanceToDestination <= AutoRunAcceptanceRadius)
 		{
 			bAutoRunning = false;
+		}
+	}
+}
+
+bool AFP_PlayerController::IsInPickupRange(const AFP_ItemActor* ItemActor) const
+{
+	const APawn* ControlledPawn = GetPawn();
+	if (!ControlledPawn || !IsValid(ItemActor)) return false;
+	return FVector::DistSquared(ControlledPawn->GetActorLocation(), ItemActor->GetActorLocation()) <= PickupRange * PickupRange;
+}
+
+void AFP_PlayerController::AutoRunToItem(AFP_ItemActor* ItemActor)
+{
+	if (!IsValid(ItemActor)) return;
+	const APawn* ControlledPawn = GetPawn();
+	if (!ControlledPawn) return;
+
+	if (UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), ItemActor->GetActorLocation()))
+	{
+		Spline->ClearSplinePoints();
+		for (const FVector& PointLoc : NavPath->PathPoints)
+		{
+			Spline->AddSplinePoint(PointLoc, ESplineCoordinateSpace::World);
+		}
+		if (NavPath->PathPoints.Num() > 0)
+		{
+			CachedDestination = NavPath->PathPoints.Last();
+			bAutoRunning = true;
+			PendingPickupItem = ItemActor;
 		}
 	}
 }
@@ -351,6 +413,21 @@ void AFP_PlayerController::Move(const FInputActionValue& InputActionValue)
 
 	if (APawn* ControlledPawn = GetPawn())
 	{
+		if (AFP_PlayerCharacter* PC = Cast<AFP_PlayerCharacter>(ControlledPawn))
+		{
+			const FVector LockDir = PC->GetMovementLockDir();
+			if (!LockDir.IsZero())
+			{
+				const FVector WorldInput = ForwardDirection * InputAxisVector.Y + RightDirection * InputAxisVector.X;
+				if (!WorldInput.IsNearlyZero())
+				{
+					const float Dot = FVector::DotProduct(WorldInput.GetSafeNormal(), LockDir);
+					if (Dot < 0.7071f)
+						return;
+				}
+			}
+		}
+
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection,   InputAxisVector.X);
 	}

@@ -33,6 +33,10 @@ FGameplayTag Attributes_Primary_Fortitude;
 
 
 //Secondary Attributes
+//Health
+FGameplayTag Health_Increased;
+FGameplayTag Health_More;
+
 //Damage
 FGameplayTag Damage_Increased_Generic;
 FGameplayTag Damage_More_Generic;
@@ -204,6 +208,7 @@ FGameplayTag Player_Block_InputReleased;
 //Input Tags
 FGameplayTag InputTag_LMB;
 FGameplayTag InputTag_RMB;
+FGameplayTag InputTag_Space;
 FGameplayTag InputTag_1;
 FGameplayTag InputTag_2;
 FGameplayTag InputTag_3;
@@ -251,6 +256,8 @@ FGameplayTag Skills_Melee;
 FGameplayTag Skill_Ranged;
 FGameplayTag Skill_Summon;
 FGameplayTag Skill_Movement;
+FGameplayTag Skills_Movement_DodgeRoll;
+FGameplayTag Skills_Rotation_Cancelled;
 FGameplayTag Skill_MoveSpeed_Diminished;
 FGameplayTag Skill_MoveSpeed_None;
 FGameplayTag Skills_Status_Equipped;
@@ -269,6 +276,7 @@ FGameplayTag State_Overheat;
 
 //SetByCaller
 FGameplayTag SetByCaller_Attribute_IncomingXP;
+FGameplayTag SetByCaller_DodgeRoll_MoveSpeed;
 
 
 //SkillTagMods
@@ -307,6 +315,96 @@ FGameplayTag SkillTagMod_Movement;
 FGameplayTag SkillTagMod_Buff;
 
 
+// -------------------------------------------------------------------------
+// Inventory
+// -------------------------------------------------------------------------
+
+// Consumable
+FGameplayTag Inventory_Consumable_Potion;
+
+// Craftable
+FGameplayTag Inventory_Craftable_Material;
+
+// Quest
+FGameplayTag Inventory_Quest_Item;
+
+// Misc
+FGameplayTag Inventory_Misc_Junk;
+
+// -------------------------------------------------------------------------
+// Inventory — Fragments
+// -------------------------------------------------------------------------
+
+/** Identifies FFP_GridFragment: defines the tile footprint of an item on the grid. */
+FGameplayTag Fragment_Grid;
+
+/** Identifies FFP_ImageFragment: stores the item's icon texture and display dimensions. */
+FGameplayTag Fragment_Icon;
+
+/** Identifies FFP_StackableFragment: defines max stack size and current stack count. */
+FGameplayTag Fragment_Stackable;
+
+/** Identifies FFP_ConsumableFragment: defines consume behaviour per item type. */
+FGameplayTag Fragment_Consumable;
+
+/** Identifies FFP_TextFragment: stores a text string for display in the item description (e.g. item name). */
+FGameplayTag Fragment_ItemName;
+
+/** Identifies FFP_LabeledNumberFragment: stores a labeled numeric stat (e.g. damage, armour). */
+FGameplayTag Fragment_PrimaryStat;
+
+/** Identifies a text leaf displaying the item's type/category (e.g. "Weapon", "Consumable"). */
+FGameplayTag Fragment_ItemType;
+
+/** Identifies a text leaf displaying flavour/lore text for the item. */
+FGameplayTag Fragment_FlavorText;
+
+/** Identifies a labeled-value leaf displaying the item's sell value. */
+FGameplayTag Fragment_SellValue;
+
+/** Identifies a labeled-value leaf displaying the item's required level. */
+FGameplayTag Fragment_RequiredLevel;
+
+/** Identifies FFP_MeshFragment: defines mesh replacement/attachment operations applied on equip. */
+FGameplayTag Fragment_Mesh;
+
+/** Identifies FFP_RarityFragment: holds the item's rarity and its drop-weight table. */
+FGameplayTag Fragment_Rarity;
+FGameplayTag Fragment_ItemLevel;
+FGameplayTag Fragment_AttributeRequirements;
+
+/** Identifies FFP_AffixFragment: holds all rolled affixes for an equippable item. */
+FGameplayTag Fragment_Affixes;
+
+/** Identifies FFP_ImplicitFragment: fixed implicit modifiers present on all rarities. */
+FGameplayTag Fragment_Implicits;
+
+/** Identifies FFP_SkillFragment: skills rolled from a pool and granted to the player on equip. */
+FGameplayTag Fragment_Skills;
+
+
+// -------------------------------------------------------------------------
+// Equipment Slot Types  (parent tags — items use child tags under these)
+// -------------------------------------------------------------------------
+FGameplayTag Inventory_Equippable_BodyArmour;
+FGameplayTag Inventory_Equippable_Headwear;
+FGameplayTag Inventory_Equippable_Gloves;
+FGameplayTag Inventory_Equippable_Boots;
+FGameplayTag Inventory_Equippable_Weapon;
+FGameplayTag Inventory_Equippable_Injector;
+FGameplayTag Inventory_Equippable_Belt;
+FGameplayTag Inventory_Equippable_Ring;
+FGameplayTag Inventory_Equippable_Amulet;
+
+// -------------------------------------------------------------------------
+// Item Types
+// -------------------------------------------------------------------------
+FGameplayTag Inventory_Equippable_Headwear_CombatHelm;
+FGameplayTag Inventory_Equippable_Gloves_CombatGloves;
+FGameplayTag Inventory_Equippable_BodyArmour_CombatArmour;
+FGameplayTag Inventory_Equippable_Boots_CombatBoots;
+
+// -------------------------------------------------------------------------
 //Locations
 FGameplayTag Location_Startup;
 FGameplayTag Location_The_Aurora;

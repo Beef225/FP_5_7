@@ -5,12 +5,14 @@
 #include "CoreMinimal.h"
 #include "FP_CharacterBase.h"
 #include "Interaction/FP_PlayerInterface.h"
+#include "Libraries/FP_EnumDefs.h"
 #include "FP_PlayerCharacter.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
 class UNiagaraComponent;
 class USoundBase;
+class USkeletalMeshComponent;
 
 
 UCLASS()
@@ -23,6 +25,9 @@ public:
 
 	// Called by PlayerController when zoom input happens
 	void AddCameraZoomInput(float ZoomDelta);
+
+	/** Returns the skeletal mesh component for the given body part, or nullptr if unrecognised. */
+	USkeletalMeshComponent* GetBodyPartMesh(EBodyPart BodyPart) const;
 	
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
@@ -54,6 +59,29 @@ private:
 	virtual void InitAbilityActorInfo() override;
 	
 	
+	// -------------------------------------------------------------------------
+	// Body Part Meshes
+	// Each piece follows the main mesh via Set Leader Pose Component in Blueprint.
+	// The main GetMesh() is set invisible at runtime; these pieces are visible.
+	// -------------------------------------------------------------------------
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Body Parts", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<USkeletalMeshComponent> Mesh_Head;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Body Parts", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<USkeletalMeshComponent> Mesh_Torso;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Body Parts", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<USkeletalMeshComponent> Mesh_Arms;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Body Parts", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<USkeletalMeshComponent> Mesh_Hands;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Body Parts", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<USkeletalMeshComponent> Mesh_Legs;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Body Parts", meta=(AllowPrivateAccess="true"))
+	TObjectPtr<USkeletalMeshComponent> Mesh_Feet;
+
 	// Components
 	UPROPERTY(VisibleAnywhere, Category="Camera")
 	TObjectPtr<USpringArmComponent> CameraBoom;
@@ -109,7 +137,20 @@ private:
 	void FaceMouse(float DeltaTime);
 
 	bool bIsFrozen = false;
+	bool bRotationCancelled = false;
 
+	FVector MovementLockDir = FVector::ZeroVector;
+
+public:
+	FVector GetMovementLockDir() const { return MovementLockDir; }
+
+private:
 	UFUNCTION()
 	void OnFrozenTagChangedForFacing(FGameplayTag Tag, int32 NewCount);
+
+	UFUNCTION()
+	void OnRotationCancelledTagChanged(FGameplayTag Tag, int32 NewCount);
+
+	UFUNCTION()
+	void OnDodgeRollTagChanged(FGameplayTag Tag, int32 NewCount);
 };

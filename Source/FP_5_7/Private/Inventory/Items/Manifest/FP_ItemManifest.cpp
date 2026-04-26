@@ -1,0 +1,91 @@
+// Copyright JG
+
+#include "Inventory/Items/Manifest/FP_ItemManifest.h"
+#include "Inventory/InventoryManagement/Items/FP_InventoryItem.h"
+#include "Inventory/Items/FP_ItemComponent.h"
+#include "Inventory/Items/Fragments/FP_ItemFragment.h"
+#include "Inventory/Items/Fragments/FP_ItemNameFragment.h"
+#include "UI/Widget/Inventory/Composite/FP_CompositeBase.h"
+
+UFP_InventoryItem* FFP_ItemManifest::Manifest(UObject* NewOuter)
+{
+	UFP_InventoryItem* Item = NewObject<UFP_InventoryItem>(NewOuter, UFP_InventoryItem::StaticClass());
+	Item->SetItemManifest(*this);
+
+	// Give each fragment a chance to do pickup-time work on the inventory copy.
+	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Item->GetItemManifestMutable().GetFragmentsMutable())
+	{
+		if (FFP_ItemFragment* FragPtr = Fragment.GetMutablePtr<FFP_ItemFragment>())
+		{
+			FragPtr->Manifest();
+		}
+	}
+
+	// Clear the source (world item) manifest — the inventory item now owns the data.
+	ClearFragments();
+
+	return Item;
+}
+
+void FFP_ItemManifest::ClearFragments()
+{
+	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
+	{
+		Fragment.Reset();
+	}
+	Fragments.Empty();
+}
+
+void FFP_ItemManifest::AssimilateInventoryFragments(UFP_CompositeBase* Composite) const
+{
+	const TArray<const FFP_InventoryItemFragment*> InventoryFragments = GetAllFragmentsOfType<FFP_InventoryItemFragment>();
+	for (const FFP_InventoryItemFragment* Fragment : InventoryFragments)
+	{
+		Composite->ApplyFunction([Fragment](UFP_CompositeBase* Widget)
+		{
+			Fragment->Assimilate(Widget);
+		});
+	}
+}
+
+void FFP_ItemManifest::NotifyItemSpawned()
+{
+	// Pass 1: Rarity must resolve before affixes roll so the budget is ready.
+	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
+	{
+		if (FFP_RarityFragment* Ptr = Fragment.GetMutablePtr<FFP_RarityFragment>())
+			Ptr->OnSpawned(*this);
+	}
+	// Pass 2: All other fragments (includes affix rolling).
+	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
+	{
+		if (Fragment.GetPtr<FFP_RarityFragment>()) continue;
+		if (Fragment.GetPtr<FFP_ItemNameFragment>()) continue;
+		if (FFP_ItemFragment* Ptr = Fragment.GetMutablePtr<FFP_ItemFragment>())
+			Ptr->OnSpawned(*this);
+	}
+	// Pass 3: Name fragment last — needs rarity and rolled affixes to be ready.
+	for (TInstancedStruct<FFP_ItemFragment>& Fragment : Fragments)
+	{
+		if (FFP_ItemNameFragment* Ptr = Fragment.GetMutablePtr<FFP_ItemNameFragment>())
+			Ptr->OnSpawned(*this);
+	}
+}
+
+void FFP_ItemManifest::SpawnPickupActor(const UObject* WorldContextObject, const FVector& SpawnLocation, const FRotator& SpawnRotation)
+{
+	if (!IsValid(PickupActorClass) || !IsValid(WorldContextObject)) return;
+
+	// Deferred spawn so InitItemManifest runs before BeginPlay, guaranteeing that
+	// fragments see the correct manifest data when OnSpawned() fires.
+	const FTransform SpawnTransform(SpawnRotation, SpawnLocation);
+	AActor* SpawnedActor = WorldContextObject->GetWorld()->SpawnActorDeferred<AActor>(
+		PickupActorClass, SpawnTransform);
+	if (!IsValid(SpawnedActor)) return;
+
+	UFP_ItemComponent* ItemComp = SpawnedActor->FindComponentByClass<UFP_ItemComponent>();
+	check(ItemComp);
+	ItemComp->InitItemManifest(*this);
+
+	SpawnedActor->FinishSpawning(SpawnTransform);
+}

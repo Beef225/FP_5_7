@@ -84,13 +84,14 @@ void UFP_OverlayWidgetController::BindCallbacksToDependencies()
 			FP_ASC->AbilitiesGivenDelegate.AddUObject(this, &UFP_OverlayWidgetController::OnInitializeStartupAbilities);
 		}
 		
+		/* TODO: Message widget system — not yet implemented.
 		FP_ASC->EffectAssetTags.AddLambda([this]
 			(const FGameplayTagContainer& AssetTags)
 			{
 				for (const FGameplayTag& Tag: AssetTags)
 				{
-					// For example, say that Tag = Message.HealthPotion
-					// "Message.HealthPotion".MatchesTag("Message") will return True, "Message".MatchesTag("Message.HealthPotion") will return False
+					// "Message.HealthPotion".MatchesTag("Message") == true
+					// "Message".MatchesTag("Message.HealthPotion") == false
 					FGameplayTag MessageTag = FGameplayTag::RequestGameplayTag(FName("Message"));
 					if (Tag.MatchesTag(MessageTag))
 					{
@@ -98,9 +99,9 @@ void UFP_OverlayWidgetController::BindCallbacksToDependencies()
 						MessageWidgetRowDelegate.Broadcast(*Row);
 					}
 				}
-			
 			}
 		);
+		*/
 		
 	}
 }

@@ -19,6 +19,10 @@ struct FFP_AbilityEntry
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	bool bGranted = false;
+
+	/** Short category label shown in item tooltips (e.g. "Ranged, Pistol"). */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FText DisplayTag;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	bool bShowInSkillMenu = true;

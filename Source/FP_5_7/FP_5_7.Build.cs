@@ -19,14 +19,16 @@ public class FP_5_7 : ModuleRules
 			"ModelViewViewModel",
 			"Slate",
 			"SlateCore",
-			"MoviePlayer"
+			"MoviePlayer",
+			"NetCore",
+			"StructUtils",
+			"Niagara"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new[]
 		{
 			"InputCore",
-			"EnhancedInput",
-			"Niagara"
+			"EnhancedInput"
 		});
 
 		if (Target.bBuildEditor)
@@ -34,6 +36,7 @@ public class FP_5_7 : ModuleRules
 			PrivateDependencyModuleNames.AddRange(new[]
 			{
 				"UnrealEd",
+				"PropertyEditor",
 				"AssetRegistry",
 				"AssetTools",
 				"Json",

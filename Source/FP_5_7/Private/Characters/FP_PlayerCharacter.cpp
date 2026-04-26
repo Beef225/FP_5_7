@@ -60,6 +60,40 @@ AFP_PlayerCharacter::AFP_PlayerCharacter()
 	LevelUpNiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>("LevelUpNiagaraComponent");
 	LevelUpNiagaraComponent->SetupAttachment(GetRootComponent());
 	LevelUpNiagaraComponent->bAutoActivate = false;
+
+	// Body part meshes — all attached to the main mesh so transforms stay in sync.
+	// Assign skeletal meshes and call SetLeaderPoseComponent(GetMesh()) in Blueprint BeginPlay.
+	Mesh_Head  = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Head"));
+	Mesh_Head->SetupAttachment(GetMesh());
+
+	Mesh_Torso = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Torso"));
+	Mesh_Torso->SetupAttachment(GetMesh());
+
+	Mesh_Arms  = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Arms"));
+	Mesh_Arms->SetupAttachment(GetMesh());
+
+	Mesh_Hands = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Hands"));
+	Mesh_Hands->SetupAttachment(GetMesh());
+
+	Mesh_Legs  = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Legs"));
+	Mesh_Legs->SetupAttachment(GetMesh());
+
+	Mesh_Feet  = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh_Feet"));
+	Mesh_Feet->SetupAttachment(GetMesh());
+}
+
+USkeletalMeshComponent* AFP_PlayerCharacter::GetBodyPartMesh(EBodyPart BodyPart) const
+{
+	switch (BodyPart)
+	{
+	case EBodyPart::Head:  return Mesh_Head;
+	case EBodyPart::Torso: return Mesh_Torso;
+	case EBodyPart::Arms:  return Mesh_Arms;
+	case EBodyPart::Hands: return Mesh_Hands;
+	case EBodyPart::Legs:  return Mesh_Legs;
+	case EBodyPart::Feet:  return Mesh_Feet;
+	default:               return nullptr;
+	}
 }
 
 void AFP_PlayerCharacter::BeginPlay()
@@ -240,6 +274,16 @@ void AFP_PlayerCharacter::InitAbilityActorInfo()
 		FFP_GameplayTags::Get().State_Frozen,
 		EGameplayTagEventType::NewOrRemoved)
 		.AddUObject(this, &AFP_PlayerCharacter::OnFrozenTagChangedForFacing);
+
+	AbilitySystemComponent->RegisterGameplayTagEvent(
+		FFP_GameplayTags::Get().Skills_Rotation_Cancelled,
+		EGameplayTagEventType::NewOrRemoved)
+		.AddUObject(this, &AFP_PlayerCharacter::OnRotationCancelledTagChanged);
+
+	AbilitySystemComponent->RegisterGameplayTagEvent(
+		FFP_GameplayTags::Get().Skills_Movement_DodgeRoll,
+		EGameplayTagEventType::NewOrRemoved)
+		.AddUObject(this, &AFP_PlayerCharacter::OnDodgeRollTagChanged);
 }
 
 bool AFP_PlayerCharacter::GetMouseWorldPoint(FVector& OutWorldPoint) const
@@ -264,9 +308,30 @@ void AFP_PlayerCharacter::OnFrozenTagChangedForFacing(FGameplayTag Tag, int32 Ne
 	bIsFrozen = NewCount > 0;
 }
 
+void AFP_PlayerCharacter::OnRotationCancelledTagChanged(FGameplayTag Tag, int32 NewCount)
+{
+	bRotationCancelled = NewCount > 0;
+}
+
+void AFP_PlayerCharacter::OnDodgeRollTagChanged(FGameplayTag Tag, int32 NewCount)
+{
+	if (NewCount > 0)
+	{
+		FVector Dir = GetVelocity();
+		if (Dir.IsNearlyZero())
+			Dir = GetCharacterMovement()->GetLastInputVector();
+		Dir.Z = 0.f;
+		MovementLockDir = Dir.IsNearlyZero() ? GetActorForwardVector() : Dir.GetSafeNormal();
+	}
+	else
+	{
+		MovementLockDir = FVector::ZeroVector;
+	}
+}
+
 void AFP_PlayerCharacter::FaceMouse(float DeltaTime)
 {
-	if (bIsFrozen) return;
+	if (bIsFrozen || bRotationCancelled) return;
 
 	FVector MouseWorld;
 	if (!GetMouseWorldPoint(MouseWorld))

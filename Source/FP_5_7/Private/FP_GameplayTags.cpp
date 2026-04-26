@@ -54,6 +54,16 @@ void FFP_GameplayTags::InitializeGameplayTags()
 
 
 	//Secondary Attributes
+	//Health
+	GameplayTags.Health_Increased = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Health.Increased"),
+		FString("Increased maximum hit points")
+		);
+	GameplayTags.Health_More = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Health.More"),
+		FString("More maximum hit points")
+		);
+
 	//Damage
 	GameplayTags.Damage_Increased_Generic = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Damage.Increased.Generic"), 
@@ -606,8 +616,12 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("InputTag for Left Mouse Button")
 		);
 	GameplayTags.InputTag_RMB = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("InputTag.RMB"), 
+		FName("InputTag.RMB"),
 		FString("InputTag for Right Mouse Button")
+		);
+	GameplayTags.InputTag_Space = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.Space"),
+		FString("InputTag for Spacebar — movement abilities such as dodge roll")
 		);
 	GameplayTags.InputTag_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("InputTag.1"), 
@@ -764,9 +778,18 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Summon Skill")
 		);
 	GameplayTags.Skill_Movement = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Skill.Movement"), 
+		FName("Skill.Movement"),
 		FString("Movement Skill")
 		);
+	GameplayTags.Skills_Movement_DodgeRoll = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Movement.DodgeRoll"),
+		FString("Dodge Roll — burst movement in the player's input direction")
+		);
+	GameplayTags.Skills_Rotation_Cancelled = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Rotation.Cancelled"),
+		FString("Suppresses mouse-facing rotation while an ability is active")
+		);
+
 	GameplayTags.Skill_MoveSpeed_Diminished = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Skill.MoveSpeed.Diminished"), 
 		FString("Reduce Skill Speed by Attribute")
@@ -818,8 +841,12 @@ void FFP_GameplayTags::InitializeGameplayTags()
 
 	//SetByCaller
 	GameplayTags.SetByCaller_Attribute_IncomingXP = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SetByCaller.Attribute.IncomingXP"), 
+		FName("SetByCaller.Attribute.IncomingXP"),
 		FString("Set By Caller Tag for IncomingXP")
+		);
+	GameplayTags.SetByCaller_DodgeRoll_MoveSpeed = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.DodgeRoll.MoveSpeed"),
+		FString("SetByCaller tag driving the dodge roll movement speed ramp GE")
 		);
 
 
@@ -966,6 +993,111 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Skill Name Microwave")
 		);
 
+	// -------------------------------------------------------------------------
+	// Inventory
+	// -------------------------------------------------------------------------
+
+	// Consumable
+	GameplayTags.Inventory_Consumable_Potion = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Consumable.Potion"), FString("A consumable potion item"));
+
+	// Craftable
+	GameplayTags.Inventory_Craftable_Material = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Craftable.Material"), FString("A raw material used in crafting"));
+
+	// Quest
+	GameplayTags.Inventory_Quest_Item = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Quest.Item"), FString("A quest-related item"));
+
+	// Misc
+	GameplayTags.Inventory_Misc_Junk = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Misc.Junk"), FString("A miscellaneous or low-value item"));
+
+	// -------------------------------------------------------------------------
+	// Inventory — Fragments
+	// -------------------------------------------------------------------------
+
+	GameplayTags.Fragment_Grid = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Grid"), FString("Identifies the grid fragment: defines tile footprint on the inventory grid"));
+
+	GameplayTags.Fragment_Icon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Icon"), FString("Identifies the image fragment: stores item icon texture and display dimensions"));
+
+	GameplayTags.Fragment_Stackable = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Stackable"), FString("Identifies the stackable fragment: defines max stack size and current stack count"));
+
+	GameplayTags.Fragment_Consumable = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Consumable"), FString("Identifies the consumable fragment: defines consume behaviour per item type"));
+
+	GameplayTags.Fragment_ItemName = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.ItemName"), FString("Identifies the text fragment: stores item name or other display text"));
+
+	GameplayTags.Fragment_PrimaryStat = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.PrimaryStat"), FString("Identifies a labeled numeric stat fragment (e.g. damage, armour)"));
+
+	GameplayTags.Fragment_ItemType = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.ItemType"), FString("Identifies a text leaf displaying the item's type/category"));
+
+	GameplayTags.Fragment_FlavorText = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.FlavorText"), FString("Identifies a text leaf displaying flavour/lore text"));
+
+	GameplayTags.Fragment_SellValue = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.SellValue"), FString("Identifies a labeled-value leaf displaying the item's sell value"));
+
+	GameplayTags.Fragment_RequiredLevel = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.RequiredLevel"), FString("Identifies a labeled-value leaf displaying the item's required level"));
+
+	GameplayTags.Fragment_Mesh = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Mesh"), FString("Identifies FFP_MeshFragment: mesh replacement/attachment operations applied on equip"));
+
+	GameplayTags.Fragment_Rarity = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Rarity"), FString("Identifies FFP_RarityFragment: item rarity and drop-weight table"));
+	GameplayTags.Fragment_ItemLevel = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.ItemLevel"), FString("Identifies FFP_ItemLevelFragment: item level set from the dropping enemy"));
+	GameplayTags.Fragment_AttributeRequirements = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.AttributeRequirements"), FString("Identifies FFP_AttributeRequirementFragment: primary stat minimums to equip"));
+	GameplayTags.Fragment_Affixes = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Affixes"), FString("Identifies FFP_AffixFragment: all rolled affixes for an equippable item"));
+	GameplayTags.Fragment_Implicits = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Implicits"), FString("Identifies FFP_ImplicitFragment: fixed implicit modifiers present on all rarities"));
+	GameplayTags.Fragment_Skills = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.Skills"), FString("Identifies FFP_SkillFragment: skills rolled from a pool and granted to the player on equip"));
+
+	// -------------------------------------------------------------------------
+	// Equipment Slot Types  (parent tags — items use child tags under these)
+	// -------------------------------------------------------------------------
+	GameplayTags.Inventory_Equippable_BodyArmour = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.BodyArmour"), FString("Body armour equipment slot"));
+	GameplayTags.Inventory_Equippable_Headwear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Headwear"), FString("Headwear equipment slot"));
+	GameplayTags.Inventory_Equippable_Gloves = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Gloves"), FString("Gloves equipment slot"));
+	GameplayTags.Inventory_Equippable_Boots = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Boots"), FString("Boots equipment slot"));
+	GameplayTags.Inventory_Equippable_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Weapon"), FString("Weapon equipment slot"));
+	GameplayTags.Inventory_Equippable_Injector = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Injector"), FString("Injector equipment slot (any of the 3 injector slots)"));
+	GameplayTags.Inventory_Equippable_Belt = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Belt"), FString("Belt equipment slot"));
+	GameplayTags.Inventory_Equippable_Ring = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Ring"), FString("Ring equipment slot (any of the 2 ring slots)"));
+	GameplayTags.Inventory_Equippable_Amulet = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Amulet"), FString("Amulet equipment slot"));
+
+	// -------------------------------------------------------------------------
+	// Item Types
+	// -------------------------------------------------------------------------
+	GameplayTags.Inventory_Equippable_Headwear_CombatHelm = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Headwear.CombatHelm"), FString("Combat Helm headwear item"));
+	GameplayTags.Inventory_Equippable_Gloves_CombatGloves = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Gloves.CombatGloves"), FString("Combat Gloves item"));
+	GameplayTags.Inventory_Equippable_BodyArmour_CombatArmour = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.BodyArmour.CombatArmour"), FString("Combat Armour body armour item"));
+	GameplayTags.Inventory_Equippable_Boots_CombatBoots = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Boots.CombatBoots"), FString("Combat Boots item"));
+
+	// -------------------------------------------------------------------------
 	//Locations
 	GameplayTags.Location_Startup = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Location.Startup"), FString("Startup / new character level"));

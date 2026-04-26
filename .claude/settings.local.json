@@ -24,7 +24,15 @@
       "Read(//tmp/**)",
       "Bash(python3:*)",
       "Bash(python export_to_json.py)",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Bash(python -c \"import openpyxl; print\\('openpyxl available'\\)\")",
+      "Bash(pip install *)",
+      "Bash(python gen_names.py)",
+      "Bash(xargs grep *)",
+      "Bash(python *)",
+      "Bash(xargs wc *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }

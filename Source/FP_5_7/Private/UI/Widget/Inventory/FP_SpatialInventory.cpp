@@ -305,6 +305,28 @@ bool UFP_SpatialInventory::CanEquipHoverItem(UFP_EquippedGridSlot* EquippedGridS
 				HeldItem->GetItemManifest().GetItemType().MatchesTag(EquipmentTypeTag);
 }
 
+void UFP_SpatialInventory::RestoreEquippedItem(UFP_InventoryItem* Item, const FGameplayTag& SlotTag)
+{
+	if (!IsValid(Item)) return;
+
+	TObjectPtr<UFP_EquippedGridSlot>* FoundSlot = EquippedGridSlots.FindByPredicate(
+		[&SlotTag](const UFP_EquippedGridSlot* EquipSlot)
+		{
+			return IsValid(EquipSlot) && EquipSlot->GetEquipmentTypeTag().MatchesTagExact(SlotTag);
+		});
+
+	if (!FoundSlot) return;
+
+	UFP_EquippedGridSlot* EquipSlot = FoundSlot->Get();
+
+	UFP_EquippedSlottedItem* SlottedItem = EquipSlot->OnItemEquipped(Item, SlotTag, Grid->GetTileSize());
+	if (!IsValid(SlottedItem)) return;
+
+	SlottedItem->SetOwningInventory(this);
+	SlottedItem->OnEquippedSlottedItemClicked.AddDynamic(this, &ThisClass::EquippedSlottedItemClicked);
+	EquipSlot->SetEquippedSlottedItem(SlottedItem);
+}
+
 void UFP_SpatialInventory::SetItemDescriptionSizeAndPosition()
 {
 	const FVector2D DescSize = ItemDescription->GetBoxSize();

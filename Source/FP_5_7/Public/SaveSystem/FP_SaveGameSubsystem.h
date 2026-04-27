@@ -206,6 +206,20 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Save")
 	void SaveActiveCharacter();
 
+	/**
+	 * Captures and persists the current inventory state (grid + equipped + hover)
+	 * for the active character. No-op if no active character or inventory is unavailable.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Save")
+	void SaveInventory();
+
+	/**
+	 * Loads the saved inventory for the given character ID and restores it onto
+	 * the local player's inventory component.  Call from InventoryComponent::BeginPlay()
+	 * after ConstructInventory().
+	 */
+	void LoadInventory(class UFP_InventoryComponent* InventoryComponent, const FGuid& CharacterID);
+
 
 	// --- Helpers ---
 

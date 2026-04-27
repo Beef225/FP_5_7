@@ -6,6 +6,8 @@
 #include "AbilitySystemComponent.h"
 #include "FP_GameplayTags.h"
 #include "Abilities/Tasks/AbilityTask_WaitGameplayEvent.h"
+#include "GameFramework/Pawn.h"
+#include "Player/FP_PlayerState.h"
 
 void UFP_GA_ListenForEvents::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	const FGameplayAbilityActorInfo* ActorInfo,
@@ -44,4 +46,12 @@ void UFP_GA_ListenForEvents::OnXPEventReceived(FGameplayEventData Payload)
 		Payload.EventMagnitude);
 
 	ASC->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+
+	if (APawn* Pawn = Cast<APawn>(GetAvatarActorFromActorInfo()))
+	{
+		if (AFP_PlayerState* PS = Pawn->GetPlayerState<AFP_PlayerState>())
+		{
+			PS->AddSkillXP(static_cast<int32>(Payload.EventMagnitude));
+		}
+	}
 }

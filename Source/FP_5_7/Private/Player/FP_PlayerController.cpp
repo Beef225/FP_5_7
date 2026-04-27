@@ -378,6 +378,17 @@ void AFP_PlayerController::OnPossess(APawn* InPawn)
 					Record->AgilityPoints,
 					Record->FortitudePoints
 				);
+				PS->LoadSkillState(
+					Record->SkillXPMap,
+					Record->SkillLevelMap,
+					Record->SkillUnspentPointsMap,
+					Record->SkillInputTagMap
+				);
+
+				if (Record->GrantedSkillTagsArray.IsEmpty())
+					PS->InitGrantedSkillsFromLibrary(); // new character — seed from asset defaults
+				else
+					PS->LoadGrantedSkills(Record->GrantedSkillTagsArray);
 			}
 		}
 		SaveSys->ClearPendingCharacter();

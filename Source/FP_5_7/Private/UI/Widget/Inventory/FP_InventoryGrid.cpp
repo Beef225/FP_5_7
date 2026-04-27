@@ -409,6 +409,18 @@ void UFP_InventoryGrid::OnHide()
 	PutHoverItemBack();
 }
 
+void UFP_InventoryGrid::RestoreItemAtIndex(UFP_InventoryItem* Item, const int32 OriginIndex)
+{
+	if (!IsValid(Item)) return;
+	if (!GridSlots.IsValidIndex(OriginIndex)) return;
+
+	const bool bStackable = Item->IsStackable();
+	const int32 StackAmount = bStackable ? Item->GetTotalStackCount() : 0;
+
+	AddItemAtIndex(Item, OriginIndex, bStackable, StackAmount);
+	UpdateGridSlots(Item, OriginIndex, bStackable, StackAmount);
+}
+
 bool UFP_InventoryGrid::IsRightClick(const FPointerEvent& MouseEvent) const
 {
 	return MouseEvent.GetEffectingButton() == EKeys::RightMouseButton;

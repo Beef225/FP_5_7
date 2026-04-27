@@ -32,6 +32,7 @@ public:
 	};
 
 	void SetRequirements(
+		FStatRequirement Level,
 		FStatRequirement Might,
 		FStatRequirement Resonance,
 		FStatRequirement Agility,

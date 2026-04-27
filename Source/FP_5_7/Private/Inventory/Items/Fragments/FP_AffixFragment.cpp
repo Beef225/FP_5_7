@@ -28,6 +28,16 @@ void FFP_AffixFragment::OnSpawned(FFP_ItemManifest& Manifest)
 	}
 
 	RollAffixes();
+
+	// Push the highest affix tier level up to the attribute requirement fragment.
+	if (FFP_AttributeRequirementFragment* ReqFrag = Manifest.GetFragmentOfTypeMutable<FFP_AttributeRequirementFragment>())
+	{
+		int32 MaxAffixLevel = 0;
+		for (const FFP_AffixInstance& Instance : RolledAffixes)
+			MaxAffixLevel = FMath::Max(MaxAffixLevel, Instance.RequiredItemLevel);
+
+		ReqFrag->SetEffectiveRequiredLevel(FMath::Max(ReqFrag->GetRequiredLevel(), MaxAffixLevel));
+	}
 }
 
 bool FFP_AffixFragment::bLogStatChanges = false;
@@ -247,8 +257,9 @@ void FFP_AffixFragment::RollAffixes()
 		Instance.AffixID       = Picked->AffixID;
 		Instance.AffixType     = Def->Type;
 		Instance.GroupTag      = Picked->GroupTag;
-		Instance.Tier          = TierData->Tier;
-		Instance.TierName      = TierData->ItemName;
+		Instance.Tier              = TierData->Tier;
+		Instance.TierName          = TierData->ItemName;
+		Instance.RequiredItemLevel = TierData->RequiredItemLevel;
 		Instance.DisplayFormat = Def->DisplayFormat;
 		Instance.Stat1_Attr         = Def->Stat1_Attr;
 		Instance.Stat1_Value        = RollStatValue(TierData->Stat1_Min, TierData->Stat1_Max, TierData->Stat1_Step);

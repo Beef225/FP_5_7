@@ -4,6 +4,7 @@
 #include "Components/RichTextBlock.h"
 
 void UFP_Leaf_AttributeRequirements::SetRequirements(
+	FStatRequirement Level,
 	FStatRequirement Might,
 	FStatRequirement Resonance,
 	FStatRequirement Agility,
@@ -13,13 +14,20 @@ void UFP_Leaf_AttributeRequirements::SetRequirements(
 
 	TArray<FString> Parts;
 
+	if (Level.Required > 0)
+	{
+		const FString LvlStr = FString::Printf(TEXT("LVL. %d"), Level.Required);
+		Parts.Add(Level.Current >= Level.Required
+			? LvlStr
+			: FString::Printf(TEXT("<fail>%s</>"), *LvlStr));
+	}
+
 	auto AddPart = [&](const FStatRequirement& Req, const TCHAR* Name)
 	{
 		if (Req.Required == 0) return;
-		if (Req.Current >= Req.Required)
-			Parts.Add(FString::Printf(TEXT("%d %s"), Req.Required, Name));
-		else
-			Parts.Add(FString::Printf(TEXT("<fail>%d %s</>"), Req.Required, Name));
+		Parts.Add(Req.Current >= Req.Required
+			? FString::Printf(TEXT("%d %s"), Req.Required, Name)
+			: FString::Printf(TEXT("<fail>%d %s</>"), Req.Required, Name));
 	};
 
 	AddPart(Might,     TEXT("MGHT"));

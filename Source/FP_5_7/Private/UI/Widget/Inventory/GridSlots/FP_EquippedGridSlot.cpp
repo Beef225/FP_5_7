@@ -81,12 +81,10 @@ UFP_EquippedSlottedItem* UFP_EquippedGridSlot::OnItemEquipped(UFP_InventoryItem*
 	EquippedSlottedItem->SetImageBrush(Brush);
 
 	Overlay_Root->AddChildToOverlay(EquippedSlottedItem);
-	const FVector2D OverlaySize = Overlay_Root->GetCachedGeometry().GetLocalSize();
-	const float LeftPadding = OverlaySize.X / 2.f - DrawSize.X / 2.f;
-	const float TopPadding = OverlaySize.Y / 2.f - DrawSize.Y / 2.f;
 
 	UOverlaySlot* OverlaySlot = UWidgetLayoutLibrary::SlotAsOverlaySlot(EquippedSlottedItem);
-	OverlaySlot->SetPadding(FMargin(LeftPadding, TopPadding));
+	OverlaySlot->SetHorizontalAlignment(HAlign_Center);
+	OverlaySlot->SetVerticalAlignment(VAlign_Center);
 
 	Image_GrayedOutIcon->SetVisibility(ESlateVisibility::Collapsed);
 

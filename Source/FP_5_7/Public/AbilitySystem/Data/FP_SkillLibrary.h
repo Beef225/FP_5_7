@@ -7,6 +7,7 @@
 #include "Engine/DataAsset.h"
 #include "Engine/DataTable.h"
 #include "Libraries/FP_EnumDefs.h"
+#include "AbilitySystem/Data/FP_SkillLevelUpInfo.h"
 #include "FP_SkillLibrary.generated.h"
 
 class UFP_GameplayAbility;
@@ -16,7 +17,15 @@ USTRUCT(BlueprintType)
 struct FFP_AbilityEntry
 {
 	GENERATED_BODY();
-	
+
+	/**
+	 * Designer-defined default: if true, every new character starts with this skill granted.
+	 * This value is a seed — it is read once at character initialisation to populate
+	 * AFP_PlayerState::GrantedSkillTags, which is the runtime source of truth.
+	 * Do NOT read bGranted from the asset during gameplay to check whether a skill is
+	 * currently active; use AFP_PlayerState::IsSkillGranted(SkillTag) instead.
+	 * Runtime grant/revoke (items, quests, level-up, etc.) only modifies the PlayerState set.
+	 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	bool bGranted = false;
 
@@ -59,6 +68,21 @@ struct FFP_AbilityEntry
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<const UTexture2D> SkillIcon = nullptr;
+
+	/**
+	 * XP curve and skill-point award table for this skill.
+	 * Leave null for skills that never level up (use MaxLevel = 1 in that case).
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<UFP_SkillLevelUpInfo> SkillLevelUpInfo = nullptr;
+
+	/**
+	 * Hard cap on this skill's level regardless of XP.
+	 * 1  = never levels (e.g. DodgeRoll).
+	 * 20 = typical design target at max XP.
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (ClampMin = 1))
+	int32 MaxLevel = 20;
 
 	
 	

@@ -8,6 +8,9 @@
 #include "Locations/FP_LocationDataAsset.h"
 #include "Player/FP_PlayerState.h"
 #include "GameFramework/PlayerController.h"
+#include "Inventory/InventoryManagement/Components/FP_InventoryComponent.h"
+#include "Libraries/FP_AbilitySystemLibrary.h"
+#include "SaveSystem/FP_InventorySaveData.h"
 #include "MoviePlayer.h"
 #include "Widgets/SOverlay.h"
 #include "Widgets/SBoxPanel.h"
@@ -296,8 +299,53 @@ void UFP_SaveGameSubsystem::SaveActiveCharacter()
 	Record->ResonancePoints        = PS->GetResonancePassivePoints();
 	Record->AgilityPoints          = PS->GetAgilityPassivePoints();
 	Record->FortitudePoints        = PS->GetFortitudePassivePoints();
+	Record->SkillXPMap             = PS->GetSkillXPMap();
+	Record->SkillLevelMap          = PS->GetSkillLevelMap();
+	Record->SkillUnspentPointsMap  = PS->GetSkillUnspentPointsMap();
+	Record->SkillInputTagMap       = PS->GetSkillInputTagMap();
+	Record->GrantedSkillTagsArray  = PS->GetGrantedSkillTagsArray();
 
 	SaveProfile();
+	SaveInventory();
+}
+
+void UFP_SaveGameSubsystem::SaveInventory()
+{
+	if (!ProfileData || !ProfileData->LastPlayedCharacterID.IsValid()) return;
+
+	const UWorld* World = GetGameInstance()->GetWorld();
+	if (!World) return;
+
+	APlayerController* PC = World->GetFirstPlayerController();
+	if (!PC) return;
+
+	UFP_InventoryComponent* IC = UFP_AbilitySystemLibrary::GetInventoryComponent(PC);
+	if (!IsValid(IC)) return;
+
+	UFP_InventorySaveData* SaveData = IC->CaptureInventoryState();
+	if (!IsValid(SaveData)) return;
+
+	const FString SlotName = FString::Printf(TEXT("FP_Inventory_%s"),
+		*ProfileData->LastPlayedCharacterID.ToString(EGuidFormats::DigitsWithHyphens));
+
+	UGameplayStatics::SaveGameToSlot(SaveData, SlotName, 0);
+}
+
+void UFP_SaveGameSubsystem::LoadInventory(UFP_InventoryComponent* InventoryComponent, const FGuid& CharacterID)
+{
+	if (!IsValid(InventoryComponent) || !CharacterID.IsValid()) return;
+
+	const FString SlotName = FString::Printf(TEXT("FP_Inventory_%s"),
+		*CharacterID.ToString(EGuidFormats::DigitsWithHyphens));
+
+	if (!UGameplayStatics::DoesSaveGameExist(SlotName, 0)) return;
+
+	UFP_InventorySaveData* SaveData = Cast<UFP_InventorySaveData>(
+		UGameplayStatics::LoadGameFromSlot(SlotName, 0));
+
+	if (!IsValid(SaveData)) return;
+
+	InventoryComponent->RestoreInventoryState(SaveData);
 }
 
 // --- Helpers ---

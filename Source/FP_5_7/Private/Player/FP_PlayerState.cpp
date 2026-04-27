@@ -5,6 +5,8 @@
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "AbilitySystem/Data/FP_LevelUpInfo.h"
+#include "AbilitySystem/Data/FP_SkillLibrary.h"
+#include "AbilitySystem/Data/FP_SkillLevelUpInfo.h"
 #include "FP_GameplayTags.h"
 #include "Net/UnrealNetwork.h"
 #include "AbilitySystemComponent.h"
@@ -152,8 +154,109 @@ void AFP_PlayerState::OnRep_FortitudePassivePoints(int32 OldPoints)
 
 void AFP_PlayerState::OnRep_GripStance(EWeaponGripStyle OldGripStance)
 {
-
 }
+
+void AFP_PlayerState::InitGrantedSkillsFromLibrary()
+{
+	if (!SkillLibrary) return;
+	for (const FFP_AbilityEntry& Entry : SkillLibrary->AbilityEntries)
+	{
+		if (Entry.bGranted && Entry.SkillTag.IsValid())
+			GrantedSkillTags.Add(Entry.SkillTag);
+	}
+}
+
+void AFP_PlayerState::AddGrantedSkill(const FGameplayTag& SkillTag)
+{
+	if (SkillTag.IsValid())
+		GrantedSkillTags.Add(SkillTag);
+}
+
+void AFP_PlayerState::RemoveGrantedSkill(const FGameplayTag& SkillTag)
+{
+	GrantedSkillTags.Remove(SkillTag);
+}
+
+void AFP_PlayerState::LoadSkillState(
+	const TMap<FGameplayTag, int32>& InXP,
+	const TMap<FGameplayTag, int32>& InLevels,
+	const TMap<FGameplayTag, int32>& InPoints,
+	const TMap<FGameplayTag, FGameplayTag>& InInputTags)
+{
+	SkillXP           = InXP;
+	SkillLevel        = InLevels;
+	UnspentSkillPoints = InPoints;
+	SkillInputTags    = InInputTags;
+
+	for (const auto& Pair : SkillXP)
+		OnSkillXPChangedDelegate.Broadcast(Pair.Key, Pair.Value);
+
+	for (const auto& Pair : SkillLevel)
+		OnSkillLevelChangedDelegate.Broadcast(Pair.Key, Pair.Value);
+
+	for (const auto& Pair : UnspentSkillPoints)
+		OnSkillPointsChangedDelegate.Broadcast(Pair.Key, Pair.Value);
+}
+
+void AFP_PlayerState::AddSkillXP(int32 InXP)
+{
+	if (!SkillLibrary || InXP <= 0) return;
+
+	for (const FFP_AbilityEntry& Entry : SkillLibrary->AbilityEntries)
+	{
+		if (!IsSkillGranted(Entry.SkillTag)) continue;
+		if (!Entry.SkillLevelUpInfo) continue;
+		if (!Entry.SkillTag.IsValid()) continue;
+
+		const FGameplayTag& Tag = Entry.SkillTag;
+		const UFP_SkillLevelUpInfo* Curve = Entry.SkillLevelUpInfo;
+		const int32 HardCap = Entry.MaxLevel;
+
+		int32 CurrentLevel = SkillLevel.FindOrAdd(Tag, 1);
+		if (CurrentLevel >= HardCap) continue;
+
+		const int32 MaxCurveLevel = FMath::Min(HardCap, Curve->GetMaxLevel());
+		const int32 MaxXP = Curve->GetXPRequirementForLevel(MaxCurveLevel + 1);
+
+		int32& CurrentXP = SkillXP.FindOrAdd(Tag, 0);
+		CurrentXP = (MaxXP > 0) ? FMath::Min(CurrentXP + InXP, MaxXP) : CurrentXP + InXP;
+
+		OnSkillXPChangedDelegate.Broadcast(Tag, CurrentXP);
+
+		const int32 NewLevel = FMath::Min(Curve->FindLevelForXP(CurrentXP), HardCap);
+		if (NewLevel > CurrentLevel)
+		{
+			int32& StoredLevel = SkillLevel.FindOrAdd(Tag, 1);
+			for (int32 L = CurrentLevel + 1; L <= NewLevel; ++L)
+			{
+				const int32 Points = Curve->LevelUpInformation.IsValidIndex(L)
+					? Curve->LevelUpInformation[L].SkillPointAward : 0;
+				if (Points > 0)
+				{
+					UnspentSkillPoints.FindOrAdd(Tag, 0) += Points;
+					OnSkillPointsChangedDelegate.Broadcast(Tag, UnspentSkillPoints[Tag]);
+				}
+			}
+			StoredLevel = NewLevel;
+			OnSkillLevelChangedDelegate.Broadcast(Tag, NewLevel);
+
+			if (UFP_AbilitySystemComponent* FP_ASC = Cast<UFP_AbilitySystemComponent>(AbilitySystemComponent))
+			{
+				FScopedAbilityListLock Lock(*FP_ASC);
+				for (FGameplayAbilitySpec& Spec : FP_ASC->GetActivatableAbilities())
+				{
+					if (FP_ASC->GetAbilityTagFromSpec(Spec).MatchesTagExact(Tag))
+					{
+						Spec.Level = NewLevel;
+						FP_ASC->MarkAbilitySpecDirty(Spec);
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
 
 void AFP_PlayerState::LoadAllocatedPoints(int32 InUnspent, int32 InMight, int32 InResonance, int32 InAgility, int32 InFortitude)
 {

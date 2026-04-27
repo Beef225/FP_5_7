@@ -68,6 +68,11 @@ public:
 	void AssignHoverItem(UFP_InventoryItem* InventoryItem);
 	void OnHide();
 
+	const TMap<int32, TObjectPtr<UFP_SlottedItem>>& GetSlottedItems() const { return SlottedItems; }
+
+	/** Restores an item directly at OriginIndex without searching for available space. */
+	void RestoreItemAtIndex(UFP_InventoryItem* Item, int32 OriginIndex);
+
 private:
 
 	void ConstructGrid();

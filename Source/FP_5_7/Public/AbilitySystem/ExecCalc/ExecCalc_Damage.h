@@ -22,7 +22,7 @@ public:
 	virtual void Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams, FGameplayEffectCustomExecutionOutput& OutExecutionOutput) const override;
 	
 	UPROPERTY(EditDefaultsOnly, Category="Debug")
-	bool bDebugDamage = true;
+	bool bDebugDamage = false;
 
 };
 

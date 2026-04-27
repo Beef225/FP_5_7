@@ -321,6 +321,8 @@ bool FFP_AttributeRequirementFragment::MeetsRequirements(APlayerController* PC) 
 	const AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>();
 	if (!PS) return false;
 
+	if (EffectiveRequiredLevel > 0 && PS->GetPlayerLevel() < EffectiveRequiredLevel) return false;
+
 	const UAbilitySystemComponent* ASC = PS->GetAbilitySystemComponent();
 	if (!ASC) return false;
 
@@ -339,8 +341,7 @@ void FFP_AttributeRequirementFragment::Assimilate(UFP_CompositeBase* Composite) 
 {
 	if (!MatchesWidgetTag(Composite)) return;
 
-	// All zeros — leave the leaf collapsed
-	if (RequiredMight == 0 && RequiredResonance == 0 && RequiredAgility == 0 && RequiredFortitude == 0)
+	if (EffectiveRequiredLevel == 0 && RequiredMight == 0 && RequiredResonance == 0 && RequiredAgility == 0 && RequiredFortitude == 0)
 		return;
 
 	UFP_Leaf_AttributeRequirements* Leaf = Cast<UFP_Leaf_AttributeRequirements>(Composite);
@@ -348,12 +349,13 @@ void FFP_AttributeRequirementFragment::Assimilate(UFP_CompositeBase* Composite) 
 
 	Composite->Expand();
 
-	int32 CurrentMight = 0, CurrentResonance = 0, CurrentAgility = 0, CurrentFortitude = 0;
+	int32 CurrentLevel = 0, CurrentMight = 0, CurrentResonance = 0, CurrentAgility = 0, CurrentFortitude = 0;
 
 	if (const APlayerController* PC = GWorld ? GWorld->GetFirstPlayerController() : nullptr)
 	{
 		if (const AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>())
 		{
+			CurrentLevel = PS->GetPlayerLevel();
 			if (const UAbilitySystemComponent* ASC = PS->GetAbilitySystemComponent())
 			{
 				CurrentMight     = static_cast<int32>(ASC->GetNumericAttribute(UFP_AttributeSet::GetMightAttribute()));
@@ -365,10 +367,11 @@ void FFP_AttributeRequirementFragment::Assimilate(UFP_CompositeBase* Composite) 
 	}
 
 	Leaf->SetRequirements(
-		{ RequiredMight,     CurrentMight     },
-		{ RequiredResonance, CurrentResonance },
-		{ RequiredAgility,   CurrentAgility   },
-		{ RequiredFortitude, CurrentFortitude }
+		{ EffectiveRequiredLevel, CurrentLevel     },
+		{ RequiredMight,          CurrentMight     },
+		{ RequiredResonance,      CurrentResonance },
+		{ RequiredAgility,        CurrentAgility   },
+		{ RequiredFortitude,      CurrentFortitude }
 	);
 }
 

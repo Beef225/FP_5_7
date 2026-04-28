@@ -48,7 +48,8 @@ public:
 	FORCEINLINE int32 GetAgilityPassivePoints() const { return AgilityPassivePoints; }
 	FORCEINLINE int32 GetFortitudePassivePoints() const { return FortitudePassivePoints; }
 
-	void AddSkillXP(int32 InXP);
+	/** MonsterLevel = -1 means no penalty (e.g. quest rewards). */
+	void AddSkillXP(int32 InXP, int32 MonsterLevel = -1);
 	void LoadSkillState(const TMap<FGameplayTag, int32>& InXP, const TMap<FGameplayTag, int32>& InLevels,
 	                    const TMap<FGameplayTag, int32>& InPoints, const TMap<FGameplayTag, FGameplayTag>& InInputTags);
 
@@ -180,6 +181,13 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	TMap<FGameplayTag, FGameplayTag> SkillInputTags;
+
+	/** Skill XP: one-directional — only penalises when character < monster (rushing high content).
+	 *  Overlevelled character vs low monster = no penalty, enabling skill catch-up. */
+	static float ComputeSkillXPMultiplier(int32 PlayerLevel, int32 MonsterLevel);
+
+	/** Character XP: bidirectional — penalises both farming low AND rushing high content. */
+	static float ComputeCharacterXPMultiplier(int32 PlayerLevel, int32 MonsterLevel);
 
 	/** Runtime source of truth for which skills this character currently has.
 	 *  Seeded from SkillLibrary asset bGranted defaults on new character creation.

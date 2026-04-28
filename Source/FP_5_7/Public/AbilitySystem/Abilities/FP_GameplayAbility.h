@@ -27,7 +27,7 @@ public:
 
 	/** When true, prints skill name, level, and XP to screen on activation. */
 	UPROPERTY(EditDefaultsOnly, Category="Debug")
-	bool bDebugActivation = false;
+	bool bDebugActivation = true;
 
 protected:
 	UFUNCTION(BlueprintPure, Category="FP|GAS")

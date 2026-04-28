@@ -198,9 +198,41 @@ void AFP_PlayerState::LoadSkillState(
 		OnSkillPointsChangedDelegate.Broadcast(Pair.Key, Pair.Value);
 }
 
-void AFP_PlayerState::AddSkillXP(int32 InXP)
+// Shared penalty core: given a pre-computed gap and player level, returns [0.01, 1.0].
+static float XPPenaltyFromGap(int32 Gap, int32 PlayerLevel)
+{
+	const int32 Tolerance = 3 + PlayerLevel / 16;
+	const float Excess = FMath::Max(static_cast<float>(Gap - Tolerance), 0.f);
+	if (Excess <= 0.f) return 1.f;
+
+	const float P = static_cast<float>(PlayerLevel);
+	const float Base = P + 5.f;
+	return FMath::Max(FMath::Pow(Base / (Base + FMath::Pow(Excess, 2.5f)), 1.5f), 0.01f);
+}
+
+float AFP_PlayerState::ComputeSkillXPMultiplier(int32 PlayerLevel, int32 MonsterLevel)
+{
+	if (MonsterLevel < 0) return 1.f;
+	// One-directional: only penalise rushing (character below monster).
+	// Overlevelled character farming low content => no penalty, enabling new-skill catch-up.
+	return XPPenaltyFromGap(FMath::Max(MonsterLevel - PlayerLevel, 0), PlayerLevel);
+}
+
+float AFP_PlayerState::ComputeCharacterXPMultiplier(int32 PlayerLevel, int32 MonsterLevel)
+{
+	if (MonsterLevel < 0) return 1.f;
+	// Bidirectional: penalise both farming low-level content AND rushing high-level content.
+	return XPPenaltyFromGap(FMath::Abs(PlayerLevel - MonsterLevel), PlayerLevel);
+}
+
+void AFP_PlayerState::AddSkillXP(int32 InXP, int32 MonsterLevel)
 {
 	if (!SkillLibrary || InXP <= 0) return;
+
+	const float Multiplier = ComputeSkillXPMultiplier(Level, MonsterLevel);
+	const int32 AdjustedXP = (Multiplier >= 1.f)
+		? InXP
+		: FMath::Max(FMath::RoundToInt(static_cast<float>(InXP) * Multiplier), 1);
 
 	for (const FFP_AbilityEntry& Entry : SkillLibrary->AbilityEntries)
 	{
@@ -219,7 +251,7 @@ void AFP_PlayerState::AddSkillXP(int32 InXP)
 		const int32 MaxXP = Curve->GetXPRequirementForLevel(MaxCurveLevel + 1);
 
 		int32& CurrentXP = SkillXP.FindOrAdd(Tag, 0);
-		CurrentXP = (MaxXP > 0) ? FMath::Min(CurrentXP + InXP, MaxXP) : CurrentXP + InXP;
+		CurrentXP = (MaxXP > 0) ? FMath::Min(CurrentXP + AdjustedXP, MaxXP) : CurrentXP + AdjustedXP;
 
 		OnSkillXPChangedDelegate.Broadcast(Tag, CurrentXP);
 

@@ -1,15 +1,20 @@
 // Copyright JG
 
-#include "UI/Widget/Inventory/Composite/FP_SkillDisplay.h"
+#include "UI/Widget/HUD/FP_SkillPickerEntry.h"
+#include "UI/Widget/HUD/FP_SkillFrame.h"
 #include "AbilitySystem/Data/FP_SkillLevelUpInfo.h"
+#include "Components/Button.h"
 #include "Components/Image.h"
 #include "Components/ProgressBar.h"
 #include "Components/RichTextBlock.h"
 #include "Components/TextBlock.h"
 #include "Engine/Texture2D.h"
 
-void UFP_SkillDisplay::Populate(const FFP_AbilityEntry& Entry, int32 CurrentXP)
+void UFP_SkillPickerEntry::Populate(const FFP_AbilityEntry& Entry, int32 CurrentXP, UFP_SkillFrame* InOwningFrame)
 {
+	SkillTag   = Entry.SkillTag;
+	OwningFrame = InOwningFrame;
+
 	if (Entry.SkillIcon)
 		Image_SkillIcon->SetBrushFromTexture(const_cast<UTexture2D*>(Entry.SkillIcon.Get()));
 
@@ -18,7 +23,7 @@ void UFP_SkillDisplay::Populate(const FFP_AbilityEntry& Entry, int32 CurrentXP)
 	const UFP_SkillLevelUpInfo* Curve = Entry.SkillLevelUpInfo;
 	if (Curve)
 	{
-		const int32 MaxLevel = FMath::Min(Entry.MaxLevel, Curve->GetMaxLevel());
+		const int32 MaxLevel     = FMath::Min(Entry.MaxLevel, Curve->GetMaxLevel());
 		const int32 CurrentLevel = FMath::Min(Curve->FindLevelForXP(CurrentXP), MaxLevel);
 
 		Text_SkillLevel->SetText(FText::FromString(FString::Printf(TEXT("LVL %d"), CurrentLevel)));
@@ -28,7 +33,7 @@ void UFP_SkillDisplay::Populate(const FFP_AbilityEntry& Entry, int32 CurrentXP)
 		{
 			const int32 ThisReq = Curve->GetXPRequirementForLevel(CurrentLevel);
 			const int32 NextReq = Curve->GetXPRequirementForLevel(CurrentLevel + 1);
-			const int32 Delta = NextReq - ThisReq;
+			const int32 Delta   = NextReq - ThisReq;
 			Percent = (Delta > 0)
 				? FMath::Clamp(static_cast<float>(CurrentXP - ThisReq) / static_cast<float>(Delta), 0.f, 1.f)
 				: 1.f;
@@ -42,4 +47,13 @@ void UFP_SkillDisplay::Populate(const FFP_AbilityEntry& Entry, int32 CurrentXP)
 		Text_SkillLevel->SetText(FText::FromString(TEXT("LVL 1")));
 		ProgressBar_SkillXP->SetVisibility(ESlateVisibility::Collapsed);
 	}
+
+	if (Button_Select)
+		Button_Select->OnClicked.AddDynamic(this, &UFP_SkillPickerEntry::OnSelectClicked);
+}
+
+void UFP_SkillPickerEntry::OnSelectClicked()
+{
+	if (UFP_SkillFrame* Frame = OwningFrame.Get())
+		Frame->AssignSkill(SkillTag);
 }

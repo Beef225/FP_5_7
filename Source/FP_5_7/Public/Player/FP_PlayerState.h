@@ -16,9 +16,10 @@ class UFP_SkillLibrary;
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnPlayerStatChanged, int32 /*StatValue*/)
 DECLARE_MULTICAST_DELEGATE_TwoParams(FOnPassivePointsChanged, FGameplayTag /*AttributeTag*/, int32 /*Points*/)
-DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillXPChanged,     FGameplayTag /*SkillTag*/, int32 /*NewXP*/)
-DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillLevelChanged,  FGameplayTag /*SkillTag*/, int32 /*NewLevel*/)
-DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillPointsChanged, FGameplayTag /*SkillTag*/, int32 /*UnspentPoints*/)
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillXPChanged,        FGameplayTag /*SkillTag*/, int32 /*NewXP*/)
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillLevelChanged,     FGameplayTag /*SkillTag*/, int32 /*NewLevel*/)
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillPointsChanged,    FGameplayTag /*SkillTag*/, int32 /*UnspentPoints*/)
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillInputTagAssigned, FGameplayTag /*SkillTag*/, FGameplayTag /*NewInputTag*/)
 /**
  * 
  */
@@ -36,9 +37,10 @@ public:
 	FOnPlayerStatChanged OnLevelChangedDelegate;
 	FOnPlayerStatChanged OnAttributePointsChangedDelegate;
 	FOnPassivePointsChanged OnPassivePointsChangedDelegate;
-	FOnSkillXPChanged     OnSkillXPChangedDelegate;
-	FOnSkillLevelChanged  OnSkillLevelChangedDelegate;
-	FOnSkillPointsChanged OnSkillPointsChangedDelegate;
+	FOnSkillXPChanged        OnSkillXPChangedDelegate;
+	FOnSkillLevelChanged     OnSkillLevelChangedDelegate;
+	FOnSkillPointsChanged    OnSkillPointsChangedDelegate;
+	FOnSkillInputTagAssigned OnSkillInputTagAssigned;
 
 	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
 	FORCEINLINE int32 GetXP() const { return XP; }
@@ -50,6 +52,13 @@ public:
 
 	/** MonsterLevel = -1 means no penalty (e.g. quest rewards). */
 	void AddSkillXP(int32 InXP, int32 MonsterLevel = -1);
+
+	/** Skill XP: one-directional — only penalises when character < monster (rushing high content).
+	 *  Overlevelled character vs low monster = no penalty, enabling skill catch-up. */
+	static float ComputeSkillXPMultiplier(int32 PlayerLevel, int32 MonsterLevel);
+
+	/** Character XP: bidirectional — penalises both farming low AND rushing high content. */
+	static float ComputeCharacterXPMultiplier(int32 PlayerLevel, int32 MonsterLevel);
 	void LoadSkillState(const TMap<FGameplayTag, int32>& InXP, const TMap<FGameplayTag, int32>& InLevels,
 	                    const TMap<FGameplayTag, int32>& InPoints, const TMap<FGameplayTag, FGameplayTag>& InInputTags);
 
@@ -73,6 +82,13 @@ public:
 	FORCEINLINE FGameplayTag GetSkillInputTag(const FGameplayTag& SkillTag) const { const FGameplayTag* Found = SkillInputTags.Find(SkillTag); return Found ? *Found : FGameplayTag(); }
 
 	void SetSkillInputTag(const FGameplayTag& SkillTag, const FGameplayTag& InputTag) { SkillInputTags.Add(SkillTag, InputTag); }
+
+	/** Assigns a skill to a hotbar slot. Clears any previous occupant of that slot,
+	 *  updates the map, and broadcasts OnSkillInputTagAssigned so all frames can refresh. */
+	void AssignSkillToSlot(const FGameplayTag& SkillTag, const FGameplayTag& SlotInputTag);
+
+	/** Removes whatever skill is assigned to SlotInputTag and broadcasts so frames clear. */
+	void ClearSkillSlot(const FGameplayTag& SlotInputTag);
 
 	const TMap<FGameplayTag, int32>& GetSkillXPMap() const           { return SkillXP; }
 	const TMap<FGameplayTag, int32>& GetSkillLevelMap() const        { return SkillLevel; }
@@ -181,13 +197,6 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	TMap<FGameplayTag, FGameplayTag> SkillInputTags;
-
-	/** Skill XP: one-directional — only penalises when character < monster (rushing high content).
-	 *  Overlevelled character vs low monster = no penalty, enabling skill catch-up. */
-	static float ComputeSkillXPMultiplier(int32 PlayerLevel, int32 MonsterLevel);
-
-	/** Character XP: bidirectional — penalises both farming low AND rushing high content. */
-	static float ComputeCharacterXPMultiplier(int32 PlayerLevel, int32 MonsterLevel);
 
 	/** Runtime source of truth for which skills this character currently has.
 	 *  Seeded from SkillLibrary asset bGranted defaults on new character creation.

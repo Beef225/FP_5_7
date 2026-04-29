@@ -38,9 +38,9 @@ void UFP_GA_ListenForEvents::OnXPEventReceived(FGameplayEventData Payload)
 
 	// Resolve monster level from the enemy actor packed into the event by SendXPEvent.
 	int32 MonsterLevel = -1;
-	if (AActor* Enemy = Payload.Instigator.Get())
-		if (Enemy->Implements<UFP_CombatInterface>())
-			MonsterLevel = IFP_CombatInterface::Execute_GetPlayerLevel(Enemy);
+	if (const AActor* Enemy = Payload.Instigator.Get())
+		if (IFP_CombatInterface* CombatInterface = const_cast<IFP_CombatInterface*>(Cast<IFP_CombatInterface>(Enemy)))
+			MonsterLevel = CombatInterface->GetPlayerLevel();
 
 	AFP_PlayerState* PS = nullptr;
 	if (APawn* Pawn = Cast<APawn>(GetAvatarActorFromActorInfo()))

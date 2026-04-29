@@ -43,6 +43,51 @@ void UFP_AbilitySystemComponent::AddCharacterPassiveAbilities(
 	}
 }
 
+void UFP_AbilitySystemComponent::AssignInputTagToSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag)
+{
+	if (!SkillTag.IsValid()) return;
+
+	const FGameplayTag InputParent = FGameplayTag::RequestGameplayTag(FName("InputTag"));
+
+	FScopedAbilityListLock Lock(*this);
+	for (FGameplayAbilitySpec& Spec : GetActivatableAbilities())
+	{
+		FGameplayTagContainer& DynTags = Spec.GetDynamicSpecSourceTags();
+		bool bDirty = false;
+
+		if (!GetAbilityTagFromSpec(Spec).MatchesTagExact(SkillTag))
+		{
+			// Strip InputTag from any other skill currently holding it
+			if (InputTag.IsValid() && DynTags.HasTagExact(InputTag))
+			{
+				DynTags.RemoveTag(InputTag);
+				bDirty = true;
+			}
+		}
+		else
+		{
+			// Remove any existing InputTag-family tag from the target skill
+			TArray<FGameplayTag> ToRemove;
+			for (const FGameplayTag& Tag : DynTags)
+				if (Tag.MatchesTag(InputParent))
+					ToRemove.Add(Tag);
+			for (const FGameplayTag& Tag : ToRemove)
+			{
+				DynTags.RemoveTag(Tag);
+				bDirty = true;
+			}
+
+			if (InputTag.IsValid())
+			{
+				DynTags.AddTag(InputTag);
+				bDirty = true;
+			}
+		}
+
+		if (bDirty) MarkAbilitySpecDirty(Spec);
+	}
+}
+
 void UFP_AbilitySystemComponent::AbilityInputTagHeld(const FGameplayTag& InputTag)
 {
 	if (!InputTag.IsValid()) return;

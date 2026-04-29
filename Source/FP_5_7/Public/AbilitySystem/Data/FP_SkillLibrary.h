@@ -35,6 +35,14 @@ struct FFP_AbilityEntry
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	bool bShowInSkillMenu = true;
+
+	/** Show this skill in the standard (non-injector) hotbar picker. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	bool bShowInSkillBar = true;
+
+	/** Show this skill only in the injector hotbar picker. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	bool bShowInInjectorBar = false;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	ESkillGrantedBy SkillGrantedBy;

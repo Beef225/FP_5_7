@@ -290,6 +290,45 @@ void AFP_PlayerState::AddSkillXP(int32 InXP, int32 MonsterLevel)
 }
 
 
+void AFP_PlayerState::AssignSkillToSlot(const FGameplayTag& SkillTag, const FGameplayTag& SlotInputTag)
+{
+	// Evict any skill previously mapped to this slot
+	FGameplayTag OldSkill;
+	for (const auto& Pair : SkillInputTags)
+	{
+		if (Pair.Value.MatchesTagExact(SlotInputTag))
+		{
+			OldSkill = Pair.Key;
+			break;
+		}
+	}
+	if (OldSkill.IsValid() && !OldSkill.MatchesTagExact(SkillTag))
+	{
+		SkillInputTags.Remove(OldSkill);
+		OnSkillInputTagAssigned.Broadcast(OldSkill, FGameplayTag());
+	}
+
+	SkillInputTags.Add(SkillTag, SlotInputTag);
+	OnSkillInputTagAssigned.Broadcast(SkillTag, SlotInputTag);
+}
+
+void AFP_PlayerState::ClearSkillSlot(const FGameplayTag& SlotInputTag)
+{
+	FGameplayTag OccupantSkill;
+	for (const auto& Pair : SkillInputTags)
+	{
+		if (Pair.Value.MatchesTagExact(SlotInputTag))
+		{
+			OccupantSkill = Pair.Key;
+			break;
+		}
+	}
+	if (!OccupantSkill.IsValid()) return;
+
+	SkillInputTags.Remove(OccupantSkill);
+	OnSkillInputTagAssigned.Broadcast(OccupantSkill, FGameplayTag());
+}
+
 void AFP_PlayerState::LoadAllocatedPoints(int32 InUnspent, int32 InMight, int32 InResonance, int32 InAgility, int32 InFortitude)
 {
 	// Restore unspent pool

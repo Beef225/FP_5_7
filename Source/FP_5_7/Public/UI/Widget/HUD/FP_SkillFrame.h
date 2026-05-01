@@ -19,6 +19,7 @@ class UFP_KeyIconSet;
 class UFP_SkillPickerEntry;
 class UFP_SkillFrameActions;
 class UFP_SkillPickerPopup;
+class UFP_SkillDescription;
 
 /**
  * One slot in the skill hotbar.
@@ -41,6 +42,8 @@ class FP_5_7_API UFP_SkillFrame : public UFP_UserWidget
 public:
 	virtual void NativeConstruct() override;
 	virtual void NativeDestruct() override;
+	virtual void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	virtual void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
 
 	/** Set in the designer for each frame instance — determines which input fires this slot. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Skill Frame")
@@ -75,6 +78,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Skill Frame")
 	void BeginMoveSlot();
 
+	/** Closes and removes the active picker popup. Called by the popup's backdrop button. */
+	void ClosePickerPopup();
+
 protected:
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UImage> Image_SkillIcon;
@@ -102,6 +108,10 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Skill Frame")
 	TSubclassOf<UFP_SkillPickerPopup> SkillPickerPopupClass;
 
+	/** Skill description composite shown on hover. Must derive from UFP_SkillDescription. */
+	UPROPERTY(EditAnywhere, Category="Skill Frame")
+	TSubclassOf<UFP_SkillDescription> SkillDescriptionClass;
+
 private:
 	UFUNCTION()
 	void OnSkillListButtonClicked();
@@ -121,9 +131,11 @@ private:
 	AFP_PlayerState* GetFPPlayerState() const;
 	UFP_AbilitySystemComponent* GetFPASC() const;
 
-	void ClosePickerPopup();
+	void OpenDescriptionPopup();
+	void CloseDescriptionPopup();
 
 	FGameplayTag AssignedSkillTag;
 	FDelegateHandle SkillAssignedHandle;
 	TWeakObjectPtr<UFP_SkillPickerPopup> ActivePickerPopup;
+	TWeakObjectPtr<UFP_SkillDescription> ActiveDescriptionPopup;
 };

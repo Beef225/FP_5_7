@@ -63,9 +63,6 @@ struct FFP_AbilityEntry
 	FText SkillDescription = FText::GetEmpty();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	float DamagePerSecond = 0.f;
-	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float BaseSkillSpeed = 1.f;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)

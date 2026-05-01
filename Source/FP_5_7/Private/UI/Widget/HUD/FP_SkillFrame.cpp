@@ -4,6 +4,7 @@
 #include "UI/Widget/HUD/FP_SkillFrameActions.h"
 #include "UI/Widget/HUD/FP_SkillPickerEntry.h"
 #include "UI/Widget/HUD/FP_SkillPickerPopup.h"
+#include "UI/Widget/Inventory/Composite/FP_SkillDescription.h"
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "AbilitySystem/Data/FP_SkillLibrary.h"
 #include "Components/Button.h"
@@ -16,6 +17,8 @@
 #include "Input/FP_KeyIconSet.h"
 #include "InputMappingContext.h"
 #include "Player/FP_PlayerState.h"
+
+static TWeakObjectPtr<UFP_SkillFrame> GActivePickerFrame;
 
 void UFP_SkillFrame::NativeConstruct()
 {
@@ -44,8 +47,21 @@ void UFP_SkillFrame::NativeConstruct()
 	}
 }
 
+void UFP_SkillFrame::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
+	OpenDescriptionPopup();
+}
+
+void UFP_SkillFrame::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseLeave(InMouseEvent);
+	CloseDescriptionPopup();
+}
+
 void UFP_SkillFrame::NativeDestruct()
 {
+	CloseDescriptionPopup();
 	ClosePickerPopup();
 
 	if (AFP_PlayerState* PS = GetFPPlayerState())
@@ -56,6 +72,8 @@ void UFP_SkillFrame::NativeDestruct()
 
 void UFP_SkillFrame::OnSkillListButtonClicked()
 {
+	CloseDescriptionPopup();
+
 	if (ActivePickerPopup.IsValid())
 	{
 		ClosePickerPopup();
@@ -74,8 +92,30 @@ void UFP_SkillFrame::PopulateSkillPicker()
 	const UFP_SkillLibrary* Library = PS->GetSkillLibrary();
 	if (!Library) return;
 
+	// Close any other frame's picker first
+	if (UFP_SkillFrame* Other = GActivePickerFrame.Get())
+	{
+		if (Other != this)
+			Other->ClosePickerPopup();
+	}
+
 	UFP_SkillPickerPopup* Popup = CreateWidget<UFP_SkillPickerPopup>(GetOwningPlayer(), SkillPickerPopupClass);
 	if (!Popup) return;
+
+	Popup->Init(this);
+
+	// Stretch popup to fill the viewport so Button_Backdrop catches all off-content clicks
+	Popup->AddToViewport(10);
+	Popup->SetAnchorsInViewport(FAnchors(0.f, 0.f, 1.f, 1.f));
+
+	// Position Border_Content so its bottom-centre aligns to the top-centre of this frame
+	const FGeometry& Geo = GetCachedGeometry();
+	const FVector2D FrameTopLeft = Geo.GetAbsolutePosition();
+	const FVector2D FrameSize    = Geo.GetAbsoluteSize();
+	Popup->PositionContent(FVector2D(FrameTopLeft.X + FrameSize.X * 0.5f, FrameTopLeft.Y));
+
+	ActivePickerPopup = Popup;
+	GActivePickerFrame = this;
 
 	UScrollBox* ScrollBox = Popup->GetScrollBox();
 	if (!ScrollBox) return;
@@ -105,16 +145,44 @@ void UFP_SkillFrame::PopulateSkillPicker()
 		EntryWidget->Populate(Entry, PS->GetSkillXP(Entry.SkillTag), this);
 		ScrollBox->AddChild(EntryWidget);
 	}
+}
 
-	// Bottom of popup aligns to top of this frame
-	const FGeometry& Geo = GetCachedGeometry();
-	const FVector2D FrameTopLeft = Geo.GetAbsolutePosition();
+void UFP_SkillFrame::OpenDescriptionPopup()
+{
+	if (!SkillDescriptionClass || !AssignedSkillTag.IsValid()) return;
+	if (ActiveDescriptionPopup.IsValid()) return;
 
-	Popup->AddToViewport(10);
-	Popup->SetPositionInViewport(FrameTopLeft, /*bRemoveDPIScale=*/false);
-	Popup->SetAlignmentInViewport(FVector2D(0.f, 1.f)); // anchor: bottom-left of popup → FrameTopLeft
+	AFP_PlayerState* PS = GetFPPlayerState();
+	if (!PS) return;
 
-	ActivePickerPopup = Popup;
+	const UFP_SkillLibrary* Library = PS->GetSkillLibrary();
+	if (!Library) return;
+
+	const FFP_AbilityEntry Entry = Library->FindAbilityEntryForTag(AssignedSkillTag);
+	if (!Entry.SkillTag.IsValid()) return;
+
+	UFP_SkillDescription* Desc = CreateWidget<UFP_SkillDescription>(GetOwningPlayer(), SkillDescriptionClass);
+	if (!Desc) return;
+
+	Desc->Populate(Entry, PS);
+
+	const FGeometry& Geo     = GetCachedGeometry();
+	const FVector2D TopLeft  = Geo.GetAbsolutePosition();
+	const FVector2D Size     = Geo.GetAbsoluteSize();
+	const FVector2D Anchor   = FVector2D(TopLeft.X + Size.X * 0.5f, TopLeft.Y);
+
+	Desc->AddToViewport(9); // below picker at 10
+	Desc->SetPositionInViewport(Anchor, /*bRemoveDPIScale=*/true);
+	Desc->SetAlignmentInViewport(FVector2D(0.5f, 1.f)); // bottom-centre of description → top-centre of frame
+
+	ActiveDescriptionPopup = Desc;
+}
+
+void UFP_SkillFrame::CloseDescriptionPopup()
+{
+	if (UFP_SkillDescription* Desc = ActiveDescriptionPopup.Get())
+		Desc->RemoveFromParent();
+	ActiveDescriptionPopup.Reset();
 }
 
 void UFP_SkillFrame::ClosePickerPopup()
@@ -122,6 +190,9 @@ void UFP_SkillFrame::ClosePickerPopup()
 	if (UFP_SkillPickerPopup* Popup = ActivePickerPopup.Get())
 		Popup->RemoveFromParent();
 	ActivePickerPopup.Reset();
+
+	if (GActivePickerFrame.Get() == this)
+		GActivePickerFrame.Reset();
 }
 
 void UFP_SkillFrame::AssignSkill(const FGameplayTag& SkillTag)

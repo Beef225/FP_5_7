@@ -433,8 +433,6 @@ FGameplayTag PassiveTree_Agility;
 FGameplayTag PassiveTree_Fortitude;
 FGameplayTag PassiveTree_IncreasedArmour_1;
 FGameplayTag PassiveTree_IncreasedArmour_2;
-FGameplayTag PassiveTree_IncreasedArmour_3;
-FGameplayTag PassiveTree_IncreasedArmour_4;
 private:
 	static FFP_GameplayTags GameplayTags;
 };

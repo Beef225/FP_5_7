@@ -10,6 +10,7 @@
 
 class UButton;
 class UImage;
+class USizeBox;
 class UFP_SkillTreeNodeData;
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnSkillTreeNodeClicked, class UFP_SkillTreeNode* /*Node*/);
@@ -17,14 +18,14 @@ DECLARE_MULTICAST_DELEGATE_OneParam(FOnSkillTreeNodeClicked, class UFP_SkillTree
 /**
  * Base widget for a single skill tree node.
  *
- * Responsibilities:
- *   - Display the node's current state visually (via OnStateChanged BlueprintImplementableEvent).
- *   - Handle click input: Available → Pending, Pending → Available. Ineligible and Allocated
- *     clicks are ignored. The owning tree widget handles Allocated transitions.
- *   - Broadcast OnNodeClicked so the tree widget can react (e.g. show tooltip, manage pending set).
+ * State visuals handled in C++:
+ *   Ineligible  — button disabled (dark button texture set in BP takes effect automatically).
+ *   Available   — button enabled; icon pulses gently between white and PulseColor on a sine wave.
+ *   Pending     — button enabled; pulse stopped; icon tint = PendingTint.
+ *   Allocated   — button disabled; icon tint = AllocatedTint (slightly bright/warm).
  *
- * Designers subclass this in Blueprint and implement OnStateChanged to drive visuals
- * (color tint, border, icon overlay, etc.) per node type and state.
+ * Designers subclass in Blueprint and implement OnStateChanged to add any
+ * additional visual responses (border swap, size scale, particle, etc.).
  */
 UCLASS(Abstract, BlueprintType, Blueprintable)
 class FP_5_7_API UFP_SkillTreeNode : public UFP_UserWidget
@@ -32,51 +33,81 @@ class FP_5_7_API UFP_SkillTreeNode : public UFP_UserWidget
 	GENERATED_BODY()
 
 public:
-	/**
-	 * Initialises the node with its data and computes its initial state.
-	 * Called by the tree widget after spawning this widget.
-	 */
 	void Populate(const UFP_SkillTreeNodeData* InNodeData, ESkillTreeNodeState InState);
-
-	/** Updates the displayed state without changing NodeData. */
 	void SetState(ESkillTreeNodeState InState);
 
 	FGameplayTag        GetNodeTag()      const;
 	ESkillTreeNodeType  GetNodeType()     const;
 	ESkillTreeNodeState GetCurrentState() const { return CurrentState; }
 
+	/**
+	 * Returns half the SizeBox_Root override dimensions — used by the tree widget
+	 * to centre this node on its canvas position.
+	 * Falls back to (25, 25) if SizeBox_Root is not bound or has no override set.
+	 */
+	FVector2D GetDesiredHalfSize() const;
+
 	const UFP_SkillTreeNodeData* GetNodeData() const { return NodeData; }
 
-	/** Fired when the player clicks a non-ineligible node. The tree widget subscribes to this. */
 	FOnSkillTreeNodeClicked OnNodeClicked;
 
 protected:
 	virtual void NativeConstruct() override;
+	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
-	/**
-	 * Called whenever the state changes. Implement in Blueprint to update visuals:
-	 * tint, border style, icon overlay, etc.
-	 * NodeType is passed so a single BP subclass can handle all three node sizes.
-	 */
 	UFUNCTION(BlueprintImplementableEvent, Category="Skill Tree Node")
 	void OnStateChanged(ESkillTreeNodeState NewState, ESkillTreeNodeType Type);
 
-	/** Exposes node data to Blueprint for tooltip and display logic. */
 	UPROPERTY(BlueprintReadOnly, Category="Skill Tree Node")
 	TObjectPtr<const UFP_SkillTreeNodeData> NodeData;
 
-	/** Current display state. Read-only in Blueprint — use SetState() from C++. */
 	UPROPERTY(BlueprintReadOnly, Category="Skill Tree Node")
 	ESkillTreeNodeState CurrentState = ESkillTreeNodeState::Ineligible;
+
+	// ---- Tint config (tweak in BP subclass defaults) -----------------------
+
+	/** Icon tint when the node is Ineligible (locked). */
+	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Node|Tints")
+	FLinearColor IneligibleTint = FLinearColor(0.25f, 0.25f, 0.25f, 1.f);
+
+	/** Icon tint when the node is Allocated. */
+	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Node|Tints")
+	FLinearColor AllocatedTint = FLinearColor(1.3f, 1.3f, 1.1f, 1.f);
+
+	/** Icon tint when the node is Pending (pre-allocated). */
+	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Node|Tints")
+	FLinearColor PendingTint = FLinearColor(1.0f, 0.85f, 0.3f, 1.f);
+
+	/** Upper colour of the Available pulse (lower is plain white). */
+	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Node|Tints")
+	FLinearColor PulseColor = FLinearColor(1.0f, 0.95f, 0.7f, 1.f);
+
+	/** How much of PulseColor is mixed in at peak (0–1). */
+	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Node|Tints", meta=(ClampMin="0.0", ClampMax="1.0"))
+	float PulseIntensity = 0.35f;
+
+	/** Oscillations per second for the Available pulse. */
+	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Node|Tints", meta=(ClampMin="0.1"))
+	float PulseSpeed = 1.2f;
+
+	// ---- Widget bindings ---------------------------------------------------
+
+	/** Root size box — its WidthOverride/HeightOverride define the node's canvas footprint. */
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<USizeBox> SizeBox_Root;
 
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UButton> Button_Node;
 
-	/** Optional — set in Blueprint to show the node icon. */
 	UPROPERTY(meta=(BindWidgetOptional))
 	TObjectPtr<UImage> Image_NodeIcon;
 
 private:
 	UFUNCTION()
 	void HandleButtonClicked();
+
+	void ApplyIconTint(const FLinearColor& Tint) const;
+
+	float PulseTime    = 0.f;
+	bool  bPulseActive = false;
 };

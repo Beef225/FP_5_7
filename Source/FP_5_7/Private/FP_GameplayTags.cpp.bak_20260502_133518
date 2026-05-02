@@ -1148,12 +1148,4 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("PassiveTree.IncreasedArmour.2"),
 		FString("8% Increased Armour")
 		);
-	GameplayTags.PassiveTree_IncreasedArmour_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.3"),
-		FString("8% Increased Armour")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.4"),
-		FString("8% Increased Armour")
-		);
 }

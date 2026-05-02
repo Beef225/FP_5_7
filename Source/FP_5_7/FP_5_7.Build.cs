@@ -42,6 +42,7 @@ public class FP_5_7 : ModuleRules
 				"Json",
 				"JsonUtilities",
 				"DesktopPlatform",
+				"MainFrame",
 				"NavigationSystem",
 				"AIModule"
 			});

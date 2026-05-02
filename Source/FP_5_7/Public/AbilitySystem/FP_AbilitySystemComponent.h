@@ -42,10 +42,11 @@ public:
 	void AbilityInputTagHeld(const FGameplayTag& InputTag);
 	void AbilityInputTagReleased(const FGameplayTag& InputTag);
 
-	/** Atomically assigns InputTag to the skill identified by SkillTag.
-	 *  Removes InputTag from any other spec that holds it, and strips any existing
-	 *  InputTag-family tag from the target skill before adding the new one. */
-	void AssignInputTagToSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag);
+	/** Adds InputTag to the target skill's spec. Does not affect other specs. */
+	void AddInputTagToSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag);
+
+	/** Removes a specific InputTag from the target skill's spec. Does not affect other specs. */
+	void RemoveInputTagFromSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag);
 
 	void UpgradeAttribute(const FGameplayTag& AttributeTag);
 

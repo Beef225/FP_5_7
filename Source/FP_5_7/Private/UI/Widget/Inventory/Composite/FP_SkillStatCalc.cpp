@@ -108,12 +108,12 @@ float CalcAvgDamage(const FFP_AbilityEntry& Entry, const AFP_PlayerState* PS)
 
 	float Damage = EffectiveBase * (1.f + TotalIncreased) * TotalMore;
 
-	// 35% dummy resistance
-	Damage *= 0.65f;
+	// 25% dummy resistance
+	Damage *= 0.75f;
 
-	// 1000-armour formula: (5·D²) / (1000 + 5·D)
+	// 100-armour formula: (5·D²) / (100 + 5·D)
 	if (Damage > 0.f)
-		Damage = (5.f * Damage * Damage) / (1000.f + 5.f * Damage);
+		Damage = (5.f * Damage * Damage) / (100.f + 5.f * Damage);
 
 	// Expected crit multiplier (no crit resistance on dummy)
 	const float CritChance = FMath::Clamp(

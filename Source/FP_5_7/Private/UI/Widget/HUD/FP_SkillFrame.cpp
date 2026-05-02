@@ -30,7 +30,10 @@ void UFP_SkillFrame::NativeConstruct()
 	RefreshKeyIcon();
 
 	if (AFP_PlayerState* PS = GetFPPlayerState())
-		SkillAssignedHandle = PS->OnSkillInputTagAssigned.AddUObject(this, &UFP_SkillFrame::HandleSkillInputTagAssigned);
+	{
+		SkillAssignedHandle    = PS->OnSkillInputTagAssigned.AddUObject(this, &UFP_SkillFrame::HandleSkillInputTagAssigned);
+		SkillStateLoadedHandle = PS->OnSkillStateLoaded.AddUObject(this, &UFP_SkillFrame::OnSkillStateLoaded);
+	}
 
 	if (UFP_AbilitySystemComponent* ASC = GetFPASC())
 	{
@@ -65,7 +68,10 @@ void UFP_SkillFrame::NativeDestruct()
 	ClosePickerPopup();
 
 	if (AFP_PlayerState* PS = GetFPPlayerState())
+	{
 		PS->OnSkillInputTagAssigned.Remove(SkillAssignedHandle);
+		PS->OnSkillStateLoaded.Remove(SkillStateLoadedHandle);
+	}
 
 	Super::NativeDestruct();
 }
@@ -201,7 +207,12 @@ void UFP_SkillFrame::AssignSkill(const FGameplayTag& SkillTag)
 	UFP_AbilitySystemComponent* ASC = GetFPASC();
 	if (!PS || !ASC || !SlotInputTag.IsValid()) return;
 
-	ASC->AssignInputTagToSkill(SkillTag, SlotInputTag);
+	// Remove old slot occupant from ASC before assigning new skill
+	const FGameplayTag OldSkill = PS->GetSkillForSlot(SlotInputTag);
+	if (OldSkill.IsValid() && !OldSkill.MatchesTagExact(SkillTag))
+		ASC->RemoveInputTagFromSkill(OldSkill, SlotInputTag);
+
+	ASC->AddInputTagToSkill(SkillTag, SlotInputTag);
 	PS->AssignSkillToSlot(SkillTag, SlotInputTag);
 
 	AssignedSkillTag = SkillTag;
@@ -214,7 +225,7 @@ void UFP_SkillFrame::ClearSlot()
 	if (AssignedSkillTag.IsValid())
 	{
 		if (UFP_AbilitySystemComponent* ASC = GetFPASC())
-			ASC->AssignInputTagToSkill(AssignedSkillTag, FGameplayTag());
+			ASC->RemoveInputTagFromSkill(AssignedSkillTag, SlotInputTag);
 
 		if (AFP_PlayerState* PS = GetFPPlayerState())
 			PS->ClearSkillSlot(SlotInputTag);
@@ -301,16 +312,14 @@ void UFP_SkillFrame::RestoreFromPlayerState()
 
 	AFP_PlayerState* PS = GetFPPlayerState();
 
-	// Primary: PlayerState map covers runtime assignments and loaded saves
+	// Primary: PlayerState map covers runtime assignments and loaded saves (slot is the key)
 	if (PS)
 	{
-		for (const auto& Pair : PS->GetSkillInputTagMap())
+		const FGameplayTag Found = PS->GetSkillForSlot(SlotInputTag);
+		if (Found.IsValid())
 		{
-			if (Pair.Value.MatchesTagExact(SlotInputTag))
-			{
-				AssignedSkillTag = Pair.Key;
-				return;
-			}
+			AssignedSkillTag = Found;
+			return;
 		}
 	}
 
@@ -334,7 +343,7 @@ void UFP_SkillFrame::RestoreFromPlayerState()
 
 	// Sync the PS map so this startup assignment persists in saves going forward
 	if (AssignedSkillTag.IsValid() && PS)
-		PS->SetSkillInputTag(AssignedSkillTag, SlotInputTag);
+		PS->SetSkillSlot(SlotInputTag, AssignedSkillTag);
 }
 
 void UFP_SkillFrame::OnAbilitiesGiven(UFP_AbilitySystemComponent* /*ASC*/)
@@ -343,14 +352,19 @@ void UFP_SkillFrame::OnAbilitiesGiven(UFP_AbilitySystemComponent* /*ASC*/)
 	RefreshIcon();
 }
 
-void UFP_SkillFrame::HandleSkillInputTagAssigned(FGameplayTag SkillTag, FGameplayTag NewInputTag)
+void UFP_SkillFrame::OnSkillStateLoaded()
 {
-	// Another frame stole our assigned skill — clear this slot
-	if (SkillTag.MatchesTagExact(AssignedSkillTag) && !NewInputTag.MatchesTagExact(SlotInputTag))
-	{
-		AssignedSkillTag = FGameplayTag();
-		RefreshIcon();
-	}
+	RestoreFromPlayerState();
+	RefreshIcon();
+}
+
+void UFP_SkillFrame::HandleSkillInputTagAssigned(FGameplayTag InSlotInputTag, FGameplayTag InSkillTag)
+{
+	// Only react to events for this frame's slot
+	if (!InSlotInputTag.MatchesTagExact(SlotInputTag)) return;
+
+	AssignedSkillTag = InSkillTag; // invalid means slot was cleared
+	RefreshIcon();
 }
 
 AFP_PlayerState* UFP_SkillFrame::GetFPPlayerState() const

@@ -385,10 +385,19 @@ void AFP_PlayerController::OnPossess(APawn* InPawn)
 					Record->SkillInputTagMap
 				);
 
-				if (Record->GrantedSkillTagsArray.IsEmpty())
+				if (Record->GrantedSkillTagsArray.Num() == 0)
 					PS->InitGrantedSkillsFromLibrary(); // new character — seed from asset defaults
 				else
 					PS->LoadGrantedSkills(Record->GrantedSkillTagsArray);
+
+				// PossessedBy fires before OnPossess, so abilities are granted by now.
+				// Apply saved slot bindings to the ASC here where both are ready.
+				if (UFP_AbilitySystemComponent* FP_ASC = Cast<UFP_AbilitySystemComponent>(PS->GetAbilitySystemComponent()))
+					PS->ApplyInputTagsToASC(FP_ASC);
+
+				// Tell all already-constructed frames to re-read from the now-populated PS map.
+				// This corrects any stale startup-ability bindings set by the early OnAbilitiesGiven fallback.
+				PS->OnSkillStateLoaded.Broadcast();
 			}
 		}
 		SaveSys->ClearPendingCharacter();

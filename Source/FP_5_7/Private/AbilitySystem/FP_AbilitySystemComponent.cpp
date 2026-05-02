@@ -43,48 +43,41 @@ void UFP_AbilitySystemComponent::AddCharacterPassiveAbilities(
 	}
 }
 
-void UFP_AbilitySystemComponent::AssignInputTagToSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag)
+void UFP_AbilitySystemComponent::AddInputTagToSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag)
 {
-	if (!SkillTag.IsValid()) return;
-
-	const FGameplayTag InputParent = FGameplayTag::RequestGameplayTag(FName("InputTag"));
+	if (!SkillTag.IsValid() || !InputTag.IsValid()) return;
 
 	FScopedAbilityListLock Lock(*this);
 	for (FGameplayAbilitySpec& Spec : GetActivatableAbilities())
 	{
+		if (!GetAbilityTagFromSpec(Spec).MatchesTagExact(SkillTag)) continue;
+
 		FGameplayTagContainer& DynTags = Spec.GetDynamicSpecSourceTags();
-		bool bDirty = false;
-
-		if (!GetAbilityTagFromSpec(Spec).MatchesTagExact(SkillTag))
+		if (!DynTags.HasTagExact(InputTag))
 		{
-			// Strip InputTag from any other skill currently holding it
-			if (InputTag.IsValid() && DynTags.HasTagExact(InputTag))
-			{
-				DynTags.RemoveTag(InputTag);
-				bDirty = true;
-			}
+			DynTags.AddTag(InputTag);
+			MarkAbilitySpecDirty(Spec);
 		}
-		else
+		break;
+	}
+}
+
+void UFP_AbilitySystemComponent::RemoveInputTagFromSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag)
+{
+	if (!SkillTag.IsValid() || !InputTag.IsValid()) return;
+
+	FScopedAbilityListLock Lock(*this);
+	for (FGameplayAbilitySpec& Spec : GetActivatableAbilities())
+	{
+		if (!GetAbilityTagFromSpec(Spec).MatchesTagExact(SkillTag)) continue;
+
+		FGameplayTagContainer& DynTags = Spec.GetDynamicSpecSourceTags();
+		if (DynTags.HasTagExact(InputTag))
 		{
-			// Remove any existing InputTag-family tag from the target skill
-			TArray<FGameplayTag> ToRemove;
-			for (const FGameplayTag& Tag : DynTags)
-				if (Tag.MatchesTag(InputParent))
-					ToRemove.Add(Tag);
-			for (const FGameplayTag& Tag : ToRemove)
-			{
-				DynTags.RemoveTag(Tag);
-				bDirty = true;
-			}
-
-			if (InputTag.IsValid())
-			{
-				DynTags.AddTag(InputTag);
-				bDirty = true;
-			}
+			DynTags.RemoveTag(InputTag);
+			MarkAbilitySpecDirty(Spec);
 		}
-
-		if (bDirty) MarkAbilitySpecDirty(Spec);
+		break;
 	}
 }
 

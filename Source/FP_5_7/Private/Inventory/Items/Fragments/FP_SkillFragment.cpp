@@ -81,7 +81,11 @@ void FFP_SkillFragment::OnEquip(APlayerController* PC)
 		const int32 Level = PS->GetSkillLevel(GrantedSkillTags[i]);
 		const FGameplayAbilitySpecHandle Handle = ASC->GrantItemSkill(Entry.SkillAbility, Level);
 		if (Handle.IsValid())
+		{
 			ActiveHandles.Add(Handle);
+			// Restore any saved hotbar slot assignment for this newly-granted skill.
+			PS->ApplyInputTagForSkill(ASC, GrantedSkillTags[i]);
+		}
 
 		PS->AddGrantedSkill(GrantedSkillTags[i]);
 	}

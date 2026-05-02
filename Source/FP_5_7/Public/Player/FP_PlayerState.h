@@ -13,13 +13,15 @@ class UAbilitySystemComponent;
 class UAttributeSet;
 class UFP_LevelUpInfo;
 class UFP_SkillLibrary;
+class UFP_AbilitySystemComponent;
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnPlayerStatChanged, int32 /*StatValue*/)
 DECLARE_MULTICAST_DELEGATE_TwoParams(FOnPassivePointsChanged, FGameplayTag /*AttributeTag*/, int32 /*Points*/)
 DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillXPChanged,        FGameplayTag /*SkillTag*/, int32 /*NewXP*/)
 DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillLevelChanged,     FGameplayTag /*SkillTag*/, int32 /*NewLevel*/)
 DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillPointsChanged,    FGameplayTag /*SkillTag*/, int32 /*UnspentPoints*/)
-DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillInputTagAssigned, FGameplayTag /*SkillTag*/, FGameplayTag /*NewInputTag*/)
+DECLARE_MULTICAST_DELEGATE(FOnSkillStateLoaded)
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillInputTagAssigned, FGameplayTag /*SlotInputTag*/, FGameplayTag /*SkillTag*/)
 /**
  * 
  */
@@ -40,6 +42,7 @@ public:
 	FOnSkillXPChanged        OnSkillXPChangedDelegate;
 	FOnSkillLevelChanged     OnSkillLevelChangedDelegate;
 	FOnSkillPointsChanged    OnSkillPointsChangedDelegate;
+	FOnSkillStateLoaded      OnSkillStateLoaded;
 	FOnSkillInputTagAssigned OnSkillInputTagAssigned;
 
 	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
@@ -79,9 +82,11 @@ public:
 	FORCEINLINE int32 GetSkillXP(const FGameplayTag& SkillTag) const     { const int32* Found = SkillXP.Find(SkillTag);           return Found ? *Found : 0; }
 	FORCEINLINE int32 GetSkillLevel(const FGameplayTag& SkillTag) const  { const int32* Found = SkillLevel.Find(SkillTag);         return Found ? *Found : 1; }
 	FORCEINLINE int32 GetSkillPoints(const FGameplayTag& SkillTag) const { const int32* Found = UnspentSkillPoints.Find(SkillTag); return Found ? *Found : 0; }
-	FORCEINLINE FGameplayTag GetSkillInputTag(const FGameplayTag& SkillTag) const { const FGameplayTag* Found = SkillInputTags.Find(SkillTag); return Found ? *Found : FGameplayTag(); }
+	/** Returns the skill assigned to a slot, or invalid if the slot is empty. */
+	FORCEINLINE FGameplayTag GetSkillForSlot(const FGameplayTag& SlotInputTag) const { const FGameplayTag* Found = SkillInputTags.Find(SlotInputTag); return Found ? *Found : FGameplayTag(); }
 
-	void SetSkillInputTag(const FGameplayTag& SkillTag, const FGameplayTag& InputTag) { SkillInputTags.Add(SkillTag, InputTag); }
+	/** Directly sets the skill for a slot (bypasses broadcast — use AssignSkillToSlot for UI-driven changes). */
+	void SetSkillSlot(const FGameplayTag& SlotInputTag, const FGameplayTag& SkillTag) { SkillInputTags.Add(SlotInputTag, SkillTag); }
 
 	/** Assigns a skill to a hotbar slot. Clears any previous occupant of that slot,
 	 *  updates the map, and broadcasts OnSkillInputTagAssigned so all frames can refresh. */
@@ -89,6 +94,13 @@ public:
 
 	/** Removes whatever skill is assigned to SlotInputTag and broadcasts so frames clear. */
 	void ClearSkillSlot(const FGameplayTag& SlotInputTag);
+
+	/** Wires all saved slot→skill pairs to the ASC. Call after startup abilities are granted.
+	 *  Only modifies specs that appear in the saved map; skills not in the map are untouched. */
+	void ApplyInputTagsToASC(UFP_AbilitySystemComponent* ASC);
+
+	/** Wires saved slot bindings for a single skill to the ASC. Call after GrantItemSkill. */
+	void ApplyInputTagForSkill(UFP_AbilitySystemComponent* ASC, const FGameplayTag& SkillTag);
 
 	const TMap<FGameplayTag, int32>& GetSkillXPMap() const           { return SkillXP; }
 	const TMap<FGameplayTag, int32>& GetSkillLevelMap() const        { return SkillLevel; }

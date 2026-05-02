@@ -292,41 +292,70 @@ void AFP_PlayerState::AddSkillXP(int32 InXP, int32 MonsterLevel)
 
 void AFP_PlayerState::AssignSkillToSlot(const FGameplayTag& SkillTag, const FGameplayTag& SlotInputTag)
 {
-	// Evict any skill previously mapped to this slot
-	FGameplayTag OldSkill;
-	for (const auto& Pair : SkillInputTags)
-	{
-		if (Pair.Value.MatchesTagExact(SlotInputTag))
-		{
-			OldSkill = Pair.Key;
-			break;
-		}
-	}
+	// Notify if a different skill was previously in this slot (so that slot's frame knows to clear)
+	const FGameplayTag OldSkill = SkillInputTags.FindRef(SlotInputTag);
 	if (OldSkill.IsValid() && !OldSkill.MatchesTagExact(SkillTag))
-	{
-		SkillInputTags.Remove(OldSkill);
-		OnSkillInputTagAssigned.Broadcast(OldSkill, FGameplayTag());
-	}
+		OnSkillInputTagAssigned.Broadcast(SlotInputTag, FGameplayTag());
 
-	SkillInputTags.Add(SkillTag, SlotInputTag);
-	OnSkillInputTagAssigned.Broadcast(SkillTag, SlotInputTag);
+	SkillInputTags.Add(SlotInputTag, SkillTag);
+	OnSkillInputTagAssigned.Broadcast(SlotInputTag, SkillTag);
 }
 
 void AFP_PlayerState::ClearSkillSlot(const FGameplayTag& SlotInputTag)
 {
-	FGameplayTag OccupantSkill;
+	if (!SkillInputTags.Contains(SlotInputTag)) return;
+
+	SkillInputTags.Remove(SlotInputTag);
+	OnSkillInputTagAssigned.Broadcast(SlotInputTag, FGameplayTag());
+}
+
+void AFP_PlayerState::ApplyInputTagsToASC(UFP_AbilitySystemComponent* ASC)
+{
+	if (!ASC || SkillInputTags.IsEmpty()) return;
+
+	// Build reverse map: SkillTag → [SlotInputTags]
+	TMap<FGameplayTag, TArray<FGameplayTag>> SkillToSlots;
 	for (const auto& Pair : SkillInputTags)
 	{
-		if (Pair.Value.MatchesTagExact(SlotInputTag))
-		{
-			OccupantSkill = Pair.Key;
-			break;
-		}
+		if (Pair.Key.IsValid() && Pair.Value.IsValid())
+			SkillToSlots.FindOrAdd(Pair.Value).Add(Pair.Key);
 	}
-	if (!OccupantSkill.IsValid()) return;
 
-	SkillInputTags.Remove(OccupantSkill);
-	OnSkillInputTagAssigned.Broadcast(OccupantSkill, FGameplayTag());
+	const FGameplayTag InputParent = FGameplayTag::RequestGameplayTag(FName("InputTag"));
+
+	FScopedAbilityListLock Lock(*ASC);
+	for (FGameplayAbilitySpec& Spec : ASC->GetActivatableAbilities())
+	{
+		const FGameplayTag SkillTag = UFP_AbilitySystemComponent::GetAbilityTagFromSpec(Spec);
+		if (!SkillTag.IsValid()) continue;
+
+		const TArray<FGameplayTag>* Slots = SkillToSlots.Find(SkillTag);
+		if (!Slots) continue; // not in saved map — leave existing tags untouched
+
+		FGameplayTagContainer& DynTags = Spec.GetDynamicSpecSourceTags();
+		bool bDirty = false;
+
+		TArray<FGameplayTag> ToRemove;
+		for (const FGameplayTag& Tag : DynTags)
+			if (Tag.MatchesTag(InputParent))
+				ToRemove.Add(Tag);
+		for (const FGameplayTag& Tag : ToRemove) { DynTags.RemoveTag(Tag); bDirty = true; }
+
+		for (const FGameplayTag& SlotTag : *Slots) { DynTags.AddTag(SlotTag); bDirty = true; }
+
+		if (bDirty) ASC->MarkAbilitySpecDirty(Spec);
+	}
+}
+
+void AFP_PlayerState::ApplyInputTagForSkill(UFP_AbilitySystemComponent* ASC, const FGameplayTag& SkillTag)
+{
+	if (!ASC || !SkillTag.IsValid()) return;
+
+	for (const auto& Pair : SkillInputTags)
+	{
+		if (Pair.Value.MatchesTagExact(SkillTag))
+			ASC->AddInputTagToSkill(SkillTag, Pair.Key);
+	}
 }
 
 void AFP_PlayerState::LoadAllocatedPoints(int32 InUnspent, int32 InMight, int32 InResonance, int32 InAgility, int32 InFortitude)

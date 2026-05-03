@@ -197,6 +197,8 @@ void UFP_SkillTreeWidget::CommitPendingNodes()
 	if (PendingNodeTags.IsEmpty()) return;
 
 	APlayerController* PC = GetOwningPlayer();
+	UE_LOG(LogTemp, Log, TEXT("SkillTree CommitPendingNodes — %d nodes pending, PC: %s"),
+		PendingNodeTags.Num(), PC ? *PC->GetName() : TEXT("null"));
 	TArray<FGameplayTag> Committed;
 
 	for (const FGameplayTag& Tag : PendingNodeTags)
@@ -205,6 +207,8 @@ void UFP_SkillTreeWidget::CommitPendingNodes()
 		{
 			if (Data && Data->NodeTag == Tag)
 			{
+				UE_LOG(LogTemp, Log, TEXT("SkillTree CommitPendingNodes — allocating node [%s] with %d effects"),
+					*Tag.ToString(), Data->Effects.Num());
 				const_cast<UFP_SkillTreeNodeData*>(Data.Get())->AllocateEffects(PC);
 				AllocatedNodeTags.AddTag(Tag);
 				Committed.Add(Tag);

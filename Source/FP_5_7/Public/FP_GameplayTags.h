@@ -198,6 +198,15 @@ FGameplayTag MetaAttribute_IncomingDamage;
 //XP
 FGameplayTag MetaAttribute_IncomingXP;
 
+//DoT duration (SetByCaller — seconds)
+FGameplayTag SetByCaller_DotDuration;
+
+//Deferred damage per tick (SetByCaller for the deferred damage periodic GE)
+FGameplayTag SetByCaller_DeferredDamagePerTick;
+
+//Gameplay event sent by ExecCalc_Damage to trigger the deferred damage passive
+FGameplayTag GameplayEvent_DeferredDamage;
+
 
 //Misc Gameplay Tags
 //Player Tags

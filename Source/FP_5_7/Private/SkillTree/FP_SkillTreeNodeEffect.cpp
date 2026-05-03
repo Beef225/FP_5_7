@@ -16,8 +16,19 @@
 static UAbilitySystemComponent* GetASC(APlayerController* PC)
 {
 	if (!PC) return nullptr;
-	const IAbilitySystemInterface* ASI = Cast<IAbilitySystemInterface>(PC->GetPawn());
-	return ASI ? ASI->GetAbilitySystemComponent() : nullptr;
+
+	// ASC lives on PlayerState in this project
+	if (AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>())
+	{
+		if (UAbilitySystemComponent* ASC = PS->GetAbilitySystemComponent())
+			return ASC;
+		UE_LOG(LogTemp, Warning, TEXT("GetASC: PlayerState found but GetAbilitySystemComponent() returned null"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("GetASC: PC [%s] has no AFP_PlayerState"), *PC->GetName());
+	}
+	return nullptr;
 }
 
 // ---------------------------------------------------------------------------
@@ -27,30 +38,51 @@ static UAbilitySystemComponent* GetASC(APlayerController* PC)
 void FFP_NodeEffect_StatModifier::OnAllocate(APlayerController* PC)
 {
 	UAbilitySystemComponent* ASC = GetASC(PC);
-	if (!ASC || !AttributeTag.IsValid()) return;
+	if (!ASC)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("StatModifier::OnAllocate — ASC is null (tag: %s)"), *AttributeTag.ToString());
+		return;
+	}
+	if (!AttributeTag.IsValid())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("StatModifier::OnAllocate — AttributeTag is invalid"));
+		return;
+	}
 
-	// Resolve attribute from tag via the attribute set's tag map
 	const UFP_AttributeSet* AS = ASC->GetSet<UFP_AttributeSet>();
-	if (!AS) return;
+	if (!AS)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("StatModifier::OnAllocate — AttributeSet not found on ASC"));
+		return;
+	}
 
 	const TStaticFuncPtr<FGameplayAttribute()>* FuncPtr = AS->TagsToAttributes.Find(AttributeTag);
-	if (!FuncPtr) return;
+	if (!FuncPtr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("StatModifier::OnAllocate — AttributeTag [%s] not found in TagsToAttributes"), *AttributeTag.ToString());
+		return;
+	}
 
 	const FGameplayAttribute Attribute = (*FuncPtr)();
 
-	// Build a dynamic infinite GE with a single modifier — no class asset required
+	UE_LOG(LogTemp, Log, TEXT("StatModifier::OnAllocate — Applying [%s] Op=%d Magnitude=%.4f to [%s]"),
+		*AttributeTag.ToString(), (int32)ModifierOp.GetValue(), Magnitude, *Attribute.GetName());
+
 	UGameplayEffect* DynamicGE = NewObject<UGameplayEffect>(GetTransientPackage(), NAME_None);
 	DynamicGE->DurationPolicy = EGameplayEffectDurationType::Infinite;
 
 	FGameplayModifierInfo ModInfo;
-	ModInfo.Attribute        = Attribute;
-	ModInfo.ModifierOp       = ModifierOp;
+	ModInfo.Attribute         = Attribute;
+	ModInfo.ModifierOp        = ModifierOp;
 	ModInfo.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(Magnitude));
 	DynamicGE->Modifiers.Add(ModInfo);
 
 	const FGameplayEffectContextHandle Context = ASC->MakeEffectContext();
 	const FGameplayEffectSpec Spec(DynamicGE, Context, 1.f);
 	ActiveHandle = ASC->ApplyGameplayEffectSpecToSelf(Spec);
+
+	UE_LOG(LogTemp, Log, TEXT("StatModifier::OnAllocate — GE applied, handle valid: %s"),
+		ActiveHandle.IsValid() ? TEXT("yes") : TEXT("no"));
 }
 
 void FFP_NodeEffect_StatModifier::OnDeallocate(APlayerController* PC)

@@ -590,8 +590,26 @@ void FFP_GameplayTags::InitializeGameplayTags()
 
 	//XP
 	GameplayTags.MetaAttribute_IncomingXP = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("MetaAttribute.IncomingXP"), 
+		FName("MetaAttribute.IncomingXP"),
 		FString("Used to add to Player Experience")
+		);
+
+	//DoT duration
+	GameplayTags.SetByCaller_DotDuration = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.DotDuration"),
+		FString("SetByCaller tag for damage-over-time duration in seconds")
+		);
+
+	//Deferred damage per tick
+	GameplayTags.SetByCaller_DeferredDamagePerTick = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.DeferredDamagePerTick"),
+		FString("SetByCaller tag for deferred damage — damage applied per tick (pre-scaled, no defences)")
+		);
+
+	//Deferred damage gameplay event
+	GameplayTags.GameplayEvent_DeferredDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("GameplayEvent.DeferredDamage"),
+		FString("Sent by ExecCalc_Damage when a deferred damage split is computed")
 		);
 
 

@@ -114,6 +114,18 @@ void UFP_SkillTreeNode::HandleButtonClicked()
 	}
 }
 
+void UFP_SkillTreeNode::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
+	OnNodeHoverChanged.Broadcast(this, true);
+}
+
+void UFP_SkillTreeNode::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
+{
+	Super::NativeOnMouseLeave(InMouseEvent);
+	OnNodeHoverChanged.Broadcast(this, false);
+}
+
 void UFP_SkillTreeNode::ApplyIconTint(const FLinearColor& Tint) const
 {
 	if (Image_NodeIcon)

@@ -107,6 +107,29 @@ void AFP_PlayerState::OnRep_AttributePoints(int32 OldAttributePoints)
 	OnAttributePointsChangedDelegate.Broadcast(AttributePoints);
 }
 
+int32 AFP_PlayerState::GetPassivePointsForTree(const FGameplayTag& TreeTag) const
+{
+	const FFP_GameplayTags& T = FFP_GameplayTags::Get();
+	if (TreeTag == T.PassiveTree_Might)     return MightPassivePoints;
+	if (TreeTag == T.PassiveTree_Resonance) return ResonancePassivePoints;
+	if (TreeTag == T.PassiveTree_Agility)   return AgilityPassivePoints;
+	if (TreeTag == T.PassiveTree_Fortitude) return FortitudePassivePoints;
+	return 0;
+}
+
+void AFP_PlayerState::SpendPassivePoints(const FGameplayTag& TreeTag, int32 Amount)
+{
+	const FFP_GameplayTags& T = FFP_GameplayTags::Get();
+	FGameplayTag AttrTag;
+	if      (TreeTag == T.PassiveTree_Might)     AttrTag = T.Attributes_Primary_Might;
+	else if (TreeTag == T.PassiveTree_Resonance) AttrTag = T.Attributes_Primary_Resonance;
+	else if (TreeTag == T.PassiveTree_Agility)   AttrTag = T.Attributes_Primary_Agility;
+	else if (TreeTag == T.PassiveTree_Fortitude) AttrTag = T.Attributes_Primary_Fortitude;
+
+	if (AttrTag.IsValid())
+		AddToPassivePoints(AttrTag, -Amount);
+}
+
 void AFP_PlayerState::AddToPassivePoints(const FGameplayTag& AttributeTag, int32 InPoints)
 {
 	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();

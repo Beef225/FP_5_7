@@ -14,6 +14,7 @@ class USizeBox;
 class UFP_SkillTreeNodeData;
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnSkillTreeNodeClicked, class UFP_SkillTreeNode* /*Node*/);
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillTreeNodeHoverChanged, class UFP_SkillTreeNode* /*Node*/, bool /*bEntered*/);
 
 /**
  * Base widget for a single skill tree node.
@@ -49,11 +50,14 @@ public:
 
 	const UFP_SkillTreeNodeData* GetNodeData() const { return NodeData; }
 
-	FOnSkillTreeNodeClicked OnNodeClicked;
+	FOnSkillTreeNodeClicked      OnNodeClicked;
+	FOnSkillTreeNodeHoverChanged OnNodeHoverChanged;
 
 protected:
 	virtual void NativeConstruct() override;
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
+	virtual void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	virtual void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
 
 	UFUNCTION(BlueprintImplementableEvent, Category="Skill Tree Node")
 	void OnStateChanged(ESkillTreeNodeState NewState, ESkillTreeNodeType Type);

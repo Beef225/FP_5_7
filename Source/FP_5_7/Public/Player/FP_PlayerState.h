@@ -53,6 +53,12 @@ public:
 	FORCEINLINE int32 GetAgilityPassivePoints() const { return AgilityPassivePoints; }
 	FORCEINLINE int32 GetFortitudePassivePoints() const { return FortitudePassivePoints; }
 
+	/** Returns available unspent points for the given PassiveTree.X tag. */
+	int32 GetPassivePointsForTree(const FGameplayTag& TreeTag) const;
+
+	/** Deducts points from the pool for the given PassiveTree.X tag. */
+	void SpendPassivePoints(const FGameplayTag& TreeTag, int32 Amount);
+
 	/** MonsterLevel = -1 means no penalty (e.g. quest rewards). */
 	void AddSkillXP(int32 InXP, int32 MonsterLevel = -1);
 

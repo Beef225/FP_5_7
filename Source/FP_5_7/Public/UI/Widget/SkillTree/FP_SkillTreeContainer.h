@@ -8,8 +8,12 @@
 #include "FP_SkillTreeContainer.generated.h"
 
 class UFP_SkillTreeWidget;
+class UFP_SkillTreeNode;
+class UFP_SkillTreeNodeDescription;
 class UOverlay;
 class UButton;
+class UTextBlock;
+class UCanvasPanel;
 
 /**
  * Viewport container for a skill tree.
@@ -71,6 +75,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Container")
 	TSubclassOf<UFP_SkillTreeWidget> TreeWidgetClass;
 
+	/** BP subclass of UFP_SkillTreeNodeDescription to use as the hover popup. */
+	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Container")
+	TSubclassOf<UFP_SkillTreeNodeDescription> NodeDescriptionClass;
+
 	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Container|Zoom", meta=(ClampMin="0.05"))
 	float ZoomMin = 0.25f;
 
@@ -93,15 +101,42 @@ protected:
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UButton> Button_Cancel;
 
+	/** Shows points already spent, with pending shown as e.g. "25+2". */
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UTextBlock> Text_PointsSpent;
+
+	/** Shows remaining available points after pending allocation. */
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UTextBlock> Text_PointsAvailable;
+
+	/**
+	 * Full-cover canvas for the node description popup.
+	 * Should fill the entire container so popup coordinates are in container-local space.
+	 * Add this to the BP on top of Overlay_Viewport with HAlign/VAlign Fill.
+	 */
+	UPROPERTY(meta=(BindWidgetOptional))
+	TObjectPtr<UCanvasPanel> Canvas_Popup;
+
 private:
 	void ApplyTransform();
+	void ShowNodePopup(UFP_SkillTreeNode* Node);
+	void HideNodePopup();
 
 	UFUNCTION() void HandleConfirmClicked();
 	UFUNCTION() void HandleCancelClicked();
 	UFUNCTION() void HandlePendingCountChanged(int32 NewCount);
+	UFUNCTION() void HandlePassivePointsChanged(FGameplayTag Tag, int32 NewPoints);
+	void HandleNodeHoverChanged(UFP_SkillTreeNode* Node, bool bEntered);
+
+	void UpdatePointsDisplay(int32 PendingCount);
 
 	UPROPERTY()
 	TObjectPtr<UFP_SkillTreeWidget> TreeWidget;
+
+	UPROPERTY()
+	TObjectPtr<UFP_SkillTreeNodeDescription> NodePopup;
+
+	int32      CachedAvailablePoints = 0;
 
 	float      CurrentZoom = 1.f;
 	FVector2D  ViewOffset  = FVector2D::ZeroVector;

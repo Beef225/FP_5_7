@@ -6,9 +6,9 @@
 #include "UI/Widget/FP_UserWidget.h"
 #include "GameplayTagContainer.h"
 #include "Libraries/FP_EnumDefs.h"
+#include "UI/Widget/SkillTree/FP_SkillTreeNode.h"
 #include "FP_SkillTreeWidget.generated.h"
 
-class UFP_SkillTreeNode;
 class UFP_SkillTreeNodeData;
 class UCanvasPanel;
 
@@ -69,9 +69,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Skill Tree")
 	int32 GetPendingCount() const { return PendingNodeTags.Num(); }
 
+	UFUNCTION(BlueprintCallable, Category="Skill Tree")
+	FGameplayTag GetTreeTag() const { return TreeTag; }
+
 	/** Fired whenever the pending count changes — subscribe to drive button states. */
 	UPROPERTY(BlueprintAssignable, Category="Skill Tree")
 	FOnSkillTreePendingCountChanged OnPendingCountChangedDelegate;
+
+	/** Relays hover enter/leave from any child node widget. */
+	FOnSkillTreeNodeHoverChanged OnNodeHoverChangedDelegate;
 
 	/**
 	 * Data assets for this tree. Populated automatically by UFP_SkillTreeImporter.
@@ -165,6 +171,8 @@ private:
 
 	UFUNCTION()
 	void HandleNodeClicked(UFP_SkillTreeNode* Node);
+
+	void HandleNodeHoverChanged(UFP_SkillTreeNode* Node, bool bEntered);
 
 	/** Tag → spawned widget. */
 	UPROPERTY()

@@ -99,6 +99,7 @@ void UFP_SkillTreeWidget::SpawnNodeWidget(const UFP_SkillTreeNodeData* Data)
 
 	NodeWidget->Populate(Data, ComputeState(Data));
 	NodeWidget->OnNodeClicked.AddUObject(this, &UFP_SkillTreeWidget::HandleNodeClicked);
+	NodeWidget->OnNodeHoverChanged.AddUObject(this, &UFP_SkillTreeWidget::HandleNodeHoverChanged);
 
 	UCanvasPanelSlot* NodeSlot = Canvas_Nodes->AddChildToCanvas(NodeWidget);
 	if (NodeSlot)
@@ -176,6 +177,11 @@ void UFP_SkillTreeWidget::HandleNodeClicked(UFP_SkillTreeNode* Node)
 	const int32 Count = PendingNodeTags.Num();
 	OnPendingCountChanged(Count);
 	OnPendingCountChangedDelegate.Broadcast(Count);
+}
+
+void UFP_SkillTreeWidget::HandleNodeHoverChanged(UFP_SkillTreeNode* Node, bool bEntered)
+{
+	OnNodeHoverChangedDelegate.Broadcast(Node, bEntered);
 }
 
 void UFP_SkillTreeWidget::LoadAllocatedState(const FGameplayTagContainer& InAllocatedNodes)

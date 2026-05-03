@@ -658,6 +658,7 @@ void UFP_AttributeSet::SendXPEvent(const FEffectProperties& Props)
 	FGameplayEventData Payload;
 	Payload.EventTag = GameplayTags.MetaAttribute_IncomingXP;
 	Payload.EventMagnitude = XPReward;
+	Payload.Instigator = Props.TargetAvatarActor; // enemy — carries monster level for skill XP penalty
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 		Props.SourceCharacter,
 		GameplayTags.MetaAttribute_IncomingXP,

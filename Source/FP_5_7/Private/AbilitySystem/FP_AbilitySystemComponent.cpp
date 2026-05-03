@@ -43,6 +43,44 @@ void UFP_AbilitySystemComponent::AddCharacterPassiveAbilities(
 	}
 }
 
+void UFP_AbilitySystemComponent::AddInputTagToSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag)
+{
+	if (!SkillTag.IsValid() || !InputTag.IsValid()) return;
+
+	FScopedAbilityListLock Lock(*this);
+	for (FGameplayAbilitySpec& Spec : GetActivatableAbilities())
+	{
+		if (!GetAbilityTagFromSpec(Spec).MatchesTagExact(SkillTag)) continue;
+
+		FGameplayTagContainer& DynTags = Spec.GetDynamicSpecSourceTags();
+		if (!DynTags.HasTagExact(InputTag))
+		{
+			DynTags.AddTag(InputTag);
+			MarkAbilitySpecDirty(Spec);
+		}
+		break;
+	}
+}
+
+void UFP_AbilitySystemComponent::RemoveInputTagFromSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag)
+{
+	if (!SkillTag.IsValid() || !InputTag.IsValid()) return;
+
+	FScopedAbilityListLock Lock(*this);
+	for (FGameplayAbilitySpec& Spec : GetActivatableAbilities())
+	{
+		if (!GetAbilityTagFromSpec(Spec).MatchesTagExact(SkillTag)) continue;
+
+		FGameplayTagContainer& DynTags = Spec.GetDynamicSpecSourceTags();
+		if (DynTags.HasTagExact(InputTag))
+		{
+			DynTags.RemoveTag(InputTag);
+			MarkAbilitySpecDirty(Spec);
+		}
+		break;
+	}
+}
+
 void UFP_AbilitySystemComponent::AbilityInputTagHeld(const FGameplayTag& InputTag)
 {
 	if (!InputTag.IsValid()) return;

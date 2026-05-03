@@ -37,6 +37,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Damage|Skill")
 	float GetAoEAttributeModifier() const;
 
+	const TMap<FGameplayTag, FDamageRange>& GetDamageTypes() const { return DamageTypes; }
+
 
 	
 protected:

@@ -8,6 +8,7 @@
 #include "FP_SkillDisplay.generated.h"
 
 class UImage;
+class UProgressBar;
 class URichTextBlock;
 class UTextBlock;
 
@@ -23,7 +24,8 @@ class FP_5_7_API UFP_SkillDisplay : public UUserWidget
 
 public:
 
-	void Populate(const FFP_AbilityEntry& Entry, int32 Level);
+	/** CurrentXP is the player's total accumulated XP for this skill (from AFP_PlayerState). */
+	void Populate(const FFP_AbilityEntry& Entry, int32 CurrentXP);
 
 private:
 
@@ -35,4 +37,7 @@ private:
 
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UTextBlock> Text_SkillLevel;
+
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UProgressBar> ProgressBar_SkillXP;
 };

@@ -41,6 +41,10 @@ struct FP_DamageStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(OverheatDamageResistance);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(OverheatMaxResistance);
 
+	// Deferred damage defence
+	DECLARE_ATTRIBUTE_CAPTUREDEF(DeferredDamageAmount);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(DeferredDamageTime);
+
 	// "Taken as" conversions (defensive conversion)
 	DECLARE_ATTRIBUTE_CAPTUREDEF(EnergyTakenAsRadiation);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(ChemicalTakenAsExplosive);
@@ -160,6 +164,9 @@ struct FP_DamageStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, OverheatDamageResistance, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, OverheatMaxResistance, Target, false);
 
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, DeferredDamageAmount, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, DeferredDamageTime, Target, false);
+
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, EnergyTakenAsRadiation, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, ChemicalTakenAsExplosive, Target, false);
 
@@ -274,6 +281,9 @@ UExecCalc_Damage::UExecCalc_Damage()
 	RelevantAttributesToCapture.Add(DamageStatics().EnergyMaxResistanceDef);
 	RelevantAttributesToCapture.Add(DamageStatics().OverheatDamageResistanceDef);
 	RelevantAttributesToCapture.Add(DamageStatics().OverheatMaxResistanceDef);
+
+	RelevantAttributesToCapture.Add(DamageStatics().DeferredDamageAmountDef);
+	RelevantAttributesToCapture.Add(DamageStatics().DeferredDamageTimeDef);
 
 	RelevantAttributesToCapture.Add(DamageStatics().EnergyTakenAsRadiationDef);
 	RelevantAttributesToCapture.Add(DamageStatics().ChemicalTakenAsExplosiveDef);
@@ -585,6 +595,48 @@ void UExecCalc_Damage::Execute_Implementation(
 			GenericDamage, PhysicalDamage, ExplosiveDamage, RadiationDamage, ChemicalDamage, EnergyDamage));
 
 
+
+	// -------------------------------------------------------
+	// 1b) DEFERRED DAMAGE SPLIT
+	//     Take a fraction of the offense-scaled damage and
+	//     send it as a DoT event — BEFORE defences apply so
+	//     the deferred portion is never double-mitigated.
+	// -------------------------------------------------------
+	{
+		const float DeferredFraction = FMath::Clamp(GetCaptured(DamageStatics().DeferredDamageAmountDef), 0.f, 1.f);
+		const float DeferredTime     = GetCaptured(DamageStatics().DeferredDamageTimeDef);
+
+		UAbilitySystemComponent* MutableTargetASC = const_cast<UAbilitySystemComponent*>(TargetASC);
+		if (DeferredFraction > 0.f && DeferredTime > 0.f && MutableTargetASC)
+		{
+			const float TotalOffense = GenericDamage + PhysicalDamage + ExplosiveDamage
+			                         + RadiationDamage + ChemicalDamage + EnergyDamage;
+			const float DeferredTotal = TotalOffense * DeferredFraction;
+
+			// Scale main damage path down — deferred portion is removed from the defence pipeline
+			const float RetainedFraction = 1.f - DeferredFraction;
+			GenericDamage   *= RetainedFraction;
+			PhysicalDamage  *= RetainedFraction;
+			ExplosiveDamage *= RetainedFraction;
+			RadiationDamage *= RetainedFraction;
+			ChemicalDamage  *= RetainedFraction;
+			EnergyDamage    *= RetainedFraction;
+
+			// Per-tick value for the 10 Hz deferred DoT GE (defences already bypassed)
+			constexpr float DotTickRate  = 10.f;
+			const float PerTickDamage    = DeferredTotal / DeferredTime / DotTickRate;
+
+			FGameplayEventData DeferredEvent;
+			DeferredEvent.EventMagnitude = PerTickDamage;
+			MutableTargetASC->HandleGameplayEvent(GameplayTags.GameplayEvent_DeferredDamage, &DeferredEvent);
+
+			LogStep(TEXT("1b) DeferredSplit"),
+				GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage,
+				FString::Printf(TEXT("Fraction=%.4f Time=%.2fs TotalDeferred=%.4f PerTick=%.4f Retained=%.4f"),
+					DeferredFraction, DeferredTime, DeferredTotal, PerTickDamage,
+					GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage));
+		}
+	}
 
 	// -------------------------------------------------------
 	// 2) RESISTANCES (per type, before block)

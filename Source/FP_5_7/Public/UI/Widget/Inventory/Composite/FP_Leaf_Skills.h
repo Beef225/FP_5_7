@@ -7,6 +7,7 @@
 #include "GameplayTagContainer.h"
 #include "FP_Leaf_Skills.generated.h"
 
+class AFP_PlayerState;
 class UVerticalBox;
 class UFP_SkillDisplay;
 class UFP_SkillLibrary;
@@ -23,7 +24,7 @@ class FP_5_7_API UFP_Leaf_Skills : public UFP_Leaf
 
 public:
 
-	void SetSkills(const TArray<FGameplayTag>& SkillTags, const TArray<int32>& Levels, const UFP_SkillLibrary* Library);
+	void SetSkills(const TArray<FGameplayTag>& SkillTags, const AFP_PlayerState* PS, const UFP_SkillLibrary* Library);
 
 private:
 

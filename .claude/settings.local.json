@@ -32,7 +32,8 @@
       "Bash(python *)",
       "Bash(xargs wc *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(grep -E \"\\\\.\\(h|cpp\\)$\")"
     ]
   }
 }

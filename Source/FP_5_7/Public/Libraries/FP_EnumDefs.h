@@ -123,3 +123,29 @@ enum class EFP_RollDirection : uint8
 	Left     UMETA(DisplayName="Left"),
 	Right    UMETA(DisplayName="Right"),
 };
+
+/** Determines which skill bar a UFP_SkillFrame belongs to, and therefore which
+ *  library entries (bShowInSkillBar / bShowInInjectorBar) are shown in its picker. */
+UENUM(BlueprintType)
+enum class ESkillBarType : uint8
+{
+	Standard  UMETA(DisplayName="Standard"),
+	Injector  UMETA(DisplayName="Injector"),
+};
+
+UENUM(BlueprintType)
+enum class ESkillTreeNodeType : uint8
+{
+	Minor   UMETA(DisplayName="Minor"),
+	Major   UMETA(DisplayName="Major"),
+	Mastery UMETA(DisplayName="Mastery"),
+};
+
+UENUM(BlueprintType)
+enum class ESkillTreeNodeState : uint8
+{
+	Ineligible UMETA(DisplayName="Ineligible"),
+	Available  UMETA(DisplayName="Available"),
+	Pending    UMETA(DisplayName="Pending"),
+	Allocated  UMETA(DisplayName="Allocated"),
+};

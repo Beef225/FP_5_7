@@ -39,6 +39,12 @@ public:
 	UFUNCTION()
 	void EquippedSlottedItemClicked(UFP_EquippedSlottedItem* EquippedSlottedItem);
 
+	UFP_InventoryGrid* GetGrid() const { return Grid; }
+	const TArray<TObjectPtr<UFP_EquippedGridSlot>>& GetEquippedGridSlots() const { return EquippedGridSlots; }
+
+	/** Restores a previously equipped item into its matching slot, bypassing attribute requirements. */
+	void RestoreEquippedItem(UFP_InventoryItem* Item, const FGameplayTag& SlotTag);
+
 private:
 
 	UFP_ItemDescription* GetItemDescription();

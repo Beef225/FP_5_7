@@ -48,14 +48,16 @@ void FFP_SkillFragment::Assimilate(UFP_CompositeBase* Composite) const
 	UFP_Leaf_Skills* Leaf = Cast<UFP_Leaf_Skills>(Composite);
 	if (!IsValid(Leaf)) return;
 
-	Leaf->SetSkills(GrantedSkillTags, GrantedSkillLevels, SkillLibrary);
+	const APlayerController* PC = Leaf->GetOwningPlayer();
+	const AFP_PlayerState* PS = PC ? PC->GetPlayerState<AFP_PlayerState>() : nullptr;
+	Leaf->SetSkills(GrantedSkillTags, PS, SkillLibrary);
 }
 
 void FFP_SkillFragment::OnEquip(APlayerController* PC)
 {
 	if (GrantedSkillTags.IsEmpty() || !PC) return;
 
-	const AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>();
+	AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>();
 	if (!PS) return;
 
 	const UFP_SkillLibrary* Library = PS->GetSkillLibrary();
@@ -76,16 +78,22 @@ void FFP_SkillFragment::OnEquip(APlayerController* PC)
 			continue;
 		}
 
-		const int32 Level = GrantedSkillLevels.IsValidIndex(i) ? GrantedSkillLevels[i] : 1;
+		const int32 Level = PS->GetSkillLevel(GrantedSkillTags[i]);
 		const FGameplayAbilitySpecHandle Handle = ASC->GrantItemSkill(Entry.SkillAbility, Level);
 		if (Handle.IsValid())
+		{
 			ActiveHandles.Add(Handle);
+			// Restore any saved hotbar slot assignment for this newly-granted skill.
+			PS->ApplyInputTagForSkill(ASC, GrantedSkillTags[i]);
+		}
+
+		PS->AddGrantedSkill(GrantedSkillTags[i]);
 	}
 }
 
 void FFP_SkillFragment::OnUnequip(APlayerController* PC)
 {
-	if (ActiveHandles.IsEmpty() || !PC) return;
+	if (!PC) return;
 
 	IAbilitySystemInterface* ASI = Cast<IAbilitySystemInterface>(PC->GetPawn());
 	if (!ASI) return;
@@ -97,4 +105,10 @@ void FFP_SkillFragment::OnUnequip(APlayerController* PC)
 		ASC->RevokeItemSkill(Handle);
 
 	ActiveHandles.Reset();
+
+	if (AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>())
+	{
+		for (const FGameplayTag& Tag : GrantedSkillTags)
+			PS->RemoveGrantedSkill(Tag);
+	}
 }

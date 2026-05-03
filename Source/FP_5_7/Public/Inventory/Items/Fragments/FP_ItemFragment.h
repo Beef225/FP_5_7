@@ -396,7 +396,20 @@ struct FP_5_7_API FFP_AttributeRequirementFragment : public FFP_InventoryItemFra
 
 	virtual void Assimilate(UFP_CompositeBase* Composite) const override;
 
+	int32 GetRequiredLevel() const { return RequiredLevel; }
+
+	/** Called by FFP_AffixFragment::OnSpawned after rolling to lock in the effective level requirement. */
+	void SetEffectiveRequiredLevel(int32 Level) { EffectiveRequiredLevel = Level; }
+
 private:
+
+	/** Base level requirement set by the designer. The affix roller may raise this. */
+	UPROPERTY(EditAnywhere, Category = "Requirements", meta = (ClampMin = 0))
+	int32 RequiredLevel{ 0 };
+
+	/** Effective level requirement = max(RequiredLevel, highest rolled affix tier level). Computed at spawn. */
+	UPROPERTY(VisibleAnywhere, Category = "Requirements")
+	int32 EffectiveRequiredLevel{ 0 };
 
 	UPROPERTY(EditAnywhere, Category = "Requirements", meta = (ClampMin = 0))
 	int32 RequiredMight{ 0 };

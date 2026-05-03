@@ -42,6 +42,12 @@ public:
 	void AbilityInputTagHeld(const FGameplayTag& InputTag);
 	void AbilityInputTagReleased(const FGameplayTag& InputTag);
 
+	/** Adds InputTag to the target skill's spec. Does not affect other specs. */
+	void AddInputTagToSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag);
+
+	/** Removes a specific InputTag from the target skill's spec. Does not affect other specs. */
+	void RemoveInputTagFromSkill(const FGameplayTag& SkillTag, const FGameplayTag& InputTag);
+
 	void UpgradeAttribute(const FGameplayTag& AttributeTag);
 
 	UFUNCTION(Server, Reliable)

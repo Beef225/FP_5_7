@@ -590,8 +590,26 @@ void FFP_GameplayTags::InitializeGameplayTags()
 
 	//XP
 	GameplayTags.MetaAttribute_IncomingXP = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("MetaAttribute.IncomingXP"), 
+		FName("MetaAttribute.IncomingXP"),
 		FString("Used to add to Player Experience")
+		);
+
+	//DoT duration
+	GameplayTags.SetByCaller_DotDuration = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.DotDuration"),
+		FString("SetByCaller tag for damage-over-time duration in seconds")
+		);
+
+	//Deferred damage per tick
+	GameplayTags.SetByCaller_DeferredDamagePerTick = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.DeferredDamagePerTick"),
+		FString("SetByCaller tag for deferred damage — damage applied per tick (pre-scaled, no defences)")
+		);
+
+	//Deferred damage gameplay event
+	GameplayTags.GameplayEvent_DeferredDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("GameplayEvent.DeferredDamage"),
+		FString("Sent by ExecCalc_Damage when a deferred damage split is computed")
 		);
 
 
@@ -1122,4 +1140,38 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Location_Shattered_Reach = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Location.Shattered_Reach"), FString("Shattered Reach"));
 
+
+	//PassiveTree
+	GameplayTags.PassiveTree_Might = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.Might"),
+		FString("Might passive skill tree")
+		);
+	GameplayTags.PassiveTree_Resonance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.Resonance"),
+		FString("Resonance passive skill tree")
+		);
+	GameplayTags.PassiveTree_Agility = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.Agility"),
+		FString("Agility passive skill tree")
+		);
+	GameplayTags.PassiveTree_Fortitude = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.Fortitude"),
+		FString("Fortitude passive skill tree")
+		);
+	GameplayTags.PassiveTree_IncreasedArmour_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.IncreasedArmour.1"),
+		FString("8% Increased Armour")
+		);
+	GameplayTags.PassiveTree_IncreasedArmour_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.IncreasedArmour.2"),
+		FString("8% Increased Armour")
+		);
+	GameplayTags.PassiveTree_IncreasedArmour_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.IncreasedArmour.3"),
+		FString("8% Increased Armour")
+		);
+	GameplayTags.PassiveTree_IncreasedArmour_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.IncreasedArmour.4"),
+		FString("8% Increased Armour")
+		);
 }

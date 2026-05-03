@@ -8,7 +8,14 @@
 #include "Inventory/Items/Fragments/FP_SkillFragment.h"
 #include "Inventory/Types/FP_InventoryTypes.h"
 #include "Net/UnrealNetwork.h"
+#include "SaveSystem/FP_InventorySaveData.h"
+#include "SaveSystem/FP_SaveGameSubsystem.h"
 #include "UI/Widget/Inventory/FP_InventoryBase.h"
+#include "UI/Widget/Inventory/FP_SpatialInventory.h"
+#include "UI/Widget/Inventory/FP_InventoryGrid.h"
+#include "UI/Widget/Inventory/GridSlots/FP_EquippedGridSlot.h"
+#include "UI/Widget/Inventory/SlottedItems/FP_SlottedItem.h"
+#include "UI/Widget/Inventory/HoverItem/FP_HoverItem.h"
 
 UFP_InventoryComponent::UFP_InventoryComponent()
 {
@@ -36,6 +43,15 @@ void UFP_InventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	ConstructInventory();
+
+	if (UFP_SaveGameSubsystem* SaveSys = UFP_SaveGameSubsystem::Get(this))
+	{
+		const FGuid CharacterID = SaveSys->GetProfile()
+			? SaveSys->GetProfile()->LastPlayedCharacterID
+			: FGuid();
+
+		SaveSys->LoadInventory(this, CharacterID);
+	}
 }
 
 void UFP_InventoryComponent::ConstructInventory()
@@ -284,4 +300,136 @@ void UFP_InventoryComponent::SpawnDroppedItem(UFP_InventoryItem* Item, int32 Sta
 		StackableFragment->SetStackCount(StackCount);
 	}
 	ItemManifest.SpawnPickupActor(this, SpawnLocation, SpawnRotation);
+}
+
+UFP_InventorySaveData* UFP_InventoryComponent::CaptureInventoryState() const
+{
+	UFP_SpatialInventory* Spatial = Cast<UFP_SpatialInventory>(InventoryMenu);
+	if (!IsValid(Spatial)) return nullptr;
+
+	UFP_InventoryGrid* Grid = Spatial->GetGrid();
+	if (!IsValid(Grid)) return nullptr;
+
+	UFP_InventorySaveData* SaveData = NewObject<UFP_InventorySaveData>(GetTransientPackage());
+
+	// --- Grid items ---
+	TSet<UFP_InventoryItem*> SavedItems;
+
+	for (const auto& [OriginIndex, SlottedItem] : Grid->GetSlottedItems())
+	{
+		UFP_InventoryItem* Item = IsValid(SlottedItem) ? SlottedItem->GetInventoryItem() : nullptr;
+		if (!IsValid(Item)) continue;
+
+		FFP_GridItemSaveRecord& Record = SaveData->GridItems.AddDefaulted_GetRef();
+		Record.OriginIndex = OriginIndex;
+		Record.StackCount  = Item->GetTotalStackCount();
+		Record.ItemManifest.InitializeAs<FFP_ItemManifest>(Item->GetItemManifest());
+
+		SavedItems.Add(Item);
+	}
+
+	// --- Equipped items ---
+	for (const UFP_EquippedGridSlot* Slot : Spatial->GetEquippedGridSlots())
+	{
+		if (!IsValid(Slot)) continue;
+
+		const UFP_EquippedSlottedItem* SlottedItem = Slot->GetEquippedSlottedItem();
+		if (!IsValid(SlottedItem)) continue;
+
+		UFP_InventoryItem* Item = SlottedItem->GetInventoryItem();
+		if (!IsValid(Item)) continue;
+
+		FFP_EquippedItemSaveRecord& Record = SaveData->EquippedItems.AddDefaulted_GetRef();
+		Record.SlotTag     = Slot->GetEquipmentTypeTag();
+		Record.ItemManifest.InitializeAs<FFP_ItemManifest>(Item->GetItemManifest());
+
+		SavedItems.Add(Item);
+	}
+
+	// --- Hover item (only if its backing item is not already captured above) ---
+	const UFP_HoverItem* HoverItem = Grid->GetHoverItem();
+	if (IsValid(HoverItem))
+	{
+		UFP_InventoryItem* HoverInventoryItem = HoverItem->GetInventoryItem();
+		if (IsValid(HoverInventoryItem) && !SavedItems.Contains(HoverInventoryItem))
+		{
+			SaveData->bHasHoverItem       = true;
+			SaveData->HoverItemStackCount = HoverItem->GetStackCount();
+			SaveData->HoverItemManifest.InitializeAs<FFP_ItemManifest>(HoverInventoryItem->GetItemManifest());
+		}
+	}
+
+	return SaveData;
+}
+
+void UFP_InventoryComponent::RestoreInventoryState(UFP_InventorySaveData* SaveData)
+{
+	if (!IsValid(SaveData)) return;
+	if (!OwningController.IsValid() || !OwningController->IsLocalController()) return;
+
+	UFP_SpatialInventory* Spatial = Cast<UFP_SpatialInventory>(InventoryMenu);
+	if (!IsValid(Spatial)) return;
+
+	UFP_InventoryGrid* Grid = Spatial->GetGrid();
+	if (!IsValid(Grid)) return;
+
+	APlayerController* PC = OwningController.Get();
+	AActor* OwningActor = GetOwner();
+
+	auto CreateItem = [&](const FInstancedStruct& ManifestStruct, int32 StackCount) -> UFP_InventoryItem*
+	{
+		const FFP_ItemManifest* Manifest = ManifestStruct.GetPtr<FFP_ItemManifest>();
+		if (!Manifest) return nullptr;
+
+		UFP_InventoryItem* Item = NewObject<UFP_InventoryItem>(OwningActor);
+		Item->SetItemManifest(*Manifest);
+		Item->SetTotalStackCount(StackCount);
+		AddRepSubObj(Item);
+		InventoryList.AddEntry(Item);
+		return Item;
+	};
+
+	// --- Restore grid items ---
+	for (const FFP_GridItemSaveRecord& Record : SaveData->GridItems)
+	{
+		UFP_InventoryItem* Item = CreateItem(Record.ItemManifest, Record.StackCount);
+		if (!Item) continue;
+		Grid->RestoreItemAtIndex(Item, Record.OriginIndex);
+	}
+
+	// --- Restore equipped items (bypasses MeetsRequirements — items were validly worn at save) ---
+	for (const FFP_EquippedItemSaveRecord& Record : SaveData->EquippedItems)
+	{
+		UFP_InventoryItem* Item = CreateItem(Record.ItemManifest, 0);
+		if (!Item) continue;
+
+		// Restore visual in the equipment slot
+		Spatial->RestoreEquippedItem(Item, Record.SlotTag);
+
+		// Reapply all equipment GEs / effects — no requirements check on restore
+		if (FFP_MeshFragment* MeshFrag = Item->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_MeshFragment>())
+			MeshFrag->OnEquip(PC);
+		if (FFP_EquipmentFragment* EquipFrag = Item->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_EquipmentFragment>())
+			EquipFrag->OnEquip(PC);
+		if (FFP_AffixFragment* AffixFrag = Item->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_AffixFragment>())
+			AffixFrag->OnEquip(PC);
+		if (FFP_ImplicitFragment* ImplicitFrag = Item->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_ImplicitFragment>())
+			ImplicitFrag->OnEquip(PC);
+		if (FFP_SkillFragment* SkillFrag = Item->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_SkillFragment>())
+			SkillFrag->OnEquip(PC);
+	}
+
+	// --- Restore hover item ---
+	if (SaveData->bHasHoverItem)
+	{
+		UFP_InventoryItem* Item = CreateItem(SaveData->HoverItemManifest, SaveData->HoverItemStackCount);
+		if (Item)
+		{
+			Grid->AssignHoverItem(Item);
+			if (UFP_HoverItem* RestoredHover = Grid->GetHoverItem())
+			{
+				RestoredHover->UpdateStackCount(Item->IsStackable() ? SaveData->HoverItemStackCount : 0);
+			}
+		}
+	}
 }

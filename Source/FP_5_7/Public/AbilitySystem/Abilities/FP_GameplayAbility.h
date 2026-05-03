@@ -23,6 +23,11 @@ public:
 	bool bAllowNegativeCost = true;
 
 	virtual bool CheckCost(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, FGameplayTagContainer* OptionalRelevantTags = nullptr) const override;
+	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
+
+	/** When true, prints skill name, level, and XP to screen on activation. */
+	UPROPERTY(EditDefaultsOnly, Category="Debug")
+	bool bDebugActivation = true;
 
 protected:
 	UFUNCTION(BlueprintPure, Category="FP|GAS")

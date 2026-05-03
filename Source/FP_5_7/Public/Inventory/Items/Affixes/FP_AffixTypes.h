@@ -109,6 +109,10 @@ struct FP_5_7_API FFP_AffixInstance
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Affixes")
 	FName TierName;
 
+	/** Minimum item level required to roll this affix tier. Drives the item's effective level requirement. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Affixes")
+	int32 RequiredItemLevel{ 1 };
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Affixes")
 	FGameplayTag Stat1_Attr;
 

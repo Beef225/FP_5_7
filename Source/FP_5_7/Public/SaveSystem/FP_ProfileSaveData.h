@@ -54,6 +54,27 @@ struct FFP_CharacterSaveRecord
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 FortitudePoints = 0;
 
+	/** Cumulative XP earned per skill tag. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TMap<FGameplayTag, int32> SkillXPMap;
+
+	/** Current level reached per skill tag. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TMap<FGameplayTag, int32> SkillLevelMap;
+
+	/** Unspent skill passive points per skill tag. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TMap<FGameplayTag, int32> SkillUnspentPointsMap;
+
+	/** Hotbar input tag assigned to each skill tag. Populated when the hotbar system is built. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TMap<FGameplayTag, FGameplayTag> SkillInputTagMap;
+
+	/** All skill tags currently granted to this character (runtime source of truth).
+	 *  On new character this is empty — OnPossess seeds it from the SkillLibrary asset defaults. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<FGameplayTag> GrantedSkillTagsArray;
+
 	/** Used to sort cards by most-recently-played. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FDateTime LastPlayed;

@@ -94,6 +94,12 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Inventory")
 	UFP_InventoryBase* GetInventoryMenu() const { return InventoryMenu; }
 
+	/** Snapshots current grid/equipped/hover state into a save data object. Returns nullptr if inventory is unavailable. */
+	class UFP_InventorySaveData* CaptureInventoryState() const;
+
+	/** Restores grid/equipped/hover items from a save data object. Call after ConstructInventory(). */
+	void RestoreInventoryState(class UFP_InventorySaveData* SaveData);
+
 	UPROPERTY(EditAnywhere, Category = "Inventory|Drop")
 	float DropSpawnAngleMin = -85.f;
 

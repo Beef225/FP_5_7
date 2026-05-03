@@ -198,6 +198,15 @@ FGameplayTag MetaAttribute_IncomingDamage;
 //XP
 FGameplayTag MetaAttribute_IncomingXP;
 
+//DoT duration (SetByCaller — seconds)
+FGameplayTag SetByCaller_DotDuration;
+
+//Deferred damage per tick (SetByCaller for the deferred damage periodic GE)
+FGameplayTag SetByCaller_DeferredDamagePerTick;
+
+//Gameplay event sent by ExecCalc_Damage to trigger the deferred damage passive
+FGameplayTag GameplayEvent_DeferredDamage;
+
 
 //Misc Gameplay Tags
 //Player Tags
@@ -425,6 +434,16 @@ FGameplayTag Skills_Radiation_Microwave;
 	
 	TArray<FGameplayTag> DamageTypes;	
 	
+
+//PassiveTree
+FGameplayTag PassiveTree_Might;
+FGameplayTag PassiveTree_Resonance;
+FGameplayTag PassiveTree_Agility;
+FGameplayTag PassiveTree_Fortitude;
+FGameplayTag PassiveTree_IncreasedArmour_1;
+FGameplayTag PassiveTree_IncreasedArmour_2;
+FGameplayTag PassiveTree_IncreasedArmour_3;
+FGameplayTag PassiveTree_IncreasedArmour_4;
 private:
 	static FFP_GameplayTags GameplayTags;
 };

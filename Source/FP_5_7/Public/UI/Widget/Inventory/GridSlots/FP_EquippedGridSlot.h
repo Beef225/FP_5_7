@@ -34,6 +34,8 @@ public:
 
 	UFP_EquippedSlottedItem* OnItemEquipped(UFP_InventoryItem* Item, const FGameplayTag& EquipmentTag, float TileSize);
 	void SetEquippedSlottedItem(UFP_EquippedSlottedItem* Item) { EquippedSlottedItem = Item; }
+	UFP_EquippedSlottedItem* GetEquippedSlottedItem() const { return EquippedSlottedItem; }
+	FGameplayTag GetEquipmentTypeTag() const { return EquipmentTypeTag; }
 
 	/** Resets slot to its empty default state: unoccupied texture + grayed icon visible. */
 	void ResetVisuals();

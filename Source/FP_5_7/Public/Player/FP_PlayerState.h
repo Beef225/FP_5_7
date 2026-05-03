@@ -13,9 +13,15 @@ class UAbilitySystemComponent;
 class UAttributeSet;
 class UFP_LevelUpInfo;
 class UFP_SkillLibrary;
+class UFP_AbilitySystemComponent;
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnPlayerStatChanged, int32 /*StatValue*/)
 DECLARE_MULTICAST_DELEGATE_TwoParams(FOnPassivePointsChanged, FGameplayTag /*AttributeTag*/, int32 /*Points*/)
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillXPChanged,        FGameplayTag /*SkillTag*/, int32 /*NewXP*/)
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillLevelChanged,     FGameplayTag /*SkillTag*/, int32 /*NewLevel*/)
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillPointsChanged,    FGameplayTag /*SkillTag*/, int32 /*UnspentPoints*/)
+DECLARE_MULTICAST_DELEGATE(FOnSkillStateLoaded)
+DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillInputTagAssigned, FGameplayTag /*SlotInputTag*/, FGameplayTag /*SkillTag*/)
 /**
  * 
  */
@@ -33,6 +39,11 @@ public:
 	FOnPlayerStatChanged OnLevelChangedDelegate;
 	FOnPlayerStatChanged OnAttributePointsChangedDelegate;
 	FOnPassivePointsChanged OnPassivePointsChangedDelegate;
+	FOnSkillXPChanged        OnSkillXPChangedDelegate;
+	FOnSkillLevelChanged     OnSkillLevelChangedDelegate;
+	FOnSkillPointsChanged    OnSkillPointsChangedDelegate;
+	FOnSkillStateLoaded      OnSkillStateLoaded;
+	FOnSkillInputTagAssigned OnSkillInputTagAssigned;
 
 	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
 	FORCEINLINE int32 GetXP() const { return XP; }
@@ -41,6 +52,66 @@ public:
 	FORCEINLINE int32 GetResonancePassivePoints() const { return ResonancePassivePoints; }
 	FORCEINLINE int32 GetAgilityPassivePoints() const { return AgilityPassivePoints; }
 	FORCEINLINE int32 GetFortitudePassivePoints() const { return FortitudePassivePoints; }
+
+	/** Returns available unspent points for the given PassiveTree.X tag. */
+	int32 GetPassivePointsForTree(const FGameplayTag& TreeTag) const;
+
+	/** Deducts points from the pool for the given PassiveTree.X tag. */
+	void SpendPassivePoints(const FGameplayTag& TreeTag, int32 Amount);
+
+	/** MonsterLevel = -1 means no penalty (e.g. quest rewards). */
+	void AddSkillXP(int32 InXP, int32 MonsterLevel = -1);
+
+	/** Skill XP: one-directional — only penalises when character < monster (rushing high content).
+	 *  Overlevelled character vs low monster = no penalty, enabling skill catch-up. */
+	static float ComputeSkillXPMultiplier(int32 PlayerLevel, int32 MonsterLevel);
+
+	/** Character XP: bidirectional — penalises both farming low AND rushing high content. */
+	static float ComputeCharacterXPMultiplier(int32 PlayerLevel, int32 MonsterLevel);
+	void LoadSkillState(const TMap<FGameplayTag, int32>& InXP, const TMap<FGameplayTag, int32>& InLevels,
+	                    const TMap<FGameplayTag, int32>& InPoints, const TMap<FGameplayTag, FGameplayTag>& InInputTags);
+
+	/** Seeds GrantedSkillTags from any entry in the SkillLibrary asset with bGranted == true.
+	 *  Call once for a new character before the first save. */
+	void InitGrantedSkillsFromLibrary();
+
+	/** Call when any source (item, quest, level-up, etc.) grants a skill at runtime. */
+	void AddGrantedSkill(const FGameplayTag& SkillTag);
+
+	/** Call when a skill is revoked (item unequipped, etc.). */
+	void RemoveGrantedSkill(const FGameplayTag& SkillTag);
+
+	FORCEINLINE bool IsSkillGranted(const FGameplayTag& SkillTag) const { return GrantedSkillTags.Contains(SkillTag); }
+	TArray<FGameplayTag> GetGrantedSkillTagsArray() const { return GrantedSkillTags.Array(); }
+	void LoadGrantedSkills(const TArray<FGameplayTag>& InTags) { GrantedSkillTags = TSet<FGameplayTag>(InTags); }
+
+	FORCEINLINE int32 GetSkillXP(const FGameplayTag& SkillTag) const     { const int32* Found = SkillXP.Find(SkillTag);           return Found ? *Found : 0; }
+	FORCEINLINE int32 GetSkillLevel(const FGameplayTag& SkillTag) const  { const int32* Found = SkillLevel.Find(SkillTag);         return Found ? *Found : 1; }
+	FORCEINLINE int32 GetSkillPoints(const FGameplayTag& SkillTag) const { const int32* Found = UnspentSkillPoints.Find(SkillTag); return Found ? *Found : 0; }
+	/** Returns the skill assigned to a slot, or invalid if the slot is empty. */
+	FORCEINLINE FGameplayTag GetSkillForSlot(const FGameplayTag& SlotInputTag) const { const FGameplayTag* Found = SkillInputTags.Find(SlotInputTag); return Found ? *Found : FGameplayTag(); }
+
+	/** Directly sets the skill for a slot (bypasses broadcast — use AssignSkillToSlot for UI-driven changes). */
+	void SetSkillSlot(const FGameplayTag& SlotInputTag, const FGameplayTag& SkillTag) { SkillInputTags.Add(SlotInputTag, SkillTag); }
+
+	/** Assigns a skill to a hotbar slot. Clears any previous occupant of that slot,
+	 *  updates the map, and broadcasts OnSkillInputTagAssigned so all frames can refresh. */
+	void AssignSkillToSlot(const FGameplayTag& SkillTag, const FGameplayTag& SlotInputTag);
+
+	/** Removes whatever skill is assigned to SlotInputTag and broadcasts so frames clear. */
+	void ClearSkillSlot(const FGameplayTag& SlotInputTag);
+
+	/** Wires all saved slot→skill pairs to the ASC. Call after startup abilities are granted.
+	 *  Only modifies specs that appear in the saved map; skills not in the map are untouched. */
+	void ApplyInputTagsToASC(UFP_AbilitySystemComponent* ASC);
+
+	/** Wires saved slot bindings for a single skill to the ASC. Call after GrantItemSkill. */
+	void ApplyInputTagForSkill(UFP_AbilitySystemComponent* ASC, const FGameplayTag& SkillTag);
+
+	const TMap<FGameplayTag, int32>& GetSkillXPMap() const           { return SkillXP; }
+	const TMap<FGameplayTag, int32>& GetSkillLevelMap() const        { return SkillLevel; }
+	const TMap<FGameplayTag, int32>& GetSkillUnspentPointsMap() const { return UnspentSkillPoints; }
+	const TMap<FGameplayTag, FGameplayTag>& GetSkillInputTagMap() const { return SkillInputTags; }
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Abilities")
 	UFP_SkillLibrary* GetSkillLibrary() const { return SkillLibrary; }
@@ -129,8 +200,26 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, ReplicatedUsing = OnRep_GripStance, Category = "Animation", meta = (AllowPrivateAccess = "true"))
 	EWeaponGripStyle GripStance = EWeaponGripStyle::Unarmed;
-	
+
 	UFUNCTION()
 	void OnRep_GripStance(EWeaponGripStyle OldGripStance);
+
+	UPROPERTY(VisibleAnywhere)
+	TMap<FGameplayTag, int32> SkillXP;
+
+	UPROPERTY(VisibleAnywhere)
+	TMap<FGameplayTag, int32> SkillLevel;
+
+	UPROPERTY(VisibleAnywhere)
+	TMap<FGameplayTag, int32> UnspentSkillPoints;
+
+	UPROPERTY(VisibleAnywhere)
+	TMap<FGameplayTag, FGameplayTag> SkillInputTags;
+
+	/** Runtime source of truth for which skills this character currently has.
+	 *  Seeded from SkillLibrary asset bGranted defaults on new character creation.
+	 *  Modified at runtime by AddGrantedSkill / RemoveGrantedSkill from any grant source. */
+	UPROPERTY(VisibleAnywhere)
+	TSet<FGameplayTag> GrantedSkillTags;
 
 };

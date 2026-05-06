@@ -7,10 +7,12 @@
 #include "GameplayTagContainer.h"
 #include "Libraries/FP_EnumDefs.h"
 #include "UI/Widget/SkillTree/FP_SkillTreeNode.h"
+#include "UI/Widget/SkillTree/FP_SkillTreeLines.h"
 #include "FP_SkillTreeWidget.generated.h"
 
 class UFP_SkillTreeNodeData;
 class UCanvasPanel;
+class UFP_SkillTreeLines;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSkillTreePendingCountChanged, int32, NewCount);
 
@@ -87,21 +89,8 @@ public:
 	TArray<TObjectPtr<UFP_SkillTreeNodeData>> NodeDataAssets;
 
 protected:
+	virtual void NativePreConstruct() override;
 	virtual void NativeConstruct() override;
-
-	/**
-	 * Draws connection lines between nodes.
-	 * Requires Canvas_Nodes to be anchored at (0,0) filling the full widget so
-	 * that canvas-space positions match NativePaint local space exactly.
-	 */
-	virtual int32 NativePaint(
-		const FPaintArgs& Args,
-		const FGeometry& AllottedGeometry,
-		const FSlateRect& MyCullingRect,
-		FSlateWindowElementList& OutDrawElements,
-		int32 LayerId,
-		const FWidgetStyle& InWidgetStyle,
-		bool bParentEnabled) const override;
 
 	// ---- BP events ---------------------------------------------------------
 
@@ -139,31 +128,36 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="Skill Tree", meta=(ClampMin="0.1"))
 	float PositionScale = 1.0f;
 
-
-	// ---- Line visuals -------------------------------------------------------
-
-	/** Both endpoints Allocated or Pending. */
 	UPROPERTY(EditDefaultsOnly, Category="Skill Tree|Lines")
-	FLinearColor LineColor_Active = FLinearColor(1.f, 0.8f, 0.2f, 1.f);
+	FLinearColor LineColor_Active   = FLinearColor(1.f, 0.8f, 0.2f, 1.f);
 
-	/** One endpoint Allocated / Pending, other not. */
 	UPROPERTY(EditDefaultsOnly, Category="Skill Tree|Lines")
-	FLinearColor LineColor_Partial = FLinearColor(0.5f, 0.5f, 0.5f, 1.f);
+	FLinearColor LineColor_Partial  = FLinearColor(0.5f, 0.5f, 0.5f, 1.f);
 
-	/** Neither endpoint Allocated nor Pending. */
 	UPROPERTY(EditDefaultsOnly, Category="Skill Tree|Lines")
 	FLinearColor LineColor_Inactive = FLinearColor(0.15f, 0.15f, 0.15f, 0.7f);
 
 	UPROPERTY(EditDefaultsOnly, Category="Skill Tree|Lines", meta=(ClampMin="0.5"))
 	float LineThickness = 2.0f;
 
-	// ---- Widget binding ----------------------------------------------------
+
+	// ---- Widget bindings ---------------------------------------------------
+
+	/**
+	 * Line drawing layer — must sit at a LOWER ZOrder than Canvas_Nodes in the BP.
+	 * Anchor to fill the same area as Canvas_Nodes.
+	 * Set Visibility = HitTestInvisible in the BP.
+	 * Configure line colours and thickness here in the BP defaults.
+	 */
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UFP_SkillTreeLines> Canvas_Lines;
 
 	/** Must fill the entire tree widget area (anchors 0,0 → 1,1, offsets 0). */
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UCanvasPanel> Canvas_Nodes;
 
 private:
+	void PushLineStyle();
 	void SpawnNodeWidget(const UFP_SkillTreeNodeData* Data);
 	ESkillTreeNodeState ComputeState(const UFP_SkillTreeNodeData* Data) const;
 	void RecomputeAllStates();
@@ -182,8 +176,11 @@ private:
 	UPROPERTY()
 	TArray<TObjectPtr<const UFP_SkillTreeNodeData>> NodeDataList;
 
-	/** Pre-computed unique connection pairs for NativePaint. Rebuilt in PopulateTree. */
+	/** Pre-computed unique connection pairs. Rebuilt in PopulateTree, passed to Canvas_Lines. */
 	TArray<TTuple<FGameplayTag, FGameplayTag>> ConnectionPairs;
+
+	/** Tag → canvas-space position (NodePosition * PositionScale). Rebuilt in PopulateTree. */
+	TMap<FGameplayTag, FVector2D> CachedPosMap;
 
 	FGameplayTagContainer AllocatedNodeTags;
 	TArray<FGameplayTag>  PendingNodeTags;

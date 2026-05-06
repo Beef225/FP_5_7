@@ -2,15 +2,32 @@
 
 #include "UI/Widget/SkillTree/FP_SkillTreeWidget.h"
 #include "UI/Widget/SkillTree/FP_SkillTreeNode.h"
+#include "UI/Widget/SkillTree/FP_SkillTreeLines.h"
 #include "SkillTree/FP_SkillTreeNodeData.h"
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
-#include "Rendering/DrawElements.h"
+
+void UFP_SkillTreeWidget::NativePreConstruct()
+{
+	Super::NativePreConstruct();
+	PushLineStyle();
+}
 
 void UFP_SkillTreeWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
+	PushLineStyle();
 	PopulateTree();
+}
+
+// ---------------------------------------------------------------------------
+// Line style
+// ---------------------------------------------------------------------------
+
+void UFP_SkillTreeWidget::PushLineStyle()
+{
+	if (Canvas_Lines)
+		Canvas_Lines->SetStyle(LineThickness, LineColor_Active, LineColor_Partial, LineColor_Inactive);
 }
 
 // ---------------------------------------------------------------------------
@@ -48,6 +65,7 @@ void UFP_SkillTreeWidget::PopulateTree()
 	SpawnedNodes.Empty();
 	NodeDataList.Empty();
 	ConnectionPairs.Empty();
+	CachedPosMap.Empty();
 	PendingNodeTags.Empty();
 
 	for (const TObjectPtr<UFP_SkillTreeNodeData>& Data : NodeDataAssets)
@@ -76,6 +94,17 @@ void UFP_SkillTreeWidget::PopulateTree()
 			ConnectionPairs.Add(MakeTuple(Data->NodeTag, Neighbour));
 		}
 	}
+
+	// Build position map and push everything to the line layer
+	CachedPosMap.Reserve(NodeDataList.Num());
+	for (const TObjectPtr<const UFP_SkillTreeNodeData>& Data : NodeDataList)
+	{
+		if (Data)
+			CachedPosMap.Add(Data->NodeTag, Data->NodePosition * PositionScale);
+	}
+
+	if (Canvas_Lines)
+		Canvas_Lines->SetConnectionData(ConnectionPairs, CachedPosMap);
 
 	RecomputeAllStates();
 }
@@ -110,6 +139,7 @@ void UFP_SkillTreeWidget::SpawnNodeWidget(const UFP_SkillTreeNodeData* Data)
 		const FVector2D Centre   = Data->NodePosition * PositionScale;
 		NodeSlot->SetPosition(Centre - HalfSize);
 		NodeSlot->SetSize(HalfSize * 2.f);
+		NodeSlot->SetZOrder(1);
 	}
 
 	SpawnedNodes.Add(Data->NodeTag, NodeWidget);
@@ -153,7 +183,8 @@ void UFP_SkillTreeWidget::RecomputeAllStates()
 		}
 	}
 
-	Invalidate(EInvalidateWidgetReason::Paint);
+	if (Canvas_Lines)
+		Canvas_Lines->SetState(AllocatedNodeTags, PendingNodeTags);
 }
 
 // ---------------------------------------------------------------------------
@@ -234,64 +265,4 @@ void UFP_SkillTreeWidget::CancelPendingNodes()
 	OnPendingCountChanged(0);
 }
 
-// ---------------------------------------------------------------------------
-// Connection line rendering
-// ---------------------------------------------------------------------------
-
-int32 UFP_SkillTreeWidget::NativePaint(
-	const FPaintArgs& Args,
-	const FGeometry& AllottedGeometry,
-	const FSlateRect& MyCullingRect,
-	FSlateWindowElementList& OutDrawElements,
-	int32 LayerId,
-	const FWidgetStyle& InWidgetStyle,
-	bool bParentEnabled) const
-{
-	// Draw lines BELOW nodes — call Super after so nodes paint on top.
-	// (If you want lines on top, call Super first and draw after.)
-
-	// Build a tag→position lookup from data assets.
-	// NodePosition is already the canvas centre in data-asset space.
-	TMap<FGameplayTag, FVector2D> PosMap;
-	PosMap.Reserve(NodeDataList.Num());
-	for (const TObjectPtr<const UFP_SkillTreeNodeData>& Data : NodeDataList)
-	{
-		if (Data)
-			PosMap.Add(Data->NodeTag, Data->NodePosition * PositionScale);
-	}
-
-	for (const TTuple<FGameplayTag, FGameplayTag>& Pair : ConnectionPairs)
-	{
-		const FVector2D* StartPtr = PosMap.Find(Pair.Get<0>());
-		const FVector2D* EndPtr   = PosMap.Find(Pair.Get<1>());
-		if (!StartPtr || !EndPtr) continue;
-
-		// Pick colour based on state of both endpoints
-		const bool bAActive = AllocatedNodeTags.HasTag(Pair.Get<0>()) || PendingNodeTags.Contains(Pair.Get<0>());
-		const bool bBActive = AllocatedNodeTags.HasTag(Pair.Get<1>()) || PendingNodeTags.Contains(Pair.Get<1>());
-
-		FLinearColor LineColor;
-		if (bAActive && bBActive)
-			LineColor = LineColor_Active;
-		else if (bAActive || bBActive)
-			LineColor = LineColor_Partial;
-		else
-			LineColor = LineColor_Inactive;
-
-		const TArray<FVector2D> Points = { *StartPtr, *EndPtr };
-		FSlateDrawElement::MakeLines(
-			OutDrawElements,
-			LayerId,
-			AllottedGeometry.ToPaintGeometry(),
-			Points,
-			ESlateDrawEffect::None,
-			LineColor,
-			true,
-			LineThickness);
-	}
-
-	++LayerId;
-	return Super::NativePaint(Args, AllottedGeometry, MyCullingRect, OutDrawElements,
-		LayerId, InWidgetStyle, bParentEnabled);
-}
 

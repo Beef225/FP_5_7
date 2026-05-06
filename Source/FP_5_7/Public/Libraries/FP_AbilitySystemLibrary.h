@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "Inventory/Items/FP_ItemComponent.h"
 #include "Inventory/Loot/Data/FP_LootTiers.h"
@@ -95,6 +96,15 @@ public:
 
 	/** Returns the hover item currently held in the player's inventory UI, or nullptr. */
 	static UFP_HoverItem* GetHoverItem(APlayerController* PC);
+
+	/**
+	 * Sends a debuff buildup event to TargetActor's ASC.
+	 * SourceActor is the instigator (used to read duration attribute on threshold break).
+	 * BuildupAmount is the raw accumulation value — scaled by the passive's immunity ramp if active.
+	 */
+	UFUNCTION(BlueprintCallable, Category="FP_AbilitySystemLibrary|Debuffs")
+	static void ApplyDebuffBuildup(AActor* TargetActor, AActor* SourceActor,
+	                               const FGameplayTag& BuildupTag, float BuildupAmount);
 
 	/**
 	 * Iterates over a 2D rectangular region of a flat array starting at Index,

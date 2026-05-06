@@ -4,6 +4,8 @@
 #include "Libraries/FP_AbilitySystemLibrary.h"
 
 #include "FP_AbilityTypes.h"
+#include "AbilitySystemComponent.h"
+#include "AbilitySystemInterface.h"
 #include "Inventory/InventoryManagement/Components/FP_InventoryComponent.h"
 #include "UI/Widget/Inventory/FP_InventoryBase.h"
 #include "UI/Widget/Inventory/HoverItem/FP_HoverItem.h"
@@ -283,4 +285,32 @@ UFP_HoverItem* UFP_AbilitySystemLibrary::GetHoverItem(APlayerController* PC)
 	UFP_InventoryBase* InventoryMenu = IC->GetInventoryMenu();
 	if (!IsValid(InventoryMenu)) return nullptr;
 	return InventoryMenu->GetHoverItem();
+}
+
+void UFP_AbilitySystemLibrary::ApplyDebuffBuildup(AActor* TargetActor, AActor* SourceActor,
+                                                   const FGameplayTag& BuildupTag, float BuildupAmount)
+{
+	if (!TargetActor || !SourceActor || BuildupAmount <= 0.f || !BuildupTag.IsValid())
+	{
+		return;
+	}
+
+	IAbilitySystemInterface* TargetASI = Cast<IAbilitySystemInterface>(TargetActor);
+	if (!TargetASI)
+	{
+		return;
+	}
+
+	UAbilitySystemComponent* TargetASC = TargetASI->GetAbilitySystemComponent();
+	if (!TargetASC)
+	{
+		return;
+	}
+
+	FGameplayEventData Payload;
+	Payload.EventTag      = BuildupTag;
+	Payload.Instigator    = SourceActor;
+	Payload.EventMagnitude = BuildupAmount;
+
+	TargetASC->HandleGameplayEvent(BuildupTag, &Payload);
 }

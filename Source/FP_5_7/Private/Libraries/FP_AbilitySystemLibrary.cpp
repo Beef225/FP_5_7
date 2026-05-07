@@ -2,6 +2,7 @@
 
 
 #include "Libraries/FP_AbilitySystemLibrary.h"
+#include "Player/FP_PlayerController.h"
 
 #include "FP_AbilityTypes.h"
 #include "AbilitySystemComponent.h"
@@ -313,4 +314,16 @@ void UFP_AbilitySystemLibrary::ApplyDebuffBuildup(AActor* TargetActor, AActor* S
 	Payload.EventMagnitude = BuildupAmount;
 
 	TargetASC->HandleGameplayEvent(BuildupTag, &Payload);
+}
+
+void UFP_AbilitySystemLibrary::PauseGame(const UObject* WorldContextObject)
+{
+	if (AFP_PlayerController* PC = Cast<AFP_PlayerController>(UGameplayStatics::GetPlayerController(WorldContextObject, 0)))
+		PC->PauseGame();
+}
+
+void UFP_AbilitySystemLibrary::UnpauseGame(const UObject* WorldContextObject)
+{
+	if (AFP_PlayerController* PC = Cast<AFP_PlayerController>(UGameplayStatics::GetPlayerController(WorldContextObject, 0)))
+		PC->UnpauseGame();
 }

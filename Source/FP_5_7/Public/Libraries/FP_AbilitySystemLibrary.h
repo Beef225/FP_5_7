@@ -106,6 +106,12 @@ public:
 	static void ApplyDebuffBuildup(AActor* TargetActor, AActor* SourceActor,
 	                               const FGameplayTag& BuildupTag, float BuildupAmount);
 
+	UFUNCTION(BlueprintCallable, Category="FP_AbilitySystemLibrary|Game", meta=(WorldContext="WorldContextObject"))
+	static void PauseGame(const UObject* WorldContextObject);
+
+	UFUNCTION(BlueprintCallable, Category="FP_AbilitySystemLibrary|Game", meta=(WorldContext="WorldContextObject"))
+	static void UnpauseGame(const UObject* WorldContextObject);
+
 	/**
 	 * Iterates over a 2D rectangular region of a flat array starting at Index,
 	 * spanning Range2D.X columns and Range2D.Y rows within a grid of GridColumns width.

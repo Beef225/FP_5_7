@@ -26,9 +26,20 @@
 #include "Player/FP_PlayerState.h"
 
 
+void AFP_PlayerController::PauseGame()
+{
+	SetPause(true);
+}
+
+void AFP_PlayerController::UnpauseGame()
+{
+	SetPause(false);
+}
+
 AFP_PlayerController::AFP_PlayerController()
 {
 	bReplicates = true;
+	bShouldPerformFullTickWhenPaused = true;
 	Spline = CreateDefaultSubobject<USplineComponent>("Spline");
 }
 

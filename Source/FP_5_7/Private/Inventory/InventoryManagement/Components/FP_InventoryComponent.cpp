@@ -6,6 +6,7 @@
 #include "Inventory/Items/Fragments/FP_AffixFragment.h"
 #include "Inventory/Items/Fragments/FP_ImplicitFragment.h"
 #include "Inventory/Items/Fragments/FP_SkillFragment.h"
+#include "Inventory/Items/Fragments/FP_GripStanceFragment.h"
 #include "Inventory/Types/FP_InventoryTypes.h"
 #include "Net/UnrealNetwork.h"
 #include "SaveSystem/FP_InventorySaveData.h"
@@ -238,6 +239,10 @@ void UFP_InventoryComponent::Multicast_EquipSlotClicked_Implementation(UFP_Inven
 		{
 			SkillFrag->OnUnequip(PC);
 		}
+		if (FFP_GripStanceFragment* GripFrag = ItemToUnequip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_GripStanceFragment>())
+		{
+			GripFrag->OnUnequip(PC);
+		}
 	}
 
 	if (IsValid(ItemToEquip))
@@ -261,6 +266,10 @@ void UFP_InventoryComponent::Multicast_EquipSlotClicked_Implementation(UFP_Inven
 		if (FFP_SkillFragment* SkillFrag = ItemToEquip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_SkillFragment>())
 		{
 			SkillFrag->OnEquip(PC);
+		}
+		if (FFP_GripStanceFragment* GripFrag = ItemToEquip->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_GripStanceFragment>())
+		{
+			GripFrag->OnEquip(PC);
 		}
 	}
 
@@ -417,6 +426,8 @@ void UFP_InventoryComponent::RestoreInventoryState(UFP_InventorySaveData* SaveDa
 			ImplicitFrag->OnEquip(PC);
 		if (FFP_SkillFragment* SkillFrag = Item->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_SkillFragment>())
 			SkillFrag->OnEquip(PC);
+		if (FFP_GripStanceFragment* GripFrag = Item->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_GripStanceFragment>())
+			GripFrag->OnEquip(PC);
 	}
 
 	// --- Restore hover item ---

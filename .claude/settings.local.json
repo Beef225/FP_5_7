@@ -33,7 +33,8 @@
       "Bash(xargs wc *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(grep -E \"\\\\.\\(h|cpp\\)$\")"
+      "Bash(grep -E \"\\\\.\\(h|cpp\\)$\")",
+      "Bash(grep -v \"//\")"
     ]
   }
 }

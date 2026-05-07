@@ -49,6 +49,12 @@ public:
 	UFUNCTION(BlueprintPure, Category="Input")
 	bool IsMouseMoveEnabled() const { return bMouseMoveEnabled; }
 
+	UFUNCTION(BlueprintCallable, Category="Game|Pause")
+	void PauseGame();
+
+	UFUNCTION(BlueprintCallable, Category="Game|Pause")
+	void UnpauseGame();
+
 	bool IsPendingLevelTransition() const { return bPendingLevelTransition; }
 	void ConsumePendingLevelTransition() { bPendingLevelTransition = false; }
 

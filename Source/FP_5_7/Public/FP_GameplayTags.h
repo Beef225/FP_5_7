@@ -401,6 +401,9 @@ FGameplayTag Fragment_Implicits;
 /** Identifies FFP_SkillFragment: skills rolled from a pool and granted to the player on equip. */
 FGameplayTag Fragment_Skills;
 
+/** Identifies FFP_GripStanceFragment: applies a weapon grip style to the player on equip. */
+FGameplayTag Fragment_GripStance;
+
 
 // -------------------------------------------------------------------------
 // Equipment Slot Types  (parent tags — items use child tags under these)
@@ -422,6 +425,11 @@ FGameplayTag Inventory_Equippable_Headwear_CombatHelm;
 FGameplayTag Inventory_Equippable_Gloves_CombatGloves;
 FGameplayTag Inventory_Equippable_BodyArmour_CombatArmour;
 FGameplayTag Inventory_Equippable_Boots_CombatBoots;
+
+// -------------------------------------------------------------------------
+// Weapons
+// -------------------------------------------------------------------------
+FGameplayTag Inventory_Equippable_Weapon_ShockRail;
 
 // -------------------------------------------------------------------------
 //Locations

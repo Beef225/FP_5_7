@@ -96,6 +96,27 @@ USkeletalMeshComponent* AFP_PlayerCharacter::GetBodyPartMesh(EBodyPart BodyPart)
 	}
 }
 
+void AFP_PlayerCharacter::SetLeftHandIKTarget(USkeletalMeshComponent* WeaponMesh, FName SocketName)
+{
+	LeftHandIKWeaponMesh = WeaponMesh;
+	LeftHandIKSocket     = SocketName;
+
+	// Ensure the weapon mesh finishes its transform update before the
+	// character anim instance reads the socket position, eliminating IK lag.
+	if (USkeletalMeshComponent* CharMesh = GetMesh())
+		CharMesh->AddTickPrerequisiteComponent(WeaponMesh);
+}
+
+void AFP_PlayerCharacter::ClearLeftHandIKTarget()
+{
+	if (LeftHandIKWeaponMesh.IsValid())
+		if (USkeletalMeshComponent* CharMesh = GetMesh())
+			CharMesh->RemoveTickPrerequisiteComponent(LeftHandIKWeaponMesh.Get());
+
+	LeftHandIKWeaponMesh = nullptr;
+	LeftHandIKSocket     = NAME_None;
+}
+
 void AFP_PlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();

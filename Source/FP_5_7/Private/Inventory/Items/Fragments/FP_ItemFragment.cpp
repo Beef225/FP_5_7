@@ -150,6 +150,18 @@ void FFP_MeshFragment::OnEquip(APlayerController* PC)
 				FAttachmentTransformRules::SnapToTargetNotIncludingScale,
 				Entry.Socket);
 
+			// Align the weapon so WeaponAlignSocket sits on the character socket
+			// rather than the weapon root.
+			if (!Entry.WeaponAlignSocket.IsNone())
+			{
+				FTransform GripLocal = SocketMesh->GetSocketTransform(Entry.WeaponAlignSocket, RTS_Component);
+				SocketMesh->SetRelativeTransform(GripLocal.Inverse());
+			}
+
+			// Register the left-hand IK target if this entry specifies one.
+			if (!Entry.LeftHandSocket.IsNone())
+				Character->SetLeftHandIKTarget(SocketMesh, Entry.LeftHandSocket);
+
 			SpawnedSocketComponents.Add(SocketMesh);
 		}
 	}
@@ -174,6 +186,9 @@ void FFP_MeshFragment::OnUnequip(APlayerController* PC)
 		}
 	}
 	CachedOriginalMeshes.Empty();
+
+	// Clear left-hand IK before destroying components
+	Character->ClearLeftHandIKTarget();
 
 	// Destroy all socket-attached add-on meshes
 	for (TWeakObjectPtr<USkeletalMeshComponent>& WeakComp : SpawnedSocketComponents)

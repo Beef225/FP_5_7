@@ -1081,6 +1081,9 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Fragment_Skills = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Fragment.Skills"), FString("Identifies FFP_SkillFragment: skills rolled from a pool and granted to the player on equip"));
 
+	GameplayTags.Fragment_GripStance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Fragment.GripStance"), FString("Identifies FFP_GripStanceFragment: applies a weapon grip style to the player on equip"));
+
 	// -------------------------------------------------------------------------
 	// Equipment Slot Types  (parent tags — items use child tags under these)
 	// -------------------------------------------------------------------------
@@ -1114,6 +1117,12 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Inventory.Equippable.BodyArmour.CombatArmour"), FString("Combat Armour body armour item"));
 	GameplayTags.Inventory_Equippable_Boots_CombatBoots = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Inventory.Equippable.Boots.CombatBoots"), FString("Combat Boots item"));
+
+	// -------------------------------------------------------------------------
+	// Weapons
+	// -------------------------------------------------------------------------
+	GameplayTags.Inventory_Equippable_Weapon_ShockRail = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Weapon.ShockRail"), FString("ShockRail weapon item"));
 
 	// -------------------------------------------------------------------------
 	//Locations

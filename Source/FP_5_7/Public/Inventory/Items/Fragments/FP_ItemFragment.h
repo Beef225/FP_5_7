@@ -294,6 +294,25 @@ struct FP_5_7_API FFP_MeshEntry
 	/** Socket name for attachment. Only used when bReplaceMesh=false. */
 	UPROPERTY(EditAnywhere, Category = "Mesh", meta = (EditCondition = "!bReplaceMesh"))
 	FName Socket{ NAME_None };
+
+	/**
+	 * Socket on the weapon skeleton that should align to the character's hand socket.
+	 * Offsets the weapon after attachment so this socket sits exactly on Socket above,
+	 * rather than the weapon root. Leave None to attach at root.
+	 * Only used when bReplaceMesh=false.
+	 */
+	UPROPERTY(EditAnywhere, Category = "Mesh", meta = (EditCondition = "!bReplaceMesh"))
+	FName WeaponAlignSocket{ NAME_None };
+
+	/**
+	 * Socket on the weapon skeleton used as the left-hand IK target.
+	 * Place this at the foregrip. The anim instance reads it each frame
+	 * and drives the left arm via Two-Bone IK.
+	 * Leave None for one-handed weapons or weapons with no left-hand IK.
+	 * Only used when bReplaceMesh=false.
+	 */
+	UPROPERTY(EditAnywhere, Category = "Mesh", meta = (EditCondition = "!bReplaceMesh"))
+	FName LeftHandSocket{ NAME_None };
 };
 
 /**

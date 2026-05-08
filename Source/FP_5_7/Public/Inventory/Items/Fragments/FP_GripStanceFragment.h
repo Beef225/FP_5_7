@@ -20,6 +20,8 @@ struct FP_5_7_API FFP_GripStanceFragment : public FFP_ItemFragment
 	void OnEquip(APlayerController* PC);
 	void OnUnequip(APlayerController* PC);
 
+	EWeaponGripStyle GetGripStance() const { return GripStance; }
+
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Weapon")

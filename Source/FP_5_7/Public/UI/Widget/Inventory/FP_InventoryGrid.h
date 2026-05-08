@@ -6,12 +6,12 @@
 #include "Blueprint/UserWidget.h"
 #include "GameplayTagContainer.h"
 #include "Inventory/Types/FP_InventoryTypes.h"
+#include "UI/Widget/Inventory/FP_InventoryBase.h"
 #include "FP_InventoryGrid.generated.h"
 
 enum class EFP_GridSlotState : uint8;
 
 class UFP_HoverItem;
-class UFP_InventoryBase;
 class UFP_SplitStackWidget;
 class UCanvasPanel;
 class UFP_GridSlot;

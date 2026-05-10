@@ -160,7 +160,7 @@ void FFP_MeshFragment::OnEquip(APlayerController* PC)
 
 			// Register the left-hand IK target if this entry specifies one.
 			if (!Entry.LeftHandSocket.IsNone())
-				Character->SetLeftHandIKTarget(SocketMesh, Entry.LeftHandSocket);
+				Character->SetLeftHandIKTarget(SocketMesh, Entry.LeftHandSocket, Entry.LeftHandJointTarget);
 
 			SpawnedSocketComponents.Add(SocketMesh);
 		}

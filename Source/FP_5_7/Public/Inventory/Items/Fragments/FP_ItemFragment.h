@@ -313,6 +313,15 @@ struct FP_5_7_API FFP_MeshEntry
 	 */
 	UPROPERTY(EditAnywhere, Category = "Mesh", meta = (EditCondition = "!bReplaceMesh"))
 	FName LeftHandSocket{ NAME_None };
+
+	/**
+	 * Component-space position hint for the Two-Bone IK joint target (elbow).
+	 * Tells the IK solver which way to bend the elbow — place this roughly where
+	 * the elbow should point for this weapon's grip. Tuned per weapon.
+	 * Only used when bReplaceMesh=false and LeftHandSocket is set.
+	 */
+	UPROPERTY(EditAnywhere, Category = "Mesh", meta = (EditCondition = "!bReplaceMesh"))
+	FVector LeftHandJointTarget{ FVector::ZeroVector };
 };
 
 /**

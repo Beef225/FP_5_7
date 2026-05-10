@@ -31,6 +31,7 @@ void UFP_PlayerAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		// Two-Bone IK effector expects a component-space vector.
 		const FVector SocketWorld      = WeaponMesh->GetSocketLocation(SocketName);
 		const FTransform MeshTransform = OwningCharacter->GetMesh()->GetComponentTransform();
-		LeftHandIKLocation = MeshTransform.InverseTransformPosition(SocketWorld);
+		LeftHandIKLocation             = MeshTransform.InverseTransformPosition(SocketWorld);
+		LeftHandJointTargetLocation    = OwningCharacter->GetLeftHandJointTargetLocation();
 	}
 }

@@ -5,11 +5,12 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Libraries/FP_EnumDefs.h"
+#include "SaveSystem/FP_ProfileSaveData.h"
 #include "FP_CharacterPreviewActor.generated.h"
 
 class USkeletalMeshComponent;
 class UFP_UpperBodyStanceSet;
-class UFP_InventorySaveData;
+class FFP_PreviewInputProcessor;
 
 /**
  * Lightweight character display actor for main menu / character select screens.
@@ -26,9 +27,12 @@ class FP_5_7_API AFP_CharacterPreviewActor : public AActor
 public:
 	AFP_CharacterPreviewActor();
 
-	/** Load equipment meshes and grip stance from an inventory save record. */
+	/**
+	 * Loads inventory save for the given character record and applies equipment meshes
+	 * and grip stance. No-op if no save exists for this character.
+	 */
 	UFUNCTION(BlueprintCallable, Category="Preview")
-	void LoadFromInventorySave(UFP_InventorySaveData* SaveData);
+	void LoadFromCharacterRecord(const FFP_CharacterSaveRecord& CharacterRecord);
 
 	/** Clear all equipped visuals and revert to default meshes / Unarmed stance. */
 	UFUNCTION(BlueprintCallable, Category="Preview")
@@ -41,8 +45,18 @@ public:
 	EWeaponGripStyle  GetPreviewGripStance() const { return PreviewGripStance; }
 	UFP_UpperBodyStanceSet* GetStanceSet()   const { return StanceSet; }
 
+	USkeletalMeshComponent* GetLeftHandIKWeaponMesh()        const { return LeftHandIKWeaponMesh.Get(); }
+	FName                   GetLeftHandIKSocket()            const { return LeftHandIKSocket; }
+	FVector                 GetLeftHandJointTargetLocation() const { return LeftHandJointTargetLocation; }
+
+	/** Drag sensitivity — degrees of yaw per pixel dragged. */
+	UPROPERTY(EditDefaultsOnly, Category="Preview|Rotation")
+	float RotationSpeed = 0.25f;
+
 protected:
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
+	virtual void Tick(float DeltaSeconds) override;
 
 	// ---- Animation config --------------------------------------------------
 
@@ -102,6 +116,16 @@ private:
 	UPROPERTY()
 	TArray<TObjectPtr<USkeletalMeshComponent>> SpawnedAttachments;
 
+	UPROPERTY()
+	TWeakObjectPtr<USkeletalMeshComponent> LeftHandIKWeaponMesh;
+
+	FName    LeftHandIKSocket            = NAME_None;
+	FVector  LeftHandJointTargetLocation = FVector::ZeroVector;
+
 	void ClearAttachments();
 	USkeletalMeshComponent* GetBodyPartMesh(EBodyPart BodyPart) const;
+
+	TSharedPtr<FFP_PreviewInputProcessor> InputProcessor;
+	bool  bWasMouseDown = false;
+	float LastMouseX    = 0.f;
 };

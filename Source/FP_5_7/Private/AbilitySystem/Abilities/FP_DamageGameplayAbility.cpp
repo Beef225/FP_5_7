@@ -153,6 +153,66 @@ void UFP_DamageGameplayAbility::AppendSkillModifierTagsToDamageSpec(FGameplayEff
 
 
 
+float UFP_DamageGameplayAbility::GetEffectiveSkillRate(float BaseRate) const
+{
+	bool bFound = false;
+	const float SpeedDelta      = GetSourceAttributeValue(UFP_AttributeSet::GetSkillSpeedAttribute(), bFound);
+	const float SpeedMultiplier = bFound ? (1.f + SpeedDelta) : 1.f;
+
+	float FreezeMultiplier = 1.f;
+	if (const AFP_CharacterBase* CharBase = Cast<AFP_CharacterBase>(GetAvatarActorFromActorInfo()))
+		FreezeMultiplier = 1.f - CharBase->GetFreezeRamp();
+
+	return BaseRate * SpeedMultiplier * FreezeMultiplier;
+}
+
+float UFP_DamageGameplayAbility::GetEffectiveSphereRadius(float BaseRadius) const
+{
+	bool bFound = false;
+	const float Additional  = GetSourceAttributeValue(UFP_AttributeSet::GetAreaOfEffectAdditionalRadiusAttribute(), bFound);
+	const float AdditionalCm = bFound ? (Additional * 100.f) : 0.f;
+
+	const float MultiplierDelta = GetSourceAttributeValue(UFP_AttributeSet::GetAreaOfEffectMulitplierAttribute(), bFound);
+	const float AreaScale = FMath::Max(1.f + (bFound ? MultiplierDelta : 0.f), 0.0001f);
+
+	// Circle area ∝ r² → scale r by sqrt(1+M) to grow area proportionally.
+	return (BaseRadius + AdditionalCm) * FMath::Sqrt(AreaScale);
+}
+
+void UFP_DamageGameplayAbility::GetEffectiveConeParams(float BaseLength, float BaseHalfAngleDeg,
+                                                        float& OutLength, float& OutHalfAngleDeg) const
+{
+	bool bFound = false;
+	const float Additional   = GetSourceAttributeValue(UFP_AttributeSet::GetAreaOfEffectAdditionalRadiusAttribute(), bFound);
+	const float AdditionalCm = bFound ? (Additional * 100.f) : 0.f;
+
+	const float MultiplierDelta = GetSourceAttributeValue(UFP_AttributeSet::GetAreaOfEffectMulitplierAttribute(), bFound);
+	const float AreaScale = FMath::Max(1.f + (bFound ? MultiplierDelta : 0.f), 0.0001f);
+
+	// 2D sector area ∝ L² × HalfAngle_rad; proportional scaling (L→kL, A→kA) gives k³ = (1+M).
+	const float k = FMath::Pow(AreaScale, 1.f / 3.f);
+	OutLength       = (BaseLength + AdditionalCm) * k;
+	OutHalfAngleDeg = BaseHalfAngleDeg * k;
+}
+
+void UFP_DamageGameplayAbility::GetEffectiveRectParams(float BaseLength, float BaseWidth,
+                                                        float& OutLength, float& OutWidth) const
+{
+	bool bFound = false;
+	const float Additional   = GetSourceAttributeValue(UFP_AttributeSet::GetAreaOfEffectAdditionalRadiusAttribute(), bFound);
+	const float AdditionalCm = bFound ? (Additional * 100.f) : 0.f;
+
+	const float MultiplierDelta = GetSourceAttributeValue(UFP_AttributeSet::GetAreaOfEffectMulitplierAttribute(), bFound);
+	const float AreaScale = FMath::Max(1.f + (bFound ? MultiplierDelta : 0.f), 0.0001f);
+
+	// Rect area ∝ L × W → scale both by sqrt(1+M); additional radius extends length only.
+	const float k = FMath::Sqrt(AreaScale);
+	OutLength = (BaseLength + AdditionalCm) * k;
+	OutWidth  = BaseWidth * k;
+}
+
+// ---------------------------------------------------------------------------
+
 void UFP_DamageGameplayAbility::AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const
 {
 	AppendSkillModifierTagsToDamageSpec(DamageSpecHandle);

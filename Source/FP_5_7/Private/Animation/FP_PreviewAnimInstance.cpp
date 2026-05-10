@@ -3,6 +3,7 @@
 #include "Animation/FP_PreviewAnimInstance.h"
 #include "Preview/FP_CharacterPreviewActor.h"
 #include "Animation/Data/FP_UpperBodyStanceSet.h"
+#include "Components/SkeletalMeshComponent.h"
 
 void UFP_PreviewAnimInstance::NativeInitializeAnimation()
 {
@@ -31,5 +32,18 @@ void UFP_PreviewAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	{
 		UpperBodySequence = nullptr;
 		bHasUpperBody     = false;
+	}
+
+	USkeletalMeshComponent* WeaponMesh = OwningPreviewActor->GetLeftHandIKWeaponMesh();
+	const FName IKSocket               = OwningPreviewActor->GetLeftHandIKSocket();
+
+	bUseLeftHandIK = IsValid(WeaponMesh) && !IKSocket.IsNone();
+
+	if (bUseLeftHandIK)
+	{
+		const FVector SocketWorld      = WeaponMesh->GetSocketLocation(IKSocket);
+		const FTransform BodyTransform = GetOwningComponent()->GetComponentTransform();
+		LeftHandIKLocation             = BodyTransform.InverseTransformPosition(SocketWorld);
+		LeftHandJointTargetLocation    = OwningPreviewActor->GetLeftHandJointTargetLocation();
 	}
 }

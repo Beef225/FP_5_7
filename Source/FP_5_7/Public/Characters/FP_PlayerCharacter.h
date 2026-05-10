@@ -30,13 +30,14 @@ public:
 	USkeletalMeshComponent* GetBodyPartMesh(EBodyPart BodyPart) const;
 
 	/** Called by FFP_MeshFragment when a weapon with a left-hand IK socket is equipped. */
-	void SetLeftHandIKTarget(USkeletalMeshComponent* WeaponMesh, FName SocketName);
+	void SetLeftHandIKTarget(USkeletalMeshComponent* WeaponMesh, FName SocketName, FVector JointTargetLocation);
 
 	/** Called by FFP_MeshFragment on unequip. Clears the IK target. */
 	void ClearLeftHandIKTarget();
 
-	USkeletalMeshComponent* GetLeftHandIKWeaponMesh() const { return LeftHandIKWeaponMesh.Get(); }
-	FName GetLeftHandIKSocket() const { return LeftHandIKSocket; }
+	USkeletalMeshComponent* GetLeftHandIKWeaponMesh()    const { return LeftHandIKWeaponMesh.Get(); }
+	FName                   GetLeftHandIKSocket()         const { return LeftHandIKSocket; }
+	FVector                 GetLeftHandJointTargetLocation() const { return LeftHandJointTargetLocation; }
 	
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
@@ -146,7 +147,8 @@ private:
 	void FaceMouse(float DeltaTime);
 
 	TWeakObjectPtr<USkeletalMeshComponent> LeftHandIKWeaponMesh;
-	FName LeftHandIKSocket = NAME_None;
+	FName    LeftHandIKSocket            = NAME_None;
+	FVector  LeftHandJointTargetLocation = FVector::ZeroVector;
 
 	bool bIsFrozen = false;
 	bool bRotationCancelled = false;

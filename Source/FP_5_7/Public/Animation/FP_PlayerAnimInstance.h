@@ -32,6 +32,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="IK|Left Hand")
 	bool bUseLeftHandIK = false;
 
+	/** Component-space elbow hint for the Two-Bone IK joint target. Feed into the Joint Target Location pin. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="IK|Left Hand")
+	FVector LeftHandJointTargetLocation = FVector::ZeroVector;
+
 private:
 	UPROPERTY()
 	TObjectPtr<AFP_PlayerCharacter> OwningCharacter;

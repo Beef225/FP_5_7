@@ -449,6 +449,7 @@ FGameplayTag Location_Shattered_Reach;
 //Skills
 FGameplayTag Skills_Energy_Firebolt;
 FGameplayTag Skills_Radiation_Microwave;
+FGameplayTag Skills_Chemical_LightningCoil;
 	
 	TArray<FGameplayTag> DamageTypes;	
 	

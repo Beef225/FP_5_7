@@ -42,6 +42,18 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Preview|Animation")
 	bool bHasUpperBody = false;
 
+	/** Component-space position of the weapon's left-hand IK socket. Feed into Two-Bone IK effector location. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Preview|IK")
+	FVector LeftHandIKLocation = FVector::ZeroVector;
+
+	/** True when the equipped weapon has a valid left-hand IK socket. Gate the IK node with this. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Preview|IK")
+	bool bUseLeftHandIK = false;
+
+	/** Component-space elbow hint for the Two-Bone IK joint target. Feed into the Joint Target Location pin. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Preview|IK")
+	FVector LeftHandJointTargetLocation = FVector::ZeroVector;
+
 private:
 	UPROPERTY()
 	TObjectPtr<AFP_CharacterPreviewActor> OwningPreviewActor;

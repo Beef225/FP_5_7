@@ -1011,6 +1011,11 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Skill Name Microwave")
 		);
 
+	GameplayTags.Skills_Chemical_LightningCoil = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Chemical.LightningCoil"),
+		FString("Lightning Coil - fires arc bolts in a cone from the weapon tip, each with a circular AoE impact")
+		);
+
 	// -------------------------------------------------------------------------
 	// Inventory
 	// -------------------------------------------------------------------------

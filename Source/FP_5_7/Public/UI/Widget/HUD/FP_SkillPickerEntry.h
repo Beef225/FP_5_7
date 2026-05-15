@@ -14,10 +14,17 @@ class URichTextBlock;
 class UTextBlock;
 class UFP_SkillFrame;
 
+/** Fired when the player clicks the skill tree button on an entry.
+ *  The parent widget should open UFP_SkillTreePanel::OpenForSkill with this entry. */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSkillTreeRequested, const FFP_AbilityEntry&, Entry);
+
 /**
  * One selectable row in UFP_SkillFrame's popup picker.
  * Mirrors UFP_SkillDisplay's icon/name/level/XP-bar layout and adds Button_Select.
  * Clicking Button_Select calls OwningFrame->AssignSkill with this entry's skill tag.
+ *
+ * Button_SkillTree (optional) — visible only when the skill has a SkillTreeWidgetClass set.
+ * Clicking it broadcasts OnSkillTreeRequested so the parent can open UFP_SkillTreePanel.
  */
 UCLASS()
 class FP_5_7_API UFP_SkillPickerEntry : public UUserWidget
@@ -26,6 +33,10 @@ class FP_5_7_API UFP_SkillPickerEntry : public UUserWidget
 
 public:
 	void Populate(const FFP_AbilityEntry& Entry, int32 CurrentXP, UFP_SkillFrame* InOwningFrame);
+
+	/** Bind this in the parent picker to open the skill tree panel for the clicked entry. */
+	UPROPERTY(BlueprintAssignable, Category="Skill Picker")
+	FOnSkillTreeRequested OnSkillTreeRequested;
 
 protected:
 	UPROPERTY(meta=(BindWidget))
@@ -43,10 +54,18 @@ protected:
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UButton> Button_Select;
 
-private:
-	UFUNCTION()
-	void OnSelectClicked();
+	/**
+	 * Optional button that opens this skill's passive tree.
+	 * Automatically hidden when the skill has no SkillTreeWidgetClass assigned.
+	 * Add a button named Button_SkillTree to the BP widget to enable it.
+	 */
+	UPROPERTY(meta=(BindWidgetOptional))
+	TObjectPtr<UButton> Button_SkillTree;
 
-	FGameplayTag SkillTag;
+private:
+	UFUNCTION() void OnSelectClicked();
+	UFUNCTION() void OnSkillTreeClicked();
+
+	FFP_AbilityEntry CachedEntry;
 	TWeakObjectPtr<UFP_SkillFrame> OwningFrame;
 };

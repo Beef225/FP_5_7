@@ -36,7 +36,8 @@
       "Bash(grep -E \"\\\\.\\(h|cpp\\)$\")",
       "Bash(grep -v \"//\")",
       "Bash(Get-ChildItem -Recurse \"C:\\\\Unreal\\\\FP_5_7\\\\Source\\\\FP_5_7\\\\Public\\\\Abilities\" -ErrorAction SilentlyContinue)",
-      "Bash(Select-Object FullName)"
+      "Bash(Select-Object FullName)",
+      "Bash(Get-ChildItem *)"
     ]
   }
 }

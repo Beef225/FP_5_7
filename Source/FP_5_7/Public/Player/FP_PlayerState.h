@@ -69,7 +69,8 @@ public:
 	/** Character XP: bidirectional — penalises both farming low AND rushing high content. */
 	static float ComputeCharacterXPMultiplier(int32 PlayerLevel, int32 MonsterLevel);
 	void LoadSkillState(const TMap<FGameplayTag, int32>& InXP, const TMap<FGameplayTag, int32>& InLevels,
-	                    const TMap<FGameplayTag, int32>& InPoints, const TMap<FGameplayTag, FGameplayTag>& InInputTags);
+	                    const TMap<FGameplayTag, int32>& InPoints, const TMap<FGameplayTag, FGameplayTag>& InInputTags,
+	                    const TArray<FGameplayTag>& InClearedSlots);
 
 	/** Seeds GrantedSkillTags from any entry in the SkillLibrary asset with bGranted == true.
 	 *  Call once for a new character before the first save. */
@@ -112,6 +113,7 @@ public:
 	const TMap<FGameplayTag, int32>& GetSkillLevelMap() const        { return SkillLevel; }
 	const TMap<FGameplayTag, int32>& GetSkillUnspentPointsMap() const { return UnspentSkillPoints; }
 	const TMap<FGameplayTag, FGameplayTag>& GetSkillInputTagMap() const { return SkillInputTags; }
+	const TSet<FGameplayTag>&              GetClearedInputSlots() const { return ClearedSlots; }
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Abilities")
 	UFP_SkillLibrary* GetSkillLibrary() const { return SkillLibrary; }
@@ -126,6 +128,48 @@ public:
 	void AddToLevel(int32 InLevel);
 	void AddToAttributePoints(int32 InPoints);
 	void AddToPassivePoints(const FGameplayTag& AttributeTag, int32 InPoints);
+
+	/** Deducts points from the per-skill passive pool. Called by UFP_SkillTreePanel on commit. */
+	void SpendSkillPassivePoints(const FGameplayTag& SkillTag, int32 Amount);
+
+	/**
+	 * Adds Delta to the per-skill passive accumulator for PassiveTag.
+	 * Called with +Magnitude on node allocate, -Magnitude on node deallocate.
+	 * The ability reads the accumulated value at cast time via GetSkillPassiveValue.
+	 */
+	void AccumulateSkillPassive(const FGameplayTag& PassiveTag, float Delta);
+
+	/** Read-only access to the full accumulator map — used by ability cast-time resolution. */
+	const TMap<FGameplayTag, float>& GetAllSkillPassiveValues() const { return SkillPassiveValues; }
+
+	/** Returns the total accumulated value for PassiveTag, or 0 if no nodes have been allocated for it. */
+	float GetSkillPassiveValue(const FGameplayTag& PassiveTag) const;
+
+	/** Stores the committed node set for a skill tree (called by UFP_SkillTreePanel on confirm). */
+	void SetSkillTreeAllocatedNodes(const FGameplayTag& TreeTag, const FGameplayTagContainer& Nodes);
+
+	/** Returns the full skill-tree allocation map for serialisation (C++ only). */
+	const TMap<FGameplayTag, FGameplayTagContainer>& GetSkillTreeAllocatedNodes() const { return SkillTreeAllocatedNodes; }
+
+	/** Returns the allocated node tags for a specific skill tree. Empty if none saved yet.
+	 *  Pass Entry.SkillTreeTag as the key. Safe to pass into OpenForSkill directly. */
+	UFUNCTION(BlueprintPure, Category="Skill Tree")
+	FGameplayTagContainer GetSkillTreeNodesForTree(const FGameplayTag& SkillTreeTag) const;
+
+	/**
+	 * Re-applies all skill-tree effects from a loaded save record.
+	 * Must be called after the ASC is initialised and granted skills are loaded.
+	 * Skips trees whose skill is not currently granted (guard).
+	 */
+	void LoadSkillTreeState(APlayerController* PC,
+	                        const TMap<FGameplayTag, FGameplayTagContainer>& SavedState);
+
+	/**
+	 * Deallocates all active effects for the given skill's tree.
+	 * Call when a skill becomes unavailable (unequip, revoke, etc.) to ensure
+	 * no passive bonuses remain active for a skill the player no longer has.
+	 */
+	void RevokeSkillTreeEffects(const FGameplayTag& SkillTag);
 
 	void SetXP(int32 InXP);
 	void SetLevel(int32 InLevel);
@@ -215,6 +259,15 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	TMap<FGameplayTag, FGameplayTag> SkillInputTags;
+
+	/** Input slots the player deliberately cleared — persisted so they stay empty after reload. */
+	TSet<FGameplayTag> ClearedSlots;
+
+	/** Per-skill passive accumulator. Rebuilt from allocated nodes on load — not persisted directly. */
+	TMap<FGameplayTag, float> SkillPassiveValues;
+
+	/** Allocated skill-tree node tags per tree. Mirrors FFP_CharacterSaveRecord::SkillTreeAllocatedNodes. */
+	TMap<FGameplayTag, FGameplayTagContainer> SkillTreeAllocatedNodes;
 
 	/** Runtime source of truth for which skills this character currently has.
 	 *  Seeded from SkillLibrary asset bGranted defaults on new character creation.

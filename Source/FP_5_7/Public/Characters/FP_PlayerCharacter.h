@@ -45,6 +45,7 @@ public:
 	
 	/** Combat Interface */
 	virtual int32 GetPlayerLevel() override;
+	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	/** end Combat Interface */
 
 	/** Player Interface */

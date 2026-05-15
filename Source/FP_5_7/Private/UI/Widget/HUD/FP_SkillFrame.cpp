@@ -1,6 +1,7 @@
 // Copyright JG
 
 #include "UI/Widget/HUD/FP_SkillFrame.h"
+#include "UI/WidgetController/FP_OverlayWidgetController.h"
 #include "UI/Widget/HUD/FP_SkillFrameActions.h"
 #include "UI/Widget/HUD/FP_SkillPickerEntry.h"
 #include "UI/Widget/HUD/FP_SkillPickerPopup.h"
@@ -17,6 +18,7 @@
 #include "Input/FP_KeyIconSet.h"
 #include "InputMappingContext.h"
 #include "Player/FP_PlayerState.h"
+#include "Framework/Application/SlateApplication.h"
 
 static TWeakObjectPtr<UFP_SkillFrame> GActivePickerFrame;
 
@@ -53,13 +55,23 @@ void UFP_SkillFrame::NativeConstruct()
 void UFP_SkillFrame::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
 	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
+	if (GetWorld())
+		GetWorld()->GetTimerManager().ClearTimer(DescriptionCloseTimerHandle);
 	OpenDescriptionPopup();
 }
 
 void UFP_SkillFrame::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
 	Super::NativeOnMouseLeave(InMouseEvent);
-	CloseDescriptionPopup();
+	// Defer the close — if the mouse moved onto the description card (which sits above
+	// the frame) we want to keep it open.  TryCloseDescriptionPopup checks both bounds.
+	if (GetWorld())
+		GetWorld()->GetTimerManager().SetTimer(
+			DescriptionCloseTimerHandle,
+			this,
+			&UFP_SkillFrame::TryCloseDescriptionPopup,
+			0.05f,
+			false);
 }
 
 void UFP_SkillFrame::NativeDestruct()
@@ -74,6 +86,15 @@ void UFP_SkillFrame::NativeDestruct()
 	}
 
 	Super::NativeDestruct();
+}
+
+void UFP_SkillFrame::HandleEntrySkillTreeRequested(const FFP_AbilityEntry& Entry)
+{
+	// Close the picker so it doesn't sit behind the tree panel.
+	ClosePickerPopup();
+
+	if (UFP_OverlayWidgetController* OWC = Cast<UFP_OverlayWidgetController>(WidgetController))
+		OWC->OnSkillTreeRequested.Broadcast(Entry);
 }
 
 void UFP_SkillFrame::OnSkillListButtonClicked()
@@ -149,6 +170,7 @@ void UFP_SkillFrame::PopulateSkillPicker()
 		if (!EntryWidget) continue;
 
 		EntryWidget->Populate(Entry, PS->GetSkillXP(Entry.SkillTag), this);
+		EntryWidget->OnSkillTreeRequested.AddDynamic(this, &UFP_SkillFrame::HandleEntrySkillTreeRequested);
 		ScrollBox->AddChild(EntryWidget);
 	}
 }
@@ -178,14 +200,36 @@ void UFP_SkillFrame::OpenDescriptionPopup()
 	const FVector2D Anchor   = FVector2D(TopLeft.X + Size.X * 0.5f, TopLeft.Y);
 
 	Desc->AddToViewport(9); // below picker at 10
+	// HitTestInvisible so the card doesn't intercept mouse events — the frame underneath
+	// stays hovered and drives the card's lifetime via TryCloseDescriptionPopup.
+	Desc->SetVisibility(ESlateVisibility::HitTestInvisible);
 	Desc->SetPositionInViewport(Anchor, /*bRemoveDPIScale=*/true);
 	Desc->SetAlignmentInViewport(FVector2D(0.5f, 1.f)); // bottom-centre of description → top-centre of frame
 
 	ActiveDescriptionPopup = Desc;
 }
 
+void UFP_SkillFrame::TryCloseDescriptionPopup()
+{
+	const FVector2D CursorPos = FSlateApplication::Get().GetCursorPos();
+
+	// Keep open if cursor is back over the frame
+	if (GetCachedGeometry().IsUnderLocation(CursorPos))
+		return;
+
+	// Keep open if cursor is over the description card (handles descriptions
+	// that are wider than the frame, extending beyond its hover bounds)
+	if (const UFP_SkillDescription* Desc = ActiveDescriptionPopup.Get())
+		if (Desc->GetCachedGeometry().IsUnderLocation(CursorPos))
+			return;
+
+	CloseDescriptionPopup();
+}
+
 void UFP_SkillFrame::CloseDescriptionPopup()
 {
+	if (GetWorld())
+		GetWorld()->GetTimerManager().ClearTimer(DescriptionCloseTimerHandle);
 	if (UFP_SkillDescription* Desc = ActiveDescriptionPopup.Get())
 		Desc->RemoveFromParent();
 	ActiveDescriptionPopup.Reset();

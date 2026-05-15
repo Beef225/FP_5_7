@@ -86,6 +86,38 @@ private:
 // ---------------------------------------------------------------------------
 
 /**
+ * Accumulates a per-skill passive value on AFP_PlayerState.
+ * Does NOT require a GAS attribute — values are stored in a lightweight TMap on PlayerState
+ * and read by the ability at cast time via PS->GetSkillPassiveValue(PassiveTag).
+ *
+ * On allocate:   PS->AccumulateSkillPassive(PassiveTag, +Magnitude)
+ * On deallocate: PS->AccumulateSkillPassive(PassiveTag, -Magnitude)
+ *
+ * The accumulator rebuilds itself from saved node allocations on load, so it does not
+ * need to be persisted separately in the save record.
+ *
+ * Node template field:  EffectType: Skill Passive
+ */
+USTRUCT(BlueprintType)
+struct FP_5_7_API FFP_NodeEffect_SkillPassive : public FFP_SkillTreeNodeEffect
+{
+	GENERATED_BODY()
+
+	virtual void OnAllocate(APlayerController* PC) override;
+	virtual void OnDeallocate(APlayerController* PC) override;
+
+	/** Tag identifying the per-skill passive bucket (e.g. SkillPassive.LightningCoil.IncreasedDamage). */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Effect")
+	FGameplayTag PassiveTag;
+
+	/** Value added to the accumulator on allocate; subtracted on deallocate. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Effect")
+	float Magnitude = 0.f;
+};
+
+// ---------------------------------------------------------------------------
+
+/**
  * Adds a loose gameplay tag to the player's ASC on allocation; removes it on deallocation.
  * Use this to gate unique code paths — query the ASC for the tag wherever needed.
  * The tag namespace should be e.g. Flag.SkillTree.X to keep it distinct.

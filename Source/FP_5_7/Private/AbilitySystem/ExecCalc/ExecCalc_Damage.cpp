@@ -490,6 +490,17 @@ void UExecCalc_Damage::Execute_Implementation(
 	const float IncreasedAoE = GetCaptured(DamageStatics().IncreasedDamageAoEDef, 0.f);
 	const float MoreAoE = GetCaptured(DamageStatics().MoreDamageAoEDef, 0.f);
 
+	// -------------------------------------------------------
+	// Skill-passive bonus buckets (stamped on spec at cast time by the ability)
+	// -------------------------------------------------------
+	const float SkillBonusIncreasedDamage  = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_IncreasedDamage,         false, 0.f);
+	const float SkillBonusMoreDamage       = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_MoreDamage,              false, 0.f);
+	const float SkillBonusIncreasedChem    = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_IncreasedChemicalDamage, false, 0.f);
+	const float SkillBonusMoreChem         = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_MoreChemicalDamage,      false, 0.f);
+	const float SkillBonusCritChance       = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_CritChance,              false, 0.f);
+	const float SkillBonusIncCritChance    = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_IncreasedCritChance,     false, 0.f);
+	const float SkillBonusCritMultiplier   = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_CritMultiplier,          false, 0.f);
+
 	FGameplayTagContainer SpecAssetTags;
 	Spec.GetAllAssetTags(SpecAssetTags);
 
@@ -578,13 +589,16 @@ void UExecCalc_Damage::Execute_Implementation(
 			return Out;
 		};
 
-	// Legacy generic damage only gets generic scaling.
-	float GenericDamage = ComputeTypeDamage(SetByCallerGeneric, 0.f, IncreasedGeneric + SkillTagIncreasedDamage, 0.f, TempDeltaIncrease, MoreGeneric + SkillTagMoreDamage, 0.f);
-	float PhysicalDamage  = ComputeTypeDamage(SetByCallerPhysical, AddedPhys, IncreasedGeneric + SkillTagIncreasedDamage, IncreasedPhys, TempDeltaIncrease, MoreGeneric + SkillTagMoreDamage, MorePhys);
-	float ExplosiveDamage = ComputeTypeDamage(SetByCallerExplosive, AddedExpl, IncreasedGeneric + SkillTagIncreasedDamage, IncreasedExpl, TempDeltaIncrease, MoreGeneric + SkillTagMoreDamage, MoreExpl);
-	float RadiationDamage = ComputeTypeDamage(SetByCallerRadiation, AddedRad, IncreasedGeneric + SkillTagIncreasedDamage, IncreasedRad, TempDeltaIncrease, MoreGeneric + SkillTagMoreDamage, MoreRad);
-	float ChemicalDamage  = ComputeTypeDamage(SetByCallerChemical, AddedChem, IncreasedGeneric + SkillTagIncreasedDamage, IncreasedChem, TempDeltaIncrease, MoreGeneric + SkillTagMoreDamage, MoreChem);
-	float EnergyDamage    = ComputeTypeDamage(SetByCallerEnergy, AddedEng, IncreasedGeneric + SkillTagIncreasedDamage, IncreasedEng, TempDeltaIncrease, MoreGeneric + SkillTagMoreDamage, MoreEng);
+	// Merge skill-passive generic bonuses into the SkillTag accumulators (already the right place in the formula).
+	const float TotalIncreasedBonus = SkillTagIncreasedDamage + SkillBonusIncreasedDamage;
+	const float TotalMoreBonus      = SkillTagMoreDamage      + SkillBonusMoreDamage;
+
+	float GenericDamage   = ComputeTypeDamage(SetByCallerGeneric,   0.f,      IncreasedGeneric + TotalIncreasedBonus, 0.f,                                    TempDeltaIncrease, MoreGeneric + TotalMoreBonus, 0.f);
+	float PhysicalDamage  = ComputeTypeDamage(SetByCallerPhysical,  AddedPhys, IncreasedGeneric + TotalIncreasedBonus, IncreasedPhys,                          TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MorePhys);
+	float ExplosiveDamage = ComputeTypeDamage(SetByCallerExplosive, AddedExpl, IncreasedGeneric + TotalIncreasedBonus, IncreasedExpl,                          TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreExpl);
+	float RadiationDamage = ComputeTypeDamage(SetByCallerRadiation, AddedRad,  IncreasedGeneric + TotalIncreasedBonus, IncreasedRad,                           TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreRad);
+	float ChemicalDamage  = ComputeTypeDamage(SetByCallerChemical,  AddedChem, IncreasedGeneric + TotalIncreasedBonus, IncreasedChem + SkillBonusIncreasedChem, TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreChem + SkillBonusMoreChem);
+	float EnergyDamage    = ComputeTypeDamage(SetByCallerEnergy,    AddedEng,  IncreasedGeneric + TotalIncreasedBonus, IncreasedEng,                           TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreEng);
 
 
 	LogStep(TEXT("1) PerTypeOffense"),
@@ -729,8 +743,8 @@ void UExecCalc_Damage::Execute_Implementation(
 	// -------------------------------------------------------
 	// 5) CRIT
 	// -------------------------------------------------------
-	const float BaseCritChance = Clamp01(GetCaptured(DamageStatics().CriticalStrikeChanceDef, 0.f));
-	const float IncCritChance = GetCaptured(DamageStatics().IncreasedCriticalStrikeChanceDef, 0.f);
+	const float BaseCritChance = Clamp01(GetCaptured(DamageStatics().CriticalStrikeChanceDef, 0.f) + SkillBonusCritChance);
+	const float IncCritChance  = GetCaptured(DamageStatics().IncreasedCriticalStrikeChanceDef, 0.f) + SkillBonusIncCritChance;
 
 	const float FinalCritChance = Clamp01(BaseCritChance * (1.f + IncCritChance));
 	const float CritRoll = FMath::FRand();
@@ -742,7 +756,7 @@ void UExecCalc_Damage::Execute_Implementation(
 
 	if (bCritical)
 	{
-		float CritMultiplier = GetCaptured(DamageStatics().CriticalStrikeMultiplierDef, 1.f);
+		float CritMultiplier = GetCaptured(DamageStatics().CriticalStrikeMultiplierDef, 1.f) + SkillBonusCritMultiplier;
 		CritMultiplier = FMath::Max(CritMultiplier, 1.f);
 
 		float CritBonusResist = Clamp01(GetCaptured(DamageStatics().CriticalHitResistanceDef, 0.f));

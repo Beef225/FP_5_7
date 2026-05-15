@@ -8,6 +8,7 @@
 #include "Engine/DataTable.h"
 #include "Libraries/FP_EnumDefs.h"
 #include "AbilitySystem/Data/FP_SkillLevelUpInfo.h"
+#include "UI/Widget/SkillTree/FP_SkillTreeWidget.h"
 #include "FP_SkillLibrary.generated.h"
 
 class UFP_GameplayAbility;
@@ -80,6 +81,20 @@ struct FFP_AbilityEntry
 	 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UFP_SkillLevelUpInfo> SkillLevelUpInfo = nullptr;
+
+	/**
+	 * Blueprint subclass of UFP_SkillTreeWidget for this skill's passive tree.
+	 * The BP subclass has NodeDataAssets pre-populated by the Python importer
+	 * and TreeTag set to the skill's tree tag.
+	 * Leave null for skills that have no skill tree yet.
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Skill Tree")
+	TSubclassOf<UFP_SkillTreeWidget> SkillTreeWidgetClass;
+
+	/** Must match the TreeTag set on the SkillTreeWidgetClass BP defaults.
+	 *  Used as the key to look up this skill's allocated nodes in PlayerState. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Skill Tree", meta=(Categories="SkillTree"))
+	FGameplayTag SkillTreeTag;
 
 	/**
 	 * Hard cap on this skill's level regardless of XP.

@@ -8,6 +8,7 @@
 #include "Locations/FP_LocationDataAsset.h"
 #include "Player/FP_PlayerState.h"
 #include "GameFramework/PlayerController.h"
+#include "GameFramework/PlayerController.h"
 #include "Inventory/InventoryManagement/Components/FP_InventoryComponent.h"
 #include "Libraries/FP_AbilitySystemLibrary.h"
 #include "SaveSystem/FP_InventorySaveData.h"
@@ -303,7 +304,9 @@ void UFP_SaveGameSubsystem::SaveActiveCharacter()
 	Record->SkillLevelMap          = PS->GetSkillLevelMap();
 	Record->SkillUnspentPointsMap  = PS->GetSkillUnspentPointsMap();
 	Record->SkillInputTagMap       = PS->GetSkillInputTagMap();
+	Record->ClearedInputSlots      = PS->GetClearedInputSlots().Array();
 	Record->GrantedSkillTagsArray  = PS->GetGrantedSkillTagsArray();
+	Record->SkillTreeAllocatedNodes = PS->GetSkillTreeAllocatedNodes();
 
 	SaveProfile();
 	SaveInventory();
@@ -329,6 +332,16 @@ void UFP_SaveGameSubsystem::SaveInventory()
 		*ProfileData->LastPlayedCharacterID.ToString(EGuidFormats::DigitsWithHyphens));
 
 	UGameplayStatics::SaveGameToSlot(SaveData, SlotName, 0);
+}
+
+void UFP_SaveGameSubsystem::LoadSkillTreeState(APlayerController* PC, AFP_PlayerState* PS)
+{
+	if (!PC || !PS || !ProfileData) return;
+
+	const FFP_CharacterSaveRecord* Record = ProfileData->FindCharacter(ProfileData->LastPlayedCharacterID);
+	if (!Record || Record->SkillTreeAllocatedNodes.IsEmpty()) return;
+
+	PS->LoadSkillTreeState(PC, Record->SkillTreeAllocatedNodes);
 }
 
 void UFP_SaveGameSubsystem::LoadInventory(UFP_InventoryComponent* InventoryComponent, const FGuid& CharacterID)

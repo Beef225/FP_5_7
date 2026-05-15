@@ -393,7 +393,8 @@ void AFP_PlayerController::OnPossess(APawn* InPawn)
 					Record->SkillXPMap,
 					Record->SkillLevelMap,
 					Record->SkillUnspentPointsMap,
-					Record->SkillInputTagMap
+					Record->SkillInputTagMap,
+					Record->ClearedInputSlots
 				);
 
 				if (Record->GrantedSkillTagsArray.Num() == 0)
@@ -405,6 +406,10 @@ void AFP_PlayerController::OnPossess(APawn* InPawn)
 				// Apply saved slot bindings to the ASC here where both are ready.
 				if (UFP_AbilitySystemComponent* FP_ASC = Cast<UFP_AbilitySystemComponent>(PS->GetAbilitySystemComponent()))
 					PS->ApplyInputTagsToASC(FP_ASC);
+
+				// Re-apply skill-tree passive effects from the save record.
+				// Must come after LoadGrantedSkills so the skill-grant guard works.
+				SaveSys->LoadSkillTreeState(this, PS);
 
 				// Tell all already-constructed frames to re-read from the now-populated PS map.
 				// This corrects any stale startup-ability bindings set by the early OnAbilitiesGiven fallback.

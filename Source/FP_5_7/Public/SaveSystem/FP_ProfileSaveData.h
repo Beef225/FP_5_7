@@ -70,10 +70,24 @@ struct FFP_CharacterSaveRecord
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TMap<FGameplayTag, FGameplayTag> SkillInputTagMap;
 
+	/** Input slots the player deliberately cleared. On load these slots will have any startup
+	 *  ability input tag stripped, keeping the slot empty rather than reverting to the default. */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TArray<FGameplayTag> ClearedInputSlots;
+
 	/** All skill tags currently granted to this character (runtime source of truth).
 	 *  On new character this is empty — OnPossess seeds it from the SkillLibrary asset defaults. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TArray<FGameplayTag> GrantedSkillTagsArray;
+
+	/**
+	 * Allocated skill-tree node tags per skill tree.
+	 * Key   = the tree's TreeTag (e.g. SkillTree.LightningCoil).
+	 * Value = all NodeTags the player has committed in that tree.
+	 * Effects are re-applied on load only when the associated skill is granted.
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TMap<FGameplayTag, FGameplayTagContainer> SkillTreeAllocatedNodes;
 
 	/** Used to sort cards by most-recently-played. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)

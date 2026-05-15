@@ -10,7 +10,9 @@
 UFP_GA_DodgeRoll::UFP_GA_DodgeRoll()
 {
 	StartupInputTag = FFP_GameplayTags::Get().InputTag_Space;
-	AbilityTags.AddTag(FFP_GameplayTags::Get().Skills_Movement_DodgeRoll);
+	FGameplayTagContainer NewTags;
+	NewTags.AddTag(FFP_GameplayTags::Get().Skills_Movement_DodgeRoll);
+	SetAssetTags(NewTags);
 
 	InstancingPolicy  = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;

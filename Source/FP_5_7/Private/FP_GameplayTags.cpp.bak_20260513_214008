@@ -1856,18 +1856,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("SkillPassive.LightningCoil.DamageLuckyRolls"),
 		FString("Per-skill passive: extra damage rolls (take highest)")
 		);
-	GameplayTags.SkillPassive_LightningCoil_CastSpeed = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillPassive.LightningCoil.CastSpeed"),
-		FString("Per-skill passive: increased skill cast speed")
-		);
-	GameplayTags.SkillTree_LightningCoil_SkillSpeed_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.SkillSpeed.1"),
-		FString("5% Increased Skill Speed")
-		);
-	GameplayTags.SkillTree_LightningCoil_SkillSpeed_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.SkillSpeed.2"),
-		FString("5% Increased Skill Speed")
-		);
 
 	// ---- GRID TEST TAGS — DELETE AFTER PLACEMENT TESTING ----
 	auto R=[](FFP_GameplayTags& GT, FGameplayTag& Tag, const char* Name){ Tag=UGameplayTagsManager::Get().AddNativeGameplayTag(FName(Name),FString("Grid test")); };

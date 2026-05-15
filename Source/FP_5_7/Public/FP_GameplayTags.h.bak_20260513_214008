@@ -637,8 +637,6 @@ FGameplayTag SkillTree_LightningCoil_DistanceLuckyRolls_3;
 FGameplayTag SkillTree_LightningCoil_DamageLuckyRolls_1;
 FGameplayTag SkillTree_LightningCoil_DamageLuckyRolls_2;
 FGameplayTag SkillTree_LightningCoil_DamageLuckyRolls_3;
-FGameplayTag SkillTree_LightningCoil_SkillSpeed_1;
-FGameplayTag SkillTree_LightningCoil_SkillSpeed_2;
 
 //SkillPassive
 FGameplayTag SkillPassive_LightningCoil_IncreasedDamage;
@@ -654,7 +652,6 @@ FGameplayTag SkillPassive_LightningCoil_ChainCount;
 FGameplayTag SkillPassive_LightningCoil_ChainRadius;
 FGameplayTag SkillPassive_LightningCoil_DistanceLuckyRolls;
 FGameplayTag SkillPassive_LightningCoil_DamageLuckyRolls;
-FGameplayTag SkillPassive_LightningCoil_CastSpeed;
 // ---- GRID TEST TAGS — DELETE AFTER PLACEMENT TESTING ----
 FGameplayTag SkillTree_LightningCoil_Grid_N001; FGameplayTag SkillTree_LightningCoil_Grid_N002; FGameplayTag SkillTree_LightningCoil_Grid_N003; FGameplayTag SkillTree_LightningCoil_Grid_N004;
 FGameplayTag SkillTree_LightningCoil_Grid_N005; FGameplayTag SkillTree_LightningCoil_Grid_N006; FGameplayTag SkillTree_LightningCoil_Grid_N007; FGameplayTag SkillTree_LightningCoil_Grid_N008;

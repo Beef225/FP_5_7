@@ -12,8 +12,8 @@
 
 void UFP_SkillPickerEntry::Populate(const FFP_AbilityEntry& Entry, int32 CurrentXP, UFP_SkillFrame* InOwningFrame)
 {
-	SkillTag   = Entry.SkillTag;
-	OwningFrame = InOwningFrame;
+	CachedEntry = Entry;
+	OwningFrame  = InOwningFrame;
 
 	if (Entry.SkillIcon)
 		Image_SkillIcon->SetBrushFromTexture(const_cast<UTexture2D*>(Entry.SkillIcon.Get()));
@@ -50,10 +50,23 @@ void UFP_SkillPickerEntry::Populate(const FFP_AbilityEntry& Entry, int32 Current
 
 	if (Button_Select)
 		Button_Select->OnClicked.AddDynamic(this, &UFP_SkillPickerEntry::OnSelectClicked);
+
+	if (Button_SkillTree)
+	{
+		Button_SkillTree->OnClicked.AddDynamic(this, &UFP_SkillPickerEntry::OnSkillTreeClicked);
+		// Only show the button when this skill actually has a tree assigned.
+		const bool bHasTree = Entry.SkillTreeWidgetClass != nullptr;
+		Button_SkillTree->SetVisibility(bHasTree ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
+	}
 }
 
 void UFP_SkillPickerEntry::OnSelectClicked()
 {
 	if (UFP_SkillFrame* Frame = OwningFrame.Get())
-		Frame->AssignSkill(SkillTag);
+		Frame->AssignSkill(CachedEntry.SkillTag);
+}
+
+void UFP_SkillPickerEntry::OnSkillTreeClicked()
+{
+	OnSkillTreeRequested.Broadcast(CachedEntry);
 }

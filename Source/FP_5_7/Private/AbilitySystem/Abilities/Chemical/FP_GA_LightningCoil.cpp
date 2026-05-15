@@ -9,10 +9,13 @@
 #include "AbilitySystemComponent.h"
 #include "Engine/OverlapResult.h"
 #include "Engine/EngineTypes.h"
+#include "Player/FP_PlayerState.h"
 
 UFP_GA_LightningCoil::UFP_GA_LightningCoil()
 {
-	AbilityTags.AddTag(FFP_GameplayTags::Get().Skills_Chemical_LightningCoil);
+	FGameplayTagContainer NewTags;
+	NewTags.AddTag(FFP_GameplayTags::Get().Skills_Chemical_LightningCoil);
+	SetAssetTags(NewTags);
 
 	InstancingPolicy  = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;
@@ -46,15 +49,25 @@ FVector UFP_GA_LightningCoil::GetRandomConePoint(const FVector& Origin, const FV
 	FVector HorizForward = FVector(ForwardDir.X, ForwardDir.Y, 0.f);
 	if (!HorizForward.Normalize()) HorizForward = FVector::ForwardVector;
 
+	// Passive ConeLength adds a flat amount to the base before AoE attribute modifiers.
+	float ExtraConeLength = 0.f;
+	if (const AFP_PlayerState* PS = GetLocalPS())
+		ExtraConeLength = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_LightningCoil_ConeLength);
+
+	// Convergence-adjusted angle as base; parent handles AoE modifiers on top.
 	float EffLength, EffHalfAngleDeg;
-	GetEffectiveConeParams(ConeLength, ConeHalfAngle, EffLength, EffHalfAngleDeg);
+	GetEffectiveConeParams(ConeLength + ExtraConeLength, GetCurrentConeAngle(), EffLength, EffHalfAngleDeg);
 	const float HalfAngleRad = FMath::DegreesToRadians(EffHalfAngleDeg);
 
-	// Random horizontal direction within the cone and random depth along it.
-	const FVector RandDir   = FMath::VRandCone(HorizForward, HalfAngleRad);
-	const float   Distance  = FMath::Max(
-		FMath::FRandRange(EffLength * 0.2f, EffLength),
-		FMath::FRandRange(EffLength * 0.2f, EffLength));
+	// Roll distance — base 2 rolls, keep furthest; extra rolls from DistanceLuckyRolls passive.
+	int32 NumDistRolls = 2;
+	if (const AFP_PlayerState* PS = GetLocalPS())
+		NumDistRolls += FMath::Max(FMath::RoundToInt(PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_LightningCoil_DistanceLuckyRolls)), 0);
+
+	const FVector RandDir = FMath::VRandCone(HorizForward, HalfAngleRad);
+	float Distance = FMath::FRandRange(EffLength * 0.2f, EffLength);
+	for (int32 i = 1; i < NumDistRolls; ++i)
+		Distance = FMath::Max(Distance, FMath::FRandRange(EffLength * 0.2f, EffLength));
 
 	const FVector HorizPoint = FVector(Origin.X + RandDir.X * Distance,
 	                                   Origin.Y + RandDir.Y * Distance,
@@ -82,15 +95,21 @@ void UFP_GA_LightningCoil::FireBoltAtLocation(const FVector& ImpactCenter)
 	AActor* Avatar = GetAvatarActorFromActorInfo();
 	if (!Avatar || !Avatar->HasAuthority()) return;
 
+	// Converge the cone for the NEXT shot before applying this shot's damage.
+	OnBoltFired();
+
 	TArray<AActor*> HitActors;
 	HitActors.Add(Avatar); // always exclude caster
 
 	ApplyBoltAoEDamage(ImpactCenter, HitActors);
 
-	if (bCanChain && HitActors.Num() > 1)
-	{
-		ChainBolt(ImpactCenter, HitActors, MaxChainCount);
-	}
+	// Chain count: passive stacks on top of MaxChainCount; also enables chaining when > 0.
+	int32 EffectiveChainCount = MaxChainCount;
+	if (const AFP_PlayerState* PS = GetLocalPS())
+		EffectiveChainCount += FMath::RoundToInt(PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_LightningCoil_ChainCount));
+
+	if ((bCanChain || EffectiveChainCount > 0) && HitActors.Num() > 1)
+		ChainBolt(ImpactCenter, HitActors, EffectiveChainCount);
 }
 
 // ---------------------------------------------------------------------------
@@ -99,8 +118,12 @@ void UFP_GA_LightningCoil::FireBoltAtLocation(const FVector& ImpactCenter)
 
 int32 UFP_GA_LightningCoil::GetEffectiveNumBolts_Implementation() const
 {
-	// TODO: read per-skill attribute modifier when skill-tree nodes are added.
-	return NumBolts;
+	int32 Extra = 0;
+	if (const APawn* Pawn = Cast<APawn>(GetAvatarActorFromActorInfo()))
+		if (const AFP_PlayerState* PS = Pawn->GetPlayerState<AFP_PlayerState>())
+			Extra = FMath::RoundToInt(PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_LightningCoil_ExtraBolts));
+
+	return FMath::Max(NumBolts + Extra, 1);
 }
 
 // ---------------------------------------------------------------------------
@@ -120,7 +143,7 @@ void UFP_GA_LightningCoil::SpawnBoltVFX(const FVector& Start, const FVector& End
 
 	if (!VFX) return;
 
-	VFX->SetEndpoints(Start, End, BoltMidpointMaxOffset);
+	VFX->SetEndpoints(Start, End, BoltMidpointMaxOffset, BoltMidPoints);
 	VFX->FinishSpawning(FTransform(FRotator::ZeroRotator, Start));
 }
 
@@ -130,8 +153,10 @@ void UFP_GA_LightningCoil::SpawnBoltVFX(const FVector& Start, const FVector& End
 
 void UFP_GA_LightningCoil::ApplyBoltAoEDamage(const FVector& ImpactCenter, TArray<AActor*>& InOutHitActors)
 {
-	// TODO: replace BoltAoERadius with GetAoEAttributeModifier() once SkillLibrary entry is set up.
-	const float Radius = BoltAoERadius;
+	float ExtraRadius = 0.f;
+	if (const AFP_PlayerState* PS = GetLocalPS())
+		ExtraRadius = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_LightningCoil_BoltAoERadius);
+	const float Radius = BoltAoERadius + ExtraRadius;
 
 	FCollisionQueryParams QueryParams;
 	for (AActor* Ignored : InOutHitActors)
@@ -157,9 +182,104 @@ void UFP_GA_LightningCoil::ApplyBoltAoEDamage(const FVector& ImpactCenter, TArra
 	}
 }
 
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+const AFP_PlayerState* UFP_GA_LightningCoil::GetLocalPS() const
+{
+	const APawn* Pawn = Cast<APawn>(GetAvatarActorFromActorInfo());
+	return Pawn ? Pawn->GetPlayerState<AFP_PlayerState>() : nullptr;
+}
+
+int32 UFP_GA_LightningCoil::GetNumDamageRolls() const
+{
+	int32 Extra = 0;
+	if (const AFP_PlayerState* PS = GetLocalPS())
+		Extra = FMath::Max(FMath::RoundToInt(PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_LightningCoil_DamageLuckyRolls)), 0);
+	return 1 + Extra;
+}
+
+void UFP_GA_LightningCoil::CauseDamage(AActor* TargetActor)
+{
+	Super::CauseDamage(TargetActor);
+
+	if (!TargetActor) return;
+	const AFP_PlayerState* PS = GetLocalPS();
+	if (!PS) return;
+
+	const float Buildup = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_LightningCoil_CorrodedBuildup);
+	if (Buildup <= 0.f) return;
+
+	FGameplayEventData EventData;
+	EventData.Instigator     = GetAvatarActorFromActorInfo();
+	EventData.EventMagnitude = Buildup;
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
+		TargetActor,
+		FFP_GameplayTags::Get().GameplayEvent_Debuff_Buildup_Corroded,
+		EventData);
+}
+
+// ---------------------------------------------------------------------------
+// Convergence
+// ---------------------------------------------------------------------------
+
+float UFP_GA_LightningCoil::GetEffectiveBaseConeAngle() const
+{
+	float Extra = 0.f;
+	if (const AFP_PlayerState* PS = GetLocalPS())
+		Extra = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_LightningCoil_ConeAngle);
+	return ConeHalfAngle + Extra;
+}
+
+float UFP_GA_LightningCoil::GetConvergenceRate() const
+{
+	if (const AFP_PlayerState* PS = GetLocalPS())
+		return PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_LightningCoil_ConvergenceRate);
+	return 0.f;
+}
+
+float UFP_GA_LightningCoil::GetCurrentConeAngle() const
+{
+	const float Base = GetEffectiveBaseConeAngle();
+	const float Rate = GetConvergenceRate();
+	if (Rate <= 0.f || CurrentConeAngle < 0.f)
+		return Base;
+
+	const float Now  = GetWorld() ? GetWorld()->GetTimeSeconds() : 0.f;
+	const float Idle = Now - LastBoltTime;
+
+	if (Idle <= ConvergenceIdleDelaySec)
+		return CurrentConeAngle;
+
+	// Widen back to base linearly over ConvergenceWideningDurSec once idle delay expires.
+	const float T = FMath::Clamp((Idle - ConvergenceIdleDelaySec) / ConvergenceWideningDurSec, 0.f, 1.f);
+	return FMath::Lerp(CurrentConeAngle, Base, T);
+}
+
+void UFP_GA_LightningCoil::OnBoltFired()
+{
+	const float Rate = GetConvergenceRate();
+	if (Rate <= 0.f) return;
+
+	const float Now = GetWorld() ? GetWorld()->GetTimeSeconds() : 0.f;
+
+	// Start from the current effective angle (may be partially widened if the player paused).
+	const float Base = GetCurrentConeAngle();
+	CurrentConeAngle = FMath::Max(Base * (1.f - Rate), ConvergenceMinAngleDeg);
+	LastBoltTime     = Now;
+}
+
+// ---------------------------------------------------------------------------
+
 void UFP_GA_LightningCoil::ChainBolt(const FVector& ImpactCenter, TArray<AActor*>& InOutHitActors, int32 RemainingChains)
 {
-	if (!bCanChain || RemainingChains <= 0) return;
+	if (RemainingChains <= 0) return;
+
+	float ExtraRadius = 0.f;
+	if (const AFP_PlayerState* PS = GetLocalPS())
+		ExtraRadius = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_LightningCoil_ChainRadius);
+	const float EffChainRadius = ChainRadius + ExtraRadius;
 
 	FCollisionQueryParams QueryParams;
 	for (AActor* Ignored : InOutHitActors)
@@ -171,7 +291,7 @@ void UFP_GA_LightningCoil::ChainBolt(const FVector& ImpactCenter, TArray<AActor*
 		ImpactCenter,
 		FQuat::Identity,
 		FCollisionObjectQueryParams(ECC_Pawn),
-		FCollisionShape::MakeSphere(ChainRadius),
+		FCollisionShape::MakeSphere(EffChainRadius),
 		QueryParams);
 
 	for (const FOverlapResult& Overlap : Overlaps)
@@ -182,6 +302,7 @@ void UFP_GA_LightningCoil::ChainBolt(const FVector& ImpactCenter, TArray<AActor*
 
 		InOutHitActors.Add(Target);
 		CauseDamage(Target);
+		SpawnBoltVFX(ImpactCenter, Target->GetActorLocation());
 		ChainBolt(Target->GetActorLocation(), InOutHitActors, RemainingChains - 1);
 		break;
 	}

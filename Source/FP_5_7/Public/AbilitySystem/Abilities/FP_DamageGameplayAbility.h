@@ -29,7 +29,7 @@ class FP_5_7_API UFP_DamageGameplayAbility : public UFP_GameplayAbility
 	
 public:
 	UFUNCTION(BlueprintCallable)
-	void CauseDamage(AActor* TargetActor);
+	virtual void CauseDamage(AActor* TargetActor);
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Damage|Skill")
 	float GetSkillSpeedAttributeModifier() const;
@@ -78,8 +78,21 @@ public:
 	
 protected:
 	void AppendSkillModifierTagsToDamageSpec(FGameplayEffectSpecHandle& DamageSpecHandle) const;
-	
 	void AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const;
+	void AssignSkillPassiveBonuses(FGameplayEffectSpecHandle& SpecHandle) const;
+
+	/** Number of times to roll the damage range, keeping the highest result. Default 1. Override per skill. */
+	virtual int32 GetNumDamageRolls() const { return 1; }
+
+	/**
+	 * Root tag for this skill's passive namespace (e.g. SkillPassive.LightningCoil).
+	 * AssignSkillPassiveBonuses iterates PlayerState::SkillPassiveValues, matches entries
+	 * whose tag starts with this prefix, and stamps them onto the damage spec as generic
+	 * SetByCaller.SkillBonus.* bucket tags that the ExecCalc reads without skill-specific logic.
+	 * Set this in each ability's Blueprint defaults.
+	 */
+	UPROPERTY(EditDefaultsOnly, Category="Damage|Skill Passives")
+	FGameplayTag SkillPassiveRootTag;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UGameplayEffect> DamageEffectClass;

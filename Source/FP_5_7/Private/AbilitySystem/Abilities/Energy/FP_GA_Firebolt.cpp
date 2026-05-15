@@ -5,7 +5,9 @@
 
 UFP_GA_Firebolt::UFP_GA_Firebolt()
 {
-	AbilityTags.AddTag(FFP_GameplayTags::Get().Skills_Energy_Firebolt);
+	FGameplayTagContainer NewTags;
+	NewTags.AddTag(FFP_GameplayTags::Get().Skills_Energy_Firebolt);
+	SetAssetTags(NewTags);
 
 	InstancingPolicy  = EGameplayAbilityInstancingPolicy::InstancedPerActor;
 	NetExecutionPolicy = EGameplayAbilityNetExecutionPolicy::LocalPredicted;

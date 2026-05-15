@@ -135,6 +135,30 @@ void FFP_NodeEffect_GrantSkill::OnDeallocate(APlayerController* PC)
 }
 
 // ---------------------------------------------------------------------------
+// FFP_NodeEffect_SkillPassive
+// ---------------------------------------------------------------------------
+
+static AFP_PlayerState* GetPS(APlayerController* PC)
+{
+	return PC ? PC->GetPlayerState<AFP_PlayerState>() : nullptr;
+}
+
+void FFP_NodeEffect_SkillPassive::OnAllocate(APlayerController* PC)
+{
+	if (AFP_PlayerState* PS = GetPS(PC))
+	{
+		UE_LOG(LogTemp, Log, TEXT("SkillPassive::OnAllocate — tag=[%s] magnitude=%.4f"), *PassiveTag.ToString(), Magnitude);
+		PS->AccumulateSkillPassive(PassiveTag, Magnitude);
+	}
+}
+
+void FFP_NodeEffect_SkillPassive::OnDeallocate(APlayerController* PC)
+{
+	if (AFP_PlayerState* PS = GetPS(PC))
+		PS->AccumulateSkillPassive(PassiveTag, -Magnitude);
+}
+
+// ---------------------------------------------------------------------------
 // FFP_NodeEffect_Flag
 // ---------------------------------------------------------------------------
 

@@ -106,6 +106,9 @@ void UFP_SkillTreeWidget::PopulateTree()
 	if (Canvas_Lines)
 		Canvas_Lines->SetConnectionData(ConnectionPairs, CachedPosMap);
 
+	UE_LOG(LogTemp, Log, TEXT("SkillTreeWidget [%s]: PopulateTree complete — %d nodes spawned, %d connections"),
+		*GetName(), SpawnedNodes.Num(), ConnectionPairs.Num());
+
 	RecomputeAllStates();
 }
 
@@ -133,13 +136,25 @@ void UFP_SkillTreeWidget::SpawnNodeWidget(const UFP_SkillTreeNodeData* Data)
 	UCanvasPanelSlot* NodeSlot = Canvas_Nodes->AddChildToCanvas(NodeWidget);
 	if (NodeSlot)
 	{
-		// Read the half-size from the node widget's own SizeBox_Root override dimensions.
-		// Each BP subclass sets its SizeBox_Root width/height to match its visual design.
 		const FVector2D HalfSize = NodeWidget->GetDesiredHalfSize();
 		const FVector2D Centre   = Data->NodePosition * PositionScale;
-		NodeSlot->SetPosition(Centre - HalfSize);
-		NodeSlot->SetSize(HalfSize * 2.f);
+		const FVector2D SlotPos  = Centre - HalfSize;
+		const FVector2D SlotSize = HalfSize * 2.f;
+		NodeSlot->SetPosition(SlotPos);
+		NodeSlot->SetSize(SlotSize);
+		NodeSlot->SetAutoSize(false);
 		NodeSlot->SetZOrder(1);
+
+		// Log first node placed so we can verify position in the output log
+		if (SpawnedNodes.IsEmpty())
+		{
+			UE_LOG(LogTemp, Log, TEXT("SkillTreeWidget [%s]: first node [%s] at canvas pos (%.0f,%.0f) size (%.0f,%.0f)"),
+				*GetName(), *Data->NodeTag.ToString(), SlotPos.X, SlotPos.Y, SlotSize.X, SlotSize.Y);
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("SkillTreeWidget: AddChildToCanvas returned null slot for %s"), *Data->NodeTag.ToString());
 	}
 
 	SpawnedNodes.Add(Data->NodeTag, NodeWidget);

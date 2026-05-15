@@ -4,6 +4,7 @@
 #include "AbilitySystem/Abilities/FP_DamageGameplayAbility.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
+#include "FP_GameplayTags.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "AbilitySystem/Data/FP_SkillLibrary.h"
@@ -213,18 +214,82 @@ void UFP_DamageGameplayAbility::GetEffectiveRectParams(float BaseLength, float B
 
 // ---------------------------------------------------------------------------
 
+void UFP_DamageGameplayAbility::AssignSkillPassiveBonuses(FGameplayEffectSpecHandle& SpecHandle) const
+{
+	if (!SkillPassiveRootTag.IsValid())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("AssignSkillPassiveBonuses [%s]: SkillPassiveRootTag is not set — no skill bonuses applied"),
+			*GetName());
+		return;
+	}
+	if (!SpecHandle.IsValid()) return;
+
+	const APawn* Pawn = Cast<APawn>(GetAvatarActorFromActorInfo());
+	const AFP_PlayerState* PS = Pawn ? Pawn->GetPlayerState<AFP_PlayerState>() : nullptr;
+	if (!PS) return;
+
+	const TMap<FGameplayTag, float>& AllValues = PS->GetAllSkillPassiveValues();
+
+	UE_LOG(LogTemp, Log, TEXT("AssignSkillPassiveBonuses [%s]: root=[%s], PS has %d passive entries"),
+		*GetName(), *SkillPassiveRootTag.ToString(), AllValues.Num());
+
+	// Log every entry so we can spot tag format mismatches
+	for (const TTuple<FGameplayTag, float>& Pair : AllValues)
+		UE_LOG(LogTemp, Log, TEXT("  passive entry: [%s] = %.4f"), *Pair.Key.ToString(), Pair.Value);
+
+	const FFP_GameplayTags& Tags   = FFP_GameplayTags::Get();
+	const FString           Prefix = SkillPassiveRootTag.ToString() + TEXT(".");
+	int32 Assigned = 0;
+
+	for (const TTuple<FGameplayTag, float>& Pair : AllValues)
+	{
+		const FString TagStr = Pair.Key.ToString();
+		if (!TagStr.StartsWith(Prefix)) continue;
+
+		const FString Leaf = TagStr.Mid(Prefix.Len());
+
+		FGameplayTag Bucket;
+		if      (Leaf == TEXT("IncreasedDamage"))         Bucket = Tags.SetByCaller_SkillBonus_IncreasedDamage;
+		else if (Leaf == TEXT("MoreDamage"))               Bucket = Tags.SetByCaller_SkillBonus_MoreDamage;
+		else if (Leaf == TEXT("IncreasedChemicalDamage"))  Bucket = Tags.SetByCaller_SkillBonus_IncreasedChemicalDamage;
+		else if (Leaf == TEXT("MoreChemicalDamage"))        Bucket = Tags.SetByCaller_SkillBonus_MoreChemicalDamage;
+		else if (Leaf == TEXT("CritChance"))               Bucket = Tags.SetByCaller_SkillBonus_CritChance;
+		else if (Leaf == TEXT("IncreasedCritChance"))      Bucket = Tags.SetByCaller_SkillBonus_IncreasedCritChance;
+		else if (Leaf == TEXT("CritMultiplier"))           Bucket = Tags.SetByCaller_SkillBonus_CritMultiplier;
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("AssignSkillPassiveBonuses [%s]: unrecognised leaf [%s] — no bucket mapped"),
+				*GetName(), *Leaf);
+		}
+
+		if (Bucket.IsValid())
+		{
+			UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, Bucket, Pair.Value);
+			UE_LOG(LogTemp, Log, TEXT("  assigned bucket [%s] = %.4f"), *Bucket.ToString(), Pair.Value);
+			++Assigned;
+		}
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("AssignSkillPassiveBonuses [%s]: %d buckets assigned to spec"), *GetName(), Assigned);
+}
+
 void UFP_DamageGameplayAbility::AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const
 {
 	AppendSkillModifierTagsToDamageSpec(DamageSpecHandle);
+	AssignSkillPassiveBonuses(DamageSpecHandle);
 
+	const int32 NumRolls = FMath::Max(GetNumDamageRolls(), 1);
 	for (const TTuple<FGameplayTag, FDamageRange>& Pair : DamageTypes)
 	{
-		
-		const float MinScaledDamage = Pair.Value.DamageMin.GetValueAtLevel(GetAbilityLevel());
-		const float MaxScaledDamage = Pair.Value.DamageMax.GetValueAtLevel(GetAbilityLevel());
+		const float MinScaledDamage  = Pair.Value.DamageMin.GetValueAtLevel(GetAbilityLevel());
+		const float MaxScaledDamage  = Pair.Value.DamageMax.GetValueAtLevel(GetAbilityLevel());
 		const float LowerBoundDamage = FMath::Min(MinScaledDamage, MaxScaledDamage);
 		const float UpperBoundDamage = FMath::Max(MinScaledDamage, MaxScaledDamage);
-		const float ScaledDamage = FMath::FRandRange(LowerBoundDamage, UpperBoundDamage);
+
+		float ScaledDamage = FMath::FRandRange(LowerBoundDamage, UpperBoundDamage);
+		for (int32 i = 1; i < NumRolls; ++i)
+			ScaledDamage = FMath::Max(ScaledDamage, FMath::FRandRange(LowerBoundDamage, UpperBoundDamage));
+
 		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(DamageSpecHandle, Pair.Key, ScaledDamage);
 	}
 }

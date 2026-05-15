@@ -220,6 +220,14 @@ public:
 	 */
 	void LoadInventory(class UFP_InventoryComponent* InventoryComponent, const FGuid& CharacterID);
 
+	/**
+	 * Re-applies all skill-tree effects for the active character onto PlayerState.
+	 * Call this after granted skills and the ASC are fully initialised (i.e. after
+	 * LoadGrantedSkills and InitializeDefaultAttributes have both run).
+	 * No-op if no pending character or no profile data.
+	 */
+	void LoadSkillTreeState(APlayerController* PC, class AFP_PlayerState* PS);
+
 
 	// --- Helpers ---
 

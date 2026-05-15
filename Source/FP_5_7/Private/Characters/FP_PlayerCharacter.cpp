@@ -102,17 +102,37 @@ void AFP_PlayerCharacter::SetLeftHandIKTarget(USkeletalMeshComponent* WeaponMesh
 	LeftHandIKSocket             = SocketName;
 	LeftHandJointTargetLocation  = JointTargetLocation;
 
-	// Ensure the weapon mesh finishes its transform update before the
-	// character anim instance reads the socket position, eliminating IK lag.
-	if (USkeletalMeshComponent* CharMesh = GetMesh())
-		CharMesh->AddTickPrerequisiteComponent(WeaponMesh);
+	// Tick the weapon mesh before the character mesh so the anim instance reads
+	// a current socket position. Using TickGroup instead of AddTickPrerequisiteComponent
+	// avoids a cycle with Mesh_Torso's leader-pose dependency on CharacterMesh0.
+	if (WeaponMesh)
+		WeaponMesh->SetTickGroup(TG_PrePhysics);
+}
+
+FVector AFP_PlayerCharacter::GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag)
+{
+	if (MontageTag.MatchesTagExact(FFP_GameplayTags::Get().Montage_Skill_Weapon))
+	{
+		// Search every attached skeletal mesh for one that has WeaponTipSocket.
+		// The equipped weapon mesh (spawned by FFP_MeshFragment) will have it; body part meshes won't.
+		TArray<USkeletalMeshComponent*> Meshes;
+		GetComponents<USkeletalMeshComponent>(Meshes);
+		for (USkeletalMeshComponent* SKMesh : Meshes)
+		{
+			if (SKMesh && SKMesh->DoesSocketExist(WeaponTipSocketName))
+				return SKMesh->GetSocketLocation(WeaponTipSocketName);
+		}
+		// No weapon mesh with that socket found — fall back to right hand
+		return GetMesh()->GetSocketLocation(RightHandSocketName);
+	}
+
+	return Super::GetCombatSocketLocation_Implementation(MontageTag);
 }
 
 void AFP_PlayerCharacter::ClearLeftHandIKTarget()
 {
 	if (LeftHandIKWeaponMesh.IsValid())
-		if (USkeletalMeshComponent* CharMesh = GetMesh())
-			CharMesh->RemoveTickPrerequisiteComponent(LeftHandIKWeaponMesh.Get());
+		LeftHandIKWeaponMesh->SetTickGroup(TG_DuringPhysics);
 
 	LeftHandIKWeaponMesh        = nullptr;
 	LeftHandIKSocket            = NAME_None;

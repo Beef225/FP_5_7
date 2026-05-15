@@ -74,6 +74,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Skill Tree")
 	FGameplayTag GetTreeTag() const { return TreeTag; }
 
+	UFUNCTION(BlueprintCallable, Category="Skill Tree")
+	int32 GetSpawnedNodeCount() const { return SpawnedNodes.Num(); }
+
 	/** Fired whenever the pending count changes — subscribe to drive button states. */
 	UPROPERTY(BlueprintAssignable, Category="Skill Tree")
 	FOnSkillTreePendingCountChanged OnPendingCountChangedDelegate;

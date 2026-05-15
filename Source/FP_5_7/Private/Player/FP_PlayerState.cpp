@@ -6,6 +6,8 @@
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "AbilitySystem/Data/FP_LevelUpInfo.h"
 #include "AbilitySystem/Data/FP_SkillLibrary.h"
+#include "UI/Widget/SkillTree/FP_SkillTreeWidget.h"
+#include "SkillTree/FP_SkillTreeNodeData.h"
 #include "AbilitySystem/Data/FP_SkillLevelUpInfo.h"
 #include "FP_GameplayTags.h"
 #include "Net/UnrealNetwork.h"
@@ -198,18 +200,21 @@ void AFP_PlayerState::AddGrantedSkill(const FGameplayTag& SkillTag)
 void AFP_PlayerState::RemoveGrantedSkill(const FGameplayTag& SkillTag)
 {
 	GrantedSkillTags.Remove(SkillTag);
+	RevokeSkillTreeEffects(SkillTag);
 }
 
 void AFP_PlayerState::LoadSkillState(
 	const TMap<FGameplayTag, int32>& InXP,
 	const TMap<FGameplayTag, int32>& InLevels,
 	const TMap<FGameplayTag, int32>& InPoints,
-	const TMap<FGameplayTag, FGameplayTag>& InInputTags)
+	const TMap<FGameplayTag, FGameplayTag>& InInputTags,
+	const TArray<FGameplayTag>& InClearedSlots)
 {
-	SkillXP           = InXP;
-	SkillLevel        = InLevels;
+	SkillXP            = InXP;
+	SkillLevel         = InLevels;
 	UnspentSkillPoints = InPoints;
-	SkillInputTags    = InInputTags;
+	SkillInputTags     = InInputTags;
+	ClearedSlots       = TSet<FGameplayTag>(InClearedSlots);
 
 	for (const auto& Pair : SkillXP)
 		OnSkillXPChangedDelegate.Broadcast(Pair.Key, Pair.Value);
@@ -321,28 +326,36 @@ void AFP_PlayerState::AssignSkillToSlot(const FGameplayTag& SkillTag, const FGam
 		OnSkillInputTagAssigned.Broadcast(SlotInputTag, FGameplayTag());
 
 	SkillInputTags.Add(SlotInputTag, SkillTag);
+	ClearedSlots.Remove(SlotInputTag); // no longer deliberately empty
 	OnSkillInputTagAssigned.Broadcast(SlotInputTag, SkillTag);
 }
 
 void AFP_PlayerState::ClearSkillSlot(const FGameplayTag& SlotInputTag)
 {
-	if (!SkillInputTags.Contains(SlotInputTag)) return;
-
 	SkillInputTags.Remove(SlotInputTag);
+	ClearedSlots.Add(SlotInputTag); // remember this was deliberately cleared
 	OnSkillInputTagAssigned.Broadcast(SlotInputTag, FGameplayTag());
 }
 
 void AFP_PlayerState::ApplyInputTagsToASC(UFP_AbilitySystemComponent* ASC)
 {
-	if (!ASC || SkillInputTags.IsEmpty()) return;
+	if (!ASC || (SkillInputTags.IsEmpty() && ClearedSlots.IsEmpty())) return;
 
-	// Build reverse map: SkillTag → [SlotInputTags]
+	// Build reverse map: SkillTag → [SlotInputTags].
+	// ClaimedInputTags = every slot the player has explicitly touched (assigned OR cleared).
+	// Any startup ability holding a claimed tag gets it stripped so the slot state
+	// exactly matches what was saved — including empty slots.
 	TMap<FGameplayTag, TArray<FGameplayTag>> SkillToSlots;
+	TSet<FGameplayTag>                       ClaimedInputTags;
 	for (const auto& Pair : SkillInputTags)
 	{
 		if (Pair.Key.IsValid() && Pair.Value.IsValid())
+		{
 			SkillToSlots.FindOrAdd(Pair.Value).Add(Pair.Key);
+			ClaimedInputTags.Add(Pair.Key);
+		}
 	}
+	ClaimedInputTags.Append(ClearedSlots); // cleared slots are claimed too — keep them empty
 
 	const FGameplayTag InputParent = FGameplayTag::RequestGameplayTag(FName("InputTag"));
 
@@ -352,19 +365,31 @@ void AFP_PlayerState::ApplyInputTagsToASC(UFP_AbilitySystemComponent* ASC)
 		const FGameplayTag SkillTag = UFP_AbilitySystemComponent::GetAbilityTagFromSpec(Spec);
 		if (!SkillTag.IsValid()) continue;
 
-		const TArray<FGameplayTag>* Slots = SkillToSlots.Find(SkillTag);
-		if (!Slots) continue; // not in saved map — leave existing tags untouched
-
 		FGameplayTagContainer& DynTags = Spec.GetDynamicSpecSourceTags();
 		bool bDirty = false;
 
-		TArray<FGameplayTag> ToRemove;
-		for (const FGameplayTag& Tag : DynTags)
-			if (Tag.MatchesTag(InputParent))
-				ToRemove.Add(Tag);
-		for (const FGameplayTag& Tag : ToRemove) { DynTags.RemoveTag(Tag); bDirty = true; }
-
-		for (const FGameplayTag& SlotTag : *Slots) { DynTags.AddTag(SlotTag); bDirty = true; }
+		const TArray<FGameplayTag>* Slots = SkillToSlots.Find(SkillTag);
+		if (Slots)
+		{
+			// Ability is in save map — replace all its input tags with the saved ones.
+			TArray<FGameplayTag> ToRemove;
+			for (const FGameplayTag& Tag : DynTags)
+				if (Tag.MatchesTag(InputParent))
+					ToRemove.Add(Tag);
+			for (const FGameplayTag& Tag : ToRemove) { DynTags.RemoveTag(Tag); bDirty = true; }
+			for (const FGameplayTag& SlotTag : *Slots) { DynTags.AddTag(SlotTag); bDirty = true; }
+		}
+		else
+		{
+			// Ability is NOT in save map (e.g. a startup default ability).
+			// Strip any input tags it holds that are claimed by saved abilities,
+			// so they don't conflict with the remapped binding.
+			TArray<FGameplayTag> ToRemove;
+			for (const FGameplayTag& Tag : DynTags)
+				if (Tag.MatchesTag(InputParent) && ClaimedInputTags.Contains(Tag))
+					ToRemove.Add(Tag);
+			for (const FGameplayTag& Tag : ToRemove) { DynTags.RemoveTag(Tag); bDirty = true; }
+		}
 
 		if (bDirty) ASC->MarkAbilitySpecDirty(Spec);
 	}
@@ -379,6 +404,115 @@ void AFP_PlayerState::ApplyInputTagForSkill(UFP_AbilitySystemComponent* ASC, con
 		if (Pair.Value.MatchesTagExact(SkillTag))
 			ASC->AddInputTagToSkill(SkillTag, Pair.Key);
 	}
+}
+
+FGameplayTagContainer AFP_PlayerState::GetSkillTreeNodesForTree(const FGameplayTag& SkillTreeTag) const
+{
+	const FGameplayTagContainer* Found = SkillTreeAllocatedNodes.Find(SkillTreeTag);
+	return Found ? *Found : FGameplayTagContainer();
+}
+
+void AFP_PlayerState::SetSkillTreeAllocatedNodes(const FGameplayTag& TreeTag, const FGameplayTagContainer& Nodes)
+{
+	if (TreeTag.IsValid())
+		SkillTreeAllocatedNodes.Add(TreeTag, Nodes);
+}
+
+void AFP_PlayerState::LoadSkillTreeState(APlayerController* PC,
+                                          const TMap<FGameplayTag, FGameplayTagContainer>& SavedState)
+{
+	SkillTreeAllocatedNodes = SavedState;
+
+	if (!PC || !SkillLibrary) return;
+
+	for (const TTuple<FGameplayTag, FGameplayTagContainer>& Pair : SavedState)
+	{
+		const FGameplayTag&           TreeTag       = Pair.Key;
+		const FGameplayTagContainer&  AllocatedTags = Pair.Value;
+
+		// Find the ability entry whose skill tree matches this tree tag.
+		for (const FFP_AbilityEntry& Entry : SkillLibrary->AbilityEntries)
+		{
+			if (!Entry.SkillTreeWidgetClass) continue;
+
+			UFP_SkillTreeWidget* CDO = GetMutableDefault<UFP_SkillTreeWidget>(Entry.SkillTreeWidgetClass);
+			if (!CDO || CDO->GetTreeTag() != TreeTag) continue;
+
+			// Guard — only apply effects when the skill is currently granted.
+			if (!IsSkillGranted(Entry.SkillTag))
+			{
+				UE_LOG(LogTemp, Log, TEXT("LoadSkillTreeState: skill %s not granted — skipping tree %s"),
+					*Entry.SkillTag.ToString(), *TreeTag.ToString());
+				break;
+			}
+
+			// Re-apply effects for each allocated node.
+			for (const FGameplayTag& NodeTag : AllocatedTags)
+			{
+				for (UFP_SkillTreeNodeData* NodeData : CDO->NodeDataAssets)
+				{
+					if (!NodeData || NodeData->NodeTag != NodeTag) continue;
+					NodeData->AllocateEffects(PC);
+					break;
+				}
+			}
+			break;
+		}
+	}
+}
+
+void AFP_PlayerState::RevokeSkillTreeEffects(const FGameplayTag& SkillTag)
+{
+	if (!SkillLibrary) return;
+
+	for (const FFP_AbilityEntry& Entry : SkillLibrary->AbilityEntries)
+	{
+		if (Entry.SkillTag != SkillTag || !Entry.SkillTreeWidgetClass) continue;
+
+		UFP_SkillTreeWidget* CDO = GetMutableDefault<UFP_SkillTreeWidget>(Entry.SkillTreeWidgetClass);
+		if (!CDO) return;
+
+		const FGameplayTag& TreeTag = CDO->GetTreeTag();
+		const FGameplayTagContainer* AllocatedNodes = SkillTreeAllocatedNodes.Find(TreeTag);
+		if (!AllocatedNodes || AllocatedNodes->IsEmpty()) return;
+
+		// Get a PC for the effect calls — player state always belongs to a pawn.
+		APlayerController* PC = GetPawn() ? Cast<APlayerController>(GetPawn()->GetController()) : nullptr;
+
+		for (const FGameplayTag& NodeTag : *AllocatedNodes)
+		{
+			for (UFP_SkillTreeNodeData* NodeData : CDO->NodeDataAssets)
+			{
+				if (!NodeData || NodeData->NodeTag != NodeTag) continue;
+				NodeData->DeallocateEffects(PC);
+				break;
+			}
+		}
+		return;
+	}
+}
+
+void AFP_PlayerState::SpendSkillPassivePoints(const FGameplayTag& SkillTag, int32 Amount)
+{
+	if (!SkillTag.IsValid() || Amount <= 0) return;
+	int32& Points = UnspentSkillPoints.FindOrAdd(SkillTag, 0);
+	Points = FMath::Max(0, Points - Amount);
+	OnSkillPointsChangedDelegate.Broadcast(SkillTag, Points);
+}
+
+void AFP_PlayerState::AccumulateSkillPassive(const FGameplayTag& PassiveTag, float Delta)
+{
+	if (!PassiveTag.IsValid()) return;
+	float& Value = SkillPassiveValues.FindOrAdd(PassiveTag, 0.f);
+	Value += Delta;
+	if (FMath::IsNearlyZero(Value))
+		SkillPassiveValues.Remove(PassiveTag);
+}
+
+float AFP_PlayerState::GetSkillPassiveValue(const FGameplayTag& PassiveTag) const
+{
+	const float* Found = SkillPassiveValues.Find(PassiveTag);
+	return Found ? *Found : 0.f;
 }
 
 void AFP_PlayerState::LoadAllocatedPoints(int32 InUnspent, int32 InMight, int32 InResonance, int32 InAgility, int32 InFortitude)

@@ -152,6 +152,22 @@ static void ApplyNodeJSON(UFP_SkillTreeNodeData* Asset, const TSharedPtr<FJsonOb
 
 				Asset->Effects.Add(MoveTemp(Entry));
 			}
+			else if (EffectType == TEXT("Skill Passive"))
+			{
+				TInstancedStruct<FFP_SkillTreeNodeEffect> Entry;
+				Entry.InitializeAs<FFP_NodeEffect_SkillPassive>();
+				FFP_NodeEffect_SkillPassive& P = Entry.GetMutable<FFP_NodeEffect_SkillPassive>();
+
+				FString PassiveTag;
+				if (EffJson->TryGetStringField(TEXT("EffectSkillPassiveTag"), PassiveTag))
+					P.PassiveTag = UGameplayTagsManager::Get().RequestGameplayTag(FName(*PassiveTag), false);
+
+				double Mag = 0.0;
+				if (EffJson->TryGetNumberField(TEXT("EffectStatMagnitude"), Mag))
+					P.Magnitude = static_cast<float>(Mag);
+
+				Asset->Effects.Add(MoveTemp(Entry));
+			}
 			else
 			{
 				UE_LOG(LogTemp, Warning, TEXT("SkillTreeImporter: unknown EffectType '%s' on node — skipped"), *EffectType);

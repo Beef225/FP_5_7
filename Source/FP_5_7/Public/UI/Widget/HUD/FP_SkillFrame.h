@@ -116,6 +116,9 @@ private:
 	UFUNCTION()
 	void OnSkillListButtonClicked();
 
+	UFUNCTION()
+	void HandleEntrySkillTreeRequested(const FFP_AbilityEntry& Entry);
+
 	/** Fired by PlayerState when any skill's slot assignment changes. Clears this frame's
 	 *  icon if our skill was reassigned to a different slot by another frame. */
 	void HandleSkillInputTagAssigned(FGameplayTag InSlotInputTag, FGameplayTag InSkillTag);
@@ -134,10 +137,12 @@ private:
 
 	void OpenDescriptionPopup();
 	void CloseDescriptionPopup();
+	void TryCloseDescriptionPopup();
 
 	FGameplayTag AssignedSkillTag;
 	FDelegateHandle SkillAssignedHandle;
 	FDelegateHandle SkillStateLoadedHandle;
 	TWeakObjectPtr<UFP_SkillPickerPopup> ActivePickerPopup;
 	TWeakObjectPtr<UFP_SkillDescription> ActiveDescriptionPopup;
+	FTimerHandle DescriptionCloseTimerHandle;
 };

@@ -434,6 +434,7 @@ FGameplayTag Inventory_Equippable_Amulet;
 FGameplayTag Inventory_Equippable_Headwear_CombatHelm;
 FGameplayTag Inventory_Equippable_Gloves_CombatGloves;
 FGameplayTag Inventory_Equippable_BodyArmour_CombatArmour;
+	FGameplayTag Inventory_Equippable_BodyArmour_DusterCoat;
 FGameplayTag Inventory_Equippable_Boots_CombatBoots;
 
 // -------------------------------------------------------------------------

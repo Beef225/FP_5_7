@@ -187,8 +187,18 @@ void FFP_MeshFragment::OnUnequip(APlayerController* PC)
 	}
 	CachedOriginalMeshes.Empty();
 
-	// Clear left-hand IK before destroying components
-	Character->ClearLeftHandIKTarget();
+	// Only clear the IK if this fragment was the one that set it.
+	// Another item (e.g. the equipped weapon) may own the IK target.
+	{
+		USkeletalMeshComponent* CurrentIKMesh = Character->GetLeftHandIKWeaponMesh();
+		const bool bOwnsIK = SpawnedSocketComponents.ContainsByPredicate(
+			[CurrentIKMesh](const TWeakObjectPtr<USkeletalMeshComponent>& Weak)
+			{
+				return Weak.IsValid() && Weak.Get() == CurrentIKMesh;
+			});
+		if (bOwnsIK)
+			Character->ClearLeftHandIKTarget();
+	}
 
 	// Destroy all socket-attached add-on meshes
 	for (TWeakObjectPtr<USkeletalMeshComponent>& WeakComp : SpawnedSocketComponents)

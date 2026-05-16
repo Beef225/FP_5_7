@@ -1134,6 +1134,8 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Inventory.Equippable.Gloves.CombatGloves"), FString("Combat Gloves item"));
 	GameplayTags.Inventory_Equippable_BodyArmour_CombatArmour = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Inventory.Equippable.BodyArmour.CombatArmour"), FString("Combat Armour body armour item"));
+	GameplayTags.Inventory_Equippable_BodyArmour_DusterCoat = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.BodyArmour.DusterCoat"), FString("Duster Coat body armour item"));
 	GameplayTags.Inventory_Equippable_Boots_CombatBoots = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Inventory.Equippable.Boots.CombatBoots"), FString("Combat Boots item"));
 

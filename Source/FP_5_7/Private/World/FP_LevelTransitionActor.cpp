@@ -45,9 +45,9 @@ void AFP_LevelTransitionActor::OnSphereOverlap(UPrimitiveComponent* OverlappedCo
 	if (!OtherPawn) return;
 
 	AFP_PlayerController* PC = Cast<AFP_PlayerController>(OtherPawn->GetController());
-	if (!PC || !PC->IsPendingLevelTransition()) return;
+	if (!PC || !PC->IsPendingInteractableArrival()) return;
 
-	PC->ConsumePendingLevelTransition();
+	PC->ConsumePendingInteractableArrival();
 
 	if (UFP_SaveGameSubsystem* SaveSys = UFP_SaveGameSubsystem::Get(this))
 	{

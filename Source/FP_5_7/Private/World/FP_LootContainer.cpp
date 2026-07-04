@@ -1,0 +1,118 @@
+// Copyright JG
+
+#include "World/FP_LootContainer.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/SphereComponent.h"
+#include "Components/FP_LootDropComponent.h"
+#include "Player/FP_PlayerController.h"
+
+AFP_LootContainer::AFP_LootContainer()
+{
+	PrimaryActorTick.bCanEverTick = false;
+
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	SetRootComponent(Mesh);
+
+	MoveToComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MoveToComponent"));
+	MoveToComponent->SetupAttachment(GetRootComponent());
+
+	TriggerSphere = CreateDefaultSubobject<USphereComponent>(TEXT("TriggerSphere"));
+	TriggerSphere->SetupAttachment(MoveToComponent);
+	TriggerSphere->SetSphereRadius(50.f);
+	TriggerSphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	TriggerSphere->SetCollisionResponseToAllChannels(ECR_Ignore);
+	TriggerSphere->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+
+	LootDropComponent = CreateDefaultSubobject<UFP_LootDropComponent>(TEXT("LootDropComponent"));
+}
+
+void AFP_LootContainer::BeginPlay()
+{
+	Super::BeginPlay();
+	TriggerSphere->OnComponentBeginOverlap.AddDynamic(this, &AFP_LootContainer::OnSphereOverlap);
+
+	// Stencil value is applied here (rather than only in the constructor) so it
+	// covers any extra static mesh pieces added in a Blueprint subclass too — e.g.
+	// a separate lid mesh on a hinge pivot — not just the C++-defined root Mesh.
+	TArray<UStaticMeshComponent*> MeshComponents;
+	GetComponents<UStaticMeshComponent>(MeshComponents);
+	for (UStaticMeshComponent* MeshComp : MeshComponents)
+	{
+		MeshComp->SetCustomDepthStencilValue(252); // CUSTOM_DEPTH_TAN
+		MeshComp->MarkRenderStateDirty();
+	}
+}
+
+void AFP_LootContainer::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (bHasBeenOpened) return;
+	if (!OtherActor) return;
+
+	APawn* OtherPawn = Cast<APawn>(OtherActor);
+	if (!OtherPawn) return;
+
+	AFP_PlayerController* PC = Cast<AFP_PlayerController>(OtherPawn->GetController());
+	if (!PC || !PC->IsPendingInteractableArrival()) return;
+
+	PC->ConsumePendingInteractableArrival();
+
+	bHasBeenOpened = true;
+	UnHighlightActor_Implementation();
+	PlayOpenAnimation();
+}
+
+void AFP_LootContainer::PlayOpenAnimation_Implementation()
+{
+	// No animation asset assigned by default — spawn immediately. Override in
+	// Blueprint (Timeline / Sequencer / Montage) and call OnOpenAnimationFinished
+	// yourself once the animation completes.
+	OnOpenAnimationFinished();
+}
+
+void AFP_LootContainer::OnOpenAnimationFinished()
+{
+	if (LootDropComponent)
+	{
+		// TODO: no area-level system exists yet — LootDropComponent::SpawnLoot only
+		// sets item level when the loot spawner implements IFP_CombatInterface, which
+		// this container doesn't, so drops default to level 1 (FFP_ItemFragment's
+		// ItemLevel default). Once areas have a level, set it here (e.g. implement
+		// IFP_CombatInterface::GetPlayerLevel_Implementation to return the area's
+		// level, the same way enemies return their own level) so container loot
+		// scales like enemy loot does.
+		LootDropComponent->SpawnLoot();
+	}
+}
+
+void AFP_LootContainer::SetMoveToLocation_Implementation(FVector& OutDestination)
+{
+	OutDestination = MoveToComponent->GetComponentLocation();
+}
+
+void AFP_LootContainer::HighlightActor_Implementation()
+{
+	if (bHasBeenOpened) return;
+
+	TArray<UStaticMeshComponent*> MeshComponents;
+	GetComponents<UStaticMeshComponent>(MeshComponents);
+	for (UStaticMeshComponent* MeshComp : MeshComponents)
+	{
+		MeshComp->SetRenderCustomDepth(true);
+	}
+}
+
+void AFP_LootContainer::UnHighlightActor_Implementation()
+{
+	TArray<UStaticMeshComponent*> MeshComponents;
+	GetComponents<UStaticMeshComponent>(MeshComponents);
+	for (UStaticMeshComponent* MeshComp : MeshComponents)
+	{
+		MeshComp->SetRenderCustomDepth(false);
+	}
+}
+
+void AFP_LootContainer::Interact_Implementation(APawn* InstigatorPawn)
+{
+	// Interaction is handled by OnSphereOverlap once the player walks to MoveToComponent.
+}

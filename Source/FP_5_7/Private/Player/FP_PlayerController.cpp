@@ -131,7 +131,7 @@ void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 	const FGameplayTag MenuRoot = FGameplayTag::RequestGameplayTag(FName("InputTag.Menu"));
 	if (InputTag.MatchesTag(MenuRoot))
 	{
-		bPendingLevelTransition = false;
+		bPendingInteractableArrival = false;
 		OnUIInputTagPressed.Broadcast(InputTag);
 		return; // stop here so "menu tags" don’t also try to drive abilities later
 	}
@@ -151,13 +151,13 @@ void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 			{
 				IC->GetInventoryMenu()->DropHoverItem();
 				bAutoRunning = false;
-				bPendingLevelTransition = false;
+				bPendingInteractableArrival = false;
 				PendingPickupItem = nullptr;
 				return;
 			}
 		}
 
-		bPendingLevelTransition = false;
+		bPendingInteractableArrival = false;
 		PendingPickupItem = nullptr;
 		if (IsValid(ThisActor))
 		{
@@ -174,7 +174,7 @@ void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 	else
 	{
 		// Any non-LMB ability (skills, etc.) cancels a pending transition
-		bPendingLevelTransition = false;
+		bPendingInteractableArrival = false;
 	}
 	
 	
@@ -212,7 +212,7 @@ void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 				IFP_HighlightInterface::Execute_SetMoveToLocation(ThisActor, CachedDestination);
 				if (bTargetingInteractable)
 				{
-					bPendingLevelTransition = true;
+					bPendingInteractableArrival = true;
 				}
 			}
 
@@ -440,7 +440,7 @@ void AFP_PlayerController::Move(const FInputActionValue& InputActionValue)
 	}
 
 	bAutoRunning = false;
-	bPendingLevelTransition = false;
+	bPendingInteractableArrival = false;
 
 	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
 

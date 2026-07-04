@@ -55,8 +55,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Game|Pause")
 	void UnpauseGame();
 
-	bool IsPendingLevelTransition() const { return bPendingLevelTransition; }
-	void ConsumePendingLevelTransition() { bPendingLevelTransition = false; }
+	bool IsPendingInteractableArrival() const { return bPendingInteractableArrival; }
+	void ConsumePendingInteractableArrival() { bPendingInteractableArrival = false; }
 
 	UFUNCTION(BlueprintPure, Category = "Inventory")
 	bool IsInPickupRange(const AFP_ItemActor* ItemActor) const;
@@ -124,8 +124,13 @@ private:
 	bool bAutoRunning = false;
 	EFP_TargetingStatus TargetingStatus = EFP_TargetingStatus::NotTargeting;
 
-	/** Set when the player intentionally clicks a level transition actor. Cleared by any other input. */
-	bool bPendingLevelTransition = false;
+	/**
+	 * Set when the player short-clicks a highlighted non-enemy interactable (door,
+	 * loot container, ...) and is walking to it. The target actor's own trigger
+	 * sphere consumes this on overlap to fire its arrival behavior. Cleared by any
+	 * other input.
+	 */
+	bool bPendingInteractableArrival = false;
 
 	
 	UPROPERTY(EditAnywhere, Category="Input")

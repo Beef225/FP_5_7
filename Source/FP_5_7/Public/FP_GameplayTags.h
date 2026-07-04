@@ -266,6 +266,7 @@ FGameplayTag Skill_Ranged;
 FGameplayTag Skill_Summon;
 FGameplayTag Skill_Movement;
 FGameplayTag Skills_Movement_DodgeRoll;
+	FGameplayTag Skills_Movement_Leap;
 FGameplayTag Skills_Rotation_Cancelled;
 FGameplayTag Skill_MoveSpeed_Diminished;
 FGameplayTag Skill_MoveSpeed_None;
@@ -656,6 +657,32 @@ FGameplayTag SkillPassive_LightningCoil_ChainRadius;
 FGameplayTag SkillPassive_LightningCoil_DistanceLuckyRolls;
 FGameplayTag SkillPassive_LightningCoil_DamageLuckyRolls;
 FGameplayTag SkillPassive_LightningCoil_CastSpeed;
+
+	//SkillTree — Leap
+	FGameplayTag SkillTree_Leap_ExtraRange_1;
+	FGameplayTag SkillTree_Leap_ExtraRange_2;
+	FGameplayTag SkillTree_Leap_ExtraRange_3;
+	FGameplayTag SkillTree_Leap_ExplosiveLanding_1;
+	FGameplayTag SkillTree_Leap_NoWindup_1;
+
+	//SkillTree — Leap (continued)
+	FGameplayTag SkillTree_Leap_HeatCost_1;
+	FGameplayTag SkillTree_Leap_HeatCost_2;
+	FGameplayTag SkillTree_Leap_HeatCost_3;
+	FGameplayTag SkillTree_Leap_HeatCost_4;
+	FGameplayTag SkillTree_Leap_HeatCost_5;
+	FGameplayTag SkillTree_Leap_HeatCost_6;
+	FGameplayTag SkillTree_Leap_CooldownDuration_1;
+	FGameplayTag SkillTree_Leap_CooldownDuration_2;
+	FGameplayTag SkillTree_Leap_CooldownDuration_3;
+	FGameplayTag SkillTree_Leap_CooldownDuration_4;
+
+	//SkillPassive — Leap
+	FGameplayTag SkillPassive_Leap_ExtraRange;
+	FGameplayTag SkillPassive_Leap_ExplosiveLanding;
+	FGameplayTag SkillPassive_Leap_NoWindup;
+	FGameplayTag SkillPassive_Leap_HeatCost;
+	FGameplayTag SkillPassive_Leap_CooldownDuration;
 // ---- GRID TEST TAGS — DELETE AFTER PLACEMENT TESTING ----
 FGameplayTag SkillTree_LightningCoil_Grid_N001; FGameplayTag SkillTree_LightningCoil_Grid_N002; FGameplayTag SkillTree_LightningCoil_Grid_N003; FGameplayTag SkillTree_LightningCoil_Grid_N004;
 FGameplayTag SkillTree_LightningCoil_Grid_N005; FGameplayTag SkillTree_LightningCoil_Grid_N006; FGameplayTag SkillTree_LightningCoil_Grid_N007; FGameplayTag SkillTree_LightningCoil_Grid_N008;

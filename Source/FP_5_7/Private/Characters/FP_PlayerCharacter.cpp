@@ -147,7 +147,63 @@ void AFP_PlayerCharacter::BeginPlay()
 	if (CameraBoom)
 	{
 		TargetArmLength = FMath::Clamp(CameraBoom->TargetArmLength, MinArmLength, MaxArmLength);
+		BaseCameraBoomRelativeLocation = CameraBoom->GetRelativeLocation();
 	}
+
+	// Elevation lock reacts to the root's own TransformUpdated event rather than
+	// polling in Tick() — see OnRootTransformUpdated for why.
+	if (USceneComponent* Root = GetRootComponent())
+	{
+		Root->TransformUpdated.AddUObject(this, &AFP_PlayerCharacter::OnRootTransformUpdated);
+	}
+}
+
+void AFP_PlayerCharacter::OnRootTransformUpdated(USceneComponent* UpdatedComponent, EUpdateTransformFlags UpdateTransformFlags, ETeleportType Teleport)
+{
+	if (!bCameraElevationLocked || !CameraBoom || !UpdatedComponent) return;
+
+	// Fires synchronously with whatever just moved the root (CMC crouch, the leap
+	// AbilityTask's SetActorLocation, root motion, ...) so the correction can never
+	// be a frame behind. Only Z is touched — X/Y stay whatever they were, so the
+	// boom keeps tracking the root's horizontal movement via normal attachment.
+	FVector Rel = CameraBoom->GetRelativeLocation();
+	Rel.Z = LockedCameraWorldZ - UpdatedComponent->GetComponentLocation().Z;
+	CameraBoom->SetRelativeLocation(Rel);
+}
+
+void AFP_PlayerCharacter::InterpCameraToDestination(FVector Destination, float InterpSpeed, float DeltaTime)
+{
+	if (!CameraBoom || !IsLocallyControlled()) return;
+
+	bCameraDestinationOverride = true;
+	CameraOverrideDestination  = Destination;
+	CameraOverrideInterpSpeed  = FMath::Max(InterpSpeed, KINDA_SMALL_NUMBER);
+}
+
+void AFP_PlayerCharacter::ReleaseCameraInterp(float BlendOutSpeed)
+{
+	bCameraDestinationOverride = false;
+	bCameraElevationLocked     = false;
+	CameraReleaseBlendSpeed    = FMath::Max(BlendOutSpeed, KINDA_SMALL_NUMBER);
+}
+
+FVector AFP_PlayerCharacter::GetCameraFollowLocation() const
+{
+	return CameraBoom ? CameraBoom->GetComponentLocation() : GetActorLocation();
+}
+
+void AFP_PlayerCharacter::LockCameraElevation()
+{
+	if (!CameraBoom || !IsLocallyControlled()) return;
+
+	bCameraElevationLocked = true;
+	LockedCameraWorldZ     = CameraBoom->GetComponentLocation().Z;
+}
+
+void AFP_PlayerCharacter::UnlockCameraElevation(float BlendOutSpeed)
+{
+	bCameraElevationLocked = false;
+	ReleaseCameraInterp(BlendOutSpeed);
 }
 
 void AFP_PlayerCharacter::AddCameraZoomInput(float ZoomDelta)
@@ -288,7 +344,23 @@ void AFP_PlayerCharacter::Tick(float DeltaTime)
 	FRotator R = CameraBoom->GetRelativeRotation();
 	R.Pitch = FMath::FInterpTo(R.Pitch, DesiredPitch, DeltaTime, PitchInterpSpeed);
 	CameraBoom->SetRelativeRotation(R);
-	
+
+	// --- Camera follow override (see InterpCameraToDestination) -----------------
+	// Elevation lock is handled synchronously via OnRootTransformUpdated, not here —
+	// skip so this block doesn't fight that correction with a stale Tick-based read.
+	if (!bCameraElevationLocked)
+	{
+		const FVector RootLoc = GetRootComponent()->GetComponentLocation();
+		const FVector Target  = bCameraDestinationOverride ? CameraOverrideDestination : (RootLoc + BaseCameraBoomRelativeLocation);
+		const float   ZSpeed  = bCameraDestinationOverride ? CameraOverrideInterpSpeed : CameraReleaseBlendSpeed;
+		const FVector CurrentBoomLoc = CameraBoom->GetComponentLocation();
+		if (!CurrentBoomLoc.Equals(Target, 0.05f))
+		{
+			const FVector NewBoomLoc = FMath::VInterpTo(CurrentBoomLoc, Target, DeltaTime, ZSpeed);
+			CameraBoom->SetRelativeLocation(NewBoomLoc - RootLoc);
+		}
+	}
+
 	FaceMouse(DeltaTime);
 }
 

@@ -803,6 +803,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Skills.Movement.DodgeRoll"),
 		FString("Dodge Roll — burst movement in the player's input direction")
 		);
+	GameplayTags.Skills_Movement_Leap = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Movement.Leap"),
+		FString("Leap — teleport to mouse cursor position up to max range")
+		);
 	GameplayTags.Skills_Rotation_Cancelled = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Skills.Rotation.Cancelled"),
 		FString("Suppresses mouse-facing rotation while an ability is active")
@@ -1869,6 +1873,91 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.SkillTree_LightningCoil_SkillSpeed_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SkillTree.LightningCoil.SkillSpeed.2"),
 		FString("5% Increased Skill Speed")
+		);
+
+	// ---- Leap SkillTree nodes ----
+	GameplayTags.SkillTree_Leap_ExtraRange_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.ExtraRange.1"),
+		FString("Extra 200cm leap range")
+		);
+	GameplayTags.SkillTree_Leap_ExtraRange_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.ExtraRange.2"),
+		FString("Extra 200cm leap range")
+		);
+	GameplayTags.SkillTree_Leap_ExtraRange_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.ExtraRange.3"),
+		FString("Extra 200cm leap range")
+		);
+	GameplayTags.SkillTree_Leap_ExplosiveLanding_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.ExplosiveLanding.1"),
+		FString("Deals explosive AoE damage on landing")
+		);
+	GameplayTags.SkillTree_Leap_NoWindup_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.NoWindup.1"),
+		FString("Removes windup animation before the leap")
+		);
+
+	GameplayTags.SkillTree_Leap_HeatCost_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.HeatCost.1"),
+		FString("Adds heat cost per cast")
+		);
+	GameplayTags.SkillTree_Leap_HeatCost_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.HeatCost.2"),
+		FString("Adds heat cost per cast")
+		);
+	GameplayTags.SkillTree_Leap_HeatCost_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.HeatCost.3"),
+		FString("Adds heat cost per cast")
+		);
+	GameplayTags.SkillTree_Leap_HeatCost_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.HeatCost.4"),
+		FString("Adds heat cost per cast")
+		);
+	GameplayTags.SkillTree_Leap_HeatCost_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.HeatCost.5"),
+		FString("Adds heat cost per cast")
+		);
+	GameplayTags.SkillTree_Leap_HeatCost_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.HeatCost.6"),
+		FString("Adds heat cost per cast")
+		);
+	GameplayTags.SkillTree_Leap_CooldownDuration_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.CooldownDuration.1"),
+		FString("Reduces cooldown duration")
+		);
+	GameplayTags.SkillTree_Leap_CooldownDuration_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.CooldownDuration.2"),
+		FString("Reduces cooldown duration")
+		);
+	GameplayTags.SkillTree_Leap_CooldownDuration_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.CooldownDuration.3"),
+		FString("Reduces cooldown duration")
+		);
+	GameplayTags.SkillTree_Leap_CooldownDuration_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTree.Leap.CooldownDuration.4"),
+		FString("Reduces cooldown duration")
+		);
+
+	// ---- Leap SkillPassive values ----
+	GameplayTags.SkillPassive_Leap_ExtraRange = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Leap.ExtraRange"),
+		FString("Per-skill passive: extra leap range in cm")
+		);
+	GameplayTags.SkillPassive_Leap_ExplosiveLanding = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Leap.ExplosiveLanding"),
+		FString("Per-skill passive: flag — >0 enables landing explosion")
+		);
+	GameplayTags.SkillPassive_Leap_NoWindup = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Leap.NoWindup"),
+		FString("Per-skill passive: flag — >0 disables windup animation")
+		);
+	GameplayTags.SkillPassive_Leap_HeatCost = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Leap.HeatCost"),
+		FString("Per-skill passive: accumulated heat generated per cast")
+		);
+	GameplayTags.SkillPassive_Leap_CooldownDuration = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Leap.CooldownDuration"),
+		FString("Per-skill passive: accumulated cooldown reduction in seconds")
 		);
 
 	// ---- GRID TEST TAGS — DELETE AFTER PLACEMENT TESTING ----

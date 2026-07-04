@@ -71,23 +71,33 @@ void FFP_SkillFragment::OnEquip(APlayerController* PC)
 
 	for (int32 i = 0; i < GrantedSkillTags.Num(); ++i)
 	{
-		const FFP_AbilityEntry Entry = Library->FindAbilityEntryForTag(GrantedSkillTags[i], true);
+		const FGameplayTag& Tag = GrantedSkillTags[i];
+		UE_LOG(LogTemp, Log, TEXT("[SKILL EQUIP] Processing tag: %s"), *Tag.ToString());
+
+		const FFP_AbilityEntry Entry = Library->FindAbilityEntryForTag(Tag, true);
 		if (!Entry.SkillAbility)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("[SKILL EQUIP] Tag '%s' has no SkillAbility set in SkillLibrary"), *GrantedSkillTags[i].ToString());
+			UE_LOG(LogTemp, Warning, TEXT("[SKILL EQUIP] Tag '%s' — no SkillAbility in SkillLibrary"), *Tag.ToString());
 			continue;
 		}
+		UE_LOG(LogTemp, Log, TEXT("[SKILL EQUIP] Tag '%s' — found library entry, ability class: %s"), *Tag.ToString(), *Entry.SkillAbility->GetName());
 
-		const int32 Level = PS->GetSkillLevel(GrantedSkillTags[i]);
+		const int32 Level = PS->GetSkillLevel(Tag);
 		const FGameplayAbilitySpecHandle Handle = ASC->GrantItemSkill(Entry.SkillAbility, Level);
 		if (Handle.IsValid())
 		{
+			UE_LOG(LogTemp, Log, TEXT("[SKILL EQUIP] Tag '%s' — ability granted (handle valid), calling AddGrantedSkill"), *Tag.ToString());
 			ActiveHandles.Add(Handle);
-			// Restore any saved hotbar slot assignment for this newly-granted skill.
-			PS->ApplyInputTagForSkill(ASC, GrantedSkillTags[i]);
+			PS->ApplyInputTagForSkill(ASC, Tag);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("[SKILL EQUIP] Tag '%s' — GrantItemSkill returned invalid handle"), *Tag.ToString());
 		}
 
-		PS->AddGrantedSkill(GrantedSkillTags[i]);
+		PS->AddGrantedSkill(Tag);
+		UE_LOG(LogTemp, Log, TEXT("[SKILL EQUIP] Tag '%s' — AddGrantedSkill called. IsSkillGranted now: %s"),
+			*Tag.ToString(), PS->IsSkillGranted(Tag) ? TEXT("true") : TEXT("false"));
 	}
 }
 

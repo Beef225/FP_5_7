@@ -113,6 +113,25 @@ public:
 	static void UnpauseGame(const UObject* WorldContextObject);
 
 	/**
+	 * Eases AvatarActor's camera toward Destination via VInterpTo instead of rigidly
+	 * tracking its root — smooths out crouch-anim dips, leap arcs, and teleport pops.
+	 * Call every tick for the duration of a movement skill; Destination is re-fed each
+	 * call so it can track a moving point or hold a fixed one. Raise InterpSpeed for
+	 * skills whose travel speed scales with attributes so the camera keeps pace.
+	 * No-op if AvatarActor isn't a locally-controlled AFP_PlayerCharacter.
+	 */
+	UFUNCTION(BlueprintCallable, Category="FP_AbilitySystemLibrary|Camera")
+	static void InterpCameraToDestination(AActor* AvatarActor, FVector Destination, float InterpSpeed, float DeltaTime);
+
+	/** Releases a prior InterpCameraToDestination override; the camera eases back to its normal follow point. */
+	UFUNCTION(BlueprintCallable, Category="FP_AbilitySystemLibrary|Camera")
+	static void ReleaseCameraInterp(AActor* AvatarActor, float BlendOutSpeed = 10.f);
+
+	/** Current world-space point AvatarActor's camera boom is easing toward (or sitting at). */
+	UFUNCTION(BlueprintPure, Category="FP_AbilitySystemLibrary|Camera")
+	static FVector GetCameraFollowLocation(AActor* AvatarActor);
+
+	/**
 	 * Iterates over a 2D rectangular region of a flat array starting at Index,
 	 * spanning Range2D.X columns and Range2D.Y rows within a grid of GridColumns width.
 	 * Calls Function on each valid element.

@@ -2,6 +2,7 @@
 
 
 #include "Libraries/FP_AbilitySystemLibrary.h"
+#include "Characters/FP_PlayerCharacter.h"
 #include "Player/FP_PlayerController.h"
 
 #include "FP_AbilityTypes.h"
@@ -326,4 +327,23 @@ void UFP_AbilitySystemLibrary::UnpauseGame(const UObject* WorldContextObject)
 {
 	if (AFP_PlayerController* PC = Cast<AFP_PlayerController>(UGameplayStatics::GetPlayerController(WorldContextObject, 0)))
 		PC->UnpauseGame();
+}
+
+void UFP_AbilitySystemLibrary::InterpCameraToDestination(AActor* AvatarActor, FVector Destination, float InterpSpeed, float DeltaTime)
+{
+	if (AFP_PlayerCharacter* PlayerChar = Cast<AFP_PlayerCharacter>(AvatarActor))
+		PlayerChar->InterpCameraToDestination(Destination, InterpSpeed, DeltaTime);
+}
+
+void UFP_AbilitySystemLibrary::ReleaseCameraInterp(AActor* AvatarActor, float BlendOutSpeed)
+{
+	if (AFP_PlayerCharacter* PlayerChar = Cast<AFP_PlayerCharacter>(AvatarActor))
+		PlayerChar->ReleaseCameraInterp(BlendOutSpeed);
+}
+
+FVector UFP_AbilitySystemLibrary::GetCameraFollowLocation(AActor* AvatarActor)
+{
+	if (const AFP_PlayerCharacter* PlayerChar = Cast<AFP_PlayerCharacter>(AvatarActor))
+		return PlayerChar->GetCameraFollowLocation();
+	return AvatarActor ? AvatarActor->GetActorLocation() : FVector::ZeroVector;
 }

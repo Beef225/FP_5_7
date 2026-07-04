@@ -164,7 +164,10 @@ void UFP_SkillFrame::PopulateSkillPicker()
 	{
 		if (!Entry.bShowInSkillMenu) continue;
 		if (bIsInjector ? !Entry.bShowInInjectorBar : !Entry.bShowInSkillBar) continue;
-		if (!PS->IsSkillGranted(Entry.SkillTag)) continue;
+		const bool bGranted = PS->IsSkillGranted(Entry.SkillTag);
+		UE_LOG(LogTemp, Log, TEXT("[SKILL PICKER] Entry '%s' — IsSkillGranted: %s"),
+			*Entry.SkillTag.ToString(), bGranted ? TEXT("true") : TEXT("false"));
+		if (!bGranted) continue;
 
 		UFP_SkillPickerEntry* EntryWidget = CreateWidget<UFP_SkillPickerEntry>(GetOwningPlayer(), SkillPickerEntryClass);
 		if (!EntryWidget) continue;

@@ -60,6 +60,17 @@ public:
 	/** Call once the target actor's own trigger sphere detects arrival — clears the flag and stops the walk-to-it auto-run. */
 	void ConsumePendingInteractableArrival() { bPendingInteractableArrival = false; bAutoRunning = false; }
 
+	/**
+	 * Triggers the same interaction a world-click on TargetActor would: walks the
+	 * player there and then interacts, or interacts immediately if already in range.
+	 * TargetActor must implement both IFP_HighlightInterface (for SetMoveToLocation)
+	 * and IFP_InteractableInterface. Intended for UI affordances like
+	 * UFP_InteractionPromptWidget's button — not used by the world-click flow itself,
+	 * which has its own inline logic in AbilityInputTagReleased.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+	void RequestInteraction(AActor* TargetActor);
+
 	UFUNCTION(BlueprintPure, Category = "Inventory")
 	bool IsInPickupRange(const AFP_ItemActor* ItemActor) const;
 

@@ -10,6 +10,7 @@
 
 class USphereComponent;
 class UFP_LootDropComponent;
+class UWidgetComponent;
 
 /**
  * A placeable world container (chest, crate, ...) that highlights in tan when hovered
@@ -89,6 +90,28 @@ protected:
 	/** Rolls the global loot pool + ExtraLootTiers and spawns the results here once opened. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Loot")
 	TObjectPtr<UFP_LootDropComponent> LootDropComponent;
+
+	/**
+	 * World-space info/interact prompt shown while highlighted. Assign a Blueprint
+	 * derived from UFP_InteractionPromptWidget as its WidgetClass in the Details
+	 * panel. Reposition above the mesh per-instance as needed.
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="UI")
+	TObjectPtr<UWidgetComponent> InteractionWidget;
+
+	/** Label shown on the interaction prompt widget. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="UI")
+	FText PromptText = FText::FromString(TEXT("Open"));
+
+	/**
+	 * TODO: item labels/prompts should be globally toggleable via an enhanced input
+	 * action ("hide UI clutter"). When that exists, drive this from that toggle state
+	 * instead of hardcoding false — false means "always visible" (current behavior,
+	 * set in BeginPlay); true reactivates the existing hover-only show/hide in
+	 * HighlightActor_Implementation/UnHighlightActor_Implementation below (that logic
+	 * is already there, just currently a no-op while this is false).
+	 */
+	bool bOnlyShowPromptWhenHovered = false;
 
 	bool bHasBeenOpened = false;
 };

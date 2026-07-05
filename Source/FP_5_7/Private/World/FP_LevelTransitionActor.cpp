@@ -3,7 +3,9 @@
 #include "World/FP_LevelTransitionActor.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
+#include "Components/WidgetComponent.h"
 #include "SaveSystem/FP_SaveGameSubsystem.h"
+#include "UI/Widget/World/FP_InteractionPromptWidget.h"
 #include "Player/FP_PlayerController.h"
 
 
@@ -27,12 +29,28 @@ AFP_LevelTransitionActor::AFP_LevelTransitionActor()
 	TriggerSphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	TriggerSphere->SetCollisionResponseToAllChannels(ECR_Ignore);
 	TriggerSphere->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+
+	InteractionWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("InteractionWidget"));
+	InteractionWidget->SetupAttachment(GetRootComponent());
+	InteractionWidget->SetWidgetSpace(EWidgetSpace::World);
+	InteractionWidget->SetDrawSize(FVector2D(200.f, 80.f));
+	InteractionWidget->SetRelativeLocation(FVector(0.f, 0.f, 100.f)); // reposition per-instance to sit above the mesh
+	InteractionWidget->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	InteractionWidget->SetTwoSided(true);
 }
 
 void AFP_LevelTransitionActor::BeginPlay()
 {
 	Super::BeginPlay();
 	TriggerSphere->OnComponentBeginOverlap.AddDynamic(this, &AFP_LevelTransitionActor::OnSphereOverlap);
+
+	if (UFP_InteractionPromptWidget* PromptWidget = Cast<UFP_InteractionPromptWidget>(InteractionWidget->GetUserWidgetObject()))
+	{
+		PromptWidget->InitPrompt(this, PromptText);
+	}
+
+	// Always visible for now (see bOnlyShowPromptWhenHovered TODO in the header).
+	if (InteractionWidget) InteractionWidget->SetVisibility(true);
 }
 
 void AFP_LevelTransitionActor::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -68,11 +86,17 @@ void AFP_LevelTransitionActor::SetMoveToLocation_Implementation(FVector& OutDest
 void AFP_LevelTransitionActor::HighlightActor_Implementation()
 {
 	Mesh->SetRenderCustomDepth(true);
+
+	// No-op while bOnlyShowPromptWhenHovered is false (the widget is already always
+	// visible, set in BeginPlay); becomes the actual show-on-hover behavior once that
+	// flag is driven by the future "hide item labels" input toggle.
+	if (InteractionWidget && bOnlyShowPromptWhenHovered) InteractionWidget->SetVisibility(true);
 }
 
 void AFP_LevelTransitionActor::UnHighlightActor_Implementation()
 {
 	Mesh->SetRenderCustomDepth(false);
+	if (InteractionWidget && bOnlyShowPromptWhenHovered) InteractionWidget->SetVisibility(false);
 }
 
 void AFP_LevelTransitionActor::Interact_Implementation(APawn* InstigatorPawn)

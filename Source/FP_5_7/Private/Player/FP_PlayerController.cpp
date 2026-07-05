@@ -249,7 +249,38 @@ void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 		FollowTime = 0.f;
 		TargetingStatus = EFP_TargetingStatus::NotTargeting;
 	}
-	
+
+}
+
+void AFP_PlayerController::RequestInteraction(AActor* TargetActor)
+{
+	APawn* ControlledPawn = GetPawn();
+	if (!IsValid(TargetActor) || !ControlledPawn) return;
+	if (!TargetActor->Implements<UFP_HighlightInterface>() || !TargetActor->Implements<UFP_InteractableInterface>()) return;
+
+	IFP_HighlightInterface::Execute_SetMoveToLocation(TargetActor, CachedDestination);
+
+	if (IFP_InteractableInterface::Execute_IsPawnAlreadyInRange(TargetActor, ControlledPawn))
+	{
+		IFP_InteractableInterface::Execute_Interact(TargetActor, ControlledPawn);
+		return;
+	}
+
+	bPendingInteractableArrival = true;
+
+	if (UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CachedDestination))
+	{
+		Spline->ClearSplinePoints();
+		for (const FVector& PointLoc : NavPath->PathPoints)
+		{
+			Spline->AddSplinePoint(PointLoc, ESplineCoordinateSpace::World);
+		}
+		if (NavPath->PathPoints.Num() > 0)
+		{
+			CachedDestination = NavPath->PathPoints[NavPath->PathPoints.Num() - 1];
+			bAutoRunning = true;
+		}
+	}
 }
 
 void AFP_PlayerController::AbilityInputTagHeld(FGameplayTag InputTag)

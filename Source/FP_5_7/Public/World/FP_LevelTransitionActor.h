@@ -10,6 +10,7 @@
 #include "FP_LevelTransitionActor.generated.h"
 
 class USphereComponent;
+class UWidgetComponent;
 
 
 /**
@@ -67,4 +68,26 @@ protected:
 	/** When the player enters this sphere the level transition fires. Attach it to MoveToComponent. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components")
 	TObjectPtr<USphereComponent> TriggerSphere;
+
+	/**
+	 * World-space info/interact prompt shown while highlighted. Assign a Blueprint
+	 * derived from UFP_InteractionPromptWidget as its WidgetClass in the Details
+	 * panel. Reposition above the mesh per-instance as needed.
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="UI")
+	TObjectPtr<UWidgetComponent> InteractionWidget;
+
+	/** Label shown on the interaction prompt widget. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="UI")
+	FText PromptText = FText::FromString(TEXT("Enter"));
+
+	/**
+	 * TODO: item labels/prompts should be globally toggleable via an enhanced input
+	 * action ("hide UI clutter"). When that exists, drive this from that toggle state
+	 * instead of hardcoding false — false means "always visible" (current behavior,
+	 * set in BeginPlay); true reactivates the existing hover-only show/hide in
+	 * HighlightActor_Implementation/UnHighlightActor_Implementation below (that logic
+	 * is already there, just currently a no-op while this is false).
+	 */
+	bool bOnlyShowPromptWhenHovered = false;
 };

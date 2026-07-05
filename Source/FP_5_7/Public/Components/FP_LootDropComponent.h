@@ -24,4 +24,11 @@ public:
 	/** Extra loot tables rolled on top of the global pool when loot is triggered. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Loot")
 	TArray<TObjectPtr<UFP_LootTiers>> ExtraLootTiers;
+
+	/**
+	 * Uncheck to skip the global loot pool entirely and roll only ExtraLootTiers —
+	 * e.g. a quest/reward chest that should only ever drop its own specific items.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Loot")
+	bool bIncludeGlobalPool = true;
 };

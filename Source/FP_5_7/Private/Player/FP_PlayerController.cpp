@@ -203,30 +203,46 @@ void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 			return;
 		}
 
-		const APawn* ControlledPawn = GetPawn();
+		APawn* ControlledPawn = GetPawn();
 		if (FollowTime <= ShortPressThreshold && ControlledPawn)
 		{
+			bool bHandledImmediately = false;
+
 			// Let the clicked actor redirect the destination (e.g. door's MoveToComponent)
 			if (IsValid(ThisActor) && ThisActor->Implements<UFP_HighlightInterface>())
 			{
 				IFP_HighlightInterface::Execute_SetMoveToLocation(ThisActor, CachedDestination);
-				if (bTargetingInteractable)
+
+				if (bTargetingInteractable && ThisActor->Implements<UFP_InteractableInterface>()
+					&& IFP_InteractableInterface::Execute_IsPawnAlreadyInRange(ThisActor, ControlledPawn))
+				{
+					// Already standing in range — no BeginOverlap event will ever fire for
+					// a fresh arrival, so interact directly instead of walking a redundant
+					// (and often blocked, since the destination sits flush against the
+					// actor) short hop.
+					IFP_InteractableInterface::Execute_Interact(ThisActor, ControlledPawn);
+					bHandledImmediately = true;
+				}
+				else if (bTargetingInteractable)
 				{
 					bPendingInteractableArrival = true;
 				}
 			}
 
-			if (UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CachedDestination))
+			if (!bHandledImmediately)
 			{
-				Spline->ClearSplinePoints();
-				for (const FVector& PointLoc : NavPath->PathPoints)
+				if (UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CachedDestination))
 				{
-					Spline->AddSplinePoint(PointLoc, ESplineCoordinateSpace::World);
-				}
-				if (NavPath->PathPoints.Num() > 0)
-				{
-					CachedDestination = NavPath->PathPoints[NavPath->PathPoints.Num() - 1];
-					bAutoRunning = true;
+					Spline->ClearSplinePoints();
+					for (const FVector& PointLoc : NavPath->PathPoints)
+					{
+						Spline->AddSplinePoint(PointLoc, ESplineCoordinateSpace::World);
+					}
+					if (NavPath->PathPoints.Num() > 0)
+					{
+						CachedDestination = NavPath->PathPoints[NavPath->PathPoints.Num() - 1];
+						bAutoRunning = true;
+					}
 				}
 			}
 		}

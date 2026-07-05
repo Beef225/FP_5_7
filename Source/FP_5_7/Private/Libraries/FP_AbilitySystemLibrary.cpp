@@ -246,14 +246,17 @@ UFP_LootTiers* UFP_AbilitySystemLibrary::GetLootTiers(const UObject* WorldContex
 	return GameMode->LootTiers;
 }
 
-TArray<FLootItem> UFP_AbilitySystemLibrary::GetLootItemsForEnemy(const UObject* WorldContextObject, const TArray<UFP_LootTiers*>& ExtraLootTiers)
+TArray<FLootItem> UFP_AbilitySystemLibrary::GetLootItemsForEnemy(const UObject* WorldContextObject, const TArray<UFP_LootTiers*>& ExtraLootTiers, bool bIncludeGlobalPool)
 {
 	TArray<FLootItem> Result;
 
-	// Roll global pool (every enemy)
-	if (UFP_LootTiers* GlobalTiers = GetLootTiers(WorldContextObject))
+	// Roll global pool (every enemy/container, unless explicitly opted out)
+	if (bIncludeGlobalPool)
 	{
-		Result.Append(GlobalTiers->GetLootItems());
+		if (UFP_LootTiers* GlobalTiers = GetLootTiers(WorldContextObject))
+		{
+			Result.Append(GlobalTiers->GetLootItems());
+		}
 	}
 
 	// Roll any extra tables assigned to this specific enemy

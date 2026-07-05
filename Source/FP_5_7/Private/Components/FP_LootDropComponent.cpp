@@ -21,7 +21,7 @@ void UFP_LootDropComponent::SpawnLoot()
 		RawExtra.Add(Tier.Get());
 	}
 
-	const TArray<FLootItem> ItemsToSpawn = UFP_AbilitySystemLibrary::GetLootItemsForEnemy(Owner, RawExtra);
+	const TArray<FLootItem> ItemsToSpawn = UFP_AbilitySystemLibrary::GetLootItemsForEnemy(Owner, RawExtra, bIncludeGlobalPool);
 
 	const FVector Origin = Owner->GetActorLocation();
 

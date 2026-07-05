@@ -56,7 +56,11 @@ void AFP_LootContainer::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent
 	if (!PC || !PC->IsPendingInteractableArrival()) return;
 
 	PC->ConsumePendingInteractableArrival();
+	HandleArrival();
+}
 
+void AFP_LootContainer::HandleArrival()
+{
 	bHasBeenOpened = true;
 	UnHighlightActor_Implementation();
 	PlayOpenAnimation();
@@ -114,5 +118,13 @@ void AFP_LootContainer::UnHighlightActor_Implementation()
 
 void AFP_LootContainer::Interact_Implementation(APawn* InstigatorPawn)
 {
-	// Interaction is handled by OnSphereOverlap once the player walks to MoveToComponent.
+	// Called directly when the controller detects the pawn is already standing in
+	// TriggerSphere at click time (so no BeginOverlap event would ever fire).
+	if (bHasBeenOpened) return;
+	HandleArrival();
+}
+
+bool AFP_LootContainer::IsPawnAlreadyInRange_Implementation(APawn* InstigatorPawn)
+{
+	return TriggerSphere && InstigatorPawn && TriggerSphere->IsOverlappingActor(InstigatorPawn);
 }

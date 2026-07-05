@@ -39,7 +39,6 @@ void AFP_LevelTransitionActor::OnSphereOverlap(UPrimitiveComponent* OverlappedCo
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (!OtherActor) return;
-	if (!DestinationLocationTag.IsValid()) return;
 
 	APawn* OtherPawn = Cast<APawn>(OtherActor);
 	if (!OtherPawn) return;
@@ -48,6 +47,12 @@ void AFP_LevelTransitionActor::OnSphereOverlap(UPrimitiveComponent* OverlappedCo
 	if (!PC || !PC->IsPendingInteractableArrival()) return;
 
 	PC->ConsumePendingInteractableArrival();
+	TriggerTransition();
+}
+
+void AFP_LevelTransitionActor::TriggerTransition()
+{
+	if (!DestinationLocationTag.IsValid()) return;
 
 	if (UFP_SaveGameSubsystem* SaveSys = UFP_SaveGameSubsystem::Get(this))
 	{
@@ -72,5 +77,12 @@ void AFP_LevelTransitionActor::UnHighlightActor_Implementation()
 
 void AFP_LevelTransitionActor::Interact_Implementation(APawn* InstigatorPawn)
 {
-	// Interaction is handled by OnSphereOverlap once the player walks to MoveToComponent.
+	// Called directly when the controller detects the pawn is already standing in
+	// TriggerSphere at click time (so no BeginOverlap event would ever fire).
+	TriggerTransition();
+}
+
+bool AFP_LevelTransitionActor::IsPawnAlreadyInRange_Implementation(APawn* InstigatorPawn)
+{
+	return TriggerSphere && InstigatorPawn && TriggerSphere->IsOverlappingActor(InstigatorPawn);
 }

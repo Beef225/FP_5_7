@@ -56,7 +56,9 @@ public:
 	void UnpauseGame();
 
 	bool IsPendingInteractableArrival() const { return bPendingInteractableArrival; }
-	void ConsumePendingInteractableArrival() { bPendingInteractableArrival = false; }
+
+	/** Call once the target actor's own trigger sphere detects arrival — clears the flag and stops the walk-to-it auto-run. */
+	void ConsumePendingInteractableArrival() { bPendingInteractableArrival = false; bAutoRunning = false; }
 
 	UFUNCTION(BlueprintPure, Category = "Inventory")
 	bool IsInPickupRange(const AFP_ItemActor* ItemActor) const;

@@ -46,6 +46,7 @@ public:
 
 	/** Interactable Interface */
 	virtual void Interact_Implementation(APawn* InstigatorPawn) override;
+	virtual bool IsPawnAlreadyInRange_Implementation(APawn* InstigatorPawn) override;
 	/** end Interactable Interface */
 
 	/**
@@ -70,6 +71,9 @@ protected:
 	UFUNCTION()
 	void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	/** Shared by OnSphereOverlap (walked here) and Interact_Implementation (already standing here). */
+	void HandleArrival();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components")
 	TObjectPtr<UStaticMeshComponent> Mesh;

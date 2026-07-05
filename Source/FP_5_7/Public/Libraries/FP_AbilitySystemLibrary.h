@@ -80,11 +80,12 @@ public:
 	static UFP_LootTiers* GetLootTiers(const UObject* WorldContextObject);
 
 	/**
-	 * Rolls the global loot table plus any extra tables assigned to the enemy,
-	 * and returns the combined list of items to spawn.
+	 * Rolls the global loot table (unless bIncludeGlobalPool is false) plus any extra
+	 * tables assigned to the enemy/container, and returns the combined list of items
+	 * to spawn.
 	 */
 	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|LootTiers", meta = (WorldContext = "WorldContextObject"))
-	static TArray<FLootItem> GetLootItemsForEnemy(const UObject* WorldContextObject, const TArray<UFP_LootTiers*>& ExtraLootTiers);
+	static TArray<FLootItem> GetLootItemsForEnemy(const UObject* WorldContextObject, const TArray<UFP_LootTiers*>& ExtraLootTiers, bool bIncludeGlobalPool = true);
 
 	/** Returns the UFP_InventoryComponent on the given PlayerController, or nullptr. */
 	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|Inventory")

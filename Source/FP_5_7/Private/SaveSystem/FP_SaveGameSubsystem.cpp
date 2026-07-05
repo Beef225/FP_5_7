@@ -253,7 +253,7 @@ void UFP_SaveGameSubsystem::OpenLevelForPendingCharacter(const UObject* WorldCon
 	UGameplayStatics::OpenLevel(WorldContextObject, LevelName);
 }
 
-void UFP_SaveGameSubsystem::TravelToLocation(const UObject* WorldContextObject, const FGameplayTag& LocationTag)
+void UFP_SaveGameSubsystem::TravelToLocation(const UObject* WorldContextObject, const FGameplayTag& LocationTag, int32 NewDepth)
 {
 	if (!ProfileData || !ProfileData->LastPlayedCharacterID.IsValid()) return;
 
@@ -265,10 +265,22 @@ void UFP_SaveGameSubsystem::TravelToLocation(const UObject* WorldContextObject, 
 	if (!Record) return;
 
 	Record->LastCheckpointTag = LocationTag;
+	if (NewDepth >= 1)
+	{
+		Record->CurrentDepth = NewDepth;
+	}
 	PendingCharacterID = ProfileData->LastPlayedCharacterID;
 	SaveProfile();
 
 	OpenLevelForPendingCharacter(WorldContextObject);
+}
+
+int32 UFP_SaveGameSubsystem::GetActiveCharacterDepth() const
+{
+	if (!ProfileData || !ProfileData->LastPlayedCharacterID.IsValid()) return 1;
+
+	const FFP_CharacterSaveRecord* Record = ProfileData->FindCharacter(ProfileData->LastPlayedCharacterID);
+	return Record ? Record->CurrentDepth : 1;
 }
 
 void UFP_SaveGameSubsystem::Deinitialize()

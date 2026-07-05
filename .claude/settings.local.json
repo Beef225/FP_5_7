@@ -40,7 +40,12 @@
       "Bash(Get-ChildItem *)",
       "Read(//c/Program Files/Epic Games//**)",
       "Read(//c/Program Files/Epic Games/UE_5.7/Engine/Build/BatchFiles//**)",
-      "Bash(\"/c/Program Files/Epic Games/UE_5.7/Engine/Build/BatchFiles/Build.bat\" FP_5_7Editor Win64 Development -Project=\"C:\\\\Unreal\\\\FP_5_7\\\\FP_5_7.uproject\" -WaitMutex)"
+      "Bash(\"/c/Program Files/Epic Games/UE_5.7/Engine/Build/BatchFiles/Build.bat\" FP_5_7Editor Win64 Development -Project=\"C:\\\\Unreal\\\\FP_5_7\\\\FP_5_7.uproject\" -WaitMutex)",
+      "Bash(git fetch *)",
+      "Bash(git --version)",
+      "Bash(git config *)",
+      "Bash(env)",
+      "Bash(openssl s_client -connect github.com:443 -servername github.com)"
     ]
   }
 }

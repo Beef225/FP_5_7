@@ -15,6 +15,13 @@ AFP_LootContainer::AFP_LootContainer()
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	SetRootComponent(Mesh);
 
+	// The player walks to MoveToComponent at the container's own center (opens from
+	// any angle, via a TriggerSphere sized larger than the mesh) — the container's
+	// solid collision would otherwise carve a navmesh hole exactly there. This only
+	// affects navigation generation, not the Visibility-blocking collision the
+	// click/highlight system relies on.
+	Mesh->SetCanEverAffectNavigation(false);
+
 	MoveToComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MoveToComponent"));
 	MoveToComponent->SetupAttachment(GetRootComponent());
 
@@ -102,14 +109,15 @@ void AFP_LootContainer::OnOpenAnimationFinished()
 {
 	if (LootDropComponent)
 	{
-		// TODO: no area-level system exists yet — LootDropComponent::SpawnLoot only
-		// sets item level when the loot spawner implements IFP_CombatInterface, which
-		// this container doesn't, so drops default to level 1 (FFP_ItemFragment's
-		// ItemLevel default). Once areas have a level, set it here (e.g. implement
-		// IFP_CombatInterface::GetPlayerLevel_Implementation to return the area's
-		// level, the same way enemies return their own level) so container loot
-		// scales like enemy loot does.
 		LootDropComponent->SpawnLoot();
+	}
+}
+
+void AFP_LootContainer::SetContainerItemLevel(int32 NewLevel)
+{
+	if (LootDropComponent)
+	{
+		LootDropComponent->SetItemLevel(NewLevel);
 	}
 }
 

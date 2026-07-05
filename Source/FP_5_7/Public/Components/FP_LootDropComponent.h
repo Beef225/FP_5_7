@@ -31,4 +31,18 @@ public:
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Loot")
 	bool bIncludeGlobalPool = true;
+
+	/**
+	 * Sets the level spawned items are stamped with. Only takes effect when the
+	 * owner does NOT implement IFP_CombatInterface (e.g. a loot container) — when
+	 * it does (e.g. an enemy), the owner's own GetPlayerLevel() is used instead, as
+	 * before, so this is a no-op for enemies.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Loot")
+	void SetItemLevel(int32 NewLevel) { FallbackItemLevel = NewLevel; }
+
+private:
+
+	UPROPERTY(VisibleAnywhere, Category = "Loot")
+	int32 FallbackItemLevel = 1;
 };

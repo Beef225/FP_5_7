@@ -1173,6 +1173,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Location.Titans_Hollow"), FString("Titan's Hollow"));
 	GameplayTags.Location_Shattered_Reach = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Location.Shattered_Reach"), FString("Shattered Reach"));
+	GameplayTags.Location_SafeZone = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.SafeZone"), FString("Safe Zone — the returning hub between endless-simulation runs"));
+	GameplayTags.Location_EndlessSimulation = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Location.EndlessSimulation"), FString("Endless Simulation — the reused combat zone, entered at varying depth"));
 
 
 	//PassiveTree

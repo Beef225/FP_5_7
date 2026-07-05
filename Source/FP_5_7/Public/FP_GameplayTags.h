@@ -456,6 +456,8 @@ FGameplayTag Location_Frozen_Orbit;
 FGameplayTag Location_Ash_Fields;
 FGameplayTag Location_Titans_Hollow;
 FGameplayTag Location_Shattered_Reach;
+FGameplayTag Location_SafeZone;
+FGameplayTag Location_EndlessSimulation;
 
 //Skills
 //Skills

@@ -26,6 +26,15 @@ struct FFP_CharacterSaveRecord
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	int32 ExperiencePoints = 0;
 
+	/**
+	 * How deep into the endless-dungeon progression this character currently is
+	 * (1-85). Set by the hub's depth-relative exit doors; read by AFP_AreaManager
+	 * in the combat zone to scale enemy/item level. Survives round trips through
+	 * the hub, unlike LastCheckpointTag which gets overwritten to the hub's own tag.
+	 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	int32 CurrentDepth = 1;
+
 	/** Identifies the character class (e.g. Player.Class.Warrior). */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FGameplayTag CharacterClassTag;

@@ -231,7 +231,18 @@ void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 
 			if (!bHandledImmediately)
 			{
-				if (UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CachedDestination))
+				UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CachedDestination);
+
+				// TEMP DEBUG — remove once the navmesh issue on the new map is confirmed/fixed.
+				UE_LOG(LogTemp, Warning, TEXT("[AutoRun Debug] From=%s To=%s bTargetingInteractable=%d NavPath=%s PointCount=%d bPathComplete=%d"),
+					*ControlledPawn->GetActorLocation().ToString(),
+					*CachedDestination.ToString(),
+					bTargetingInteractable ? 1 : 0,
+					NavPath ? TEXT("valid") : TEXT("NULL"),
+					NavPath ? NavPath->PathPoints.Num() : -1,
+					NavPath ? (NavPath->IsPartial() ? 0 : 1) : -1);
+
+				if (NavPath)
 				{
 					Spline->ClearSplinePoints();
 					for (const FVector& PointLoc : NavPath->PathPoints)

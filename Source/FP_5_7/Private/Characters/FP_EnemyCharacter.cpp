@@ -88,6 +88,16 @@ int32 AFP_EnemyCharacter::GetPlayerLevel()
 	return Level;
 }
 
+void AFP_EnemyCharacter::SetEnemyLevel(int32 NewLevel)
+{
+	Level = NewLevel;
+
+	if (HasAuthority())
+	{
+		InitializeDefaultAttributes();
+	}
+}
+
 void AFP_EnemyCharacter::Die()
 {
 	const float Extra = GetDeathRagdollDelay(); // protected in base; if private, expose a protected getter

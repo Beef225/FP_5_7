@@ -190,11 +190,18 @@ public:
 	 * Full level-transition flow for in-game travel (doors, portals, etc.):
 	 *   1. Saves current runtime state (XP, level, attributes) to disk.
 	 *   2. Updates the active character's LastCheckpointTag to LocationTag.
-	 *   3. Sets the pending character and saves the profile.
-	 *   4. Shows the loading screen and opens the resolved level.
+	 *   3. If NewDepth >= 1, updates the active character's CurrentDepth too
+	 *      (leave at the default -1 for travel that shouldn't change depth,
+	 *      e.g. a zone's own door back to the hub).
+	 *   4. Sets the pending character and saves the profile.
+	 *   5. Shows the loading screen and opens the resolved level.
 	 */
 	UFUNCTION(BlueprintCallable, Category="Save", meta=(WorldContext="WorldContextObject"))
-	void TravelToLocation(const UObject* WorldContextObject, const FGameplayTag& LocationTag);
+	void TravelToLocation(const UObject* WorldContextObject, const FGameplayTag& LocationTag, int32 NewDepth = -1);
+
+	/** CurrentDepth of the active character (1-85), or 1 if there is no active character. */
+	UFUNCTION(BlueprintPure, Category="Save")
+	int32 GetActiveCharacterDepth() const;
 
 
 	/**

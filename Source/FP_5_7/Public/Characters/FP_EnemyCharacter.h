@@ -39,7 +39,16 @@ public:
 	virtual AActor* GetCombatTarget_Implementation() const override;
 	virtual int32 GetXPReward_Implementation() const override;
 	/** end Combat Interface */
-	
+
+	/**
+	 * Overrides Level and re-applies default attributes (HP/damage/etc. via the
+	 * existing GAS ScalableFloat curves) at the new level. Server-authoritative,
+	 * like the equivalent call from BeginPlay. Used by AFP_AreaManager to scale
+	 * enemies found in a level to that level's current depth.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	void SetEnemyLevel(int32 NewLevel);
+
 	UPROPERTY(BlueprintReadWrite, Category = "Combat")
 	TObjectPtr<AActor> CombatTarget;
 

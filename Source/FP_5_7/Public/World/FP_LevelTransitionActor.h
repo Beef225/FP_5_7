@@ -36,6 +36,24 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Transition", meta=(Categories="Location"))
 	FGameplayTag DestinationLocationTag;
 
+	/**
+	 * Enable for the hub's depth-relative exit doors: instead of leaving depth
+	 * untouched, this door computes NewDepth = Clamp(CurrentDepth + DepthDelta, 1, MaxAreaDepth)
+	 * and passes it to TravelToLocation. DestinationLocationTag stays the same
+	 * static combat-zone tag on all such doors — only the depth changes, not which
+	 * level loads (there's one reused zone level for now, until procedural/tileset
+	 * generation exists). Leave false for ordinary doors (e.g. a zone's own door
+	 * back to the hub) — depth is left untouched in that case (it only affects
+	 * whether the depth is actually written on interact; the door's displayed
+	 * level number below is computed the same way either way).
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Transition|Depth")
+	bool bAppliesAreaDepthDelta = false;
+
+	/** -1 = one level down, 0 = same level, +1 = one level up. Also used to compute the displayed level number even when bAppliesAreaDepthDelta is false. */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Transition|Depth")
+	int32 DepthDelta = 0;
+
 	/** Highlight Interface */
 	virtual void HighlightActor_Implementation() override;
 	virtual void UnHighlightActor_Implementation() override;
@@ -77,9 +95,14 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="UI")
 	TObjectPtr<UWidgetComponent> InteractionWidget;
 
-	/** Label shown on the interaction prompt widget. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="UI")
-	FText PromptText = FText::FromString(TEXT("Enter"));
+	/**
+	 * Resolves DestinationLocationTag through the UFP_LocationRegistry and returns
+	 * its UFP_LocationDataAsset::GetDisplayName() — so the prompt's zone name always
+	 * matches the destination's own display name (set once per location) rather
+	 * than being retyped on every door pointing there. Falls back to the tag's own
+	 * leaf name if the registry/location can't be resolved.
+	 */
+	FText ResolveDestinationDisplayName() const;
 
 	/**
 	 * TODO: item labels/prompts should be globally toggleable via an enhanced input
@@ -90,4 +113,7 @@ protected:
 	 * is already there, just currently a no-op while this is false).
 	 */
 	bool bOnlyShowPromptWhenHovered = false;
+
+	/** Progression cap — matches the design's "up to level 85" ceiling. */
+	static constexpr int32 MaxAreaDepth = 85;
 };

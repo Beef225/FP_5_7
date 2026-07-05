@@ -5,6 +5,8 @@
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "SaveSystem/FP_SaveGameSubsystem.h"
+#include "Locations/FP_LocationRegistry.h"
+#include "Locations/FP_LocationDataAsset.h"
 #include "UI/Widget/World/FP_InteractionPromptWidget.h"
 #include "Player/FP_PlayerController.h"
 
@@ -44,9 +46,17 @@ void AFP_LevelTransitionActor::BeginPlay()
 	Super::BeginPlay();
 	TriggerSphere->OnComponentBeginOverlap.AddDynamic(this, &AFP_LevelTransitionActor::OnSphereOverlap);
 
+	int32 DisplayLevel = 1;
+	if (const UFP_SaveGameSubsystem* SaveSys = UFP_SaveGameSubsystem::Get(this))
+	{
+		DisplayLevel = FMath::Clamp(SaveSys->GetActiveCharacterDepth() + DepthDelta, 1, MaxAreaDepth);
+	}
+	const FText EffectivePromptText = FText::FromString(
+		FString::Printf(TEXT("%s - LEVEL %d"), *ResolveDestinationDisplayName().ToString(), DisplayLevel));
+
 	if (UFP_InteractionPromptWidget* PromptWidget = Cast<UFP_InteractionPromptWidget>(InteractionWidget->GetUserWidgetObject()))
 	{
-		PromptWidget->InitPrompt(this, PromptText);
+		PromptWidget->InitPrompt(this, EffectivePromptText);
 	}
 
 	// Always visible for now (see bOnlyShowPromptWhenHovered TODO in the header).
@@ -72,10 +82,32 @@ void AFP_LevelTransitionActor::TriggerTransition()
 {
 	if (!DestinationLocationTag.IsValid()) return;
 
-	if (UFP_SaveGameSubsystem* SaveSys = UFP_SaveGameSubsystem::Get(this))
+	UFP_SaveGameSubsystem* SaveSys = UFP_SaveGameSubsystem::Get(this);
+	if (!SaveSys) return;
+
+	int32 NewDepth = -1; // -1 = don't touch CurrentDepth (ordinary doors, e.g. zone -> hub)
+	if (bAppliesAreaDepthDelta)
 	{
-		SaveSys->TravelToLocation(this, DestinationLocationTag);
+		NewDepth = FMath::Clamp(SaveSys->GetActiveCharacterDepth() + DepthDelta, 1, MaxAreaDepth);
 	}
+
+	SaveSys->TravelToLocation(this, DestinationLocationTag, NewDepth);
+}
+
+FText AFP_LevelTransitionActor::ResolveDestinationDisplayName() const
+{
+	if (const UFP_SaveGameSubsystem* SaveSys = UFP_SaveGameSubsystem::Get(this))
+	{
+		if (const UFP_LocationRegistry* Registry = SaveSys->GetLocationRegistry())
+		{
+			if (const UFP_LocationDataAsset* Location = Registry->FindLocation(DestinationLocationTag))
+			{
+				return Location->GetDisplayName();
+			}
+		}
+	}
+
+	return FText::FromName(DestinationLocationTag.GetTagName());
 }
 
 void AFP_LevelTransitionActor::SetMoveToLocation_Implementation(FVector& OutDestination)

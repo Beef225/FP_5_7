@@ -66,6 +66,10 @@ public:
 	UFUNCTION(BlueprintPure, Category="Loot")
 	bool HasBeenOpened() const { return bHasBeenOpened; }
 
+	/** Sets the level loot spawned from this container is stamped with. Used by AFP_AreaManager. */
+	UFUNCTION(BlueprintCallable, Category="Loot")
+	void SetContainerItemLevel(int32 NewLevel);
+
 protected:
 	virtual void BeginPlay() override;
 

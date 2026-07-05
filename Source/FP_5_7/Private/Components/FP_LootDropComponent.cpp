@@ -45,6 +45,10 @@ void UFP_LootDropComponent::SpawnLoot()
 			{
 				ItemActor->SetItemLevel(Combat->GetPlayerLevel());
 			}
+			else
+			{
+				ItemActor->SetItemLevel(FallbackItemLevel);
+			}
 		}
 	}
 }

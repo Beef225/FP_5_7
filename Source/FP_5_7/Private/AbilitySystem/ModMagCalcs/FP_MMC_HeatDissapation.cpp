@@ -54,21 +54,5 @@ float UFP_MMC_HeatDissapation::CalculateBaseMagnitude_Implementation(const FGame
 	GetCapturedAttributeMagnitude(HeatDef, Spec, EvaluationParameters, Heat);
 
 	const float DissipationValue = CoolingCoefficient * ThermalMass * (Heat - AmbientTemperature) * GEPeriod;
-	/*if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(
-			-1,
-			2.0f,
-			FColor::Cyan,
-			FString::Printf(
-				TEXT("HeatDissipation=%.4f | AmbientTemperature=%.4f | ThermalMass=%.4f | CoolingCoefficient=%.4f | Heat=%.4f"),
-				DissipationValue,
-				AmbientTemperature,
-				ThermalMass,
-				CoolingCoefficient,
-				Heat));
-	}
-*/
 	return DissipationValue;
-
 }

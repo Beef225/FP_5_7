@@ -63,7 +63,6 @@ void UFP_SkillTreePanel::OpenForSkill(TSubclassOf<UFP_SkillTreeWidget> TreeWidge
 	// is deferred (e.g. widget not yet in the live viewport when SetContent is called).
 	if (ActiveTree->GetSpawnedNodeCount() == 0)
 	{
-		UE_LOG(LogTemp, Log, TEXT("SkillTreePanel: PopulateTree not triggered by NativeConstruct — calling explicitly"));
 		ActiveTree->PopulateTree();
 	}
 

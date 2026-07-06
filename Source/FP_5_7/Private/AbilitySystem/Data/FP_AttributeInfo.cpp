@@ -38,11 +38,6 @@ FAttributeInfo UFP_AttributeInfo::FindAttributeInfoforTag(const FGameplayTag& At
 	return FAttributeInfo();
 }
 
-void UFP_AttributeInfo::TestButton()
-{
-	UE_LOG(LogTemp, Warning, TEXT("TestButton clicked on [%s]"), *GetNameSafe(this));
-}
-
 void UFP_AttributeInfo::ImportFromJson()
 {
 #if WITH_EDITOR

@@ -35,4 +35,8 @@ private:
 	/** GE that adds to IncomingXP via SetByCaller (tag: MetaAttribute.IncomingXP). Set on BP child. */
 	UPROPERTY(EditDefaultsOnly, Category="Effects")
 	TSubclassOf<UGameplayEffect> IncomingXPEffectClass;
+
+	/** Shows "+{Awarded} XP (Max possible +{Raw} XP)" on screen per kill, so you can see the level-penalty in action. Turn off when done testing. */
+	UPROPERTY(EditDefaultsOnly, Category="Debug")
+	bool bDebugXP = true;
 };

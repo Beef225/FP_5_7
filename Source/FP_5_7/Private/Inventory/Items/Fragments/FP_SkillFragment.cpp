@@ -72,7 +72,6 @@ void FFP_SkillFragment::OnEquip(APlayerController* PC)
 	for (int32 i = 0; i < GrantedSkillTags.Num(); ++i)
 	{
 		const FGameplayTag& Tag = GrantedSkillTags[i];
-		UE_LOG(LogTemp, Log, TEXT("[SKILL EQUIP] Processing tag: %s"), *Tag.ToString());
 
 		const FFP_AbilityEntry Entry = Library->FindAbilityEntryForTag(Tag, true);
 		if (!Entry.SkillAbility)
@@ -80,13 +79,11 @@ void FFP_SkillFragment::OnEquip(APlayerController* PC)
 			UE_LOG(LogTemp, Warning, TEXT("[SKILL EQUIP] Tag '%s' — no SkillAbility in SkillLibrary"), *Tag.ToString());
 			continue;
 		}
-		UE_LOG(LogTemp, Log, TEXT("[SKILL EQUIP] Tag '%s' — found library entry, ability class: %s"), *Tag.ToString(), *Entry.SkillAbility->GetName());
 
 		const int32 Level = PS->GetSkillLevel(Tag);
 		const FGameplayAbilitySpecHandle Handle = ASC->GrantItemSkill(Entry.SkillAbility, Level);
 		if (Handle.IsValid())
 		{
-			UE_LOG(LogTemp, Log, TEXT("[SKILL EQUIP] Tag '%s' — ability granted (handle valid), calling AddGrantedSkill"), *Tag.ToString());
 			ActiveHandles.Add(Handle);
 			PS->ApplyInputTagForSkill(ASC, Tag);
 		}
@@ -96,8 +93,6 @@ void FFP_SkillFragment::OnEquip(APlayerController* PC)
 		}
 
 		PS->AddGrantedSkill(Tag);
-		UE_LOG(LogTemp, Log, TEXT("[SKILL EQUIP] Tag '%s' — AddGrantedSkill called. IsSkillGranted now: %s"),
-			*Tag.ToString(), PS->IsSkillGranted(Tag) ? TEXT("true") : TEXT("false"));
 	}
 }
 

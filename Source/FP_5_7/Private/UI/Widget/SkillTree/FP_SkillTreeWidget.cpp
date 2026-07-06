@@ -59,8 +59,6 @@ void UFP_SkillTreeWidget::PopulateTree()
 		return;
 	}
 
-	UE_LOG(LogTemp, Log, TEXT("SkillTreeWidget [%s]: PopulateTree — %d data assets"), *GetName(), NodeDataAssets.Num());
-
 	Canvas_Nodes->ClearChildren();
 	SpawnedNodes.Empty();
 	NodeDataList.Empty();
@@ -106,9 +104,6 @@ void UFP_SkillTreeWidget::PopulateTree()
 	if (Canvas_Lines)
 		Canvas_Lines->SetConnectionData(ConnectionPairs, CachedPosMap);
 
-	UE_LOG(LogTemp, Log, TEXT("SkillTreeWidget [%s]: PopulateTree complete — %d nodes spawned, %d connections"),
-		*GetName(), SpawnedNodes.Num(), ConnectionPairs.Num());
-
 	RecomputeAllStates();
 }
 
@@ -144,13 +139,6 @@ void UFP_SkillTreeWidget::SpawnNodeWidget(const UFP_SkillTreeNodeData* Data)
 		NodeSlot->SetSize(SlotSize);
 		NodeSlot->SetAutoSize(false);
 		NodeSlot->SetZOrder(1);
-
-		// Log first node placed so we can verify position in the output log
-		if (SpawnedNodes.IsEmpty())
-		{
-			UE_LOG(LogTemp, Log, TEXT("SkillTreeWidget [%s]: first node [%s] at canvas pos (%.0f,%.0f) size (%.0f,%.0f)"),
-				*GetName(), *Data->NodeTag.ToString(), SlotPos.X, SlotPos.Y, SlotSize.X, SlotSize.Y);
-		}
 	}
 	else
 	{
@@ -243,8 +231,6 @@ void UFP_SkillTreeWidget::CommitPendingNodes()
 	if (PendingNodeTags.IsEmpty()) return;
 
 	APlayerController* PC = GetOwningPlayer();
-	UE_LOG(LogTemp, Log, TEXT("SkillTree CommitPendingNodes — %d nodes pending, PC: %s"),
-		PendingNodeTags.Num(), PC ? *PC->GetName() : TEXT("null"));
 	TArray<FGameplayTag> Committed;
 
 	for (const FGameplayTag& Tag : PendingNodeTags)
@@ -253,8 +239,6 @@ void UFP_SkillTreeWidget::CommitPendingNodes()
 		{
 			if (Data && Data->NodeTag == Tag)
 			{
-				UE_LOG(LogTemp, Log, TEXT("SkillTree CommitPendingNodes — allocating node [%s] with %d effects"),
-					*Tag.ToString(), Data->Effects.Num());
 				const_cast<UFP_SkillTreeNodeData*>(Data.Get())->AllocateEffects(PC);
 				AllocatedNodeTags.AddTag(Tag);
 				Committed.Add(Tag);

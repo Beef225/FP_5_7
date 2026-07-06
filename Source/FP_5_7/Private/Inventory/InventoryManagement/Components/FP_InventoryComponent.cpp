@@ -173,8 +173,6 @@ void UFP_InventoryComponent::Server_AddStacksToItem_Implementation(UFP_ItemCompo
 
 void UFP_InventoryComponent::Server_ConsumeItem_Implementation(UFP_InventoryItem* Item)
 {
-	const FString ItemName = Item->GetItemManifest().GetItemType().ToString();
-
 	const int32 NewStackCount = Item->GetTotalStackCount() - 1;
 	if (NewStackCount <= 0)
 	{
@@ -184,9 +182,6 @@ void UFP_InventoryComponent::Server_ConsumeItem_Implementation(UFP_InventoryItem
 	{
 		Item->SetTotalStackCount(NewStackCount);
 	}
-
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green,
-		FString::Printf(TEXT("%s consumed!"), *ItemName));
 
 	if (FFP_ConsumableFragment* ConsumableFragment = Item->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_ConsumableFragment>())
 	{

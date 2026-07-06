@@ -53,6 +53,13 @@ void UFP_GA_ListenForEvents::OnXPEventReceived(FGameplayEventData Payload)
 		: 1.f;
 	const float CharXP = FMath::Max(FMath::RoundToInt(static_cast<float>(RawXP) * CharMultiplier), 1);
 
+	if (bDebugXP && GEngine)
+	{
+		const FColor MessageColor = (CharXP < RawXP) ? FColor::Orange : FColor::Yellow;
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, MessageColor,
+			FString::Printf(TEXT("+%d XP (Max possible +%d XP)"), static_cast<int32>(CharXP), RawXP));
+	}
+
 	FGameplayEffectContextHandle ContextHandle = ASC->MakeEffectContext();
 	ContextHandle.AddSourceObject(GetAvatarActorFromActorInfo());
 	const FGameplayEffectSpecHandle SpecHandle = ASC->MakeOutgoingSpec(IncomingXPEffectClass, 1.f, ContextHandle);

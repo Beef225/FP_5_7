@@ -216,20 +216,10 @@ void FFP_MeshFragment::OnUnequip(APlayerController* PC)
 
 void FFP_StrengthModifier::OnEquip(APlayerController* PC)
 {
-	GEngine->AddOnScreenDebugMessage(
-		-1,
-		5.f,
-		FColor::Green,
-		FString::Printf(TEXT("Strength increased by: %f"), GetValue()));
 }
 
 void FFP_StrengthModifier::OnUnequip(APlayerController* PC)
 {
-	GEngine->AddOnScreenDebugMessage(
-		-1,
-		5.f,
-		FColor::Green,
-		FString::Printf(TEXT("Item unequipped. Strength decreased by: %f"), GetValue()));
 }
 
 void FFP_EquipmentFragment::OnEquip(APlayerController* PC)

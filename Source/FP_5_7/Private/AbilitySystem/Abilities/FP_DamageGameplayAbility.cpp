@@ -230,16 +230,8 @@ void UFP_DamageGameplayAbility::AssignSkillPassiveBonuses(FGameplayEffectSpecHan
 
 	const TMap<FGameplayTag, float>& AllValues = PS->GetAllSkillPassiveValues();
 
-	UE_LOG(LogTemp, Log, TEXT("AssignSkillPassiveBonuses [%s]: root=[%s], PS has %d passive entries"),
-		*GetName(), *SkillPassiveRootTag.ToString(), AllValues.Num());
-
-	// Log every entry so we can spot tag format mismatches
-	for (const TTuple<FGameplayTag, float>& Pair : AllValues)
-		UE_LOG(LogTemp, Log, TEXT("  passive entry: [%s] = %.4f"), *Pair.Key.ToString(), Pair.Value);
-
 	const FFP_GameplayTags& Tags   = FFP_GameplayTags::Get();
 	const FString           Prefix = SkillPassiveRootTag.ToString() + TEXT(".");
-	int32 Assigned = 0;
 
 	for (const TTuple<FGameplayTag, float>& Pair : AllValues)
 	{
@@ -265,12 +257,8 @@ void UFP_DamageGameplayAbility::AssignSkillPassiveBonuses(FGameplayEffectSpecHan
 		if (Bucket.IsValid())
 		{
 			UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, Bucket, Pair.Value);
-			UE_LOG(LogTemp, Log, TEXT("  assigned bucket [%s] = %.4f"), *Bucket.ToString(), Pair.Value);
-			++Assigned;
 		}
 	}
-
-	UE_LOG(LogTemp, Log, TEXT("AssignSkillPassiveBonuses [%s]: %d buckets assigned to spec"), *GetName(), Assigned);
 }
 
 void UFP_DamageGameplayAbility::AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const

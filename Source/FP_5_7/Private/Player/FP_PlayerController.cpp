@@ -48,49 +48,12 @@ void AFP_PlayerController::PlayerTick(float DeltaTime)
 	Super::PlayerTick(DeltaTime);
 	CursorTrace();
 	AutoRun();
-	//GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, bAutoRunning));
 }
 
 void AFP_PlayerController::CursorTrace()
 {
-
 	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
-	
-	// ---------- DEBUG BLOCK ----------
-	/*if (GEngine)
-	{
-		if (CursorHit.bBlockingHit)
-		{
-			AActor* HitActor = CursorHit.GetActor();
-			UPrimitiveComponent* HitComp = CursorHit.GetComponent();
 
-			const FString ActorName = HitActor ? HitActor->GetName() : TEXT("NULL");
-			const FString CompName  = HitComp ? HitComp->GetName() : TEXT("NULL");
-
-			GEngine->AddOnScreenDebugMessage(
-				-1,
-				0.f, // 0 = update every frame
-				FColor::Green,
-				FString::Printf(
-					TEXT("HIT | Actor: %s | Component: %s | Distance: %.1f"),
-					*ActorName,
-					*CompName,
-					CursorHit.Distance
-				)
-			);
-		}
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(
-				-1,
-				0.f,
-				FColor::Red,
-				TEXT("NO BLOCKING HIT UNDER CURSOR")
-			);
-		}
-	}*/
-	// ---------- END DEBUG BLOCK ----------
-	
 	AActor* HitActor = CursorHit.bBlockingHit ? CursorHit.GetActor() : nullptr;
 	AActor* NewActor = (IsValid(HitActor) && HitActor->Implements<UFP_HighlightInterface>()) ? HitActor : nullptr;
 
@@ -126,8 +89,6 @@ void AFP_PlayerController::UnHighlightActor(AActor* InActor)
 
 void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
-	//GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
-		
 	const FGameplayTag MenuRoot = FGameplayTag::RequestGameplayTag(FName("InputTag.Menu"));
 	if (InputTag.MatchesTag(MenuRoot))
 	{
@@ -183,7 +144,6 @@ void AFP_PlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 
 void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 {
-	//GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Blue, *InputTag.ToString());
 	if (!InputTag.MatchesTagExact(FFP_GameplayTags::Get().InputTag_LMB))
 	{
 		if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
@@ -231,18 +191,7 @@ void AFP_PlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 
 			if (!bHandledImmediately)
 			{
-				UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CachedDestination);
-
-				// TEMP DEBUG — remove once the navmesh issue on the new map is confirmed/fixed.
-				UE_LOG(LogTemp, Warning, TEXT("[AutoRun Debug] From=%s To=%s bTargetingInteractable=%d NavPath=%s PointCount=%d bPathComplete=%d"),
-					*ControlledPawn->GetActorLocation().ToString(),
-					*CachedDestination.ToString(),
-					bTargetingInteractable ? 1 : 0,
-					NavPath ? TEXT("valid") : TEXT("NULL"),
-					NavPath ? NavPath->PathPoints.Num() : -1,
-					NavPath ? (NavPath->IsPartial() ? 0 : 1) : -1);
-
-				if (NavPath)
+				if (UNavigationPath* NavPath = UNavigationSystemV1::FindPathToLocationSynchronously(this, ControlledPawn->GetActorLocation(), CachedDestination))
 				{
 					Spline->ClearSplinePoints();
 					for (const FVector& PointLoc : NavPath->PathPoints)
@@ -296,8 +245,6 @@ void AFP_PlayerController::RequestInteraction(AActor* TargetActor)
 
 void AFP_PlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
-	//GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Green, *InputTag.ToString());
-	
 	if (!InputTag.MatchesTagExact(FFP_GameplayTags::Get().InputTag_LMB))
 	{
 		if (GetASC()) GetASC()->AbilityInputTagHeld(InputTag);

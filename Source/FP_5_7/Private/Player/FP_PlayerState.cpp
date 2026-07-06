@@ -441,8 +441,6 @@ void AFP_PlayerState::LoadSkillTreeState(APlayerController* PC,
 			// Guard — only apply effects when the skill is currently granted.
 			if (!IsSkillGranted(Entry.SkillTag))
 			{
-				UE_LOG(LogTemp, Log, TEXT("LoadSkillTreeState: skill %s not granted — skipping tree %s"),
-					*Entry.SkillTag.ToString(), *TreeTag.ToString());
 				break;
 			}
 

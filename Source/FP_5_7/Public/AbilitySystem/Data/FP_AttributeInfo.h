@@ -47,10 +47,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TArray<FAttributeInfo> AttributeInformation;
 
-	/** Sanity check button. */
-	UFUNCTION(CallInEditor, Category="FP|Debug", meta=(DisplayName="Test Button"))
-	void TestButton();
-
 	/** Button: Pick JSON file and REPLACE AttributeInformation. */
 	UFUNCTION(CallInEditor, Category="FP|GAS|Import", meta=(DisplayName="Import JSON (Replace)"))
 	void ImportFromJson();

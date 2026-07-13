@@ -59,6 +59,12 @@ Thumbs.db
 Desktop.ini
 
 ############################
+# Auto-generated backups (e.g. import_tree_tags.py's
+# agt.backup() writes these next to FP_GameplayTags.h/.cpp)
+############################
+*.bak_*
+
+############################
 # Keep these (do NOT ignore)
 ############################
 # Config/*.ini should be committed (project settings)

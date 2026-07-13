@@ -176,22 +176,16 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 	FGameplayAttributeData MoreDamageRifle;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageGrenade;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageGrenade;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageShotgun;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageShotgun;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageDrone;
+	FGameplayAttributeData IncreasedDamageDroneController;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageDrone;
+	FGameplayAttributeData MoreDamageDroneController;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageAxe;
@@ -206,22 +200,52 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 	FGameplayAttributeData MoreDamageSword;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageClub;
+	FGameplayAttributeData IncreasedDamageMace;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageClub;
+	FGameplayAttributeData MoreDamageMace;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageUnarmed;
+	FGameplayAttributeData IncreasedDamageGauntlets;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageUnarmed;
+	FGameplayAttributeData MoreDamageGauntlets;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageLauncher;
+	FGameplayAttributeData IncreasedDamageOrdnance;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageLauncher;
+	FGameplayAttributeData MoreDamageOrdnance;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageConduit;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData MoreDamageConduit;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageAccelerator;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData MoreDamageAccelerator;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageSpear;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData MoreDamageSpear;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamagePrecision;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData MoreDamagePrecision;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedDamageProjector;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData MoreDamageProjector;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageMelee;
@@ -398,6 +422,10 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData ProjectileSpeed;
+
+//HeatCost
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData HeatCostEfficiency;
 
 //Item
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
@@ -636,14 +664,6 @@ UFUNCTION()
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageRifle)
 
 UFUNCTION()
-	void OnRep_IncreasedDamageGrenade(const FGameplayAttributeData& OldIncreasedDamageGrenade) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageGrenade)
-
-UFUNCTION()
-	void OnRep_MoreDamageGrenade(const FGameplayAttributeData& OldMoreDamageGrenade) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageGrenade)
-
-UFUNCTION()
 	void OnRep_IncreasedDamageShotgun(const FGameplayAttributeData& OldIncreasedDamageShotgun) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageShotgun)
 
@@ -652,12 +672,12 @@ UFUNCTION()
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageShotgun)
 
 UFUNCTION()
-	void OnRep_IncreasedDamageDrone(const FGameplayAttributeData& OldIncreasedDamageDrone) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageDrone)
+	void OnRep_IncreasedDamageDroneController(const FGameplayAttributeData& OldIncreasedDamageDroneController) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageDroneController)
 
 UFUNCTION()
-	void OnRep_MoreDamageDrone(const FGameplayAttributeData& OldMoreDamageDrone) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageDrone)
+	void OnRep_MoreDamageDroneController(const FGameplayAttributeData& OldMoreDamageDroneController) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageDroneController)
 
 UFUNCTION()
 	void OnRep_IncreasedDamageAxe(const FGameplayAttributeData& OldIncreasedDamageAxe) const;
@@ -676,28 +696,68 @@ UFUNCTION()
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageSword)
 
 UFUNCTION()
-	void OnRep_IncreasedDamageClub(const FGameplayAttributeData& OldIncreasedDamageClub) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageClub)
+	void OnRep_IncreasedDamageMace(const FGameplayAttributeData& OldIncreasedDamageMace) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageMace)
 
 UFUNCTION()
-	void OnRep_MoreDamageClub(const FGameplayAttributeData& OldMoreDamageClub) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageClub)
+	void OnRep_MoreDamageMace(const FGameplayAttributeData& OldMoreDamageMace) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageMace)
 
 UFUNCTION()
-	void OnRep_IncreasedDamageUnarmed(const FGameplayAttributeData& OldIncreasedDamageUnarmed) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageUnarmed)
+	void OnRep_IncreasedDamageGauntlets(const FGameplayAttributeData& OldIncreasedDamageGauntlets) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageGauntlets)
 
 UFUNCTION()
-	void OnRep_MoreDamageUnarmed(const FGameplayAttributeData& OldMoreDamageUnarmed) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageUnarmed)
+	void OnRep_MoreDamageGauntlets(const FGameplayAttributeData& OldMoreDamageGauntlets) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageGauntlets)
 
 UFUNCTION()
-	void OnRep_IncreasedDamageLauncher(const FGameplayAttributeData& OldIncreasedDamageLauncher) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageLauncher)
+	void OnRep_IncreasedDamageOrdnance(const FGameplayAttributeData& OldIncreasedDamageOrdnance) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageOrdnance)
 
 UFUNCTION()
-	void OnRep_MoreDamageLauncher(const FGameplayAttributeData& OldMoreDamageLauncher) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageLauncher)
+	void OnRep_MoreDamageOrdnance(const FGameplayAttributeData& OldMoreDamageOrdnance) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageOrdnance)
+
+UFUNCTION()
+	void OnRep_IncreasedDamageConduit(const FGameplayAttributeData& OldIncreasedDamageConduit) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageConduit)
+
+UFUNCTION()
+	void OnRep_MoreDamageConduit(const FGameplayAttributeData& OldMoreDamageConduit) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageConduit)
+
+UFUNCTION()
+	void OnRep_IncreasedDamageAccelerator(const FGameplayAttributeData& OldIncreasedDamageAccelerator) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageAccelerator)
+
+UFUNCTION()
+	void OnRep_MoreDamageAccelerator(const FGameplayAttributeData& OldMoreDamageAccelerator) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageAccelerator)
+
+UFUNCTION()
+	void OnRep_IncreasedDamageSpear(const FGameplayAttributeData& OldIncreasedDamageSpear) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageSpear)
+
+UFUNCTION()
+	void OnRep_MoreDamageSpear(const FGameplayAttributeData& OldMoreDamageSpear) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageSpear)
+
+UFUNCTION()
+	void OnRep_IncreasedDamagePrecision(const FGameplayAttributeData& OldIncreasedDamagePrecision) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamagePrecision)
+
+UFUNCTION()
+	void OnRep_MoreDamagePrecision(const FGameplayAttributeData& OldMoreDamagePrecision) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamagePrecision)
+
+UFUNCTION()
+	void OnRep_IncreasedDamageProjector(const FGameplayAttributeData& OldIncreasedDamageProjector) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageProjector)
+
+UFUNCTION()
+	void OnRep_MoreDamageProjector(const FGameplayAttributeData& OldMoreDamageProjector) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageProjector)
 
 UFUNCTION()
 	void OnRep_IncreasedDamageMelee(const FGameplayAttributeData& OldIncreasedDamageMelee) const;
@@ -930,6 +990,11 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_ProjectileSpeed(const FGameplayAttributeData& OldProjectileSpeed) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ProjectileSpeed)
+
+//HeatCost
+UFUNCTION()
+	void OnRep_HeatCostEfficiency(const FGameplayAttributeData& OldHeatCostEfficiency) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, HeatCostEfficiency)
 
 //Item
 UFUNCTION()

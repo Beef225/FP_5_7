@@ -81,18 +81,28 @@ struct FP_DamageStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageRifle);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageShotgun);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageShotgun);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageDrone);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageDrone);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageDroneController);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageDroneController);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageAxe);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageAxe);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageSword);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageSword);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageClub);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageClub);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageUnarmed);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageUnarmed);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageLauncher);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageLauncher);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageMace);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageMace);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageGauntlets);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageGauntlets);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageOrdnance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageOrdnance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageConduit);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageConduit);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageAccelerator);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageAccelerator);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageSpear);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageSpear);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamagePrecision);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamagePrecision);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageProjector);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageProjector);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageProjectile);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageProjectile);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageMelee);
@@ -199,18 +209,28 @@ struct FP_DamageStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageRifle, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageShotgun, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageShotgun, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageDrone, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageDrone, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageDroneController, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageDroneController, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAxe, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageAxe, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageSword, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageSword, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageClub, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageClub, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageUnarmed, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageUnarmed, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageLauncher, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageLauncher, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageMace, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageMace, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageGauntlets, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageGauntlets, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageOrdnance, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageOrdnance, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageConduit, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageConduit, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAccelerator, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageAccelerator, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageSpear, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageSpear, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamagePrecision, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamagePrecision, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageProjector, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageProjector, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageProjectile, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageProjectile, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageMelee, Source, false);
@@ -315,18 +335,28 @@ UExecCalc_Damage::UExecCalc_Damage()
 	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageRifleDef);
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageShotgunDef);
 	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageShotgunDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageDroneDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageDroneDef);
+	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageDroneControllerDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageDroneControllerDef);
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageAxeDef);
 	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageAxeDef);
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageSwordDef);
 	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageSwordDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageClubDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageClubDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageUnarmedDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageUnarmedDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageLauncherDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageLauncherDef);
+	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageMaceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageMaceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageGauntletsDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageGauntletsDef);
+	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageOrdnanceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageOrdnanceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageConduitDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageConduitDef);
+	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageAcceleratorDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageAcceleratorDef);
+	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageSpearDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageSpearDef);
+	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamagePrecisionDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MoreDamagePrecisionDef);
+	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageProjectorDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageProjectorDef);
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageProjectileDef);
 	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageProjectileDef);
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageMeleeDef);
@@ -471,18 +501,28 @@ void UExecCalc_Damage::Execute_Implementation(
 	const float MoreRifle = GetCaptured(DamageStatics().MoreDamageRifleDef, 0.f);
 	const float IncreasedShotgun = GetCaptured(DamageStatics().IncreasedDamageShotgunDef, 0.f);
 	const float MoreShotgun = GetCaptured(DamageStatics().MoreDamageShotgunDef, 0.f);
-	const float IncreasedDrone = GetCaptured(DamageStatics().IncreasedDamageDroneDef, 0.f);
-	const float MoreDrone = GetCaptured(DamageStatics().MoreDamageDroneDef, 0.f);
+	const float IncreasedDroneController = GetCaptured(DamageStatics().IncreasedDamageDroneControllerDef, 0.f);
+	const float MoreDroneController = GetCaptured(DamageStatics().MoreDamageDroneControllerDef, 0.f);
 	const float IncreasedAxe = GetCaptured(DamageStatics().IncreasedDamageAxeDef, 0.f);
 	const float MoreAxe = GetCaptured(DamageStatics().MoreDamageAxeDef, 0.f);
 	const float IncreasedSword = GetCaptured(DamageStatics().IncreasedDamageSwordDef, 0.f);
 	const float MoreSword = GetCaptured(DamageStatics().MoreDamageSwordDef, 0.f);
-	const float IncreasedClub = GetCaptured(DamageStatics().IncreasedDamageClubDef, 0.f);
-	const float MoreClub = GetCaptured(DamageStatics().MoreDamageClubDef, 0.f);
-	const float IncreasedUnarmed = GetCaptured(DamageStatics().IncreasedDamageUnarmedDef, 0.f);
-	const float MoreUnarmed = GetCaptured(DamageStatics().MoreDamageUnarmedDef, 0.f);
-	const float IncreasedLauncher = GetCaptured(DamageStatics().IncreasedDamageLauncherDef, 0.f);
-	const float MoreLauncher = GetCaptured(DamageStatics().MoreDamageLauncherDef, 0.f);
+	const float IncreasedMace = GetCaptured(DamageStatics().IncreasedDamageMaceDef, 0.f);
+	const float MoreMace = GetCaptured(DamageStatics().MoreDamageMaceDef, 0.f);
+	const float IncreasedGauntlets = GetCaptured(DamageStatics().IncreasedDamageGauntletsDef, 0.f);
+	const float MoreGauntlets = GetCaptured(DamageStatics().MoreDamageGauntletsDef, 0.f);
+	const float IncreasedOrdnance = GetCaptured(DamageStatics().IncreasedDamageOrdnanceDef, 0.f);
+	const float MoreOrdnance = GetCaptured(DamageStatics().MoreDamageOrdnanceDef, 0.f);
+	const float IncreasedConduit = GetCaptured(DamageStatics().IncreasedDamageConduitDef, 0.f);
+	const float MoreConduit = GetCaptured(DamageStatics().MoreDamageConduitDef, 0.f);
+	const float IncreasedAccelerator = GetCaptured(DamageStatics().IncreasedDamageAcceleratorDef, 0.f);
+	const float MoreAccelerator = GetCaptured(DamageStatics().MoreDamageAcceleratorDef, 0.f);
+	const float IncreasedSpear = GetCaptured(DamageStatics().IncreasedDamageSpearDef, 0.f);
+	const float MoreSpear = GetCaptured(DamageStatics().MoreDamageSpearDef, 0.f);
+	const float IncreasedPrecision = GetCaptured(DamageStatics().IncreasedDamagePrecisionDef, 0.f);
+	const float MorePrecision = GetCaptured(DamageStatics().MoreDamagePrecisionDef, 0.f);
+	const float IncreasedProjector = GetCaptured(DamageStatics().IncreasedDamageProjectorDef, 0.f);
+	const float MoreProjector = GetCaptured(DamageStatics().MoreDamageProjectorDef, 0.f);
 	const float IncreasedProjectile = GetCaptured(DamageStatics().IncreasedDamageProjectileDef, 0.f);
 	const float MoreProjectile = GetCaptured(DamageStatics().MoreDamageProjectileDef, 0.f);
 	const float IncreasedMelee = GetCaptured(DamageStatics().IncreasedDamageMeleeDef, 0.f);
@@ -521,10 +561,10 @@ void UExecCalc_Damage::Execute_Implementation(
 		SkillTagIncreasedDamage += IncreasedShotgun;
 		SkillTagMoreDamage += MoreShotgun;
 	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Drone))
+	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_DroneController))
 	{
-		SkillTagIncreasedDamage += IncreasedDrone;
-		SkillTagMoreDamage += MoreDrone;
+		SkillTagIncreasedDamage += IncreasedDroneController;
+		SkillTagMoreDamage += MoreDroneController;
 	}
 	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Axe))
 	{
@@ -536,20 +576,45 @@ void UExecCalc_Damage::Execute_Implementation(
 		SkillTagIncreasedDamage += IncreasedSword;
 		SkillTagMoreDamage += MoreSword;
 	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Club))
+	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Mace))
 	{
-		SkillTagIncreasedDamage += IncreasedClub;
-		SkillTagMoreDamage += MoreClub;
+		SkillTagIncreasedDamage += IncreasedMace;
+		SkillTagMoreDamage += MoreMace;
 	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Unarmed))
+	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Gauntlets))
 	{
-		SkillTagIncreasedDamage += IncreasedUnarmed;
-		SkillTagMoreDamage += MoreUnarmed;
+		SkillTagIncreasedDamage += IncreasedGauntlets;
+		SkillTagMoreDamage += MoreGauntlets;
 	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Launcher))
+	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Ordnance))
 	{
-		SkillTagIncreasedDamage += IncreasedLauncher;
-		SkillTagMoreDamage += MoreLauncher;
+		SkillTagIncreasedDamage += IncreasedOrdnance;
+		SkillTagMoreDamage += MoreOrdnance;
+	}
+	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Conduit))
+	{
+		SkillTagIncreasedDamage += IncreasedConduit;
+		SkillTagMoreDamage += MoreConduit;
+	}
+	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Accelerator))
+	{
+		SkillTagIncreasedDamage += IncreasedAccelerator;
+		SkillTagMoreDamage += MoreAccelerator;
+	}
+	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Spear))
+	{
+		SkillTagIncreasedDamage += IncreasedSpear;
+		SkillTagMoreDamage += MoreSpear;
+	}
+	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Precision))
+	{
+		SkillTagIncreasedDamage += IncreasedPrecision;
+		SkillTagMoreDamage += MorePrecision;
+	}
+	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Projector))
+	{
+		SkillTagIncreasedDamage += IncreasedProjector;
+		SkillTagMoreDamage += MoreProjector;
 	}
 	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Projectile))
 	{

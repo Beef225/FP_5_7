@@ -31,9 +31,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void CauseDamage(AActor* TargetActor);
 	
+	// TODO: not yet gated by SkillModifierTags — always applies the generic
+	// Speed.Skill attribute to every ability. See the SkillTagMod TODO block
+	// in FP_GameplayTags.h for the per-category attribute + gating pattern to
+	// apply here once weapon-specific Skill Speed nodes exist.
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Damage|Skill")
 	float GetSkillSpeedAttributeModifier() const;
 
+	// TODO: not yet gated by SkillModifierTags — see FP_GameplayTags.h's
+	// SkillTagMod TODO block (same note as GetSkillSpeedAttributeModifier above).
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Damage|Skill")
 	float GetAoEAttributeModifier() const;
 

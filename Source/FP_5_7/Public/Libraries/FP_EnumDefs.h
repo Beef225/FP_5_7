@@ -4,6 +4,9 @@
 #include "CoreMinimal.h"
 
 
+// Grip/handedness pose per weapon category. Unarmed is also the "no weapon
+// equipped" sentinel default used across FP_GripStanceFragment/FP_PlayerState/
+// preview classes — keep it distinct from Gauntlets (the actual brawling weapon).
 UENUM(BlueprintType)
 enum class EWeaponGripStyle : uint8
 {
@@ -16,11 +19,18 @@ enum class EWeaponGripStyle : uint8
 	Sword2H            UMETA(DisplayName="Sword (2H)"),
 	Axe1H              UMETA(DisplayName="Axe (1H)"),
 	Axe2H              UMETA(DisplayName="Axe (2H)"),
-	Club1H            UMETA(DisplayName="Club (1H)"),
-	Club2H            UMETA(DisplayName="Club (1H)"),
+	Mace1H             UMETA(DisplayName="Mace (1H)"),
+	Mace2H             UMETA(DisplayName="Mace (2H)"),
+	Gauntlets          UMETA(DisplayName="Gauntlets"),
+	DroneController    UMETA(DisplayName="Drone Controller"),
+	Conduit1H          UMETA(DisplayName="Conduit (1H)"),
+	Accelerator2H      UMETA(DisplayName="Accelerator (2H)"),
+	Spear2H            UMETA(DisplayName="Spear (2H)"),
+	Precision2H        UMETA(DisplayName="Precision (2H)"),
+	Projector1H        UMETA(DisplayName="Projector (1H)"),
 	Dual1H             UMETA(DisplayName="Dual 1H"),
 	HeavyHip           UMETA(DisplayName="Heavy (Hip-fire / Minigun)"),
-	ShoulderLauncher   UMETA(DisplayName="Shoulder Launcher"),
+	Ordnance2H         UMETA(DisplayName="Ordnance (2H)"),
 };
 
 UENUM(BlueprintType)

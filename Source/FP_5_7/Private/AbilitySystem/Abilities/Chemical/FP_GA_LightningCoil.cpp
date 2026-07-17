@@ -200,9 +200,9 @@ int32 UFP_GA_LightningCoil::GetNumDamageRolls() const
 	return 1 + Extra;
 }
 
-void UFP_GA_LightningCoil::CauseDamage(AActor* TargetActor)
+void UFP_GA_LightningCoil::CauseDamage(AActor* TargetActor, float DamageMultiplier)
 {
-	Super::CauseDamage(TargetActor);
+	Super::CauseDamage(TargetActor, DamageMultiplier);
 
 	if (!TargetActor) return;
 	const AFP_PlayerState* PS = GetLocalPS();

@@ -417,6 +417,10 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Seco
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData SkillSpeed;
 
+//Duration
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+	FGameplayAttributeData SkillDuration;
+
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
 	FGameplayAttributeData SkillMoveSpeedModifier;
 
@@ -984,6 +988,10 @@ UFUNCTION()
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, SkillSpeed)
 
 UFUNCTION()
+	void OnRep_SkillDuration(const FGameplayAttributeData& OldSkillDuration) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, SkillDuration)
+
+UFUNCTION()
 	void OnRep_SkillMoveSpeedModifier(const FGameplayAttributeData& OldSkillMoveSpeedModifier) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, SkillMoveSpeedModifier)
 
@@ -1137,6 +1145,7 @@ private:
 	void SendXPEvent(const FEffectProperties& Props);
 	bool bTopOffHealth = false;
 	bool bDebugXP = true;
+	bool bDebugHeatCapacity = false;
 	
 	
 };

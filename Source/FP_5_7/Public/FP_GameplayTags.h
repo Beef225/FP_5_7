@@ -168,6 +168,9 @@ FGameplayTag Speed_Skill;
 FGameplayTag Speed_Movement_DuringSkill;
 FGameplayTag Speed_Projectile;
 
+//Duration
+FGameplayTag Duration_Skill;
+
 //Item
 FGameplayTag Item_Quantity;
 FGameplayTag Item_Rarity;
@@ -569,6 +572,10 @@ FGameplayTag Inventory_Equippable_Boots_CombatBoots;
 // Weapons
 // -------------------------------------------------------------------------
 FGameplayTag Inventory_Equippable_Weapon_ShockRail;
+	
+	
+	FGameplayTag Inventory_Equippable_Weapon_ImpactorMace;
+	
 
 // -------------------------------------------------------------------------
 //Locations
@@ -591,8 +598,9 @@ FGameplayTag Location_EndlessSimulation;
 FGameplayTag Skills_Energy_Firebolt;
 FGameplayTag Skills_Radiation_Microwave;
 FGameplayTag Skills_Chemical_LightningCoil;
-	
-	TArray<FGameplayTag> DamageTypes;	
+FGameplayTag Skills_Physical_Impact;
+
+	TArray<FGameplayTag> DamageTypes;
 	
 
 //PassiveTree
@@ -968,6 +976,12 @@ FGameplayTag SkillPassive_LightningCoil_ChainRadius;
 FGameplayTag SkillPassive_LightningCoil_DistanceLuckyRolls;
 FGameplayTag SkillPassive_LightningCoil_DamageLuckyRolls;
 FGameplayTag SkillPassive_LightningCoil_CastSpeed;
+
+FGameplayTag SkillPassive_Impact_InitialRadius;
+FGameplayTag SkillPassive_Impact_SecondaryRadius;
+FGameplayTag SkillPassive_Impact_MaxChainDepth;
+FGameplayTag SkillPassive_Impact_SecondaryDamageMultiplier;
+FGameplayTag SkillPassive_Impact_ChainDelayModifier;
 
 	//SkillTree — Leap
 	FGameplayTag SkillTree_Leap_ExtraRange_1;

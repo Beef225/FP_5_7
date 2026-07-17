@@ -29,7 +29,7 @@ class FP_5_7_API UFP_DamageGameplayAbility : public UFP_GameplayAbility
 	
 public:
 	UFUNCTION(BlueprintCallable)
-	virtual void CauseDamage(AActor* TargetActor);
+	virtual void CauseDamage(AActor* TargetActor, float DamageMultiplier = 1.f);
 	
 	// TODO: not yet gated by SkillModifierTags — always applies the generic
 	// Speed.Skill attribute to every ability. See the SkillTagMod TODO block
@@ -84,7 +84,7 @@ public:
 	
 protected:
 	void AppendSkillModifierTagsToDamageSpec(FGameplayEffectSpecHandle& DamageSpecHandle) const;
-	void AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const;
+	void AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle, float DamageMultiplier = 1.f) const;
 	void AssignSkillPassiveBonuses(FGameplayEffectSpecHandle& SpecHandle) const;
 
 	/** Number of times to roll the damage range, keeping the highest result. Default 1. Override per skill. */

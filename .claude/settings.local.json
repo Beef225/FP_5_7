@@ -76,7 +76,13 @@
       "Bash(git check-ignore *)",
       "Bash(where python3 *)",
       "Bash(where py *)",
-      "Bash(/c/Users/jakeg/AppData/Local/Python/bin/python3.exe -c ' *)"
+      "Bash(/c/Users/jakeg/AppData/Local/Python/bin/python3.exe -c ' *)",
+      "Bash(git rm *)",
+      "Bash(grep -v '^-.*FName\\(\" *$')",
+      "Bash(grep -v '^+.*FName\\(\" *$')",
+      "Bash(\"/c/Program Files/Epic Games/UE_5.7/Engine/Build/BatchFiles/Build.bat\" FP_5_7Editor Win64 Development -project=\"C:/Unreal/FP_5_7/FP_5_7.uproject\" -waitmutex)",
+      "Bash(xargs ls -t)",
+      "Bash(sort -u -t'/' -k1,1)"
     ]
   }
 }

@@ -154,7 +154,7 @@ protected:
 	float ConvergenceWideningDurSec = 2.f;
 
 protected:
-	virtual void  CauseDamage(AActor* TargetActor) override;
+	virtual void  CauseDamage(AActor* TargetActor, float DamageMultiplier = 1.f) override;
 	virtual int32 GetNumDamageRolls() const override;
 
 private:

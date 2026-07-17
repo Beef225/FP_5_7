@@ -157,6 +157,7 @@ TagsToAttributes.Add(GameplayTags.AoE_AdditionalRadius, GetAreaOfEffectAdditiona
 //Speed
 TagsToAttributes.Add(GameplayTags.Speed_Movement, GetMovementSpeedAttribute);
 TagsToAttributes.Add(GameplayTags.Speed_Skill, GetSkillSpeedAttribute);
+TagsToAttributes.Add(GameplayTags.Duration_Skill, GetSkillDurationAttribute);
 TagsToAttributes.Add(GameplayTags.Speed_Movement_DuringSkill, GetSkillMoveSpeedModifierAttribute);
 TagsToAttributes.Add(GameplayTags.Speed_Projectile, GetProjectileSpeedAttribute);
 TagsToAttributes.Add(GameplayTags.Heat_SkillCost, GetHeatCostEfficiencyAttribute);
@@ -452,6 +453,9 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MovementSpeed, COND_None, REPNO
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, SkillSpeed, COND_None, REPNOTIFY_Always)
 
+//Duration
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, SkillDuration, COND_None, REPNOTIFY_Always)
+
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, SkillMoveSpeedModifier, COND_None, REPNOTIFY_Always)
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ProjectileSpeed, COND_None, REPNOTIFY_Always)
@@ -588,11 +592,39 @@ void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	{
 		HandleIncomingXP(Props);
 	}
+
+	if (bDebugHeatCapacity &&
+		(Data.EvaluatedData.Attribute == GetThermalMassAttribute() || Data.EvaluatedData.Attribute == GetCoolingCoefficientAttribute()))
+	{
+		auto OpToString = [](EGameplayModOp::Type Op) -> FString
+		{
+			switch (Op)
+			{
+			case EGameplayModOp::Additive: return TEXT("Add");
+			case EGameplayModOp::Multiplicitive: return TEXT("Multiply");
+			case EGameplayModOp::Division: return TEXT("Divide");
+			case EGameplayModOp::Override: return TEXT("Override");
+			default: return TEXT("Unknown");
+			}
+		};
+		const FString EffectName = Data.EffectSpec.Def ? Data.EffectSpec.Def->GetClass()->GetName() : TEXT("Unknown");
+		const FString SourceName = Props.SourceAvatarActor ? Props.SourceAvatarActor->GetName() : TEXT("Unknown");
+		UE_LOG(LogTemp, Warning, TEXT("[HeatCapacity Debug] %s modified by GE '%s' (Op=%s, Magnitude=%f) | Source: %s"),
+			*Data.EvaluatedData.Attribute.GetName(), *EffectName, *OpToString(Data.EvaluatedData.ModifierOp),
+			Data.EvaluatedData.Magnitude, *SourceName);
+	}
 }
 
 void UFP_AttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
 {
 	Super::PostAttributeChange(Attribute, OldValue, NewValue);
+
+	if (bDebugHeatCapacity && OldValue != NewValue &&
+		(Attribute == GetThermalMassAttribute() || Attribute == GetCoolingCoefficientAttribute()))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[HeatCapacity Debug] %s changed: %f -> %f"),
+			*Attribute.GetName(), OldValue, NewValue);
+	}
 }
 
 void UFP_AttributeSet::HandleIncomingDamage(const FEffectProperties& Props)
@@ -1257,6 +1289,12 @@ void UFP_AttributeSet::OnRep_MovementSpeed(const FGameplayAttributeData& OldMove
 void UFP_AttributeSet::OnRep_SkillSpeed(const FGameplayAttributeData& OldSkillSpeed) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, SkillSpeed, OldSkillSpeed);
+}
+
+//Duration
+void UFP_AttributeSet::OnRep_SkillDuration(const FGameplayAttributeData& OldSkillDuration) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, SkillDuration, OldSkillDuration);
 }
 
 void UFP_AttributeSet::OnRep_SkillMoveSpeedModifier(const FGameplayAttributeData& OldSkillMoveSpeedModifier) const

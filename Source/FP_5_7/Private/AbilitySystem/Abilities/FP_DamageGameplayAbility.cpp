@@ -59,13 +59,13 @@ namespace
 }
 
 
-void UFP_DamageGameplayAbility::CauseDamage(AActor* TargetActor)
+void UFP_DamageGameplayAbility::CauseDamage(AActor* TargetActor, float DamageMultiplier)
 {
 	FGameplayEffectSpecHandle DamageSpecHandle = MakeOutgoingGameplayEffectSpec(DamageEffectClass, 1.f);
-	AssignRolledDamageMagnitudes(DamageSpecHandle);
+	AssignRolledDamageMagnitudes(DamageSpecHandle, DamageMultiplier);
 	GetAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(*DamageSpecHandle.Data.Get(),
 		UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor));
-	
+
 }
 
 float UFP_DamageGameplayAbility::GetSkillSpeedAttributeModifier() const
@@ -261,7 +261,7 @@ void UFP_DamageGameplayAbility::AssignSkillPassiveBonuses(FGameplayEffectSpecHan
 	}
 }
 
-void UFP_DamageGameplayAbility::AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle) const
+void UFP_DamageGameplayAbility::AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle, float DamageMultiplier) const
 {
 	AppendSkillModifierTagsToDamageSpec(DamageSpecHandle);
 	AssignSkillPassiveBonuses(DamageSpecHandle);
@@ -277,6 +277,8 @@ void UFP_DamageGameplayAbility::AssignRolledDamageMagnitudes(FGameplayEffectSpec
 		float ScaledDamage = FMath::FRandRange(LowerBoundDamage, UpperBoundDamage);
 		for (int32 i = 1; i < NumRolls; ++i)
 			ScaledDamage = FMath::Max(ScaledDamage, FMath::FRandRange(LowerBoundDamage, UpperBoundDamage));
+
+		ScaledDamage *= DamageMultiplier;
 
 		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(DamageSpecHandle, Pair.Key, ScaledDamage);
 	}

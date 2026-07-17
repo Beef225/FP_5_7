@@ -486,8 +486,14 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Multiplier of Movment speed during Skills that allow Movement")
 		);
 	GameplayTags.Speed_Projectile = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("Speed.Projectile"), 
+		FName("Speed.Projectile"),
 		FString("Increased Projectile Speed")
+		);
+
+	//Duration
+	GameplayTags.Duration_Skill = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Duration.Skill"),
+		FString("Skill duration scalar (delta from neutral 0) affecting skill-defined timers such as chain/detonation delays")
 		);
 
 	//Item
@@ -1093,6 +1099,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Skills.Chemical.LightningCoil"),
 		FString("Lightning Coil - fires arc bolts in a cone from the weapon tip, each with a circular AoE impact")
 		);
+	GameplayTags.Skills_Physical_Impact = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Physical.Impact"),
+		FString("Impact - large circular AoE at the weapon tip; hit enemies detonate their own smaller chained AoE after a delay")
+		);
 
 	// -------------------------------------------------------------------------
 	// Inventory
@@ -1209,6 +1219,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Inventory_Equippable_Weapon_ShockRail = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Inventory.Equippable.Weapon.ShockRail"), FString("ShockRail weapon item"));
 
+	GameplayTags.Inventory_Equippable_Weapon_ImpactorMace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Inventory.Equippable.Weapon.ImpactorMace"), FString("ImpactorMace weapon item"));
+	
+	
 	// -------------------------------------------------------------------------
 	//Locations
 	GameplayTags.Location_Startup = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -2658,6 +2672,28 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("SkillPassive.LightningCoil.CastSpeed"),
 		FString("Per-skill passive: increased skill cast speed")
 		);
+
+	GameplayTags.SkillPassive_Impact_InitialRadius = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.InitialRadius"),
+		FString("Per-skill passive: flat radius addition (cm) to Impact's initial weapon-tip AoE")
+		);
+	GameplayTags.SkillPassive_Impact_SecondaryRadius = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.SecondaryRadius"),
+		FString("Per-skill passive: flat radius addition (cm) to Impact's secondary/chained AoE")
+		);
+	GameplayTags.SkillPassive_Impact_MaxChainDepth = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.MaxChainDepth"),
+		FString("Per-skill passive: additional chain generations beyond the base (default 1: initial hit + one secondary generation)")
+		);
+	GameplayTags.SkillPassive_Impact_SecondaryDamageMultiplier = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.SecondaryDamageMultiplier"),
+		FString("Per-skill passive: delta to secondary/chained AoE damage (0 = same as initial hit)")
+		);
+	GameplayTags.SkillPassive_Impact_ChainDelayModifier = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.ChainDelayModifier"),
+		FString("Per-skill passive: delta to Impact's chain delay multiplier, stacks with the global Duration.Skill attribute")
+		);
+
 	GameplayTags.SkillTree_LightningCoil_SkillSpeed_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SkillTree.LightningCoil.SkillSpeed.1"),
 		FString("5% Increased Skill Speed")

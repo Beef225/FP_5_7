@@ -249,6 +249,7 @@ void UFP_AbilitySystemComponent::AddDeferredDamage(float Amount, float Duration,
 	Instance.RemainingDamage = Amount;
 	Instance.RemainingTime = FMath::Max(Duration, 0.f);
 	Instance.SourceASC = SourceASC;
+	Instance.bRecoup = RecoupsDeferredDamage(this);
 
 	UWorld* World = GetWorld();
 	if (World && !World->GetTimerManager().IsTimerActive(DeferredDamageTimer))
@@ -291,14 +292,46 @@ void UFP_AbilitySystemComponent::ScaleDeferredDamageRemainingTime(float Multipli
 	}
 }
 
+float UFP_AbilitySystemComponent::GetIncreasedDamageTaken() const
+{
+	float Increased = 0.f;
+	if (DeferredDamageInstances.Num() > 0
+		&& HasMatchingGameplayTag(FFP_GameplayTags::Get().Flag_SkillTree_IncreasedDamageTaken_WhileDeferring))
+	{
+		Increased += BideDamageTakenWhileDeferring;
+	}
+	return Increased;
+}
+
 float UFP_AbilitySystemComponent::GetPendingDeferredDamage() const
 {
 	float Total = 0.f;
 	for (const FFP_DeferredDamageInstance& Instance : DeferredDamageInstances)
 	{
-		Total += Instance.RemainingDamage;
+		if (!Instance.bRecoup)
+		{
+			Total += Instance.RemainingDamage;
+		}
 	}
 	return Total;
+}
+
+float UFP_AbilitySystemComponent::GetPendingRecoup() const
+{
+	float Total = 0.f;
+	for (const FFP_DeferredDamageInstance& Instance : DeferredDamageInstances)
+	{
+		if (Instance.bRecoup)
+		{
+			Total += Instance.RemainingDamage;
+		}
+	}
+	return Total;
+}
+
+bool UFP_AbilitySystemComponent::RecoupsDeferredDamage(const UAbilitySystemComponent* ASC)
+{
+	return ASC && ASC->HasMatchingGameplayTag(FFP_GameplayTags::Get().Flag_SkillTree_RecoupInsteadOfDefer);
 }
 
 void UFP_AbilitySystemComponent::ClearDeferredDamage()
@@ -329,7 +362,9 @@ void UFP_AbilitySystemComponent::TickDeferredDamage()
 	}
 
 	// Pay out each instance's share for this tick, grouped by source so kill credit stays correct.
+	// Recoup (Restorative Nanites) instances pay out as healing instead.
 	TMap<TWeakObjectPtr<UAbilitySystemComponent>, float> DamageBySource;
+	float RecoupThisTick = 0.f;
 	for (int32 i = DeferredDamageInstances.Num() - 1; i >= 0; --i)
 	{
 		FFP_DeferredDamageInstance& Instance = DeferredDamageInstances[i];
@@ -339,7 +374,14 @@ void UFP_AbilitySystemComponent::TickDeferredDamage()
 
 		Instance.RemainingDamage -= Payout;
 		Instance.RemainingTime = FMath::Max(Instance.RemainingTime - DeltaTime, 0.f);
-		DamageBySource.FindOrAdd(Instance.SourceASC) += Payout;
+		if (Instance.bRecoup)
+		{
+			RecoupThisTick += Payout;
+		}
+		else
+		{
+			DamageBySource.FindOrAdd(Instance.SourceASC) += Payout;
+		}
 
 		if (Instance.RemainingDamage <= KINDA_SMALL_NUMBER)
 		{
@@ -352,6 +394,11 @@ void UFP_AbilitySystemComponent::TickDeferredDamage()
 		World->GetTimerManager().ClearTimer(DeferredDamageTimer);
 	}
 
+	// Heal before damage, so a tick that does both can't kill through life that was being restored.
+	if (RecoupThisTick > 0.f)
+	{
+		ApplyRecoupTick(RecoupThisTick);
+	}
 	for (const TPair<TWeakObjectPtr<UAbilitySystemComponent>, float>& Pair : DamageBySource)
 	{
 		if (Pair.Value > 0.f)
@@ -359,6 +406,31 @@ void UFP_AbilitySystemComponent::TickDeferredDamage()
 			ApplyDeferredDamageTick(Pair.Value, Pair.Key.Get());
 		}
 	}
+}
+
+void UFP_AbilitySystemComponent::ApplyRecoupTick(float Amount)
+{
+	const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
+
+	if (!RecoupTickEffect)
+	{
+		RecoupTickEffect = NewObject<UGameplayEffect>(this, TEXT("GE_DeferredRecoupTick"), RF_Transient);
+		RecoupTickEffect->DurationPolicy = EGameplayEffectDurationType::Instant;
+
+		FSetByCallerFloat SetByCaller;
+		SetByCaller.DataTag = Tags.SetByCaller_DeferredDamagePerTick;
+
+		FGameplayModifierInfo Mod;
+		Mod.Attribute = UFP_AttributeSet::GetHitPointsAttribute();   // clamped to MaxHitPoints by the attribute set
+		Mod.ModifierOp = EGameplayModOp::Additive;
+		Mod.ModifierMagnitude = FGameplayEffectModifierMagnitude(SetByCaller);
+		RecoupTickEffect->Modifiers.Add(Mod);
+	}
+
+	FGameplayEffectSpec Spec(RecoupTickEffect, MakeEffectContext(), 1.f);
+	Spec.SetSetByCallerMagnitude(Tags.SetByCaller_DeferredDamagePerTick, Amount);
+	Spec.AddDynamicAssetTag(Tags.Effects_DeferredDamageTick);
+	ApplyGameplayEffectSpecToSelf(Spec);
 }
 
 void UFP_AbilitySystemComponent::ApplyDeferredDamageTick(float Amount, UAbilitySystemComponent* SourceASC)

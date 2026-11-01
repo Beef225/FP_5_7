@@ -49,6 +49,12 @@ public:
 	 */
 	static void AppendWeaponStatTags(FGameplayTagContainer& InOutTags);
 
+	/**
+	 * This skill's gated-stat tags (Skills.* + SkillTagMod.* incl. derived weapon-stat tags).
+	 * Used by ExecCalc_DamageOverTime to evaluate gated stats for DoTs the ability applied.
+	 */
+	void GetSkillTagsForEffects(FGameplayTagContainer& OutTags) const { GetSkillModifierTags(OutTags); }
+
 	virtual bool CheckCost(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, FGameplayTagContainer* OptionalRelevantTags = nullptr) const override;
 	virtual void ApplyCost(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo) const override;
 

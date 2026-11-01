@@ -17,14 +17,18 @@ from .model import Node, SkillTree
 LABEL_W, LABEL_H = 180.0, 40.0
 
 BG = QColor("#1b1d22")
-GRID_MINOR_C = QColor("#23262d")
-GRID_MAJOR_C = QColor("#2c3039")
+CANVAS_BG = QColor("#1f2228")
+GRID_MINOR_C = QColor("#2a2e36")
+GRID_MAJOR_C = QColor("#3a404c")
 CANVAS_C = QColor("#3b4150")
+RING_C = QColor("#4b5466")
+EDGE_RING_C = QColor("#5d687d")
 EDGE_C = QColor("#6b7280")
 EDGE_HI = QColor("#cbd5e1")
 SELECT_C = QColor("#22d3ee")
 START_C = QColor("#facc15")
 ISSUE_C = QColor("#ef4444")
+HIGHLIGHT_C = QColor("#f59e0b")   # Stat Report matches
 LABEL_C = QColor("#d1d5db")
 
 
@@ -65,7 +69,7 @@ class NodeItem(QGraphicsItem):
         self.update()
 
     def boundingRect(self) -> QRectF:
-        r = self.radius + 10
+        r = self.radius + 24              # room for start / selection rings + report halo
         half_w = max(r, LABEL_W / 2)
         return QRectF(-half_w, -r, half_w * 2, r * 2 + LABEL_H)
 
@@ -82,6 +86,9 @@ class NodeItem(QGraphicsItem):
         ts = self.tree_scene
         base = group_color(n.group)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        highlighted = n.uid in ts.highlight_uids
+        if ts.highlight_uids and not highlighted and not self.isSelected():
+            painter.setOpacity(0.3)       # a Stat Report is active: dim non-matching nodes
 
         painter.setPen(Qt.PenStyle.NoPen)
         painter.setBrush(base.darker(260))
@@ -115,6 +122,14 @@ class NodeItem(QGraphicsItem):
             outer += 4
             painter.drawEllipse(QPointF(0, 0), outer, outer)
 
+        if highlighted:
+            glow = QColor(HIGHLIGHT_C)
+            glow.setAlpha(90)
+            painter.setPen(QPen(glow, 10))
+            painter.drawEllipse(QPointF(0, 0), outer + 7, outer + 7)
+            painter.setPen(QPen(HIGHLIGHT_C, 3))
+            painter.drawEllipse(QPointF(0, 0), outer + 7, outer + 7)
+
         if n.uid in ts.issue_uids:
             painter.setPen(Qt.PenStyle.NoPen)
             painter.setBrush(ISSUE_C)
@@ -132,7 +147,7 @@ class NodeItem(QGraphicsItem):
 
     def itemChange(self, change, value):
         if change == QGraphicsItem.GraphicsItemChange.ItemPositionChange and self.tree_scene.snap_enabled:
-            s = config.SNAP_SIZE
+            s = self.tree_scene.grid_minor or config.GRID_MINOR
             return QPointF(round(value.x() / s) * s, round(value.y() / s) * s)
         if change == QGraphicsItem.GraphicsItemChange.ItemPositionHasChanged:
             self.node.x, self.node.y = self.pos().x(), self.pos().y()
@@ -195,14 +210,16 @@ class TreeScene(QGraphicsScene):
 
     def __init__(self, icons: IconLibrary) -> None:
         super().__init__()
-        m = config.CANVAS_SIZE
-        self.setSceneRect(-m, -m, m * 3, m * 3)
+        self.canvas_w = self.canvas_h = config.CANVAS_SIZE
+        self.grid_minor, self.grid_major, self.ring_step = config.GRID_MINOR, config.GRID_MAJOR, config.RING_STEP
+        self.set_canvas_size(config.CANVAS_SIZE, config.CANVAS_SIZE)
         self.setItemIndexMethod(QGraphicsScene.ItemIndexMethod.NoIndex)
         self.icons = icons
         self.tree = SkillTree()
         self.node_items: dict[int, NodeItem] = {}
         self.edge_items: dict[frozenset[int], EdgeItem] = {}
         self.issue_uids: set[int] = set()
+        self.highlight_uids: set[int] = set()   # Stat Report matches (empty = no dimming)
         self.snap_enabled = False
         self.show_labels = True
         self.show_icons = True
@@ -210,6 +227,21 @@ class TreeScene(QGraphicsScene):
         self._link_source: NodeItem | None = None
         self._link_line: QGraphicsLineItem | None = None
         self._press_positions: dict[int, tuple[float, float]] = {}
+
+    def set_canvas_size(self, width: float, height: float) -> None:
+        """Canvas = the project's NodePosition area (0,0)-(width,height); one canvas of pan margin."""
+        self.canvas_w, self.canvas_h = float(width), float(height)
+        self.setSceneRect(-self.canvas_w, -self.canvas_h, self.canvas_w * 3, self.canvas_h * 3)
+        self.update()
+
+    def apply_layout(self, meta) -> None:
+        """Canvas size + grid settings from a ProjectMeta."""
+        self.grid_minor, self.grid_major, self.ring_step = meta.grid_minor, meta.grid_major, meta.ring_step
+        self.set_canvas_size(meta.canvas_width, meta.canvas_height)
+
+    @property
+    def canvas_rect(self) -> QRectF:
+        return QRectF(0, 0, self.canvas_w, self.canvas_h)
 
     # ---- building ----------------------------------------------------------
 
@@ -281,6 +313,18 @@ class TreeScene(QGraphicsScene):
         changed = uids ^ self.issue_uids
         self.issue_uids = uids
         for uid in changed:
+            if uid in self.node_items:
+                self.node_items[uid].update()
+
+    def set_highlight_uids(self, uids: set[int]) -> None:
+        uids = set(uids)
+        if uids == self.highlight_uids:
+            return
+        dim_changed = bool(uids) != bool(self.highlight_uids)
+        changed = uids ^ self.highlight_uids
+        self.highlight_uids = uids
+        targets = self.node_items.keys() if dim_changed else changed
+        for uid in targets:
             if uid in self.node_items:
                 self.node_items[uid].update()
 
@@ -409,32 +453,56 @@ class TreeScene(QGraphicsScene):
 
     def drawBackground(self, painter: QPainter, rect: QRectF) -> None:
         painter.fillRect(rect, BG)
+        canvas = self.canvas_rect
         lod = QStyleOptionGraphicsItem.levelOfDetailFromTransform(painter.worldTransform())
-        if self.show_grid:
-            for step, color, min_lod in ((config.GRID_MINOR, GRID_MINOR_C, 0.25),
-                                         (config.GRID_MAJOR, GRID_MAJOR_C, 0.0)):
-                if lod < min_lod:
+        area = rect.intersected(canvas)          # grid only inside the canvas
+        if self.show_grid and not area.isEmpty():
+            painter.fillRect(area, CANVAS_BG)
+            major = self.grid_major
+
+            def on_major(v: float) -> bool:
+                return major > 0 and abs(v - round(v / major) * major) < 1e-6
+
+            # A line set is hidden while its lines would be < 5 screen px apart.
+            for step, color, is_major in ((self.grid_minor, GRID_MINOR_C, False),
+                                          (major, GRID_MAJOR_C, True)):
+                if step <= 0 or step * lod < 5:
                     continue
                 painter.setPen(QPen(color, 0))
-                left = math.floor(rect.left() / step) * step
-                top = math.floor(rect.top() / step) * step
-                x = left
-                while x < rect.right():
-                    painter.drawLine(QPointF(x, rect.top()), QPointF(x, rect.bottom()))
+                x = math.ceil(area.left() / step) * step
+                while x <= area.right():
+                    if is_major or not on_major(x):
+                        painter.drawLine(QPointF(x, area.top()), QPointF(x, area.bottom()))
                     x += step
-                y = top
-                while y < rect.bottom():
-                    painter.drawLine(QPointF(rect.left(), y), QPointF(rect.right(), y))
+                y = math.ceil(area.top() / step) * step
+                while y <= area.bottom():
+                    if is_major or not on_major(y):
+                        painter.drawLine(QPointF(area.left(), y), QPointF(area.right(), y))
                     y += step
-        size, c = config.CANVAS_SIZE, config.CANVAS_CENTRE
+        cx, cy = canvas.center().x(), canvas.center().y()
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         painter.setBrush(Qt.BrushStyle.NoBrush)
         painter.setPen(QPen(CANVAS_C, 0, Qt.PenStyle.DashLine))
-        painter.drawRect(QRectF(0, 0, size, size))
-        painter.setPen(QPen(CANVAS_C, 2))
-        painter.drawEllipse(QPointF(c, c), c, c)
-        painter.drawLine(QPointF(c - 25, c), QPointF(c + 25, c))
-        painter.drawLine(QPointF(c, c - 25), QPointF(c, c + 25))
+        painter.drawRect(canvas)
+        half_w, half_h = canvas.width() / 2, canvas.height() / 2
+        if self.show_grid and self.ring_step > 0:
+            # Guide rings: scaled copies of the edge oval, ring_step apart along the longer
+            # half-axis (circles on a square canvas, ovals otherwise).
+            ring_pen = QPen(RING_C, 1.5)
+            ring_pen.setCosmetic(True)          # constant screen width at any zoom
+            painter.setPen(ring_pen)
+            longer = max(half_w, half_h)
+            r = self.ring_step
+            while r < longer - 1:
+                t = r / longer
+                painter.drawEllipse(QPointF(cx, cy), half_w * t, half_h * t)
+                r += self.ring_step
+        edge_pen = QPen(EDGE_RING_C, 2)
+        edge_pen.setCosmetic(True)
+        painter.setPen(edge_pen)
+        painter.drawEllipse(QPointF(cx, cy), half_w, half_h)
+        painter.drawLine(QPointF(cx - 25, cy), QPointF(cx + 25, cy))
+        painter.drawLine(QPointF(cx, cy - 25), QPointF(cx, cy + 25))
 
 
 class TreeView(QGraphicsView):
@@ -451,7 +519,8 @@ class TreeView(QGraphicsView):
         self.setDragMode(QGraphicsView.DragMode.RubberBandDrag)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.setBackgroundBrush(QBrush(BG))
+        # No view background brush: with one set, Qt never calls TreeScene.drawBackground
+        # (grid, canvas border, centre ring). The scene fills BG itself.
         self.setMouseTracking(True)
         self._pan_from = None
         self._space_down = False
@@ -462,7 +531,7 @@ class TreeView(QGraphicsView):
 
     def fit_all(self) -> None:
         items_rect = self.scene().itemsBoundingRect()
-        rect = items_rect if not items_rect.isEmpty() else QRectF(0, 0, config.CANVAS_SIZE, config.CANVAS_SIZE)
+        rect = items_rect if not items_rect.isEmpty() else self.scene().canvas_rect
         self.fitInView(rect.adjusted(-80, -80, 80, 80), Qt.AspectRatioMode.KeepAspectRatio)
         self.zoom_changed.emit(self.zoom)
 

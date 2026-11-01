@@ -22,6 +22,12 @@ struct FFP_DeferredDamageInstance
 	float RemainingTime = 0.f;
 	/** Who dealt the original hit; drip ticks use it as instigator (kill / XP credit). */
 	TWeakObjectPtr<UAbilitySystemComponent> SourceASC;
+	/**
+	 * Restorative Nanites (Flag.SkillTree.RecoupInsteadOfDefer): the hit was taken in full and
+	 * RemainingDamage is HEALED back over RemainingTime instead of dealt. Still a deferred
+	 * damage instance for everything that asks "am I deferring?" (e.g. Bide).
+	 */
+	bool bRecoup = false;
 };
 
 
@@ -96,6 +102,27 @@ public:
 	UFUNCTION(BlueprintPure, Category = "FP|Deferred Damage")
 	int32 GetNumDeferredDamageInstances() const { return DeferredDamageInstances.Num(); }
 
+	/** Total life still to be restored by Restorative Nanites (recoup) instances. */
+	UFUNCTION(BlueprintPure, Category = "FP|Deferred Damage")
+	float GetPendingRecoup() const;
+
+	/**
+	 * Restorative Nanites: deferring does not mitigate — the hit lands in full and the deferred
+	 * share is restored as life over DeferredDamageTime. Read by ExecCalc_Damage (no subtraction)
+	 * and AddDeferredDamage (recoup instance).
+	 */
+	static bool RecoupsDeferredDamage(const UAbilitySystemComponent* ASC);
+
+	/**
+	 * Server only. Target-side "increased damage taken", summed into the ADDITIVE increased pool of
+	 * ExecCalc_Damage and ExecCalc_DamageOverTime (alongside the attacker's increases). Not applied to
+	 * deferred ticks. Bide (Flag.SkillTree.IncreasedDamageTaken.WhileDeferring): +BideDamageTakenWhileDeferring
+	 * while at least one deferred damage instance is active.
+	 */
+	float GetIncreasedDamageTaken() const;
+
+	static constexpr float BideDamageTakenWhileDeferring = 0.25f;
+
 	/** Drop all pending deferred damage without dealing it. */
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "FP|Deferred Damage")
 	void ClearDeferredDamage();
@@ -126,6 +153,7 @@ private:
 	void OnDeferredDamageTimeChanged(const FOnAttributeChangeData& Data);
 	FDelegateHandle DeferredDamageTimeChangedHandle;
 	void ApplyDeferredDamageTick(float Amount, UAbilitySystemComponent* SourceASC);
+	void ApplyRecoupTick(float Amount);
 
 	TArray<FFP_DeferredDamageInstance> DeferredDamageInstances;
 	FTimerHandle DeferredDamageTimer;
@@ -134,6 +162,10 @@ private:
 	/** Transient instant GE: IncomingDamage += SetByCaller.DeferredDamagePerTick. Built on first use. */
 	UPROPERTY(Transient)
 	TObjectPtr<UGameplayEffect> DeferredDamageTickEffect;
+
+	/** Transient instant GE: HitPoints += SetByCaller.DeferredDamagePerTick (Restorative Nanites). */
+	UPROPERTY(Transient)
+	TObjectPtr<UGameplayEffect> RecoupTickEffect;
 
 	UPROPERTY(Transient)
 	TObjectPtr<UGameplayEffect> SkillCostEffect;

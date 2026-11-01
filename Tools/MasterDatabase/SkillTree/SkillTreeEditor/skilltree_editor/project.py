@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from . import config
 from .model import SkillTree
 
 PROJECT_EXT = ".sktree"
@@ -62,6 +63,11 @@ class ProjectMeta:
     tag_root: str = ""                  # prefix for new nodes; "" = derive from tags
     ue_asset_folder: str = ""           # FP_SkillTreeImporter NodeAssetOutputPath
     export_file: str = ""               # UE JSON, relative to project; "" = <stem>.json
+    canvas_width: float = config.CANVAS_SIZE   # document units (NodePosition space)
+    canvas_height: float = config.CANVAS_SIZE
+    grid_minor: float = config.GRID_MINOR      # thin lines + snap step; 0 = no thin lines
+    grid_major: float = config.GRID_MAJOR      # bold lines; 0 = none
+    ring_step: float = config.RING_STEP        # guide ovals; 0 = none
     notes: str = ""
     releases: list[Release] = field(default_factory=list)
 
@@ -132,6 +138,7 @@ class Project:
             "version": self.meta.version,
             "liveVersion": self.meta.live_version,
             "revision": self.meta.revision,
+            "canvasSize": {"X": self.meta.canvas_width, "Y": self.meta.canvas_height},
             "exported": self.meta.modified,
         }
         return data

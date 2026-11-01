@@ -210,6 +210,7 @@ TagsToAttributes.Add(GameplayTags.Conditional_Damage_IncreasedAgainstOverheated,
 TagsToAttributes.Add(GameplayTags.Conditional_Damage_IncreasedAgainstFrozen, GetIncreasedDamageAgainstFrozenAttribute);
 TagsToAttributes.Add(GameplayTags.Conditional_Damage_PerHeat, GetIncreasedDamagePerHeatFromEquilibriumAttribute);
 TagsToAttributes.Add(GameplayTags.Execute_Threshold, GetExecuteThresholdAttribute);
+TagsToAttributes.Add(GameplayTags.Conversion_ProjectileSpeedToDamage, GetProjectileSpeedToDamageAttribute);
 
 //Recovery
 TagsToAttributes.Add(GameplayTags.Recovery_Life_OnHit, GetLifeGainedOnHitAttribute);
@@ -462,6 +463,7 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageAgainstFrozen, C
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamagePerHeatFromEquilibrium, COND_None, REPNOTIFY_Always)
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ExecuteThreshold, COND_None, REPNOTIFY_Always)
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ProjectileSpeedToDamage, COND_None, REPNOTIFY_Always)
 
 //Recovery
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, LifeGainedOnHit, COND_None, REPNOTIFY_Always)
@@ -547,8 +549,9 @@ void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 				// Spread over the target's CURRENT DeferredDamageTime; source kept for kill/XP credit.
 				TargetFPASC->AddDeferredDamage(LocalDeferred, GetDeferredDamageTime(), Props.SourceASC);
 			}
-			else
+			else if (!UFP_AbilitySystemComponent::RecoupsDeferredDamage(Props.TargetASC))
 			{
+				// No instance tracking: deal it now (a recouping target already took the full hit).
 				SetHitPoints(FMath::Clamp(GetHitPoints() - LocalDeferred, 0.f, GetMaxHitPoints()));
 			}
 		}
@@ -1252,6 +1255,11 @@ void UFP_AttributeSet::OnRep_IncreasedDamagePerHeatFromEquilibrium(const FGamepl
 void UFP_AttributeSet::OnRep_ExecuteThreshold(const FGameplayAttributeData& OldExecuteThreshold) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ExecuteThreshold, OldExecuteThreshold);
+}
+
+void UFP_AttributeSet::OnRep_ProjectileSpeedToDamage(const FGameplayAttributeData& OldProjectileSpeedToDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ProjectileSpeedToDamage, OldProjectileSpeedToDamage);
 }
 
 //Recovery

@@ -20,6 +20,7 @@ from .catalog import load_catalog
 from .icons import IconLibrary
 from .importers import import_node_data_xlsx
 from .inspector import Inspector
+from .stat_report import StatReportPanel
 from .project import PROJECT_EXT, Project, ProjectMeta, bump, other_project_tags
 from .project_ui import (ProjectHeader, ProjectSettingsDialog, ReleaseDialog, ReleaseHistoryDialog,
                          suggested_folder)
@@ -83,6 +84,7 @@ class Document:
         for key, value in view_opts.items():
             setattr(self.scene, key, value)
         self.view = TreeView(self.scene)
+        self.scene.apply_layout(project.meta)
         project.apply_tag_root()
         self.scene.rebuild(project.tree)
         self.history.reset(project.tree.snapshot())
@@ -189,6 +191,11 @@ class MainWindow(QMainWindow):
         self.issue_tree.setColumnWidth(1, 300)
         self.issues_dock = self._dock("Validation", self.issue_tree, Qt.DockWidgetArea.BottomDockWidgetArea)
 
+        self.stat_report = StatReportPanel()
+        self.stat_dock = self._dock("Stat Report", self.stat_report, Qt.DockWidgetArea.BottomDockWidgetArea)
+        self.tabifyDockWidget(self.issues_dock, self.stat_dock)
+        self.issues_dock.raise_()
+
         self.status_counts = QLabel()
         self.status_zoom = QLabel()
         self.status_pos = QLabel()
@@ -197,6 +204,7 @@ class MainWindow(QMainWindow):
 
         self._validate_timer = QTimer(self, singleShot=True, interval=250, timeout=self.run_validation)
         self._list_timer = QTimer(self, singleShot=True, interval=150, timeout=self.refresh_node_list)
+        self._report_timer = QTimer(self, singleShot=True, interval=200, timeout=self.refresh_stat_report)
 
         self._build_actions()
         self._connect()
@@ -279,7 +287,7 @@ class MainWindow(QMainWindow):
         self._act(v, "Show &Grid", self._set_grid, "Ctrl+3", True, True)
         self._act(v, "&Snap to Grid", self._set_snap, "G", True, False)
         v.addSeparator()
-        for dock in (self.nodes_dock, self.issues_dock):
+        for dock in (self.nodes_dock, self.issues_dock, self.stat_dock):
             v.addAction(dock.toggleViewAction())
 
         p = mb.addMenu("&Project")
@@ -293,6 +301,8 @@ class MainWindow(QMainWindow):
 
         t = mb.addMenu("&Tools")
         self._act(t, "&Validate", self.run_validation, "F5")
+        self._act(t, "Stat &Report…", self.show_stat_report, "Ctrl+R",
+                  tip="Count, list, total and highlight every node granting a stat / passive / flag")
         self._act(t, "&Renumber Tags (fix placeholders / duplicates)", self.renumber)
         t.addSeparator()
         self._act(t, "Register Tags in C++ (node, SkillPassive, gated stat tags)…", self.register_tags)
@@ -307,6 +317,10 @@ class MainWindow(QMainWindow):
     def _connect(self) -> None:
         self.inspector.edited.connect(self._on_inspector_edit)
         self.node_filter.textChanged.connect(lambda _t: self._list_timer.start())
+        self.stat_report.highlight_changed.connect(lambda uids: self.scene.set_highlight_uids(uids))
+        self.stat_report.select_requested.connect(self._select_from_report)
+        self.stat_report.set_resolver(self.catalog.resolve_gated)
+        self._update_report_completions()
         self.node_list.itemSelectionChanged.connect(self._on_list_selection)
         self.issue_tree.itemActivated.connect(self._on_issue_activated)
         self.issue_tree.itemClicked.connect(self._on_issue_activated)
@@ -399,6 +413,7 @@ class MainWindow(QMainWindow):
             return
         if self._doc is not None and self._doc in self.docs:
             self.inspector.flush()  # pending field edits commit to the tab being left
+            self._doc.scene.set_highlight_uids(set())  # report highlight follows the active tab
         self._doc = new
         self.stack.setCurrentWidget(new.view)
         self.inspector.set_nodes(new.scene.selected_nodes())
@@ -406,6 +421,8 @@ class MainWindow(QMainWindow):
         self._after_change(validate=False)
         self.run_validation()
         self.refresh_node_list()
+        self._update_report_completions()
+        self.refresh_stat_report()
 
     def _remove_tab(self, index: int) -> None:
         doc = self.tab_bar.tabData(index)
@@ -639,6 +656,7 @@ class MainWindow(QMainWindow):
     def _meta_changed(self) -> None:
         self.meta_dirty = True
         self.project.apply_tag_root()
+        self.scene.apply_layout(self.project.meta)
         self._after_change()
 
     def project_settings(self) -> None:
@@ -724,6 +742,7 @@ class MainWindow(QMainWindow):
         if validate:
             self._validate_timer.start()
         self._list_timer.start()
+        self._report_timer.start()
 
     def _update_title(self) -> None:
         m = self.project.meta
@@ -802,6 +821,38 @@ class MainWindow(QMainWindow):
             self.scene.select_uids(uids, centre_view=self.view if len(uids) == 1 else None)
             if len(uids) > 1:
                 self.frame_selection()
+
+    # ---- stat report ---------------------------------------------------------------
+
+    def show_stat_report(self) -> None:
+        self.stat_dock.show()
+        self.stat_dock.raise_()
+        self.stat_report.query.setFocus()
+        self.stat_report.query.selectAll()
+
+    def refresh_stat_report(self) -> None:
+        if self._doc is None or self._closing:
+            return
+        self.stat_report.set_tree(self.scene.tree)
+
+    def _update_report_completions(self) -> None:
+        cat = self.catalog
+        tags = set(cat.attribute_tags)
+        for prefix in ("SkillPassive.", "Flag.", "Skills."):
+            tags.update(cat.with_prefix(prefix))
+        if self._doc is not None:
+            for node in self.scene.tree.nodes.values():
+                for eff in node.effects:
+                    for key in ("EffectStatModAttributeType", "EffectSkillPassiveTag", "EffectFlagType", "GrantSkillTag"):
+                        value = eff.values.get(key)
+                        if value:
+                            tags.add(str(value))
+        self.stat_report.set_completions(sorted(tags))
+
+    def _select_from_report(self, uids: list, frame: bool) -> None:
+        self.scene.select_uids(uids, centre_view=self.view if len(uids) == 1 else None)
+        if frame and len(uids) > 1:
+            self.frame_selection()
 
     # ---- validation --------------------------------------------------------------
 
@@ -985,7 +1036,7 @@ class MainWindow(QMainWindow):
 
     def _set_snap(self, on: bool) -> None:
         self._set_view_opt("snap_enabled", on)
-        self.statusBar().showMessage(f"Snap to grid {'on' if on else 'off'} ({config.SNAP_SIZE:g} units)", 2000)
+        self.statusBar().showMessage(f"Snap to grid {'on' if on else 'off'} ({self.scene.grid_minor or config.GRID_MINOR:g} units)", 2000)
 
     # ---- tools ----------------------------------------------------------------------
 
@@ -1005,6 +1056,7 @@ class MainWindow(QMainWindow):
         self.catalog.__dict__.update(fresh.__dict__)
         self.inspector.refresh_fields()
         self.run_validation()
+        self._update_report_completions()
         self.statusBar().showMessage(f"Tag catalog reloaded: {len(self.catalog.registered)} registered tags", 3000)
 
     def copy_json_path(self) -> None:

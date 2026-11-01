@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/ExecCalc/ExecCalc_Damage.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "FP_GameplayTags.h"
 #include "FP_AbilityTypes.h"
 #include "Libraries/FP_AbilitySystemLibrary.h"
@@ -103,6 +104,8 @@ struct FP_DamageStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageAgainstFrozen);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamagePerHeatFromEquilibrium);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(ExecuteThreshold);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(ProjectileSpeed);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(ProjectileSpeedToDamage);
 
 	// Ambient Heat (for comparing for IncreasedDamagePerHeatFromEquilibrium
 	DECLARE_ATTRIBUTE_CAPTUREDEF(AmbientTemperature);
@@ -191,6 +194,8 @@ struct FP_DamageStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAgainstFrozen, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamagePerHeatFromEquilibrium, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, ExecuteThreshold, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, ProjectileSpeed, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, ProjectileSpeedToDamage, Source, false);
 		
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, AmbientTemperature, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, Heat, Target, false);
@@ -282,6 +287,8 @@ UExecCalc_Damage::UExecCalc_Damage()
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageAgainstFrozenDef);
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamagePerHeatFromEquilibriumDef);
 	RelevantAttributesToCapture.Add(DamageStatics().ExecuteThresholdDef);
+	RelevantAttributesToCapture.Add(DamageStatics().ProjectileSpeedDef);
+	RelevantAttributesToCapture.Add(DamageStatics().ProjectileSpeedToDamageDef);
 	
 	RelevantAttributesToCapture.Add(DamageStatics().AmbientTemperatureDef);
 	RelevantAttributesToCapture.Add(DamageStatics().HeatDef);
@@ -452,7 +459,17 @@ void UExecCalc_Damage::Execute_Implementation(
 
 	// Weapon / hit-type damage (Damage.Increased.Rifle, Damage.More.Melee, ...) is gated onto IncreasedDamage /
 	// MoreDamage via source-tag requirements, so it is already inside IncreasedGeneric / MoreGeneric here.
-	const float TotalIncreasedBonus = SkillBonusIncreasedDamage + ConditionalIncreased;
+	// Velocity Transfer & co.: ProjectileSpeed (gated, as this skill sees it) x conversion fraction,
+	// into the ADDITIVE increased pool. Negative speed (reductions) lowers damage.
+	const float SpeedToDamage = GetCaptured(DamageStatics().ProjectileSpeedToDamageDef, 0.f);
+	const float SpeedIncreased = (SpeedToDamage != 0.f)
+		? GetCaptured(DamageStatics().ProjectileSpeedDef, 0.f) * SpeedToDamage : 0.f;
+
+	// Target-side increased damage taken (e.g. Bide while deferring) joins the same additive pool.
+	const UFP_AbilitySystemComponent* FPTargetASC = Cast<UFP_AbilitySystemComponent>(TargetASC);
+	const float TakenIncreased = FPTargetASC ? FPTargetASC->GetIncreasedDamageTaken() : 0.f;
+
+	const float TotalIncreasedBonus = SkillBonusIncreasedDamage + ConditionalIncreased + SpeedIncreased + TakenIncreased;
 	const float TotalMoreBonus      = SkillBonusMoreDamage;
 
 	float GenericDamage   = ComputeTypeDamage(SetByCallerGeneric,   0.f,      IncreasedGeneric + TotalIncreasedBonus, 0.f,                                    TempDeltaIncrease, MoreGeneric + TotalMoreBonus, 0.f);
@@ -464,8 +481,9 @@ void UExecCalc_Damage::Execute_Implementation(
 
 	LogStep(TEXT("1) PerTypeOffense"),
 		GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage,
-		FString::Printf(TEXT("SBCC(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f) | Offense(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f)"),
+		FString::Printf(TEXT("SBCC(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f) | SpeedInc=%.4f TakenInc=%.4f | Offense(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f)"),
 			SetByCallerGeneric, SetByCallerPhysical, SetByCallerExplosive, SetByCallerRadiation, SetByCallerChemical, SetByCallerEnergy,
+			SpeedIncreased, TakenIncreased,
 			GenericDamage, PhysicalDamage, ExplosiveDamage, RadiationDamage, ChemicalDamage, EnergyDamage));
 
 	// -------------------------------------------------------
@@ -510,6 +528,8 @@ void UExecCalc_Damage::Execute_Implementation(
 	EnergyDamage = ApplyResistance(EnergyDamage, EngRes, EngMaxRes, EngPen);
 
 	float Damage = GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage;
+	// Block and crit scale the whole hit uniformly, so this share still holds at the armour step.
+	const float ExplosiveShare = (Damage > 0.f) ? Clamp01(ExplosiveDamage / Damage) : 0.f;
 
 	LogStep(TEXT("2) PerTypeResisted"),
 		Damage,
@@ -601,19 +621,23 @@ void UExecCalc_Damage::Execute_Implementation(
 
 	const float DamageBeforeArmour = Damage;
 
+	// Flag.SkillTree.DoubleArmourVsExplosive: the explosive share of the hit is mitigated by 2x armour.
+	// Both parts use the WHOLE hit's size in the formula (armour scales with hit size), so with no
+	// explosive damage or no flag this is identical to the plain formula.
+	const float ExplosiveArmourMult = (TargetASC && ExplosiveShare > 0.f
+		&& TargetASC->HasMatchingGameplayTag(GameplayTags.Flag_SkillTree_DoubleArmourVsExplosive)) ? 2.f : 1.f;
+
 	if (Armour > 0.f && Damage > 0.f)
 	{
-		const float Denom = Armour + 5.f * Damage;
-		if (Denom > 0.f)
-		{
-			Damage = (5.f * Damage * Damage) / Denom;
-		}
+		auto ArmourRatio = [&](float A) { return (5.f * DamageBeforeArmour) / (A + 5.f * DamageBeforeArmour); };
+		Damage = DamageBeforeArmour * ((1.f - ExplosiveShare) * ArmourRatio(Armour)
+			+ ExplosiveShare * ArmourRatio(Armour * ExplosiveArmourMult));
 	}
 
 	LogStep(TEXT("6) Armour"),
 		Damage,
-		FString::Printf(TEXT("Armour=%.4f (%.4f->%.4f)"),
-			Armour, DamageBeforeArmour, Damage));
+		FString::Printf(TEXT("Armour=%.4f ExplShare=%.4f ExplArmourMult=%.1f (%.4f->%.4f)"),
+			Armour, ExplosiveShare, ExplosiveArmourMult, DamageBeforeArmour, Damage));
 
 	// -------------------------------------------------------
 	// 6b) DEFERRED DAMAGE (target defence)
@@ -621,19 +645,26 @@ void UExecCalc_Damage::Execute_Implementation(
 	//     hit is not taken now but dripped into HitPoints over DeferredDamageTime
 	//     seconds (UFP_AbilitySystemComponent deferred instances). Only this direct-
 	//     damage calc defers; ExecCalc_DamageOverTime never does.
+	//     Restorative Nanites (Flag.SkillTree.RecoupInsteadOfDefer): nothing is subtracted — the
+	//     hit lands in full — and the same deferred share becomes a recoup instance that HEALS
+	//     over DeferredDamageTime (still counts as deferring, e.g. for Bide).
 	// -------------------------------------------------------
 	float DeferredDamage = 0.f;
 	{
 		const float DeferredFraction = Clamp01(GetCaptured(DamageStatics().DeferredDamageAmountDef, 0.f));
 		const float DeferredTime     = GetCaptured(DamageStatics().DeferredDamageTimeDef, 0.f);
+		const bool bRecoup = UFP_AbilitySystemComponent::RecoupsDeferredDamage(TargetASC);
 		if (DeferredFraction > 0.f && DeferredTime > 0.f && Damage > 0.f)
 		{
 			DeferredDamage = Damage * DeferredFraction;
-			Damage -= DeferredDamage;
+			if (!bRecoup)
+			{
+				Damage -= DeferredDamage;
+			}
 		}
 		LogStep(TEXT("6b) Deferred"), Damage,
-			FString::Printf(TEXT("Fraction=%.4f Time=%.2fs Deferred=%.4f Immediate=%.4f"),
-				DeferredFraction, DeferredTime, DeferredDamage, Damage));
+			FString::Printf(TEXT("Fraction=%.4f Time=%.2fs %s=%.4f Immediate=%.4f"),
+				DeferredFraction, DeferredTime, bRecoup ? TEXT("Recoup") : TEXT("Deferred"), DeferredDamage, Damage));
 	}
 
 	// -------------------------------------------------------

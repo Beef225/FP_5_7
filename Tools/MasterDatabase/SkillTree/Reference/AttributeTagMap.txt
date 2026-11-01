@@ -137,6 +137,7 @@ Heat.SkillCost                                Heat cost of skills, -reduces/+inc
 Heat.SkillCostEfficiency                      Heat cost efficiency, cost / (1 + value)  (Add)
 Heat.SkillCostFlat                            Flat heat per cast after efficiency, -5 = 5 less  (Add)
 Execute.Threshold                             Execute below this fraction of target max life  (Add)
+Conversion.ProjectileSpeedToDamage            Projectile speed also counts as increased damage, 1.0 = 100%  (Add)
 
 --- DEBUFF EFFECTIVENESS ---
 Debuff.Effectiveness.Bruised                  Bruised debuff power  (Add)

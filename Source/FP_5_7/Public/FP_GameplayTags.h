@@ -204,6 +204,7 @@ FGameplayTag Conversion_Damage_ChemicalToRadiation;
 FGameplayTag Conversion_Damage_ExplosiveToPhysical;
 FGameplayTag Conversion_Defense_EnergyToRadiation;
 FGameplayTag Conversion_Defense_ChemicalToExplosive;
+FGameplayTag Conversion_ProjectileSpeedToDamage;
 
 //Conditional
 FGameplayTag Conditional_Damage_IncreasedAgainstBruised;
@@ -383,8 +384,8 @@ FGameplayTag SetByCaller_SkillBonus_CritMultiplier;
 //
 // STILL NOT CONSUMED (base stat has no runtime reader yet, so gating it does
 // nothing until the mechanic exists): Projectile.Count, Projectile.Pierce,
-// Debuff.Effectiveness.* per skill, and
-// DoT specs don't carry skill tags yet.
+// Debuff.Effectiveness.* per skill. DoTs: ExecCalc_DamageOverTime adds the
+// applying ability's skill tags to the source tags, so gated stats do apply.
 //
 // SIGN CONVENTION (any stat, bidirectional or not): positive = increased /
 // more of the thing, negative = reduced / less of the thing. This already
@@ -877,6 +878,10 @@ FGameplayTag PassiveTree_SplicedPlanariidae_2;
 FGameplayTag PassiveTree_SplicedPlanariidae_3;
 FGameplayTag PassiveTree_SplicedPlanariidae_4;
 FGameplayTag PassiveTree_LiquidCooledSystems_1;
+FGameplayTag PassiveTree_RestorativeNanites_1;
+FGameplayTag PassiveTree_DamageOverTime_1;
+FGameplayTag PassiveTree_DamageOverTime_2;
+FGameplayTag PassiveTree_DamageOverTime_3;
 
 //SkillTree
 FGameplayTag SkillTree_LightningCoil_Damage_1;
@@ -1113,9 +1118,13 @@ FGameplayTag Projectile_Count_Rifle;
 FGameplayTag AoE_Multiplier_Rifle;
 FGameplayTag Heat_SkillCost_MightWeapon;
 FGameplayTag Execute_Threshold_Axe;
+FGameplayTag Conversion_ProjectileSpeedToDamage_Accelerator;
 
 //SkillTreeFlags
 FGameplayTag Flag_SkillTree_MightSkillsCostHPInsteadOfHeat;
+FGameplayTag Flag_SkillTree_IncreasedDamageTaken_WhileDeferring;
+FGameplayTag Flag_SkillTree_DoubleArmourVsExplosive;
+FGameplayTag Flag_SkillTree_RecoupInsteadOfDefer;
 
 
 //Execute

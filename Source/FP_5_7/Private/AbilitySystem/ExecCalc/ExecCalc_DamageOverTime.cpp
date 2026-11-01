@@ -2,9 +2,11 @@
 
 #include "AbilitySystem/ExecCalc/ExecCalc_DamageOverTime.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/FP_AbilitySystemComponent.h"
 #include "FP_GameplayTags.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "AbilitySystem/ExecCalc/FP_HeatDamageCurve.h"
+#include "AbilitySystem/Abilities/FP_GameplayAbility.h"
 
 struct FP_DotStatics
 {
@@ -71,6 +73,8 @@ struct FP_DotStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageAgainstOverheated);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageAgainstFrozen);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamagePerHeatFromEquilibrium);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(ProjectileSpeed);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(ProjectileSpeedToDamage);
 
 	DECLARE_ATTRIBUTE_CAPTUREDEF(AmbientTemperature);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Heat);
@@ -140,6 +144,8 @@ struct FP_DotStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAgainstOverheated, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAgainstFrozen, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamagePerHeatFromEquilibrium, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, ProjectileSpeed, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, ProjectileSpeedToDamage, Source, false);
 
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, AmbientTemperature, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, Heat, Target, false);
@@ -216,6 +222,8 @@ UExecCalc_DamageOverTime::UExecCalc_DamageOverTime()
 	RelevantAttributesToCapture.Add(DotStatics().IncreasedDamageAgainstOverheatedDef);
 	RelevantAttributesToCapture.Add(DotStatics().IncreasedDamageAgainstFrozenDef);
 	RelevantAttributesToCapture.Add(DotStatics().IncreasedDamagePerHeatFromEquilibriumDef);
+	RelevantAttributesToCapture.Add(DotStatics().ProjectileSpeedDef);
+	RelevantAttributesToCapture.Add(DotStatics().ProjectileSpeedToDamageDef);
 
 	RelevantAttributesToCapture.Add(DotStatics().AmbientTemperatureDef);
 	RelevantAttributesToCapture.Add(DotStatics().HeatDef);
@@ -236,11 +244,24 @@ void UExecCalc_DamageOverTime::Execute_Implementation(
 
 	const FGameplayEffectSpec& Spec = ExecutionParams.GetOwningSpec();
 
-	const FGameplayTagContainer* SourceTags = Spec.CapturedSourceTags.GetAggregatedTags();
 	const FGameplayTagContainer* TargetTags  = Spec.CapturedTargetTags.GetAggregatedTags();
 
+	// DoT specs are made in Blueprint and don't carry the skill's tags, so gated stats
+	// (Damage.Increased.Rifle, Speed.Projectile.Accelerator, ...) would never apply. Add the tags
+	// of the ability that applied this DoT (server-side instance) to the source tags.
+	FGameplayTagContainer SourceTagsWithSkill;
+	if (const FGameplayTagContainer* Captured = Spec.CapturedSourceTags.GetAggregatedTags())
+	{
+		SourceTagsWithSkill = *Captured;
+	}
+	if (const UFP_GameplayAbility* SourceAbility =
+		Cast<UFP_GameplayAbility>(Spec.GetContext().GetAbilityInstance_NotReplicated()))
+	{
+		SourceAbility->GetSkillTagsForEffects(SourceTagsWithSkill);
+	}
+
 	FAggregatorEvaluateParameters EvalParams;
-	EvalParams.SourceTags = SourceTags;
+	EvalParams.SourceTags = &SourceTagsWithSkill;
 	EvalParams.TargetTags = TargetTags;
 
 	auto GetCaptured = [&](const FGameplayEffectAttributeCaptureDefinition& Def, float DefaultValue = 0.f)
@@ -280,7 +301,16 @@ void UExecCalc_DamageOverTime::Execute_Implementation(
 	const float AddedChem = GetCaptured(DotStatics().AddedChemicalDamageDef);
 	const float AddedEng  = GetCaptured(DotStatics().AddedEnergyDamageDef);
 
-	const float IncreasedGeneric = GetCaptured(DotStatics().IncreasedDamageDef);
+	// ProjectileSpeed x conversion (Velocity Transfer) joins the ADDITIVE generic increased pool.
+	const float SpeedToDamage  = GetCaptured(DotStatics().ProjectileSpeedToDamageDef);
+	const float SpeedIncreased = (SpeedToDamage != 0.f)
+		? GetCaptured(DotStatics().ProjectileSpeedDef) * SpeedToDamage : 0.f;
+
+	// Target-side increased damage taken (e.g. Bide while deferring) joins the same additive pool.
+	const UFP_AbilitySystemComponent* FPTargetASC = Cast<UFP_AbilitySystemComponent>(TargetASC);
+	const float TakenIncreased = FPTargetASC ? FPTargetASC->GetIncreasedDamageTaken() : 0.f;
+
+	const float IncreasedGeneric = GetCaptured(DotStatics().IncreasedDamageDef) + SpeedIncreased + TakenIncreased;
 	const float IncreasedPhys    = GetCaptured(DotStatics().IncreasedPhysicalDamageDef);
 	const float IncreasedExpl    = GetCaptured(DotStatics().IncreasedExplosiveDamageDef);
 	const float IncreasedRad     = GetCaptured(DotStatics().IncreasedRadiationDamageDef);
@@ -329,10 +359,10 @@ void UExecCalc_DamageOverTime::Execute_Implementation(
 
 	LogStep(TEXT("1) PerTypeOffense"),
 		GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage,
-		FString::Printf(TEXT("SBC(Gen=%.2f Phys=%.2f Expl=%.2f Rad=%.2f Chem=%.2f Eng=%.2f) IncDoT=%.4f MoreDoT=%.4f"),
+		FString::Printf(TEXT("SBC(Gen=%.2f Phys=%.2f Expl=%.2f Rad=%.2f Chem=%.2f Eng=%.2f) IncDoT=%.4f MoreDoT=%.4f SpeedInc=%.4f"),
 			SetByCallerGeneric, SetByCallerPhysical, SetByCallerExplosive,
 			SetByCallerRadiation, SetByCallerChemical, SetByCallerEnergy,
-			IncreasedDoT, MoreDoT));
+			IncreasedDoT, MoreDoT, SpeedIncreased));
 
 	// -------------------------------------------------------
 	// 2) RESISTANCES
@@ -358,6 +388,7 @@ void UExecCalc_DamageOverTime::Execute_Implementation(
 	EnergyDamage    = ApplyResistance(EnergyDamage,    GetCaptured(DotStatics().EnergyDamageResistanceDef),    GetCaptured(DotStatics().EnergyMaxResistanceDef,    1.f), EngPen);
 
 	float Damage = GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage;
+	const float ExplosiveShare = (Damage > 0.f) ? FMath::Clamp(ExplosiveDamage / Damage, 0.f, 1.f) : 0.f;
 
 	LogStep(TEXT("2) Resisted"),
 		Damage,
@@ -378,16 +409,22 @@ void UExecCalc_DamageOverTime::Execute_Implementation(
 	Armour *= (1.f + GetCaptured(DotStatics().IncreasedArmourDef));
 
 	const float DamageBeforeArmour = Damage;
+
+	// Flag.SkillTree.DoubleArmourVsExplosive: explosive share mitigated by 2x armour (see ExecCalc_Damage).
+	const float ExplosiveArmourMult = (TargetASC && ExplosiveShare > 0.f
+		&& TargetASC->HasMatchingGameplayTag(GameplayTags.Flag_SkillTree_DoubleArmourVsExplosive)) ? 2.f : 1.f;
+
 	if (Armour > 0.f)
 	{
-		const float Denom = Armour + 5.f * Damage;
-		if (Denom > 0.f)
-			Damage = (5.f * Damage * Damage) / Denom;
+		auto ArmourRatio = [&](float A) { return (5.f * DamageBeforeArmour) / (A + 5.f * DamageBeforeArmour); };
+		Damage = DamageBeforeArmour * ((1.f - ExplosiveShare) * ArmourRatio(Armour)
+			+ ExplosiveShare * ArmourRatio(Armour * ExplosiveArmourMult));
 	}
 
 	LogStep(TEXT("3) Armour"),
 		Damage,
-		FString::Printf(TEXT("Armour=%.4f (%.4f->%.4f)"), Armour, DamageBeforeArmour, Damage));
+		FString::Printf(TEXT("Armour=%.4f ExplShare=%.4f ExplArmourMult=%.1f (%.4f->%.4f)"),
+			Armour, ExplosiveShare, ExplosiveArmourMult, DamageBeforeArmour, Damage));
 
 	// -------------------------------------------------------
 	// 4) DIVIDE BY TICK RATE — convert per-second to per-tick

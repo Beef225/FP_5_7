@@ -8,7 +8,7 @@ from PySide6.QtGui import QRegularExpressionValidator
 from PySide6.QtCore import QRegularExpression
 from PySide6.QtWidgets import (QCheckBox, QComboBox, QCompleter, QDialog, QDialogButtonBox,
                                QFileDialog, QFormLayout, QFrame, QHBoxLayout, QLabel, QLineEdit,
-                               QPlainTextEdit, QPushButton, QSizePolicy, QTreeWidget,
+                               QPlainTextEdit, QPushButton, QSizePolicy, QSpinBox, QTreeWidget,
                                QTreeWidgetItem, QVBoxLayout, QWidget)
 
 from . import config
@@ -169,6 +169,38 @@ class ProjectSettingsDialog(QDialog):
         self.export_file.setPlaceholderText("<project name>.json (next to the project)")
         form.addRow("UE export file", self.export_file)
 
+        canvas_row = QHBoxLayout()
+        self.canvas_w, self.canvas_h = QSpinBox(), QSpinBox()
+        for box, value in ((self.canvas_w, meta.canvas_width), (self.canvas_h, meta.canvas_height)):
+            box.setRange(100, 20000)
+            box.setSingleStep(50)
+            box.setSuffix(" px")
+            box.setValue(int(round(value)))
+        canvas_row.addWidget(self.canvas_w)
+        canvas_row.addWidget(QLabel("×"))
+        canvas_row.addWidget(self.canvas_h)
+        canvas_row.addStretch(1)
+        self.canvas_w.setToolTip("Canvas width in NodePosition units (passive trees: 3000).")
+        self.canvas_h.setToolTip("Canvas height in NodePosition units (passive trees: 3000).")
+        form.addRow("Canvas size", canvas_row)
+
+        grid_row = QHBoxLayout()
+        self.grid_minor, self.grid_major, self.ring_step = QSpinBox(), QSpinBox(), QSpinBox()
+        for box, value, label, tip in (
+                (self.grid_minor, meta.grid_minor, "thin", "Thin grid line spacing; also the snap step (G)."),
+                (self.grid_major, meta.grid_major, "bold", "Bold grid line spacing."),
+                (self.ring_step, meta.ring_step, "rings", "Guide ring spacing, measured along the canvas's "
+                                                          "longer half-axis (ovals on non-square canvases).")):
+            box.setRange(0, 5000)
+            box.setSuffix(" px")
+            box.setSpecialValueText("off")
+            box.setValue(int(round(value)))
+            box.setToolTip(tip + " 0 = off.")
+            grid_row.addWidget(QLabel(label))
+            grid_row.addWidget(box)
+        grid_row.addStretch(1)
+        form.addRow("Grid", grid_row)
+
         self.notes = QPlainTextEdit(meta.notes)
         self.notes.setPlaceholderText("Design notes, TODOs, balance thoughts…")
         form.addRow("Notes", self.notes)
@@ -214,6 +246,11 @@ class ProjectSettingsDialog(QDialog):
         meta.tag_root = self.tag_root.text().strip()
         meta.ue_asset_folder = self.ue_folder.text().strip()
         meta.export_file = self.export_file.text().strip()
+        meta.canvas_width = float(self.canvas_w.value())
+        meta.canvas_height = float(self.canvas_h.value())
+        meta.grid_minor = float(self.grid_minor.value())
+        meta.grid_major = float(self.grid_major.value())
+        meta.ring_step = float(self.ring_step.value())
         meta.notes = self.notes.toPlainText()
 
     def _suggest_location(self, *_a) -> None:

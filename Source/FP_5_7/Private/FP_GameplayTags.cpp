@@ -589,6 +589,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Conversion.Defense.ChemicalToExplosive"), 
 		FString("Convert Incoming Chemical Damage asExplosive Damage")
 		);
+	GameplayTags.Conversion_ProjectileSpeedToDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conversion.ProjectileSpeedToDamage"),
+		FString("Fraction of the skill's projectile speed modifiers also counted as increased damage (1.0 = 100%). Additive increased pool, direct hits and DoT")
+		);
 
 	//Conditional
 	GameplayTags.Conditional_Damage_IncreasedAgainstBruised = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -2478,6 +2482,22 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("PassiveTree.LiquidCooledSystems.1"),
 		FString("Skills From Weapons That Require Might Cost Hit Points Instead of Heat, 300% Increased Skill Cost For Skills From Weapons That Require Might")
 		);
+	GameplayTags.PassiveTree_RestorativeNanites_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.RestorativeNanites.1"),
+		FString("Deferring Damage does not mitigate damage taken, Restore HP of the damage that would have been mitigated over your Deferred Damage Time")
+		);
+	GameplayTags.PassiveTree_DamageOverTime_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.DamageOverTime.1"),
+		FString("6% Increased Damage Over Time")
+		);
+	GameplayTags.PassiveTree_DamageOverTime_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.DamageOverTime.2"),
+		FString("6% Increased Damage Over Time")
+		);
+	GameplayTags.PassiveTree_DamageOverTime_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("PassiveTree.DamageOverTime.3"),
+		FString("10% Increased Damage Over Time Multiplier")
+		);
 
 	// -------------------------------------------------------------------------
 	// Debuff State Tags
@@ -3133,11 +3153,27 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Execute.Threshold.Axe"),
 		FString("Gated stat: Execute.Threshold only for skills with SkillTagMod.Axe")
 		);
+	GameplayTags.Conversion_ProjectileSpeedToDamage_Accelerator = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conversion.ProjectileSpeedToDamage.Accelerator"),
+		FString("Gated stat: Conversion.ProjectileSpeedToDamage only for skills with SkillTagMod.Accelerator")
+		);
 
 	//SkillTreeFlags
 	GameplayTags.Flag_SkillTree_MightSkillsCostHPInsteadOfHeat = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Flag.SkillTree.MightSkillsCostHPInsteadOfHeat"),
 		FString("Liquid Cooled Systems: Might weapon skills pay positive heat costs with hit points")
+		);
+	GameplayTags.Flag_SkillTree_IncreasedDamageTaken_WhileDeferring = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.IncreasedDamageTaken.WhileDeferring"),
+		FString("Bide: 25% more damage taken (separate multiplier, hits and DoTs) while any deferred damage instance is active")
+		);
+	GameplayTags.Flag_SkillTree_DoubleArmourVsExplosive = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.DoubleArmourVsExplosive"),
+		FString("Double the effect of armour against the explosive share of hits and DoTs")
+		);
+	GameplayTags.Flag_SkillTree_RecoupInsteadOfDefer = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.RecoupInsteadOfDefer"),
+		FString("Restorative Nanites: deferring does not mitigate; the deferred share is restored as life over Deferred Damage Time")
 		);
 
 	//Execute

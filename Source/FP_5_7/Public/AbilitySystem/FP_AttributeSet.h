@@ -438,6 +438,12 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamagePerHeatFromE
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ExecuteThreshold, Category = "Secondary Attributes")
 	FGameplayAttributeData ExecuteThreshold;
 
+// Conversion.ProjectileSpeedToDamage: this fraction of the skill's ProjectileSpeed (as seen by the
+// skill, so Speed.Projectile.<Leaf> counts) is added to the additive Increased damage pool, in both
+// ExecCalc_Damage and ExecCalc_DamageOverTime. 1.0 = 100%. Gate it (….Accelerator) per weapon.
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ProjectileSpeedToDamage, Category = "Secondary Attributes")
+	FGameplayAttributeData ProjectileSpeedToDamage;
+
 //Recovery
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_LifeGainedOnHit, Category = "Secondary Attributes")
 	FGameplayAttributeData LifeGainedOnHit;
@@ -913,6 +919,10 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_ExecuteThreshold(const FGameplayAttributeData& OldExecuteThreshold) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ExecuteThreshold)
+
+UFUNCTION()
+	void OnRep_ProjectileSpeedToDamage(const FGameplayAttributeData& OldProjectileSpeedToDamage) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ProjectileSpeedToDamage)
 
 //Recovery
 UFUNCTION()

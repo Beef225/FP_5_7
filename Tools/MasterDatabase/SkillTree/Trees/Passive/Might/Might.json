@@ -656,9 +656,10 @@
       ],
       "Effects": [
         {
-          "EffectType": "Effect Flag",
-          "EffectFlagType": "Flag.SkillTree.ProjectileSpeedToDamage.Accelerator",
-          "EffectFlagTag": "Flag.SkillTree.ProjectileSpeedToDamage.Accelerator"
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Conversion.ProjectileSpeedToDamage.Accelerator",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
         }
       ]
     },
@@ -1221,7 +1222,7 @@
       "NodeDescription": "Kill Enemies with less than 5% of Life Remaining with Axes",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/skull-crossed-bones.skull-crossed-bones",
       "NodePosition": {
-        "X": 417.35,
+        "X": 416.51,
         "Y": 536.1
       },
       "ConnectedNodeTags": [
@@ -1408,7 +1409,7 @@
       "NodeType": "Major",
       "IsStartNode": false,
       "NodeName": "Bide",
-      "NodeDescription": "Damage Deffered Over 2 Additional Seconds\n25% Increased Damage while Taking Deffered Damage",
+      "NodeDescription": "Damage Deferred Over 2 Additional Seconds\n25% Increased Damage while Taking Deferred Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/hourglass.hourglass",
       "NodePosition": {
         "X": 1881.05,
@@ -1839,7 +1840,7 @@
       "NodeType": "Minor",
       "IsStartNode": true,
       "NodeName": "Deferred Damage Time",
-      "NodeDescription": "Damage Deffered Over 1 Additional Second",
+      "NodeDescription": "Damage Deferred Over 0.5 Additional Seconds",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
       "NodePosition": {
         "X": 1673.21,
@@ -1853,7 +1854,7 @@
           "EffectType": "Stat Mod",
           "EffectStatModAttributeType": "Defence.DeferredDamageTime",
           "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 1
+          "EffectStatMagnitude": 0.5
         }
       ]
     },
@@ -1937,7 +1938,7 @@
       "NodeType": "Minor",
       "IsStartNode": false,
       "NodeName": "Deferred Damage Time",
-      "NodeDescription": "Damage Deffered Over 1 Additional Second",
+      "NodeDescription": "Damage Deferred Over 0.5 Additional Second",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
       "NodePosition": {
         "X": 1673.2,
@@ -1953,7 +1954,7 @@
           "EffectType": "Stat Mod",
           "EffectStatModAttributeType": "Defence.DeferredDamageTime",
           "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 1
+          "EffectStatMagnitude": 0.5
         }
       ]
     },
@@ -2097,7 +2098,8 @@
       },
       "ConnectedNodeTags": [
         "PassiveTree.DeferredDamage.6",
-        "PassiveTree.DeferredDamage.8"
+        "PassiveTree.DeferredDamage.8",
+        "PassiveTree.RestorativeNanites.1"
       ],
       "Effects": [
         {
@@ -2113,7 +2115,7 @@
       "NodeType": "Minor",
       "IsStartNode": false,
       "NodeName": "Deferred Damage Time",
-      "NodeDescription": "Damage Deffered Over 1 Additional Second",
+      "NodeDescription": "Damage Deferred Over 0.5 Additional Seconds",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
       "NodePosition": {
         "X": 2695.11,
@@ -2129,7 +2131,7 @@
           "EffectType": "Stat Mod",
           "EffectStatModAttributeType": "Defence.DeferredDamageTime",
           "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 0.02
+          "EffectStatMagnitude": 0.5
         }
       ]
     },
@@ -2387,6 +2389,7 @@
         "Y": 1198.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.DamageOverTime.1",
         "PassiveTree.IncreasedMelee.2",
         "PassiveTree.IncreasedMelee.4"
       ],
@@ -3890,8 +3893,8 @@
       "NodeDescription": "10% Increased Area of Effect with Ordnance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosion-rays.explosion-rays",
       "NodePosition": {
-        "X": 655.97,
-        "Y": 1120.0
+        "X": 657.68,
+        "Y": 1120.57
       },
       "ConnectedNodeTags": [
         "PassiveTree.Ordnance.BlastWheel.1",
@@ -4484,7 +4487,7 @@
         },
         {
           "EffectType": "Stat Mod",
-          "EffectStatModAttributeType": "Damage.IncreasedExplosive",
+          "EffectStatModAttributeType": "Damage.Increased.Explosive",
           "EffectStatModifierOp": "Add",
           "EffectStatMagnitude": 0.2
         }
@@ -4498,8 +4501,8 @@
       "NodeDescription": "8% Increased Ordnance Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
       "NodePosition": {
-        "X": 2353.65,
-        "Y": 1749.79
+        "X": 2266.87,
+        "Y": 1797.93
       },
       "ConnectedNodeTags": [
         "PassiveTree.DeferredDamage.4",
@@ -4522,8 +4525,8 @@
       "NodeDescription": "8% Increased Ordnance Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
       "NodePosition": {
-        "X": 2402.75,
-        "Y": 1721.44
+        "X": 2251.37,
+        "Y": 1711.31
       },
       "ConnectedNodeTags": [
         "PassiveTree.Ordnance.OrdnanceDamageB.1",
@@ -4546,8 +4549,8 @@
       "NodeDescription": "8% Increased Ordnance Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
       "NodePosition": {
-        "X": 2451.85,
-        "Y": 1749.79
+        "X": 2302.38,
+        "Y": 1649.05
       },
       "ConnectedNodeTags": [
         "PassiveTree.Ordnance.OrdnanceDamageB.2",
@@ -4570,8 +4573,8 @@
       "NodeDescription": "8% Increased Ordnance Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
       "NodePosition": {
-        "X": 2451.85,
-        "Y": 1806.48
+        "X": 2388.51,
+        "Y": 1649.4
       },
       "ConnectedNodeTags": [
         "PassiveTree.Ordnance.OrdnanceDamageB.3",
@@ -4594,8 +4597,8 @@
       "NodeDescription": "8% Increased Ordnance Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
       "NodePosition": {
-        "X": 2402.75,
-        "Y": 1834.83
+        "X": 2424.36,
+        "Y": 1715.19
       },
       "ConnectedNodeTags": [
         "PassiveTree.Ordnance.OrdnanceDamageB.4",
@@ -4618,8 +4621,8 @@
       "NodeDescription": "25% Increased Ordnance Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
       "NodePosition": {
-        "X": 2329.36,
-        "Y": 1832.73
+        "X": 2392.29,
+        "Y": 1795.27
       },
       "ConnectedNodeTags": [
         "PassiveTree.Ordnance.OrdnanceDamageB.5"
@@ -4781,7 +4784,7 @@
       "NodeType": "Major",
       "IsStartNode": false,
       "NodeName": "Outlasting",
-      "NodeDescription": "+5 to All Debuff Thresholds\n +1 Second to Deferred Damage Over Time",
+      "NodeDescription": "+5 to All Debuff Thresholds\nDamage Deferred Over 0.5 Additional Seconds",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/chalk-outline-murder.chalk-outline-murder",
       "NodePosition": {
         "X": 2712.44,
@@ -4800,18 +4803,6 @@
         },
         {
           "EffectType": "Stat Mod",
-          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
-          "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 5
-        },
-        {
-          "EffectType": "Stat Mod",
-          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
-          "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 5
-        },
-        {
-          "EffectType": "Stat Mod",
           "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
           "EffectStatModifierOp": "Add",
           "EffectStatMagnitude": 5
@@ -4820,7 +4811,7 @@
           "EffectType": "Stat Mod",
           "EffectStatModAttributeType": "Defence.DeferredDamageTime",
           "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 1
+          "EffectStatMagnitude": 0.5
         }
       ]
     },
@@ -5209,8 +5200,8 @@
       "NodeDescription": "7% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/rifle.rifle",
       "NodePosition": {
-        "X": 2660.47,
-        "Y": 2332.0
+        "X": 2684.54,
+        "Y": 2334.53
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.RifleDamage.2",
@@ -5233,8 +5224,8 @@
       "NodeDescription": "7% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/rifle.rifle",
       "NodePosition": {
-        "X": 2830.79,
-        "Y": 2366.68
+        "X": 2820.79,
+        "Y": 2359.61
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.RifleDamage.3",
@@ -5257,8 +5248,8 @@
       "NodeDescription": "7% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/rifle.rifle",
       "NodePosition": {
-        "X": 2747.12,
-        "Y": 2386.21
+        "X": 2744.59,
+        "Y": 2375.44
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.RifleDamage.4",
@@ -5281,8 +5272,8 @@
       "NodeDescription": "7% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/rifle.rifle",
       "NodePosition": {
-        "X": 2751.76,
-        "Y": 2472.0
+        "X": 2737.19,
+        "Y": 2445.4
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.RifleDamage.5",
@@ -5305,8 +5296,8 @@
       "NodeDescription": "10% Increased Rifle Damage\n5% More Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/rifle.rifle",
       "NodePosition": {
-        "X": 2724.85,
-        "Y": 2559.11
+        "X": 2657.08,
+        "Y": 2429.9
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.RifleDamage.6"
@@ -5758,8 +5749,8 @@
       "NodeTag": "PassiveTree.CarryOn.1",
       "NodeType": "Minor",
       "IsStartNode": false,
-      "NodeName": "Hit Point Regeneration and Deffered Damage Amount",
-      "NodeDescription": "0.35% of Hit Points Regenerated per Second\n2% of Damage Deferred Over Time",
+      "NodeName": "Hit Point Regeneration and Deferred Damage Amount",
+      "NodeDescription": "0.35% of Hit Points Regenerated per Second\n1% of Damage Deferred Over Time",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/regeneration.regeneration",
       "NodePosition": {
         "X": 980.38,
@@ -5780,7 +5771,7 @@
           "EffectType": "Stat Mod",
           "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
           "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 0.02
+          "EffectStatMagnitude": 0.01
         }
       ]
     },
@@ -5788,8 +5779,8 @@
       "NodeTag": "PassiveTree.CarryOn.2",
       "NodeType": "Minor",
       "IsStartNode": false,
-      "NodeName": "Hit Point Regeneration and Deffered Damage Amount",
-      "NodeDescription": "0.35% of Hit Points Regenerated per Second\n2% of Damage Deferred Over Time",
+      "NodeName": "Hit Point Regeneration and Deferred Damage Amount",
+      "NodeDescription": "0.35% of Hit Points Regenerated per Second\n1% of Damage Deferred Over Time",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/regeneration.regeneration",
       "NodePosition": {
         "X": 893.78,
@@ -5810,7 +5801,7 @@
           "EffectType": "Stat Mod",
           "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
           "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 0.02
+          "EffectStatMagnitude": 0.01
         }
       ]
     },
@@ -5818,8 +5809,8 @@
       "NodeTag": "PassiveTree.CarryOn.3",
       "NodeType": "Major",
       "IsStartNode": false,
-      "NodeName": "Hit Point Regeneration and Deffered Damage Amount",
-      "NodeDescription": "1% of Hit Points Regenerated per Second\n5% of Damage Deferred Over Time",
+      "NodeName": "Hit Point Regeneration and Deferred Damage Amount",
+      "NodeDescription": "1% of Hit Points Regenerated per Second\n3% of Damage Deferred Over Time",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/regeneration.regeneration",
       "NodePosition": {
         "X": 895.8,
@@ -5839,7 +5830,7 @@
           "EffectType": "Stat Mod",
           "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
           "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 0.05
+          "EffectStatMagnitude": 0.03
         }
       ]
     },
@@ -6034,8 +6025,8 @@
       "NodeDescription": "Skills From Weapons That Require Might Cost Hit Points Instead of Heat\n300% Increased Skill Cost For Skills From Weapons That Require Might",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/water-recycling.water-recycling",
       "NodePosition": {
-        "X": 1594.76,
-        "Y": 2860.36
+        "X": 1674.85,
+        "Y": 2540.01
       },
       "ConnectedNodeTags": [
         "PassiveTree.DeferredDamage.13"
@@ -6053,6 +6044,99 @@
           "EffectStatMagnitude": 3.0
         }
       ]
+    },
+    {
+      "NodeTag": "PassiveTree.RestorativeNanites.1",
+      "NodeType": "Mastery",
+      "IsStartNode": false,
+      "NodeName": "Restorative Nanites",
+      "NodeDescription": "Deferring Damage does not mitigate damage taken\nRestore HP of the damage that would have been mitigated over your Deferred Damage Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/stump-regrowth.stump-regrowth",
+      "NodePosition": {
+        "X": 2832.76,
+        "Y": 1904.75
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.7"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Effect Flag",
+          "EffectFlagType": "Flag.SkillTree.RecoupInsteadOfDefer",
+          "EffectFlagTag": "Flag.SkillTree.RecoupInsteadOfDefer"
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DamageOverTime.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Damage Over Time",
+      "NodeDescription": "6% Increased Damage Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/poison-bottle.poison-bottle",
+      "NodePosition": {
+        "X": 1000.54,
+        "Y": 1097.06
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DamageOverTime.2",
+        "PassiveTree.IncreasedMelee.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "DoT.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DamageOverTime.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Damage Over Time",
+      "NodeDescription": "6% Increased Damage Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/poison-bottle.poison-bottle",
+      "NodePosition": {
+        "X": 1019.47,
+        "Y": 1025.43
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DamageOverTime.1",
+        "PassiveTree.DamageOverTime.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "DoT.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DamageOverTime.3",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Festering Wounds",
+      "NodeDescription": "10% Increased Damage Over Time Multiplier",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/poison-bottle.poison-bottle",
+      "NodePosition": {
+        "X": 1102.58,
+        "Y": 991.2
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DamageOverTime.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "DoT.Multiplier",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
     }
   ],
   "treeInfo": {
@@ -6060,7 +6144,11 @@
     "treeType": "Passive",
     "version": "0.1.0",
     "liveVersion": "",
-    "revision": 5,
-    "exported": "2026-10-31T21:14:11-04:00"
+    "revision": 13,
+    "canvasSize": {
+      "X": 3000.0,
+      "Y": 3000.0
+    },
+    "exported": "2026-11-01T17:57:54-05:00"
   }
 }

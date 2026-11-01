@@ -10,12 +10,17 @@
     "author": "jakeg",
     "version": "0.1.0",
     "live_version": "",
-    "revision": 3,
+    "revision": 4,
     "created": "2026-10-31T16:49:43-04:00",
-    "modified": "2026-10-31T18:29:49-04:00",
+    "modified": "2026-11-01T11:11:43-05:00",
     "tag_root": "",
     "ue_asset_folder": "",
     "export_file": "",
+    "canvas_width": 1800.0,
+    "canvas_height": 900.0,
+    "grid_minor": 10.0,
+    "grid_major": 50.0,
+    "ring_step": 300.0,
     "notes": "Rebuilt 2026-10-31 from LeapTagReference.txt (15 nodes; all NodeTags and SkillPassive tags already registered in C++). Replaces the earlier placeholder, which was a verbatim copy of LightningCoil.\nHeatCost and CooldownDuration are NOT wired in UFP_GA_Leap yet — their magnitudes (1.0 heat, -0.5 s) are placeholders. Layout follows the reference's suggested structure; rearrange freely.",
     "releases": []
   },
@@ -28,8 +33,8 @@
       "NodeDescription": "+2 m Leap Range",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/jump-across.jump-across",
       "NodePosition": {
-        "X": 1200.0,
-        "Y": 1300.0
+        "X": 600.0,
+        "Y": 260.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.ExtraRange.2"
@@ -50,8 +55,8 @@
       "NodeDescription": "+2 m Leap Range",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/jump-across.jump-across",
       "NodePosition": {
-        "X": 1300.0,
-        "Y": 1300.0
+        "X": 700.0,
+        "Y": 260.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.ExtraRange.1",
@@ -73,8 +78,8 @@
       "NodeDescription": "+2 m Leap Range",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/jump-across.jump-across",
       "NodePosition": {
-        "X": 1400.0,
-        "Y": 1300.0
+        "X": 800.0,
+        "Y": 260.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.ExtraRange.2"
@@ -95,8 +100,8 @@
       "NodeDescription": "Leap explodes on landing, damaging nearby enemies",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosion-rays.explosion-rays",
       "NodePosition": {
-        "X": 1200.0,
-        "Y": 1500.0
+        "X": 600.0,
+        "Y": 460.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.HeatCost.1",
@@ -118,8 +123,8 @@
       "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
       "NodePosition": {
-        "X": 1300.0,
-        "Y": 1500.0
+        "X": 700.0,
+        "Y": 460.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.ExplosiveLanding.1",
@@ -141,8 +146,8 @@
       "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
       "NodePosition": {
-        "X": 1400.0,
-        "Y": 1500.0
+        "X": 800.0,
+        "Y": 460.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.HeatCost.1",
@@ -164,8 +169,8 @@
       "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
       "NodePosition": {
-        "X": 1500.0,
-        "Y": 1500.0
+        "X": 900.0,
+        "Y": 460.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.HeatCost.2",
@@ -187,8 +192,8 @@
       "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
       "NodePosition": {
-        "X": 1600.0,
-        "Y": 1500.0
+        "X": 1000.0,
+        "Y": 460.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.HeatCost.3",
@@ -210,8 +215,8 @@
       "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
       "NodePosition": {
-        "X": 1700.0,
-        "Y": 1500.0
+        "X": 1100.0,
+        "Y": 460.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.HeatCost.4",
@@ -233,8 +238,8 @@
       "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
       "NodePosition": {
-        "X": 1800.0,
-        "Y": 1500.0
+        "X": 1200.0,
+        "Y": 460.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.HeatCost.5"
@@ -255,8 +260,8 @@
       "NodeDescription": "Leap skips its windup, but gains a cooldown",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 1300.0,
-        "Y": 1680.0
+        "X": 700.0,
+        "Y": 640.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.CooldownDuration.1",
@@ -278,8 +283,8 @@
       "NodeDescription": "-0.5 s Leap Cooldown (TBD — not yet wired)",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stopwatch.stopwatch",
       "NodePosition": {
-        "X": 1400.0,
-        "Y": 1680.0
+        "X": 800.0,
+        "Y": 640.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.CooldownDuration.2",
@@ -301,8 +306,8 @@
       "NodeDescription": "-0.5 s Leap Cooldown (TBD — not yet wired)",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stopwatch.stopwatch",
       "NodePosition": {
-        "X": 1500.0,
-        "Y": 1680.0
+        "X": 900.0,
+        "Y": 640.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.CooldownDuration.1",
@@ -324,8 +329,8 @@
       "NodeDescription": "-0.5 s Leap Cooldown (TBD — not yet wired)",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stopwatch.stopwatch",
       "NodePosition": {
-        "X": 1600.0,
-        "Y": 1680.0
+        "X": 1000.0,
+        "Y": 640.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.CooldownDuration.2",
@@ -347,8 +352,8 @@
       "NodeDescription": "-0.5 s Leap Cooldown (TBD — not yet wired)",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stopwatch.stopwatch",
       "NodePosition": {
-        "X": 1700.0,
-        "Y": 1680.0
+        "X": 1100.0,
+        "Y": 640.0
       },
       "ConnectedNodeTags": [
         "SkillTree.Leap.CooldownDuration.3"

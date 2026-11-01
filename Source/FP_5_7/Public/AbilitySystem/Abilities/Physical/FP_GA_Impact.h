@@ -7,12 +7,13 @@
 #include "FP_GA_Impact.generated.h"
 
 class AFP_PlayerState;
+class UNiagaraSystem;
 
 /**
  * Impact — Physical melee skill.
  *
- * C++ owns: CommitAbility, weapon-tip AoE overlap, damage, delayed chain scheduling.
- * Blueprint owns: montage, latent wait nodes, VFX, EndAbility.
+ * C++ owns: CommitAbility, weapon-tip AoE overlap, damage, delayed chain scheduling, VFX/debug spawn.
+ * Blueprint owns: montage, latent wait nodes, EndAbility.
  *
  * BP flow:
  *   Event ActivateAbility
@@ -22,12 +23,19 @@ class AFP_PlayerState;
  *     → WaitGameplayEvent (Event.Montage.1)
  *         EventReceived → PerformInitialImpact
  *
+ * EndAbility is expected to fire once the montage finishes — but the chain of delayed AoEs
+ * is deliberately NOT tied to the ability's active lifetime. Chain state is threaded through
+ * scheduled timers via a shared, per-activation context (FImpactChainStatePtr) rather than
+ * stored on the ability instance, so: (a) explosions keep resolving after EndAbility, letting
+ * the player act freely while they go off, and (b) if the player re-triggers Impact before a
+ * previous activation's chain has finished, the two activations' exclude lists don't collide.
+ *
  * Each enemy caught in the initial weapon-tip AoE detonates its own smaller AoE at its
  * location after GetEffectiveChainDelay() seconds. If the skill tree has raised the max
  * chain depth above the default (1), enemies caught by that secondary AoE detonate their
- * own AoE too, and so on. An enemy can only ever be hit once per activation (HitActors),
- * so chains can't loop back and forth indefinitely — they're bounded by both the exclude
- * list and the max chain depth.
+ * own AoE too, and so on. An enemy can only ever be hit once per activation, so chains
+ * can't loop back and forth indefinitely — they're bounded by both the exclude list and
+ * the max chain depth.
  */
 UCLASS()
 class FP_5_7_API UFP_GA_Impact : public UFP_MeleeSkill
@@ -51,13 +59,6 @@ protected:
 		const FGameplayAbilityActorInfo* ActorInfo,
 		const FGameplayAbilityActivationInfo ActivationInfo,
 		const FGameplayEventData* TriggerEventData) override;
-
-	virtual void EndAbility(
-		const FGameplayAbilitySpecHandle Handle,
-		const FGameplayAbilityActorInfo* ActorInfo,
-		const FGameplayAbilityActivationInfo ActivationInfo,
-		bool bReplicateEndAbility,
-		bool bWasCancelled) override;
 
 	// ---- AoE ------------------------------------------------------------------
 
@@ -83,12 +84,36 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Impact|Chain")
 	int32 BaseMaxChainDepth = 1;
 
+	// ---- VFX / Debug ------------------------------------------------------------
+
+	/** Niagara system spawned (scaled to match the AoE radius) at every AoE trigger point — initial, secondary, and chained alike. Leave unset to skip VFX. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Impact|VFX")
+	TObjectPtr<UNiagaraSystem> ImpactVFX;
+
+	/** Radius (cm) ImpactVFX was authored at 1:1 scale. Actual spawn scale = triggered radius / this value. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Impact|VFX", meta=(ClampMin="1.0"))
+	float VFXReferenceRadius = 100.f;
+
+	/** Draws a debug sphere at every AoE trigger point (initial, secondary, chained). Toggle off once VFX is in place. */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Impact|Debug")
+	bool bDrawDebugAoESpheres = true;
+
 private:
-	/** Overlaps a sphere at Origin, damages+schedules every newly-found enemy, excluding anything already in HitActors. */
-	void ApplySphereDamageAndScheduleChain(const FVector& Origin, float Radius, float DamageMultiplier, int32 ChainDepth);
+	/** Per-activation exclude-list context, threaded by value through scheduled timers so it outlives EndAbility and stays isolated per activation. */
+	struct FImpactChainState
+	{
+		TArray<TWeakObjectPtr<AActor>> HitActors;
+	};
+	using FImpactChainStatePtr = TSharedPtr<FImpactChainState>;
+
+	/** Overlaps a sphere at Origin, damages+schedules every newly-found enemy, excluding anything already in State's HitActors. */
+	void ApplySphereDamageAndScheduleChain(const FImpactChainStatePtr& State, const FVector& Origin, float Radius, float DamageMultiplier, int32 ChainDepth);
 
 	/** Timer callback: detonates the chained AoE at TargetActor's current location, if it's still valid. */
-	void SpawnChainedImpactAt(TWeakObjectPtr<AActor> TargetActor, int32 ChainDepth);
+	void SpawnChainedImpactAt(FImpactChainStatePtr State, TWeakObjectPtr<AActor> TargetActor, int32 ChainDepth);
+
+	/** Spawns ImpactVFX (if assigned) and draws a debug sphere (if enabled) at an AoE trigger point. */
+	void SpawnImpactEffects(const FVector& Location, float Radius) const;
 
 	float GetEffectiveInitialRadius() const;
 	float GetEffectiveSecondaryRadius() const;
@@ -98,12 +123,4 @@ private:
 
 	/** Convenience: returns the PlayerState, or null. */
 	const AFP_PlayerState* GetLocalPS() const;
-
-	// Persists across the whole activation, including all delayed chain generations —
-	// an enemy that already spawned/received an AoE this activation cannot be retriggered.
-	UPROPERTY()
-	TArray<AActor*> HitActors;
-
-	// Cleared in EndAbility so a cancelled/interrupted activation can't fire a "ghost" AoE later.
-	TArray<FTimerHandle> PendingChainTimers;
 };

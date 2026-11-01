@@ -15,6 +15,48 @@
 #include "Player/FP_PlayerController.h"
 #include "Interaction/FP_CombatInterface.h"
 
+bool UFP_AttributeSet::ResolveStatTag(const FGameplayTag& StatTag, FGameplayAttribute& OutAttribute,
+                                      FGameplayTagContainer& OutRequiredTags) const
+{
+	OutRequiredTags.Reset();
+	if (!StatTag.IsValid())
+	{
+		return false;
+	}
+	if (const TStaticFuncPtr<FGameplayAttribute()>* Direct = TagsToAttributes.Find(StatTag))
+	{
+		OutAttribute = (*Direct)();
+		return true;
+	}
+
+	FString Remaining = StatTag.ToString();
+	FString Head, Leaf;
+	while (Remaining.Split(TEXT("."), &Head, &Leaf, ESearchCase::CaseSensitive, ESearchDir::FromEnd))
+	{
+		if (Leaf == TEXT("Ranged"))
+		{
+			Leaf = TEXT("RangedWeapon");
+		}
+		const FGameplayTag Gate = FGameplayTag::RequestGameplayTag(FName(*(TEXT("SkillTagMod.") + Leaf)), false);
+		if (!Gate.IsValid())
+		{
+			break; // segment isn't a SkillTagMod leaf -> not a gated stat
+		}
+		OutRequiredTags.AddTag(Gate);
+		Remaining = Head;
+
+		const FGameplayTag Base = FGameplayTag::RequestGameplayTag(FName(*Remaining), false);
+		if (const TStaticFuncPtr<FGameplayAttribute()>* BaseAttr = Base.IsValid() ? TagsToAttributes.Find(Base) : nullptr)
+		{
+			OutAttribute = (*BaseAttr)();
+			return true;
+		}
+	}
+
+	OutRequiredTags.Reset();
+	return false;
+}
+
 UFP_AttributeSet::UFP_AttributeSet()
 {
 	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();

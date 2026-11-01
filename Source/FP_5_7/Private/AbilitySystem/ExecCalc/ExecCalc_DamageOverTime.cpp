@@ -4,6 +4,7 @@
 #include "AbilitySystemComponent.h"
 #include "FP_GameplayTags.h"
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "AbilitySystem/ExecCalc/FP_HeatDamageCurve.h"
 
 struct FP_DotStatics
 {
@@ -140,8 +141,8 @@ struct FP_DotStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAgainstFrozen, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamagePerHeatFromEquilibrium, Source, false);
 
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, AmbientTemperature, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, Heat, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, AmbientTemperature, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, Heat, Target, false);
 
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageOverTime, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, DamageOverTimeMultiplier, Source, false);
@@ -299,9 +300,9 @@ void UExecCalc_DamageOverTime::Execute_Implementation(
 
 	const float TargetHeat  = GetCaptured(DotStatics().HeatDef);
 	const float AmbientTemp = GetCaptured(DotStatics().AmbientTemperatureDef);
-	const float TempDelta   = FMath::Abs(TargetHeat - AmbientTemp);
-	const float IncPerHeat  = GetCaptured(DotStatics().IncreasedDamagePerHeatFromEquilibriumDef);
-	const float TempDeltaIncrease = TempDelta * IncPerHeat;
+	const float HeatAmplify = GetCaptured(DotStatics().IncreasedDamagePerHeatFromEquilibriumDef);
+	// Separate multiplier (not part of the "increased" pool): 2x at 80 from steady state, -> 5x max.
+	const float HeatMultiplier = FPHeatDamage::Multiplier(TargetHeat, AmbientTemp, HeatAmplify);
 
 	auto ComputeTypeDamage =
 		[&](float BaseSetByCaller, float FlatAdded, float TypeInc, float TypeMore) -> float
@@ -310,11 +311,12 @@ void UExecCalc_DamageOverTime::Execute_Implementation(
 			if (Flat <= 0.f) return 0.f;
 
 			float Out = Flat;
-			Out *= (1.f + IncreasedGeneric + TypeInc + TempDeltaIncrease);
+			Out *= (1.f + IncreasedGeneric + TypeInc);
 			Out *= (1.f + MoreGeneric);
 			Out *= (1.f + TypeMore);
 			Out *= (1.f + IncreasedDoT);
 			Out *= (1.f + MoreDoT);
+			Out *= HeatMultiplier;
 			return Out;
 		};
 

@@ -31,15 +31,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void CauseDamage(AActor* TargetActor, float DamageMultiplier = 1.f);
 	
-	// TODO: not yet gated by SkillModifierTags — always applies the generic
-	// Speed.Skill attribute to every ability. See the SkillTagMod TODO block
-	// in FP_GameplayTags.h for the per-category attribute + gating pattern to
-	// apply here once weapon-specific Skill Speed nodes exist.
+	// Gated: includes Speed.Skill.<Leaf> modifiers matching this skill's SkillModifierTags
+	// (via GetSourceAttributeValue -> GetSkillModifierTags).
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Damage|Skill")
 	float GetSkillSpeedAttributeModifier() const;
 
-	// TODO: not yet gated by SkillModifierTags — see FP_GameplayTags.h's
-	// SkillTagMod TODO block (same note as GetSkillSpeedAttributeModifier above).
+	// Gated: includes AoE.<Stat>.<Leaf> modifiers matching this skill's SkillModifierTags.
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Damage|Skill")
 	float GetAoEAttributeModifier() const;
 
@@ -83,6 +80,9 @@ public:
 
 	
 protected:
+	/** This skill's tag (Skills.*) plus its Skill Library SkillModifierTags (SkillTagMod.*). */
+	virtual void GetSkillModifierTags(FGameplayTagContainer& OutTags) const override;
+
 	void AppendSkillModifierTagsToDamageSpec(FGameplayEffectSpecHandle& DamageSpecHandle) const;
 	void AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle, float DamageMultiplier = 1.f) const;
 	void AssignSkillPassiveBonuses(FGameplayEffectSpecHandle& SpecHandle) const;

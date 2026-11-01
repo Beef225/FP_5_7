@@ -7,6 +7,7 @@
 #include "FP_AbilityTypes.h"
 #include "Libraries/FP_AbilitySystemLibrary.h"
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "AbilitySystem/ExecCalc/FP_HeatDamageCurve.h"
 
 struct FP_DamageStatics
 {
@@ -262,8 +263,8 @@ struct FP_DamageStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAgainstFrozen, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamagePerHeatFromEquilibrium, Source, false);
 		
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, AmbientTemperature, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, Heat, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, AmbientTemperature, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, Heat, Target, false);
 	}
 };
 
@@ -537,6 +538,8 @@ void UExecCalc_Damage::Execute_Implementation(
 	const float SkillBonusMoreDamage       = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_MoreDamage,              false, 0.f);
 	const float SkillBonusIncreasedChem    = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_IncreasedChemicalDamage, false, 0.f);
 	const float SkillBonusMoreChem         = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_MoreChemicalDamage,      false, 0.f);
+	const float SkillBonusIncreasedPhys    = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_IncreasedPhysicalDamage, false, 0.f);
+	const float SkillBonusMorePhys         = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_MorePhysicalDamage,      false, 0.f);
 	const float SkillBonusCritChance       = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_CritChance,              false, 0.f);
 	const float SkillBonusIncCritChance    = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_IncreasedCritChance,     false, 0.f);
 	const float SkillBonusCritMultiplier   = Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_CritMultiplier,          false, 0.f);
@@ -634,12 +637,13 @@ void UExecCalc_Damage::Execute_Implementation(
 
 	const float TargetHeat  = GetCaptured(DamageStatics().HeatDef, 0.f);
 	const float AmbientTemp = GetCaptured(DamageStatics().AmbientTemperatureDef, 0.f);
-	const float TempDelta   = FMath::Abs(TargetHeat - AmbientTemp);
-	const float IncPerHeat = GetCaptured(DamageStatics().IncreasedDamagePerHeatFromEquilibriumDef, 0.f);
-	const float TempDeltaIncrease = TempDelta * IncPerHeat;
+	const float HeatAmplify = GetCaptured(DamageStatics().IncreasedDamagePerHeatFromEquilibriumDef, 0.f);
+	// Separate multiplier (not part of the "increased" pool): 2x at 80 from steady state, -> 5x max.
+	const float HeatMultiplier = FPHeatDamage::Multiplier(TargetHeat, AmbientTemp, HeatAmplify);
+	const float TempDeltaIncrease = 0.f; // legacy additive slot in ComputeTypeDamage, superseded by HeatMultiplier
 
 	auto ComputeTypeDamage =
-		[](float BaseSetByCaller, float FlatAdded, float GenericInc, float TypeInc, float TempInc, float GenericMore, float TypeMore)
+		[HeatMultiplier](float BaseSetByCaller, float FlatAdded, float GenericInc, float TypeInc, float TempInc, float GenericMore, float TypeMore)
 		{
 			const float Flat = BaseSetByCaller + FlatAdded;
 			if (Flat <= 0.f)
@@ -651,15 +655,36 @@ void UExecCalc_Damage::Execute_Implementation(
 			Out *= (1.f + GenericInc + TypeInc + TempInc);
 			Out *= (1.f + GenericMore);
 			Out *= (1.f + TypeMore);
+			Out *= HeatMultiplier;
 			return Out;
 		};
 
+	// Conditional "increased damage against <State>" — attacker's attribute, applied only when the
+	// target currently has that state tag. Additive with every other "increased" source.
+	float ConditionalIncreased = 0.f;
+	if (TargetASC)
+	{
+		auto AddIfTargetHas = [&](const FGameplayTag& StateTag, const FGameplayEffectAttributeCaptureDefinition& Def)
+		{
+			if (TargetASC->HasMatchingGameplayTag(StateTag))
+			{
+				ConditionalIncreased += GetCaptured(Def, 0.f);
+			}
+		};
+		AddIfTargetHas(GameplayTags.State_Bruised,    DamageStatics().IncreasedDamageAgainstBruisedDef);
+		AddIfTargetHas(GameplayTags.State_Concussed,  DamageStatics().IncreasedDamageAgainstConcussedDef);
+		AddIfTargetHas(GameplayTags.State_Irradiated, DamageStatics().IncreasedDamageAgainstIrradiatedDef);
+		AddIfTargetHas(GameplayTags.State_Corroded,   DamageStatics().IncreasedDamageAgainstCorrodedDef);
+		AddIfTargetHas(GameplayTags.State_Overheat,   DamageStatics().IncreasedDamageAgainstOverheatedDef);
+		AddIfTargetHas(GameplayTags.State_Frozen,     DamageStatics().IncreasedDamageAgainstFrozenDef);
+	}
+
 	// Merge skill-passive generic bonuses into the SkillTag accumulators (already the right place in the formula).
-	const float TotalIncreasedBonus = SkillTagIncreasedDamage + SkillBonusIncreasedDamage;
+	const float TotalIncreasedBonus = SkillTagIncreasedDamage + SkillBonusIncreasedDamage + ConditionalIncreased;
 	const float TotalMoreBonus      = SkillTagMoreDamage      + SkillBonusMoreDamage;
 
 	float GenericDamage   = ComputeTypeDamage(SetByCallerGeneric,   0.f,      IncreasedGeneric + TotalIncreasedBonus, 0.f,                                    TempDeltaIncrease, MoreGeneric + TotalMoreBonus, 0.f);
-	float PhysicalDamage  = ComputeTypeDamage(SetByCallerPhysical,  AddedPhys, IncreasedGeneric + TotalIncreasedBonus, IncreasedPhys,                          TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MorePhys);
+	float PhysicalDamage  = ComputeTypeDamage(SetByCallerPhysical,  AddedPhys, IncreasedGeneric + TotalIncreasedBonus, IncreasedPhys + SkillBonusIncreasedPhys, TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MorePhys + SkillBonusMorePhys);
 	float ExplosiveDamage = ComputeTypeDamage(SetByCallerExplosive, AddedExpl, IncreasedGeneric + TotalIncreasedBonus, IncreasedExpl,                          TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreExpl);
 	float RadiationDamage = ComputeTypeDamage(SetByCallerRadiation, AddedRad,  IncreasedGeneric + TotalIncreasedBonus, IncreasedRad,                           TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreRad);
 	float ChemicalDamage  = ComputeTypeDamage(SetByCallerChemical,  AddedChem, IncreasedGeneric + TotalIncreasedBonus, IncreasedChem + SkillBonusIncreasedChem, TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreChem + SkillBonusMoreChem);
@@ -786,7 +811,7 @@ void UExecCalc_Damage::Execute_Implementation(
 	const float BlockRoll = FMath::FRand();
 	const bool bBlocked = (BlockChance > 0.f) && (BlockRoll < BlockChance);
 
-	UFP_AbilitySystemLibrary::SetIsBlockedHit(EffectContectHandle, bDodged);
+	UFP_AbilitySystemLibrary::SetIsBlockedHit(EffectContectHandle, bBlocked);
 	
 	float BlockedDamageRaw = 0.f;
 	float BlockedDamage = 0.f;
@@ -815,7 +840,7 @@ void UExecCalc_Damage::Execute_Implementation(
 	const float CritRoll = FMath::FRand();
 	const bool bCritical = (FinalCritChance > 0.f) && (CritRoll < FinalCritChance);
 
-	UFP_AbilitySystemLibrary::SetIsCriticalHit(EffectContectHandle, bDodged);
+	UFP_AbilitySystemLibrary::SetIsCriticalHit(EffectContectHandle, bCritical);
 	
 	const float DamageBeforeCrit = Damage;
 
@@ -845,6 +870,9 @@ void UExecCalc_Damage::Execute_Implementation(
 	float Armour = FMath::Max(GetCaptured(DamageStatics().ArmourDef, 0.f), 0.f);
 	float IncreasedArmour = GetCaptured(DamageStatics().IncreasedArmourDef, 0.f);
 	Armour *= (1.f + IncreasedArmour);
+	// Attacker's armour penetration ignores that fraction of the target's (post-increase) armour.
+	const float ArmourPen = Clamp01(GetCaptured(DamageStatics().ArmourPenetrationDef, 0.f));
+	Armour *= (1.f - ArmourPen);
 
 	const float DamageBeforeArmour = Damage;
 

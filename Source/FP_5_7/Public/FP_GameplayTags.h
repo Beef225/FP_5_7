@@ -327,45 +327,53 @@ FGameplayTag SetByCaller_SkillBonus_IncreasedDamage;
 FGameplayTag SetByCaller_SkillBonus_MoreDamage;
 FGameplayTag SetByCaller_SkillBonus_IncreasedChemicalDamage;
 FGameplayTag SetByCaller_SkillBonus_MoreChemicalDamage;
+FGameplayTag SetByCaller_SkillBonus_IncreasedPhysicalDamage;
+FGameplayTag SetByCaller_SkillBonus_MorePhysicalDamage;
 FGameplayTag SetByCaller_SkillBonus_CritChance;
 FGameplayTag SetByCaller_SkillBonus_IncreasedCritChance;
 FGameplayTag SetByCaller_SkillBonus_CritMultiplier;
 
 
 // ---------------------------------------------------------------------------
-// TODO(SkillTagMod / gated-stat tag standard) — pick this back up here.
+// GATED-STAT TAG STANDARD (implemented 2026-10-31).
 //
 // THE STANDARD (applies to any stat, not just Damage):
 //   To make a stat apply only when a skill matches specific condition(s)
 //   (a weapon type, a weapon class, a hit type, or any combination), take
 //   the stat's existing attribute tag and APPEND one segment per required
 //   condition, each segment matching the leaf name of an existing
-//   SkillTagMod.<Leaf> tag:
+//   SkillTagMod.<Leaf> tag ("Ranged" is accepted for RangedWeapon):
 //     Speed.Skill              -> Speed.Skill.Rifle                 (gated: Rifle)
 //     Damage.Increased.AoE     -> Damage.Increased.AoE.Mace         (gated: AoE AND Mace)
 //     Critical.StrikeMultiplier -> Critical.StrikeMultiplier.Rifle  (gated: Rifle)
 //   One segment = one required SkillTagMod tag; multiple segments = ALL of
-//   them required (AND, not OR). The gated tag is a NEW, SEPARATE attribute
-//   from the ungated/generic one — both get registered and both can be
-//   summed into the total independently (a Rifle+AoE skill can pull from
-//   the generic bucket, the Rifle bucket, the AoE bucket, AND an AoE.Rifle
-//   compound bucket all at once, if all of those attributes exist and have
-//   points invested).
+//   them required (AND, not OR).
 //
-//   Implementing a gated attribute is always the same two steps, regardless
-//   of which stat family it's on:
-//     1. Register the attribute (FP_AttributeSet.h/.cpp) and its tag
-//        (FP_GameplayTags.h/.cpp + TagsToAttributes), same pattern as every
-//        existing IncreasedDamage<Type> attribute.
-//     2. Wherever that stat gets READ at runtime, resolve the skill's
-//        SkillModifierTags (via Spec.GetAllAssetTags() if going through a
-//        GameplayEffect, or directly off the resolved FFP_AbilityEntry
-//        otherwise) and, for every gated variant that exists, check
-//        HasTagExact(SkillTagMod_X) for EACH of its condition segments —
-//        only fold the attribute into the running total if ALL are present.
-//   No stat family needs bespoke gating logic beyond "where do I read
-//   SkillModifierTags from here, and what's my running total" — the
-//   tag-matching shape is identical everywhere.
+//   NO NEW ATTRIBUTES. A gated tag modifies the BASE attribute, with the
+//   SkillTagMod tags put on the modifier as required source tags
+//   (FGameplayModifierInfo::SourceTags.RequireTags). GAS then only counts the
+//   modifier when the reader supplies those tags:
+//     - UFP_AttributeSet::ResolveStatTag() turns a tag into (attribute,
+//       required tags). Used by skill tree Stat Mod nodes, gear affixes and
+//       implicits.
+//     - ExecCalc_Damage / ExecCalc_DamageOverTime: captured attributes are
+//       evaluated with the damage spec's source tags, which include the
+//       skill's SkillModifierTags (AppendSkillModifierTagsToDamageSpec).
+//     - Ability-side reads: UFP_GameplayAbility::GetSourceAttributeValue()
+//       evaluates with GetSkillModifierTags() (skill speed, AoE, projectile
+//       speed, duration, ...).
+//     - The attribute's plain value (character sheet) excludes gated mods.
+//   Adding a new gated stat = author it in the tree, then the editor's
+//   Tools > Register Tags in C++ registers the TAG (GatedStats section).
+//
+// LEGACY: the per-weapon damage attributes (IncreasedDamageRifle, ...) and
+// the HasTagExact(SkillTagMod_X) blocks in ExecCalc_Damage predate this and
+// still work; they could be migrated to Damage.Increased + gate later.
+//
+// STILL NOT CONSUMED (base stat has no runtime reader yet, so gating it does
+// nothing until the mechanic exists): Projectile.Count, Projectile.Pierce,
+// Heat.SkillCost (HeatCostEfficiency), Debuff.Effectiveness.* per skill, and
+// DoT specs don't carry skill tags yet.
 //
 // SIGN CONVENTION (any stat, bidirectional or not): positive = increased /
 // more of the thing, negative = reduced / less of the thing. This already
@@ -375,51 +383,6 @@ FGameplayTag SetByCaller_SkillBonus_CritMultiplier;
 // NEGATIVE magnitude, an "Increased Heat Cost" node with a positive one).
 // Never flip this per-attribute — a node reading "10% Reduced X" always gets
 // authored as -0.10, full stop, regardless of which attribute it targets.
-//
-// CURRENT STATE:
-//   - Damage IS gated this way today: ExecCalc_Damage.cpp reads Spec asset
-//     tags and sums IncreasedDamage<Type>/MoreDamage<Type> for the 17
-//     single-segment weapon/hit-type tags it checks (Pistol, Rifle, ...,
-//     Melee, Projectile, AoE). No COMPOUND (multi-segment) checks exist yet
-//     anywhere — every existing check is single-tag. The other 18 registered
-//     SkillTagMod_* tags below (DamageOverTime, Bomb, element types, debuff
-//     mechanic tags, Piercing, Channeling, Duration, Cooldown, Trigger,
-//     Movement, Buff) are declared/registered but consumed nowhere in C++.
-//   - Skill Speed (UFP_DamageGameplayAbility::GetSkillSpeedAttributeModifier /
-//     GetEffectiveSkillRate), Crit (not yet touched at all), and AoE
-//     (GetAoEAttributeModifier / GetEffectiveSphereRadius /
-//     GetEffectiveConeParams / GetEffectiveRectParams) are NOT gated at
-//     all — they always apply their generic attribute to every ability
-//     regardless of SkillModifierTags. This is the next implementation pass:
-//     go through each of these call sites and apply the standard above.
-//   - AppendSkillModifierTagsToDamageSpec() (FP_DamageGameplayAbility.cpp)
-//     only runs when AssignRolledDamageMagnitudes() is explicitly called —
-//     verify that's actually happening for the abilities being gated before
-//     assuming Damage's existing SkillTagMod bonuses are live end-to-end.
-//
-// WORKED EXAMPLES already authored into the Rifle nodes in MightPassiveTree
-// (NodeDataTable) — none of these are registered/consumed in C++ yet, they
-// are EffectStatModAttributeType strings sitting in the table waiting for
-// the implementation pass above:
-//   Speed.Skill.Rifle                     (gated: Rifle)
-//   Critical.StrikeChance.Increased.Rifle (gated: Rifle)
-//   Critical.StrikeChance.Base.Rifle      (gated: Rifle)
-//   Critical.StrikeMultiplier.Rifle       (gated: Rifle)
-//   Projectile.Pierce.Rifle               (gated: Rifle)
-//   Projectile.Count.Rifle                (gated: Rifle — "Rifles Fire an
-//                                          Extra Projectile"; no base Rifle
-//                                          skill exists yet either)
-//   AoE.Multiplier.Rifle                  (gated: Rifle)
-// COMPOUND examples now actually authored (Mace/Ordnance/Axe nodes):
-//   Damage.Increased.AoE.Mace / .Ordnance   AoE.Multiplier.Axe
-//   AoE.AdditionalRadius.Mace               DoT.Increased.Axe
-//   Debuff.Effectiveness.Bruised.Axe        (gated: hit-type/mechanic AND weapon)
-// Same single-segment suffix pattern also now used for non-Damage families
-// per the standard above: Critical.StrikeChance.Increased/Base.<Type>,
-// Critical.StrikeMultiplier.<Type>, Heat.SkillCost.<Type> (see Heat section).
-// Only build attributes/gating for combinations actually being authored —
-// this is combinatorial (e.g. 3 hit-types x 14 weapon types = up to 42
-// possible Damage compound attributes alone), do not pre-build the matrix.
 //
 // SkillTagMod_MeleeWeapon / SkillTagMod_RangedWeapon (added below) are a
 // WEAPON-CLASS categorization — "this skill belongs to an inherently
@@ -469,6 +432,7 @@ FGameplayTag SkillTagMod_ThermalDestabilizing;
 FGameplayTag SkillTagMod_Piercing;
 FGameplayTag SkillTagMod_Channeling;
 FGameplayTag SkillTagMod_Duration;
+FGameplayTag SkillTagMod_Chain;
 FGameplayTag SkillTagMod_Cooldown;
 FGameplayTag SkillTagMod_Trigger;
 FGameplayTag SkillTagMod_Movement;
@@ -982,6 +946,25 @@ FGameplayTag SkillPassive_Impact_SecondaryRadius;
 FGameplayTag SkillPassive_Impact_MaxChainDepth;
 FGameplayTag SkillPassive_Impact_SecondaryDamageMultiplier;
 FGameplayTag SkillPassive_Impact_ChainDelayModifier;
+FGameplayTag SkillPassive_Impact_InitialAreaOfEffect;
+FGameplayTag SkillPassive_Impact_SecondaryAreaOfEffect;
+FGameplayTag SkillPassive_Impact_MoreDamage;
+FGameplayTag SkillPassive_Impact_InitialCritChance;
+FGameplayTag SkillPassive_Impact_InitialCritMultiplier;
+FGameplayTag SkillPassive_Impact_InitialPhysicalDamage;
+FGameplayTag SkillPassive_Impact_InitialAreaDamage;
+FGameplayTag SkillPassive_Impact_InitialBruisedMagnitude;
+FGameplayTag SkillPassive_Impact_InitialMoreCritChance;
+FGameplayTag SkillPassive_Impact_IncreasedDamage;
+FGameplayTag SkillPassive_Impact_IncreasedMeleeDamage;
+FGameplayTag SkillPassive_Impact_IncreasedPhysicalDamage;
+FGameplayTag SkillPassive_Impact_IncreasedCritChance;
+FGameplayTag SkillPassive_Impact_BruisedDuration;
+FGameplayTag SkillPassive_Impact_ArmourPenetration;
+FGameplayTag SkillPassive_Impact_LifeOnHit;
+FGameplayTag SkillPassive_Impact_IncreasedAgainstBruised;
+FGameplayTag SkillPassive_Impact_SecondaryCritChance;
+FGameplayTag SkillPassive_Impact_SecondaryPhysicalDamage;
 
 	//SkillTree — Leap
 	FGameplayTag SkillTree_Leap_ExtraRange_1;
@@ -1075,6 +1058,44 @@ FGameplayTag SkillTree_LightningCoil_Grid_N249; FGameplayTag SkillTree_Lightning
 FGameplayTag SkillTree_LightningCoil_Grid_N253; FGameplayTag SkillTree_LightningCoil_Grid_N254; FGameplayTag SkillTree_LightningCoil_Grid_N255; FGameplayTag SkillTree_LightningCoil_Grid_N256;
 // ---- END GRID TEST TAGS ----
 
+
+//GatedStats
+FGameplayTag Damage_Increased_Energy_Accelerator;
+FGameplayTag Penetration_Physical_Accelerator;
+FGameplayTag Critical_StrikeMultiplier_Accelerator;
+FGameplayTag Speed_Projectile_Accelerator;
+FGameplayTag Critical_StrikeMultiplier_Axe;
+FGameplayTag DoT_Increased_Axe;
+FGameplayTag Debuff_Effectiveness_Bruised_Axe;
+FGameplayTag AoE_Multiplier_Axe;
+FGameplayTag Penetration_Armour_Mace;
+FGameplayTag Penetration_Physical_Mace;
+FGameplayTag Penetration_Explosive_Mace;
+FGameplayTag Penetration_Radiation_Mace;
+FGameplayTag Penetration_Chemical_Mace;
+FGameplayTag Penetration_Energy_Mace;
+FGameplayTag AoE_Multiplier_Mace;
+FGameplayTag Damage_Increased_AoE_Mace;
+FGameplayTag AoE_AdditionalRadius_Mace;
+FGameplayTag Critical_StrikeMultiplier_Mace;
+FGameplayTag Critical_StrikeChance_Increased_Mace;
+FGameplayTag Critical_StrikeChance_Base_Mace;
+FGameplayTag Heat_SkillCost_Mace;
+FGameplayTag Conditional_Damage_IncreasedAgainstConcussed_Mace;
+FGameplayTag Damage_Increased_AoE_Ordnance;
+FGameplayTag AoE_Multiplier_Ordnance;
+FGameplayTag Critical_StrikeMultiplier_Ordnance;
+FGameplayTag Critical_StrikeChance_Increased_Ordnance;
+FGameplayTag Critical_StrikeChance_Base_Ordnance;
+FGameplayTag Penetration_Explosive_Ordnance;
+FGameplayTag Damage_Increased_Explosive_Ordnance;
+FGameplayTag Critical_StrikeChance_Increased_Rifle;
+FGameplayTag Critical_StrikeMultiplier_Rifle;
+FGameplayTag Critical_StrikeChance_Base_Rifle;
+FGameplayTag Projectile_Pierce_Rifle;
+FGameplayTag Speed_Skill_Rifle;
+FGameplayTag Projectile_Count_Rifle;
+FGameplayTag AoE_Multiplier_Rifle;
 private:
 	static FFP_GameplayTags GameplayTags;
 };

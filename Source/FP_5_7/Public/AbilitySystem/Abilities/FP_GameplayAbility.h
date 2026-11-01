@@ -28,6 +28,13 @@ protected:
 	UFUNCTION(BlueprintPure, Category="FP|GAS")
 	UAbilitySystemComponent* GetSourceASC() const;
 
+	/**
+	 * The caster's value of Attribute AS SEEN BY THIS SKILL: includes gated stat modifiers
+	 * (e.g. Speed.Skill.Rifle) whose SkillTagMod requirements this skill's tags satisfy.
+	 */
 	UFUNCTION(BlueprintPure, Category="FP|GAS")
 	float GetSourceAttributeValue(const FGameplayAttribute& Attribute, bool& bFound) const;
+
+	/** Tags that qualify gated stat modifiers for this skill (SkillTagMod.*). Empty = ungated reads. */
+	virtual void GetSkillModifierTags(FGameplayTagContainer& OutTags) const {}
 };

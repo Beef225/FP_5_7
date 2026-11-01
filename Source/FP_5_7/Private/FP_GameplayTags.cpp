@@ -921,6 +921,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("SetByCaller.SkillBonus.IncreasedChemicalDamage"),FString("Per-skill passive increased chemical damage bonus"));
 	GameplayTags.SetByCaller_SkillBonus_MoreChemicalDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SetByCaller.SkillBonus.MoreChemicalDamage"),     FString("Per-skill passive more chemical damage bonus"));
+	GameplayTags.SetByCaller_SkillBonus_IncreasedPhysicalDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.SkillBonus.IncreasedPhysicalDamage"),FString("Per-skill passive increased physical damage bonus"));
+	GameplayTags.SetByCaller_SkillBonus_MorePhysicalDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.SkillBonus.MorePhysicalDamage"),     FString("Per-skill passive more physical damage bonus"));
 	GameplayTags.SetByCaller_SkillBonus_CritChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SetByCaller.SkillBonus.CritChance"),             FString("Per-skill passive flat crit chance bonus"));
 	GameplayTags.SetByCaller_SkillBonus_IncreasedCritChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -1063,7 +1067,11 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("")
 		);
 	GameplayTags.SkillTagMod_Duration = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTagMod.Duration"), 
+		FName("SkillTagMod.Duration"),
+		FString("")
+		);
+	GameplayTags.SkillTagMod_Chain = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.Chain"),
 		FString("")
 		);
 	GameplayTags.SkillTagMod_Cooldown = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -2675,11 +2683,11 @@ void FFP_GameplayTags::InitializeGameplayTags()
 
 	GameplayTags.SkillPassive_Impact_InitialRadius = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SkillPassive.Impact.InitialRadius"),
-		FString("Per-skill passive: flat radius addition (cm) to Impact's initial weapon-tip AoE")
+		FString("Per-skill passive: flat radius addition (METRES — multiply by 100 before applying as cm) to Impact's initial weapon-tip AoE")
 		);
 	GameplayTags.SkillPassive_Impact_SecondaryRadius = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SkillPassive.Impact.SecondaryRadius"),
-		FString("Per-skill passive: flat radius addition (cm) to Impact's secondary/chained AoE")
+		FString("Per-skill passive: flat radius addition (METRES — multiply by 100 before applying as cm) to Impact's secondary/chained AoE")
 		);
 	GameplayTags.SkillPassive_Impact_MaxChainDepth = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SkillPassive.Impact.MaxChainDepth"),
@@ -2692,6 +2700,82 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.SkillPassive_Impact_ChainDelayModifier = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SkillPassive.Impact.ChainDelayModifier"),
 		FString("Per-skill passive: delta to Impact's chain delay multiplier, stacks with the global Duration.Skill attribute")
+		);
+	GameplayTags.SkillPassive_Impact_InitialAreaOfEffect = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.InitialAreaOfEffect"),
+		FString("Per-skill passive: percent area-of-effect delta (sqrt-scaled onto radius) to Impact's initial weapon-tip AoE")
+		);
+	GameplayTags.SkillPassive_Impact_SecondaryAreaOfEffect = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.SecondaryAreaOfEffect"),
+		FString("Per-skill passive: percent area-of-effect delta (sqrt-scaled onto radius) to Impact's secondary/chained AoE")
+		);
+	GameplayTags.SkillPassive_Impact_MoreDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.MoreDamage"),
+		FString("Per-skill passive: more-multiplier bonus to all Impact damage — generic leaf, routes via SetByCaller.SkillBonus.MoreDamage")
+		);
+	GameplayTags.SkillPassive_Impact_InitialCritChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.InitialCritChance"),
+		FString("Per-skill passive: increased critical strike chance, Initial Impact only (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_Impact_InitialCritMultiplier = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.InitialCritMultiplier"),
+		FString("Per-skill passive: increased critical strike multiplier, Initial Impact only (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_Impact_InitialPhysicalDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.InitialPhysicalDamage"),
+		FString("Per-skill passive: increased physical damage, Initial Impact only (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_Impact_InitialAreaDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.InitialAreaDamage"),
+		FString("Per-skill passive: increased area damage, Initial Impact only (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_Impact_InitialBruisedMagnitude = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.InitialBruisedMagnitude"),
+		FString("Per-skill passive: increased Bruised debuff buildup applied by Initial Impact (content-only — needs a debuff-buildup pathway like LightningCoil's Corroded)")
+		);
+	GameplayTags.SkillPassive_Impact_InitialMoreCritChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.InitialMoreCritChance"),
+		FString("Per-skill passive: rare more-multiplier bonus to critical strike chance, Initial Impact only (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_Impact_IncreasedDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.IncreasedDamage"),
+		FString("Per-skill passive: increased damage, whole skill — generic leaf, routes via SetByCaller.SkillBonus.IncreasedDamage")
+		);
+	GameplayTags.SkillPassive_Impact_IncreasedMeleeDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.IncreasedMeleeDamage"),
+		FString("Per-skill passive: increased melee damage, whole skill (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_Impact_IncreasedPhysicalDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.IncreasedPhysicalDamage"),
+		FString("Per-skill passive: increased physical damage, whole skill — generic leaf, routes via SetByCaller.SkillBonus.IncreasedPhysicalDamage")
+		);
+	GameplayTags.SkillPassive_Impact_IncreasedCritChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.IncreasedCritChance"),
+		FString("Per-skill passive: increased critical strike chance, whole skill — generic leaf, routes via SetByCaller.SkillBonus.IncreasedCritChance")
+		);
+	GameplayTags.SkillPassive_Impact_BruisedDuration = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.BruisedDuration"),
+		FString("Per-skill passive: increased Bruised debuff duration applied by Impact, whole skill (content-only — needs Impact-scoped debuff wiring)")
+		);
+	GameplayTags.SkillPassive_Impact_ArmourPenetration = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.ArmourPenetration"),
+		FString("Per-skill passive: increased armour penetration, whole skill (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_Impact_LifeOnHit = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.LifeOnHit"),
+		FString("Per-skill passive: flat life gained on hit, whole skill (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_Impact_IncreasedAgainstBruised = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.IncreasedAgainstBruised"),
+		FString("Per-skill passive: increased damage against Bruised enemies, whole skill (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_Impact_SecondaryCritChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.SecondaryCritChance"),
+		FString("Per-skill passive: increased critical strike chance, Secondary Impacts only (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_Impact_SecondaryPhysicalDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.Impact.SecondaryPhysicalDamage"),
+		FString("Per-skill passive: increased physical damage, Secondary Impacts only (content-only — not yet routed to a SetByCaller bucket)")
 		);
 
 	GameplayTags.SkillTree_LightningCoil_SkillSpeed_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -2855,4 +2939,150 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	R(GameplayTags,GameplayTags.SkillTree_LightningCoil_Grid_N249,"SkillTree.LightningCoil.Grid.N249"); R(GameplayTags,GameplayTags.SkillTree_LightningCoil_Grid_N250,"SkillTree.LightningCoil.Grid.N250"); R(GameplayTags,GameplayTags.SkillTree_LightningCoil_Grid_N251,"SkillTree.LightningCoil.Grid.N251"); R(GameplayTags,GameplayTags.SkillTree_LightningCoil_Grid_N252,"SkillTree.LightningCoil.Grid.N252");
 	R(GameplayTags,GameplayTags.SkillTree_LightningCoil_Grid_N253,"SkillTree.LightningCoil.Grid.N253"); R(GameplayTags,GameplayTags.SkillTree_LightningCoil_Grid_N254,"SkillTree.LightningCoil.Grid.N254"); R(GameplayTags,GameplayTags.SkillTree_LightningCoil_Grid_N255,"SkillTree.LightningCoil.Grid.N255"); R(GameplayTags,GameplayTags.SkillTree_LightningCoil_Grid_N256,"SkillTree.LightningCoil.Grid.N256");
 	// ---- END GRID TEST TAGS ----
+
+	//GatedStats
+	GameplayTags.Damage_Increased_Energy_Accelerator = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Energy.Accelerator"),
+		FString("Gated stat: Damage.Increased.Energy only for skills with SkillTagMod.Accelerator")
+		);
+	GameplayTags.Penetration_Physical_Accelerator = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Physical.Accelerator"),
+		FString("Gated stat: Penetration.Physical only for skills with SkillTagMod.Accelerator")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Accelerator = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Accelerator"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Accelerator")
+		);
+	GameplayTags.Speed_Projectile_Accelerator = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Projectile.Accelerator"),
+		FString("Gated stat: Speed.Projectile only for skills with SkillTagMod.Accelerator")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Axe"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Axe")
+		);
+	GameplayTags.DoT_Increased_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("DoT.Increased.Axe"),
+		FString("Gated stat: DoT.Increased only for skills with SkillTagMod.Axe")
+		);
+	GameplayTags.Debuff_Effectiveness_Bruised_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Debuff.Effectiveness.Bruised.Axe"),
+		FString("Gated stat: Debuff.Effectiveness.Bruised only for skills with SkillTagMod.Axe")
+		);
+	GameplayTags.AoE_Multiplier_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.Multiplier.Axe"),
+		FString("Gated stat: AoE.Multiplier only for skills with SkillTagMod.Axe")
+		);
+	GameplayTags.Penetration_Armour_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Armour.Mace"),
+		FString("Gated stat: Penetration.Armour only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Penetration_Physical_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Physical.Mace"),
+		FString("Gated stat: Penetration.Physical only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Penetration_Explosive_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Explosive.Mace"),
+		FString("Gated stat: Penetration.Explosive only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Penetration_Radiation_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Radiation.Mace"),
+		FString("Gated stat: Penetration.Radiation only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Penetration_Chemical_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Chemical.Mace"),
+		FString("Gated stat: Penetration.Chemical only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Penetration_Energy_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Energy.Mace"),
+		FString("Gated stat: Penetration.Energy only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.AoE_Multiplier_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.Multiplier.Mace"),
+		FString("Gated stat: AoE.Multiplier only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Damage_Increased_AoE_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.AoE.Mace"),
+		FString("Gated stat: Damage.Increased.AoE only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.AoE_AdditionalRadius_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.AdditionalRadius.Mace"),
+		FString("Gated stat: AoE.AdditionalRadius only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Mace"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Critical_StrikeChance_Increased_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Increased.Mace"),
+		FString("Gated stat: Critical.StrikeChance.Increased only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Critical_StrikeChance_Base_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Base.Mace"),
+		FString("Gated stat: Critical.StrikeChance.Base only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Heat_SkillCost_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Heat.SkillCost.Mace"),
+		FString("Gated stat: Heat.SkillCost only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstConcussed_Mace = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstConcussed.Mace"),
+		FString("Gated stat: Conditional.Damage.IncreasedAgainstConcussed only for skills with SkillTagMod.Mace")
+		);
+	GameplayTags.Damage_Increased_AoE_Ordnance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.AoE.Ordnance"),
+		FString("Gated stat: Damage.Increased.AoE only for skills with SkillTagMod.Ordnance")
+		);
+	GameplayTags.AoE_Multiplier_Ordnance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.Multiplier.Ordnance"),
+		FString("Gated stat: AoE.Multiplier only for skills with SkillTagMod.Ordnance")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Ordnance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Ordnance"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Ordnance")
+		);
+	GameplayTags.Critical_StrikeChance_Increased_Ordnance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Increased.Ordnance"),
+		FString("Gated stat: Critical.StrikeChance.Increased only for skills with SkillTagMod.Ordnance")
+		);
+	GameplayTags.Critical_StrikeChance_Base_Ordnance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Base.Ordnance"),
+		FString("Gated stat: Critical.StrikeChance.Base only for skills with SkillTagMod.Ordnance")
+		);
+	GameplayTags.Penetration_Explosive_Ordnance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Explosive.Ordnance"),
+		FString("Gated stat: Penetration.Explosive only for skills with SkillTagMod.Ordnance")
+		);
+	GameplayTags.Damage_Increased_Explosive_Ordnance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Explosive.Ordnance"),
+		FString("Gated stat: Damage.Increased.Explosive only for skills with SkillTagMod.Ordnance")
+		);
+	GameplayTags.Critical_StrikeChance_Increased_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Increased.Rifle"),
+		FString("Gated stat: Critical.StrikeChance.Increased only for skills with SkillTagMod.Rifle")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Rifle"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Rifle")
+		);
+	GameplayTags.Critical_StrikeChance_Base_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Base.Rifle"),
+		FString("Gated stat: Critical.StrikeChance.Base only for skills with SkillTagMod.Rifle")
+		);
+	GameplayTags.Projectile_Pierce_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Projectile.Pierce.Rifle"),
+		FString("Gated stat: Projectile.Pierce only for skills with SkillTagMod.Rifle")
+		);
+	GameplayTags.Speed_Skill_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Skill.Rifle"),
+		FString("Gated stat: Speed.Skill only for skills with SkillTagMod.Rifle")
+		);
+	GameplayTags.Projectile_Count_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Projectile.Count.Rifle"),
+		FString("Gated stat: Projectile.Count only for skills with SkillTagMod.Rifle")
+		);
+	GameplayTags.AoE_Multiplier_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.Multiplier.Rifle"),
+		FString("Gated stat: AoE.Multiplier only for skills with SkillTagMod.Rifle")
+		);
 }

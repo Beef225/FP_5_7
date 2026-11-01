@@ -31,5 +31,17 @@ float UFP_GameplayAbility::GetSourceAttributeValue(const FGameplayAttribute& Att
 	}
 
 	bFound = true;
-	return ASC->GetNumericAttribute(Attribute);
+
+	FGameplayTagContainer SkillTags;
+	GetSkillModifierTags(SkillTags);
+	if (SkillTags.IsEmpty())
+	{
+		return ASC->GetNumericAttribute(Attribute);
+	}
+
+	// Evaluate as if the skill's tags were source tags, so modifiers that require them
+	// (gated stats like Speed.Skill.Rifle -> SkillTagMod.Rifle) are counted for this skill only.
+	FGameplayTagRequirements SourceReqs;
+	SourceReqs.RequireTags = SkillTags;
+	return ASC->GetFilteredAttributeValue(Attribute, SourceReqs, FGameplayTagContainer());
 }

@@ -70,36 +70,50 @@ public:
 	virtual void PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue) override;
 
 	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
+
+	/**
+	 * Resolve a stat tag to the attribute it modifies, following the gated-stat standard
+	 * (see FP_GameplayTags.h):
+	 *   - A tag in TagsToAttributes maps directly (OutRequiredTags empty).
+	 *   - Otherwise trailing segments are peeled off while each one names a SkillTagMod.<Leaf>
+	 *     ("Ranged" is accepted for RangedWeapon) until a base tag in TagsToAttributes is found.
+	 *     e.g. Critical.StrikeMultiplier.Rifle -> CriticalStrikeMultiplier, requires SkillTagMod.Rifle
+	 *          Damage.Increased.AoE.Mace       -> IncreasedDamageAoE,       requires SkillTagMod.Mace
+	 * Put OutRequiredTags in FGameplayModifierInfo::SourceTags.RequireTags: GAS then only counts
+	 * the modifier when the evaluating spec/ability carries ALL of those tags. No new attributes.
+	 */
+	bool ResolveStatTag(const FGameplayTag& StatTag, FGameplayAttribute& OutAttribute,
+	                    FGameplayTagContainer& OutRequiredTags) const;
 	
 	
 	//Vital Attributes
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Vital Attributes")
 	FGameplayAttributeData HitPoints;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Vital Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxHitPoints, Category = "Vital Attributes")
 	FGameplayAttributeData MaxHitPoints;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Vital Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Heat, Category = "Vital Attributes")
 	FGameplayAttributeData Heat;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Vital Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxHeatThreshold, Category = "Vital Attributes")
 	FGameplayAttributeData MaxHeatThreshold;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Vital Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MinHeatThreshold, Category = "Vital Attributes")
 	FGameplayAttributeData MinHeatThreshold;
 
 
 //Primary Attributes
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Primary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Might, Category = "Primary Attributes")
 	FGameplayAttributeData Might;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Primary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Resonance, Category = "Primary Attributes")
 	FGameplayAttributeData Resonance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Primary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Agility, Category = "Primary Attributes")
 	FGameplayAttributeData Agility;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Primary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Fortitude, Category = "Primary Attributes")
 	FGameplayAttributeData Fortitude;
 
 
@@ -112,424 +126,424 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreHitPoints, Category = "
 	FGameplayAttributeData MoreHitPoints;
 
 //Damage
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_AddedPhysicalDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData AddedPhysicalDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedPhysicalDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedPhysicalDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MorePhysicalDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData MorePhysicalDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_AddedExplosiveDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData AddedExplosiveDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedExplosiveDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedExplosiveDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreExplosiveDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreExplosiveDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_AddedRadiationDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData AddedRadiationDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedRadiationDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedRadiationDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreRadiationDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreRadiationDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_AddedChemicalDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData AddedChemicalDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedChemicalDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedChemicalDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreChemicalDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreChemicalDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_AddedEnergyDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData AddedEnergyDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedEnergyDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedEnergyDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreEnergyDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreEnergyDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamagePistol, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamagePistol;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamagePistol, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamagePistol;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageRifle, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageRifle;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageRifle, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageRifle;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageShotgun, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageShotgun;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageShotgun, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageShotgun;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageDroneController, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageDroneController;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageDroneController, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageDroneController;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAxe, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageAxe;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageAxe, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageAxe;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageSword, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageSword;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageSword, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageSword;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageMace, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageMace;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageMace, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageMace;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageGauntlets, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageGauntlets;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageGauntlets, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageGauntlets;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageOrdnance, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageOrdnance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageOrdnance, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageOrdnance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageConduit, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageConduit;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageConduit, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageConduit;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAccelerator, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageAccelerator;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageAccelerator, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageAccelerator;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageSpear, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageSpear;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageSpear, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageSpear;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamagePrecision, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamagePrecision;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamagePrecision, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamagePrecision;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageProjector, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageProjector;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageProjector, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageProjector;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageMelee, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageMelee;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageMelee, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageMelee;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageProjectile, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageProjectile;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageProjectile, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageProjectile;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAoE, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageAoE;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageAoE, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreDamageAoE;
 
 //Resistance
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_PhysicalDamageResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData PhysicalDamageResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_PhysicalMaxResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData PhysicalMaxResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ExplosiveDamageResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData ExplosiveDamageResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ExplosiveMaxResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData ExplosiveMaxResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_RadiationDamageResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData RadiationDamageResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_RadiationMaxResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData RadiationMaxResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ChemicalDamageResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData ChemicalDamageResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ChemicalMaxResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData ChemicalMaxResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_EnergyDamageResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData EnergyDamageResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_EnergyMaxResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData EnergyMaxResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_OverheatDamageResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData OverheatDamageResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_OverheatMaxResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData OverheatMaxResistance;
 
 //Critical
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalStrikeChance, Category = "Secondary Attributes")
 	FGameplayAttributeData CriticalStrikeChance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedCriticalStrikeChance, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedCriticalStrikeChance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalStrikeMultiplier, Category = "Secondary Attributes")
 	FGameplayAttributeData CriticalStrikeMultiplier;
 
 //Defence
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Armour, Category = "Secondary Attributes")
 	FGameplayAttributeData Armour;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ChanceToDodge, Category = "Secondary Attributes")
 	FGameplayAttributeData ChanceToDodge;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BlockChance, Category = "Secondary Attributes")
 	FGameplayAttributeData BlockChance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BlockedDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData BlockedDamage;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_DeferredDamageAmount, Category = "Secondary Attributes")
 	FGameplayAttributeData DeferredDamageAmount;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_DeferredDamageTime, Category = "Secondary Attributes")
 	FGameplayAttributeData DeferredDamageTime;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HealthRegeneration, Category = "Secondary Attributes")
 	FGameplayAttributeData HealthRegeneration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData CriticalHitResistance;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ReducedDamageFromProjectiles, Category = "Secondary Attributes")
 	FGameplayAttributeData ReducedDamageFromProjectiles;
 
 //Defense
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedArmour, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedArmour;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ReducedDamageFromAoE, Category = "Secondary Attributes")
 	FGameplayAttributeData ReducedDamageFromAoE;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ReducedDamageFromMelee, Category = "Secondary Attributes")
 	FGameplayAttributeData ReducedDamageFromMelee;
 
 //Heat
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_AmbientTemperature, Category = "Secondary Attributes")
 	FGameplayAttributeData AmbientTemperature;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ThermalMass, Category = "Secondary Attributes")
 	FGameplayAttributeData ThermalMass;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CoolingCoefficient, Category = "Secondary Attributes")
 	FGameplayAttributeData CoolingCoefficient;
 
 //Debuff
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BruisedEffectiveness, Category = "Secondary Attributes")
 	FGameplayAttributeData BruisedEffectiveness;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ConcussedEffectiveness, Category = "Secondary Attributes")
 	FGameplayAttributeData ConcussedEffectiveness;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IrradiatedEffectiveness, Category = "Secondary Attributes")
 	FGameplayAttributeData IrradiatedEffectiveness;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CorrodedEffectiveness, Category = "Secondary Attributes")
 	FGameplayAttributeData CorrodedEffectiveness;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ThermalDestabalizationEffectiveness, Category = "Secondary Attributes")
 	FGameplayAttributeData ThermalDestabalizationEffectiveness;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BruisedThreshold, Category = "Secondary Attributes")
 	FGameplayAttributeData BruisedThreshold;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ConcussedThreshold, Category = "Secondary Attributes")
 	FGameplayAttributeData ConcussedThreshold;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IrradiatedThreshold, Category = "Secondary Attributes")
 	FGameplayAttributeData IrradiatedThreshold;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CorrodedThreshold, Category = "Secondary Attributes")
 	FGameplayAttributeData CorrodedThreshold;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BruisedDuration, Category = "Secondary Attributes")
 	FGameplayAttributeData BruisedDuration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ConcussedDuration, Category = "Secondary Attributes")
 	FGameplayAttributeData ConcussedDuration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IrradiatedDuration, Category = "Secondary Attributes")
 	FGameplayAttributeData IrradiatedDuration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CorrodedDuration, Category = "Secondary Attributes")
 	FGameplayAttributeData CorrodedDuration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ThermalInsulation, Category = "Secondary Attributes")
 	FGameplayAttributeData ThermalInsulation;
 
 //AoE
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_AreaOfEffectMulitplier, Category = "Secondary Attributes")
 	FGameplayAttributeData AreaOfEffectMulitplier;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_AreaOfEffectAdditionalRadius, Category = "Secondary Attributes")
 	FGameplayAttributeData AreaOfEffectAdditionalRadius;
 
 //Speed
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MovementSpeed, Category = "Secondary Attributes")
 	FGameplayAttributeData MovementSpeed;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_SkillSpeed, Category = "Secondary Attributes")
 	FGameplayAttributeData SkillSpeed;
 
 //Duration
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_SkillDuration, Category = "Secondary Attributes")
 	FGameplayAttributeData SkillDuration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_SkillMoveSpeedModifier, Category = "Secondary Attributes")
 	FGameplayAttributeData SkillMoveSpeedModifier;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ProjectileSpeed, Category = "Secondary Attributes")
 	FGameplayAttributeData ProjectileSpeed;
 
 //HeatCost
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HeatCostEfficiency, Category = "Secondary Attributes")
 	FGameplayAttributeData HeatCostEfficiency;
 
 //Item
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ItemQuantity, Category = "Secondary Attributes")
 	FGameplayAttributeData ItemQuantity;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ItemRarity, Category = "Secondary Attributes")
 	FGameplayAttributeData ItemRarity;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_WattsQuantity, Category = "Secondary Attributes")
 	FGameplayAttributeData WattsQuantity;
 
 //DoT
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageOverTime, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageOverTime;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_DamageOverTimeMultiplier, Category = "Secondary Attributes")
 	FGameplayAttributeData DamageOverTimeMultiplier;
 
 //Penetration
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ArmourPenetration, Category = "Secondary Attributes")
 	FGameplayAttributeData ArmourPenetration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_PhysicalResistancePenetration, Category = "Secondary Attributes")
 	FGameplayAttributeData PhysicalResistancePenetration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ExplosiveResistancePenetration, Category = "Secondary Attributes")
 	FGameplayAttributeData ExplosiveResistancePenetration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_RadiationResistancePenetration, Category = "Secondary Attributes")
 	FGameplayAttributeData RadiationResistancePenetration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ChemicalResistancePenetration, Category = "Secondary Attributes")
 	FGameplayAttributeData ChemicalResistancePenetration;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_EnergyResistancePenetration, Category = "Secondary Attributes")
 	FGameplayAttributeData EnergyResistancePenetration;
 
 //Projectile
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ProjectileTargetsPierced, Category = "Secondary Attributes")
 	FGameplayAttributeData ProjectileTargetsPierced;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ProjectileTargetsBounced, Category = "Secondary Attributes")
 	FGameplayAttributeData ProjectileTargetsBounced;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ProjectileCount, Category = "Secondary Attributes")
 	FGameplayAttributeData ProjectileCount;
 
 //Conversion
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_PhysicalDamageToEnergy, Category = "Secondary Attributes")
 	FGameplayAttributeData PhysicalDamageToEnergy;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ChemicalDamageToRadiation, Category = "Secondary Attributes")
 	FGameplayAttributeData ChemicalDamageToRadiation;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ExplosiveDamageToPhysical, Category = "Secondary Attributes")
 	FGameplayAttributeData ExplosiveDamageToPhysical;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_EnergyTakenAsRadiation, Category = "Secondary Attributes")
 	FGameplayAttributeData EnergyTakenAsRadiation;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ChemicalTakenAsExplosive, Category = "Secondary Attributes")
 	FGameplayAttributeData ChemicalTakenAsExplosive;
 
 //Conditional
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAgainstBruised, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageAgainstBruised;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAgainstConcussed, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageAgainstConcussed;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAgainstIrradiated, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageAgainstIrradiated;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAgainstCorroded, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageAgainstCorroded;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAgainstOverheated, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageAgainstOverheated;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAgainstFrozen, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamageAgainstFrozen;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamagePerHeatFromEquilibrium, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamagePerHeatFromEquilibrium;
 
 //Recovery
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_LifeGainedOnHit, Category = "Secondary Attributes")
 	FGameplayAttributeData LifeGainedOnHit;
 
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Secondary Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_LifeGainedOnKill, Category = "Secondary Attributes")
 	FGameplayAttributeData LifeGainedOnKill;
 
 
 //Meta Attributes
 //Damage
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Meta Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncomingDamage, Category = "Meta Attributes")
 	FGameplayAttributeData IncomingDamage;
 
 //XP
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Meta Attributes")
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncomingXP, Category = "Meta Attributes")
 	FGameplayAttributeData IncomingXP;
 	
 	//Vital Attributes

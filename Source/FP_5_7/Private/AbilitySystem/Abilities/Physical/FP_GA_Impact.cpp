@@ -4,6 +4,8 @@
 
 #include "AbilitySystemComponent.h"
 #include "FP_GameplayTags.h"
+#include "DrawDebugHelpers.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Engine/OverlapResult.h"
 #include "Engine/EngineTypes.h"
 #include "GameFramework/Pawn.h"
@@ -37,24 +39,7 @@ void UFP_GA_Impact::ActivateAbility(
 	}
 	// Blueprint takes over from here:
 	//   PlayMontageAndWait → WaitGameplayEvent(Event.Montage.1) → PerformInitialImpact → EndAbility
-}
-
-void UFP_GA_Impact::EndAbility(
-	const FGameplayAbilitySpecHandle Handle,
-	const FGameplayAbilityActorInfo* ActorInfo,
-	const FGameplayAbilityActivationInfo ActivationInfo,
-	bool bReplicateEndAbility,
-	bool bWasCancelled)
-{
-	if (UWorld* World = GetWorld())
-	{
-		FTimerManager& TimerManager = World->GetTimerManager();
-		for (FTimerHandle& TimerHandle : PendingChainTimers)
-			TimerManager.ClearTimer(TimerHandle);
-	}
-	PendingChainTimers.Reset();
-
-	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
+	// (chain AoEs keep resolving after EndAbility — see class comment)
 }
 
 // ---------------------------------------------------------------------------
@@ -66,33 +51,29 @@ void UFP_GA_Impact::PerformInitialImpact()
 	AActor* Avatar = GetAvatarActorFromActorInfo();
 	if (!Avatar || !Avatar->HasAuthority()) return;
 
-	// Defensive reset: the ability instance is InstancedPerActor and reused across
-	// activations, so a rapid re-swing must not inherit the previous swing's state.
-	if (UWorld* World = GetWorld())
-	{
-		FTimerManager& TimerManager = World->GetTimerManager();
-		for (FTimerHandle& TimerHandle : PendingChainTimers)
-			TimerManager.ClearTimer(TimerHandle);
-	}
-	PendingChainTimers.Reset();
-	HitActors.Reset();
-	HitActors.Add(Avatar); // always exclude the caster
+	// Fresh context per activation — deliberately not ability-instance state, so a
+	// re-triggered swing can't stomp on a previous swing's still-resolving chain.
+	FImpactChainStatePtr State = MakeShared<FImpactChainState>();
+	State->HitActors.Add(Avatar); // always exclude the caster
 
 	const FVector SocketLocation = IFP_CombatInterface::Execute_GetCombatSocketLocation(
 		Avatar, FFP_GameplayTags::Get().Montage_Skill_Weapon);
 
-	ApplySphereDamageAndScheduleChain(SocketLocation, GetEffectiveInitialRadius(), /*DamageMultiplier=*/1.f, /*ChainDepth=*/0);
+	ApplySphereDamageAndScheduleChain(State, SocketLocation, GetEffectiveInitialRadius(), /*DamageMultiplier=*/1.f, /*ChainDepth=*/0);
 }
 
 // ---------------------------------------------------------------------------
 // Internal helpers
 // ---------------------------------------------------------------------------
 
-void UFP_GA_Impact::ApplySphereDamageAndScheduleChain(const FVector& Origin, float Radius, float DamageMultiplier, int32 ChainDepth)
+void UFP_GA_Impact::ApplySphereDamageAndScheduleChain(const FImpactChainStatePtr& State, const FVector& Origin, float Radius, float DamageMultiplier, int32 ChainDepth)
 {
+	SpawnImpactEffects(Origin, Radius);
+
 	FCollisionQueryParams QueryParams;
-	for (AActor* Ignored : HitActors)
-		QueryParams.AddIgnoredActor(Ignored);
+	for (const TWeakObjectPtr<AActor>& Ignored : State->HitActors)
+		if (AActor* IgnoredActor = Ignored.Get())
+			QueryParams.AddIgnoredActor(IgnoredActor);
 
 	TArray<FOverlapResult> Overlaps;
 	GetWorld()->OverlapMultiByObjectType(
@@ -109,30 +90,45 @@ void UFP_GA_Impact::ApplySphereDamageAndScheduleChain(const FVector& Origin, flo
 	for (const FOverlapResult& Overlap : Overlaps)
 	{
 		AActor* Target = Overlap.GetActor();
-		if (!Target || HitActors.Contains(Target)) continue;
+		if (!Target) continue;
+		if (State->HitActors.ContainsByPredicate([Target](const TWeakObjectPtr<AActor>& W) { return W.Get() == Target; })) continue;
 		if (!Target->Implements<UFP_EnemyInterface>()) continue;
 
-		HitActors.Add(Target);
+		State->HitActors.Add(Target);
 		CauseDamage(Target, DamageMultiplier);
 
 		if (ChainDepth < EffectiveMaxChainDepth)
 		{
 			FTimerHandle TimerHandle;
 			FTimerDelegate TimerDelegate = FTimerDelegate::CreateUObject(
-				this, &UFP_GA_Impact::SpawnChainedImpactAt, TWeakObjectPtr<AActor>(Target), ChainDepth + 1);
+				this, &UFP_GA_Impact::SpawnChainedImpactAt, State, TWeakObjectPtr<AActor>(Target), ChainDepth + 1);
 			GetWorld()->GetTimerManager().SetTimer(TimerHandle, TimerDelegate, ChainDelay, false);
-			PendingChainTimers.Add(TimerHandle);
 		}
 	}
 }
 
-void UFP_GA_Impact::SpawnChainedImpactAt(TWeakObjectPtr<AActor> TargetActor, int32 ChainDepth)
+void UFP_GA_Impact::SpawnChainedImpactAt(FImpactChainStatePtr State, TWeakObjectPtr<AActor> TargetActor, int32 ChainDepth)
 {
 	AActor* Target = TargetActor.Get();
 	if (!Target) return; // enemy died before its chain detonation fired
 
-	ApplySphereDamageAndScheduleChain(Target->GetActorLocation(), GetEffectiveSecondaryRadius(),
+	ApplySphereDamageAndScheduleChain(State, Target->GetActorLocation(), GetEffectiveSecondaryRadius(),
 		GetEffectiveSecondaryDamageMultiplier(), ChainDepth);
+}
+
+void UFP_GA_Impact::SpawnImpactEffects(const FVector& Location, float Radius) const
+{
+	if (ImpactVFX)
+	{
+		const float Scale = VFXReferenceRadius > 0.f ? (Radius / VFXReferenceRadius) : 1.f;
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+			GetWorld(), ImpactVFX, Location, FRotator::ZeroRotator, FVector(Scale), true, true, ENCPoolMethod::AutoRelease);
+	}
+
+	if (bDrawDebugAoESpheres)
+	{
+		DrawDebugSphere(GetWorld(), Location, Radius, 24, FColor::Orange, false, 1.5f);
+	}
 }
 
 // ---------------------------------------------------------------------------
@@ -141,20 +137,35 @@ void UFP_GA_Impact::SpawnChainedImpactAt(TWeakObjectPtr<AActor> TargetActor, int
 
 float UFP_GA_Impact::GetEffectiveInitialRadius() const
 {
-	float ExtraRadius = 0.f;
+	float ExtraRadiusMetres = 0.f;
+	float AreaOfEffectDelta = 0.f;
 	if (const AFP_PlayerState* PS = GetLocalPS())
-		ExtraRadius = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_Impact_InitialRadius);
+	{
+		ExtraRadiusMetres = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_Impact_InitialRadius);
+		AreaOfEffectDelta = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_Impact_InitialAreaOfEffect);
+	}
 
-	return GetEffectiveSphereRadius(BaseInitialRadius + ExtraRadius);
+	const float ExtraRadiusCm = ExtraRadiusMetres * 100.f;
+	const float AreaScale = FMath::Max(1.f + AreaOfEffectDelta, 0.0001f);
+
+	// Circle area ∝ r² → scale r by sqrt(1+M) to grow area proportionally (same convention as GetEffectiveSphereRadius's own global AoE terms).
+	return GetEffectiveSphereRadius(BaseInitialRadius + ExtraRadiusCm) * FMath::Sqrt(AreaScale);
 }
 
 float UFP_GA_Impact::GetEffectiveSecondaryRadius() const
 {
-	float ExtraRadius = 0.f;
+	float ExtraRadiusMetres = 0.f;
+	float AreaOfEffectDelta = 0.f;
 	if (const AFP_PlayerState* PS = GetLocalPS())
-		ExtraRadius = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_Impact_SecondaryRadius);
+	{
+		ExtraRadiusMetres = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_Impact_SecondaryRadius);
+		AreaOfEffectDelta = PS->GetSkillPassiveValue(FFP_GameplayTags::Get().SkillPassive_Impact_SecondaryAreaOfEffect);
+	}
 
-	return GetEffectiveSphereRadius(BaseSecondaryRadius + ExtraRadius);
+	const float ExtraRadiusCm = ExtraRadiusMetres * 100.f;
+	const float AreaScale = FMath::Max(1.f + AreaOfEffectDelta, 0.0001f);
+
+	return GetEffectiveSphereRadius(BaseSecondaryRadius + ExtraRadiusCm) * FMath::Sqrt(AreaScale);
 }
 
 float UFP_GA_Impact::GetEffectiveChainDelay() const

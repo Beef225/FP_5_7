@@ -115,6 +115,26 @@ float UFP_DamageGameplayAbility::GetAoEAttributeModifier() const
 	return (BaseRadius + AdditionalRadiusScaled) * FMath::Sqrt(MultiplierTerm);
 }
 
+void UFP_DamageGameplayAbility::GetSkillModifierTags(FGameplayTagContainer& OutTags) const
+{
+	const FGameplayTag SkillTagRoot = FGameplayTag::RequestGameplayTag(FName("Skill"));
+	const FGameplayTag SkillsTagRoot = FGameplayTag::RequestGameplayTag(FName("Skills"));
+	for (const FGameplayTag& Tag : GetAssetTags())
+	{
+		if (Tag.MatchesTag(SkillTagRoot) || Tag.MatchesTag(SkillsTagRoot))
+		{
+			OutTags.AddTag(Tag);
+			break;
+		}
+	}
+
+	FFP_AbilityEntry AbilityEntry;
+	if (ResolveSkillAbilityEntry(this, AbilityEntry))
+	{
+		OutTags.AppendTags(AbilityEntry.SkillModifierTags);
+	}
+}
+
 void UFP_DamageGameplayAbility::AppendSkillModifierTagsToDamageSpec(FGameplayEffectSpecHandle& DamageSpecHandle) const
 {
 	if (!DamageSpecHandle.Data.IsValid())
@@ -245,6 +265,8 @@ void UFP_DamageGameplayAbility::AssignSkillPassiveBonuses(FGameplayEffectSpecHan
 		else if (Leaf == TEXT("MoreDamage"))               Bucket = Tags.SetByCaller_SkillBonus_MoreDamage;
 		else if (Leaf == TEXT("IncreasedChemicalDamage"))  Bucket = Tags.SetByCaller_SkillBonus_IncreasedChemicalDamage;
 		else if (Leaf == TEXT("MoreChemicalDamage"))        Bucket = Tags.SetByCaller_SkillBonus_MoreChemicalDamage;
+		else if (Leaf == TEXT("IncreasedPhysicalDamage"))  Bucket = Tags.SetByCaller_SkillBonus_IncreasedPhysicalDamage;
+		else if (Leaf == TEXT("MorePhysicalDamage"))        Bucket = Tags.SetByCaller_SkillBonus_MorePhysicalDamage;
 		else if (Leaf == TEXT("CritChance"))               Bucket = Tags.SetByCaller_SkillBonus_CritChance;
 		else if (Leaf == TEXT("IncreasedCritChance"))      Bucket = Tags.SetByCaller_SkillBonus_IncreasedCritChance;
 		else if (Leaf == TEXT("CritMultiplier"))           Bucket = Tags.SetByCaller_SkillBonus_CritMultiplier;

@@ -44,6 +44,9 @@ static TArray<FFP_ImplicitStatSnapshot> SnapshotImplicitStats(
 			const TStaticFuncPtr<FGameplayAttribute()>* Fn = AS->TagsToAttributes.Find(Tag);
 			if (!Fn)
 			{
+				// Gated stats (e.g. Crit.Rifle) don't change the attribute's plain value — nothing to log.
+				FGameplayAttribute GatedAttr; FGameplayTagContainer GatedReqs;
+				if (AS->ResolveStatTag(Tag, GatedAttr, GatedReqs)) return;
 				UE_LOG(LogTemp, Warning, TEXT("[IMPLICIT] Tag '%s' has no entry in TagsToAttributes — will not be logged"), *Tag.ToString());
 				return;
 			}
@@ -94,15 +97,17 @@ void FFP_ImplicitFragment::OnEquip(APlayerController* PC)
 	auto AddMod = [&](FGameplayTag StatTag, float Value)
 	{
 		if (!StatTag.IsValid()) return;
-		const TStaticFuncPtr<FGameplayAttribute()>* AttrFunc = AS->TagsToAttributes.Find(StatTag);
-		if (!AttrFunc)
+		FGameplayAttribute Attribute;
+		FGameplayTagContainer RequiredSkillTags;
+		if (!AS->ResolveStatTag(StatTag, Attribute, RequiredSkillTags))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("[IMPLICIT EQUIP] Tag '%s' has no entry in TagsToAttributes — stat will not be applied"), *StatTag.ToString());
+			UE_LOG(LogTemp, Warning, TEXT("[IMPLICIT EQUIP] Tag '%s' is not an attribute tag or a gated stat tag — stat will not be applied"), *StatTag.ToString());
 			return;
 		}
 
 		FGameplayModifierInfo Mod;
-		Mod.Attribute         = (*AttrFunc)();
+		Mod.Attribute         = Attribute;
+		Mod.SourceTags.RequireTags = RequiredSkillTags; // gated stat (e.g. Rifle-only)
 		Mod.ModifierOp        = EGameplayModOp::Additive;
 		FScalableFloat SF;
 		SF.Value              = Value;

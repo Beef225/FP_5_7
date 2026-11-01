@@ -56,14 +56,15 @@ void FFP_NodeEffect_StatModifier::OnAllocate(APlayerController* PC)
 		return;
 	}
 
-	const TStaticFuncPtr<FGameplayAttribute()>* FuncPtr = AS->TagsToAttributes.Find(AttributeTag);
-	if (!FuncPtr)
+	// Plain stat tag -> its attribute. Gated tag (e.g. Speed.Skill.Rifle) -> the base attribute plus
+	// SkillTagMod requirements, so the modifier only counts for skills carrying those tags.
+	FGameplayAttribute Attribute;
+	FGameplayTagContainer RequiredSkillTags;
+	if (!AS->ResolveStatTag(AttributeTag, Attribute, RequiredSkillTags))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("StatModifier::OnAllocate — AttributeTag [%s] not found in TagsToAttributes"), *AttributeTag.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("StatModifier::OnAllocate — AttributeTag [%s] is not an attribute tag or a gated stat tag"), *AttributeTag.ToString());
 		return;
 	}
-
-	const FGameplayAttribute Attribute = (*FuncPtr)();
 
 	UE_LOG(LogTemp, Log, TEXT("StatModifier::OnAllocate — Applying [%s] Op=%d Magnitude=%.4f to [%s]"),
 		*AttributeTag.ToString(), (int32)ModifierOp.GetValue(), Magnitude, *Attribute.GetName());
@@ -75,6 +76,7 @@ void FFP_NodeEffect_StatModifier::OnAllocate(APlayerController* PC)
 	ModInfo.Attribute         = Attribute;
 	ModInfo.ModifierOp        = ModifierOp;
 	ModInfo.ModifierMagnitude = FGameplayEffectModifierMagnitude(FScalableFloat(Magnitude));
+	ModInfo.SourceTags.RequireTags = RequiredSkillTags;
 	DynamicGE->Modifiers.Add(ModInfo);
 
 	const FGameplayEffectContextHandle Context = ASC->MakeEffectContext();

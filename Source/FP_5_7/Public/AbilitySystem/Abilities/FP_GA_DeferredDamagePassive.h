@@ -8,17 +8,13 @@
 #include "FP_GA_DeferredDamagePassive.generated.h"
 
 /**
- * Startup passive ability that intercepts the GameplayEvent.DeferredDamage event
- * broadcast by ExecCalc_Damage and applies the pre-computed per-tick damage as a
- * periodic gameplay effect.
- *
- * Setup:
- *   1. Grant this ability to the character at startup (same as FreezePassive/OverheatPassive).
- *   2. Set DeferredDamageEffectClass to the GE Blueprint configured as follows:
- *        - Duration Policy : Has Duration  (SetByCaller tag: SetByCaller.DotDuration)
- *        - Period          : 0.1
- *        - Modifier        : IncomingDamage += SetByCaller(SetByCaller.DeferredDamagePerTick)
- *        - No execution calculation needed.
+ * OBSOLETE (2026-10-31): deferred damage is now handled natively.
+ *   ExecCalc_Damage splits the deferred share AFTER all mitigation into the
+ *   IncomingDeferredDamage meta attribute -> UFP_AttributeSet -> UFP_AbilitySystemComponent
+ *   ::AddDeferredDamage (stacking, re-timeable instances, 10 Hz drip).
+ * GameplayEvent.DeferredDamage is no longer sent, so this ability does nothing. Remove
+ * GA_DeferredDamage from startup passives and delete GA_/GE_DeferredDamage in the editor;
+ * then this class can be deleted.
  */
 UCLASS()
 class FP_5_7_API UFP_GA_DeferredDamagePassive : public UFP_GameplayAbility

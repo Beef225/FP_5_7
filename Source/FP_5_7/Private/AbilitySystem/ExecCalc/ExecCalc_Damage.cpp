@@ -701,48 +701,6 @@ void UExecCalc_Damage::Execute_Implementation(
 
 
 	// -------------------------------------------------------
-	// 1b) DEFERRED DAMAGE SPLIT
-	//     Take a fraction of the offense-scaled damage and
-	//     send it as a DoT event — BEFORE defences apply so
-	//     the deferred portion is never double-mitigated.
-	// -------------------------------------------------------
-	{
-		const float DeferredFraction = FMath::Clamp(GetCaptured(DamageStatics().DeferredDamageAmountDef), 0.f, 1.f);
-		const float DeferredTime     = GetCaptured(DamageStatics().DeferredDamageTimeDef);
-
-		UAbilitySystemComponent* MutableTargetASC = const_cast<UAbilitySystemComponent*>(TargetASC);
-		if (DeferredFraction > 0.f && DeferredTime > 0.f && MutableTargetASC)
-		{
-			const float TotalOffense = GenericDamage + PhysicalDamage + ExplosiveDamage
-			                         + RadiationDamage + ChemicalDamage + EnergyDamage;
-			const float DeferredTotal = TotalOffense * DeferredFraction;
-
-			// Scale main damage path down — deferred portion is removed from the defence pipeline
-			const float RetainedFraction = 1.f - DeferredFraction;
-			GenericDamage   *= RetainedFraction;
-			PhysicalDamage  *= RetainedFraction;
-			ExplosiveDamage *= RetainedFraction;
-			RadiationDamage *= RetainedFraction;
-			ChemicalDamage  *= RetainedFraction;
-			EnergyDamage    *= RetainedFraction;
-
-			// Per-tick value for the 10 Hz deferred DoT GE (defences already bypassed)
-			constexpr float DotTickRate  = 10.f;
-			const float PerTickDamage    = DeferredTotal / DeferredTime / DotTickRate;
-
-			FGameplayEventData DeferredEvent;
-			DeferredEvent.EventMagnitude = PerTickDamage;
-			MutableTargetASC->HandleGameplayEvent(GameplayTags.GameplayEvent_DeferredDamage, &DeferredEvent);
-
-			LogStep(TEXT("1b) DeferredSplit"),
-				GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage,
-				FString::Printf(TEXT("Fraction=%.4f Time=%.2fs TotalDeferred=%.4f PerTick=%.4f Retained=%.4f"),
-					DeferredFraction, DeferredTime, DeferredTotal, PerTickDamage,
-					GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage));
-		}
-	}
-
-	// -------------------------------------------------------
 	// 2) RESISTANCES (per type, before block)
 	// -------------------------------------------------------
 	auto ApplyResistance = [](float InDamage, float Resistance, float MaxResistance, float Penetration)
@@ -891,15 +849,37 @@ void UExecCalc_Damage::Execute_Implementation(
 			Armour, DamageBeforeArmour, Damage));
 
 	// -------------------------------------------------------
+	// 6b) DEFERRED DAMAGE (target defence)
+	//     After ALL mitigation: the target's DeferredDamageAmount fraction of this
+	//     hit is not taken now but dripped into HitPoints over DeferredDamageTime
+	//     seconds (UFP_AbilitySystemComponent deferred instances). Only this direct-
+	//     damage calc defers; ExecCalc_DamageOverTime never does.
+	// -------------------------------------------------------
+	float DeferredDamage = 0.f;
+	{
+		const float DeferredFraction = Clamp01(GetCaptured(DamageStatics().DeferredDamageAmountDef, 0.f));
+		const float DeferredTime     = GetCaptured(DamageStatics().DeferredDamageTimeDef, 0.f);
+		if (DeferredFraction > 0.f && DeferredTime > 0.f && Damage > 0.f)
+		{
+			DeferredDamage = Damage * DeferredFraction;
+			Damage -= DeferredDamage;
+		}
+		LogStep(TEXT("6b) Deferred"), Damage,
+			FString::Printf(TEXT("Fraction=%.4f Time=%.2fs Deferred=%.4f Immediate=%.4f"),
+				DeferredFraction, DeferredTime, DeferredDamage, Damage));
+	}
+
+	// -------------------------------------------------------
 	// 7) OUTPUT
 	// -------------------------------------------------------
-	LogStep(TEXT("7) Output"), Damage, TEXT("Applying IncomingDamage"));
+	LogStep(TEXT("7) Output"), Damage, TEXT("Applying IncomingDamage (+ IncomingDeferredDamage)"));
 
-	const FGameplayModifierEvaluatedData EvaluatedData(
-		UFP_AttributeSet::GetIncomingDamageAttribute(),
-		EGameplayModOp::Additive,
-		Damage);
-
-	OutExecutionOutput.AddOutputModifier(EvaluatedData);
+	OutExecutionOutput.AddOutputModifier(FGameplayModifierEvaluatedData(
+		UFP_AttributeSet::GetIncomingDamageAttribute(), EGameplayModOp::Additive, Damage));
+	if (DeferredDamage > 0.f)
+	{
+		OutExecutionOutput.AddOutputModifier(FGameplayModifierEvaluatedData(
+			UFP_AttributeSet::GetIncomingDeferredDamageAttribute(), EGameplayModOp::Additive, DeferredDamage));
+	}
 }
 

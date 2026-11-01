@@ -281,6 +281,7 @@ FGameplayTag Damage_Overheat;
 
 //Effects
 FGameplayTag Effects_HitReact;
+FGameplayTag Effects_DeferredDamageTick;
 FGameplayTag Effects_DeathReact;
 
 //Skills

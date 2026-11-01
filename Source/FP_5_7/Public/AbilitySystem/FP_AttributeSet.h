@@ -542,6 +542,12 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_LifeGainedOnKill, Category 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncomingDamage, Category = "Meta Attributes")
 	FGameplayAttributeData IncomingDamage;
 
+// Deferred share of a direct hit, output by ExecCalc_Damage alongside IncomingDamage.
+// Server-side meta attribute (not replicated): PostGameplayEffectExecute hands it to
+// UFP_AbilitySystemComponent::AddDeferredDamage, which drips it into HitPoints over time.
+UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingDeferredDamage;
+
 //XP
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncomingXP, Category = "Meta Attributes")
 	FGameplayAttributeData IncomingXP;
@@ -1143,6 +1149,7 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_IncomingDamage(const FGameplayAttributeData& OldIncomingDamage) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncomingDamage)
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncomingDeferredDamage)
 
 //XP
 UFUNCTION()

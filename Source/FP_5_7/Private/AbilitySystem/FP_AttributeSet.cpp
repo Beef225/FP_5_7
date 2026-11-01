@@ -2,6 +2,7 @@
 
 
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "AbilitySystem/FP_AbilitySystemComponent.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "FP_AbilityTypes.h"
@@ -623,11 +624,34 @@ void UFP_AttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 			}
 			else
 			{
-				FGameplayTagContainer TagContainer;
-				TagContainer.AddTag(FFP_GameplayTags::Get().Effects_HitReact);
-				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
+				// Deferred-damage drip ticks (10 Hz) must not spam hit reacts.
+				FGameplayTagContainer SpecAssetTags;
+				Data.EffectSpec.GetAllAssetTags(SpecAssetTags);
+				if (!SpecAssetTags.HasTagExact(FFP_GameplayTags::Get().Effects_DeferredDamageTick))
+				{
+					FGameplayTagContainer TagContainer;
+					TagContainer.AddTag(FFP_GameplayTags::Get().Effects_HitReact);
+					Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
+				}
 			}
 
+		}
+	}
+	if (Data.EvaluatedData.Attribute == GetIncomingDeferredDamageAttribute())
+	{
+		const float LocalDeferred = GetIncomingDeferredDamage();
+		SetIncomingDeferredDamage(0.f);
+		if (LocalDeferred > 0.f)
+		{
+			if (UFP_AbilitySystemComponent* TargetFPASC = Cast<UFP_AbilitySystemComponent>(Props.TargetASC))
+			{
+				// Spread over the target's CURRENT DeferredDamageTime; source kept for kill/XP credit.
+				TargetFPASC->AddDeferredDamage(LocalDeferred, GetDeferredDamageTime(), Props.SourceASC);
+			}
+			else
+			{
+				SetHitPoints(FMath::Clamp(GetHitPoints() - LocalDeferred, 0.f, GetMaxHitPoints()));
+			}
 		}
 	}
 	if (Data.EvaluatedData.Attribute == GetIncomingXPAttribute())

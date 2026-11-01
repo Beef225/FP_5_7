@@ -12,6 +12,18 @@ DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags, const FGameplayTagContaine
 DECLARE_MULTICAST_DELEGATE_OneParam(FAbilitesGiven, UFP_AbilitySystemComponent* );
 DECLARE_DELEGATE_OneParam(FForEachAbilty, const FGameplayAbilitySpec& );
 
+/** One deferred hit: damage still owed and the time left to deal it. Server-only. */
+USTRUCT()
+struct FFP_DeferredDamageInstance
+{
+	GENERATED_BODY()
+
+	float RemainingDamage = 0.f;
+	float RemainingTime = 0.f;
+	/** Who dealt the original hit; drip ticks use it as instigator (kill / XP credit). */
+	TWeakObjectPtr<UAbilitySystemComponent> SourceASC;
+};
+
 
 /**
  * 
@@ -58,12 +70,60 @@ public:
 	static FGameplayTag GetAbilityTagFromSpec(const FGameplayAbilitySpec& AbilitySpec);
 	static FGameplayTag GetInputTagFromSpec(const FGameplayAbilitySpec& AbilitySpec);
 
+	// ---- Deferred damage -------------------------------------------------------------
+	// Each direct hit taken while DeferredDamageAmount > 0 adds one instance (they stack).
+	// Every tick each instance pays out RemainingDamage * dt / RemainingTime, so changing an
+	// instance's RemainingTime re-spreads what is still owed. The owed AMOUNT never changes.
+	// AUTOMATIC: whenever the DeferredDamageTime attribute changes (any GE, ability, node, gear),
+	// every pending instance's remaining time is scaled by NewValue / OldValue. Dropping the
+	// stat to 0 therefore pays out everything still owed on the next tick.
+
+	/** Server only. Called from UFP_AttributeSet when ExecCalc_Damage outputs IncomingDeferredDamage. */
+	void AddDeferredDamage(float Amount, float Duration, UAbilitySystemComponent* SourceASC);
+
+	/** Set the remaining time of every pending instance (seconds). <= 0 pays everything out next tick. */
+	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "FP|Deferred Damage")
+	void SetDeferredDamageRemainingTime(float NewRemainingTime);
+
+	/** Multiply the remaining time of every pending instance (e.g. 2 = drip twice as slowly). */
+	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "FP|Deferred Damage")
+	void ScaleDeferredDamageRemainingTime(float Multiplier);
+
+	/** Total damage still owed across all instances. */
+	UFUNCTION(BlueprintPure, Category = "FP|Deferred Damage")
+	float GetPendingDeferredDamage() const;
+
+	UFUNCTION(BlueprintPure, Category = "FP|Deferred Damage")
+	int32 GetNumDeferredDamageInstances() const { return DeferredDamageInstances.Num(); }
+
+	/** Drop all pending deferred damage without dealing it. */
+	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "FP|Deferred Damage")
+	void ClearDeferredDamage();
+
+	/** Seconds between drip ticks. */
+	UPROPERTY(EditDefaultsOnly, Category = "FP|Deferred Damage", meta = (ClampMin = "0.02"))
+	float DeferredDamageTickInterval = 0.1f;
+
 
 protected:
 
 	virtual void OnRep_ActivateAbilities() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 	
 	UFUNCTION(Client, Reliable)
 	void ClientEffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle);
 	
+private:
+	void TickDeferredDamage();
+	void OnDeferredDamageTimeChanged(const FOnAttributeChangeData& Data);
+	FDelegateHandle DeferredDamageTimeChangedHandle;
+	void ApplyDeferredDamageTick(float Amount, UAbilitySystemComponent* SourceASC);
+
+	TArray<FFP_DeferredDamageInstance> DeferredDamageInstances;
+	FTimerHandle DeferredDamageTimer;
+	double LastDeferredTickTime = 0.0;
+
+	/** Transient instant GE: IncomingDamage += SetByCaller.DeferredDamagePerTick. Built on first use. */
+	UPROPERTY(Transient)
+	TObjectPtr<UGameplayEffect> DeferredDamageTickEffect;
 };

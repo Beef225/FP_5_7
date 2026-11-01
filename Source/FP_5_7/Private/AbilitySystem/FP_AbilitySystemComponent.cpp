@@ -8,10 +8,22 @@
 #include "Interaction/FP_PlayerInterface.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "Player/FP_PlayerState.h"
+#include "GameplayEffect.h"
+#include "TimerManager.h"
+#include "Engine/World.h"
+#include "Interaction/FP_CombatInterface.h"
 
 void UFP_AbilitySystemComponent::AbilityActorInfoSet()
 {
 	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &UFP_AbilitySystemComponent::ClientEffectApplied);
+
+	// Pending deferred damage follows changes to the DeferredDamageTime stat (bind once).
+	if (!DeferredDamageTimeChangedHandle.IsValid())
+	{
+		DeferredDamageTimeChangedHandle = GetGameplayAttributeValueChangeDelegate(
+			UFP_AttributeSet::GetDeferredDamageTimeAttribute()).AddUObject(
+				this, &UFP_AbilitySystemComponent::OnDeferredDamageTimeChanged);
+	}
 }
 
 void UFP_AbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities)
@@ -220,4 +232,166 @@ void UFP_AbilitySystemComponent::ClientEffectApplied_Implementation(UAbilitySyst
 	FGameplayTagContainer TagContainer;
 	EffectSpec.GetAllAssetTags(TagContainer);
 	EffectAssetTags.Broadcast(TagContainer);
+}
+
+// ---------------------------------------------------------------------------
+// Deferred damage
+// ---------------------------------------------------------------------------
+
+void UFP_AbilitySystemComponent::AddDeferredDamage(float Amount, float Duration, UAbilitySystemComponent* SourceASC)
+{
+	if (Amount <= 0.f || !IsOwnerActorAuthoritative())
+	{
+		return;
+	}
+
+	FFP_DeferredDamageInstance& Instance = DeferredDamageInstances.AddDefaulted_GetRef();
+	Instance.RemainingDamage = Amount;
+	Instance.RemainingTime = FMath::Max(Duration, 0.f);
+	Instance.SourceASC = SourceASC;
+
+	UWorld* World = GetWorld();
+	if (World && !World->GetTimerManager().IsTimerActive(DeferredDamageTimer))
+	{
+		LastDeferredTickTime = World->GetTimeSeconds();
+		World->GetTimerManager().SetTimer(DeferredDamageTimer, this, &UFP_AbilitySystemComponent::TickDeferredDamage,
+			FMath::Max(DeferredDamageTickInterval, 0.02f), true);
+	}
+}
+
+void UFP_AbilitySystemComponent::OnDeferredDamageTimeChanged(const FOnAttributeChangeData& Data)
+{
+	if (!IsOwnerActorAuthoritative() || DeferredDamageInstances.IsEmpty())
+	{
+		return;
+	}
+	// Instances only exist if the time was > 0 when they were created; with no meaningful
+	// old value there is nothing to scale against.
+	if (Data.OldValue <= KINDA_SMALL_NUMBER)
+	{
+		return;
+	}
+	// Proportional: 10s -> 5s halves every instance's remaining time (6s left -> 3s left).
+	ScaleDeferredDamageRemainingTime(FMath::Max(Data.NewValue, 0.f) / Data.OldValue);
+}
+
+void UFP_AbilitySystemComponent::SetDeferredDamageRemainingTime(float NewRemainingTime)
+{
+	for (FFP_DeferredDamageInstance& Instance : DeferredDamageInstances)
+	{
+		Instance.RemainingTime = FMath::Max(NewRemainingTime, 0.f);
+	}
+}
+
+void UFP_AbilitySystemComponent::ScaleDeferredDamageRemainingTime(float Multiplier)
+{
+	for (FFP_DeferredDamageInstance& Instance : DeferredDamageInstances)
+	{
+		Instance.RemainingTime = FMath::Max(Instance.RemainingTime * Multiplier, 0.f);
+	}
+}
+
+float UFP_AbilitySystemComponent::GetPendingDeferredDamage() const
+{
+	float Total = 0.f;
+	for (const FFP_DeferredDamageInstance& Instance : DeferredDamageInstances)
+	{
+		Total += Instance.RemainingDamage;
+	}
+	return Total;
+}
+
+void UFP_AbilitySystemComponent::ClearDeferredDamage()
+{
+	DeferredDamageInstances.Reset();
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(DeferredDamageTimer);
+	}
+}
+
+void UFP_AbilitySystemComponent::TickDeferredDamage()
+{
+	UWorld* World = GetWorld();
+	if (!World)
+	{
+		return;
+	}
+	const double Now = World->GetTimeSeconds();
+	const float DeltaTime = static_cast<float>(Now - LastDeferredTickTime);
+	LastDeferredTickTime = Now;
+
+	AActor* Avatar = GetAvatarActor();
+	if (!Avatar || (Avatar->Implements<UFP_CombatInterface>() && IFP_CombatInterface::Execute_IsDead(Avatar)))
+	{
+		ClearDeferredDamage();
+		return;
+	}
+
+	// Pay out each instance's share for this tick, grouped by source so kill credit stays correct.
+	TMap<TWeakObjectPtr<UAbilitySystemComponent>, float> DamageBySource;
+	for (int32 i = DeferredDamageInstances.Num() - 1; i >= 0; --i)
+	{
+		FFP_DeferredDamageInstance& Instance = DeferredDamageInstances[i];
+		const float Payout = (Instance.RemainingTime <= DeltaTime)
+			? Instance.RemainingDamage
+			: Instance.RemainingDamage * (DeltaTime / Instance.RemainingTime);
+
+		Instance.RemainingDamage -= Payout;
+		Instance.RemainingTime = FMath::Max(Instance.RemainingTime - DeltaTime, 0.f);
+		DamageBySource.FindOrAdd(Instance.SourceASC) += Payout;
+
+		if (Instance.RemainingDamage <= KINDA_SMALL_NUMBER)
+		{
+			DeferredDamageInstances.RemoveAtSwap(i);
+		}
+	}
+
+	if (DeferredDamageInstances.IsEmpty())
+	{
+		World->GetTimerManager().ClearTimer(DeferredDamageTimer);
+	}
+
+	for (const TPair<TWeakObjectPtr<UAbilitySystemComponent>, float>& Pair : DamageBySource)
+	{
+		if (Pair.Value > 0.f)
+		{
+			ApplyDeferredDamageTick(Pair.Value, Pair.Key.Get());
+		}
+	}
+}
+
+void UFP_AbilitySystemComponent::ApplyDeferredDamageTick(float Amount, UAbilitySystemComponent* SourceASC)
+{
+	const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
+
+	if (!DeferredDamageTickEffect)
+	{
+		DeferredDamageTickEffect = NewObject<UGameplayEffect>(this, TEXT("GE_DeferredDamageTick"), RF_Transient);
+		DeferredDamageTickEffect->DurationPolicy = EGameplayEffectDurationType::Instant;
+
+		FSetByCallerFloat SetByCaller;
+		SetByCaller.DataTag = Tags.SetByCaller_DeferredDamagePerTick;
+
+		FGameplayModifierInfo Mod;
+		Mod.Attribute = UFP_AttributeSet::GetIncomingDamageAttribute();
+		Mod.ModifierOp = EGameplayModOp::Additive;
+		Mod.ModifierMagnitude = FGameplayEffectModifierMagnitude(SetByCaller);
+		DeferredDamageTickEffect->Modifiers.Add(Mod);
+	}
+
+	// Instigator = original attacker when still around, so a lethal drip credits them.
+	UAbilitySystemComponent* ContextSource = SourceASC ? SourceASC : this;
+	const FGameplayEffectContextHandle Context = ContextSource->MakeEffectContext();
+
+	FGameplayEffectSpec Spec(DeferredDamageTickEffect, Context, 1.f);
+	Spec.SetSetByCallerMagnitude(Tags.SetByCaller_DeferredDamagePerTick, Amount);
+	Spec.AddDynamicAssetTag(Tags.Effects_DeferredDamageTick);
+	ApplyGameplayEffectSpecToSelf(Spec);
+}
+
+void UFP_AbilitySystemComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	ClearDeferredDamage();
+	Super::EndPlay(EndPlayReason);
 }

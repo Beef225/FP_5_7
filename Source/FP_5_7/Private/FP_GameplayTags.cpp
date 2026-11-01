@@ -819,6 +819,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Effects.HitReact"), 
 		FString("Hit React Montage")
 		);
+	GameplayTags.Effects_DeferredDamageTick = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Effects.DeferredDamageTick"),
+		FString("Marks a deferred-damage drip tick: no hit react, never deferred again")
+		);
 	GameplayTags.Effects_DeathReact = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Effects.DeathReact"), 
 		FString("Death React Montage")

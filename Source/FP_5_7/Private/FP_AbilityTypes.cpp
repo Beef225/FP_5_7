@@ -22,10 +22,11 @@ bool FFP_GameplayEffectContext::NetSerialize(FArchive& Ar, UPackageMap* Map, boo
 		if (bIsBlockedHit)                                              RepBits |= 1 << 7;
 		if (bIsCriticalHit)                                             RepBits |= 1 << 8;
 		if (bIsDodgedHit)                                               RepBits |= 1 << 9;
+		if (bIsExecutedHit)                                             RepBits |= 1 << 10;
 	}
 
 	// Update count if you add more bits later
-	Ar.SerializeBits(&RepBits, 10);
+	Ar.SerializeBits(&RepBits, 11);
 
 	if (RepBits & (1 << 0)) Ar << Instigator;
 	if (RepBits & (1 << 1)) Ar << EffectCauser;
@@ -60,6 +61,7 @@ bool FFP_GameplayEffectContext::NetSerialize(FArchive& Ar, UPackageMap* Map, boo
 	bIsBlockedHit  = (RepBits & (1 << 7)) != 0;
 	bIsCriticalHit = (RepBits & (1 << 8)) != 0;
 	bIsDodgedHit   = (RepBits & (1 << 9)) != 0;
+	bIsExecutedHit = (RepBits & (1 << 10)) != 0;
 
 	if (Ar.IsLoading())
 	{

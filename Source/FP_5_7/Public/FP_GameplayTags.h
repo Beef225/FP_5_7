@@ -129,17 +129,22 @@ FGameplayTag Defense_ReduceeDamage_Melee;
 FGameplayTag Heat_AmbientTemperature;
 FGameplayTag Heat_ThermalMass;
 FGameplayTag Heat_CoolingCoefficient;
-// Modifies the Heat cost of activating skills — decimal fraction, BIDIRECTIONAL:
-// negative = reduced cost, positive = increased cost (supports a high-heat
-// "sustain it and turn it into damage" build that WANTS higher heat costs on
-// purpose, not just cost-reduction builds). Sign convention matches every
-// other Increased/Reduced-style attribute (see standard note above): positive
-// = more, negative = less. FinalCost = BaseCost * (1 + sum) — a -0.10 node
-// ("10% Reduced Heat Cost") gives 0.9x cost, a +0.10 node gives 1.1x cost.
-// Gated variants follow the standard <Type> suffix, e.g. Heat.SkillCost.Mace
-// for "Reduced Heat Cost with Maces" (magnitude authored as -0.10). Attribute
-// only — dynamic heat costs (the GameplayEffect Cost that actually reads
-// this) are not implemented yet.
+FGameplayTag Heat_SkillCostEfficiency;
+FGameplayTag Heat_SkillCostFlat;
+// SKILL HEAT COST (UFP_GameplayAbility::ComputeSkillCost). Per cast:
+//   Level  = Entry.BaseHeatCost * (1 + Library.HeatCostPerLevel * (SkillLevel - 1))
+//            + SkillPassive.<Skill>.HeatCost (skill tree)
+//   Paid   = max(0, |Level| * max(0, 1 + Heat.SkillCost) / (1 + Heat.SkillCostEfficiency)
+//            + Heat.SkillCostFlat)
+// e.g. 20 base, efficiency 0.25, flat -6: 20 / 1.25 - 6 = 10.
+//   Heat.SkillCost            IncreasedHeatCost  bidirectional %, -0.10 = 10% reduced, +3.0 = 300% increased (x4)
+//   Heat.SkillCostEfficiency  HeatCostEfficiency diminishing, 1.0 = half cost, 2.0 = a third
+//   Heat.SkillCostFlat        FlatHeatCost       flat after efficiency, -5 = 5 less heat generated
+// Heat-generating skills add Paid to Heat. Cooling skills (negative Level) cool by
+// |Level| and cost stats do not touch them. Liquid Cooled Systems
+// (Flag.SkillTree.MightSkillsCostHPInsteadOfHeat) makes Might-weapon skills pay Paid
+// in HitPoints instead, whether they heat or cool. All three stats gate normally,
+// e.g. Heat.SkillCost.Mace, Heat.SkillCostFlat.MightWeapon.
 FGameplayTag Heat_SkillCost;
 
 //Debuff
@@ -321,6 +326,9 @@ FGameplayTag GameplayEvent_Debuff_Buildup_Corroded;
 //SetByCaller
 FGameplayTag SetByCaller_Attribute_IncomingXP;
 FGameplayTag SetByCaller_DodgeRoll_MoveSpeed;
+FGameplayTag SetByCaller_SkillCost_Heat;
+FGameplayTag SetByCaller_SkillCost_HitPoints;
+FGameplayTag SetByCaller_SkillBonus_ExecuteThreshold;
 
 // Skill-passive bonus buckets — stamped onto the damage spec by the ability at cast time.
 // One fixed tag per modifier category; the ExecCalc reads these generically.
@@ -367,13 +375,15 @@ FGameplayTag SetByCaller_SkillBonus_CritMultiplier;
 //   Adding a new gated stat = author it in the tree, then the editor's
 //   Tools > Register Tags in C++ registers the TAG (GatedStats section).
 //
-// LEGACY: the per-weapon damage attributes (IncreasedDamageRifle, ...) and
-// the HasTagExact(SkillTagMod_X) blocks in ExecCalc_Damage predate this and
-// still work; they could be migrated to Damage.Increased + gate later.
+// Weapon / hit-type damage (Damage.Increased.Rifle, Damage.More.Melee, ...)
+// was migrated 2026-11-01: the per-weapon attributes are gone and those tags
+// now resolve as gated Damage.Increased / Damage.More (a base "X" also matches
+// "X.Generic", so Damage.Increased -> Damage.Increased.Generic). Same math as
+// before: the gated amounts add into the generic Increased / More pools.
 //
 // STILL NOT CONSUMED (base stat has no runtime reader yet, so gating it does
 // nothing until the mechanic exists): Projectile.Count, Projectile.Pierce,
-// Heat.SkillCost (HeatCostEfficiency), Debuff.Effectiveness.* per skill, and
+// Debuff.Effectiveness.* per skill, and
 // DoT specs don't carry skill tags yet.
 //
 // SIGN CONVENTION (any stat, bidirectional or not): positive = increased /
@@ -438,6 +448,10 @@ FGameplayTag SkillTagMod_Cooldown;
 FGameplayTag SkillTagMod_Trigger;
 FGameplayTag SkillTagMod_Movement;
 FGameplayTag SkillTagMod_Buff;
+FGameplayTag SkillTagMod_MightWeapon;
+FGameplayTag SkillTagMod_AgilityWeapon;
+FGameplayTag SkillTagMod_FortitudeWeapon;
+FGameplayTag SkillTagMod_ResonanceWeapon;
 
 
 // -------------------------------------------------------------------------
@@ -1097,6 +1111,16 @@ FGameplayTag Projectile_Pierce_Rifle;
 FGameplayTag Speed_Skill_Rifle;
 FGameplayTag Projectile_Count_Rifle;
 FGameplayTag AoE_Multiplier_Rifle;
+FGameplayTag Heat_SkillCost_MightWeapon;
+FGameplayTag Execute_Threshold_Axe;
+
+//SkillTreeFlags
+FGameplayTag Flag_SkillTree_MightSkillsCostHPInsteadOfHeat;
+
+
+//Execute
+FGameplayTag Execute_Threshold;
+
 private:
 	static FFP_GameplayTags GameplayTags;
 };

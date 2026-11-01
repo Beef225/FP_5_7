@@ -58,14 +58,15 @@
 
 --------------------------------------------------------------------------------
   HEAT COST  (6 nodes)
-  *** NOT YET IMPLEMENTED — tags registered, wiring deferred ***
+  WIRED 2026-11-01 via the native skill cost (Skill Library BaseHeatCost)
 --------------------------------------------------------------------------------
   Node tags    SkillTree.Leap.HeatCost.1  →  .6
   Effect tag   SkillPassive.Leap.HeatCost
   Magnitude    TBD per node  (each node adds accumulated heat generated per cast)
-  Routes to    UFP_GA_Leap — NOT YET WIRED. When implemented, read
-               PS->GetSkillPassiveValue(SkillPassive.Leap.HeatCost) at cast time
-               and apply heat via the heat system.
+  Routes to    UFP_DamageGameplayAbility::GetFlatHeatCostBonus — added to the
+               level-scaled BaseHeatCost before the cost stats. Requires
+               SkillPassiveRootTag = SkillPassive.Leap on BP_GA_Leap, and either a
+               BaseHeatCost in Leap's Skill Library entry or no Cost GE on the GA.
   Connections  TBD. Suggest gating HeatCost.1 behind ExplosiveLanding.1 to make
                it a cost branch for the power upgrade.
   Notes        Heat cost is a resource expenditure on each use. Higher heat cost
@@ -101,7 +102,7 @@
   SkillPassive.Leap.ExplosiveLanding   1        Wired — UFP_GA_Leap::ShouldDoExplosiveLanding
                                                          UFP_GA_Leap::ApplyLandingExplosion
   SkillPassive.Leap.NoWindup           1        Wired — UFP_GA_Leap::ShouldSkipWindup
-  SkillPassive.Leap.HeatCost           6        NOT WIRED — heat system pending
+  SkillPassive.Leap.HeatCost           6        wired (native skill cost)
   SkillPassive.Leap.CooldownDuration   4        NOT WIRED — cooldown GE pending
 
 

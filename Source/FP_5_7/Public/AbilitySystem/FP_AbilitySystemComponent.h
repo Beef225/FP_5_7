@@ -100,6 +100,14 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "FP|Deferred Damage")
 	void ClearDeferredDamage();
 
+	/**
+	 * Shared instant GE used by UFP_GameplayAbility's native skill cost:
+	 *   Heat      += SetByCaller.SkillCost.Heat
+	 *   HitPoints += SetByCaller.SkillCost.HitPoints   (negative = HP paid)
+	 * Built on first use (transient), so no per-skill cost GE assets are needed.
+	 */
+	UGameplayEffect* GetSkillCostEffect();
+
 	/** Seconds between drip ticks. */
 	UPROPERTY(EditDefaultsOnly, Category = "FP|Deferred Damage", meta = (ClampMin = "0.02"))
 	float DeferredDamageTickInterval = 0.1f;
@@ -126,4 +134,7 @@ private:
 	/** Transient instant GE: IncomingDamage += SetByCaller.DeferredDamagePerTick. Built on first use. */
 	UPROPERTY(Transient)
 	TObjectPtr<UGameplayEffect> DeferredDamageTickEffect;
+
+	UPROPERTY(Transient)
+	TObjectPtr<UGameplayEffect> SkillCostEffect;
 };

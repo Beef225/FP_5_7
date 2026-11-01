@@ -83,6 +83,9 @@ protected:
 	/** This skill's tag (Skills.*) plus its Skill Library SkillModifierTags (SkillTagMod.*). */
 	virtual void GetSkillModifierTags(FGameplayTagContainer& OutTags) const override;
 
+	/** SkillPassive.<Root>.HeatCost from this skill's tree (e.g. Leap HeatCost nodes). */
+	virtual float GetFlatHeatCostBonus(const FGameplayAbilityActorInfo* ActorInfo) const override;
+
 	void AppendSkillModifierTagsToDamageSpec(FGameplayEffectSpecHandle& DamageSpecHandle) const;
 	void AssignRolledDamageMagnitudes(FGameplayEffectSpecHandle& DamageSpecHandle, float DamageMultiplier = 1.f) const;
 	void AssignSkillPassiveBonuses(FGameplayEffectSpecHandle& SpecHandle) const;

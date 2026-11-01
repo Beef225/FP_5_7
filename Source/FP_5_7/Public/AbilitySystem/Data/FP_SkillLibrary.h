@@ -69,6 +69,15 @@ struct FFP_AbilityEntry
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float BaseRadius = 50.f;
 
+	/**
+	 * Heat per cast at skill level 1. Positive heats the caster, negative cools.
+	 * Scaled by the library's HeatCostPerLevel, then by the caster's cost stats
+	 * (see UFP_GameplayAbility::ComputeSkillCost). 0 with a Cost GE set on the
+	 * ability = legacy Blueprint cost GE is used instead.
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Cost")
+	float BaseHeatCost = 0.f;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,  meta = (Categories = "SkillTagMod"))
 	FGameplayTagContainer SkillModifierTags;
 	
@@ -123,6 +132,14 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Ability Library")
 	TArray<FFP_AbilityEntry> AbilityEntries;
+
+	/**
+	 * GLOBAL heat cost level scaling for every skill:
+	 *   LevelCost = BaseHeatCost * (1 + HeatCostPerLevel * (SkillLevel - 1))
+	 * 0.1 -> level 10 = 1.9x, level 20 = 2.9x.
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Cost", meta=(ClampMin="0"))
+	float HeatCostPerLevel = 0.1f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Ability Library")
 	TObjectPtr<UDataTable> DefaultRichTextStyleSet = nullptr;

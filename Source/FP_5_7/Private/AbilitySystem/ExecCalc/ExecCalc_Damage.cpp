@@ -1,6 +1,5 @@
 ﻿// Copyright JG
 
-
 #include "AbilitySystem/ExecCalc/ExecCalc_Damage.h"
 #include "AbilitySystemComponent.h"
 #include "FP_GameplayTags.h"
@@ -76,41 +75,6 @@ struct FP_DamageStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreEnergyDamage);
 	
 	// Weapon/skill-mod increased/more
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamagePistol);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamagePistol);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageRifle);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageRifle);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageShotgun);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageShotgun);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageDroneController);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageDroneController);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageAxe);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageAxe);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageSword);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageSword);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageMace);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageMace);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageGauntlets);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageGauntlets);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageOrdnance);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageOrdnance);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageConduit);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageConduit);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageAccelerator);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageAccelerator);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageSpear);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageSpear);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamagePrecision);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamagePrecision);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageProjector);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageProjector);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageProjectile);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageProjectile);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageMelee);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageMelee);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageAoE);
-	DECLARE_ATTRIBUTE_CAPTUREDEF(MoreDamageAoE);
-
 
 	// Crit (offensive)
 	DECLARE_ATTRIBUTE_CAPTUREDEF(CriticalStrikeChance);
@@ -138,11 +102,11 @@ struct FP_DamageStatics
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageAgainstOverheated);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamageAgainstFrozen);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(IncreasedDamagePerHeatFromEquilibrium);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(ExecuteThreshold);
 
 	// Ambient Heat (for comparing for IncreasedDamagePerHeatFromEquilibrium
 	DECLARE_ATTRIBUTE_CAPTUREDEF(AmbientTemperature);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(Heat);
-
 
 	FP_DamageStatics()
 	{
@@ -203,42 +167,6 @@ struct FP_DamageStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreChemicalDamage, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedEnergyDamage, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreEnergyDamage, Source, false);
-		
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamagePistol, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamagePistol, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageRifle, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageRifle, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageShotgun, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageShotgun, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageDroneController, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageDroneController, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAxe, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageAxe, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageSword, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageSword, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageMace, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageMace, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageGauntlets, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageGauntlets, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageOrdnance, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageOrdnance, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageConduit, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageConduit, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAccelerator, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageAccelerator, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageSpear, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageSpear, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamagePrecision, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamagePrecision, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageProjector, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageProjector, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageProjectile, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageProjectile, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageMelee, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageMelee, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAoE, Source, false);
-		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MoreDamageAoE, Source, false);
-
 
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, CriticalStrikeChance, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedCriticalStrikeChance, Source, false);
@@ -262,6 +190,7 @@ struct FP_DamageStatics
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAgainstOverheated, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamageAgainstFrozen, Source, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, IncreasedDamagePerHeatFromEquilibrium, Source, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, ExecuteThreshold, Source, false);
 		
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, AmbientTemperature, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, Heat, Target, false);
@@ -329,42 +258,6 @@ UExecCalc_Damage::UExecCalc_Damage()
 	RelevantAttributesToCapture.Add(DamageStatics().MoreChemicalDamageDef);
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedEnergyDamageDef);
 	RelevantAttributesToCapture.Add(DamageStatics().MoreEnergyDamageDef);
-	
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamagePistolDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamagePistolDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageRifleDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageRifleDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageShotgunDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageShotgunDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageDroneControllerDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageDroneControllerDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageAxeDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageAxeDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageSwordDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageSwordDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageMaceDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageMaceDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageGauntletsDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageGauntletsDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageOrdnanceDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageOrdnanceDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageConduitDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageConduitDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageAcceleratorDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageAcceleratorDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageSpearDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageSpearDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamagePrecisionDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamagePrecisionDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageProjectorDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageProjectorDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageProjectileDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageProjectileDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageMeleeDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageMeleeDef);
-	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageAoEDef);
-	RelevantAttributesToCapture.Add(DamageStatics().MoreDamageAoEDef);
-
 
 	RelevantAttributesToCapture.Add(DamageStatics().CriticalStrikeChanceDef);
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedCriticalStrikeChanceDef);
@@ -388,6 +281,7 @@ UExecCalc_Damage::UExecCalc_Damage()
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageAgainstOverheatedDef);
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamageAgainstFrozenDef);
 	RelevantAttributesToCapture.Add(DamageStatics().IncreasedDamagePerHeatFromEquilibriumDef);
+	RelevantAttributesToCapture.Add(DamageStatics().ExecuteThresholdDef);
 	
 	RelevantAttributesToCapture.Add(DamageStatics().AmbientTemperatureDef);
 	RelevantAttributesToCapture.Add(DamageStatics().HeatDef);
@@ -495,41 +389,6 @@ void UExecCalc_Damage::Execute_Implementation(
 	const float MoreRad  = GetCaptured(DamageStatics().MoreRadiationDamageDef, 0.f);
 	const float MoreChem = GetCaptured(DamageStatics().MoreChemicalDamageDef, 0.f);
 	const float MoreEng  = GetCaptured(DamageStatics().MoreEnergyDamageDef, 0.f);
-	
-	const float IncreasedPistol = GetCaptured(DamageStatics().IncreasedDamagePistolDef, 0.f);
-	const float MorePistol = GetCaptured(DamageStatics().MoreDamagePistolDef, 0.f);
-	const float IncreasedRifle = GetCaptured(DamageStatics().IncreasedDamageRifleDef, 0.f);
-	const float MoreRifle = GetCaptured(DamageStatics().MoreDamageRifleDef, 0.f);
-	const float IncreasedShotgun = GetCaptured(DamageStatics().IncreasedDamageShotgunDef, 0.f);
-	const float MoreShotgun = GetCaptured(DamageStatics().MoreDamageShotgunDef, 0.f);
-	const float IncreasedDroneController = GetCaptured(DamageStatics().IncreasedDamageDroneControllerDef, 0.f);
-	const float MoreDroneController = GetCaptured(DamageStatics().MoreDamageDroneControllerDef, 0.f);
-	const float IncreasedAxe = GetCaptured(DamageStatics().IncreasedDamageAxeDef, 0.f);
-	const float MoreAxe = GetCaptured(DamageStatics().MoreDamageAxeDef, 0.f);
-	const float IncreasedSword = GetCaptured(DamageStatics().IncreasedDamageSwordDef, 0.f);
-	const float MoreSword = GetCaptured(DamageStatics().MoreDamageSwordDef, 0.f);
-	const float IncreasedMace = GetCaptured(DamageStatics().IncreasedDamageMaceDef, 0.f);
-	const float MoreMace = GetCaptured(DamageStatics().MoreDamageMaceDef, 0.f);
-	const float IncreasedGauntlets = GetCaptured(DamageStatics().IncreasedDamageGauntletsDef, 0.f);
-	const float MoreGauntlets = GetCaptured(DamageStatics().MoreDamageGauntletsDef, 0.f);
-	const float IncreasedOrdnance = GetCaptured(DamageStatics().IncreasedDamageOrdnanceDef, 0.f);
-	const float MoreOrdnance = GetCaptured(DamageStatics().MoreDamageOrdnanceDef, 0.f);
-	const float IncreasedConduit = GetCaptured(DamageStatics().IncreasedDamageConduitDef, 0.f);
-	const float MoreConduit = GetCaptured(DamageStatics().MoreDamageConduitDef, 0.f);
-	const float IncreasedAccelerator = GetCaptured(DamageStatics().IncreasedDamageAcceleratorDef, 0.f);
-	const float MoreAccelerator = GetCaptured(DamageStatics().MoreDamageAcceleratorDef, 0.f);
-	const float IncreasedSpear = GetCaptured(DamageStatics().IncreasedDamageSpearDef, 0.f);
-	const float MoreSpear = GetCaptured(DamageStatics().MoreDamageSpearDef, 0.f);
-	const float IncreasedPrecision = GetCaptured(DamageStatics().IncreasedDamagePrecisionDef, 0.f);
-	const float MorePrecision = GetCaptured(DamageStatics().MoreDamagePrecisionDef, 0.f);
-	const float IncreasedProjector = GetCaptured(DamageStatics().IncreasedDamageProjectorDef, 0.f);
-	const float MoreProjector = GetCaptured(DamageStatics().MoreDamageProjectorDef, 0.f);
-	const float IncreasedProjectile = GetCaptured(DamageStatics().IncreasedDamageProjectileDef, 0.f);
-	const float MoreProjectile = GetCaptured(DamageStatics().MoreDamageProjectileDef, 0.f);
-	const float IncreasedMelee = GetCaptured(DamageStatics().IncreasedDamageMeleeDef, 0.f);
-	const float MoreMelee = GetCaptured(DamageStatics().MoreDamageMeleeDef, 0.f);
-	const float IncreasedAoE = GetCaptured(DamageStatics().IncreasedDamageAoEDef, 0.f);
-	const float MoreAoE = GetCaptured(DamageStatics().MoreDamageAoEDef, 0.f);
 
 	// -------------------------------------------------------
 	// Skill-passive bonus buckets (stamped on spec at cast time by the ability)
@@ -546,94 +405,6 @@ void UExecCalc_Damage::Execute_Implementation(
 
 	FGameplayTagContainer SpecAssetTags;
 	Spec.GetAllAssetTags(SpecAssetTags);
-
-	float SkillTagIncreasedDamage = 0.f;
-	float SkillTagMoreDamage = 0.f;
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Pistol))
-	{
-		SkillTagIncreasedDamage += IncreasedPistol;
-		SkillTagMoreDamage += MorePistol;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Rifle))
-	{
-		SkillTagIncreasedDamage += IncreasedRifle;
-		SkillTagMoreDamage += MoreRifle;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Shotgun))
-	{
-		SkillTagIncreasedDamage += IncreasedShotgun;
-		SkillTagMoreDamage += MoreShotgun;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_DroneController))
-	{
-		SkillTagIncreasedDamage += IncreasedDroneController;
-		SkillTagMoreDamage += MoreDroneController;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Axe))
-	{
-		SkillTagIncreasedDamage += IncreasedAxe;
-		SkillTagMoreDamage += MoreAxe;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Sword))
-	{
-		SkillTagIncreasedDamage += IncreasedSword;
-		SkillTagMoreDamage += MoreSword;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Mace))
-	{
-		SkillTagIncreasedDamage += IncreasedMace;
-		SkillTagMoreDamage += MoreMace;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Gauntlets))
-	{
-		SkillTagIncreasedDamage += IncreasedGauntlets;
-		SkillTagMoreDamage += MoreGauntlets;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Ordnance))
-	{
-		SkillTagIncreasedDamage += IncreasedOrdnance;
-		SkillTagMoreDamage += MoreOrdnance;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Conduit))
-	{
-		SkillTagIncreasedDamage += IncreasedConduit;
-		SkillTagMoreDamage += MoreConduit;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Accelerator))
-	{
-		SkillTagIncreasedDamage += IncreasedAccelerator;
-		SkillTagMoreDamage += MoreAccelerator;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Spear))
-	{
-		SkillTagIncreasedDamage += IncreasedSpear;
-		SkillTagMoreDamage += MoreSpear;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Precision))
-	{
-		SkillTagIncreasedDamage += IncreasedPrecision;
-		SkillTagMoreDamage += MorePrecision;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Projector))
-	{
-		SkillTagIncreasedDamage += IncreasedProjector;
-		SkillTagMoreDamage += MoreProjector;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Projectile))
-	{
-		SkillTagIncreasedDamage += IncreasedProjectile;
-		SkillTagMoreDamage += MoreProjectile;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_Melee))
-	{
-		SkillTagIncreasedDamage += IncreasedMelee;
-		SkillTagMoreDamage += MoreMelee;
-	}
-	if (SpecAssetTags.HasTagExact(GameplayTags.SkillTagMod_AoE))
-	{
-		SkillTagIncreasedDamage += IncreasedAoE;
-		SkillTagMoreDamage += MoreAoE;
-	}
 
 	const float TargetHeat  = GetCaptured(DamageStatics().HeatDef, 0.f);
 	const float AmbientTemp = GetCaptured(DamageStatics().AmbientTemperatureDef, 0.f);
@@ -679,9 +450,10 @@ void UExecCalc_Damage::Execute_Implementation(
 		AddIfTargetHas(GameplayTags.State_Frozen,     DamageStatics().IncreasedDamageAgainstFrozenDef);
 	}
 
-	// Merge skill-passive generic bonuses into the SkillTag accumulators (already the right place in the formula).
-	const float TotalIncreasedBonus = SkillTagIncreasedDamage + SkillBonusIncreasedDamage + ConditionalIncreased;
-	const float TotalMoreBonus      = SkillTagMoreDamage      + SkillBonusMoreDamage;
+	// Weapon / hit-type damage (Damage.Increased.Rifle, Damage.More.Melee, ...) is gated onto IncreasedDamage /
+	// MoreDamage via source-tag requirements, so it is already inside IncreasedGeneric / MoreGeneric here.
+	const float TotalIncreasedBonus = SkillBonusIncreasedDamage + ConditionalIncreased;
+	const float TotalMoreBonus      = SkillBonusMoreDamage;
 
 	float GenericDamage   = ComputeTypeDamage(SetByCallerGeneric,   0.f,      IncreasedGeneric + TotalIncreasedBonus, 0.f,                                    TempDeltaIncrease, MoreGeneric + TotalMoreBonus, 0.f);
 	float PhysicalDamage  = ComputeTypeDamage(SetByCallerPhysical,  AddedPhys, IncreasedGeneric + TotalIncreasedBonus, IncreasedPhys + SkillBonusIncreasedPhys, TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MorePhys + SkillBonusMorePhys);
@@ -690,15 +462,11 @@ void UExecCalc_Damage::Execute_Implementation(
 	float ChemicalDamage  = ComputeTypeDamage(SetByCallerChemical,  AddedChem, IncreasedGeneric + TotalIncreasedBonus, IncreasedChem + SkillBonusIncreasedChem, TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreChem + SkillBonusMoreChem);
 	float EnergyDamage    = ComputeTypeDamage(SetByCallerEnergy,    AddedEng,  IncreasedGeneric + TotalIncreasedBonus, IncreasedEng,                           TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreEng);
 
-
 	LogStep(TEXT("1) PerTypeOffense"),
 		GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage,
-		FString::Printf(TEXT("SBCC(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f) | SkillTagInc=%.4f SkillTagMore=%.4f | Offense(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f)"),
+		FString::Printf(TEXT("SBCC(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f) | Offense(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f)"),
 			SetByCallerGeneric, SetByCallerPhysical, SetByCallerExplosive, SetByCallerRadiation, SetByCallerChemical, SetByCallerEnergy,
-			SkillTagIncreasedDamage, SkillTagMoreDamage,
 			GenericDamage, PhysicalDamage, ExplosiveDamage, RadiationDamage, ChemicalDamage, EnergyDamage));
-
-
 
 	// -------------------------------------------------------
 	// 2) RESISTANCES (per type, before block)
@@ -759,7 +527,6 @@ void UExecCalc_Damage::Execute_Implementation(
 		return;
 	}
 
-	
 	// -------------------------------------------------------
 	// 4) BLOCK
 	// -------------------------------------------------------
@@ -867,6 +634,40 @@ void UExecCalc_Damage::Execute_Implementation(
 		LogStep(TEXT("6b) Deferred"), Damage,
 			FString::Printf(TEXT("Fraction=%.4f Time=%.2fs Deferred=%.4f Immediate=%.4f"),
 				DeferredFraction, DeferredTime, DeferredDamage, Damage));
+	}
+
+	// -------------------------------------------------------
+	// 6c) EXECUTE (attacker offence)
+	//     Threshold = attacker's ExecuteThreshold as seen by this hit (gated variants such as
+	//     Execute.Threshold.Axe count when the spec carries the tag) + skill-specific
+	//     SetByCaller.SkillBonus.ExecuteThreshold. If this hit leaves the target at or below
+	//     Threshold x MaxHitPoints, the hit deals exactly the target's remaining life instead,
+	//     undeferred, so the normal death / XP / kill-credit path runs. Dodged hits returned earlier.
+	// -------------------------------------------------------
+	{
+		const float ExecuteThreshold =
+			GetCaptured(DamageStatics().ExecuteThresholdDef, 0.f)
+			+ Spec.GetSetByCallerMagnitude(GameplayTags.SetByCaller_SkillBonus_ExecuteThreshold, false, 0.f);
+
+		if (ExecuteThreshold > 0.f && TargetASC)
+		{
+			const float TargetHP    = TargetASC->GetNumericAttribute(UFP_AttributeSet::GetHitPointsAttribute());
+			const float TargetMaxHP = TargetASC->GetNumericAttribute(UFP_AttributeSet::GetMaxHitPointsAttribute());
+			const float HPAfterHit  = TargetHP - Damage; // deferred part hasn't landed yet
+
+			const bool bExecute = TargetHP > 0.f && TargetMaxHP > 0.f
+				&& HPAfterHit <= Clamp01(ExecuteThreshold) * TargetMaxHP;
+			if (bExecute)
+			{
+				Damage = FMath::Max(Damage, TargetHP);
+				DeferredDamage = 0.f;
+				UFP_AbilitySystemLibrary::SetIsExecutedHit(EffectContectHandle, true);
+			}
+
+			LogStep(TEXT("6c) Execute"), Damage,
+				FString::Printf(TEXT("Threshold=%.4f TargetHP=%.1f/%.1f AfterHit=%.1f Executed=%s"),
+					ExecuteThreshold, TargetHP, TargetMaxHP, HPAfterHit, bExecute ? TEXT("true") : TEXT("false")));
+		}
 	}
 
 	// -------------------------------------------------------

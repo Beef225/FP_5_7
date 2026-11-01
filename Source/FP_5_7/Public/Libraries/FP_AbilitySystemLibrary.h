@@ -57,6 +57,10 @@ public:
 	
 	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
 	static bool IsDodgedHit(const FGameplayEffectContextHandle& EffectContextHandle);
+
+	/** True when the hit killed through Execute.Threshold (e.g. show "EXECUTED" floating text). */
+	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
+	static bool IsExecutedHit(const FGameplayEffectContextHandle& EffectContextHandle);
 	
 	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
 	static void SetIsBlockedHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsBlockedHit);
@@ -66,6 +70,9 @@ public:
 	
 	UFUNCTION(BlueprintPure, Category = "FP_AbilitySystemLibrary|GameplayEffects")
 	static void SetIsDodgedHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsDodgedHit);
+
+	UFUNCTION(BlueprintCallable, Category = "FP_AbilitySystemLibrary|GameplayEffects")
+	static void SetIsExecutedHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsExecutedHit);
 	
 	UFUNCTION(BlueprintCallable, Category = "AuraAbilitySystemLibrary|GameplayMechanics")
 	static void GetLivePlayersWithinRadius(const UObject* WorldContextObject, TArray<AActor*>& OutOverlappingActors, const TArray<AActor*>& ActorsToIgnore, float Radius, const FVector& SphereOrigin);

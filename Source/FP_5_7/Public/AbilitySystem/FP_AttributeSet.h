@@ -76,16 +76,16 @@ public:
 	 * (see FP_GameplayTags.h):
 	 *   - A tag in TagsToAttributes maps directly (OutRequiredTags empty).
 	 *   - Otherwise trailing segments are peeled off while each one names a SkillTagMod.<Leaf>
-	 *     ("Ranged" is accepted for RangedWeapon) until a base tag in TagsToAttributes is found.
+	 *     ("Ranged" is accepted for RangedWeapon) until a base tag in TagsToAttributes is found
+	 *     (a base "X" also matches "X.Generic", e.g. Damage.Increased -> Damage.Increased.Generic).
 	 *     e.g. Critical.StrikeMultiplier.Rifle -> CriticalStrikeMultiplier, requires SkillTagMod.Rifle
-	 *          Damage.Increased.AoE.Mace       -> IncreasedDamageAoE,       requires SkillTagMod.Mace
+	 *          Damage.Increased.AoE.Mace       -> IncreasedDamage, requires SkillTagMod.AoE + SkillTagMod.Mace
 	 * Put OutRequiredTags in FGameplayModifierInfo::SourceTags.RequireTags: GAS then only counts
 	 * the modifier when the evaluating spec/ability carries ALL of those tags. No new attributes.
 	 */
 	bool ResolveStatTag(const FGameplayTag& StatTag, FGameplayAttribute& OutAttribute,
 	                    FGameplayTagContainer& OutRequiredTags) const;
-	
-	
+
 	//Vital Attributes
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HitPoints, Category = "Vital Attributes")
 	FGameplayAttributeData HitPoints;
@@ -102,7 +102,6 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxHeatThreshold, Category 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MinHeatThreshold, Category = "Vital Attributes")
 	FGameplayAttributeData MinHeatThreshold;
 
-
 //Primary Attributes
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Might, Category = "Primary Attributes")
 	FGameplayAttributeData Might;
@@ -115,7 +114,6 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Agility, Category = "Primar
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Fortitude, Category = "Primary Attributes")
 	FGameplayAttributeData Fortitude;
-
 
 //Secondary Attributes
 //Health
@@ -176,108 +174,6 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedEnergyDamage, Cate
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreEnergyDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData MoreEnergyDamage;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamagePistol, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamagePistol;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamagePistol, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamagePistol;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageRifle, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageRifle;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageRifle, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageRifle;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageShotgun, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageShotgun;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageShotgun, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageShotgun;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageDroneController, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageDroneController;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageDroneController, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageDroneController;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAxe, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageAxe;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageAxe, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageAxe;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageSword, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageSword;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageSword, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageSword;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageMace, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageMace;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageMace, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageMace;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageGauntlets, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageGauntlets;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageGauntlets, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageGauntlets;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageOrdnance, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageOrdnance;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageOrdnance, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageOrdnance;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageConduit, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageConduit;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageConduit, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageConduit;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAccelerator, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageAccelerator;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageAccelerator, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageAccelerator;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageSpear, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageSpear;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageSpear, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageSpear;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamagePrecision, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamagePrecision;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamagePrecision, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamagePrecision;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageProjector, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageProjector;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageProjector, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageProjector;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageMelee, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageMelee;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageMelee, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageMelee;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageProjectile, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageProjectile;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageProjectile, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageProjectile;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAoE, Category = "Secondary Attributes")
-	FGameplayAttributeData IncreasedDamageAoE;
-
-UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MoreDamageAoE, Category = "Secondary Attributes")
-	FGameplayAttributeData MoreDamageAoE;
 
 //Resistance
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_PhysicalDamageResistance, Category = "Secondary Attributes")
@@ -442,8 +338,15 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ProjectileSpeed, Category =
 	FGameplayAttributeData ProjectileSpeed;
 
 //HeatCost
+// Heat.SkillCostEfficiency: diminishing, cost / (1 + value). 1.0 = half cost, 2.0 = a third.
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HeatCostEfficiency, Category = "Secondary Attributes")
 	FGameplayAttributeData HeatCostEfficiency;
+// Heat.SkillCost: increased / reduced cost, cost * (1 + value). +3.0 = 300% increased (x4), -0.1 = 10% reduced.
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedHeatCost, Category = "Secondary Attributes")
+	FGameplayAttributeData IncreasedHeatCost;
+// Heat.SkillCostFlat: flat heat per cast, added after efficiency. -5 = "5 less heat generated".
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_FlatHeatCost, Category = "Secondary Attributes")
+	FGameplayAttributeData FlatHeatCost;
 
 //Item
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ItemQuantity, Category = "Secondary Attributes")
@@ -529,13 +432,18 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamageAgainstFroze
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_IncreasedDamagePerHeatFromEquilibrium, Category = "Secondary Attributes")
 	FGameplayAttributeData IncreasedDamagePerHeatFromEquilibrium;
 
+// Execute.Threshold: fraction of the TARGET's max life. A direct hit that leaves the target at or
+// below it kills outright (ExecCalc_Damage step 6c). Additive across sources; gate it like any
+// stat (Execute.Threshold.Axe). Skill-specific: SetByCaller.SkillBonus.ExecuteThreshold.
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ExecuteThreshold, Category = "Secondary Attributes")
+	FGameplayAttributeData ExecuteThreshold;
+
 //Recovery
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_LifeGainedOnHit, Category = "Secondary Attributes")
 	FGameplayAttributeData LifeGainedOnHit;
 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_LifeGainedOnKill, Category = "Secondary Attributes")
 	FGameplayAttributeData LifeGainedOnKill;
-
 
 //Meta Attributes
 //Damage
@@ -573,7 +481,6 @@ UFUNCTION()
 	void OnRep_MinHeatThreshold(const FGameplayAttributeData& OldMinHeatThreshold) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MinHeatThreshold)
 
-
 //Primary Attributes
 UFUNCTION()
 	void OnRep_Might(const FGameplayAttributeData& OldMight) const;
@@ -590,7 +497,6 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_Fortitude(const FGameplayAttributeData& OldFortitude) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, Fortitude)
-
 
 //Secondary Attributes
 //Health
@@ -670,142 +576,6 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_MoreEnergyDamage(const FGameplayAttributeData& OldMoreEnergyDamage) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreEnergyDamage)
-
-UFUNCTION()
-	void OnRep_IncreasedDamagePistol(const FGameplayAttributeData& OldIncreasedDamagePistol) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamagePistol)
-
-UFUNCTION()
-	void OnRep_MoreDamagePistol(const FGameplayAttributeData& OldMoreDamagePistol) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamagePistol)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageRifle(const FGameplayAttributeData& OldIncreasedDamageRifle) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageRifle)
-
-UFUNCTION()
-	void OnRep_MoreDamageRifle(const FGameplayAttributeData& OldMoreDamageRifle) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageRifle)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageShotgun(const FGameplayAttributeData& OldIncreasedDamageShotgun) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageShotgun)
-
-UFUNCTION()
-	void OnRep_MoreDamageShotgun(const FGameplayAttributeData& OldMoreDamageShotgun) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageShotgun)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageDroneController(const FGameplayAttributeData& OldIncreasedDamageDroneController) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageDroneController)
-
-UFUNCTION()
-	void OnRep_MoreDamageDroneController(const FGameplayAttributeData& OldMoreDamageDroneController) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageDroneController)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageAxe(const FGameplayAttributeData& OldIncreasedDamageAxe) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageAxe)
-
-UFUNCTION()
-	void OnRep_MoreDamageAxe(const FGameplayAttributeData& OldMoreDamageAxe) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageAxe)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageSword(const FGameplayAttributeData& OldIncreasedDamageSword) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageSword)
-
-UFUNCTION()
-	void OnRep_MoreDamageSword(const FGameplayAttributeData& OldMoreDamageSword) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageSword)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageMace(const FGameplayAttributeData& OldIncreasedDamageMace) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageMace)
-
-UFUNCTION()
-	void OnRep_MoreDamageMace(const FGameplayAttributeData& OldMoreDamageMace) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageMace)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageGauntlets(const FGameplayAttributeData& OldIncreasedDamageGauntlets) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageGauntlets)
-
-UFUNCTION()
-	void OnRep_MoreDamageGauntlets(const FGameplayAttributeData& OldMoreDamageGauntlets) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageGauntlets)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageOrdnance(const FGameplayAttributeData& OldIncreasedDamageOrdnance) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageOrdnance)
-
-UFUNCTION()
-	void OnRep_MoreDamageOrdnance(const FGameplayAttributeData& OldMoreDamageOrdnance) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageOrdnance)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageConduit(const FGameplayAttributeData& OldIncreasedDamageConduit) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageConduit)
-
-UFUNCTION()
-	void OnRep_MoreDamageConduit(const FGameplayAttributeData& OldMoreDamageConduit) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageConduit)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageAccelerator(const FGameplayAttributeData& OldIncreasedDamageAccelerator) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageAccelerator)
-
-UFUNCTION()
-	void OnRep_MoreDamageAccelerator(const FGameplayAttributeData& OldMoreDamageAccelerator) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageAccelerator)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageSpear(const FGameplayAttributeData& OldIncreasedDamageSpear) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageSpear)
-
-UFUNCTION()
-	void OnRep_MoreDamageSpear(const FGameplayAttributeData& OldMoreDamageSpear) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageSpear)
-
-UFUNCTION()
-	void OnRep_IncreasedDamagePrecision(const FGameplayAttributeData& OldIncreasedDamagePrecision) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamagePrecision)
-
-UFUNCTION()
-	void OnRep_MoreDamagePrecision(const FGameplayAttributeData& OldMoreDamagePrecision) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamagePrecision)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageProjector(const FGameplayAttributeData& OldIncreasedDamageProjector) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageProjector)
-
-UFUNCTION()
-	void OnRep_MoreDamageProjector(const FGameplayAttributeData& OldMoreDamageProjector) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageProjector)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageMelee(const FGameplayAttributeData& OldIncreasedDamageMelee) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageMelee)
-
-UFUNCTION()
-	void OnRep_MoreDamageMelee(const FGameplayAttributeData& OldMoreDamageMelee) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageMelee)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageProjectile(const FGameplayAttributeData& OldIncreasedDamageProjectile) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageProjectile)
-
-UFUNCTION()
-	void OnRep_MoreDamageProjectile(const FGameplayAttributeData& OldMoreDamageProjectile) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageProjectile)
-
-UFUNCTION()
-	void OnRep_IncreasedDamageAoE(const FGameplayAttributeData& OldIncreasedDamageAoE) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamageAoE)
-
-UFUNCTION()
-	void OnRep_MoreDamageAoE(const FGameplayAttributeData& OldMoreDamageAoE) const;
-	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MoreDamageAoE)
 
 //Resistance
 UFUNCTION()
@@ -1023,6 +793,12 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_HeatCostEfficiency(const FGameplayAttributeData& OldHeatCostEfficiency) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, HeatCostEfficiency)
+UFUNCTION()
+	void OnRep_IncreasedHeatCost(const FGameplayAttributeData& OldIncreasedHeatCost) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedHeatCost)
+UFUNCTION()
+	void OnRep_FlatHeatCost(const FGameplayAttributeData& OldFlatHeatCost) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, FlatHeatCost)
 
 //Item
 UFUNCTION()
@@ -1134,6 +910,10 @@ UFUNCTION()
 	void OnRep_IncreasedDamagePerHeatFromEquilibrium(const FGameplayAttributeData& OldIncreasedDamagePerHeatFromEquilibrium) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncreasedDamagePerHeatFromEquilibrium)
 
+UFUNCTION()
+	void OnRep_ExecuteThreshold(const FGameplayAttributeData& OldExecuteThreshold) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ExecuteThreshold)
+
 //Recovery
 UFUNCTION()
 	void OnRep_LifeGainedOnHit(const FGameplayAttributeData& OldLifeGainedOnHit) const;
@@ -1142,7 +922,6 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_LifeGainedOnKill(const FGameplayAttributeData& OldLifeGainedOnKill) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, LifeGainedOnKill)
-
 
 //Meta Attributes
 //Damage
@@ -1155,8 +934,7 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_IncomingXP(const FGameplayAttributeData& OldIncomingXP) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, IncomingXP)
-	
-	
+
 private:
 	void HandleIncomingDamage(const FEffectProperties& Props);
 	void HandleIncomingXP(const FEffectProperties& Props);
@@ -1167,6 +945,5 @@ private:
 	bool bTopOffHealth = false;
 	bool bDebugXP = true;
 	bool bDebugHeatCapacity = false;
-	
-	
+
 };

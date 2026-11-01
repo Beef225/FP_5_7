@@ -134,6 +134,9 @@ Heat.AmbientTemperature                       Environment temperature  (Add)
 Heat.ThermalMass                              Heat capacity  (Add)
 Heat.CoolingCoefficient                       Heat dissipation rate  (Add)
 Heat.SkillCost                                Heat cost of skills, -reduces/+increases  (Add)
+Heat.SkillCostEfficiency                      Heat cost efficiency, cost / (1 + value)  (Add)
+Heat.SkillCostFlat                            Flat heat per cast after efficiency, -5 = 5 less  (Add)
+Execute.Threshold                             Execute below this fraction of target max life  (Add)
 
 --- DEBUFF EFFECTIVENESS ---
 Debuff.Effectiveness.Bruised                  Bruised debuff power  (Add)

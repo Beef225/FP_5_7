@@ -54,8 +54,10 @@ class TagCatalog:
             gates.insert(0, gate)
             segs = segs[:-1]
             base = ".".join(segs)
-            if base in self.registered and not base.startswith(_NOT_ATTRIBUTES):
-                return base, gates
+            # "Damage.Increased" -> "Damage.Increased.Generic", like the C++ resolver.
+            for cand in (base, base + ".Generic"):
+                if cand in self.registered and not cand.startswith(_NOT_ATTRIBUTES):
+                    return cand, gates
         return None, []
 
     def options_for(self, field_key: str) -> list[str]:

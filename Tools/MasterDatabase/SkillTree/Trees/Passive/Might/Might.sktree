@@ -1249,9 +1249,10 @@
       ],
       "Effects": [
         {
-          "EffectType": "Effect Flag",
-          "EffectFlagType": "Flag.SkillTree.Execute.Axe",
-          "EffectFlagTag": "Flag.SkillTree.Execute.Axe"
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Execute.Threshold.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
         }
       ]
     },
@@ -6066,9 +6067,10 @@
           "EffectFlagTag": "Flag.SkillTree.MightSkillsCostHPInsteadOfHeat"
         },
         {
-          "EffectType": "Effect Flag",
-          "EffectFlagType": "Flag.SkillTree.MightSkillsTripleCost",
-          "EffectFlagTag": "Flag.SkillTree.MightSkillsTripleCost"
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCost.MightWeapon",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 3.0
         }
       ]
     }

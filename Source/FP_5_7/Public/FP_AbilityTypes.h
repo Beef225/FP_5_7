@@ -12,10 +12,12 @@ public:
 	bool IsCriticalHit() const { return bIsCriticalHit; }
 	bool IsBlockedHit()  const { return bIsBlockedHit; }
 	bool IsDodgedHit()   const { return bIsDodgedHit; }
+	bool IsExecutedHit() const { return bIsExecutedHit; }
 
 	void SetIsCriticalHit(bool bIn) { bIsCriticalHit = bIn; }
 	void SetIsBlockedHit (bool bIn) { bIsBlockedHit  = bIn; }
 	void SetIsDodgedHit  (bool bIn) { bIsDodgedHit   = bIn; }
+	void SetIsExecutedHit(bool bIn) { bIsExecutedHit = bIn; }
 
 	virtual UScriptStruct* GetScriptStruct() const override
 	{
@@ -46,6 +48,10 @@ protected:
 
 	UPROPERTY()
 	bool bIsDodgedHit = false;
+
+	/** The hit killed via Execute.Threshold (damage was set to the target's remaining life). */
+	UPROPERTY()
+	bool bIsExecutedHit = false;
 };
 
 template<>

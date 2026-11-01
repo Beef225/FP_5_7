@@ -403,6 +403,14 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Heat.SkillCost"),
 		FString("Heat cost of activating skills (decimal fraction, bidirectional: negative = reduced cost, positive = increased cost)")
 		);
+	GameplayTags.Heat_SkillCostEfficiency = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Heat.SkillCostEfficiency"),
+		FString("Heat cost efficiency (decimal, diminishing): cost / (1 + value). 1.0 = half cost, 2.0 = a third")
+		);
+	GameplayTags.Heat_SkillCostFlat = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Heat.SkillCostFlat"),
+		FString("Flat heat per cast, applied after efficiency. Negative = less heat generated (-5 = 5 less heat)")
+		);
 
 	//Debuff
 	GameplayTags.Debuff_Effectiveness_Bruised = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -916,6 +924,18 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("SetByCaller.DodgeRoll.MoveSpeed"),
 		FString("SetByCaller tag driving the dodge roll movement speed ramp GE")
 		);
+	GameplayTags.SetByCaller_SkillCost_Heat = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.SkillCost.Heat"),
+		FString("Native skill cost: heat added on commit")
+		);
+	GameplayTags.SetByCaller_SkillCost_HitPoints = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.SkillCost.HitPoints"),
+		FString("Native skill cost: hit points removed on commit (negative magnitude)")
+		);
+	GameplayTags.SetByCaller_SkillBonus_ExecuteThreshold = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SetByCaller.SkillBonus.ExecuteThreshold"),
+		FString("Skill-specific execute threshold (SkillPassive.<Skill>.ExecuteThreshold or set by the ability)")
+		);
 
 	GameplayTags.SetByCaller_SkillBonus_IncreasedDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SetByCaller.SkillBonus.IncreasedDamage"),        FString("Per-skill passive increased damage bonus"));
@@ -1093,6 +1113,22 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.SkillTagMod_Buff = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SkillTagMod.Buff"), 
 		FString("")
+		);
+	GameplayTags.SkillTagMod_MightWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.MightWeapon"),
+		FString("Derived: skill comes from a Might weapon (Mace, Ordnance, Rifle, Axe, Accelerator)")
+		);
+	GameplayTags.SkillTagMod_AgilityWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.AgilityWeapon"),
+		FString("Derived: skill comes from an Agility weapon (Sword, Pistol, Rifle, Spear, Precision)")
+		);
+	GameplayTags.SkillTagMod_FortitudeWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.FortitudeWeapon"),
+		FString("Derived: skill comes from a Fortitude weapon (Gauntlets, Shotgun, Axe, Spear, Projector)")
+		);
+	GameplayTags.SkillTagMod_ResonanceWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillTagMod.ResonanceWeapon"),
+		FString("Derived: skill comes from a Resonance weapon (Conduit, DroneController, Accelerator, Precision, Projector)")
 		);
 
 
@@ -3088,5 +3124,25 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.AoE_Multiplier_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("AoE.Multiplier.Rifle"),
 		FString("Gated stat: AoE.Multiplier only for skills with SkillTagMod.Rifle")
+		);
+	GameplayTags.Heat_SkillCost_MightWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Heat.SkillCost.MightWeapon"),
+		FString("Gated stat: Heat.SkillCost only for skills from Might weapons")
+		);
+	GameplayTags.Execute_Threshold_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Execute.Threshold.Axe"),
+		FString("Gated stat: Execute.Threshold only for skills with SkillTagMod.Axe")
+		);
+
+	//SkillTreeFlags
+	GameplayTags.Flag_SkillTree_MightSkillsCostHPInsteadOfHeat = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.MightSkillsCostHPInsteadOfHeat"),
+		FString("Liquid Cooled Systems: Might weapon skills pay positive heat costs with hit points")
+		);
+
+	//Execute
+	GameplayTags.Execute_Threshold = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Execute.Threshold"),
+		FString("Execute (cull) threshold: fraction of max life. A hit that leaves the target at or below it kills. Additive across sources")
 		);
 }

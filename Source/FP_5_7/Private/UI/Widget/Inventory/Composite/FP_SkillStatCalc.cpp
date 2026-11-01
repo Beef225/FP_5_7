@@ -2,6 +2,7 @@
 
 #include "UI/Widget/Inventory/Composite/FP_SkillStatCalc.h"
 #include "AbilitySystem/Abilities/FP_DamageGameplayAbility.h"
+#include "AbilitySystem/Abilities/FP_GameplayAbility.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "AbilitySystem/Data/FP_SkillLevelUpInfo.h"
 #include "AbilitySystemComponent.h"
@@ -21,6 +22,14 @@ namespace
 		return bFound ? Val : 0.f;
 	}
 
+	float GetSkillAttr(const UAbilitySystemComponent* ASC, FGameplayAttribute Attr, const FGameplayTagContainer& SkillTags)
+	{
+		if (!ASC) return 0.f;
+		FGameplayTagRequirements SourceReqs;
+		SourceReqs.RequireTags = SkillTags;
+		return const_cast<UAbilitySystemComponent*>(ASC)->GetFilteredAttributeValue(Attr, SourceReqs, FGameplayTagContainer());
+	}
+
 	// Maps the leaf portion of a SkillTagMod tag to a pair of attribute getters.
 	struct FDamageTagEntry
 	{
@@ -31,24 +40,6 @@ namespace
 
 	static const FDamageTagEntry DamageTagTable[] =
 	{
-		// Weapon types
-		{ TEXT("Pistol"),     UFP_AttributeSet::GetIncreasedDamagePistolAttribute,     UFP_AttributeSet::GetMoreDamagePistolAttribute     },
-		{ TEXT("Rifle"),      UFP_AttributeSet::GetIncreasedDamageRifleAttribute,      UFP_AttributeSet::GetMoreDamageRifleAttribute      },
-		{ TEXT("Shotgun"),    UFP_AttributeSet::GetIncreasedDamageShotgunAttribute,    UFP_AttributeSet::GetMoreDamageShotgunAttribute    },
-		{ TEXT("DroneController"), UFP_AttributeSet::GetIncreasedDamageDroneControllerAttribute, UFP_AttributeSet::GetMoreDamageDroneControllerAttribute },
-		{ TEXT("Axe"),        UFP_AttributeSet::GetIncreasedDamageAxeAttribute,        UFP_AttributeSet::GetMoreDamageAxeAttribute        },
-		{ TEXT("Sword"),      UFP_AttributeSet::GetIncreasedDamageSwordAttribute,      UFP_AttributeSet::GetMoreDamageSwordAttribute      },
-		{ TEXT("Mace"),       UFP_AttributeSet::GetIncreasedDamageMaceAttribute,       UFP_AttributeSet::GetMoreDamageMaceAttribute       },
-		{ TEXT("Gauntlets"),  UFP_AttributeSet::GetIncreasedDamageGauntletsAttribute,  UFP_AttributeSet::GetMoreDamageGauntletsAttribute  },
-		{ TEXT("Ordnance"),   UFP_AttributeSet::GetIncreasedDamageOrdnanceAttribute,   UFP_AttributeSet::GetMoreDamageOrdnanceAttribute   },
-		{ TEXT("Conduit"),    UFP_AttributeSet::GetIncreasedDamageConduitAttribute,    UFP_AttributeSet::GetMoreDamageConduitAttribute    },
-		{ TEXT("Accelerator"),UFP_AttributeSet::GetIncreasedDamageAcceleratorAttribute,UFP_AttributeSet::GetMoreDamageAcceleratorAttribute},
-		{ TEXT("Spear"),      UFP_AttributeSet::GetIncreasedDamageSpearAttribute,      UFP_AttributeSet::GetMoreDamageSpearAttribute      },
-		{ TEXT("Precision"),  UFP_AttributeSet::GetIncreasedDamagePrecisionAttribute,  UFP_AttributeSet::GetMoreDamagePrecisionAttribute  },
-		{ TEXT("Projector"),  UFP_AttributeSet::GetIncreasedDamageProjectorAttribute,  UFP_AttributeSet::GetMoreDamageProjectorAttribute  },
-		{ TEXT("Melee"),      UFP_AttributeSet::GetIncreasedDamageMeleeAttribute,      UFP_AttributeSet::GetMoreDamageMeleeAttribute      },
-		{ TEXT("Projectile"), UFP_AttributeSet::GetIncreasedDamageProjectileAttribute, UFP_AttributeSet::GetMoreDamageProjectileAttribute },
-		{ TEXT("AoE"),        UFP_AttributeSet::GetIncreasedDamageAoEAttribute,        UFP_AttributeSet::GetMoreDamageAoEAttribute        },
 		// Damage element types
 		{ TEXT("Physical"),   UFP_AttributeSet::GetIncreasedPhysicalDamageAttribute,   UFP_AttributeSet::GetMorePhysicalDamageAttribute   },
 		{ TEXT("Energy"),     UFP_AttributeSet::GetIncreasedEnergyDamageAttribute,     UFP_AttributeSet::GetMoreEnergyDamageAttribute     },
@@ -89,9 +80,15 @@ float CalcAvgDamage(const FFP_AbilityEntry& Entry, const AFP_PlayerState* PS)
 	}
 	if (EffectiveBase <= 0.f) return 0.f;
 
-	// Collect tag-driven bonuses (additive Increased, multiplicative More)
-	float TotalIncreased = GetAttr(ASC, UFP_AttributeSet::GetIncreasedDamageAttribute());
-	float TotalMore      = 1.f + GetAttr(ASC, UFP_AttributeSet::GetMoreDamageAttribute());
+	// Generic Increased / More, read as this skill sees them: gated weapon / hit-type modifiers
+	// (Damage.Increased.Rifle, Damage.More.Melee, ...) count only when the skill carries those tags.
+	FGameplayTagContainer SkillTags = Entry.SkillModifierTags;
+	SkillTags.AddTag(Entry.SkillTag);
+	UFP_GameplayAbility::AppendWeaponStatTags(SkillTags);
+	float TotalIncreased = GetSkillAttr(ASC, UFP_AttributeSet::GetIncreasedDamageAttribute(), SkillTags);
+	float TotalMore      = 1.f + GetSkillAttr(ASC, UFP_AttributeSet::GetMoreDamageAttribute(), SkillTags);
+
+	// Element-specific Increased / More (still separate attributes)
 
 	for (const FGameplayTag& Tag : Entry.SkillModifierTags)
 	{

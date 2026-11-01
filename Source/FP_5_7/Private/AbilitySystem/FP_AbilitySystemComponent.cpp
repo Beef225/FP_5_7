@@ -390,6 +390,31 @@ void UFP_AbilitySystemComponent::ApplyDeferredDamageTick(float Amount, UAbilityS
 	ApplyGameplayEffectSpecToSelf(Spec);
 }
 
+UGameplayEffect* UFP_AbilitySystemComponent::GetSkillCostEffect()
+{
+	if (!SkillCostEffect)
+	{
+		const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
+		SkillCostEffect = NewObject<UGameplayEffect>(this, TEXT("GE_SkillCost"), RF_Transient);
+		SkillCostEffect->DurationPolicy = EGameplayEffectDurationType::Instant;
+
+		auto AddSetByCallerMod = [this](const FGameplayAttribute& Attribute, const FGameplayTag& DataTag)
+		{
+			FSetByCallerFloat SetByCaller;
+			SetByCaller.DataTag = DataTag;
+
+			FGameplayModifierInfo Mod;
+			Mod.Attribute = Attribute;
+			Mod.ModifierOp = EGameplayModOp::Additive;
+			Mod.ModifierMagnitude = FGameplayEffectModifierMagnitude(SetByCaller);
+			SkillCostEffect->Modifiers.Add(Mod);
+		};
+		AddSetByCallerMod(UFP_AttributeSet::GetHeatAttribute(), Tags.SetByCaller_SkillCost_Heat);
+		AddSetByCallerMod(UFP_AttributeSet::GetHitPointsAttribute(), Tags.SetByCaller_SkillCost_HitPoints);
+	}
+	return SkillCostEffect;
+}
+
 void UFP_AbilitySystemComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	ClearDeferredDamage();

@@ -16,45 +16,7 @@ namespace
 {
 	bool ResolveSkillAbilityEntry(const UFP_DamageGameplayAbility* Ability, FFP_AbilityEntry& OutAbilityEntry)
 	{
-		if (Ability == nullptr)
-		{
-			return false;
-		}
-
-		const AActor* AvatarActor = Ability->GetAvatarActorFromActorInfo();
-		const APawn* AvatarPawn = Cast<APawn>(AvatarActor);
-		const AFP_PlayerState* FPPlayerState = AvatarPawn ? AvatarPawn->GetPlayerState<AFP_PlayerState>() : nullptr;
-		if (FPPlayerState == nullptr)
-		{
-			return false;
-		}
-
-		const UFP_SkillLibrary* SkillLibrary = FPPlayerState->GetSkillLibrary();
-		if (SkillLibrary == nullptr)
-		{
-			return false;
-		}
-
-		FGameplayTag SkillTag;
-		const FGameplayTag SkillTagRoot = FGameplayTag::RequestGameplayTag(FName("Skill"));
-		const FGameplayTag SkillsTagRoot = FGameplayTag::RequestGameplayTag(FName("Skills"));
-		const FGameplayTagContainer& AssetTags = Ability->GetAssetTags();
-		for (const FGameplayTag& Tag : AssetTags)
-		{
-			if (Tag.MatchesTag(SkillTagRoot) || Tag.MatchesTag(SkillsTagRoot))
-			{
-				SkillTag = Tag;
-				break;
-			}
-		}
-
-		if (!SkillTag.IsValid())
-		{
-			return false;
-		}
-
-		OutAbilityEntry = SkillLibrary->FindAbilityEntryForTag(SkillTag, false);
-		return true;
+		return Ability && Ability->FindSkillEntry(Ability->GetCurrentActorInfo(), OutAbilityEntry);
 	}
 }
 
@@ -133,6 +95,24 @@ void UFP_DamageGameplayAbility::GetSkillModifierTags(FGameplayTagContainer& OutT
 	{
 		OutTags.AppendTags(AbilityEntry.SkillModifierTags);
 	}
+	AppendWeaponStatTags(OutTags); // SkillTagMod.MightWeapon etc.
+}
+
+float UFP_DamageGameplayAbility::GetFlatHeatCostBonus(const FGameplayAbilityActorInfo* ActorInfo) const
+{
+	if (!SkillPassiveRootTag.IsValid() || !ActorInfo)
+	{
+		return 0.f;
+	}
+	const APawn* Pawn = Cast<APawn>(ActorInfo->AvatarActor.Get());
+	const AFP_PlayerState* PS = Pawn ? Pawn->GetPlayerState<AFP_PlayerState>() : nullptr;
+	if (!PS)
+	{
+		return 0.f;
+	}
+	const FGameplayTag PassiveTag = FGameplayTag::RequestGameplayTag(
+		FName(*(SkillPassiveRootTag.ToString() + TEXT(".HeatCost"))), false);
+	return PassiveTag.IsValid() ? PS->GetSkillPassiveValue(PassiveTag) : 0.f;
 }
 
 void UFP_DamageGameplayAbility::AppendSkillModifierTagsToDamageSpec(FGameplayEffectSpecHandle& DamageSpecHandle) const
@@ -166,7 +146,9 @@ void UFP_DamageGameplayAbility::AppendSkillModifierTagsToDamageSpec(FGameplayEff
 		return;
 	}
 
-	for (const FGameplayTag& ModifierTag : AbilityEntry.SkillModifierTags)
+	FGameplayTagContainer ModifierTags = AbilityEntry.SkillModifierTags;
+	AppendWeaponStatTags(ModifierTags); // so damage stats can gate on SkillTagMod.MightWeapon etc.
+	for (const FGameplayTag& ModifierTag : ModifierTags)
 	{
 		DamageSpecHandle.Data->AddDynamicAssetTag(ModifierTag);
 	}
@@ -270,6 +252,8 @@ void UFP_DamageGameplayAbility::AssignSkillPassiveBonuses(FGameplayEffectSpecHan
 		else if (Leaf == TEXT("CritChance"))               Bucket = Tags.SetByCaller_SkillBonus_CritChance;
 		else if (Leaf == TEXT("IncreasedCritChance"))      Bucket = Tags.SetByCaller_SkillBonus_IncreasedCritChance;
 		else if (Leaf == TEXT("CritMultiplier"))           Bucket = Tags.SetByCaller_SkillBonus_CritMultiplier;
+		else if (Leaf == TEXT("ExecuteThreshold"))         Bucket = Tags.SetByCaller_SkillBonus_ExecuteThreshold;
+		else if (Leaf == TEXT("HeatCost"))                 continue; // read by the native skill cost, not the damage spec
 		else
 		{
 			UE_LOG(LogTemp, Warning, TEXT("AssignSkillPassiveBonuses [%s]: unrecognised leaf [%s] — no bucket mapped"),

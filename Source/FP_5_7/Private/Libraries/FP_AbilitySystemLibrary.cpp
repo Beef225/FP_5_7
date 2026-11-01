@@ -175,6 +175,23 @@ bool UFP_AbilitySystemLibrary::IsDodgedHit(const FGameplayEffectContextHandle& E
 	return false;
 }
 
+bool UFP_AbilitySystemLibrary::IsExecutedHit(const FGameplayEffectContextHandle& EffectContextHandle)
+{
+	if (const FFP_GameplayEffectContext* FP_EffectContext = static_cast<const FFP_GameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		return FP_EffectContext->IsExecutedHit();
+	}
+	return false;
+}
+
+void UFP_AbilitySystemLibrary::SetIsExecutedHit(FGameplayEffectContextHandle& EffectContextHandle, bool bInIsExecutedHit)
+{
+	if (FFP_GameplayEffectContext* FP_EffectContext = static_cast<FFP_GameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		FP_EffectContext->SetIsExecutedHit(bInIsExecutedHit);
+	}
+}
+
 void UFP_AbilitySystemLibrary::SetIsBlockedHit(FGameplayEffectContextHandle& EffectContextHandle, bool bInIsBlockedHit)
 {
 	if ( FFP_GameplayEffectContext* FP_EffectContext = static_cast<FFP_GameplayEffectContext*>(EffectContextHandle.Get()))

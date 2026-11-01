@@ -138,6 +138,7 @@ class MainWindow(QMainWindow):
         self.icons = IconLibrary()
         self.node_data_clipboard: dict | None = None
         self._restoring = False
+        self._closing = False  # set once the window accepts close: scenes are torn down after this
         self._doc: Document | None = None
         self.view_opts = {"show_labels": True, "show_icons": True, "show_grid": True, "snap_enabled": False}
 
@@ -313,7 +314,7 @@ class MainWindow(QMainWindow):
     def _wire_document(self, doc: Document) -> None:
         """Scene/view signals only act while their tab is the active one."""
         def active(fn):
-            return lambda *a: fn(*a) if doc is self._doc else None
+            return lambda *a: fn(*a) if doc is self._doc and not self._closing else None
         doc.scene.committed.connect(active(self.commit))
         doc.scene.add_node_requested.connect(active(self.add_node_at))
         doc.scene.selectionChanged.connect(active(self._on_selection))
@@ -1077,4 +1078,12 @@ class MainWindow(QMainWindow):
         self.settings.setValue("currentTab", session[1])
         self.settings.setValue("geometry", self.saveGeometry())
         self.settings.setValue("windowState", self.saveState())
+        # Qt destroys the scenes after this, which clears their selection and emits
+        # selectionChanged into half-deleted objects. Stop listening first.
+        self._closing = True
+        for d in self.docs:
+            d.scene.blockSignals(True)
+            d.view.blockSignals(True)
+        self._validate_timer.stop()
+        self._list_timer.stop()
         event.accept()

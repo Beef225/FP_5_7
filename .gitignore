@@ -7,7 +7,26 @@ DerivedDataCache/
 Intermediate/
 Saved/
 
-Tools/
+# Tools: ignored by default (Blender files, screenshots, icon dumps, backups...).
+# Opt folders back in below. Git can't re-include a file whose parent folder is
+# excluded, so each level is "ignore contents" + "un-ignore the one we want".
+/Tools/*
+!/Tools/add_gameplay_tag.py
+!/Tools/add_gameplay_tag_howto.txt
+!/Tools/MasterDatabase/
+/Tools/MasterDatabase/*
+!/Tools/MasterDatabase/SkillTree/
+!/Tools/MasterDatabase/Affixes/
+
+# Office lock files (open Excel workbooks)
+~$*
+
+# Python tooling noise (anywhere)
+.venv/
+__pycache__/
+*.pyc
+*.json.tmp
+Tools/**/.idea/
 
 # Local shader cache / local DDC variants (belt + suspenders)
 **/DerivedDataCache/**

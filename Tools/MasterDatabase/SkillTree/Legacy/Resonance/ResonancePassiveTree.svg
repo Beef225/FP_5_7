@@ -1,0 +1,1003 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Inkscape (http://www.inkscape.org/) --><svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" width="3000" height="3000" viewBox="0 0 793.75 793.74997" version="1.1" id="svg1" sodipodi:docname="MightPassiveTree.svg" inkscape:version="1.4.3 (0d15f75, 2025-12-25)">
+  <sodipodi:namedview id="namedview1" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="px" inkscape:zoom="1.131351" inkscape:cx="1469.4821" inkscape:cy="2386.5273" inkscape:window-width="3840" inkscape:window-height="2054" inkscape:window-x="-11" inkscape:window-y="-11" inkscape:window-maximized="1" inkscape:current-layer="layer1" showgrid="true" showguides="false">
+    <inkscape:grid type="axonomgrid" id="grid5" units="px" originx="396.87499" originy="396.87499" spacingx="1" spacingy="5.2916666" empcolor="#6b6b6b" empopacity="1" color="#ae0000" opacity="0.13333333" empspacing="5" dotted="false" gridanglex="30" gridanglez="30" enabled="true" visible="true"/>
+  </sodipodi:namedview>
+  <defs id="defs1"/>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1">
+    <circle style="opacity:0.85;fill:#d099ff;fill-opacity:0.358442;stroke-width:40;paint-order:stroke fill markers" id="path10" cx="396.875" cy="396.875" sodipodi:insensitive="true" r="320.79022">
+      <desc id="desc1">ignore</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#5599ff;stroke-width:51.425;paint-order:stroke fill markers" id="path5" cx="396.875" cy="396.875" r="39.6875"/>
+    <ellipse style="opacity:0.85;fill:#4ee04e;stroke-width:55.3105;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_1" cx="351.04782" cy="370.94583" rx="5.8214293" ry="5.8208332">
+      <desc id="desc3">NodeTag:PassiveTree.IncreasedMelee.1
+NodeType: Minor
+IsStartNode: true
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </ellipse>
+    <ellipse style="opacity:0.85;fill:#4ee04e;stroke-width:55.3105;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_2" cx="305.22064" cy="343.42917" rx="5.8214293" ry="5.8208332">
+      <desc id="desc2">NodeTag:PassiveTree.IncreasedMelee.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </ellipse>
+    <ellipse style="opacity:0.85;fill:#4ee04e;stroke-width:55.3104;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_3" cx="259.39346" cy="316.97086" rx="5.8214297" ry="5.8208332">
+      <desc id="desc2-2">NodeTag:PassiveTree.IncreasedMelee.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </ellipse>
+    <circle style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_4" cx="213.56628" cy="290.51251" r="5.8208332">
+      <desc id="desc2-1">NodeTag:PassiveTree.IncreasedMelee.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_5" cx="167.73911" cy="264.05417" r="5.8208332">
+      <desc id="desc2-1-1">NodeTag:PassiveTree.IncreasedMelee.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_6" cx="121.91193" cy="238.65417" r="5.8208332">
+      <desc id="desc2-1-1-4">NodeTag:PassiveTree.IncreasedMelee.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <ellipse style="opacity:0.85;fill:#e04e4e;stroke-width:55.3105;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_1" cx="-442.70218" cy="370.94583" rx="5.8214293" ry="5.8208332" transform="scale(-1,1)">
+      <desc id="desc3-9">NodeTag:PassiveTree.BruisedConcussedThreshold.1
+NodeType: Minor
+IsStartNode: true
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </ellipse>
+    <ellipse style="opacity:0.85;fill:#e04e4e;stroke-width:55.3105;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_2" cx="-488.52933" cy="343.42917" rx="5.8214293" ry="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-7">NodeTag:PassiveTree.BruisedConcussedThreshold.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </ellipse>
+    <ellipse style="opacity:0.85;fill:#e04e4e;stroke-width:55.3104;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_3" cx="-534.35651" cy="316.97086" rx="5.8214297" ry="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-2-3">NodeTag:PassiveTree.BruisedConcussedThreshold.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </ellipse>
+    <circle style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_4" cx="-580.18372" cy="290.51251" r="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-1-12">NodeTag:PassiveTree.BruisedConcussedThreshold.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_5" cx="-626.01086" cy="264.05417" r="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-1-1-1">NodeTag:PassiveTree.BruisedConcussedThreshold.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_6" cx="-671.83807" cy="238.65416" r="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-1-1-4-4">NodeTag:PassiveTree.BruisedConcussedThreshold.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.528;paint-order:stroke fill markers" id="PassiveTree_Might_3" cx="351.04782" cy="-423.30026" transform="scale(1,-1)" r="5.8208332">
+      <desc id="desc3-8">NodeTag:PassiveTree.Fortitude.3
+NodeType: Minor
+IsStartNode: true
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <ellipse style="opacity:0.85;fill:#4ee0e0;stroke-width:55.3105;paint-order:stroke fill markers" id="PassiveTree_Might_1" cx="305.22064" cy="-450.32083" rx="5.8214293" ry="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-8">NodeTag:PassiveTree.Fortitude.1
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </ellipse>
+    <ellipse style="opacity:0.85;fill:#4ee0e0;stroke-width:55.3104;paint-order:stroke fill markers" id="PassiveTree_Might_2" cx="259.39346" cy="-476.77914" rx="5.8214297" ry="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-2-7">NodeTag:PassiveTree.Fortitude.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </ellipse>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_Might_4" cx="213.56628" cy="-503.23752" r="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-1-3">NodeTag:PassiveTree.Fortitude.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_Might_5" cx="167.73911" cy="-529.69586" r="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-1-1-3">NodeTag:PassiveTree.Fortitude.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_Might_6" cx="121.91192" cy="-555.09589" r="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-1-1-4-1">NodeTag:PassiveTree.Fortitude.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <ellipse style="opacity:0.85;fill:#e0e04e;stroke-width:55.3105;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_1" cx="-442.70218" cy="-422.80417" rx="5.8214293" ry="5.8208332" transform="scale(-1)">
+      <desc id="desc3-9-7">NodeTag:PassiveTree.DeferredDamage.1
+NodeType: Minor
+IsStartNode: true
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </ellipse>
+    <ellipse style="opacity:0.85;fill:#e0e04e;stroke-width:55.3105;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_2" cx="-488.52933" cy="-450.32083" rx="5.8214293" ry="5.8208332" transform="scale(-1)">
+      <desc id="desc2-7-4">NodeTag:PassiveTree.DeferredDamage.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </ellipse>
+    <ellipse style="opacity:0.85;fill:#e0e04e;stroke-width:55.3104;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_3" cx="-534.35651" cy="-476.77914" rx="5.8214297" ry="5.8208332" transform="scale(-1)">
+      <desc id="desc2-2-3-6">NodeTag:PassiveTree.DeferredDamage.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </ellipse>
+    <circle style="opacity:0.85;fill:#e0e04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_4" cx="-580.18372" cy="-503.23752" r="5.8208332" transform="scale(-1)">
+      <desc id="desc2-1-12-1">NodeTag:PassiveTree.DeferredDamage.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e0e04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_5" cx="-626.01086" cy="-529.69586" r="5.8208332" transform="scale(-1)">
+      <desc id="desc2-1-1-1-9">NodeTag:PassiveTree.DeferredDamage.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e0e04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_6" cx="-671.83807" cy="-555.09589" r="5.8208332" transform="scale(-1)">
+      <desc id="desc2-1-1-4-4-6">NodeTag:PassiveTree.DeferredDamage.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_7" cx="153.99095" cy="188.38335" r="5.8208332">
+      <desc id="desc2-1-1-4-6">NodeTag:PassiveTree.IncreasedMelee.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e04ee0;stroke-width:205.279;paint-order:stroke fill markers" id="PassiveTree_RelentlessStrength_1" cx="76.084755" cy="396.34586" r="11.1125">
+      <desc id="desc2-1-1-4-6-9">NodeTag:PassiveTree.RelentlessStrength.1
+NodeType: Major
+IsStartNode: false
+NodeName: Relentless Strength
+NodeDescription: 10% Increased Melee Damage\n+2 Might
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.1
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_8" cx="94.415627" cy="290.51251" r="5.8208332">
+      <desc id="desc2-1-1-4-6-9-3">NodeTag:PassiveTree.IncreasedMelee.8
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_9" cx="80.667473" cy="343.67715" r="5.8208332">
+      <desc id="desc2-1-1-4-6-9-3-8">NodeTag:PassiveTree.IncreasedMelee.9
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4e4ee0;stroke-width:205.279;paint-order:stroke fill markers" id="PassiveTree_Outlasting_1" cx="-717.66522" cy="396.34586" transform="scale(-1,1)" r="11.1125">
+      <desc id="desc2-1-1-4-6-9-8">NodeTag:PassiveTree.Outlasting.1
+NodeType: Major
+IsStartNode: false
+NodeName: Outlasting
+NodeDescription: +5 to All Debuff Thresholds\n +1 Second to Deferred Damage Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_7" cx="-699.33435" cy="290.51251" r="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-1-1-4-6-9-3-0">NodeTag:PassiveTree.BruisedConcussedThreshold.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_8" cx="-713.08246" cy="343.67715" r="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-1-1-4-6-9-3-8-8">NodeTag:PassiveTree.BruisedConcussedThreshold.8
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_Might_7" cx="94.415619" cy="-502.17917" r="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-1-1-4-6-9-3-2">NodeTag:PassiveTree.Fortitude.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_Might_8" cx="80.667465" cy="-449.01456" r="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-1-1-4-6-9-3-8-86">NodeTag:PassiveTree.Fortitude.8
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e0e04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_7" cx="-699.33435" cy="-502.17917" r="5.8208332" transform="scale(-1)">
+      <desc id="desc2-1-1-4-6-9-3-0-3">NodeTag:PassiveTree.DeferredDamage.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e0e04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_8" cx="-713.08246" cy="-449.01456" r="5.8208332" transform="scale(-1)">
+      <desc id="desc2-1-1-4-6-9-3-8-8-2">NodeTag:PassiveTree.DeferredDamage.8
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_10" cx="189.41458" cy="153.45834" r="5.8208332">
+      <desc id="desc2-1-1-4-9">NodeTag:PassiveTree.IncreasedMelee.10
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_11" cx="236.47987" cy="119.59167" r="5.8208332">
+      <desc id="desc2-1-1-4-9-3">NodeTag:PassiveTree.IncreasedMelee.11
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_12" cx="294.81708" cy="93.133347" r="5.8208332">
+      <desc id="desc2-1-1-4-9-3-1">NodeTag:PassiveTree.IncreasedMelee.12
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_IncreasedMelee_13" cx="351.04782" cy="79.904175" r="5.8208332">
+      <desc id="desc2-1-1-4-9-3-1-2">NodeTag:PassiveTree.IncreasedMelee.13
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Melee Damage
+NodeDescription: 5% Increased Melee Damage
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Damage.Increased.Melee
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_9" cx="-639.75903" cy="187.32501" r="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-1-1-4-6-6">NodeTag:PassiveTree.BruisedConcussedThreshold.9
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_10" cx="-604.33539" cy="152.40001" r="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-1-1-4-9-1">NodeTag:PassiveTree.BruisedConcussedThreshold.10
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_11" cx="-557.27014" cy="118.53334" r="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-1-1-4-9-3-5">NodeTag:PassiveTree.BruisedConcussedThreshold.11
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_12" cx="-498.93292" cy="92.07502" r="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-1-1-4-9-3-1-5">NodeTag:PassiveTree.BruisedConcussedThreshold.12
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_BruisedConcussedThreshold_13" cx="-442.70215" cy="78.845848" r="5.8208332" transform="scale(-1,1)">
+      <desc id="desc2-1-1-4-9-3-1-2-1">NodeTag:PassiveTree.BruisedConcussedThreshold.13
+NodeType: Minor
+IsStartNode: false
+NodeName: Bruised and Concussed Threshold
+NodeDescription: +5 to Bruised Threshold\n+5 to Concussed Threshold
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 5</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_Might_9" cx="153.99097" cy="-605.3667" r="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-1-1-4-6-60">NodeTag:PassiveTree.Fortitude.9
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_Might_10" cx="189.4146" cy="-640.29169" r="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-1-1-4-9-17">NodeTag:PassiveTree.Fortitude.10
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_Might_11" cx="236.47989" cy="-674.15839" r="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-1-1-4-9-3-7">NodeTag:PassiveTree.Fortitude.11
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_Might_12" cx="294.81711" cy="-700.6167" r="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-1-1-4-9-3-1-3">NodeTag:PassiveTree.Fortitude.12
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_Might_13" cx="351.04782" cy="-713.84583" r="5.8208332" transform="scale(1,-1)">
+      <desc id="desc2-1-1-4-9-3-1-2-9">NodeTag:PassiveTree.Fortitude.13
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e0e04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_9" cx="-639.75903" cy="-606.42505" r="5.8208332" transform="scale(-1)">
+      <desc id="desc2-1-1-4-6-6-8">NodeTag:PassiveTree.DeferredDamage.9
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e0e04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_10" cx="-604.33539" cy="-641.35004" r="5.8208332" transform="scale(-1)">
+      <desc id="desc2-1-1-4-9-1-8">NodeTag:PassiveTree.DeferredDamage.10
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e0e04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_11" cx="-557.27014" cy="-675.21674" r="5.8208332" transform="scale(-1)">
+      <desc id="desc2-1-1-4-9-3-5-6">NodeTag:PassiveTree.DeferredDamage.11
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e0e04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_12" cx="-498.93292" cy="-701.67505" r="5.8208332" transform="scale(-1)">
+      <desc id="desc2-1-1-4-9-3-1-5-0">NodeTag:PassiveTree.DeferredDamage.12
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </circle>
+    <circle style="opacity:0.85;fill:#e0e04e;stroke-width:107.527;paint-order:stroke fill markers" id="PassiveTree_DeferredDamage_13" cx="-442.70215" cy="-714.90417" r="5.8208332" transform="scale(-1)">
+      <desc id="desc2-1-1-4-9-3-1-2-1-8">NodeTag:PassiveTree.DeferredDamage.13
+NodeType: Minor
+IsStartNode: false
+NodeName: Deferred Damage Amount
+NodeDescription: 2% of Damage Deferred Over Time
+NodeIcon: /Script/Engine.Texture2D'/Engine/EngineMaterials/DefaultCalibrationColor.DefaultCalibrationColor'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defence.DeferredDamageTime
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.02</desc>
+    </circle>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.287388px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 346.05712,367.9492 310.21134,346.4258" id="path3" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_1" inkscape:connection-end="#PassiveTree_IncreasedMelee_2"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" id="path6" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_2" inkscape:connection-end="#PassiveTree_IncreasedMelee_3" d="M 300.17935,340.51858 264.43476,319.88145"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 254.35217,314.06026 218.60719,293.42288" id="path7" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_3" inkscape:connection-end="#PassiveTree_IncreasedMelee_4"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 208.52538,287.60214 -35.74537,-20.6376" id="path8" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_4" inkscape:connection-end="#PassiveTree_IncreasedMelee_5"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 162.64805,261.23242 127.00299,241.47593" id="path9" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_5" inkscape:connection-end="#PassiveTree_IncreasedMelee_6"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 125.04309,233.74735 25.8167,-40.45718" id="path11" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_6" inkscape:connection-end="#PassiveTree_IncreasedMelee_7"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 158.1359,184.29675 27.13374,-26.75181" id="path12" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_7" inkscape:connection-end="#PassiveTree_IncreasedMelee_10"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 194.1393,150.05858 37.61585,-27.06715" id="path13" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_10" inkscape:connection-end="#PassiveTree_IncreasedMelee_11"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 241.78088,117.18744 289.51607,95.537573" id="path14" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_11" inkscape:connection-end="#PassiveTree_IncreasedMelee_12"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 300.48315,91.800313 44.8986,-10.563105" id="path15" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_12" inkscape:connection-end="#PassiveTree_IncreasedMelee_13"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 356.86824,79.836967 80.01349,-0.923911" id="path16" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_13" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_13"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 448.36822,80.178881 44.89863,10.563106" id="path17" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_13" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_12"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 504.23393,94.479246 47.7352,21.649864" id="path18" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_12" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_11"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 561.99486,121.9331 37.61581,27.06715" id="path19" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_11" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_10"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 608.48033,156.48661 27.13376,26.7518" id="path20" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_10" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_9"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 642.84389,192.26105 25.90932,41.45707" id="path21" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_9" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_6"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 666.74701,241.47591 -35.64509,19.75651" id="path22" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_6" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_5"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 620.96996,266.96454 -35.74534,20.6376" id="path23" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_5" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_4"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 575.14281,293.42288 539.3978,314.06026" id="path24" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_4" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_3"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 529.31521,319.88145 -35.74459,20.63713" id="path25" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_3" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_2"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 483.53863,346.42581 -35.84575,21.52338" id="path26" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_2" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_1"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 674.56477,243.79675 22.04288,41.57317" id="path27" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_6" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_7"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 700.79163,296.14787 10.83355,41.89393" id="path28" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_7" inkscape:connection-end="#PassiveTree_BruisedConcussedThreshold_8"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 713.58703,349.47605 3.11493,35.79919" id="path29" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_BruisedConcussedThreshold_8" inkscape:connection-end="#PassiveTree_Outlasting_1"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 716.70196,407.41647 -3.11493,35.79919" id="path30" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Outlasting_1" inkscape:connection-end="#PassiveTree_DeferredDamage_8"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 711.62518,454.64991 -10.83355,41.8939" id="path31" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_8" inkscape:connection-end="#PassiveTree_DeferredDamage_7"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 696.65047,507.34431 -22.12852,42.58644" id="path32" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_7" inkscape:connection-end="#PassiveTree_DeferredDamage_6"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 666.74701,552.27413 631.10192,532.51761" id="path33" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_6" inkscape:connection-end="#PassiveTree_DeferredDamage_5"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 620.96996,526.78549 -35.74534,-20.6376" id="path34" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_5" inkscape:connection-end="#PassiveTree_DeferredDamage_4"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 575.14281,500.32715 539.3978,479.68974" id="path35" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_4" inkscape:connection-end="#PassiveTree_DeferredDamage_3"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 529.31521,473.86855 493.57062,453.23142" id="path36" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_3" inkscape:connection-end="#PassiveTree_DeferredDamage_2"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 483.53863,447.32419 447.69288,425.80081" id="path37" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_2" inkscape:connection-end="#PassiveTree_DeferredDamage_1"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 668.75321,560.03192 -25.90932,41.45709" id="path38" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_6" inkscape:connection-end="#PassiveTree_DeferredDamage_9"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 635.61409,610.51165 -27.13376,26.75179" id="path39" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_9" inkscape:connection-end="#PassiveTree_DeferredDamage_10"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 599.61067,644.7498 -37.61581,27.06717" id="path40" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_10" inkscape:connection-end="#PassiveTree_DeferredDamage_11"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 551.96913,677.62096 -47.7352,21.64986" id="path41" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_11" inkscape:connection-end="#PassiveTree_DeferredDamage_12"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 493.26685,703.00808 -44.89863,10.56307" id="path42" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_12" inkscape:connection-end="#PassiveTree_DeferredDamage_13"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 436.88173,714.83697 -80.01349,-0.92394" id="path43" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_DeferredDamage_13" inkscape:connection-end="#PassiveTree_Might_13"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 345.38175,712.5128 300.48318,701.94973" id="path44" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_13" inkscape:connection-end="#PassiveTree_Might_12"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 289.5161,698.21247 241.7809,676.56261" id="path45" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_12" inkscape:connection-end="#PassiveTree_Might_11"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 231.75517,670.75863 194.13932,643.69145" id="path46" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_11" inkscape:connection-end="#PassiveTree_Might_10"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 185.26965,636.20509 158.13591,609.4533" id="path47" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_10" inkscape:connection-end="#PassiveTree_Might_9"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 150.8598,600.45988 125.04308,560.00271" id="path48" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_9" inkscape:connection-end="#PassiveTree_Might_6"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 119.22804,549.93075 97.0995,507.34431" id="path49" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_6" inkscape:connection-end="#PassiveTree_Might_7"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 92.958339,496.54381 82.124745,454.64991" id="path50" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_7" inkscape:connection-end="#PassiveTree_Might_8"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 80.162903,443.21566 77.048011,407.41647" id="path51" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_8" inkscape:connection-end="#PassiveTree_RelentlessStrength_1"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 77.048012,385.27524 80.16291,349.47605" id="path52" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_RelentlessStrength_1" inkscape:connection-end="#PassiveTree_IncreasedMelee_9"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 82.124752,338.0418 92.958347,296.14787" id="path53" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_9" inkscape:connection-end="#PassiveTree_IncreasedMelee_8"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 97.142326,285.36993 119.18523,243.79676" id="path54" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_IncreasedMelee_8" inkscape:connection-end="#PassiveTree_IncreasedMelee_6"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 346.03377,426.25664 -35.7987,21.10759" id="path55" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_3" inkscape:connection-end="#PassiveTree_Might_1"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 300.17935,453.23142 -35.74459,20.63713" id="path56" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_1" inkscape:connection-end="#PassiveTree_Might_2"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 254.35217,479.68974 -35.74498,20.63741" id="path57" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_2" inkscape:connection-end="#PassiveTree_Might_4"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 208.52538,506.14789 -35.74537,20.6376" id="path58" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_4" inkscape:connection-end="#PassiveTree_Might_5"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 162.64805,532.51761 -35.64507,19.75652" id="path59" inkscape:connector-type="polyline" inkscape:connector-curvature="0" inkscape:connection-start="#PassiveTree_Might_5" inkscape:connection-end="#PassiveTree_Might_6"/>
+  </g>
+</svg>

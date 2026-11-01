@@ -1,0 +1,1564 @@
+{
+  "nodes": [
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 1415.82,
+        "Y": 1349.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.2"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 1284.29,
+        "Y": 1123.05
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.1",
+        "PassiveTree.IncreasedHitPoints.3"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 1154.48,
+        "Y": 900.93
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.2",
+        "PassiveTree.IncreasedHitPoints.4"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 1028.79,
+        "Y": 675.08
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.3",
+        "PassiveTree.IncreasedHitPoints.5"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 893.38,
+        "Y": 449.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.4",
+        "PassiveTree.IncreasedHitPoints.11"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 374.17,
+        "Y": 1048.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.8",
+        "PassiveTree.IncreasedHitPoints.7"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1586.6,
+        "Y": 1349.33
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.2"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1716.45,
+        "Y": 1122.75
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.1",
+        "PassiveTree.IncreasedArmour.3"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1845.4,
+        "Y": 900.46
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.2",
+        "PassiveTree.IncreasedArmour.4"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1970.36,
+        "Y": 669.73
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.3",
+        "PassiveTree.IncreasedArmour.5"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 2106.62,
+        "Y": 449.84
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.4",
+        "PassiveTree.IncreasedArmour.11"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 2625.83,
+        "Y": 1052.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.9",
+        "PassiveTree.IncreasedArmour.7"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.3",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1413.4,
+        "Y": 1652.03
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.1"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1153.59,
+        "Y": 1702.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.3",
+        "PassiveTree.Fortitude.2"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 980.38,
+        "Y": 1802.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.1",
+        "PassiveTree.Fortitude.4"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 807.18,
+        "Y": 1902.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.2",
+        "PassiveTree.Fortitude.5"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 674.62,
+        "Y": 2122.08
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.4",
+        "PassiveTree.Fortitude.9"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 486.84,
+        "Y": 2151.62
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.9",
+        "PassiveTree.Fortitude.7"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1586.13,
+        "Y": 1652.05
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.2"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1846.41,
+        "Y": 1702.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.1",
+        "PassiveTree.AllThreshold.3"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 2019.62,
+        "Y": 1802.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.2",
+        "PassiveTree.AllThreshold.4"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 2192.82,
+        "Y": 1902.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.3",
+        "PassiveTree.AllThreshold.5"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 2327.06,
+        "Y": 2127.14
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.4",
+        "PassiveTree.AllThreshold.9"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 2508.35,
+        "Y": 2151.62
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.7",
+        "PassiveTree.AllThreshold.9"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 374.17,
+        "Y": 748.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.6",
+        "PassiveTree.IncreasedHitPoints.10"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Bulwark.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Relentless Strength",
+      "NodeDescription": "8% Increased Hit Points\n12% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/charging-bull.charging-bull",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.12
+        }
+      ],
+      "NodePosition": {
+        "X": 1500.0,
+        "Y": 201.36
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.13",
+        "PassiveTree.IncreasedArmour.13"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 374.17,
+        "Y": 1348.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.9",
+        "PassiveTree.IncreasedHitPoints.6"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 374.17,
+        "Y": 1648.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.8",
+        "PassiveTree.IncreasedHitPoints.8"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.NeverFall.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Never Fall",
+      "NodeDescription": "+2 to Fortitude\n+4 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/flying-fox.flying-fox",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1502.44,
+        "Y": 2894.02
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.13",
+        "PassiveTree.Fortitude.13"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 2625.78,
+        "Y": 1350.22
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.6",
+        "PassiveTree.IncreasedArmour.8"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 2625.81,
+        "Y": 1647.69
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.7",
+        "PassiveTree.AllThreshold.8"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 407.92,
+        "Y": 1977.18
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.6",
+        "PassiveTree.Fortitude.8"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 373.77,
+        "Y": 1802.58
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.7",
+        "PassiveTree.IncreasedHitPoints.9"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 2598.76,
+        "Y": 1977.18
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.8",
+        "PassiveTree.AllThreshold.6"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 2625.2,
+        "Y": 1802.58
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.8",
+        "PassiveTree.AllThreshold.7"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 374.17,
+        "Y": 448.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.7",
+        "PassiveTree.IncreasedHitPoints.11"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 633.97,
+        "Y": 302.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.10",
+        "PassiveTree.IncreasedHitPoints.12",
+        "PassiveTree.IncreasedHitPoints.5"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 980.4,
+        "Y": 298.85
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.11",
+        "PassiveTree.IncreasedHitPoints.13"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedHitPoints.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Hit Points",
+      "NodeDescription": "4% Increased Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ],
+      "NodePosition": {
+        "X": 1326.79,
+        "Y": 302.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedHitPoints.12",
+        "PassiveTree.Bulwark.1"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 2625.83,
+        "Y": 748.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.10",
+        "PassiveTree.IncreasedArmour.6"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 2625.83,
+        "Y": 448.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.11",
+        "PassiveTree.IncreasedArmour.9"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 2366.03,
+        "Y": 298.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.5",
+        "PassiveTree.IncreasedArmour.10",
+        "PassiveTree.IncreasedArmour.12"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 2019.62,
+        "Y": 298.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.13",
+        "PassiveTree.IncreasedArmour.11"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedArmour.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Armour",
+      "NodeDescription": "8% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1673.2,
+        "Y": 298.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Bulwark.1",
+        "PassiveTree.IncreasedArmour.12"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 604.32,
+        "Y": 2317.58
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.10",
+        "PassiveTree.Fortitude.6",
+        "PassiveTree.Fortitude.5"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 765.03,
+        "Y": 2476.47
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.11",
+        "PassiveTree.Fortitude.9"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 980.38,
+        "Y": 2631.97
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.12",
+        "PassiveTree.Fortitude.10"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1197.41,
+        "Y": 2775.54
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortitude.13",
+        "PassiveTree.Fortitude.11"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortitude.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Fortitude",
+      "NodeDescription": "+1 Fortitude",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Fortitude",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1410.61,
+        "Y": 2851.76
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.NeverFall.1",
+        "PassiveTree.Fortitude.12"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 2399.68,
+        "Y": 2317.58
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.6",
+        "PassiveTree.AllThreshold.10",
+        "PassiveTree.AllThreshold.5"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 2241.11,
+        "Y": 2476.47
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.9",
+        "PassiveTree.AllThreshold.11"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 2019.62,
+        "Y": 2631.97
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.10",
+        "PassiveTree.AllThreshold.12"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1803.29,
+        "Y": 2775.54
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.11",
+        "PassiveTree.AllThreshold.13"
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.AllThreshold.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Debuff Threshold",
+      "NodeDescription": "+2 to All Debuff Thresholds",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1591.54,
+        "Y": 2851.75
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.12",
+        "PassiveTree.NeverFall.1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1303 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1800"
+   height="900"
+   viewBox="0 0 476.24998 238.125"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="LightningCoilTree.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.5999719"
+     inkscape:cx="692.82467"
+     inkscape:cy="498.75876"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="opacity:0.85;fill:#4eb8e0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_Damage_1"
+       cx="257.17499"
+       cy="100.0125"
+       r="5.8208332">
+      <desc
+         id="desc1">NodeTag:SkillTree.LightningCoil.Damage.1
+NodeType: Minor
+IsStartNode: true
+NodeName: Increased Damage
+NodeDescription: 8% Increased Damage
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedDamage
+EffectStatModifierOp:
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d34ee0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_IncreasedCritChance_1"
+       cx="219.075"
+       cy="100.0125"
+       r="5.8208332">
+      <desc
+         id="desc1-6">NodeTag:SkillTree.LightningCoil.IncreasedCritChance.1
+NodeType: Minor
+IsStartNode: true
+NodeName: Increased Critical Chance
+NodeDescription: 10% Increased Critical Chance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedCritChance
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee069;fill-opacity:0.89875;stroke-width:145.16;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_Convergence_1"
+       cx="64.888626"
+       cy="169.96214"
+       r="11.1125">
+      <desc
+         id="desc1-6-2">NodeTag:SkillTree.LightningCoil.Convergence.1
+NodeType: Major
+IsStartNode: false
+NodeName: Convergence
+NodeDescription: Bolts Converge on Subsequent Use\n30% Less Damage
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/expanded-rays.expanded-rays'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ConvergenceRate
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.MoreDamage
+EffectStatModifierOp:
+EffectStatMagnitude: -0.3</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#834ee0;fill-opacity:0.89875;stroke-width:145.16;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_ExtraBolts_1"
+       cx="323.65976"
+       cy="99.563606"
+       r="11.1125">
+      <desc
+         id="desc1-6-2-13">NodeTag:SkillTree.LightningCoil.ExtraBolts.1
+NodeType: Major
+IsStartNode: false
+NodeName: Extra Bolt
+NodeDescription: Fire an Extra Bolt\n30% Less Damage
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-tree.lightning-tree'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ExtraBolts
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.MoreDamage
+EffectStatModifierOp:
+EffectStatMagnitude: -0.3</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#834ee0;fill-opacity:0.89875;stroke-width:145.16;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_ExtraBolts_2"
+       cx="390.98474"
+       cy="83.702377"
+       r="11.1125">
+      <desc
+         id="desc1-6-2-13-8">NodeTag:SkillTree.LightningCoil.ExtraBolts.2
+NodeType: Major
+IsStartNode: false
+NodeName: Extra Bolt
+NodeDescription: Fire an Extra Bolt\n20% Less Damage
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-tree.lightning-tree'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ExtraBolts
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.MoreDamage
+EffectStatModifierOp:
+EffectStatMagnitude: -0.2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4e69e0;fill-opacity:0.89875;stroke-width:145.16;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_DistanceLuckyRolls_1"
+       cx="140.33131"
+       cy="140.50853"
+       r="11.1125">
+      <desc
+         id="desc1-6-2-6">NodeTag:SkillTree.LightningCoil.DistanceLuckyRolls.1
+NodeType: Major
+IsStartNode: false
+NodeName: Distance
+NodeDescription: Increased Chance to Shoot Bolts Farther Away
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/deadly-strike.deadly-strike'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.DistanceLuckyRolls
+EffectStatModifierOp:
+EffectStatMagnitude: 1
+</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e09e4e;fill-opacity:0.89875;stroke-width:145.16;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_ChainCount_1"
+       cx="169.13535"
+       cy="96.704575"
+       r="11.1125">
+      <desc
+         id="desc1-6-2-16">NodeTag:SkillTree.LightningCoil.ChainCount.1
+NodeType: Major
+IsStartNode: false
+NodeName: Chain
+NodeDescription: Bolts Chain to an Additional Target\nFire One Less Bolt
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/andromeda-chain.andromeda-chain'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ChainCount
+EffectStatModifierOp:
+EffectStatMagnitude: 1
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ExtraBolts
+EffectStatModifierOp:
+EffectStatMagnitude: -1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e09e4e;fill-opacity:0.89875;stroke-width:145.16;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_ChainCount_2"
+       cx="74.381035"
+       cy="87.081184"
+       r="11.1125">
+      <desc
+         id="desc1-6-2-16-2">NodeTag:SkillTree.LightningCoil.ChainCount.2
+NodeType: Major
+IsStartNode: false
+NodeName: Chain
+NodeDescription: Bolts Chain to an Additional Target
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/andromeda-chain.andromeda-chain'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ChainCount
+EffectStatModifierOp:
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee069;fill-opacity:0.89875;stroke-width:76.0362;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_Convergence_2"
+       cx="38.497074"
+       cy="187.5114"
+       r="5.8208332">
+      <desc
+         id="desc1-6-2-1">NodeTag:SkillTree.LightningCoil.Convergence.2
+NodeType: Minor
+IsStartNode: true
+NodeName: Convergence Rate
+NodeDescription: Converge 5% Faster
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/expanded-rays.expanded-rays'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ConvergenceRate
+EffectStatModifierOp:
+EffectStatMagnitude: 0.05
+</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee069;fill-opacity:0.89875;stroke-width:76.0362;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_Convergence_3"
+       cx="14.452589"
+       cy="173.00441"
+       r="5.8208332">
+      <desc
+         id="desc1-6-2-1-1">NodeTag:SkillTree.LightningCoil.Convergence.3
+NodeType: Minor
+IsStartNode: true
+NodeName: Convergence Rate
+NodeDescription: Converge 5% Faster
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/expanded-rays.expanded-rays'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ConvergenceRate
+EffectStatModifierOp:
+EffectStatMagnitude: 0.05
+</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_BoltAoE_1"
+       cx="219.075"
+       cy="138.11249"
+       r="5.8208332">
+      <desc
+         id="desc1-6-1">NodeTag:SkillTree.LightningCoil.BoltAoE.1
+NodeType: Minor
+IsStartNode: true
+NodeName: Bolt AoE Radius
+NodeDescription: +0.1 Bolt Area Of Effect Radius
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.BoltAoERadius
+EffectStatModifierOp:
+EffectStatMagnitude: 10</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_BoltAoE_2"
+       cx="196.8501"
+       cy="163.94252"
+       r="5.8208332">
+      <desc
+         id="desc1-6-1-8">NodeTag:SkillTree.LightningCoil.BoltAoE.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Bolt AoE Radius
+NodeDescription: +0.1 Bolt Area Of Effect Radius
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.BoltAoERadius
+EffectStatModifierOp:
+EffectStatMagnitude: 10</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#83e04e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_ConeLength_1"
+       cx="115.7574"
+       cy="142.17934"
+       r="5.8208332">
+      <desc
+         id="desc1-6-1-8-9">NodeTag:SkillTree.LightningCoil.ConeLength.1
+NodeType: Minor
+IsStartNode: false
+NodeName: Max Distance
+NodeDescription: +1 m to Maximum Distance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ConeLength
+EffectStatModifierOp:
+EffectStatMagnitude: 100</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#83e04e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_ConeLength_2"
+       cx="99.865852"
+       cy="124.81988"
+       r="5.8208332">
+      <desc
+         id="desc1-6-1-8-9-5">NodeTag:SkillTree.LightningCoil.ConeLength.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Max Distance
+NodeDescription: +1 m to Maximum Distance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ConeLength
+EffectStatModifierOp:
+EffectStatMagnitude: 100</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_BoltAoE_3"
+       cx="156.40175"
+       cy="163.90939"
+       r="5.8208332">
+      <desc
+         id="desc1-6-1-8-3">NodeTag:SkillTree.LightningCoil.BoltAoE.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Bolt AoE Radius
+NodeDescription: +0.1 Bolt Area Of Effect Radius
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.BoltAoERadius
+EffectStatModifierOp:
+EffectStatMagnitude: 10</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_BoltAoE_4"
+       cx="126.4378"
+       cy="201.31496"
+       r="5.8208332">
+      <desc
+         id="desc1-6-1-8-7">NodeTag:SkillTree.LightningCoil.BoltAoE.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Bolt AoE Radius
+NodeDescription: +0.1 Bolt Area Of Effect Radius
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.BoltAoERadius
+EffectStatModifierOp:
+EffectStatMagnitude: 10</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_BoltAoE_5"
+       cx="84.931259"
+       cy="191.02916"
+       r="5.8208332">
+      <desc
+         id="desc1-6-1-8-71">NodeTag:SkillTree.LightningCoil.BoltAoE.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Bolt AoE Radius
+NodeDescription: +0.1 Bolt Area Of Effect Radius
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.BoltAoERadius
+EffectStatModifierOp:
+EffectStatMagnitude: 10</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_BoltAoE_6"
+       cx="34.660419"
+       cy="214.04791"
+       r="5.8208332">
+      <desc
+         id="desc1-6-1-8-6">NodeTag:SkillTree.LightningCoil.BoltAoE.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Bolt AoE Radius
+NodeDescription: +0.1 Bolt Area Of Effect Radius
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.BoltAoERadius
+EffectStatModifierOp:
+EffectStatMagnitude: 10</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d34ee0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_IncreasedCritChance_2"
+       cx="197.57756"
+       cy="85.79113"
+       r="5.8208332">
+      <desc
+         id="desc1-6-5">NodeTag:SkillTree.LightningCoil.IncreasedCritChance.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Critical Chance
+NodeDescription: 10% Increased Critical Chance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedCritChance
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d3e04e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_ChainRadius_1"
+       cx="142.67694"
+       cy="84.765747"
+       r="5.8208332">
+      <desc
+         id="desc1-6-5-89">NodeTag:SkillTree.LightningCoil.ChainRadius.1
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Chain Distance
+NodeDescription: +1 m to Chain Distance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chained-arrow-heads.chained-arrow-heads'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ChainRadius
+EffectStatModifierOp:
+EffectStatMagnitude: 100</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d3e04e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_ChainRadius_2"
+       cx="127.62862"
+       cy="99.334541"
+       r="5.8208332">
+      <desc
+         id="desc1-6-5-89-3">NodeTag:SkillTree.LightningCoil.ChainRadius.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Chain Distance
+NodeDescription: +1 m to Chain Distance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chained-arrow-heads.chained-arrow-heads'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ChainRadius
+EffectStatModifierOp:
+EffectStatMagnitude: 100</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d3e04e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_ChainRadius_3"
+       cx="105.00651"
+       cy="81.739456"
+       r="5.8208332">
+      <desc
+         id="desc1-6-5-89-3-1">NodeTag:SkillTree.LightningCoil.ChainRadius.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Chain Distance
+NodeDescription: +1 m to Chain Distance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chained-arrow-heads.chained-arrow-heads'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.ChainRadius
+EffectStatModifierOp:
+EffectStatMagnitude: 100</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d34ee0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_IncreasedCritChance_3"
+       cx="194.46875"
+       cy="61.912498"
+       r="5.8208332">
+      <desc
+         id="desc1-6-5-1">NodeTag:SkillTree.LightningCoil.IncreasedCritChance.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Critical Chance
+NodeDescription: 10% Increased Critical Chance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedCritChance
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d34ee0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_IncreasedCritChance_4"
+       cx="158.48543"
+       cy="61.383335"
+       r="5.8208332">
+      <desc
+         id="desc1-6-5-7">NodeTag:SkillTree.LightningCoil.IncreasedCritChance.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Critical Chance
+NodeDescription: 10% Increased Critical Chance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedCritChance
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d34ee0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_IncreasedCritChance_5"
+       cx="135.20209"
+       cy="43.391666"
+       r="5.8208332">
+      <desc
+         id="desc1-6-5-5">NodeTag:SkillTree.LightningCoil.IncreasedCritChance.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Critical Chance
+NodeDescription: 10% Increased Critical Chance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedCritChance
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d34ee0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_IncreasedCritChance_6"
+       cx="89.164589"
+       cy="48.418751"
+       r="5.8208332">
+      <desc
+         id="desc1-6-5-2">NodeTag:SkillTree.LightningCoil.IncreasedCritChance.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Critical Chance
+NodeDescription: 10% Increased Critical Chance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedCritChance
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d34ee0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_IncreasedCritChance_7"
+       cx="68.527092"
+       cy="23.547918"
+       r="5.8208332">
+      <desc
+         id="desc1-6-5-12">NodeTag:SkillTree.LightningCoil.IncreasedCritChance.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Critical Chance
+NodeDescription: 10% Increased Critical Chance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedCritChance
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#d34ee0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_IncreasedCritChance_8"
+       cx="23.28334"
+       cy="21.431252"
+       r="5.8208332">
+      <desc
+         id="desc1-6-5-8">NodeTag:SkillTree.LightningCoil.IncreasedCritChance.8
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Critical Chance
+NodeDescription: 10% Increased Critical Chance
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedCritChance
+EffectStatModifierOp:
+EffectStatMagnitude: 0.1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0b8;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_CorrodedBuildup_1"
+       cx="257.17499"
+       cy="138.11249"
+       r="5.8208332">
+      <desc
+         id="desc1-1">NodeTag:SkillTree.LightningCoil.CorrodedBuildup.1
+NodeType: Minor
+IsStartNode: true
+NodeName: Corroded Buildup
+NodeDescription: +2 to Corroded Buildup
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.CorrodedBuildup
+EffectStatModifierOp:
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0b8;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_CorrodedBuildup_2"
+       cx="284.06339"
+       cy="143.00719"
+       r="5.8208332">
+      <desc
+         id="desc1-1-4">NodeTag:SkillTree.LightningCoil.CorrodedBuildup.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Corroded Buildup
+NodeDescription: +2 to Corroded Buildup
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.CorrodedBuildup
+EffectStatModifierOp:
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0b8;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_CorrodedBuildup_3"
+       cx="294.91107"
+       cy="167.01823"
+       r="5.8208332">
+      <desc
+         id="desc1-1-4-8">NodeTag:SkillTree.LightningCoil.CorrodedBuildup.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Corroded Buildup
+NodeDescription: +2 to Corroded Buildup
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.CorrodedBuildup
+EffectStatModifierOp:
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0b8;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_CorrodedBuildup_4"
+       cx="327.3559"
+       cy="178.72603"
+       r="5.8208332">
+      <desc
+         id="desc1-1-4-88">NodeTag:SkillTree.LightningCoil.CorrodedBuildup.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Corroded Buildup
+NodeDescription: +2 to Corroded Buildup
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.CorrodedBuildup
+EffectStatModifierOp:
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0b8;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_CorrodedBuildup_5"
+       cx="344.25583"
+       cy="204.98598"
+       r="5.8208332">
+      <desc
+         id="desc1-1-4-9">NodeTag:SkillTree.LightningCoil.CorrodedBuildup.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Corroded Buildup
+NodeDescription: +2 to Corroded Buildup
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.CorrodedBuildup
+EffectStatModifierOp:
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0b8;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_CorrodedBuildup_6"
+       cx="389.49957"
+       cy="204.52299"
+       r="5.8208332">
+      <desc
+         id="desc1-1-4-3">NodeTag:SkillTree.LightningCoil.CorrodedBuildup.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Corroded Buildup
+NodeDescription: +2 to Corroded Buildup
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.CorrodedBuildup
+EffectStatModifierOp:
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0b8;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_CorrodedBuildup_7"
+       cx="429.0882"
+       cy="221.39008"
+       r="5.8208332">
+      <desc
+         id="desc1-1-4-0">NodeTag:SkillTree.LightningCoil.CorrodedBuildup.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Corroded Buildup
+NodeDescription: +2 to Corroded Buildup
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.CorrodedBuildup
+EffectStatModifierOp:
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4eb8e0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_Damage_2"
+       cx="272.45432"
+       cy="76.894348"
+       r="5.8208332">
+      <desc
+         id="desc1-3">NodeTag:SkillTree.LightningCoil.Damage.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Damage
+NodeDescription: 8% Increased Damage
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedDamage
+EffectStatModifierOp:
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4eb8e0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_Damage_3"
+       cx="295.67166"
+       cy="80.995514"
+       r="5.8208332">
+      <desc
+         id="desc1-3-1">NodeTag:SkillTree.LightningCoil.Damage.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Damage
+NodeDescription: 8% Increased Damage
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedDamage
+EffectStatModifierOp:
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4eb8e0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_Damage_4"
+       cx="310.78625"
+       cy="51.362278"
+       r="5.8208332">
+      <desc
+         id="desc1-3-7">NodeTag:SkillTree.LightningCoil.Damage.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Damage
+NodeDescription: 8% Increased Damage
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedDamage
+EffectStatModifierOp:
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4eb8e0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_Damage_5"
+       cx="348.0925"
+       cy="61.118843"
+       r="5.8208332">
+      <desc
+         id="desc1-3-8">NodeTag:SkillTree.LightningCoil.Damage.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Damage
+NodeDescription: 8% Increased Damage
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedDamage
+EffectStatModifierOp:
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e9e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_SkillSpeed_1"
+       cx="350.30832"
+       cy="92.053123"
+       r="5.8208332">
+      <desc
+         id="desc1-3-8-6">NodeTag:SkillTree.LightningCoil.SkillSpeed.1
+NodeType: Minor
+IsStartNode: false
+NodeName: Skill Speed
+NodeDescription: 5% Increased Skill Speed
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-arc.lightning-arc'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.CastSpeed
+EffectStatModifierOp:
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e9e;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_SkillSpeed_2"
+       cx="368.97681"
+       cy="106.6875"
+       r="5.8208332">
+      <desc
+         id="desc1-3-8-6-4">NodeTag:SkillTree.LightningCoil.SkillSpeed.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Skill Speed
+NodeDescription: 5% Increased Skill Speed
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-arc.lightning-arc'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.CastSpeed
+EffectStatModifierOp:
+EffectStatMagnitude: 0.05</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4eb8e0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_Damage_6"
+       cx="377.49442"
+       cy="24.738577"
+       r="5.8208332">
+      <desc
+         id="desc1-3-6">NodeTag:SkillTree.LightningCoil.Damage.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Damage
+NodeDescription: 8% Increased Damage
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedDamage
+EffectStatModifierOp:
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4eb8e0;fill-opacity:0.89875;stroke-width:76.0363;paint-order:stroke fill markers"
+       id="SkillTree_LightningCoil_Damage_7"
+       cx="429.55103"
+       cy="29.368635"
+       r="5.8208332">
+      <desc
+         id="desc1-3-5">NodeTag:SkillTree.LightningCoil.Damage.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Damage
+NodeDescription: 8% Increased Damage
+NodeIcon:/Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull'
+
+EffectType: Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag: SkillPassive.LightningCoil.IncreasedDamage
+EffectStatModifierOp:
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <rect
+       style="opacity:0.85;fill:#d099ff;fill-opacity:0.89875;stroke-width:66.6666;paint-order:stroke fill markers"
+       id="rect1"
+       width="26.458332"
+       height="26.458332"
+       x="224.89583"
+       y="105.83333" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 260.38441,95.156526 8.86048,-13.406207"
+       id="path2"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_Damage_1"
+       inkscape:connection-end="#SkillTree_LightningCoil_Damage_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 278.18633,77.906864 11.75332,2.076134"
+       id="path3"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_Damage_2"
+       inkscape:connection-end="#SkillTree_LightningCoil_Damage_3" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 298.3164,75.810322 308.14152,56.54747"
+       id="path4"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_Damage_3"
+       inkscape:connection-end="#SkillTree_LightningCoil_Damage_4" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 316.41763,52.835032 26.04349,6.811057"
+       id="path5"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_Damage_4"
+       inkscape:connection-end="#SkillTree_LightningCoil_Damage_5" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 351.75122,56.591744 373.83569,29.265676"
+       id="path6"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_Damage_5"
+       inkscape:connection-end="#SkillTree_LightningCoil_Damage_6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 383.29228,25.254255 40.46088,3.598702"
+       id="path7"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_Damage_6"
+       inkscape:connection-end="#SkillTree_LightningCoil_Damage_7" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 262.90161,139.15495 15.43515,2.80978"
+       id="path8"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_CorrodedBuildup_1"
+       inkscape:connection-end="#SkillTree_LightningCoil_CorrodedBuildup_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 286.45985,148.3117 6.05476,13.40203"
+       id="path9"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_CorrodedBuildup_2"
+       inkscape:connection-end="#SkillTree_LightningCoil_CorrodedBuildup_3" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 300.38626,168.99397 21.49445,7.75632"
+       id="path10"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_CorrodedBuildup_3"
+       inkscape:connection-end="#SkillTree_LightningCoil_CorrodedBuildup_4" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 330.50594,183.62073 10.59984,16.47055"
+       id="path11"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_CorrodedBuildup_4"
+       inkscape:connection-end="#SkillTree_LightningCoil_CorrodedBuildup_5" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 350.0763,204.92642 33.60281,-0.34386"
+       id="path12"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_CorrodedBuildup_5"
+       inkscape:connection-end="#SkillTree_LightningCoil_CorrodedBuildup_6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 394.85456,206.80454 28.87865,12.304"
+       id="path13"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_CorrodedBuildup_6"
+       inkscape:connection-end="#SkillTree_LightningCoil_CorrodedBuildup_7" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 214.2204,96.800995 202.43216,89.002632"
+       id="path14"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_IncreasedCritChance_1"
+       inkscape:connection-end="#SkillTree_LightningCoil_IncreasedCritChance_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 196.82609,80.019118 195.22022,67.684511"
+       id="path15"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_IncreasedCritChance_2"
+       inkscape:connection-end="#SkillTree_LightningCoil_IncreasedCritChance_3" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 188.64862,61.826909 164.30556,61.468925"
+       id="path16"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_IncreasedCritChance_3"
+       inkscape:connection-end="#SkillTree_LightningCoil_IncreasedCritChance_4" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 153.87957,57.824265 139.80794,46.950736"
+       id="path17"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_IncreasedCritChance_4"
+       inkscape:connection-end="#SkillTree_LightningCoil_IncreasedCritChance_5" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 129.4157,44.023513 94.950975,47.786904"
+       id="path18"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_IncreasedCritChance_5"
+       inkscape:connection-end="#SkillTree_LightningCoil_IncreasedCritChance_6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 85.447634,43.939343 72.244047,28.027326"
+       id="path19"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_IncreasedCritChance_6"
+       inkscape:connection-end="#SkillTree_LightningCoil_IncreasedCritChance_7" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 68.527092,23.547918 v 0"
+       id="path20"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_IncreasedCritChance_7"
+       inkscape:connection-end="#SkillTree_LightningCoil_IncreasedCritChance_7" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 29.097747,21.703271 33.614939,1.572628"
+       id="path21"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_IncreasedCritChance_8"
+       inkscape:connection-end="#SkillTree_LightningCoil_IncreasedCritChance_7" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 215.27852,142.52479 -14.63195,17.00543"
+       id="path22"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_BoltAoE_1"
+       inkscape:connection-end="#SkillTree_LightningCoil_BoltAoE_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 191.02929,163.93775 -28.80674,-0.0236"
+       id="path23"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_BoltAoE_2"
+       inkscape:connection-end="#SkillTree_LightningCoil_BoltAoE_3" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 152.76259,168.45235 130.07696,196.772"
+       id="path24"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_BoltAoE_3"
+       inkscape:connection-end="#SkillTree_LightningCoil_BoltAoE_4" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 120.78793,199.91486 -30.206805,-7.4856"
+       id="path25"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_BoltAoE_4"
+       inkscape:connection-end="#SkillTree_LightningCoil_BoltAoE_5" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 79.638869,193.45252 -39.68606,18.17204"
+       id="path26"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_BoltAoE_5"
+       inkscape:connection-end="#SkillTree_LightningCoil_BoltAoE_6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80.919125,186.81196 -8.37097,-8.79881"
+       id="path1"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_BoltAoE_5"
+       inkscape:connection-end="#SkillTree_LightningCoil_Convergence_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 55.635277,176.11523 -12.291211,8.17313"
+       id="path27"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_Convergence_1"
+       inkscape:connection-end="#SkillTree_LightningCoil_Convergence_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 33.513177,184.50442 19.436486,176.01139"
+       id="path28"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_Convergence_2"
+       inkscape:connection-end="#SkillTree_LightningCoil_Convergence_3" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 192.14311,87.876361 -12.6329,4.847317"
+       id="path29"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_IncreasedCritChance_2"
+       inkscape:connection-end="#SkillTree_LightningCoil_ChainCount_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 159.00647,92.134124 147.98254,87.159793"
+       id="path30"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_ChainCount_1"
+       inkscape:connection-end="#SkillTree_LightningCoil_ChainRadius_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 131.81059,95.285829 6.68438,-6.47137"
+       id="path31"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_ChainRadius_2"
+       inkscape:connection-end="#SkillTree_LightningCoil_ChainRadius_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 123.03398,95.760912 109.60114,85.313085"
+       id="path32"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_ChainRadius_2"
+       inkscape:connection-end="#SkillTree_LightningCoil_ChainRadius_3" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 99.272276,82.739627 -13.94407,2.43214"
+       id="path33"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_ChainRadius_3"
+       inkscape:connection-end="#SkillTree_LightningCoil_ChainCount_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 153.10655,159.11111 -6.4844,-9.44221"
+       id="path34"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_BoltAoE_3"
+       inkscape:connection-end="#SkillTree_LightningCoil_DistanceLuckyRolls_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 129.24462,141.26233 -7.6799,0.52216"
+       id="path35"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_DistanceLuckyRolls_1"
+       inkscape:connection-end="#SkillTree_LightningCoil_ConeLength_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 111.82705,137.88594 -8.03085,-8.77267"
+       id="path36"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_ConeLength_1"
+       inkscape:connection-end="#SkillTree_LightningCoil_ConeLength_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 300.52205,84.213401 13.87787,9.206967"
+       id="path37"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_Damage_3"
+       inkscape:connection-end="#SkillTree_LightningCoil_ExtraBolts_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 334.3554,96.549207 10.35044,-2.917113"
+       id="path38"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_ExtraBolts_1"
+       inkscape:connection-end="#SkillTree_LightningCoil_SkillSpeed_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 354.88931,95.644202 9.5065,7.452218"
+       id="path39"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_SkillSpeed_1"
+       inkscape:connection-end="#SkillTree_LightningCoil_SkillSpeed_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 373.00236,102.4832 383.29959,91.728761"
+       id="path40"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#SkillTree_LightningCoil_SkillSpeed_2"
+       inkscape:connection-end="#SkillTree_LightningCoil_ExtraBolts_2" />
+  </g>
+</svg>

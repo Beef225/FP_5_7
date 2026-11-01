@@ -1,0 +1,87 @@
+==============================================================================
+ import_tree_tags.py  —  How to Use
+==============================================================================
+
+PURPOSE
+-------
+Reads a skill tree JSON file and adds any missing NodeTags to
+FP_GameplayTags.h and FP_GameplayTags.cpp in one pass.
+
+Run after exporting the JSON from the SVG.
+Tags that already exist in the singleton are skipped automatically —
+safe to run multiple times on the same file.
+
+REQUIREMENTS
+------------
+Python 3.8+  (no extra packages)
+add_gameplay_tag.py must exist at:
+  C:\Unreal\FP_5_7\Tools\add_gameplay_tag.py
+
+COMMANDS
+--------
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Pipeline\ImportTreeTags\import_tree_tags.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Trees\Passive\Might\Might.json"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Pipeline\ImportTreeTags\import_tree_tags.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Trees\Passive\Resonance\Resonance.json"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Pipeline\ImportTreeTags\import_tree_tags.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Trees\Passive\Agility\Agility.json"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Pipeline\ImportTreeTags\import_tree_tags.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Trees\Passive\Fortitude\Fortitude.json"
+  
+  
+  skills
+  
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Pipeline\ImportTreeTags\import_tree_tags.py"
+
+  # Preview without writing anything:
+  python "...\import_tree_tags.py" "...\MightPassiveTree.json" --dry-run
+
+  # Override the section name in the singleton:
+  python "...\import_tree_tags.py" "...\MightPassiveTree.json" --section PassiveTree
+
+
+WHAT GETS WRITTEN
+-----------------
+For each missing NodeTag the script inserts:
+
+  Header (FP_GameplayTags.h):
+    FGameplayTag PassiveTree_Might_IncreasedArmour_1;
+
+  CPP (FP_GameplayTags.cpp):
+    GameplayTags.PassiveTree_Might_IncreasedArmour_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
+        FName("PassiveTree.Might.IncreasedArmour.1"),
+        FString("Grants increased armour rating.")
+        );
+
+  The description string is taken from the NodeDescription field in the JSON.
+
+Section behaviour:
+  - The section name is inferred from the first segment of the first NodeTag
+    (e.g. PassiveTree.Might.IncreasedArmour.1  ->  section "PassiveTree").
+  - If that section already exists the new tags are appended to it.
+  - If it does not exist a new // comment section is created automatically.
+  - Use --section to override the inferred name.
+
+
+BACKUPS
+-------
+Before writing, both source files are copied to timestamped backups:
+  FP_GameplayTags.h.bak_YYYYMMDD_HHMMSS
+  FP_GameplayTags.cpp.bak_YYYYMMDD_HHMMSS
+
+These sit next to the originals.  Delete them once the build compiles cleanly.
+
+
+WORKFLOW — FULL PIPELINE
+--------------------------
+1. Design tree in Inkscape, set node descriptions (see NodeTemplate.txt).
+2. Validate:     python ValidatePassiveTree\Validate_Passive_Tree.py <svg>
+3. Export JSON:  python SVGToJSON\svg_to_skilltree_json.py <svg>
+4. Add tags:     python ImportTreeTags\import_tree_tags.py <json>     <- YOU ARE HERE
+5. Rebuild in Visual Studio / UE.
+6. Import assets in UE Python console (see ImportSkillTreeAssets_howto.txt).
+
+
+SEE ALSO
+--------
+NodeTemplate.txt                       — full field reference for node descriptions
+AttributeTagMap.txt                    — attribute tag names for EffectStatModAttributeType
+ValidatePassiveTree\Validate_Passive_Tree.py  — renumber, rename IDs, colour nodes
+SVGToJSON\svg_to_skilltree_json.py     — convert validated SVG to JSON
+ImportSkillTreeAssets\ImportSkillTreeAssets_howto.txt  — create UE data assets

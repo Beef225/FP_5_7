@@ -1,0 +1,353 @@
+{
+  "nodes": [
+    {
+      "NodeTag": "SkillTree.Leap.ExtraRange.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Extra Range",
+      "NodeDescription": "+2 m Leap Range",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/jump-across.jump-across",
+      "NodePosition": {
+        "X": 1200.0,
+        "Y": 1300.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.ExtraRange.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.ExtraRange",
+          "EffectStatMagnitude": 200.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.ExtraRange.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Extra Range",
+      "NodeDescription": "+2 m Leap Range",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/jump-across.jump-across",
+      "NodePosition": {
+        "X": 1300.0,
+        "Y": 1300.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.ExtraRange.1",
+        "SkillTree.Leap.ExtraRange.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.ExtraRange",
+          "EffectStatMagnitude": 200.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.ExtraRange.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Extra Range",
+      "NodeDescription": "+2 m Leap Range",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/jump-across.jump-across",
+      "NodePosition": {
+        "X": 1400.0,
+        "Y": 1300.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.ExtraRange.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.ExtraRange",
+          "EffectStatMagnitude": 200.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.ExplosiveLanding.1",
+      "NodeType": "Major",
+      "IsStartNode": true,
+      "NodeName": "Explosive Landing",
+      "NodeDescription": "Leap explodes on landing, damaging nearby enemies",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosion-rays.explosion-rays",
+      "NodePosition": {
+        "X": 1200.0,
+        "Y": 1500.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.HeatCost.1",
+        "SkillTree.Leap.NoWindup.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.ExplosiveLanding",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.HeatCost.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Cost",
+      "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
+      "NodePosition": {
+        "X": 1300.0,
+        "Y": 1500.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.ExplosiveLanding.1",
+        "SkillTree.Leap.HeatCost.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.HeatCost",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.HeatCost.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Cost",
+      "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
+      "NodePosition": {
+        "X": 1400.0,
+        "Y": 1500.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.HeatCost.1",
+        "SkillTree.Leap.HeatCost.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.HeatCost",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.HeatCost.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Cost",
+      "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
+      "NodePosition": {
+        "X": 1500.0,
+        "Y": 1500.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.HeatCost.2",
+        "SkillTree.Leap.HeatCost.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.HeatCost",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.HeatCost.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Cost",
+      "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
+      "NodePosition": {
+        "X": 1600.0,
+        "Y": 1500.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.HeatCost.3",
+        "SkillTree.Leap.HeatCost.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.HeatCost",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.HeatCost.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Cost",
+      "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
+      "NodePosition": {
+        "X": 1700.0,
+        "Y": 1500.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.HeatCost.4",
+        "SkillTree.Leap.HeatCost.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.HeatCost",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.HeatCost.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Cost",
+      "NodeDescription": "Leap generates more Heat (magnitude TBD — not yet wired)",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
+      "NodePosition": {
+        "X": 1800.0,
+        "Y": 1500.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.HeatCost.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.HeatCost",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.NoWindup.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "No Windup",
+      "NodeDescription": "Leap skips its windup, but gains a cooldown",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
+      "NodePosition": {
+        "X": 1300.0,
+        "Y": 1680.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.CooldownDuration.1",
+        "SkillTree.Leap.ExplosiveLanding.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.NoWindup",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.CooldownDuration.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Reduced Cooldown",
+      "NodeDescription": "-0.5 s Leap Cooldown (TBD — not yet wired)",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stopwatch.stopwatch",
+      "NodePosition": {
+        "X": 1400.0,
+        "Y": 1680.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.CooldownDuration.2",
+        "SkillTree.Leap.NoWindup.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.CooldownDuration",
+          "EffectStatMagnitude": -0.5
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.CooldownDuration.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Reduced Cooldown",
+      "NodeDescription": "-0.5 s Leap Cooldown (TBD — not yet wired)",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stopwatch.stopwatch",
+      "NodePosition": {
+        "X": 1500.0,
+        "Y": 1680.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.CooldownDuration.1",
+        "SkillTree.Leap.CooldownDuration.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.CooldownDuration",
+          "EffectStatMagnitude": -0.5
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.CooldownDuration.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Reduced Cooldown",
+      "NodeDescription": "-0.5 s Leap Cooldown (TBD — not yet wired)",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stopwatch.stopwatch",
+      "NodePosition": {
+        "X": 1600.0,
+        "Y": 1680.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.CooldownDuration.2",
+        "SkillTree.Leap.CooldownDuration.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.CooldownDuration",
+          "EffectStatMagnitude": -0.5
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Leap.CooldownDuration.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Reduced Cooldown",
+      "NodeDescription": "-0.5 s Leap Cooldown (TBD — not yet wired)",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stopwatch.stopwatch",
+      "NodePosition": {
+        "X": 1700.0,
+        "Y": 1680.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Leap.CooldownDuration.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Leap.CooldownDuration",
+          "EffectStatMagnitude": -0.5
+        }
+      ]
+    }
+  ],
+  "treeInfo": {
+    "name": "Leap",
+    "treeType": "Skill",
+    "version": "0.1.0",
+    "liveVersion": "",
+    "revision": 3,
+    "exported": "2026-10-31T18:29:49-04:00"
+  }
+}

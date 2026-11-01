@@ -1,0 +1,171 @@
+NodeTag:
+NodeType:
+IsStartNode:
+NodeName:
+NodeDescription:
+NodeIcon:
+
+EffectType:
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType:
+EffectStatModifierOp:
+EffectStatMagnitude:
+
+==============================================================================
+ FIELD REFERENCE
+==============================================================================
+
+NodeTag            Unique gameplay tag.  Convention:
+                     PassiveTree.<Stat>.<EffectName>.<Index>
+                     SkillTree.<SkillName>.<EffectName>.<Index>
+
+NodeType           Minor  |  Major  |  Mastery
+
+IsStartNode        true  |  false
+                   true = available at tree open with no allocated neighbour.
+
+NodeName           Short display name shown on the node widget.
+
+NodeDescription    One or two sentences shown in the tooltip panel.
+
+NodeIcon           Asset path of the icon texture.
+                   In UE: right-click asset → Copy Reference, paste only the
+                   part inside the single quotes.
+                   Example:
+                     /Game/Blueprints/UI/SkillTrees/Data/Icons/basicnodeicon.basicnodeicon
+
+CONNECTIONS        Do not add connection fields here.
+                   Connections are read automatically from the Inkscape
+                   connector lines drawn between node objects in the SVG.
+                   The Python importer reads inkscape:connection-start /
+                   inkscape:connection-end on each connector path and writes
+                   ConnectedNodeTags for you.
+
+EffectType         One of:  Stat Mod  |  Skill Passive  |  Effect Flag  |  Grant Skill
+                   Repeat the full six-line effect block once per effect.
+                   Leave unused fields blank — the importer skips them.
+                   Each EffectType: line starts a new entry in the Effects array.
+
+EffectSkillPassiveTag  (Skill Passive only)  Tag of the per-skill accumulator bucket.
+                   Use tags from the SkillPassive.* namespace in AttributeTagMap.csv.
+                   Example:  SkillPassive.LightningCoil.IncreasedDamage
+                   The ability reads this value at cast time via PS->GetSkillPassiveValue().
+                   EffectStatMagnitude is the value added per node allocated.
+
+EffectFlagType     (Effect Flag only)  Gameplay tag added to the player ASC.
+                   Namespace:  Flag.SkillTree.*
+                   Example:  Flag.SkillTree.Fortified
+
+GrantSkillTag      (Grant Skill only)  Tag of the skill to grant.
+                   Example:  Skills.Firebolt.Secondary
+
+EffectStatModAttributeType   (Stat Mod only)  Attribute tag — see AttributeTagMap.txt.
+                   Example:  Defense.IncreasedArmour
+
+EffectStatModifierOp         (Stat Mod only)  Add  |  Multiply
+                   Add      = flat bonus
+                   Multiply = fraction  (0.10 = +10%)
+
+EffectStatMagnitude          (Stat Mod only)  Numeric value.
+                   Examples:  5   |   0.10   |   -0.05
+
+==============================================================================
+ EXAMPLES
+==============================================================================
+
+--- Single stat node ---
+NodeTag:PassiveTree.Might.IncreasedArmour.1
+NodeType:Minor
+IsStartNode:false
+NodeName:Increased Armour
+NodeDescription:Grants increased armour rating.
+NodeIcon:/Game/Blueprints/UI/SkillTrees/Data/Icons/basicnodeicon.basicnodeicon
+
+EffectType:Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType:Defence.Armour
+EffectStatModifierOp:Add
+EffectStatMagnitude:5
+
+--- Multiple effects: 1 Grant Skill + 2 Stat Mods ---
+NodeTag:SkillTree.Firebolt.EmpoweredTwinBolts.1
+NodeType:Major
+IsStartNode:false
+NodeName:Empowered Twin Bolts
+NodeDescription:Firebolt fires a second projectile and deals more damage.
+NodeIcon:/Game/Blueprints/UI/SkillTrees/Data/Icons/majoricon.majoricon
+
+EffectType:Grant Skill
+EffectFlagType:
+GrantSkillTag:Skills.Firebolt.Secondary
+EffectStatModAttributeType:
+EffectStatModifierOp:
+EffectStatMagnitude:
+
+EffectType:Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType:Damage.Increased.Generic
+EffectStatModifierOp:Multiply
+EffectStatMagnitude:0.10
+
+EffectType:Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType:Projectile.Count
+EffectStatModifierOp:Add
+EffectStatMagnitude:1
+
+--- Stat + Flag ---
+NodeTag:PassiveTree.Might.Mastery.Fortified.1
+NodeType:Mastery
+IsStartNode:false
+NodeName:Fortified
+NodeDescription:You take reduced damage while standing still.
+NodeIcon:/Game/Blueprints/UI/SkillTrees/Data/Icons/masteryicon.masteryicon
+
+EffectType:Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType:Defense.IncreasedArmour
+EffectStatModifierOp:Multiply
+EffectStatMagnitude:0.20
+
+EffectType:Effect Flag
+EffectFlagType:Flag.SkillTree.Fortified
+GrantSkillTag:
+EffectStatModAttributeType:
+EffectStatModifierOp:
+EffectStatMagnitude:
+
+--- Skill Passive node (LightningCoil increased damage) ---
+NodeTag:SkillTree.LightningCoil.IncreasedDamage.1
+NodeType:Minor
+IsStartNode:false
+NodeName:Charged Coils
+NodeDescription:Lightning Coil deals increased damage.
+NodeIcon:/Game/Blueprints/UI/SkillTrees/Data/Icons/basicnodeicon.basicnodeicon
+
+EffectType:Skill Passive
+EffectFlagType:
+GrantSkillTag:
+EffectSkillPassiveTag:SkillPassive.LightningCoil.IncreasedDamage
+EffectStatModifierOp:
+EffectStatMagnitude:0.20
+
+--- Starter node ---
+NodeTag:PassiveTree.Might.Core.1
+NodeType:Minor
+IsStartNode:true
+NodeName:Might Core
+NodeDescription:Entry point to the Might passive tree.
+NodeIcon:/Game/Blueprints/UI/SkillTrees/Data/Icons/basicnodeicon.basicnodeicon
+
+EffectType:Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType:Attributes.Primary.Might
+EffectStatModifierOp:Add
+EffectStatMagnitude:1

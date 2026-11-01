@@ -1,0 +1,236 @@
+==============================================================================
+ NodeDataTable  —  How to Use
+==============================================================================
+
+PURPOSE
+-------
+Inkscape's Object Properties description box is fine for a handful of nodes,
+miserable for hundreds. This workflow makes the .xlsx table the source of
+truth for EVERYTHING — content, position, connections — and treats the SVG
+as a disposable visual-editing surface you regenerate and sync, not
+something you hand-author.
+
+  .xlsx table  — NodeType, NodeName, NodeDescription, NodeIcon, Effects,
+                 X/Y position, and which nodes connect to which. Filter,
+                 sort, bulk-edit magnitudes, data-validate the Op column —
+                 whatever Excel is good at.
+  Inkscape     — the one thing a spreadsheet can't do: dragging nodes to
+                 exact visual positions and drawing connector lines by eye.
+                 Nothing else about the SVG matters — regenerate it any
+                 time from the table, sync your visual edits back, repeat.
+
+Each node's SVG description is reduced to a single line:
+  "NodeTag:PassiveTree.Mace.Foo.1"
+That's the join key back to the table. Nothing else lives in the SVG.
+
+
+REQUIREMENTS
+------------
+Python 3.8+
+openpyxl:  pip install openpyxl
+lxml:      pip install lxml
+
+
+WORKBOOK LAYOUT
+----------------
+Three sheets, all keyed by NodeTag.
+
+  Nodes sheet
+    NodeTag | NodeType | NodeName | NodeDescription | NodeIcon |
+    IsStartNode | X | Y
+    X/Y are document-pixel units (0-3000 on the standard canvas, centre is
+    1500,1500) — the same units the final JSON's NodePosition uses.
+
+  Effects sheet — one row per EFFECT. A node with two effects (the dual-stat
+    "wheel" nodes) gets two rows sharing its NodeTag. EffectOrder controls
+    which comes first in the JSON — it exists so you can sort/filter the
+    sheet without losing effect order.
+    NodeTag | EffectOrder | EffectType | EffectStatModAttributeType |
+    EffectStatModifierOp | EffectStatMagnitude | EffectFlagType |
+    GrantSkillTag | EffectSkillPassiveTag
+
+  Connections sheet — one row per edge.
+    NodeTagA | NodeTagB
+
+
+THE FIVE SCRIPTS
+-----------------
+  export_svg_to_xlsx.py           SVG (fully inline)  -> .xlsx   [bootstrap only]
+  validate_node_table.py          .xlsx -> .xlsx                 [renumber/check]
+  generate_svg_from_table.py      .xlsx -> SVG                   [for visual editing]
+  sync_svg_positions_to_table.py  SVG   -> .xlsx                 [after visual editing]
+  table_to_json.py                .xlsx -> JSON                  [final export]
+
+
+TYPICAL LOOP (a tree already on this workflow)
+------------------------------------------------
+  1. Add/edit rows directly in the .xlsx: new nodes, new effects, retuned
+     magnitudes, whatever. Give new nodes a rough X/Y if you already know
+     roughly where they belong — or leave X/Y blank, they'll get scattered
+     near canvas centre next step so you can find and drag them.
+
+  2. python validate_node_table.py <xlsx>
+     Renumbers any placeholder/duplicate tag indices (in Nodes-sheet row
+     order) and propagates the renames into the Effects and Connections
+     sheets automatically. Run with --dry-run first if you want to preview.
+
+  3. python generate_svg_from_table.py <svg> <xlsx>
+     Rebuilds every node marker and connector line in the SVG from the
+     table. Only touches node circles/ellipses and connector paths —
+     the decorative boundary circle, grid, everything else in the SVG is
+     left alone. Writes a .bak of the prior SVG first.
+
+  4. Open the SVG in Inkscape. Drag newly-scattered nodes into place, draw
+     connector lines (Connector tool, Ctrl+F2) for anything not yet wired
+     up, nudge whatever needs nudging. Don't bother touching descriptions —
+     there's nothing useful in them anymore.
+
+  5. python sync_svg_positions_to_table.py <svg> <xlsx>
+     Writes exact X/Y back into the Nodes sheet and REBUILDS the
+     Connections sheet from whatever connectors currently exist in the SVG
+     (the SVG is authoritative for connections once you've drawn them by
+     hand). A node you drew directly in Inkscape without a table row first
+     gets a stub row (NodeTag/X/Y only) so nothing is lost — fill in its
+     content afterward.
+
+  6. python table_to_json.py <xlsx>
+     Final JSON, straight from the table, no SVG involved. Same output
+     ImportTreeTags\import_tree_tags.py and the UE importer already expect.
+
+  7. Continue the pipeline as usual: import_tree_tags.py on the JSON,
+     rebuild, import assets.
+
+Steps 1-2 and 3-5 can each repeat any number of times before you move on —
+e.g. batch-add 40 rows in Excel, generate, drag them all into place, sync,
+then go back and add 40 more.
+
+
+MIGRATING A TREE THAT'S STILL FULLY INLINE IN THE SVG
+---------------------------------------------------------
+  1. python export_svg_to_xlsx.py <svg>
+     One-time bootstrap: flattens every node's current inline description
+     into the table (Nodes + Effects), and captures current position/
+     connections too (Connections sheet, X/Y columns).
+  2. Simplify the SVG's descriptions down to "NodeTag:X" — either by hand,
+     or just run generate_svg_from_table.py once the table is in place;
+     it rebuilds the node markers minimal by construction.
+  3. From here on, use the typical loop above.
+
+export_svg_to_xlsx.py REFUSES to run (without --force) if it detects the
+target SVG's descriptions are already mostly minimal — that means the tree
+has already migrated and the SVG no longer holds the content, so
+overwriting the table from it would destroy real data. Use
+sync_svg_positions_to_table.py instead in that situation; it only ever
+touches position/connections, never NodeName/NodeDescription/Effects.
+
+
+GOTCHAS
+-------
+- A value that starts with +, -, =, or @ (e.g. "+2 Armour Penetration")
+  reads as a formula to Excel in a General-formatted cell. export_svg_to_xlsx.py
+  and table_to_json.py handle this automatically — the table stores such
+  values with a leading apostrophe ('+2 Armour Penetration), which Excel
+  hides in the cell display and treats as text; table_to_json.py strips the
+  apostrophe back off on export. If you type a new value starting with one
+  of those characters directly into Excel, type the leading apostrophe
+  yourself (standard Excel text-escape) or the cell will try to parse it as
+  a formula.
+- NodeTag is the join key across all three sheets. validate_node_table.py
+  keeps them in sync automatically when it renumbers — don't hand-rename a
+  tag in just one sheet.
+- EffectStatMagnitude / X / Y are read as numbers when the cell is numeric —
+  don't format those columns as text in Excel, they'll come through as
+  strings in the JSON.
+- generate_svg_from_table.py assigns node fill colour by the tag's 2nd
+  segment (e.g. all "PassiveTree.Mace.*" nodes share a colour) — same
+  convention ValidatePassiveTree\Validate_Passive_Tree.py uses for
+  non-migrated trees.
+- generate_svg_from_table.py sizes node circles by NodeType: Minor r=5.82,
+  Major r=9.7, Mastery r=16.54 (125px diameter on the standard 3000px
+  canvas). Mastery is its own size tier, not just a bigger Major.
+- If you're not sure an existing attribute can represent a node's effect
+  text, make it an "Effect Flag" (EffectType=Effect Flag, EffectFlagType=
+  Flag.SkillTree.<Description>) instead of guessing a Stat Mod attribute
+  that doesn't really match. Flags don't carry a magnitude — they just add
+  a gameplay tag to the player's ASC when allocated; the actual mechanic
+  gets implemented in C++ later, keyed off that tag.
+- sync_svg_positions_to_table.py REBUILDS the Connections sheet from the SVG
+  every time — any connection you added by editing the Connections sheet
+  directly (rather than drawing it in Inkscape) will be lost the next time
+  you sync, unless it's also been generated into the SVG first (step 3)
+  and survives untouched through your Inkscape session.
+
+
+LEGACY / NON-MIGRATED TREES
+-----------------------------
+SVGToJSON\svg_to_skilltree_json.py still works standalone (SVG fully
+inline, no table) for any tree you haven't migrated, and also accepts an
+optional .xlsx as a second argument for a partial migration (content from
+the table for any NodeTag it defines, inline SVG description as fallback
+for anything not yet migrated). table_to_json.py above is the fully-
+migrated end state: no SVG parsing at all.
+
+
+SEE ALSO
+--------
+SVGToJSON\svg_to_skilltree_json.py    — legacy/partial-migration SVG(+table) -> JSON path
+ValidatePassiveTree\Validate_Passive_Tree.py — SVG-side renumber/colour, for non-migrated trees
+AttributeTagMap.txt                   — attribute tag names for EffectStatModAttributeType
+NodeTemplate.txt                      — full field reference (table columns mirror it 1:1)
+
+
+==============================================================================
+ POWERSHELL — copy and paste one line at a time
+==============================================================================
+Might passive tree and the Impact skill tree are on this workflow so far —
+emulate the same five lines (just swap the path for the target tree/skill
+folder) as other passive trees and skill-specific trees move onto it.
+
+Uses "py" (the Python Launcher), not "python" — on Windows, bare "python"/
+"python3" often resolve to a Microsoft Store stub (App Execution Alias) that
+opens the Store instead of running your installed Python, even when Python
+is installed correctly. "py" is a separate real launcher that isn't affected
+by that stub. If "py" ever fails too, Settings > Apps > Advanced app
+settings > App execution aliases, turn off "App Installer" for python.exe /
+python3.exe, and plain "python" will start working as well.
+
+--- 1. export_svg_to_xlsx.py  (SVG -> xlsx, bootstrap only) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\export_svg_to_xlsx.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree.svg"
+
+--- 2. validate_node_table.py  (xlsx -> xlsx, renumber/check) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\validate_node_table.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree_NodeData.xlsx"
+
+--- 3. generate_svg_from_table.py  (xlsx -> SVG, before Inkscape) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\generate_svg_from_table.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree.svg" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree_NodeData.xlsx"
+
+--- 4. sync_svg_positions_to_table.py  (SVG -> xlsx, after Inkscape) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\sync_svg_positions_to_table.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree.svg" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree_NodeData.xlsx"
+
+--- 5. table_to_json.py  (xlsx -> JSON, final export) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\table_to_json.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree_NodeData.xlsx"
+
+--- bonus: add_attribute_tags_sheet.py  (refresh the AttributeTags dropdown-source sheet) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\add_attribute_tags_sheet.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree_NodeData.xlsx"
+
+
+--- IMPACT skill tree (Skills\Physical\Impact) — same five lines, Impact paths ---
+
+--- 1. export_svg_to_xlsx.py  (SVG -> xlsx, bootstrap only — N/A, table was hand-built) ---
+(ImpactTree_NodeData.xlsx was bootstrapped directly, not from an inline SVG —
+skip this step for Impact; it's only needed when migrating an old, still-
+fully-inline tree.)
+
+--- 2. validate_node_table.py  (xlsx -> xlsx, renumber/check) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\validate_node_table.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Skills\Physical\Impact\ImpactTree_NodeData.xlsx"
+
+--- 3. generate_svg_from_table.py  (xlsx -> SVG, before Inkscape) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\generate_svg_from_table.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Skills\Physical\Impact\ImpactTree.svg" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Skills\Physical\Impact\ImpactTree_NodeData.xlsx"
+
+--- 4. sync_svg_positions_to_table.py  (SVG -> xlsx, after Inkscape) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\sync_svg_positions_to_table.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Skills\Physical\Impact\ImpactTree.svg" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Skills\Physical\Impact\ImpactTree_NodeData.xlsx"
+
+--- 5. table_to_json.py  (xlsx -> JSON, final export) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\table_to_json.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Skills\Physical\Impact\ImpactTree_NodeData.xlsx"
+
+--- bonus: add_attribute_tags_sheet.py  (refresh the AttributeTags dropdown-source sheet) ---
+py "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\NodeDataTable\add_attribute_tags_sheet.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Skills\Physical\Impact\ImpactTree_NodeData.xlsx"

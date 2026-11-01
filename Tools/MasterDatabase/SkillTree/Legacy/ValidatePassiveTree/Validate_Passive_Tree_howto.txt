@@ -1,0 +1,142 @@
+==============================================================================
+ Validate_Passive_Tree.py  —  How to Use
+==============================================================================
+
+PURPOSE
+-------
+Run this script on your Inkscape passive tree SVG before exporting to JSON.
+It performs four operations in one pass:
+
+  1. RENUMBER   — assigns sequential indices (1, 2, 3 ...) within each prefix
+                  group, in SVG document order.  You can leave any placeholder
+                  number on NodeTag: lines and the script will fix them.
+
+  2. RENAME IDs — sets each node element's SVG id to its final NodeTag
+                  (dots replaced with underscores).
+                  Connector inkscape:connection-start/end references are
+                  updated automatically to match the new ids.
+
+  3. COLOUR     — fills each node with a group colour.  All nodes sharing the
+                  same second tag segment (e.g. Might, Fortitude) get the same
+                  colour.  Colours are auto-generated across the colour wheel.
+
+  4. VALIDATE   — confirms all final NodeTag values are unique.
+                  Reports errors and aborts the save if any are found.
+
+
+REQUIREMENTS
+------------
+Python 3.7+
+lxml library:  pip install lxml
+
+
+COMMANDS
+--------
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\ValidatePassiveTree\Validate_Passive_Tree.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree.svg"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\ValidatePassiveTree\Validate_Passive_Tree.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Resonance\ResonancePassiveTree.svg"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\ValidatePassiveTree\Validate_Passive_Tree.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Agility\AgilityPassiveTree.svg"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\ValidatePassiveTree\Validate_Passive_Tree.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Fortitude\FortitudePassiveTree.svg"
+
+
+
+  Skills:
+  
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\ValidatePassiveTree\Validate_Passive_Tree.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Skills\chemical\LightningCoil\LightningCoilTree.svg"
+  
+  
+  
+  # Preview changes without writing:
+  python "...\Validate_Passive_Tree.py" "...\MightPassiveTree.svg" --dry-run
+
+After running, reload the file in Inkscape:  File > Revert
+
+
+INKSCAPE SETUP — Setting a node description
+--------------------------------------------
+1. Draw a node using the Ellipse / Arc tool (E key).
+
+2. Open Object Properties:
+     Object menu > Object Properties   (Ctrl+Shift+O)
+
+3. Fill in the Description field using NodeTemplate format.
+   The NodeTag: line drives all four operations above:
+
+     NodeTag:PassiveTree.Might.IncreasedArmour.0
+     NodeType:Minor
+     IsStartNode:false
+     NodeName:Increased Armour
+     NodeDescription:Grants increased armour rating.
+     NodeIcon:/Game/...
+
+   Tag format:
+     PassiveTree.<Group>.<EffectName>.<Index>
+     SkillTree.<SkillName>.<EffectName>.<Index>
+
+   The last segment is the index placeholder — put 0 or anything, the script
+   will replace it with the correct number.
+
+4. To skip a shape entirely (decorative, placeholder, etc.) set the entire
+   description to:
+
+     ignore
+
+   The script silently skips it.
+
+Connector lines and all non-arc/ellipse shapes are ignored automatically.
+
+
+NUMBERING
+---------
+Nodes are grouped by prefix (all tag segments except the last number).
+Within each prefix group they are numbered 1, 2, 3 ... in SVG document order.
+
+  Three nodes all tagged PassiveTree.Might.IncreasedArmour.0 become:
+    PassiveTree.Might.IncreasedArmour.1
+    PassiveTree.Might.IncreasedArmour.2
+    PassiveTree.Might.IncreasedArmour.3
+
+Different prefixes are numbered independently:
+  PassiveTree.Might.IncreasedArmour.1  and  PassiveTree.Might.Core.1  are both valid.
+
+
+ELEMENT ID RENAMING
+-------------------
+Each node's SVG element id is set to its NodeTag with dots replaced by underscores:
+  NodeTag:  PassiveTree.Might.IncreasedArmour.1
+  SVG id:   PassiveTree_Might_IncreasedArmour_1
+
+Any Inkscape connector lines whose connection-start or connection-end referenced
+the old id are updated automatically — connections are not broken.
+
+
+EXAMPLE OUTPUT
+--------------
+  Processing: C:\...\MightPassiveTree.svg
+
+  Renumbering 3 NodeTag(s):
+    PassiveTree.Might.IncreasedArmour.0  ->  PassiveTree.Might.IncreasedArmour.1
+    PassiveTree.Might.IncreasedArmour.0  ->  PassiveTree.Might.IncreasedArmour.2
+    PassiveTree.Might.IncreasedArmour.0  ->  PassiveTree.Might.IncreasedArmour.3
+
+  Renaming 3 element id(s):
+    ellipse42  ->  PassiveTree_Might_IncreasedArmour_1
+    ellipse43  ->  PassiveTree_Might_IncreasedArmour_2
+    ellipse44  ->  PassiveTree_Might_IncreasedArmour_3
+
+  Group colour assignments:
+    *.Agility.*    ->  #e07070  (6 nodes)
+    *.Fortitude.*  ->  #e0c870  (4 nodes)
+    *.Might.*      ->  #70e098  (8 nodes)
+    *.Resonance.*  ->  #7098e0  (5 nodes)
+
+  Updated connector references on 12 connector(s).
+
+  Saved: C:\...\MightPassiveTree.svg
+  Processed 23 nodes across 4 groups.
+
+
+SEE ALSO
+--------
+NodeTemplate.txt                  — full field reference and examples for node descriptions
+AttributeTagMap.txt               — attribute tag names for EffectStatModAttributeType
+SVGToJSON\svg_to_skilltree_json.py  — converts the validated SVG to JSON for import into UE

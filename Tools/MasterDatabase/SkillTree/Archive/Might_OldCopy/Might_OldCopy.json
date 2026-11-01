@@ -1,0 +1,5338 @@
+{
+  "nodes": [
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1326.79,
+        "Y": 1402.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1153.59,
+        "Y": 1298.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.1",
+        "PassiveTree.IncreasedMelee.3",
+        "PassiveTree.SkillSpeed.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.SkillSpeed.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Skill Speed",
+      "NodeDescription": "3% Increased Skill Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1106.1,
+        "Y": 1365.43
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.2",
+        "PassiveTree.SkillSpeed.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 980.38,
+        "Y": 1198.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.2",
+        "PassiveTree.IncreasedMelee.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 807.18,
+        "Y": 1098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.3",
+        "PassiveTree.IncreasedMelee.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 633.97,
+        "Y": 998.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.4",
+        "PassiveTree.IncreasedMelee.6",
+        "PassiveTree.Mace.ArmorBreak.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 460.77,
+        "Y": 902.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.5",
+        "PassiveTree.IncreasedMelee.7",
+        "PassiveTree.IncreasedMelee.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 1673.21,
+        "Y": 1402.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 1846.41,
+        "Y": 1298.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.1",
+        "PassiveTree.BruisedConcussedThreshold.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2019.62,
+        "Y": 1198.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.2",
+        "PassiveTree.BruisedConcussedThreshold.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2192.82,
+        "Y": 1098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.3",
+        "PassiveTree.BruisedConcussedThreshold.5",
+        "PassiveTree.Mace.MaceDamageB.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2366.03,
+        "Y": 998.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.4",
+        "PassiveTree.BruisedConcussedThreshold.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2539.23,
+        "Y": 902.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.5",
+        "PassiveTree.BruisedConcussedThreshold.7",
+        "PassiveTree.BruisedConcussedThreshold.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 1326.79,
+        "Y": 1599.88
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 1153.59,
+        "Y": 1702.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.1",
+        "PassiveTree.Might.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 980.38,
+        "Y": 1802.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.2",
+        "PassiveTree.Might.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 807.18,
+        "Y": 1902.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.3",
+        "PassiveTree.Might.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 633.97,
+        "Y": 2002.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.4",
+        "PassiveTree.Might.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 460.77,
+        "Y": 2098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.PenetratorWheel.1",
+        "PassiveTree.Might.5",
+        "PassiveTree.Might.7",
+        "PassiveTree.Might.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Deferred Damage Time",
+      "NodeDescription": "Damage Deffered Over 1 Additional Second",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 1673.21,
+        "Y": 1598.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 1846.41,
+        "Y": 1702.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.1",
+        "PassiveTree.DeferredDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2019.62,
+        "Y": 1802.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.2",
+        "PassiveTree.DeferredDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2192.82,
+        "Y": 1902.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.3",
+        "PassiveTree.DeferredDamage.5",
+        "PassiveTree.Ordnance.OrdnanceDamageB.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2366.03,
+        "Y": 2002.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.4",
+        "PassiveTree.DeferredDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2539.23,
+        "Y": 2098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.ParticleCharge.1",
+        "PassiveTree.Accelerator.ParticleCharge.4",
+        "PassiveTree.DeferredDamage.5",
+        "PassiveTree.DeferredDamage.7",
+        "PassiveTree.DeferredDamage.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 582.01,
+        "Y": 712.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BerserkersAxework.1",
+        "PassiveTree.IncreasedMelee.10",
+        "PassiveTree.IncreasedMelee.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.RelentlessStrength.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Relentless Strength",
+      "NodeDescription": "10% Increased Melee Damage\n+2 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/heavy-timer.heavy-timer",
+      "NodePosition": {
+        "X": 287.56,
+        "Y": 1498.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BleedWheel.1",
+        "PassiveTree.IncreasedMelee.9",
+        "PassiveTree.Might.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 356.85,
+        "Y": 1098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.6",
+        "PassiveTree.IncreasedMelee.9",
+        "PassiveTree.Rifle.PenetratingRounds.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 304.88,
+        "Y": 1298.94
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.8",
+        "PassiveTree.Ordnance.HighExplosive.1",
+        "PassiveTree.RelentlessStrength.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Outlasting.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Outlasting",
+      "NodeDescription": "+5 to All Debuff Thresholds\n +1 Second to Deferred Damage Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/chalk-outline-murder.chalk-outline-murder",
+      "NodePosition": {
+        "X": 2712.44,
+        "Y": 1498.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.8",
+        "PassiveTree.DeferredDamage.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2643.15,
+        "Y": 1098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.6",
+        "PassiveTree.BruisedConcussedThreshold.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2695.11,
+        "Y": 1298.94
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.7",
+        "PassiveTree.Mace.MaceDamageA.1",
+        "PassiveTree.Ordnance.OrdnanceSpecialist.5",
+        "PassiveTree.Outlasting.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 356.85,
+        "Y": 1898.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.6",
+        "PassiveTree.Might.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 304.88,
+        "Y": 1697.06
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.GroundSlam.2",
+        "PassiveTree.Might.7",
+        "PassiveTree.RelentlessStrength.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2643.15,
+        "Y": 1898.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.6",
+        "PassiveTree.DeferredDamage.8",
+        "PassiveTree.Ordnance.OrdnanceDamageA.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Time",
+      "NodeDescription": "Damage Deffered Over 1 Additional Second",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2695.11,
+        "Y": 1697.06
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.7",
+        "PassiveTree.Outlasting.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 715.9,
+        "Y": 580.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.11",
+        "PassiveTree.IncreasedMelee.7"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 893.78,
+        "Y": 452.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.VelocityRounds.1",
+        "PassiveTree.IncreasedMelee.10",
+        "PassiveTree.IncreasedMelee.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1114.27,
+        "Y": 352.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.11",
+        "PassiveTree.IncreasedMelee.13",
+        "PassiveTree.Mace.HeavySwing.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1326.79,
+        "Y": 302.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.13",
+        "PassiveTree.IncreasedMelee.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2417.99,
+        "Y": 708.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.10",
+        "PassiveTree.BruisedConcussedThreshold.6",
+        "PassiveTree.Mace.SledgehammerMastery.1",
+        "PassiveTree.Rifle.RapidCycling.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2284.1,
+        "Y": 576.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.11",
+        "PassiveTree.BruisedConcussedThreshold.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2106.22,
+        "Y": 448.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.RailgunMastery.1",
+        "PassiveTree.BruisedConcussedThreshold.10",
+        "PassiveTree.BruisedConcussedThreshold.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 1885.73,
+        "Y": 348.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.11",
+        "PassiveTree.BruisedConcussedThreshold.13",
+        "PassiveTree.Rifle.RiflemansMastery.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 1673.2,
+        "Y": 298.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.12",
+        "PassiveTree.IncreasedMelee.13",
+        "PassiveTree.Ordnance.DevastatingImpact.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 582.01,
+        "Y": 2288.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.CleaveWheel.1",
+        "PassiveTree.Might.10",
+        "PassiveTree.Might.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 715.9,
+        "Y": 2420.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.11",
+        "PassiveTree.Might.9",
+        "PassiveTree.Ordnance.ExplosivePenetration.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 893.78,
+        "Y": 2548.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.ExecutionersEdge.1",
+        "PassiveTree.Might.10",
+        "PassiveTree.Might.12",
+        "PassiveTree.Rifle.MarksmanWheel.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 1114.27,
+        "Y": 2648.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.11",
+        "PassiveTree.Might.13"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 1326.79,
+        "Y": 2698.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.13",
+        "PassiveTree.Might.12",
+        "PassiveTree.Ordnance.BlastWheel.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2417.99,
+        "Y": 2292.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.10",
+        "PassiveTree.DeferredDamage.6",
+        "PassiveTree.Rifle.RifleDamage.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2284.1,
+        "Y": 2424.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.AxeDamage.1",
+        "PassiveTree.DeferredDamage.11",
+        "PassiveTree.DeferredDamage.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2106.22,
+        "Y": 2552.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.AcceleratorDamage.1",
+        "PassiveTree.DeferredDamage.10",
+        "PassiveTree.DeferredDamage.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 1885.73,
+        "Y": 2652.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.11",
+        "PassiveTree.DeferredDamage.13"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageAmount",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Time",
+      "NodeDescription": "Damage Deffered Over 1 Additional Second",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 1673.2,
+        "Y": 2702.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.12",
+        "PassiveTree.Mace.StaggerWheel.1",
+        "PassiveTree.Might.13"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.SkillSpeed.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Skill Speed",
+      "NodeDescription": "3% Increased Skill Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1088.99,
+        "Y": 1439.06
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.SkillSpeed.1",
+        "PassiveTree.SkillSpeed.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.SkillSpeed.3",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Onslaught",
+      "NodeDescription": "7% Increased Skill Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1030.67,
+        "Y": 1383.06
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.SkillSpeed.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.07
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.ArmorBreak.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Armour Penetration",
+      "NodeDescription": "Penetrate 2% of Armour with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/spiked-shield.spiked-shield",
+      "NodePosition": {
+        "X": 772.74,
+        "Y": 933.36
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.5",
+        "PassiveTree.Mace.ArmorBreak.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Armour.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.ArmorBreak.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Armour Penetration",
+      "NodeDescription": "Penetrate 2% of Armour with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/spiked-shield.spiked-shield",
+      "NodePosition": {
+        "X": 756.1,
+        "Y": 864.11
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.ArmorBreak.1",
+        "PassiveTree.Mace.ArmorBreak.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Armour.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.ArmorBreak.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Armour Penetration",
+      "NodeDescription": "Penetrate 2% of Armour with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/spiked-shield.spiked-shield",
+      "NodePosition": {
+        "X": 827.09,
+        "Y": 869.78
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.ArmorBreak.2",
+        "PassiveTree.Mace.ArmorBreak.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Armour.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.ArmorBreak.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Armour Penetration",
+      "NodeDescription": "Penetrate 2% of Armour with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/spiked-shield.spiked-shield",
+      "NodePosition": {
+        "X": 816.8,
+        "Y": 799.31
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.ArmorBreak.3",
+        "PassiveTree.Mace.ArmorBreak.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Armour.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.ArmorBreak.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Exploit Their Weakness",
+      "NodeDescription": "Penetrate 5% of Armour with Maces\nPenetrate 5% of All Resistances with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/spiked-shield.spiked-shield",
+      "NodePosition": {
+        "X": 886.98,
+        "Y": 811.38
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.ArmorBreak.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Armour.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Physical.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Explosive.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Radiation.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Chemical.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Energy.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.GroundSlam.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Additional Slam Radius",
+      "NodeDescription": "10% Increased Area of Effect with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shockwave.shockwave",
+      "NodePosition": {
+        "X": 136.36,
+        "Y": 1760.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.GroundSlam.4",
+        "PassiveTree.Mace.GroundSlam.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "AoE.Multiplier.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.GroundSlam.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Additional Slam Radius",
+      "NodeDescription": "10% Increased Area of Effect with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shockwave.shockwave",
+      "NodePosition": {
+        "X": 248.24,
+        "Y": 1710.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.GroundSlam.3",
+        "PassiveTree.Might.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "AoE.Multiplier.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.GroundSlam.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Additional Slam Radius",
+      "NodeDescription": "10% Area Damage with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shockwave.shockwave",
+      "NodePosition": {
+        "X": 248.24,
+        "Y": 1770.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.GroundSlam.2",
+        "PassiveTree.Mace.GroundSlam.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.AoE.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.GroundSlam.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Additional Slam Radius",
+      "NodeDescription": "10% Area Damage with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shockwave.shockwave",
+      "NodePosition": {
+        "X": 190.74,
+        "Y": 1796.87
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.GroundSlam.1",
+        "PassiveTree.Mace.GroundSlam.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.AoE.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.GroundSlam.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Additional Slam Radius",
+      "NodeDescription": "+3 Additional Area Radius with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shockwave.shockwave",
+      "NodePosition": {
+        "X": 181.62,
+        "Y": 1700.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.GroundSlam.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "AoE.AdditionalRadius.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 3
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.HeavySwing.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Mace Critical Strike Multiplier",
+      "NodeDescription": "15% Critical Strike Multiplier with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thor-hammer.thor-hammer",
+      "NodePosition": {
+        "X": 1067.71,
+        "Y": 174.04
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.12",
+        "PassiveTree.Mace.HeavySwing.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.HeavySwing.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Mace Critical Strike Multiplier",
+      "NodeDescription": "15% Critical Strike Multiplier with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thor-hammer.thor-hammer",
+      "NodePosition": {
+        "X": 1113.19,
+        "Y": 101.16
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.HeavySwing.1",
+        "PassiveTree.Mace.HeavySwing.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.HeavySwing.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Mace Critical Strike Chance",
+      "NodeDescription": "25% Increased Critical Strike Chance with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thor-hammer.thor-hammer",
+      "NodePosition": {
+        "X": 1189.66,
+        "Y": 140.32
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.HeavySwing.2",
+        "PassiveTree.Mace.HeavySwing.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeChance.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.HeavySwing.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Mace Critical Strike Chance",
+      "NodeDescription": "25% Increased Critical Strike Chance with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thor-hammer.thor-hammer",
+      "NodePosition": {
+        "X": 1241.57,
+        "Y": 71.86
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.HeavySwing.3",
+        "PassiveTree.Mace.HeavySwing.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeChance.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.HeavySwing.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Heavy Swing",
+      "NodeDescription": "+3% Base Critical Strike Chance with Maces\n35% Critical Strike Multiplier with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thor-hammer.thor-hammer",
+      "NodePosition": {
+        "X": 1314.17,
+        "Y": 117.79
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.HeavySwing.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeChance.Base.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.35
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageA.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "9% Increased Mace Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mace-head.mace-head",
+      "NodePosition": {
+        "X": 2806.85,
+        "Y": 1320.98
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.8",
+        "PassiveTree.Mace.MaceDamageA.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.09
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageA.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "9% Increased Mace Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mace-head.mace-head",
+      "NodePosition": {
+        "X": 2870.09,
+        "Y": 1375.31
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageA.1",
+        "PassiveTree.Mace.MaceDamageA.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.09
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageA.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "9% Increased Mace Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mace-head.mace-head",
+      "NodePosition": {
+        "X": 2817.7,
+        "Y": 1440.16
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageA.2",
+        "PassiveTree.Mace.MaceDamageA.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.09
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageA.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "9% Increased Mace Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mace-head.mace-head",
+      "NodePosition": {
+        "X": 2875.75,
+        "Y": 1500.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageA.3",
+        "PassiveTree.Mace.MaceDamageA.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.09
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageA.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "9% Increased Mace Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mace-head.mace-head",
+      "NodePosition": {
+        "X": 2817.7,
+        "Y": 1559.84
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageA.4",
+        "PassiveTree.Mace.MaceDamageA.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.09
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageA.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "9% Increased Mace Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mace-head.mace-head",
+      "NodePosition": {
+        "X": 2870.09,
+        "Y": 1624.69
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageA.5",
+        "PassiveTree.Mace.MaceDamageA.7"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.09
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageA.7",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Bash And Dash",
+      "NodeDescription": "12% Increased Mace Damage\n5% Increased Movement Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mace-head.mace-head",
+      "NodePosition": {
+        "X": 2806.85,
+        "Y": 1679.02
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageA.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.12
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Movement",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageB.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "5% Increased Mace Damage\n5% Increased Area Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/flanged-mace.flanged-mace",
+      "NodePosition": {
+        "X": 2353.38,
+        "Y": 1180.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.4",
+        "PassiveTree.Mace.MaceDamageB.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.AoE",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageB.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "5% Increased Mace Damage\n5% Increased Area Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/flanged-mace.flanged-mace",
+      "NodePosition": {
+        "X": 2402.75,
+        "Y": 1165.17
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageB.1",
+        "PassiveTree.Mace.MaceDamageB.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.AoE",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageB.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "5% Increased Mace Damage\n5% Increased Area Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/flanged-mace.flanged-mace",
+      "NodePosition": {
+        "X": 2451.85,
+        "Y": 1193.52
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageB.2",
+        "PassiveTree.Mace.MaceDamageB.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.AoE",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageB.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "5% Increased Mace Damage\n5% Increased Area Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/flanged-mace.flanged-mace",
+      "NodePosition": {
+        "X": 2451.85,
+        "Y": 1250.21
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageB.3",
+        "PassiveTree.Mace.MaceDamageB.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.AoE",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageB.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "5% Increased Mace Damage\n5% Increased Area Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/flanged-mace.flanged-mace",
+      "NodePosition": {
+        "X": 2413.31,
+        "Y": 1280.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageB.4",
+        "PassiveTree.Mace.MaceDamageB.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.AoE",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.MaceDamageB.6",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Increased Mace Damage",
+      "NodeDescription": "10% Increased Mace Damage\n+1 Additional Area Radius",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/flanged-mace.flanged-mace",
+      "NodePosition": {
+        "X": 2353.65,
+        "Y": 1250.21
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.MaceDamageB.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 10
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "AoE.AdditionalRadius",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.SledgehammerMastery.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Reduced Heat Cost with Maces",
+      "NodeDescription": "5% Reduced Heat Cost with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2517.23,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.9",
+        "PassiveTree.Mace.SledgehammerMastery.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCost.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.SledgehammerMastery.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Reduced Heat Cost with Maces",
+      "NodeDescription": "5% Reduced Heat Cost with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2594.12,
+        "Y": 700.39
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.SledgehammerMastery.1",
+        "PassiveTree.Mace.SledgehammerMastery.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCost.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.SledgehammerMastery.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Heat Cost with Maces",
+      "NodeDescription": "5% Increased Heat Cost with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2682.47,
+        "Y": 688.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.SledgehammerMastery.2",
+        "PassiveTree.Mace.SledgehammerMastery.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCost.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.SledgehammerMastery.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Heat Cost with Maces",
+      "NodeDescription": "5% Increased Heat Cost with Maces",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2718.1,
+        "Y": 757.91
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.SledgehammerMastery.3",
+        "PassiveTree.Mace.SledgehammerMastery.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCost.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.SledgehammerMastery.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Massive",
+      "NodeDescription": "+0.15 Thermal Mass",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2603.83,
+        "Y": 770.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.SledgehammerMastery.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.ThermalMass",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.StaggerWheel.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Concussed Effectiveness",
+      "NodeDescription": "6% Increased Concussed Debuff Effectiveness",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shatter.shatter",
+      "NodePosition": {
+        "X": 1564.6,
+        "Y": 2750.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.13",
+        "PassiveTree.Mace.StaggerWheel.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Effectiveness.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.StaggerWheel.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Damage Against Concussed",
+      "NodeDescription": "15% Increased Damage Against with Maces Concussed Enemies",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
+      "NodePosition": {
+        "X": 1614.94,
+        "Y": 2783.22
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.StaggerWheel.1",
+        "PassiveTree.Mace.StaggerWheel.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Conditional.Damage.IncreasedAgainstConcussed.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.StaggerWheel.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Concussed Effectiveness",
+      "NodeDescription": "6% Increased Concussed Debuff Effectiveness",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shatter.shatter",
+      "NodePosition": {
+        "X": 1656.96,
+        "Y": 2837.98
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.StaggerWheel.2",
+        "PassiveTree.Mace.StaggerWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Effectiveness.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.StaggerWheel.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Damage Against Concussed",
+      "NodeDescription": "15% Increased Damage with Maces Against Concussed Enemies",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
+      "NodePosition": {
+        "X": 1614.94,
+        "Y": 2892.74
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.StaggerWheel.3",
+        "PassiveTree.Mace.StaggerWheel.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Conditional.Damage.IncreasedAgainstConcussed.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Mace.StaggerWheel.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Overwhelming Force",
+      "NodeDescription": "15% Increased Concussed Debuff Effectiveness\n24% Increased Damage with Maces Against Concussed Enemies",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shatter.shatter",
+      "NodePosition": {
+        "X": 1551.17,
+        "Y": 2866.33
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Mace.StaggerWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Effectiveness.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Conditional.Damage.IncreasedAgainstConcussed.Mace",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.24
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.BlastWheel.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Increased Area Damage",
+      "NodeDescription": "8% Increased Area Damage with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-ray.fire-ray",
+      "NodePosition": {
+        "X": 1216.11,
+        "Y": 2753.33
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.13",
+        "PassiveTree.Ordnance.BlastWheel.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.AoE.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.BlastWheel.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Area of Effect",
+      "NodeDescription": "10% Increased Area of Effect with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosion-rays.explosion-rays",
+      "NodePosition": {
+        "X": 1258.13,
+        "Y": 2808.09
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.BlastWheel.1",
+        "PassiveTree.Ordnance.BlastWheel.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "AoE.Multiplier.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.BlastWheel.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Increased Area Damage",
+      "NodeDescription": "8% Increased Area Damage with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-ray.fire-ray",
+      "NodePosition": {
+        "X": 1216.11,
+        "Y": 2862.85
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.BlastWheel.2",
+        "PassiveTree.Ordnance.BlastWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.AoE.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.BlastWheel.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Saturation Bombardment",
+      "NodeDescription": "+2 Additional Area Radius with Ordnance \n20% Increased Area Damage with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosion-rays.explosion-rays",
+      "NodePosition": {
+        "X": 1152.34,
+        "Y": 2836.44
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.BlastWheel.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "AoE.AdditionalRadius",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.AoE.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.2
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.DevastatingImpact.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Critical Strike Multiplier",
+      "NodeDescription": "15% Critical Strike Multiplier with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/headshot.headshot",
+      "NodePosition": {
+        "X": 1477.75,
+        "Y": 105.53
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.13",
+        "PassiveTree.Ordnance.DevastatingImpact.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.DevastatingImpact.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Critical Strike Multiplier",
+      "NodeDescription": "15% Critical Strike Multiplier with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/headshot.headshot",
+      "NodePosition": {
+        "X": 1542.69,
+        "Y": 49.29
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.DevastatingImpact.1",
+        "PassiveTree.Ordnance.DevastatingImpact.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.DevastatingImpact.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Critical Strike Chance",
+      "NodeDescription": "20% Increased Critical Strike Chance with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/headshot.headshot",
+      "NodePosition": {
+        "X": 1604.22,
+        "Y": 109.25
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.DevastatingImpact.2",
+        "PassiveTree.Ordnance.DevastatingImpact.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeChance.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.2
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.DevastatingImpact.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Critical Strike Chance",
+      "NodeDescription": "20% Increased Critical Strike Chance with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/headshot.headshot",
+      "NodePosition": {
+        "X": 1674.0,
+        "Y": 59.13
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.DevastatingImpact.3",
+        "PassiveTree.Ordnance.DevastatingImpact.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeChance.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.2
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.DevastatingImpact.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Devastating Impact",
+      "NodeDescription": "2% Base Critical Strike Chance with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/headshot.headshot",
+      "NodePosition": {
+        "X": 1729.84,
+        "Y": 124.42
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.DevastatingImpact.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeChance.Base.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.ExplosivePenetration.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Explosive Resistance Penetration",
+      "NodeDescription": "2% Explosive Resistance Penetration with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-punch.armor-punch",
+      "NodePosition": {
+        "X": 886.98,
+        "Y": 2188.62
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.10",
+        "PassiveTree.Ordnance.ExplosivePenetration.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Explosive.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.ExplosivePenetration.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Explosive Resistance Penetration",
+      "NodeDescription": "2% Explosive Resistance Penetration with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-punch.armor-punch",
+      "NodePosition": {
+        "X": 816.8,
+        "Y": 2200.69
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.ExplosivePenetration.1",
+        "PassiveTree.Ordnance.ExplosivePenetration.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Explosive.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.ExplosivePenetration.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Explosive Resistance Penetration",
+      "NodeDescription": "2% Explosive Resistance Penetration with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-punch.armor-punch",
+      "NodePosition": {
+        "X": 827.09,
+        "Y": 2130.22
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.ExplosivePenetration.2",
+        "PassiveTree.Ordnance.ExplosivePenetration.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Explosive.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.ExplosivePenetration.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Explosive Resistance Penetration",
+      "NodeDescription": "2% Explosive Resistance Penetration with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-punch.armor-punch",
+      "NodePosition": {
+        "X": 756.1,
+        "Y": 2135.89
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.ExplosivePenetration.3",
+        "PassiveTree.Ordnance.ExplosivePenetration.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Explosive.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.ExplosivePenetration.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Ablative Ordnance",
+      "NodeDescription": "7% Explosive Resistance Penetration with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-punch.armor-punch",
+      "NodePosition": {
+        "X": 772.74,
+        "Y": 2066.64
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.ExplosivePenetration.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Explosive.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.07
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.HighExplosive.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Increased Explosive Damage",
+      "NodeDescription": "10% Increased Explosive Damage with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosive-meeting.explosive-meeting",
+      "NodePosition": {
+        "X": 265.56,
+        "Y": 1240.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.9",
+        "PassiveTree.Ordnance.HighExplosive.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Explosive.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.HighExplosive.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Increased Explosive Damage",
+      "NodeDescription": "10% Increased Explosive Damage with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosive-meeting.explosive-meeting",
+      "NodePosition": {
+        "X": 187.93,
+        "Y": 1245.26
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.HighExplosive.1",
+        "PassiveTree.Ordnance.HighExplosive.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Explosive.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.HighExplosive.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Increased Explosive Damage",
+      "NodeDescription": "10% Increased Explosive Damage with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosive-meeting.explosive-meeting",
+      "NodePosition": {
+        "X": 229.95,
+        "Y": 1300.03
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.HighExplosive.2",
+        "PassiveTree.Ordnance.HighExplosive.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Explosive.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.HighExplosive.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Increased Explosive Damage",
+      "NodeDescription": "10% Increased Explosive Damage with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosive-meeting.explosive-meeting",
+      "NodePosition": {
+        "X": 187.93,
+        "Y": 1354.79
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.HighExplosive.3",
+        "PassiveTree.Ordnance.HighExplosive.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Explosive.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.HighExplosive.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "High Explosive",
+      "NodeDescription": "25% Increased Explosive Damage with Ordnance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosive-meeting.explosive-meeting",
+      "NodePosition": {
+        "X": 124.16,
+        "Y": 1328.37
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.HighExplosive.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Explosive.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.25
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageA.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cluster-bomb.cluster-bomb",
+      "NodePosition": {
+        "X": 2820.87,
+        "Y": 1790.72
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageA.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageA.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cluster-bomb.cluster-bomb",
+      "NodePosition": {
+        "X": 2902.96,
+        "Y": 1828.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageA.1",
+        "PassiveTree.Ordnance.OrdnanceDamageA.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageA.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cluster-bomb.cluster-bomb",
+      "NodePosition": {
+        "X": 2804.19,
+        "Y": 1870.97
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageA.2",
+        "PassiveTree.Ordnance.OrdnanceDamageA.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageA.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cluster-bomb.cluster-bomb",
+      "NodePosition": {
+        "X": 2887.9,
+        "Y": 1888.24
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageA.3",
+        "PassiveTree.Ordnance.OrdnanceDamageA.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageA.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cluster-bomb.cluster-bomb",
+      "NodePosition": {
+        "X": 2724.12,
+        "Y": 1931.57
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.7",
+        "PassiveTree.Ordnance.OrdnanceDamageA.4",
+        "PassiveTree.Ordnance.OrdnanceDamageA.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageA.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cluster-bomb.cluster-bomb",
+      "NodePosition": {
+        "X": 2841.3,
+        "Y": 1964.27
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageA.5",
+        "PassiveTree.Ordnance.OrdnanceDamageA.7"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageA.7",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Blast Them All To Hell",
+      "NodeDescription": "15% Increased Ordnance Damage\n20% Explosive Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cluster-bomb.cluster-bomb",
+      "NodePosition": {
+        "X": 2762.38,
+        "Y": 2010.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageA.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.2
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageB.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 2353.65,
+        "Y": 1749.79
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.4",
+        "PassiveTree.Ordnance.OrdnanceDamageB.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageB.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 2402.75,
+        "Y": 1721.44
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageB.1",
+        "PassiveTree.Ordnance.OrdnanceDamageB.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageB.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 2451.85,
+        "Y": 1749.79
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageB.2",
+        "PassiveTree.Ordnance.OrdnanceDamageB.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageB.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 2451.85,
+        "Y": 1806.48
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageB.3",
+        "PassiveTree.Ordnance.OrdnanceDamageB.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageB.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Ordnance Damage",
+      "NodeDescription": "8% Increased Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 2402.75,
+        "Y": 1834.83
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageB.4",
+        "PassiveTree.Ordnance.OrdnanceDamageB.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceDamageB.6",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Kaboom, Baby",
+      "NodeDescription": "25% Increased Ordnance Damage\n",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 2329.36,
+        "Y": 1832.73
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceDamageB.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.25
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceSpecialist.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2708.34,
+        "Y": 971.01
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceSpecialist.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceSpecialist.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2784.0,
+        "Y": 1006.02
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceSpecialist.1",
+        "PassiveTree.Ordnance.OrdnanceSpecialist.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceSpecialist.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2751.31,
+        "Y": 1082.71
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceSpecialist.2",
+        "PassiveTree.Ordnance.OrdnanceSpecialist.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceSpecialist.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2823.49,
+        "Y": 1124.42
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceSpecialist.3",
+        "PassiveTree.Ordnance.OrdnanceSpecialist.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceSpecialist.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2783.98,
+        "Y": 1197.83
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.8",
+        "PassiveTree.Ordnance.OrdnanceSpecialist.4",
+        "PassiveTree.Ordnance.OrdnanceSpecialist.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ordnance.OrdnanceSpecialist.6",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Ordnance Specialist",
+      "NodeDescription": "10% More Ordnance Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cluster-bomb.cluster-bomb",
+      "NodePosition": {
+        "X": 2852.08,
+        "Y": 1245.92
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ordnance.OrdnanceSpecialist.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.More.Ordnance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": " Rifle Damage",
+      "NodeDescription": "7% Increased Rifle Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/assault-rifle.assault-rifle",
+      "NodePosition": {
+        "X": 2528.77,
+        "Y": 2305.28
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.9",
+        "PassiveTree.Rifle.RifleDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.07
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": " Rifle Damage",
+      "NodeDescription": "7% Increased Rifle Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/assault-rifle.assault-rifle",
+      "NodePosition": {
+        "X": 2595.87,
+        "Y": 2320.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RifleDamage.1",
+        "PassiveTree.Rifle.RifleDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.07
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": " Rifle Damage",
+      "NodeDescription": "7% Increased Rifle Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/assault-rifle.assault-rifle",
+      "NodePosition": {
+        "X": 2660.47,
+        "Y": 2332.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RifleDamage.2",
+        "PassiveTree.Rifle.RifleDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.07
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": " Rifle Damage",
+      "NodeDescription": "7% Increased Rifle Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/assault-rifle.assault-rifle",
+      "NodePosition": {
+        "X": 2830.79,
+        "Y": 2366.68
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RifleDamage.3",
+        "PassiveTree.Rifle.RifleDamage.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.07
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": " Rifle Damage",
+      "NodeDescription": "7% Increased Rifle Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/assault-rifle.assault-rifle",
+      "NodePosition": {
+        "X": 2747.12,
+        "Y": 2386.21
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RifleDamage.4",
+        "PassiveTree.Rifle.RifleDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.07
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": " Rifle Damage",
+      "NodeDescription": "7% Increased Rifle Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/assault-rifle.assault-rifle",
+      "NodePosition": {
+        "X": 2751.76,
+        "Y": 2472.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RifleDamage.5",
+        "PassiveTree.Rifle.RifleDamage.7"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.07
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.7",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Improved Rifling",
+      "NodeDescription": "10% Increased Rifle Damage\n5% More Rifle Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/assault-rifle.assault-rifle",
+      "NodePosition": {
+        "X": 2724.85,
+        "Y": 2559.11
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RifleDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.More.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.MarksmanWheel.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Rifle Critical Strike Chance",
+      "NodeDescription": "10% Increased Critical Strike with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
+      "NodePosition": {
+        "X": 876.59,
+        "Y": 2712.63
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.11",
+        "PassiveTree.Rifle.MarksmanWheel.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeChance.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.MarksmanWheel.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Rifle Critical Strike Multiplier",
+      "NodeDescription": "15% Increased Critical Strike Multiplier with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/headshot.headshot",
+      "NodePosition": {
+        "X": 938.37,
+        "Y": 2707.24
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.MarksmanWheel.1",
+        "PassiveTree.Rifle.MarksmanWheel.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.MarksmanWheel.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Rifle Critical Strike Chance",
+      "NodeDescription": "8% Increased Critical Strike with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
+      "NodePosition": {
+        "X": 980.38,
+        "Y": 2762.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.MarksmanWheel.2",
+        "PassiveTree.Rifle.MarksmanWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeChance.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.MarksmanWheel.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Rifle Critical Strike Multiplier",
+      "NodeDescription": "15% Increased Critical Strike Multiplier with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/headshot.headshot",
+      "NodePosition": {
+        "X": 938.37,
+        "Y": 2816.76
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.MarksmanWheel.3",
+        "PassiveTree.Rifle.MarksmanWheel.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.MarksmanWheel.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Dead Eye",
+      "NodeDescription": "+3% Base Critical Strike Chance with Rifles\n30% Critical Strike Multiplier with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
+      "NodePosition": {
+        "X": 874.59,
+        "Y": 2790.35
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.MarksmanWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeChance.Base.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.3
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RapidCycling.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Skill Speed with Rifles",
+      "NodeDescription": "4% Increased Skill Speed with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/bolt-spool.bolt-spool",
+      "NodePosition": {
+        "X": 2492.29,
+        "Y": 610.22
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.9",
+        "PassiveTree.Rifle.RapidCycling.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RapidCycling.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Skill Speed with Rifles",
+      "NodeDescription": "4% Increased Skill Speed with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/bolt-spool.bolt-spool",
+      "NodePosition": {
+        "X": 2575.52,
+        "Y": 620.26
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RapidCycling.1",
+        "PassiveTree.Rifle.RapidCycling.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RapidCycling.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Skill Speed with Rifles",
+      "NodeDescription": "4% Increased Skill Speed with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/bolt-spool.bolt-spool",
+      "NodePosition": {
+        "X": 2561.23,
+        "Y": 538.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RapidCycling.2",
+        "PassiveTree.Rifle.RapidCycling.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RapidCycling.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Skill Speed with Rifles",
+      "NodeDescription": "4% Increased Skill Speed with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/bolt-spool.bolt-spool",
+      "NodePosition": {
+        "X": 2643.15,
+        "Y": 598.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RapidCycling.3",
+        "PassiveTree.Rifle.RapidCycling.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RapidCycling.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Rapid Cycling",
+      "NodeDescription": "8% Increased Skill Speed with Rifles\nRifles Fire an Extra Projectile",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/bolt-spool.bolt-spool",
+      "NodePosition": {
+        "X": 2637.81,
+        "Y": 509.54
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RapidCycling.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Projectile.Count.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.PenetratingRounds.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Rifle Projectile Pierce",
+      "NodeDescription": "+1 Extra Target Pierced with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/piercing-arrow.piercing-arrow",
+      "NodePosition": {
+        "X": 426.13,
+        "Y": 1138.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.8",
+        "PassiveTree.Rifle.PenetratingRounds.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Projectile.Pierce.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.PenetratingRounds.2",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Through-And-Through",
+      "NodeDescription": "+2 Extra Targets Pierced with Rifles",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/piercing-arrow.piercing-arrow",
+      "NodePosition": {
+        "X": 493.39,
+        "Y": 1180.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.PenetratingRounds.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Projectile.Pierce.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RiflemansMastery.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might and Rifle Damage",
+      "NodeDescription": "5% Increased Rifle Damage\n+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 1889.76,
+        "Y": 160.92
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.12",
+        "PassiveTree.Rifle.RiflemansMastery.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RiflemansMastery.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might and Rifle Damage",
+      "NodeDescription": "5% Increased Rifle Damage\n+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 1968.4,
+        "Y": 126.32
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RiflemansMastery.1",
+        "PassiveTree.Rifle.RiflemansMastery.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RiflemansMastery.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might and Rifle Damage",
+      "NodeDescription": "5% Increased Rifle Damage\n+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2009.52,
+        "Y": 201.76
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RiflemansMastery.2",
+        "PassiveTree.Rifle.RiflemansMastery.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RiflemansMastery.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might and Rifle Damage",
+      "NodeDescription": "5% Increased Rifle Damage\n+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2090.97,
+        "Y": 174.43
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RiflemansMastery.3",
+        "PassiveTree.Rifle.RiflemansMastery.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Rifle.RiflemansMastery.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Rifleman's Brutality",
+      "NodeDescription": "+25% Increased Area of Effect with Rifles\n+4 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/assault-rifle.assault-rifle",
+      "NodePosition": {
+        "X": 2125.09,
+        "Y": 253.28
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Rifle.RiflemansMastery.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "AoE.Multiplier.Rifle",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.25
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.AxeDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Axe Damage",
+      "NodeDescription": "8% Increased Axe Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/axe-sword.axe-sword",
+      "NodePosition": {
+        "X": 2454.77,
+        "Y": 2410.12
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.AxeDamage.2",
+        "PassiveTree.DeferredDamage.10"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.AxeDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Axe Damage",
+      "NodeDescription": "8% Increased Axe Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/axe-sword.axe-sword",
+      "NodePosition": {
+        "X": 2451.72,
+        "Y": 2493.44
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.AxeDamage.1",
+        "PassiveTree.Axe.AxeDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.AxeDamage.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Axe Damage",
+      "NodeDescription": "8% Increased Axe Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/axe-sword.axe-sword",
+      "NodePosition": {
+        "X": 2368.35,
+        "Y": 2492.91
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.AxeDamage.2",
+        "PassiveTree.Axe.AxeDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.AxeDamage.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Axe Damage",
+      "NodeDescription": "8% Increased Axe Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/axe-sword.axe-sword",
+      "NodePosition": {
+        "X": 2291.26,
+        "Y": 2501.72
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.AxeDamage.3",
+        "PassiveTree.Axe.AxeDamage.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.AxeDamage.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Axe Damage",
+      "NodeDescription": "8% Increased Axe Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/axe-sword.axe-sword",
+      "NodePosition": {
+        "X": 2274.79,
+        "Y": 2567.52
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.AxeDamage.4",
+        "PassiveTree.Axe.AxeDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.AxeDamage.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Axe Damage",
+      "NodeDescription": "8% Increased Axe Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/axe-sword.axe-sword",
+      "NodePosition": {
+        "X": 2256.75,
+        "Y": 2648.92
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.AxeDamage.5",
+        "PassiveTree.Axe.AxeDamage.7"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.AxeDamage.7",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Razor's Edge",
+      "NodeDescription": "12% Increased Axe Damage\n5% More Axe Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/axe-sword.axe-sword",
+      "NodePosition": {
+        "X": 2350.73,
+        "Y": 2570.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.AxeDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.12
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.More.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.CleaveWheel.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Axe Area of Effect",
+      "NodeDescription": "8% Increased Area of Effect with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/battle-axe.battle-axe",
+      "NodePosition": {
+        "X": 517.41,
+        "Y": 2298.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.CleaveWheel.2",
+        "PassiveTree.Might.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "AoE.Multiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.CleaveWheel.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Axe Critical Strike Multiplier",
+      "NodeDescription": "15% Critical Strike Multiplier with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cleaver.cleaver",
+      "NodePosition": {
+        "X": 531.11,
+        "Y": 2357.85
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.CleaveWheel.1",
+        "PassiveTree.Axe.CleaveWheel.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.CleaveWheel.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Axe Area of Effect",
+      "NodeDescription": "8% Increased Area of Effect with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/battle-axe.battle-axe",
+      "NodePosition": {
+        "X": 573.13,
+        "Y": 2412.61
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.CleaveWheel.2",
+        "PassiveTree.Axe.CleaveWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "AoE.Multiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.CleaveWheel.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Axe Critical Strike Multiplier",
+      "NodeDescription": "15% Critical Strike Multiplier with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cleaver.cleaver",
+      "NodePosition": {
+        "X": 531.11,
+        "Y": 2467.37
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.CleaveWheel.3",
+        "PassiveTree.Axe.CleaveWheel.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.CleaveWheel.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Wide Arc",
+      "NodeDescription": "15% Increased Area of Effect with Axes\n25% Critical Strike Multiplier with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/battle-axe.battle-axe",
+      "NodePosition": {
+        "X": 467.34,
+        "Y": 2440.96
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.CleaveWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "AoE.Multiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.25
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.BleedWheel.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Damage Over Time",
+      "NodeDescription": "8% Increased Damage Over Time with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bloody-sword.bloody-sword",
+      "NodePosition": {
+        "X": 213.6,
+        "Y": 1470.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BleedWheel.2",
+        "PassiveTree.RelentlessStrength.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "DoT.Increased.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.BleedWheel.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised Effectiveness",
+      "NodeDescription": "10% Increased Bruised Debuff Effectiveness with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dripping-blade.dripping-blade",
+      "NodePosition": {
+        "X": 178.96,
+        "Y": 1530.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BleedWheel.1",
+        "PassiveTree.Axe.BleedWheel.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Effectiveness.Bruised.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.BleedWheel.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Damage Over Time",
+      "NodeDescription": "8% Increased Damage Over Time with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bloody-sword.bloody-sword",
+      "NodePosition": {
+        "X": 166.69,
+        "Y": 1592.02
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BleedWheel.2",
+        "PassiveTree.Axe.BleedWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "DoT.Increased.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.BleedWheel.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised Effectiveness",
+      "NodeDescription": "10% Increased Bruised Debuff Effectiveness with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dripping-blade.dripping-blade",
+      "NodePosition": {
+        "X": 101.72,
+        "Y": 1600.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BleedWheel.3",
+        "PassiveTree.Axe.BleedWheel.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Effectiveness.Bruised.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.BleedWheel.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Open Wounds",
+      "NodeDescription": "15% Increased Damage Over Time with Axes\n20% Increased Bruised Debuff Effectiveness with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dripping-blade.dripping-blade",
+      "NodePosition": {
+        "X": 51.13,
+        "Y": 1533.17
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BleedWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "DoT.Increased.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Effectiveness.Bruised.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.2
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.ExecutionersEdge.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Axe Critical Strike Multiplier",
+      "NodeDescription": "15% Critical Strike Multiplier with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
+      "NodePosition": {
+        "X": 785.82,
+        "Y": 2622.88
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.ExecutionersEdge.2",
+        "PassiveTree.Might.11"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.ExecutionersEdge.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Axe Critical Strike Multiplier",
+      "NodeDescription": "15% Critical Strike Multiplier with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
+      "NodePosition": {
+        "X": 703.06,
+        "Y": 2635.74
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.ExecutionersEdge.1",
+        "PassiveTree.Axe.ExecutionersEdge.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.ExecutionersEdge.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Axe Critical Strike Multiplier",
+      "NodeDescription": "15% Critical Strike Multiplier with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
+      "NodePosition": {
+        "X": 686.99,
+        "Y": 2553.53
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.ExecutionersEdge.2",
+        "PassiveTree.Axe.ExecutionersEdge.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.ExecutionersEdge.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Executioner's Edge",
+      "NodeDescription": "30% Critical Strike Multiplier with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
+      "NodePosition": {
+        "X": 603.4,
+        "Y": 2558.83
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.ExecutionersEdge.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.3
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.BerserkersAxework.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 395.89,
+        "Y": 647.96
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BerserkersAxework.2",
+        "PassiveTree.IncreasedMelee.7"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.BerserkersAxework.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 378.85,
+        "Y": 578.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BerserkersAxework.1",
+        "PassiveTree.Axe.BerserkersAxework.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.BerserkersAxework.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 392.14,
+        "Y": 504.41
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BerserkersAxework.2",
+        "PassiveTree.Axe.BerserkersAxework.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.BerserkersAxework.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 452.57,
+        "Y": 462.73
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BerserkersAxework.3",
+        "PassiveTree.Axe.BerserkersAxework.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.BerserkersAxework.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Berserker's Axework",
+      "NodeDescription": "25% Critical Strike Multiplier with Axes\n6% More Axe Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/double-axe.double-axe",
+      "NodePosition": {
+        "X": 528.03,
+        "Y": 476.66
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Axe.BerserkersAxework.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.25
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.More.Axe",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.AcceleratorDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Accelerator Damage",
+      "NodeDescription": "4% Increased Accelerator Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/tesla-coil.tesla-coil",
+      "NodePosition": {
+        "X": 2144.09,
+        "Y": 2651.11
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.AcceleratorDamage.2",
+        "PassiveTree.DeferredDamage.11"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Accelerator",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.AcceleratorDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Accelerator Damage",
+      "NodeDescription": "4% Increased Accelerator Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/tesla-coil.tesla-coil",
+      "NodePosition": {
+        "X": 2116.62,
+        "Y": 2729.82
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.AcceleratorDamage.1",
+        "PassiveTree.Accelerator.AcceleratorDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Accelerator",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.AcceleratorDamage.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Accelerator Damage",
+      "NodeDescription": "4% Increased Accelerator Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/tesla-coil.tesla-coil",
+      "NodePosition": {
+        "X": 2037.11,
+        "Y": 2704.75
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.AcceleratorDamage.2",
+        "PassiveTree.Accelerator.AcceleratorDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Accelerator",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.AcceleratorDamage.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Accelerator Damage",
+      "NodeDescription": "4% Increased Accelerator Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/tesla-coil.tesla-coil",
+      "NodePosition": {
+        "X": 2002.62,
+        "Y": 2780.65
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.AcceleratorDamage.3",
+        "PassiveTree.Accelerator.AcceleratorDamage.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Accelerator",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.AcceleratorDamage.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Accelerator Damage",
+      "NodeDescription": "4% Increased Accelerator Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/tesla-coil.tesla-coil",
+      "NodePosition": {
+        "X": 1925.71,
+        "Y": 2748.47
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.AcceleratorDamage.4",
+        "PassiveTree.Accelerator.AcceleratorDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Accelerator",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.AcceleratorDamage.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Accelerator Damage",
+      "NodeDescription": "4% Increased Accelerator Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/tesla-coil.tesla-coil",
+      "NodePosition": {
+        "X": 1884.48,
+        "Y": 2820.93
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.AcceleratorDamage.5",
+        "PassiveTree.Accelerator.AcceleratorDamage.7"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Accelerator",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 4
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.AcceleratorDamage.7",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Increased Accelerator Damage",
+      "NodeDescription": "10% Increased Accelerator Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/tesla-coil.tesla-coil",
+      "NodePosition": {
+        "X": 1810.8,
+        "Y": 2781.92
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.AcceleratorDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Accelerator",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 10
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.PenetratorWheel.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Physical Penetration",
+      "NodeDescription": "+2 Physical Resistance Penetration",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/magnet-blast.magnet-blast",
+      "NodePosition": {
+        "X": 300.21,
+        "Y": 2060.11
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.PenetratorWheel.2",
+        "PassiveTree.Might.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.PenetratorWheel.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Critical Strike Multiplier",
+      "NodeDescription": "+0.03 Critical Strike Multiplier",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/laser-sparks.laser-sparks",
+      "NodePosition": {
+        "X": 237.71,
+        "Y": 2060.19
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.PenetratorWheel.1",
+        "PassiveTree.Accelerator.PenetratorWheel.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.PenetratorWheel.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Physical Penetration",
+      "NodeDescription": "+2 Physical Resistance Penetration",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/magnet-blast.magnet-blast",
+      "NodePosition": {
+        "X": 279.73,
+        "Y": 2114.95
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.PenetratorWheel.2",
+        "PassiveTree.Accelerator.PenetratorWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.PenetratorWheel.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Critical Strike Multiplier",
+      "NodeDescription": "+0.03 Critical Strike Multiplier",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/laser-sparks.laser-sparks",
+      "NodePosition": {
+        "X": 237.71,
+        "Y": 2169.71
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.PenetratorWheel.3",
+        "PassiveTree.Accelerator.PenetratorWheel.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.PenetratorWheel.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Rail Charge",
+      "NodeDescription": "+5 Physical Resistance Penetration\n+0.08 Critical Strike Multiplier",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/magnet-blast.magnet-blast",
+      "NodePosition": {
+        "X": 173.94,
+        "Y": 2143.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.PenetratorWheel.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Penetration.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.ParticleCharge.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Energy Damage",
+      "NodeDescription": "3% Increased Energy Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/laser-blast.laser-blast",
+      "NodePosition": {
+        "X": 2573.87,
+        "Y": 2182.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.ParticleCharge.2",
+        "PassiveTree.DeferredDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 3
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.ParticleCharge.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Energy Damage",
+      "NodeDescription": "3% Increased Energy Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/laser-blast.laser-blast",
+      "NodePosition": {
+        "X": 2625.83,
+        "Y": 2208.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.ParticleCharge.1",
+        "PassiveTree.Accelerator.ParticleCharge.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 3
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.ParticleCharge.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Energy Damage",
+      "NodeDescription": "3% Increased Energy Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/laser-blast.laser-blast",
+      "NodePosition": {
+        "X": 2695.12,
+        "Y": 2088.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.ParticleCharge.4",
+        "PassiveTree.Accelerator.ParticleCharge.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 3
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.ParticleCharge.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Energy Damage",
+      "NodeDescription": "3% Increased Energy Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/laser-blast.laser-blast",
+      "NodePosition": {
+        "X": 2643.15,
+        "Y": 2062.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.ParticleCharge.3",
+        "PassiveTree.DeferredDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 3
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.ParticleCharge.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Increased Energy Damage",
+      "NodeDescription": "8% Increased Energy Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/laser-blast.laser-blast",
+      "NodePosition": {
+        "X": 2695.12,
+        "Y": 2166.66
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.ParticleCharge.2",
+        "PassiveTree.Accelerator.ParticleCharge.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 8
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.VelocityRounds.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Projectile Speed",
+      "NodeDescription": "+20 Projectile Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/high-speed.high-speed",
+      "NodePosition": {
+        "X": 915.78,
+        "Y": 270.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.VelocityRounds.2",
+        "PassiveTree.IncreasedMelee.11"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Projectile",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 20
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.VelocityRounds.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Projectile Speed",
+      "NodeDescription": "+20 Projectile Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/high-speed.high-speed",
+      "NodePosition": {
+        "X": 827.78,
+        "Y": 229.13
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.VelocityRounds.1",
+        "PassiveTree.Accelerator.VelocityRounds.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Projectile",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 20
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.VelocityRounds.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Projectile Speed",
+      "NodeDescription": "+20 Projectile Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/high-speed.high-speed",
+      "NodePosition": {
+        "X": 827.78,
+        "Y": 315.99
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.VelocityRounds.2",
+        "PassiveTree.Accelerator.VelocityRounds.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Projectile",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 20
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.VelocityRounds.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Projectile Speed",
+      "NodeDescription": "+50 Projectile Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/high-speed.high-speed",
+      "NodePosition": {
+        "X": 742.24,
+        "Y": 300.91
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.VelocityRounds.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Projectile",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 50
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.RailgunMastery.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2225.57,
+        "Y": 398.43
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.RailgunMastery.2",
+        "PassiveTree.BruisedConcussedThreshold.11"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.RailgunMastery.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2308.09,
+        "Y": 386.59
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.RailgunMastery.1",
+        "PassiveTree.Accelerator.RailgunMastery.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.RailgunMastery.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2322.42,
+        "Y": 468.72
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.RailgunMastery.2",
+        "PassiveTree.Accelerator.RailgunMastery.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.RailgunMastery.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 2405.67,
+        "Y": 464.41
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.RailgunMastery.3",
+        "PassiveTree.Accelerator.RailgunMastery.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Accelerator.RailgunMastery.5",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Railgun Mastery",
+      "NodeDescription": "+0.10 Critical Strike Multiplier\n6% More Accelerator Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/particle-accelerator.particle-accelerator",
+      "NodePosition": {
+        "X": 2412.5,
+        "Y": 547.5
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Accelerator.RailgunMastery.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Critical.StrikeMultiplier",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.More.Accelerator",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Axe.Execute.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Execute",
+      "NodeDescription": "Kill Enemies with less than 5% of Life Remaining with Axes",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/skull-crossed-bones.skull-crossed-bones",
+      "NodePosition": {
+        "X": 600.0,
+        "Y": 500.0
+      },
+      "ConnectedNodeTags": [],
+      "Effects": [
+        {
+          "EffectType": "Effect Flag",
+          "EffectFlagType": "Flag.SkillTree.Execute.Axe",
+          "EffectFlagTag": "Flag.SkillTree.Execute.Axe"
+        }
+      ]
+    }
+  ],
+  "treeInfo": {
+    "name": "Might (old 210-node copy)",
+    "treeType": "Passive",
+    "version": "0.0.0",
+    "liveVersion": "",
+    "revision": 1,
+    "exported": "2026-10-31T18:29:49-04:00"
+  }
+}

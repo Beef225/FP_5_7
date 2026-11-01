@@ -1,0 +1,89 @@
+==============================================================================
+ REPLACE NODE FIELDS — HOW TO
+==============================================================================
+
+PURPOSE
+  Batch-replace any field value across all passive tree SVG files.
+  Works on every field a node desc block can contain: NodeTag, NodeName,
+  NodeDescription, NodeType, IsStartNode, NodeIcon, and all Effect fields.
+
+------------------------------------------------------------------------------
+QUICK START
+------------------------------------------------------------------------------
+
+1. Open replace_node_fields.py in a text editor.
+
+2. Set the FIND_ variable for the field you want to change.
+   Set the matching REPLACE_ variable to the new value.
+   Leave all other FIND_ variables as empty strings — they are skipped.
+
+   Example — rename a NodeTag:
+     FIND_NodeTag     = "PassiveTree.IncreasedArmour.1"
+     REPLACE_NodeTag  = "PassiveTree.IncreasedDamage.1"
+
+   Example — fix a description across all trees:
+     FIND_NodeDescription  = "5% Increased Melee Damage"
+     REPLACE_NodeDescription = "Increases melee damage by 5%."
+
+   Example — change an effect magnitude on one specific attribute:
+     FIND_EffectStatModAttributeType  = "Damage.Increased.Melee"
+     REPLACE_EffectStatModAttributeType = "Damage.Increased.Ranged"
+
+3. Comment out any SVG_FILES entries for trees you do NOT want modified.
+
+4. Run the script from the Terminal / Command Prompt:
+
+   python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Passive Tree Replacement\replace_node_fields.py"
+
+5. The script prints every change it makes.  Review the output before
+   importing into Unreal.
+
+------------------------------------------------------------------------------
+VALIDATE AFTER EDITING
+------------------------------------------------------------------------------
+
+Run the validator on any tree you modified:
+
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\ValidatePassiveTree\Validate_Passive_Tree.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree.svg"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\ValidatePassiveTree\Validate_Passive_Tree.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Resonance\ResonancePassiveTree.svg"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\ValidatePassiveTree\Validate_Passive_Tree.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Agility\AgilityPassiveTree.svg"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\ValidatePassiveTree\Validate_Passive_Tree.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Fortitude\FortitudePassiveTree.svg"
+
+------------------------------------------------------------------------------
+RULES
+------------------------------------------------------------------------------
+
+- Values are matched EXACTLY after stripping leading/trailing whitespace.
+  "PassiveTree.IncreasedArmour.1" will NOT match "passiveTree.IncreasedArmour.1".
+
+- Only the first colon on a line is treated as the field separator.  Values
+  that contain colons (e.g. asset paths) are handled correctly.
+
+- To put a newline inside NodeDescription use \n literally in the Python
+  string:
+    REPLACE_NodeDescription = "+5 to Bruised Threshold\n+5 to Concussed Threshold"
+
+- Multiple FIND/REPLACE pairs can be active at once.  Each field is checked
+  independently per line, so you can rename a tag AND fix a description in
+  the same run.
+
+- The script only modifies nodes where the field value matches.  All other
+  nodes are written back unchanged.
+
+------------------------------------------------------------------------------
+FIELD REFERENCE  (matches NodeTemplate.txt)
+------------------------------------------------------------------------------
+
+  NodeTag                    Unique gameplay tag (without the "NodeTag:" prefix)
+  NodeType                   Minor | Major | Mastery
+  IsStartNode                true | false
+  NodeName                   Short display name
+  NodeDescription            Tooltip text (use \n for line breaks)
+  NodeIcon                   Asset reference path
+
+  EffectType                 Stat Mod | Effect Flag | Grant Skill
+  EffectFlagType             Flag.SkillTree.* tag
+  GrantSkillTag              Skills.* tag
+  EffectStatModAttributeType Attribute tag (see AttributeTagMap.txt)
+  EffectStatModifierOp       Add | Multiply
+  EffectStatMagnitude        Numeric value e.g. 5 or 0.10

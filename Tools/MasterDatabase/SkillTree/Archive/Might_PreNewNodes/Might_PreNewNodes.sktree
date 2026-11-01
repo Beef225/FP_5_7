@@ -1,0 +1,1428 @@
+{
+  "format": "FP.SkillTreeProject",
+  "formatVersion": 1,
+  "project": {
+    "name": "Might (pre new nodes, 54 nodes)",
+    "tree_type": "Passive",
+    "category": "Might",
+    "skill_tag": "",
+    "description": "",
+    "author": "jakeg",
+    "version": "0.0.0",
+    "live_version": "",
+    "revision": 1,
+    "created": "2026-10-31T18:29:49-04:00",
+    "modified": "2026-10-31T18:29:49-04:00",
+    "tag_root": "",
+    "ue_asset_folder": "",
+    "export_file": "",
+    "notes": "ARCHIVE — do not import into UE (shares NodeTags with Trees/Passive/Might).\nFrom Legacy/Might/MightPassiveTree.svg.bak_pre_newnodes: the original 54-node Might before the weapon branches were added.",
+    "releases": []
+  },
+  "nodes": [
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1326.79,
+        "Y": 1402.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1153.59,
+        "Y": 1298.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.1",
+        "PassiveTree.IncreasedMelee.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 980.38,
+        "Y": 1198.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.2",
+        "PassiveTree.IncreasedMelee.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 807.18,
+        "Y": 1098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.3",
+        "PassiveTree.IncreasedMelee.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 633.97,
+        "Y": 998.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.4",
+        "PassiveTree.IncreasedMelee.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 460.77,
+        "Y": 902.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.5",
+        "PassiveTree.IncreasedMelee.7",
+        "PassiveTree.IncreasedMelee.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 1673.21,
+        "Y": 1402.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 1846.41,
+        "Y": 1298.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.1",
+        "PassiveTree.BruisedConcussedThreshold.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2019.62,
+        "Y": 1198.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.2",
+        "PassiveTree.BruisedConcussedThreshold.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2192.82,
+        "Y": 1098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.3",
+        "PassiveTree.BruisedConcussedThreshold.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2366.03,
+        "Y": 998.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.4",
+        "PassiveTree.BruisedConcussedThreshold.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2539.23,
+        "Y": 902.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.5",
+        "PassiveTree.BruisedConcussedThreshold.7",
+        "PassiveTree.BruisedConcussedThreshold.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.3",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 1326.79,
+        "Y": 1599.88
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 1153.59,
+        "Y": 1702.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.2",
+        "PassiveTree.Might.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 980.38,
+        "Y": 1802.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.1",
+        "PassiveTree.Might.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 807.18,
+        "Y": 1902.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.2",
+        "PassiveTree.Might.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 633.97,
+        "Y": 2002.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.4",
+        "PassiveTree.Might.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 460.77,
+        "Y": 2098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.5",
+        "PassiveTree.Might.7",
+        "PassiveTree.Might.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 1673.21,
+        "Y": 1598.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 1846.41,
+        "Y": 1702.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.1",
+        "PassiveTree.DeferredDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2019.62,
+        "Y": 1802.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.2",
+        "PassiveTree.DeferredDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2192.82,
+        "Y": 1902.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.3",
+        "PassiveTree.DeferredDamage.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2366.03,
+        "Y": 2002.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.4",
+        "PassiveTree.DeferredDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2539.23,
+        "Y": 2098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.5",
+        "PassiveTree.DeferredDamage.7",
+        "PassiveTree.DeferredDamage.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 582.01,
+        "Y": 712.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.10",
+        "PassiveTree.IncreasedMelee.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.RelentlessStrength.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Relentless Strength",
+      "NodeDescription": "10% Increased Melee Damage\n+2 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/heavy-timer.heavy-timer",
+      "NodePosition": {
+        "X": 287.56,
+        "Y": 1498.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.9",
+        "PassiveTree.Might.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 2.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 356.85,
+        "Y": 1098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.6",
+        "PassiveTree.IncreasedMelee.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 304.88,
+        "Y": 1298.94
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.8",
+        "PassiveTree.RelentlessStrength.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Outlasting.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Outlasting",
+      "NodeDescription": "+5 to All Debuff Thresholds\n +1 Second to Deferred Damage Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/chalk-outline-murder.chalk-outline-murder",
+      "NodePosition": {
+        "X": 2712.44,
+        "Y": 1498.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.8",
+        "PassiveTree.DeferredDamage.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Irradiated",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Corroded",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2643.15,
+        "Y": 1098.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.6",
+        "PassiveTree.BruisedConcussedThreshold.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2695.11,
+        "Y": 1298.94
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.7",
+        "PassiveTree.Outlasting.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 356.85,
+        "Y": 1898.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.6",
+        "PassiveTree.Might.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 304.88,
+        "Y": 1697.06
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.7",
+        "PassiveTree.RelentlessStrength.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2643.15,
+        "Y": 1898.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.6",
+        "PassiveTree.DeferredDamage.8"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2695.11,
+        "Y": 1697.06
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.7",
+        "PassiveTree.Outlasting.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 715.9,
+        "Y": 580.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.11",
+        "PassiveTree.IncreasedMelee.7"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 893.78,
+        "Y": 452.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.10",
+        "PassiveTree.IncreasedMelee.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1114.27,
+        "Y": 352.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.11",
+        "PassiveTree.IncreasedMelee.13"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.IncreasedMelee.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Melee Damage",
+      "NodeDescription": "5% Increased Melee Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
+      "NodePosition": {
+        "X": 1326.79,
+        "Y": 302.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.13",
+        "PassiveTree.IncreasedMelee.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Melee",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2417.99,
+        "Y": 708.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.10",
+        "PassiveTree.BruisedConcussedThreshold.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2284.1,
+        "Y": 576.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.11",
+        "PassiveTree.BruisedConcussedThreshold.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 2106.22,
+        "Y": 448.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.10",
+        "PassiveTree.BruisedConcussedThreshold.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 1885.73,
+        "Y": 348.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.11",
+        "PassiveTree.BruisedConcussedThreshold.13"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BruisedConcussedThreshold.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruised and Concussed Threshold",
+      "NodeDescription": "+5 to Bruised Threshold\n+5 to Concussed Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/egg-defense.egg-defense",
+      "NodePosition": {
+        "X": 1673.2,
+        "Y": 298.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.12",
+        "PassiveTree.IncreasedMelee.13"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Bruised",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Debuff.Threshold.Concussed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 582.01,
+        "Y": 2288.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.10",
+        "PassiveTree.Might.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 715.9,
+        "Y": 2420.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.11",
+        "PassiveTree.Might.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 893.78,
+        "Y": 2548.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.10",
+        "PassiveTree.Might.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 1114.27,
+        "Y": 2648.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.11",
+        "PassiveTree.Might.13"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Might.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Might",
+      "NodeDescription": "+1 Might",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/strong.strong",
+      "NodePosition": {
+        "X": 1326.79,
+        "Y": 2698.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.13",
+        "PassiveTree.Might.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.9",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2417.99,
+        "Y": 2292.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.10",
+        "PassiveTree.DeferredDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.10",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2284.1,
+        "Y": 2424.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.11",
+        "PassiveTree.DeferredDamage.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.11",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 2106.22,
+        "Y": 2552.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.10",
+        "PassiveTree.DeferredDamage.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.12",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 1885.73,
+        "Y": 2652.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.11",
+        "PassiveTree.DeferredDamage.13"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeferredDamage.13",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Deferred Damage Amount",
+      "NodeDescription": "2% of Damage Deferred Over Time",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/time-trap.time-trap",
+      "NodePosition": {
+        "X": 1673.2,
+        "Y": 2702.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.12",
+        "PassiveTree.Might.13"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.DeferredDamageTime",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    }
+  ]
+}

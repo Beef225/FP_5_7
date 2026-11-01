@@ -1,0 +1,2004 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="3000"
+   height="3000"
+   viewBox="0 0 793.75 793.74997"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="FortitudePassiveTree.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.5999719"
+     inkscape:cx="1485.0261"
+     inkscape:cy="358.13129"
+     inkscape:window-width="3840"
+     inkscape:window-height="2054"
+     inkscape:window-x="3829"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     showguides="false">
+    <inkscape:grid
+       type="axonomgrid"
+       id="grid5"
+       units="px"
+       originx="396.87499"
+       originy="396.87499"
+       spacingx="1"
+       spacingy="26.458333"
+       empcolor="#6b6b88"
+       empopacity="1"
+       color="#ae0000"
+       opacity="0.13333333"
+       empspacing="1"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="opacity:0.85;fill:#d099ff;fill-opacity:0.358442;stroke-width:40;paint-order:stroke fill markers"
+       id="path10"
+       cx="396.875"
+       cy="396.875"
+       sodipodi:insensitive="true"
+       r="320.79022">
+      <desc
+         id="desc1">ignore</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#5599ff;stroke-width:51.425;paint-order:stroke fill markers"
+       id="path5"
+       cx="396.875"
+       cy="396.875"
+       r="39.6875" />
+    <ellipse
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:55.3105;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_1"
+       cx="374.60138"
+       cy="357.00192"
+       rx="5.8214293"
+       ry="5.8208332">
+      <desc
+         id="desc3">NodeTag:PassiveTree.IncreasedHitPoints.1
+NodeType: Minor
+IsStartNode: true
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </ellipse>
+    <ellipse
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:55.3105;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_2"
+       cx="339.80252"
+       cy="297.13937"
+       rx="5.8214293"
+       ry="5.8208332">
+      <desc
+         id="desc2">NodeTag:PassiveTree.IncreasedHitPoints.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </ellipse>
+    <ellipse
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:55.3104;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_3"
+       cx="305.45694"
+       cy="238.37091"
+       rx="5.8214297"
+       ry="5.8208332">
+      <desc
+         id="desc2-2">NodeTag:PassiveTree.IncreasedHitPoints.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </ellipse>
+    <circle
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_4"
+       cx="272.1998"
+       cy="178.61554"
+       r="5.8208332">
+      <desc
+         id="desc2-1">NodeTag:PassiveTree.IncreasedHitPoints.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_5"
+       cx="236.37357"
+       cy="118.98193"
+       r="5.8208332">
+      <desc
+         id="desc2-1-1">NodeTag:PassiveTree.IncreasedHitPoints.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_6"
+       cx="98.998344"
+       cy="277.28336"
+       r="5.8208332">
+      <desc
+         id="desc2-1-1-4">NodeTag:PassiveTree.IncreasedHitPoints.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.528;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_1"
+       cx="-419.78857"
+       cy="357.01028"
+       transform="scale(-1,1)"
+       r="5.8208332">
+      <desc
+         id="desc3-9">NodeTag:PassiveTree.IncreasedArmour.1
+NodeType: Minor
+IsStartNode: true
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <ellipse
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:55.3105;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_2"
+       cx="-454.14349"
+       cy="297.061"
+       rx="5.8214293"
+       ry="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-7">NodeTag:PassiveTree.IncreasedArmour.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </ellipse>
+    <ellipse
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:55.3104;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_3"
+       cx="-488.26224"
+       cy="238.24652"
+       rx="5.8214297"
+       ry="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-2-3">NodeTag:PassiveTree.IncreasedArmour.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </ellipse>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_4"
+       cx="-521.32312"
+       cy="177.2005"
+       r="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-1-12">NodeTag:PassiveTree.IncreasedArmour.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_5"
+       cx="-557.37659"
+       cy="119.01905"
+       r="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-1-1-1">NodeTag:PassiveTree.IncreasedArmour.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_6"
+       cx="-694.75165"
+       cy="278.34167"
+       r="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-1-1-4-4">NodeTag:PassiveTree.IncreasedArmour.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.528;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_3"
+       cx="373.9614"
+       cy="-437.0983"
+       transform="scale(1,-1)"
+       r="5.8208332">
+      <desc
+         id="desc3-8">NodeTag:PassiveTree.Fortitude.3
+NodeType: Minor
+IsStartNode: true
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <ellipse
+       style="opacity:0.85;fill:#4ee04e;stroke-width:55.3105;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_1"
+       cx="305.22064"
+       cy="-450.32083"
+       rx="5.8214293"
+       ry="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-8">NodeTag:PassiveTree.Fortitude.1
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </ellipse>
+    <ellipse
+       style="opacity:0.85;fill:#4ee04e;stroke-width:55.3104;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_2"
+       cx="259.39346"
+       cy="-476.77914"
+       rx="5.8214297"
+       ry="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-2-7">NodeTag:PassiveTree.Fortitude.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </ellipse>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_4"
+       cx="213.56628"
+       cy="-503.23752"
+       r="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-1-3">NodeTag:PassiveTree.Fortitude.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_5"
+       cx="178.49376"
+       cy="-561.46777"
+       r="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-1-1-3">NodeTag:PassiveTree.Fortitude.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_6"
+       cx="128.81093"
+       cy="-569.28204"
+       r="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-1-1-4-1">NodeTag:PassiveTree.Fortitude.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <ellipse
+       style="opacity:0.85;fill:#e04e4e;stroke-width:55.3105;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_1"
+       cx="-419.66464"
+       cy="-437.10382"
+       rx="5.8214293"
+       ry="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc3-9-7">NodeTag:PassiveTree.AllThreshold.1
+NodeType: Minor
+IsStartNode: true
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </ellipse>
+    <ellipse
+       style="opacity:0.85;fill:#e04e4e;stroke-width:55.3105;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_2"
+       cx="-488.52933"
+       cy="-450.32083"
+       rx="5.8214293"
+       ry="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-7-4">NodeTag:PassiveTree.AllThreshold.2
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </ellipse>
+    <ellipse
+       style="opacity:0.85;fill:#e04e4e;stroke-width:55.3104;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_3"
+       cx="-534.35651"
+       cy="-476.77914"
+       rx="5.8214297"
+       ry="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-2-3-6">NodeTag:PassiveTree.AllThreshold.3
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </ellipse>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_4"
+       cx="-580.18372"
+       cy="-503.23752"
+       r="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-1-12-1">NodeTag:PassiveTree.AllThreshold.4
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_5"
+       cx="-615.70258"
+       cy="-562.80463"
+       r="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-1-1-1-9">NodeTag:PassiveTree.AllThreshold.5
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_6"
+       cx="-663.66699"
+       cy="-569.28198"
+       r="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-1-1-4-4-6">NodeTag:PassiveTree.AllThreshold.6
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_7"
+       cx="98.998344"
+       cy="197.90834"
+       r="5.8208332">
+      <desc
+         id="desc2-1-1-4-6">NodeTag:PassiveTree.IncreasedHitPoints.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e0e04e;stroke-width:205.279;paint-order:stroke fill markers"
+       id="PassiveTree_Bulwark_1"
+       cx="396.875"
+       cy="53.275391"
+       r="11.1125">
+      <desc
+         id="desc2-1-1-4-6-9">NodeTag:PassiveTree.Bulwark.1
+NodeType: Major
+IsStartNode: false
+NodeName: Relentless Strength
+NodeDescription: 8% Increased Hit Points\n12% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/charging-bull.charging-bull'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.12</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_8"
+       cx="98.998344"
+       cy="356.65836"
+       r="5.8208332">
+      <desc
+         id="desc2-1-1-4-6-9-3">NodeTag:PassiveTree.IncreasedHitPoints.8
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_9"
+       cx="98.998344"
+       cy="436.03336"
+       r="5.8208332">
+      <desc
+         id="desc2-1-1-4-6-9-3-8">NodeTag:PassiveTree.IncreasedHitPoints.9
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04ee0;stroke-width:205.279;paint-order:stroke fill markers"
+       id="PassiveTree_NeverFall_1"
+       cx="-397.52158"
+       cy="765.71002"
+       transform="scale(-1,1)"
+       r="11.1125">
+      <desc
+         id="desc2-1-1-4-6-9-8">NodeTag:PassiveTree.NeverFall.1
+NodeType: Major
+IsStartNode: false
+NodeName: Never Fall
+NodeDescription: +2 to Fortitude\n+4 to All Debuff Thresholds 
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/flying-fox.flying-fox'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 4
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 4
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 4
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 4
+</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_7"
+       cx="-694.7373"
+       cy="357.24588"
+       r="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-1-1-4-6-9-3-0">NodeTag:PassiveTree.IncreasedArmour.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_8"
+       cx="-694.74603"
+       cy="435.95227"
+       r="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-1-1-4-6-9-3-8-8">NodeTag:PassiveTree.IncreasedArmour.8
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_7"
+       cx="107.92769"
+       cy="-523.12817"
+       r="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-1-1-4-6-9-3-2">NodeTag:PassiveTree.Fortitude.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_8"
+       cx="98.893646"
+       cy="-476.93158"
+       r="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-1-1-4-6-9-3-8-86">NodeTag:PassiveTree.Fortitude.8
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_7"
+       cx="-687.58813"
+       cy="-523.12805"
+       r="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-1-1-4-6-9-3-0-3">NodeTag:PassiveTree.AllThreshold.7
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_8"
+       cx="-694.58295"
+       cy="-476.93155"
+       r="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-1-1-4-6-9-3-8-8-2">NodeTag:PassiveTree.AllThreshold.8
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_10"
+       cx="98.998344"
+       cy="118.53334"
+       r="5.8208332">
+      <desc
+         id="desc2-1-1-4-9">NodeTag:PassiveTree.IncreasedHitPoints.10
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_11"
+       cx="167.73911"
+       cy="79.904175"
+       r="5.8208332">
+      <desc
+         id="desc2-1-1-4-9-3">NodeTag:PassiveTree.IncreasedHitPoints.11
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_12"
+       cx="259.39783"
+       cy="79.069717"
+       r="5.8208332">
+      <desc
+         id="desc2-1-1-4-9-3-1">NodeTag:PassiveTree.IncreasedHitPoints.12
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4e4ee0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedHitPoints_13"
+       cx="351.04782"
+       cy="79.904175"
+       r="5.8208332">
+      <desc
+         id="desc2-1-1-4-9-3-1-2">NodeTag:PassiveTree.IncreasedHitPoints.13
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Hit Points
+NodeDescription: 4% Increased Hit Points
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-increase.health-increase'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Health.Increased
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.04</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_9"
+       cx="-694.75165"
+       cy="197.90834"
+       r="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-1-1-4-6-6">NodeTag:PassiveTree.IncreasedArmour.9
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_10"
+       cx="-694.75165"
+       cy="118.53334"
+       r="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-1-1-4-9-1">NodeTag:PassiveTree.IncreasedArmour.10
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_11"
+       cx="-626.01086"
+       cy="78.845848"
+       r="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-1-1-4-9-3-5">NodeTag:PassiveTree.IncreasedArmour.11
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_12"
+       cx="-534.35651"
+       cy="78.845848"
+       r="5.8208332"
+       transform="scale(-1,1)">
+      <desc
+         id="desc2-1-1-4-9-3-1-5">NodeTag:PassiveTree.IncreasedArmour.12
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee0e0;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_IncreasedArmour_13"
+       cx="-442.70215"
+       cy="78.845848"
+       transform="scale(-1,1)"
+       r="5.8208332">
+      <desc
+         id="desc2-1-1-4-9-3-1-2-1">NodeTag:PassiveTree.IncreasedArmour.13
+NodeType: Minor
+IsStartNode: false
+NodeName: Increased Armour
+NodeDescription: 8% Increased Armour
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Defense.IncreasedArmour
+EffectStatModifierOp: Add
+EffectStatMagnitude: 0.08</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_9"
+       cx="159.89195"
+       cy="-613.19263"
+       r="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-1-1-4-6-60">NodeTag:PassiveTree.Fortitude.9
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_10"
+       cx="202.41516"
+       cy="-655.2337"
+       r="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-1-1-4-9-17">NodeTag:PassiveTree.Fortitude.10
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_11"
+       cx="259.39346"
+       cy="-696.37555"
+       r="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-1-1-4-9-3-7">NodeTag:PassiveTree.Fortitude.11
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_12"
+       cx="316.81476"
+       cy="-734.36212"
+       r="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-1-1-4-9-3-1-3">NodeTag:PassiveTree.Fortitude.12
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#4ee04e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_Fortitude_13"
+       cx="373.22485"
+       cy="-754.52686"
+       r="5.8208332"
+       transform="scale(1,-1)">
+      <desc
+         id="desc2-1-1-4-9-3-1-2-9">NodeTag:PassiveTree.Fortitude.13
+NodeType: Minor
+IsStartNode: false
+NodeName: Fortitude
+NodeDescription: +1 Fortitude
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/health-normal.health-normal'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Attributes.Primary.Fortitude
+EffectStatModifierOp: Add
+EffectStatMagnitude: 1</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_9"
+       cx="-634.9151"
+       cy="-613.1925"
+       r="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-1-1-4-6-6-8">NodeTag:PassiveTree.AllThreshold.9
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_10"
+       cx="-592.95984"
+       cy="-655.2337"
+       r="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-1-1-4-9-1-8">NodeTag:PassiveTree.AllThreshold.10
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_11"
+       cx="-534.35651"
+       cy="-696.37567"
+       r="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-1-1-4-9-3-5-6">NodeTag:PassiveTree.AllThreshold.11
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_12"
+       cx="-477.11945"
+       cy="-734.36212"
+       r="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-1-1-4-9-3-1-5-0">NodeTag:PassiveTree.AllThreshold.12
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <circle
+       style="opacity:0.85;fill:#e04e4e;stroke-width:107.527;paint-order:stroke fill markers"
+       id="PassiveTree_AllThreshold_13"
+       cx="-421.09613"
+       cy="-754.52673"
+       r="5.8208332"
+       transform="scale(-1)">
+      <desc
+         id="desc2-1-1-4-9-3-1-2-1-8">NodeTag:PassiveTree.AllThreshold.13
+NodeType: Minor
+IsStartNode: false
+NodeName: Debuff Threshold
+NodeDescription: +2 to All Debuff Thresholds
+NodeIcon: /Script/Engine.Texture2D'/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes'
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Bruised
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Concussed
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Irradiated
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2
+
+EffectType: Stat Mod
+EffectFlagType:
+GrantSkillTag:
+EffectStatModAttributeType: Debuff.Threshold.Corroded
+EffectStatModifierOp: Add
+EffectStatMagnitude: 2</desc>
+    </circle>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 422.6827,351.96004 28.5666,-49.84867"
+       id="path1"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_1"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 457.06436,292.02596 28.27701,-48.7444"
+       id="path2"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_2"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_3" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 491.03424,233.12808 27.51694,-50.80926"
+       id="path3"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_3"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_4" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 524.38914,172.25269 29.92143,-48.28583"
+       id="path4"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_4"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_5" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 562.4001,116.07868 620.98736,81.786222"
+       id="path6"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_5"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_11" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 631.05177,81.756215 58.65897,33.866755"
+       id="path7"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_11"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_10" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 694.75165,124.35417 v 67.73334"
+       id="path8"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_10"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_9" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 694.75165,203.72917 v 68.79167"
+       id="path9"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_9"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 694.75059,284.1625 -0.0122,67.26255"
+       id="path11"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_6"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_7" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 694.73795,363.06671 0.007,67.06473"
+       id="path12"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_7"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_8" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 694.72287,441.77296 -0.11676,29.3379"
+       id="path13"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_8"
+       inkscape:connection-end="#PassiveTree_AllThreshold_8" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 693.71153,482.6867 -5.25198,34.6862"
+       id="path14"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_8"
+       inkscape:connection-end="#PassiveTree_AllThreshold_7" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 684.90964,528.29599 -18.56415,35.81805"
+       id="path15"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_7"
+       inkscape:connection-end="#PassiveTree_AllThreshold_6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 660.47839,574.15168 638.1037,608.3228"
+       id="path16"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_6"
+       inkscape:connection-end="#PassiveTree_AllThreshold_9" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 630.80339,617.31264 -33.73184,33.80093"
+       id="path17"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_9"
+       inkscape:connection-end="#PassiveTree_AllThreshold_10" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 588.19584,658.57823 -49.07533,34.45292"
+       id="path18"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_10"
+       inkscape:connection-end="#PassiveTree_AllThreshold_11" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 529.50665,699.59437 481.9693,731.14342"
+       id="path19"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_11"
+       inkscape:connection-end="#PassiveTree_AllThreshold_12" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 471.64263,736.3334 -45.06969,16.22205"
+       id="path20"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_12"
+       inkscape:connection-end="#PassiveTree_AllThreshold_13" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 415.83707,757.02152 -8.27547,3.92572"
+       id="path21"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_13"
+       inkscape:connection-end="#PassiveTree_NeverFall_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 387.42713,761.0638 -8.91471,-4.10321"
+       id="path22"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_NeverFall_1"
+       inkscape:connection-end="#PassiveTree_Fortitude_13" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 367.7437,752.56753 322.29591,736.32145"
+       id="path23"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_13"
+       inkscape:connection-end="#PassiveTree_Fortitude_12" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 311.96017,731.15061 264.24806,699.58706"
+       id="path24"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_12"
+       inkscape:connection-end="#PassiveTree_Fortitude_11" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 254.67429,692.96801 207.13434,658.64124"
+       id="path25"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_11"
+       inkscape:connection-end="#PassiveTree_Fortitude_10" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 198.27589,651.14136 164.03122,617.28497"
+       id="path26"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_10"
+       inkscape:connection-end="#PassiveTree_Fortitude_9" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 156.52906,608.4416 132.17382,574.03307"
+       id="path27"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_9"
+       inkscape:connection-end="#PassiveTree_Fortitude_6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 126.41142,563.97891 110.3272,528.43131"
+       id="path28"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_6"
+       inkscape:connection-end="#PassiveTree_Fortitude_7" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 106.81056,517.41563 -6.79979,-34.77151"
+       id="path29"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_7"
+       inkscape:connection-end="#PassiveTree_Fortitude_8" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 98.908547,471.11084 0.0749,-29.25674"
+       id="path30"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_8"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_9" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 98.998344,430.21252 0,-67.73333"
+       id="path31"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_9"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_8" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 98.998344,350.83752 V 283.10419"
+       id="path32"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_8"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 98.998344,271.46252 V 203.72917"
+       id="path33"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_6"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_7" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 98.998344,192.08751 V 124.35417"
+       id="path34"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_7"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_10" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 104.07275,115.68176 162.6647,82.755757"
+       id="path35"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_10"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_11" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 173.55961,79.851185 80.01771,-0.728478"
+       id="path36"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_11"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_12" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 265.21834,79.122712 80.00897,0.728468"
+       id="path37"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_12"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_13" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 356.08065,76.979751 387.26687,58.858382"
+       id="path38"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_13"
+       inkscape:connection-end="#PassiveTree_Bulwark_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 406.5789,58.689937 31.04025,17.31972"
+       id="path39"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Bulwark_1"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_13" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 448.52298,78.845848 80.01269,0"
+       id="path40"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_13"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_12" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 540.17734,78.845848 h 80.01269"
+       id="path41"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedArmour_12"
+       inkscape:connection-end="#PassiveTree_IncreasedArmour_11" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 371.67596,351.96949 342.72794,302.1718"
+       id="path42"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_1"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 336.86543,292.11374 -28.4714,-48.7172"
+       id="path43"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_2"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_3" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 302.62619,233.28471 -27.59571,-49.5831"
+       id="path44"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_3"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_4" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 269.20219,173.62595 239.37118,123.97153"
+       id="path45"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_4"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_5" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 231.31522,116.10191 172.79745,82.784196"
+       id="path46"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_IncreasedHitPoints_5"
+       inkscape:connection-end="#PassiveTree_IncreasedHitPoints_11" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 368.24546,438.19778 -57.30831,11.02346"
+       id="path47"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_3"
+       inkscape:connection-end="#PassiveTree_Fortitude_1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 300.17935,453.23142 -35.74459,20.63713"
+       id="path48"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_1"
+       inkscape:connection-end="#PassiveTree_Fortitude_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 254.35217,479.68974 -35.74498,20.63741"
+       id="path49"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_2"
+       inkscape:connection-end="#PassiveTree_Fortitude_4" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 210.56307,508.2237 -29.06609,48.25789"
+       id="path50"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_4"
+       inkscape:connection-end="#PassiveTree_Fortitude_5" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 176.52394,566.94512 -14.66217,40.77016"
+       id="path51"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_Fortitude_5"
+       inkscape:connection-end="#PassiveTree_Fortitude_9" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 425.3816,438.20106 57.43077,11.02253"
+       id="path52"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_1"
+       inkscape:connection-end="#PassiveTree_AllThreshold_2" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 493.57062,453.23142 35.74459,20.63713"
+       id="path53"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_2"
+       inkscape:connection-end="#PassiveTree_AllThreshold_3" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 539.3978,479.68974 35.74501,20.63741"
+       id="path54"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_3"
+       inkscape:connection-end="#PassiveTree_AllThreshold_4" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 583.1648,508.23696 29.55669,49.56822"
+       id="path55"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_4"
+       inkscape:connection-end="#PassiveTree_AllThreshold_5" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 617.77635,568.24342 15.06498,39.51029"
+       id="path56"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="0"
+       inkscape:connection-start="#PassiveTree_AllThreshold_5"
+       inkscape:connection-end="#PassiveTree_AllThreshold_9" />
+  </g>
+</svg>

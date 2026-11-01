@@ -1,0 +1,228 @@
+==============================================================================
+ ATTRIBUTE TAG MAP  —  use these tags in EFFECT_STAT lines
+ Format:  EFFECT_STAT:<AttributeTag>|<Op>|<Magnitude>
+
+ EffectStatModifierOp is ALWAYS "Add" — every attribute below is designed to
+ accumulate as a linear SUM of every contributing node (base value 0), with
+ any percentage-style behaviour ("Increased X damage", AoE size, etc.)
+ applied by the CONSUMING C++ code doing its own `1 + sum` math (e.g.
+ ExecCalc_Damage.cpp, GetEffectiveSphereRadius) — never by GAS's own
+ Multiply modifier op. EffectStatModifierOp IS a real, literal GAS op
+ (confirmed via FP_SkillTreeImporter.cpp / FFP_NodeEffect_StatModifier) —
+ setting it to anything but Add on one of these attributes actively breaks
+ it (confirmed bug: an AoE.Multiplier node using Multiply collapsed to 0
+ instead of contributing +10%, since GAS's Multiplicative op multiplies
+ against the attribute's base value, which is 0 for every bonus-only
+ attribute here). The (Op) column below is purely descriptive of how the
+ summed value gets used downstream — it is not a menu to choose from.
+==============================================================================
+
+--- VITAL ---
+Attributes.Vital.HitPoints                    Current hit points
+Attributes.Vital.MaxHitPoints                 Maximum hit points
+Attributes.Vital.Heat                         Current heat level
+Attributes.Vital.MaxHeatThreshold             Max heat before damage
+
+--- PRIMARY ---
+Attributes.Primary.Might                      Strength stat
+Attributes.Primary.Resonance                  Attunement stat
+Attributes.Primary.Agility                    Speed stat
+Attributes.Primary.Fortitude                  Heartiness stat
+
+--- HEALTH ---
+Health.Increased                              Increased maximum hit points  (Add)
+Health.More                                   More maximum hit points  (Add)
+
+--- DAMAGE (generic) ---
+Damage.Increased.Generic                      Increased all damage  (Add)
+Damage.More.Generic                           More all damage  (Add)
+
+--- DAMAGE (element, flat add) ---
+Damage.Added.Physical                         Flat physical damage added
+Damage.Added.Explosive                        Flat explosive damage added
+Damage.Added.Radiation                        Flat radiation damage added
+Damage.Added.Chemical                         Flat chemical damage added
+Damage.Added.Energy                           Flat energy damage added
+
+--- DAMAGE (element, increased %) ---
+Damage.Increased.Physical                     Increased physical damage  (Add)
+Damage.Increased.Explosive                    Increased explosive damage  (Add)
+Damage.Increased.Radiation                    Increased radiation damage  (Add)
+Damage.Increased.Chemical                     Increased chemical damage  (Add)
+Damage.Increased.Energy                       Increased energy damage  (Add)
+
+--- DAMAGE (element, more %) ---
+Damage.More.Physical                          More physical damage  (Add)
+Damage.More.Explosive                         More explosive damage  (Add)
+Damage.More.Radiation                         More radiation damage  (Add)
+Damage.More.Chemical                          More chemical damage  (Add)
+Damage.More.Energy                            More energy damage  (Add)
+
+--- DAMAGE (weapon type — 14 categories) ---
+Damage.Increased.Mace                         Increased mace damage  (Add)
+Damage.More.Mace                              More mace damage  (Add)
+Damage.Increased.Ordnance                     Increased ordnance damage  (Add)
+Damage.More.Ordnance                          More ordnance damage  (Add)
+Damage.Increased.Sword                        Increased sword damage  (Add)
+Damage.More.Sword                             More sword damage  (Add)
+Damage.Increased.Pistol                       Increased pistol damage  (Add)
+Damage.More.Pistol                            More pistol damage  (Add)
+Damage.Increased.Gauntlets                    Increased gauntlets damage  (Add)
+Damage.More.Gauntlets                         More gauntlets damage  (Add)
+Damage.Increased.Shotgun                      Increased shotgun damage  (Add)
+Damage.More.Shotgun                           More shotgun damage  (Add)
+Damage.Increased.Conduit                      Increased conduit damage  (Add)
+Damage.More.Conduit                           More conduit damage  (Add)
+Damage.Increased.DroneController              Increased drone controller damage  (Add)
+Damage.More.DroneController                   More drone controller damage  (Add)
+Damage.Increased.Rifle                        Increased rifle damage  (Add)
+Damage.More.Rifle                             More rifle damage  (Add)
+Damage.Increased.Axe                          Increased axe damage  (Add)
+Damage.More.Axe                               More axe damage  (Add)
+Damage.Increased.Accelerator                  Increased accelerator damage  (Add)
+Damage.More.Accelerator                       More accelerator damage  (Add)
+Damage.Increased.Spear                        Increased spear damage  (Add)
+Damage.More.Spear                             More spear damage  (Add)
+Damage.Increased.Precision                    Increased precision damage  (Add)
+Damage.More.Precision                         More precision damage  (Add)
+Damage.Increased.Projector                    Increased projector damage  (Add)
+Damage.More.Projector                         More projector damage  (Add)
+
+--- DAMAGE (hit type) ---
+Damage.Increased.Melee                        Increased melee damage  (Add)
+Damage.More.Melee                             More melee damage  (Add)
+Damage.Increased.Projectile                   Increased projectile damage  (Add)
+Damage.More.Projectile                        More projectile damage  (Add)
+Damage.Increased.AoE                          Increased area damage  (Add)
+Damage.More.AoE                               More area damage  (Add)
+
+--- RESISTANCE ---
+Resistance.Damage.Physical                    Physical damage reduction  (Add)
+Resistance.Max.Physical                       Physical resistance cap  (Add)
+Resistance.Damage.Explosive                   Explosive damage reduction  (Add)
+Resistance.Max.Explosive                      Explosive resistance cap  (Add)
+Resistance.Damage.Radiation                   Radiation damage reduction  (Add)
+Resistance.Max.Radiation                      Radiation resistance cap  (Add)
+Resistance.Damage.Chemical                    Chemical damage reduction  (Add)
+Resistance.Max.Chemical                       Chemical resistance cap  (Add)
+Resistance.Damage.Energy                      Energy damage reduction  (Add)
+Resistance.Max.Energy                         Energy resistance cap  (Add)
+Resistance.Damage.Overheat                    Overheat damage reduction  (Add)
+Resistance.Max.Overheat                       Overheat resistance cap  (Add)
+
+--- CRITICAL ---
+Critical.StrikeChance.Base                    Base crit chance  (Add)
+Critical.StrikeChance.Increased               Increased crit chance  (Add)
+Critical.StrikeMultiplier                     Crit damage multiplier  (Add)
+
+--- DEFENCE ---
+Defence.Armour                                Flat armour  (Add)
+Defence.DodgeChance                           Dodge chance  (Add)
+Defence.BlockChance                           Block chance  (Add)
+Defence.BlockedDamage                         Damage mitigated on block  (Add)
+Defence.DeferredDamageAmount                  Portion of hit deferred over time  (Add)
+Defence.DeferredDamageTime                    Duration for deferred damage  (Add)
+Defence.HealthRegeneration                    Health regen per second  (Add)
+Defense.CriticalHitResistance                 Reduced damage from crits  (Add)
+Defense.ReducedDamage.Projectiles             Reduced damage from projectiles  (Add)
+Defense.IncreasedArmour                       Increased armour  (Add)
+Defense.ReducedDamage.AoE                     Reduced damage from AoE  (Add)
+Defense.ReduceeDamage.Melee                   Reduced damage from melee  (Add)
+
+--- HEAT ---
+Heat.AmbientTemperature                       Environment temperature  (Add)
+Heat.ThermalMass                              Heat capacity  (Add)
+Heat.CoolingCoefficient                       Heat dissipation rate  (Add)
+Heat.SkillCost                                Heat cost of skills, -reduces/+increases  (Add)
+
+--- DEBUFF EFFECTIVENESS ---
+Debuff.Effectiveness.Bruised                  Bruised debuff power  (Add)
+Debuff.Effectiveness.Concussed               Concussed debuff power  (Add)
+Debuff.Effectiveness.Irradiated               Irradiated debuff power  (Add)
+Debuff.Effectiveness.Corroded                 Corroded debuff power  (Add)
+Debuff.Effectiveness.ThermalDestabalization   Thermal destabilisation power  (Add)
+
+--- DEBUFF THRESHOLDS ---
+Debuff.Threshold.Bruised                      Buildup before bruised applies  (Add)
+Debuff.Threshold.Concussed                    Buildup before concussed applies  (Add)
+Debuff.Threshold.Irradiated                   Buildup before irradiated applies  (Add)
+Debuff.Threshold.Corroded                     Buildup before corroded applies  (Add)
+
+--- DEBUFF DURATION ---
+Debuff.Duration.Bruised                       Bruised duration  (Add)
+Debuff.Duration.Concussed                     Concussed duration  (Add)
+Debuff.Duration.Irradiated                    Irradiated duration  (Add)
+Debuff.Duration.Corroded                      Corroded duration  (Add)
+Debuff.ThermalInsulation                      Heat damage modifier  (Add)
+
+--- AREA OF EFFECT ---
+AoE.Multiplier                                AoE size multiplier  (Add)
+AoE.AdditionalRadius                          Flat radius bonus  (Add)
+
+--- SPEED ---
+Speed.Movement                                Movement speed  (Add)
+Speed.Skill                                   Skill cast/activation speed  (Add)
+Speed.Movement.DuringSkill                    Move speed multiplier during skills  (Add)
+Speed.Projectile                              Projectile speed  (Add)
+
+--- DURATION ---
+Duration.Skill                                Skill duration scalar, affecting skill-defined timers such as Impact's chain delay  (Add)
+
+--- ITEM FIND ---
+Item.Quantity                                 Drop more items  (Add)
+Item.Rarity                                   Drop better items  (Add)
+Item.WattsQuantity                            Drop more Watts  (Add)
+
+--- DAMAGE OVER TIME ---
+DoT.Increased                                 Increased DoT damage  (Add)
+DoT.Multiplier                                More DoT damage  (Add)
+
+--- PENETRATION ---
+Penetration.Armour                            Armour penetration  (Add)
+Penetration.Physical                          Physical resistance penetration  (Add)
+Penetration.Explosive                         Explosive resistance penetration  (Add)
+Penetration.Radiation                         Radiation resistance penetration  (Add)
+Penetration.Chemical                          Chemical resistance penetration  (Add)
+Penetration.Energy                            Energy resistance penetration  (Add)
+
+--- PROJECTILE ---
+Projectile.Pierce                             Extra targets pierced  (Add)
+Projectile.Bounce                             Extra targets bounced to  (Add)
+Projectile.Count                              Additional projectiles  (Add)
+
+--- DAMAGE CONVERSION ---
+Conversion.Damage.PhysicalToEnergy            Convert % physical dealt → energy  (Add)
+Conversion.Damage.ChemicalToRadiation         Convert % chemical dealt → radiation  (Add)
+Conversion.Damage.ExplosiveToPhysical         Convert % explosive dealt → physical  (Add)
+Conversion.Defense.EnergyToRadiation          Take % incoming energy as radiation  (Add)
+Conversion.Defense.ChemicalToExplosive        Take % incoming chemical as explosive  (Add)
+
+--- CONDITIONAL DAMAGE ---
+Conditional.Damage.IncreasedAgainstBruised    Increased damage vs bruised  (Add)
+Conditional.Damage.IncreasedAgainstConcussed  Increased damage vs concussed  (Add)
+Conditional.Damage.IncreasedAgainstIrradiated Increased damage vs irradiated  (Add)
+Conditional.Damage.IncreasedAgainstCorroded   Increased damage vs corroded  (Add)
+Conditional.Damage.IncreasedAgainstOverheated Increased damage vs overheated  (Add)
+Conditional.Damage.IncreasedAgainstFrozen     Increased damage vs frozen  (Add)
+Conditional.Damage.PerHeat                    Increased damage per heat from equilibrium  (Add)
+
+--- RECOVERY ---
+Recovery.Life.OnHit                           Life gained on hit  (Add)
+Recovery.Life.OnKill                          Life gained on kill  (Add)
+
+--- META (internal use — avoid in node effects) ---
+MetaAttribute.IncomingDamage                  Damage calc pipeline only
+MetaAttribute.IncomingXP                      XP calc pipeline only
+
+==============================================================================
+ EFFECT_STAT QUICK EXAMPLES
+==============================================================================
+
+EFFECT_STAT:Defence.Armour|Add|10
+EFFECT_STAT:Defense.IncreasedArmour|Add|0.20
+EFFECT_STAT:Attributes.Primary.Might|Add|2
+EFFECT_STAT:Damage.Increased.Generic|Add|0.10
+EFFECT_STAT:Health.Increased|Add|0.15
+EFFECT_STAT:Critical.StrikeChance.Base|Add|5
+EFFECT_STAT:Projectile.Count|Add|1
+EFFECT_STAT:Speed.Movement|Add|50

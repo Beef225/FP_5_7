@@ -1,0 +1,1005 @@
+{
+  "nodes": [
+    {
+      "NodeTag": "SkillTree.LightningCoil.Damage.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Increased Damage",
+      "NodeDescription": "8% Increased Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedDamage",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 972.0,
+        "Y": 378.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.Damage.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.IncreasedCritChance.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Increased Critical Chance",
+      "NodeDescription": "10% Increased Critical Chance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedCritChance",
+          "EffectStatMagnitude": 0.1
+        }
+      ],
+      "NodePosition": {
+        "X": 828.0,
+        "Y": 378.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.IncreasedCritChance.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.Convergence.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Convergence",
+      "NodeDescription": "Bolts Converge on Subsequent Use\n30% Less Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/expanded-rays.expanded-rays",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ConvergenceRate",
+          "EffectStatMagnitude": 0.1
+        },
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.MoreDamage",
+          "EffectStatMagnitude": -0.3
+        }
+      ],
+      "NodePosition": {
+        "X": 245.25,
+        "Y": 642.38
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.BoltAoE.5",
+        "SkillTree.LightningCoil.Convergence.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.ExtraBolts.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Extra Bolt",
+      "NodeDescription": "Fire an Extra Bolt\n30% Less Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-tree.lightning-tree",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ExtraBolts",
+          "EffectStatMagnitude": 0.1
+        },
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.MoreDamage",
+          "EffectStatMagnitude": -0.3
+        }
+      ],
+      "NodePosition": {
+        "X": 1223.28,
+        "Y": 376.3
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.Damage.3",
+        "SkillTree.LightningCoil.SkillSpeed.1"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.ExtraBolts.2",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Extra Bolt",
+      "NodeDescription": "Fire an Extra Bolt\n20% Less Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-tree.lightning-tree",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ExtraBolts",
+          "EffectStatMagnitude": 0.1
+        },
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.MoreDamage",
+          "EffectStatMagnitude": -0.2
+        }
+      ],
+      "NodePosition": {
+        "X": 1477.74,
+        "Y": 316.36
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.SkillSpeed.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.DistanceLuckyRolls.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Distance",
+      "NodeDescription": "Increased Chance to Shoot Bolts Farther Away",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/deadly-strike.deadly-strike",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.DistanceLuckyRolls",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 530.39,
+        "Y": 531.06
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.BoltAoE.3",
+        "SkillTree.LightningCoil.ConeLength.1"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.ChainCount.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Chain",
+      "NodeDescription": "Bolts Chain to an Additional Target\nFire One Less Bolt",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/andromeda-chain.andromeda-chain",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ChainCount",
+          "EffectStatMagnitude": 1.0
+        },
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ExtraBolts",
+          "EffectStatMagnitude": -1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 639.25,
+        "Y": 365.5
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.IncreasedCritChance.2",
+        "SkillTree.LightningCoil.ChainRadius.1"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.ChainCount.2",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Chain",
+      "NodeDescription": "Bolts Chain to an Additional Target",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/andromeda-chain.andromeda-chain",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ChainCount",
+          "EffectStatMagnitude": 1.0
+        }
+      ],
+      "NodePosition": {
+        "X": 281.13,
+        "Y": 329.13
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.ChainRadius.3"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.Convergence.2",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Convergence Rate",
+      "NodeDescription": "Converge 5% Faster",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/expanded-rays.expanded-rays",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ConvergenceRate",
+          "EffectStatMagnitude": 0.05
+        }
+      ],
+      "NodePosition": {
+        "X": 145.5,
+        "Y": 708.7
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.Convergence.1",
+        "SkillTree.LightningCoil.Convergence.3"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.Convergence.3",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Convergence Rate",
+      "NodeDescription": "Converge 5% Faster",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/expanded-rays.expanded-rays",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ConvergenceRate",
+          "EffectStatMagnitude": 0.05
+        }
+      ],
+      "NodePosition": {
+        "X": 54.62,
+        "Y": 653.87
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.Convergence.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.BoltAoE.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Bolt AoE Radius",
+      "NodeDescription": "+0.1 Bolt Area Of Effect Radius",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.BoltAoERadius",
+          "EffectStatMagnitude": 10.0
+        }
+      ],
+      "NodePosition": {
+        "X": 828.0,
+        "Y": 522.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.BoltAoE.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.BoltAoE.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bolt AoE Radius",
+      "NodeDescription": "+0.1 Bolt Area Of Effect Radius",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.BoltAoERadius",
+          "EffectStatMagnitude": 10.0
+        }
+      ],
+      "NodePosition": {
+        "X": 744.0,
+        "Y": 619.63
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.BoltAoE.1",
+        "SkillTree.LightningCoil.BoltAoE.3"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.ConeLength.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Max Distance",
+      "NodeDescription": "+1 m to Maximum Distance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ConeLength",
+          "EffectStatMagnitude": 100.0
+        }
+      ],
+      "NodePosition": {
+        "X": 437.51,
+        "Y": 537.37
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.DistanceLuckyRolls.1",
+        "SkillTree.LightningCoil.ConeLength.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.ConeLength.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Max Distance",
+      "NodeDescription": "+1 m to Maximum Distance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ConeLength",
+          "EffectStatMagnitude": 100.0
+        }
+      ],
+      "NodePosition": {
+        "X": 377.45,
+        "Y": 471.76
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.ConeLength.1"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.BoltAoE.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bolt AoE Radius",
+      "NodeDescription": "+0.1 Bolt Area Of Effect Radius",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.BoltAoERadius",
+          "EffectStatMagnitude": 10.0
+        }
+      ],
+      "NodePosition": {
+        "X": 591.12,
+        "Y": 619.5
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.BoltAoE.2",
+        "SkillTree.LightningCoil.BoltAoE.4",
+        "SkillTree.LightningCoil.DistanceLuckyRolls.1"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.BoltAoE.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bolt AoE Radius",
+      "NodeDescription": "+0.1 Bolt Area Of Effect Radius",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.BoltAoERadius",
+          "EffectStatMagnitude": 10.0
+        }
+      ],
+      "NodePosition": {
+        "X": 477.88,
+        "Y": 760.88
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.BoltAoE.3",
+        "SkillTree.LightningCoil.BoltAoE.5"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.BoltAoE.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bolt AoE Radius",
+      "NodeDescription": "+0.1 Bolt Area Of Effect Radius",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.BoltAoERadius",
+          "EffectStatMagnitude": 10.0
+        }
+      ],
+      "NodePosition": {
+        "X": 321.0,
+        "Y": 722.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.BoltAoE.4",
+        "SkillTree.LightningCoil.BoltAoE.6",
+        "SkillTree.LightningCoil.Convergence.1"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.BoltAoE.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bolt AoE Radius",
+      "NodeDescription": "+0.1 Bolt Area Of Effect Radius",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/expander.expander",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.BoltAoERadius",
+          "EffectStatMagnitude": 10.0
+        }
+      ],
+      "NodePosition": {
+        "X": 131.0,
+        "Y": 809.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.BoltAoE.5"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.IncreasedCritChance.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Critical Chance",
+      "NodeDescription": "10% Increased Critical Chance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedCritChance",
+          "EffectStatMagnitude": 0.1
+        }
+      ],
+      "NodePosition": {
+        "X": 746.75,
+        "Y": 324.25
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.IncreasedCritChance.1",
+        "SkillTree.LightningCoil.IncreasedCritChance.3",
+        "SkillTree.LightningCoil.ChainCount.1"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.ChainRadius.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Chain Distance",
+      "NodeDescription": "+1 m to Chain Distance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chained-arrow-heads.chained-arrow-heads",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ChainRadius",
+          "EffectStatMagnitude": 100.0
+        }
+      ],
+      "NodePosition": {
+        "X": 539.25,
+        "Y": 320.37
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.ChainCount.1",
+        "SkillTree.LightningCoil.ChainRadius.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.ChainRadius.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Chain Distance",
+      "NodeDescription": "+1 m to Chain Distance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chained-arrow-heads.chained-arrow-heads",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ChainRadius",
+          "EffectStatMagnitude": 100.0
+        }
+      ],
+      "NodePosition": {
+        "X": 482.38,
+        "Y": 375.44
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.ChainRadius.1",
+        "SkillTree.LightningCoil.ChainRadius.3"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.ChainRadius.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Chain Distance",
+      "NodeDescription": "+1 m to Chain Distance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chained-arrow-heads.chained-arrow-heads",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.ChainRadius",
+          "EffectStatMagnitude": 100.0
+        }
+      ],
+      "NodePosition": {
+        "X": 396.88,
+        "Y": 308.94
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.ChainRadius.2",
+        "SkillTree.LightningCoil.ChainCount.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.IncreasedCritChance.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Critical Chance",
+      "NodeDescription": "10% Increased Critical Chance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedCritChance",
+          "EffectStatMagnitude": 0.1
+        }
+      ],
+      "NodePosition": {
+        "X": 735.0,
+        "Y": 234.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.IncreasedCritChance.2",
+        "SkillTree.LightningCoil.IncreasedCritChance.4"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.IncreasedCritChance.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Critical Chance",
+      "NodeDescription": "10% Increased Critical Chance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedCritChance",
+          "EffectStatMagnitude": 0.1
+        }
+      ],
+      "NodePosition": {
+        "X": 599.0,
+        "Y": 232.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.IncreasedCritChance.3",
+        "SkillTree.LightningCoil.IncreasedCritChance.5"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.IncreasedCritChance.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Critical Chance",
+      "NodeDescription": "10% Increased Critical Chance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedCritChance",
+          "EffectStatMagnitude": 0.1
+        }
+      ],
+      "NodePosition": {
+        "X": 511.0,
+        "Y": 164.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.IncreasedCritChance.4",
+        "SkillTree.LightningCoil.IncreasedCritChance.6"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.IncreasedCritChance.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Critical Chance",
+      "NodeDescription": "10% Increased Critical Chance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedCritChance",
+          "EffectStatMagnitude": 0.1
+        }
+      ],
+      "NodePosition": {
+        "X": 337.0,
+        "Y": 183.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.IncreasedCritChance.5",
+        "SkillTree.LightningCoil.IncreasedCritChance.7"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.IncreasedCritChance.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Critical Chance",
+      "NodeDescription": "10% Increased Critical Chance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedCritChance",
+          "EffectStatMagnitude": 0.1
+        }
+      ],
+      "NodePosition": {
+        "X": 259.0,
+        "Y": 89.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.IncreasedCritChance.6",
+        "SkillTree.LightningCoil.IncreasedCritChance.8"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.IncreasedCritChance.8",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Critical Chance",
+      "NodeDescription": "10% Increased Critical Chance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedCritChance",
+          "EffectStatMagnitude": 0.1
+        }
+      ],
+      "NodePosition": {
+        "X": 88.0,
+        "Y": 81.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.IncreasedCritChance.7"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.CorrodedBuildup.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Corroded Buildup",
+      "NodeDescription": "+2 to Corroded Buildup",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.CorrodedBuildup",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 972.0,
+        "Y": 522.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.CorrodedBuildup.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.CorrodedBuildup.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Corroded Buildup",
+      "NodeDescription": "+2 to Corroded Buildup",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.CorrodedBuildup",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1073.63,
+        "Y": 540.5
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.CorrodedBuildup.1",
+        "SkillTree.LightningCoil.CorrodedBuildup.3"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.CorrodedBuildup.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Corroded Buildup",
+      "NodeDescription": "+2 to Corroded Buildup",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.CorrodedBuildup",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1114.62,
+        "Y": 631.25
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.CorrodedBuildup.2",
+        "SkillTree.LightningCoil.CorrodedBuildup.4"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.CorrodedBuildup.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Corroded Buildup",
+      "NodeDescription": "+2 to Corroded Buildup",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.CorrodedBuildup",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1237.25,
+        "Y": 675.5
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.CorrodedBuildup.3",
+        "SkillTree.LightningCoil.CorrodedBuildup.5"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.CorrodedBuildup.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Corroded Buildup",
+      "NodeDescription": "+2 to Corroded Buildup",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.CorrodedBuildup",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1301.12,
+        "Y": 774.75
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.CorrodedBuildup.4",
+        "SkillTree.LightningCoil.CorrodedBuildup.6"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.CorrodedBuildup.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Corroded Buildup",
+      "NodeDescription": "+2 to Corroded Buildup",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.CorrodedBuildup",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1472.12,
+        "Y": 773.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.CorrodedBuildup.5",
+        "SkillTree.LightningCoil.CorrodedBuildup.7"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.CorrodedBuildup.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Corroded Buildup",
+      "NodeDescription": "+2 to Corroded Buildup",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sonic-boom.sonic-boom",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.CorrodedBuildup",
+          "EffectStatMagnitude": 2.0
+        }
+      ],
+      "NodePosition": {
+        "X": 1621.75,
+        "Y": 836.75
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.CorrodedBuildup.6"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.Damage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Damage",
+      "NodeDescription": "8% Increased Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedDamage",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1029.75,
+        "Y": 290.62
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.Damage.1",
+        "SkillTree.LightningCoil.Damage.3"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.Damage.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Damage",
+      "NodeDescription": "8% Increased Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedDamage",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1117.5,
+        "Y": 306.12
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.Damage.2",
+        "SkillTree.LightningCoil.Damage.4",
+        "SkillTree.LightningCoil.ExtraBolts.1"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.Damage.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Damage",
+      "NodeDescription": "8% Increased Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedDamage",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1174.63,
+        "Y": 194.13
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.Damage.3",
+        "SkillTree.LightningCoil.Damage.5"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.Damage.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Damage",
+      "NodeDescription": "8% Increased Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedDamage",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1315.63,
+        "Y": 231.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.Damage.4",
+        "SkillTree.LightningCoil.Damage.6"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.SkillSpeed.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Skill Speed",
+      "NodeDescription": "5% Increased Skill Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-arc.lightning-arc",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.CastSpeed",
+          "EffectStatMagnitude": 0.05
+        }
+      ],
+      "NodePosition": {
+        "X": 1324.0,
+        "Y": 347.92
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.ExtraBolts.1",
+        "SkillTree.LightningCoil.SkillSpeed.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.SkillSpeed.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Skill Speed",
+      "NodeDescription": "5% Increased Skill Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-arc.lightning-arc",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.CastSpeed",
+          "EffectStatMagnitude": 0.05
+        }
+      ],
+      "NodePosition": {
+        "X": 1394.56,
+        "Y": 403.23
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.SkillSpeed.1",
+        "SkillTree.LightningCoil.ExtraBolts.2"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.Damage.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Damage",
+      "NodeDescription": "8% Increased Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedDamage",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1426.75,
+        "Y": 93.5
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.Damage.5",
+        "SkillTree.LightningCoil.Damage.7"
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.LightningCoil.Damage.7",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Damage",
+      "NodeDescription": "8% Increased Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thunder-skull.thunder-skull",
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.LightningCoil.IncreasedDamage",
+          "EffectStatMagnitude": 0.08
+        }
+      ],
+      "NodePosition": {
+        "X": 1623.5,
+        "Y": 111.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.LightningCoil.Damage.6"
+      ]
+    }
+  ]
+}

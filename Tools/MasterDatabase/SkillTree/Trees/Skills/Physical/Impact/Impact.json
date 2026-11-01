@@ -1,0 +1,1642 @@
+{
+  "nodes": [
+    {
+      "NodeTag": "SkillTree.Impact.InitialAreaOfEffect.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Wider Swing",
+      "NodeDescription": "10% Area of Effect to Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/impact-point.impact-point",
+      "NodePosition": {
+        "X": 200.0,
+        "Y": 220.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaOfEffect.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialAreaOfEffect",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialAreaOfEffect.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Wider Swing",
+      "NodeDescription": "10% Area of Effect to Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/impact-point.impact-point",
+      "NodePosition": {
+        "X": 330.0,
+        "Y": 220.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaOfEffect.1",
+        "SkillTree.Impact.InitialAreaOfEffect.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialAreaOfEffect",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialAreaOfEffect.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Wider Swing",
+      "NodeDescription": "10% Area of Effect to Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/impact-point.impact-point",
+      "NodePosition": {
+        "X": 460.0,
+        "Y": 220.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaOfEffect.2",
+        "SkillTree.Impact.InitialAreaOfEffect.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialAreaOfEffect",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialAreaOfEffect.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Wider Swing",
+      "NodeDescription": "10% Area of Effect to Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/impact-point.impact-point",
+      "NodePosition": {
+        "X": 590.0,
+        "Y": 220.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaOfEffect.3",
+        "SkillTree.Impact.InitialAreaOfEffect.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialAreaOfEffect",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialAreaOfEffect.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Wider Swing",
+      "NodeDescription": "10% Area of Effect to Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/impact-point.impact-point",
+      "NodePosition": {
+        "X": 720.0,
+        "Y": 220.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaOfEffect.4",
+        "SkillTree.Impact.InitialRadius.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialAreaOfEffect",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialRadius.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Reaching Swing",
+      "NodeDescription": "+3 Radius to Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/impact-point.impact-point",
+      "NodePosition": {
+        "X": 850.0,
+        "Y": 220.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaOfEffect.5",
+        "SkillTree.Impact.SecondaryAreaOfEffect.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialRadius",
+          "EffectStatMagnitude": 3
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryAreaOfEffect.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Wider Detonation",
+      "NodeDescription": "8% Area of Effect to Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mine-explosion.mine-explosion",
+      "NodePosition": {
+        "X": 1000.0,
+        "Y": 320.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialRadius.1",
+        "SkillTree.Impact.SecondaryAreaOfEffect.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryAreaOfEffect",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryAreaOfEffect.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Wider Detonation",
+      "NodeDescription": "8% Area of Effect to Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mine-explosion.mine-explosion",
+      "NodePosition": {
+        "X": 1130.0,
+        "Y": 320.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryAreaOfEffect.1",
+        "SkillTree.Impact.SecondaryAreaOfEffect.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryAreaOfEffect",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryAreaOfEffect.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Wider Detonation",
+      "NodeDescription": "8% Area of Effect to Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mine-explosion.mine-explosion",
+      "NodePosition": {
+        "X": 1260.0,
+        "Y": 320.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.ChainDepth.1",
+        "SkillTree.Impact.SecondaryAreaOfEffect.2",
+        "SkillTree.Impact.SecondaryAreaOfEffect.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryAreaOfEffect",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryAreaOfEffect.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Wider Detonation",
+      "NodeDescription": "8% Area of Effect to Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mine-explosion.mine-explosion",
+      "NodePosition": {
+        "X": 1390.0,
+        "Y": 320.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryAreaOfEffect.3",
+        "SkillTree.Impact.SecondaryAreaOfEffect.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryAreaOfEffect",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryAreaOfEffect.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Wider Detonation",
+      "NodeDescription": "8% Area of Effect to Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mine-explosion.mine-explosion",
+      "NodePosition": {
+        "X": 1520.0,
+        "Y": 320.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryAreaOfEffect.4",
+        "SkillTree.Impact.SecondaryRadius.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryAreaOfEffect",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryRadius.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Reaching Detonation",
+      "NodeDescription": "+1 Radius to Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mine-explosion.mine-explosion",
+      "NodePosition": {
+        "X": 1650.0,
+        "Y": 320.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryAreaOfEffect.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryRadius",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Volatile Chain",
+      "NodeDescription": "15% Increased Damage with Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 200.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryDamageMultiplier",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Volatile Chain",
+      "NodeDescription": "15% Increased Damage with Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 330.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryDamage.1",
+        "SkillTree.Impact.SecondaryDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryDamageMultiplier",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryDamage.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Volatile Chain",
+      "NodeDescription": "15% Increased Damage with Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 460.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryDamage.2",
+        "SkillTree.Impact.SecondaryDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryDamageMultiplier",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryDamage.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Volatile Chain",
+      "NodeDescription": "15% Increased Damage with Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 590.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.HastyDetonation.1",
+        "SkillTree.Impact.PatientDetonation.1",
+        "SkillTree.Impact.SecondaryDamage.3",
+        "SkillTree.Impact.SecondaryDamage.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryDamageMultiplier",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryDamage.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Volatile Chain",
+      "NodeDescription": "15% Increased Damage with Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 720.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryDamage.4",
+        "SkillTree.Impact.SecondaryDamage.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryDamageMultiplier",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryDamage.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Volatile Chain",
+      "NodeDescription": "15% Increased Damage with Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bright-explosion.bright-explosion",
+      "NodePosition": {
+        "X": 850.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryCritChance.1",
+        "SkillTree.Impact.SecondaryDamage.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryDamageMultiplier",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.ChainDepth.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Deeper Chain",
+      "NodeDescription": "+1 to Chained Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crossed-chains.crossed-chains",
+      "NodePosition": {
+        "X": 1300.0,
+        "Y": 420.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.ChainDepth.2",
+        "SkillTree.Impact.SecondaryAreaOfEffect.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.MaxChainDepth",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.ChainDepth.2",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Deeper Chain",
+      "NodeDescription": "+1 to Chained Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crossed-chains.crossed-chains",
+      "NodePosition": {
+        "X": 1500.0,
+        "Y": 420.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.ChainDepth.1",
+        "SkillTree.Impact.Mastery.ChainReaction.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.MaxChainDepth",
+          "EffectStatMagnitude": 1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.HastyDetonation.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Hasty Detonation",
+      "NodeDescription": "20% Reduced Damage with Secondary Impacts\n30% Reduced Secondary Impact Chain Delay",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/laser-blast.laser-blast",
+      "NodePosition": {
+        "X": 1150.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryDamageMultiplier",
+          "EffectStatMagnitude": -0.2
+        },
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.ChainDelayModifier",
+          "EffectStatMagnitude": -0.3
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.PatientDetonation.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Patient Detonation",
+      "NodeDescription": "20% Increased Damage with Secondary Impacts\n30% Increased Secondary Impact Chain Delay",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/hourglass.hourglass",
+      "NodePosition": {
+        "X": 1300.0,
+        "Y": 780.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryDamageMultiplier",
+          "EffectStatMagnitude": 0.2
+        },
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.ChainDelayModifier",
+          "EffectStatMagnitude": 0.3
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.Mastery.ChainReaction.1",
+      "NodeType": "Mastery",
+      "IsStartNode": false,
+      "NodeName": "Chain Reaction",
+      "NodeDescription": "+1 Chained Secondary Impacts\n10% More Impact Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crowned-explosion.crowned-explosion",
+      "NodePosition": {
+        "X": 1650.0,
+        "Y": 520.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.ChainDepth.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.MaxChainDepth",
+          "EffectStatMagnitude": 1
+        },
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.MoreDamage",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialCritChance.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Precise Impact",
+      "NodeDescription": "5% Increased Critical Strike Chance with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 200.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritChance.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialCritChance.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Precise Impact",
+      "NodeDescription": "5% Increased Critical Strike Chance with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 330.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritChance.1",
+        "SkillTree.Impact.InitialCritChance.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialCritChance.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Precise Impact",
+      "NodeDescription": "5% Increased Critical Strike Chance with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 460.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritChance.2",
+        "SkillTree.Impact.InitialCritChance.4",
+        "SkillTree.Impact.InitialCritMultiplier.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialCritChance.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Precise Impact",
+      "NodeDescription": "5% Increased Critical Strike Chance with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 590.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritChance.3",
+        "SkillTree.Impact.InitialCritChance.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialCritChance.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Precise Impact",
+      "NodeDescription": "5% Increased Critical Strike Chance with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 720.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritChance.4",
+        "SkillTree.Impact.InitialCritChance.6"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialCritChance.6",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Precise Impact",
+      "NodeDescription": "5% Increased Critical Strike Chance with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 850.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritChance.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialCritMultiplier.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Devastating Impact",
+      "NodeDescription": "8% Increased Critical Strike Multiplier with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosion-rays.explosion-rays",
+      "NodePosition": {
+        "X": 980.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritChance.3",
+        "SkillTree.Impact.InitialCritMultiplier.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialCritMultiplier",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialCritMultiplier.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Devastating Impact",
+      "NodeDescription": "8% Increased Critical Strike Multiplier with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosion-rays.explosion-rays",
+      "NodePosition": {
+        "X": 1110.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritMultiplier.1",
+        "SkillTree.Impact.InitialCritMultiplier.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialCritMultiplier",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialCritMultiplier.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Devastating Impact",
+      "NodeDescription": "8% Increased Critical Strike Multiplier with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosion-rays.explosion-rays",
+      "NodePosition": {
+        "X": 1240.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritMultiplier.2",
+        "SkillTree.Impact.InitialCritMultiplier.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialCritMultiplier",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialCritMultiplier.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Devastating Impact",
+      "NodeDescription": "8% Increased Critical Strike Multiplier with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosion-rays.explosion-rays",
+      "NodePosition": {
+        "X": 1370.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritMultiplier.3",
+        "SkillTree.Impact.InitialMoreCritChance.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialCritMultiplier",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialMoreCritChance.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Lethal Impact",
+      "NodeDescription": "15% More Critical Strike Chance with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crowned-explosion.crowned-explosion",
+      "NodePosition": {
+        "X": 1560.0,
+        "Y": 120.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialCritMultiplier.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialMoreCritChance",
+          "EffectStatMagnitude": 0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialPhysicalDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Crushing Impact",
+      "NodeDescription": "6% Increased Physical Damage with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil-impact.anvil-impact",
+      "NodePosition": {
+        "X": 200.0,
+        "Y": 20.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialPhysicalDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialPhysicalDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialPhysicalDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Crushing Impact",
+      "NodeDescription": "6% Increased Physical Damage with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil-impact.anvil-impact",
+      "NodePosition": {
+        "X": 330.0,
+        "Y": 20.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialPhysicalDamage.1",
+        "SkillTree.Impact.InitialPhysicalDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialPhysicalDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialPhysicalDamage.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Crushing Impact",
+      "NodeDescription": "6% Increased Physical Damage with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil-impact.anvil-impact",
+      "NodePosition": {
+        "X": 460.0,
+        "Y": 20.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaDamage.1",
+        "SkillTree.Impact.InitialPhysicalDamage.2",
+        "SkillTree.Impact.InitialPhysicalDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialPhysicalDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialPhysicalDamage.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Crushing Impact",
+      "NodeDescription": "6% Increased Physical Damage with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil-impact.anvil-impact",
+      "NodePosition": {
+        "X": 590.0,
+        "Y": 20.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialPhysicalDamage.3",
+        "SkillTree.Impact.InitialPhysicalDamage.5"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialPhysicalDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialPhysicalDamage.5",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Crushing Impact",
+      "NodeDescription": "6% Increased Physical Damage with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil-impact.anvil-impact",
+      "NodePosition": {
+        "X": 720.0,
+        "Y": 20.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialPhysicalDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialPhysicalDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialAreaDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cratering Impact",
+      "NodeDescription": "6% Increased Area Damage with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/circle-sparks.circle-sparks",
+      "NodePosition": {
+        "X": 850.0,
+        "Y": 20.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaDamage.2",
+        "SkillTree.Impact.InitialPhysicalDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialAreaDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialAreaDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cratering Impact",
+      "NodeDescription": "6% Increased Area Damage with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/circle-sparks.circle-sparks",
+      "NodePosition": {
+        "X": 980.0,
+        "Y": 20.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaDamage.1",
+        "SkillTree.Impact.InitialAreaDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialAreaDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialAreaDamage.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cratering Impact",
+      "NodeDescription": "6% Increased Area Damage with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/circle-sparks.circle-sparks",
+      "NodePosition": {
+        "X": 1110.0,
+        "Y": 20.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaDamage.2",
+        "SkillTree.Impact.InitialAreaDamage.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialAreaDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialAreaDamage.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cratering Impact",
+      "NodeDescription": "6% Increased Area Damage with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/circle-sparks.circle-sparks",
+      "NodePosition": {
+        "X": 1240.0,
+        "Y": 20.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialAreaDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialAreaDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialBruisedMagnitude.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Bruising Impact",
+      "NodeDescription": "8% Increased Bruised Buildup with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/gooey-impact.gooey-impact",
+      "NodePosition": {
+        "X": 200.0,
+        "Y": 420.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialBruisedMagnitude.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialBruisedMagnitude",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialBruisedMagnitude.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruising Impact",
+      "NodeDescription": "8% Increased Bruised Buildup with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/gooey-impact.gooey-impact",
+      "NodePosition": {
+        "X": 330.0,
+        "Y": 420.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialBruisedMagnitude.1",
+        "SkillTree.Impact.InitialBruisedMagnitude.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialBruisedMagnitude",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.InitialBruisedMagnitude.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Bruising Impact",
+      "NodeDescription": "8% Increased Bruised Buildup with Initial Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/gooey-impact.gooey-impact",
+      "NodePosition": {
+        "X": 460.0,
+        "Y": 420.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.InitialBruisedMagnitude.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.InitialBruisedMagnitude",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Forceful Impact",
+      "NodeDescription": "6% Increased Damage with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosive-materials.explosive-materials",
+      "NodePosition": {
+        "X": 200.0,
+        "Y": 820.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Forceful Impact",
+      "NodeDescription": "6% Increased Damage with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosive-materials.explosive-materials",
+      "NodePosition": {
+        "X": 330.0,
+        "Y": 820.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedDamage.1",
+        "SkillTree.Impact.IncreasedDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedDamage.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Forceful Impact",
+      "NodeDescription": "6% Increased Damage with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosive-materials.explosive-materials",
+      "NodePosition": {
+        "X": 460.0,
+        "Y": 820.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedDamage.2",
+        "SkillTree.Impact.IncreasedDamage.4",
+        "SkillTree.Impact.IncreasedMeleeDamage.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedDamage.4",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Forceful Impact",
+      "NodeDescription": "6% Increased Damage with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosive-materials.explosive-materials",
+      "NodePosition": {
+        "X": 590.0,
+        "Y": 820.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedDamage.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedMeleeDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Brutal Impact",
+      "NodeDescription": "6% Increased Melee Damage with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/boxing-ring.boxing-ring",
+      "NodePosition": {
+        "X": 850.0,
+        "Y": 820.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedDamage.3",
+        "SkillTree.Impact.IncreasedMeleeDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedMeleeDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedMeleeDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Brutal Impact",
+      "NodeDescription": "6% Increased Melee Damage with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/boxing-ring.boxing-ring",
+      "NodePosition": {
+        "X": 980.0,
+        "Y": 820.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedMeleeDamage.1",
+        "SkillTree.Impact.MoreDamage.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedMeleeDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.MoreDamage.1",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Overwhelming Impact",
+      "NodeDescription": "10% More Impact Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/corner-explosion.corner-explosion",
+      "NodePosition": {
+        "X": 1150.0,
+        "Y": 820.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedMeleeDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.MoreDamage",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.PhysicalDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Hardened Impact",
+      "NodeDescription": "6% Increased Physical Damage with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil-impact.anvil-impact",
+      "NodePosition": {
+        "X": 1350.0,
+        "Y": 820.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.PhysicalDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedPhysicalDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.PhysicalDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Hardened Impact",
+      "NodeDescription": "6% Increased Physical Damage with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil-impact.anvil-impact",
+      "NodePosition": {
+        "X": 1480.0,
+        "Y": 820.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedCritChance.1",
+        "SkillTree.Impact.PhysicalDamage.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedPhysicalDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedCritChance.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Keen Impact",
+      "NodeDescription": "5% Increased Critical Strike Chance with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 1350.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedCritChance.2",
+        "SkillTree.Impact.PhysicalDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedCritChance.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Keen Impact",
+      "NodeDescription": "5% Increased Critical Strike Chance with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 1480.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedCritChance.1",
+        "SkillTree.Impact.IncreasedCritChance.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedCritChance.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Keen Impact",
+      "NodeDescription": "5% Increased Critical Strike Chance with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 1610.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedCritChance.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.BruisedDuration.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Lingering Bruises",
+      "NodeDescription": "10% Increased Bruised Duration with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/gooey-impact.gooey-impact",
+      "NodePosition": {
+        "X": 200.0,
+        "Y": 520.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.BruisedDuration.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.BruisedDuration",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.BruisedDuration.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Lingering Bruises",
+      "NodeDescription": "10% Increased Bruised Duration with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/gooey-impact.gooey-impact",
+      "NodePosition": {
+        "X": 330.0,
+        "Y": 520.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.ArmourPenetration.1",
+        "SkillTree.Impact.BruisedDuration.1",
+        "SkillTree.Impact.BruisedDuration.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.BruisedDuration",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.BruisedDuration.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Lingering Bruises",
+      "NodeDescription": "10% Increased Bruised Duration with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/gooey-impact.gooey-impact",
+      "NodePosition": {
+        "X": 460.0,
+        "Y": 520.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.BruisedDuration.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.BruisedDuration",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.ArmourPenetration.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Piercing Impact",
+      "NodeDescription": "5% Increased Armour Penetration with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/harpoon-chain.harpoon-chain",
+      "NodePosition": {
+        "X": 650.0,
+        "Y": 520.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.ArmourPenetration.2",
+        "SkillTree.Impact.BruisedDuration.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.ArmourPenetration",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.ArmourPenetration.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Piercing Impact",
+      "NodeDescription": "5% Increased Armour Penetration with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/harpoon-chain.harpoon-chain",
+      "NodePosition": {
+        "X": 780.0,
+        "Y": 520.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.ArmourPenetration.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.ArmourPenetration",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.LifeOnHit.1",
+      "NodeType": "Minor",
+      "IsStartNode": true,
+      "NodeName": "Vital Impact",
+      "NodeDescription": "+2 Life Gained on Hit with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chained-heart.chained-heart",
+      "NodePosition": {
+        "X": 200.0,
+        "Y": 620.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.LifeOnHit.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.LifeOnHit",
+          "EffectStatMagnitude": 2
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.LifeOnHit.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Vital Impact",
+      "NodeDescription": "+2 Life Gained on Hit with Impact",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chained-heart.chained-heart",
+      "NodePosition": {
+        "X": 330.0,
+        "Y": 620.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedAgainstBruised.1",
+        "SkillTree.Impact.LifeOnHit.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.LifeOnHit",
+          "EffectStatMagnitude": 2
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedAgainstBruised.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Exploiting Impact",
+      "NodeDescription": "10% Increased Damage with Impact against Bruised enemies",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fangs-circle.fangs-circle",
+      "NodePosition": {
+        "X": 460.0,
+        "Y": 620.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedAgainstBruised.2",
+        "SkillTree.Impact.LifeOnHit.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedAgainstBruised",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.IncreasedAgainstBruised.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Exploiting Impact",
+      "NodeDescription": "10% Increased Damage with Impact against Bruised enemies",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fangs-circle.fangs-circle",
+      "NodePosition": {
+        "X": 590.0,
+        "Y": 620.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.IncreasedAgainstBruised.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.IncreasedAgainstBruised",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryCritChance.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Sharp Detonation",
+      "NodeDescription": "5% Increased Critical Strike Chance with Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 1450.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryCritChance.2",
+        "SkillTree.Impact.SecondaryDamage.6",
+        "SkillTree.Impact.SecondaryPhysicalDamage.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryCritChance.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Sharp Detonation",
+      "NodeDescription": "5% Increased Critical Strike Chance with Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
+      "NodePosition": {
+        "X": 1580.0,
+        "Y": 720.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryCritChance.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryCritChance",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryPhysicalDamage.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heavy Detonation",
+      "NodeDescription": "6% Increased Physical Damage with Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil-impact.anvil-impact",
+      "NodePosition": {
+        "X": 1450.0,
+        "Y": 620.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryCritChance.1",
+        "SkillTree.Impact.SecondaryPhysicalDamage.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryPhysicalDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "SkillTree.Impact.SecondaryPhysicalDamage.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heavy Detonation",
+      "NodeDescription": "6% Increased Physical Damage with Secondary Impacts",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil-impact.anvil-impact",
+      "NodePosition": {
+        "X": 1580.0,
+        "Y": 620.0
+      },
+      "ConnectedNodeTags": [
+        "SkillTree.Impact.SecondaryPhysicalDamage.1"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Skill Passive",
+          "EffectSkillPassiveTag": "SkillPassive.Impact.SecondaryPhysicalDamage",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    }
+  ],
+  "treeInfo": {
+    "name": "Impact",
+    "treeType": "Skill",
+    "version": "0.1.0",
+    "liveVersion": "",
+    "revision": 1,
+    "exported": "2026-10-31T16:49:43-04:00"
+  }
+}

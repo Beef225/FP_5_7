@@ -1,0 +1,102 @@
+==============================================================================
+ add_gameplay_tag.py  —  How to Use
+==============================================================================
+
+Adds a native gameplay tag to FP_GameplayTags.h AND FP_GameplayTags.cpp in
+one command.  Both files are backed up before any changes are written.
+
+REQUIREMENTS
+  Python 3.8+  (no extra packages)
+
+------------------------------------------------------------------------------
+COMMANDS
+------------------------------------------------------------------------------
+
+Basic (section inferred from first tag segment):
+  python add_gameplay_tag.py <Tag> "<Description>"
+
+Explicit section hint:
+  python add_gameplay_tag.py <Tag> "<Description>" <SectionHint>
+
+Create a new section (if none exists yet):
+  python add_gameplay_tag.py <Tag> "<Description>" --new-section "<SectionName>"
+
+Preview without writing:
+  python add_gameplay_tag.py <Tag> "<Description>" --dry-run
+
+------------------------------------------------------------------------------
+EXAMPLES
+------------------------------------------------------------------------------
+
+Add to existing Damage section (inferred automatically):
+  python add_gameplay_tag.py Damage.Increased.Frost "Increased frost damage"
+
+Same, but with explicit section hint:
+  python add_gameplay_tag.py Damage.Increased.Frost "Increased frost damage" Damage
+
+Add a SkillTree tag — section doesn't exist yet, create it:
+  python add_gameplay_tag.py SkillTree.Node.Core "Entry node" --new-section "SkillTree"
+
+Add to DefENCE section (hint resolves partial match):
+  python add_gameplay_tag.py Defence.FrostResist "Frost damage resistance" Defence
+
+Preview what would change (no files touched):
+  python add_gameplay_tag.py Damage.Increased.Frost "Test" --dry-run
+
+------------------------------------------------------------------------------
+HOW THE SECTION HINT WORKS
+------------------------------------------------------------------------------
+
+The section hint is matched against the // comment lines in both files
+(case-insensitive contains match).
+
+  Tag: Damage.Increased.Frost   →  auto-hint: "Damage"
+  Matches comment line:            //Damage
+
+  Tag: Defence.FrostResist      →  auto-hint: "Defence"
+  Matches comment line:            //Defence
+
+If the hint matches more than one section, the shortest matching section name
+wins (most specific).
+
+If no match is found the script prints all available sections and exits
+without writing anything.
+
+------------------------------------------------------------------------------
+WHAT GETS WRITTEN
+------------------------------------------------------------------------------
+
+Header (FP_GameplayTags.h):
+  FGameplayTag Damage_Increased_Frost;
+
+  Inserted after the last FGameplayTag declaration in the matched section.
+
+CPP (FP_GameplayTags.cpp):
+  GameplayTags.Damage_Increased_Frost = UGameplayTagsManager::Get().AddNativeGameplayTag(
+      FName("Damage.Increased.Frost"),
+      FString("Increased frost damage")
+      );
+
+  Inserted after the last ); closing block in the matched section.
+
+------------------------------------------------------------------------------
+BACKUPS
+------------------------------------------------------------------------------
+
+Before writing, both files are copied to:
+  FP_GameplayTags.h.bak_YYYYMMDD_HHMMSS
+  FP_GameplayTags.cpp.bak_YYYYMMDD_HHMMSS
+
+in the same folder as the originals.  Safe to delete after confirming the
+build compiles.
+
+------------------------------------------------------------------------------
+AFTER RUNNING
+------------------------------------------------------------------------------
+
+1. Rebuild the project (VS or Unreal live coding).
+2. If the new tag maps to an attribute:
+   - Wire it into UFP_AttributeSet::TagsToAttributes in FP_AttributeSet.cpp.
+   - Add it to Tools/MasterDatabase/SkillTree/AttributeTagMap.txt.
+3. Access in code:
+   FFP_GameplayTags::Get().Damage_Increased_Frost

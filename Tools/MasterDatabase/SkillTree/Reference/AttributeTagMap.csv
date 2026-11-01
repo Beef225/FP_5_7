@@ -1,0 +1,232 @@
+Description,AttributeTag,Skill: Lightning Coil
+,,
+VITAL ATTRIBUTES,,
+Current hit points,Attributes.Vital.HitPoints,
+Maximum hit points,Attributes.Vital.MaxHitPoints,
+Current heat level,Attributes.Vital.Heat,
+Maximum heat threshold,Attributes.Vital.MaxHeatThreshold,
+,,
+PRIMARY ATTRIBUTES,,
+Might,Attributes.Primary.Might,
+Resonance,Attributes.Primary.Resonance,
+Agility,Attributes.Primary.Agility,
+Fortitude,Attributes.Primary.Fortitude,
+,,
+HEALTH,,
+Increased maximum hit points,Health.Increased,
+More maximum hit points,Health.More,
+,,
+DAMAGE — GENERIC,,
+Increased all damage,Damage.Increased.Generic,SkillPassive.LightningCoil.IncreasedDamage
+More all damage,Damage.More.Generic,SkillPassive.LightningCoil.MoreDamage
+,,
+DAMAGE — FLAT ADDED,,
+Flat physical damage added,Damage.Added.Physical,
+Flat explosive damage added,Damage.Added.Explosive,
+Flat radiation damage added,Damage.Added.Radiation,
+Flat chemical damage added,Damage.Added.Chemical,SkillPassive.LightningCoil.AddedDamage
+Flat energy damage added,Damage.Added.Energy,
+,,
+DAMAGE — ELEMENT INCREASED,,
+Increased physical damage,Damage.Increased.Physical,
+Increased explosive damage,Damage.Increased.Explosive,
+Increased radiation damage,Damage.Increased.Radiation,
+Increased chemical damage,Damage.Increased.Chemical,SkillPassive.LightningCoil.IncreasedChemicalDamage
+Increased energy damage,Damage.Increased.Energy,
+,,
+DAMAGE — ELEMENT MORE,,
+More physical damage,Damage.More.Physical,
+More explosive damage,Damage.More.Explosive,
+More radiation damage,Damage.More.Radiation,
+More chemical damage,Damage.More.Chemical,SkillPassive.LightningCoil.MoreChemicalDamage
+More energy damage,Damage.More.Energy,
+,,
+DAMAGE — WEAPON TYPE,,
+Increased mace damage,Damage.Increased.Mace,
+More mace damage,Damage.More.Mace,
+Increased ordnance damage,Damage.Increased.Ordnance,
+More ordnance damage,Damage.More.Ordnance,
+Increased sword damage,Damage.Increased.Sword,
+More sword damage,Damage.More.Sword,
+Increased pistol damage,Damage.Increased.Pistol,
+More pistol damage,Damage.More.Pistol,
+Increased gauntlets damage,Damage.Increased.Gauntlets,
+More gauntlets damage,Damage.More.Gauntlets,
+Increased shotgun damage,Damage.Increased.Shotgun,
+More shotgun damage,Damage.More.Shotgun,
+Increased conduit damage,Damage.Increased.Conduit,
+More conduit damage,Damage.More.Conduit,
+Increased drone controller damage,Damage.Increased.DroneController,
+More drone controller damage,Damage.More.DroneController,
+Increased rifle damage,Damage.Increased.Rifle,
+More rifle damage,Damage.More.Rifle,
+Increased axe damage,Damage.Increased.Axe,
+More axe damage,Damage.More.Axe,
+Increased accelerator damage,Damage.Increased.Accelerator,
+More accelerator damage,Damage.More.Accelerator,
+Increased spear damage,Damage.Increased.Spear,
+More spear damage,Damage.More.Spear,
+Increased precision damage,Damage.Increased.Precision,
+More precision damage,Damage.More.Precision,
+Increased projector damage,Damage.Increased.Projector,
+More projector damage,Damage.More.Projector,
+,,
+DAMAGE — HIT TYPE,,
+Increased melee damage,Damage.Increased.Melee,
+More melee damage,Damage.More.Melee,
+Increased projectile damage,Damage.Increased.Projectile,
+More projectile damage,Damage.More.Projectile,
+Increased area of effect damage,Damage.Increased.AoE,SkillPassive.LightningCoil.IncreasedAoEDamage
+More area of effect damage,Damage.More.AoE,SkillPassive.LightningCoil.MoreAoEDamage
+,,
+RESISTANCE,,
+Physical damage reduction,Resistance.Damage.Physical,
+Physical resistance cap,Resistance.Max.Physical,
+Explosive damage reduction,Resistance.Damage.Explosive,
+Explosive resistance cap,Resistance.Max.Explosive,
+Radiation damage reduction,Resistance.Damage.Radiation,
+Radiation resistance cap,Resistance.Max.Radiation,
+Chemical damage reduction,Resistance.Damage.Chemical,
+Chemical resistance cap,Resistance.Max.Chemical,
+Energy damage reduction,Resistance.Damage.Energy,
+Energy resistance cap,Resistance.Max.Energy,
+Overheat damage reduction,Resistance.Damage.Overheat,
+Overheat resistance cap,Resistance.Max.Overheat,
+,,
+CRITICAL,,
+Base critical strike chance,Critical.StrikeChance.Base,SkillPassive.LightningCoil.CritChance
+Increased critical strike chance,Critical.StrikeChance.Increased,SkillPassive.LightningCoil.IncreasedCritChance
+Critical strike damage multiplier,Critical.StrikeMultiplier,SkillPassive.LightningCoil.CritMultiplier
+,,
+DEFENCE,,
+Flat armour,Defence.Armour,
+Dodge chance,Defence.DodgeChance,
+Block chance,Defence.BlockChance,
+Damage mitigated on block,Defence.BlockedDamage,
+Portion of hit deferred over time,Defence.DeferredDamageAmount,
+Duration for deferred damage,Defence.DeferredDamageTime,
+Health regeneration per second,Defence.HealthRegeneration,
+Reduced damage from critical hits,Defense.CriticalHitResistance,
+Reduced damage from projectiles,Defense.ReducedDamage.Projectiles,
+Increased armour,Defense.IncreasedArmour,
+Reduced damage from area attacks,Defense.ReducedDamage.AoE,
+Reduced damage from melee,Defense.ReduceeDamage.Melee,
+,,
+HEAT,,
+Ambient environment temperature,Heat.AmbientTemperature,
+Heat capacity,Heat.ThermalMass,
+Heat dissipation rate,Heat.CoolingCoefficient,
+,,
+DEBUFF EFFECTIVENESS,,
+Bruised debuff power,Debuff.Effectiveness.Bruised,
+Concussed debuff power,Debuff.Effectiveness.Concussed,
+Irradiated debuff power,Debuff.Effectiveness.Irradiated,
+Corroded debuff power,Debuff.Effectiveness.Corroded,SkillPassive.LightningCoil.CorrodedEffectiveness
+Thermal destabilisation power,Debuff.Effectiveness.ThermalDestabalization,
+,,
+DEBUFF THRESHOLDS,,
+Buildup required before Bruised applies,Debuff.Threshold.Bruised,
+Buildup required before Concussed applies,Debuff.Threshold.Concussed,
+Buildup required before Irradiated applies,Debuff.Threshold.Irradiated,
+Buildup required before Corroded applies,Debuff.Threshold.Corroded,SkillPassive.LightningCoil.CorrodedThreshold
+,,
+DEBUFF DURATION,,
+Bruised duration,Debuff.Duration.Bruised,
+Concussed duration,Debuff.Duration.Concussed,
+Irradiated duration,Debuff.Duration.Irradiated,
+Corroded duration,Debuff.Duration.Corroded,SkillPassive.LightningCoil.CorrodedDuration
+Heat damage modifier,Debuff.ThermalInsulation,
+,,
+AREA OF EFFECT,,
+AoE size multiplier,AoE.Multiplier,SkillPassive.LightningCoil.AoEMultiplier
+Flat radius bonus in metres,AoE.AdditionalRadius,SkillPassive.LightningCoil.AdditionalRadius
+,,
+SPEED,,
+Movement speed,Speed.Movement,
+Skill cast and activation speed,Speed.Skill,SkillPassive.LightningCoil.CastSpeed
+Movement speed multiplier during skills,Speed.Movement.DuringSkill,
+Projectile speed,Speed.Projectile,
+,,
+DURATION,,
+Skill duration scalar affecting chain/detonation delays,Duration.Skill,
+,,
+ITEM FIND,,
+Increased item quantity,Item.Quantity,
+Increased item rarity,Item.Rarity,
+Increased Watts dropped,Item.WattsQuantity,
+,,
+DAMAGE OVER TIME,,
+Increased damage over time,DoT.Increased,SkillPassive.LightningCoil.IncreasedDoT
+More damage over time,DoT.Multiplier,SkillPassive.LightningCoil.MoreDoT
+,,
+PENETRATION,,
+Armour penetration,Penetration.Armour,SkillPassive.LightningCoil.ArmourPenetration
+Physical resistance penetration,Penetration.Physical,
+Explosive resistance penetration,Penetration.Explosive,
+Radiation resistance penetration,Penetration.Radiation,
+Chemical resistance penetration,Penetration.Chemical,SkillPassive.LightningCoil.ChemicalPenetration
+Energy resistance penetration,Penetration.Energy,
+,,
+PROJECTILE,,
+Extra targets pierced,Projectile.Pierce,
+Extra bounce targets,Projectile.Bounce,
+Additional projectiles,Projectile.Count,
+,,
+DAMAGE CONVERSION,,
+Convert physical dealt to energy,Conversion.Damage.PhysicalToEnergy,
+Convert chemical dealt to radiation,Conversion.Damage.ChemicalToRadiation,
+Convert explosive dealt to physical,Conversion.Damage.ExplosiveToPhysical,
+Take incoming energy as radiation,Conversion.Defense.EnergyToRadiation,
+Take incoming chemical as explosive,Conversion.Defense.ChemicalToExplosive,
+,,
+CONDITIONAL DAMAGE,,
+Increased damage against Bruised targets,Conditional.Damage.IncreasedAgainstBruised,
+Increased damage against Concussed targets,Conditional.Damage.IncreasedAgainstConcussed,
+Increased damage against Irradiated targets,Conditional.Damage.IncreasedAgainstIrradiated,
+Increased damage against Corroded targets,Conditional.Damage.IncreasedAgainstCorroded,SkillPassive.LightningCoil.IncreasedAgainstCorroded
+Increased damage against Overheated targets,Conditional.Damage.IncreasedAgainstOverheated,
+Increased damage against Frozen targets,Conditional.Damage.IncreasedAgainstFrozen,
+Increased damage per heat above equilibrium,Conditional.Damage.PerHeat,
+,,
+RECOVERY,,
+Life gained on hit,Recovery.Life.OnHit,SkillPassive.LightningCoil.LifeOnHit
+Life gained on kill,Recovery.Life.OnKill,
+,,
+LIGHTNING COIL — SKILL SPECIFIC (no global equivalent),,
+Additional bolts fired per activation,,SkillPassive.LightningCoil.ExtraBolts
+Flat bonus to cone reach in cm,,SkillPassive.LightningCoil.ConeLength
+Flat bonus to cone half-angle in degrees,,SkillPassive.LightningCoil.ConeAngle
+Flat bonus to each bolt impact radius in cm,,SkillPassive.LightningCoil.BoltAoERadius
+Additional chain hops per bolt,,SkillPassive.LightningCoil.ChainCount
+Flat bonus to chain search radius in cm,,SkillPassive.LightningCoil.ChainRadius
+Extra distance rolls taken — highest result used,,SkillPassive.LightningCoil.DistanceLuckyRolls
+Extra damage rolls taken — highest result used,,SkillPassive.LightningCoil.DamageLuckyRolls
+Corroded buildup amount applied per bolt hit,,SkillPassive.LightningCoil.CorrodedBuildup
+,,SkillPassive_LightningCoil_MoreDamage
+,,FGameplayTag SkillPassive_LightningCoil_ConvergenceRate
+,,
+IMPACT — SKILL SPECIFIC (no global equivalent),,
+Flat bonus to initial weapon-tip AoE radius in METRES (x100 in code),,SkillPassive.Impact.InitialRadius
+Flat bonus to secondary/chained AoE radius in METRES (x100 in code),,SkillPassive.Impact.SecondaryRadius
+Percent area-of-effect bonus (sqrt-scaled) to initial weapon-tip AoE,,SkillPassive.Impact.InitialAreaOfEffect
+Percent area-of-effect bonus (sqrt-scaled) to secondary/chained AoE,,SkillPassive.Impact.SecondaryAreaOfEffect
+Additional chain generations beyond the base depth,,SkillPassive.Impact.MaxChainDepth
+Delta to secondary/chained detonation damage,,SkillPassive.Impact.SecondaryDamageMultiplier
+Delta to Impact's chain-delay multiplier (stacks with Duration.Skill),,SkillPassive.Impact.ChainDelayModifier
+More-multiplier bonus to all Impact damage (live — generic leaf),,SkillPassive.Impact.MoreDamage
+Increased critical strike chance — Initial Impact only (content-only),,SkillPassive.Impact.InitialCritChance
+Increased critical strike multiplier — Initial Impact only (content-only),,SkillPassive.Impact.InitialCritMultiplier
+Increased physical damage — Initial Impact only (content-only),,SkillPassive.Impact.InitialPhysicalDamage
+Increased area damage — Initial Impact only (content-only),,SkillPassive.Impact.InitialAreaDamage
+Increased Bruised buildup applied — Initial Impact only (content-only),,SkillPassive.Impact.InitialBruisedMagnitude
+Rare more-multiplier bonus to crit chance — Initial Impact only (content-only),,SkillPassive.Impact.InitialMoreCritChance
+Increased damage — whole skill (live — generic leaf),,SkillPassive.Impact.IncreasedDamage
+Increased melee damage — whole skill (content-only),,SkillPassive.Impact.IncreasedMeleeDamage
+Increased physical damage — whole skill (live — dedicated SetByCaller bucket),,SkillPassive.Impact.IncreasedPhysicalDamage
+Increased critical strike chance — whole skill (live — generic leaf),,SkillPassive.Impact.IncreasedCritChance
+Increased Bruised debuff duration — whole skill (content-only),,SkillPassive.Impact.BruisedDuration
+Increased armour penetration — whole skill (content-only),,SkillPassive.Impact.ArmourPenetration
+Flat life gained on hit — whole skill (content-only),,SkillPassive.Impact.LifeOnHit
+Increased damage against Bruised enemies — whole skill (content-only),,SkillPassive.Impact.IncreasedAgainstBruised
+Increased critical strike chance — Secondary Impacts only (content-only),,SkillPassive.Impact.SecondaryCritChance
+Increased physical damage — Secondary Impacts only (content-only),,SkillPassive.Impact.SecondaryPhysicalDamage

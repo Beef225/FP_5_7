@@ -1,0 +1,106 @@
+==============================================================================
+ import_skill_tree_assets.py  —  How to Use
+==============================================================================
+
+PURPOSE
+-------
+Runs inside Unreal Engine's built-in Python console.
+Reads a skill tree JSON file and creates or updates UFP_SkillTreeNodeData
+data assets in the UE Content Browser — one asset per node.
+
+REQUIREMENTS
+------------
+  Unreal Engine 5.7 with Python scripting enabled.
+  Enable: Edit > Plugins > Python Editor Script Plugin
+
+------------------------------------------------------------------------------
+HOW TO RUN
+------------------------------------------------------------------------------
+
+1. Open the UE Output Log:
+     Window > Developer Tools > Output Log
+
+2. Change the console dropdown from "Cmd" to "Python".
+
+3. Copy and paste the block for the tree you want to import:
+
+  --- MIGHT ---
+  import sys, importlib
+  sys.path.append(r'C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Pipeline\ImportSkillTreeAssets')
+  import import_skill_tree_assets as importer; importlib.reload(importer)
+  importer.import_tree(json_path=r'C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Trees\Passive\Might\Might.json', output_folder='/Game/Blueprints/UI/SkillTrees/CharacterSkillTrees/Data/Nodes/Might')
+
+  --- RESONANCE ---
+  import sys, importlib
+  sys.path.append(r'C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Pipeline\ImportSkillTreeAssets')
+  import import_skill_tree_assets as importer; importlib.reload(importer)
+  importer.import_tree(json_path=r'C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Trees\Passive\Resonance\Resonance.json', output_folder='/Game/Blueprints/UI/SkillTrees/CharacterSkillTrees/Data/Nodes/Resonance')
+
+  --- AGILITY ---
+  import sys, importlib
+  sys.path.append(r'C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Pipeline\ImportSkillTreeAssets')
+  import import_skill_tree_assets as importer; importlib.reload(importer)
+  importer.import_tree(json_path=r'C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Trees\Passive\Agility\Agility.json', output_folder='/Game/Blueprints/UI/SkillTrees/CharacterSkillTrees/Data/Nodes/Agility')
+
+  --- FORTITUDE ---
+  import sys, importlib
+  sys.path.append(r'C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Pipeline\ImportSkillTreeAssets')
+  import import_skill_tree_assets as importer; importlib.reload(importer)
+  importer.import_tree(json_path=r'C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Trees\Passive\Fortitude\Fortitude.json', output_folder='/Game/Blueprints/UI/SkillTrees/CharacterSkillTrees/Data/Nodes/Fortitude')
+
+4. Check the Output Log for the summary (Created / Updated / Failed counts).
+
+Safe to re-run — nodes that already exist are updated in place, not duplicated.
+
+------------------------------------------------------------------------------
+WHAT GETS CREATED / UPDATED
+------------------------------------------------------------------------------
+
+For each node in the JSON one UFP_SkillTreeNodeData data asset is created
+(or updated if it already exists) at:
+
+    <output_folder>/<NodeTag with dots replaced by underscores>
+
+Example:
+    /Game/.../Nodes/Might/PassiveTree_Might_IncreasedArmour_1
+
+Properties set automatically:
+    NodeTag, NodeType, IsStartNode, NodeName, NodeDescription,
+    NodeIcon, NodePosition, ConnectedNodeTags
+
+Effects (TInstancedStruct array) CANNOT be set via Python.
+After import, open each data asset and add effects manually
+using the Effects array in the Details panel.
+
+------------------------------------------------------------------------------
+AFTER IMPORT
+------------------------------------------------------------------------------
+
+1. Open each newly created data asset and fill in the Effects array.
+
+2. Assign all generated assets to the NodeDataAssets array on your
+   tree widget BP subclass (e.g. WBP_MightTree defaults panel).
+
+------------------------------------------------------------------------------
+WORKFLOW — FULL PIPELINE
+------------------------------------------------------------------------------
+
+1. Design tree in Inkscape, set node descriptions using NodeTemplate.txt.
+2. Validate and renumber:
+     python Validate_Passive_Tree.py <TreeFolder>\<TreeName>.svg
+3. Export JSON:
+     python svg_to_skilltree_json.py <TreeFolder>\<TreeName>.svg
+4. Add C++ gameplay tags:
+     python import_tree_tags.py <TreeFolder>\<TreeName>.json
+5. Rebuild in Visual Studio / UE.
+6. Run this importer in UE Python console (see above).
+7. Add Effects to each asset in the Details panel.
+
+------------------------------------------------------------------------------
+SEE ALSO
+------------------------------------------------------------------------------
+NodeTemplate.txt              — full field reference for node descriptions
+AttributeTagMap.txt           — attribute tag names for EffectStatModAttributeType
+Validate_Passive_Tree.py      — renumber, rename IDs, colour nodes
+svg_to_skilltree_json.py      — convert validated SVG to JSON
+import_tree_tags.py           — add NodeTags to FP_GameplayTags.h/.cpp

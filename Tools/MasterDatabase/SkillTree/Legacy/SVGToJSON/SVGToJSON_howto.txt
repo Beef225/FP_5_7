@@ -1,0 +1,110 @@
+==============================================================================
+ svg_to_skilltree_json.py  —  How to Use
+==============================================================================
+
+PURPOSE
+-------
+Converts an Inkscape passive tree SVG into a JSON file ready for the
+UE Python importer.  Run this after validating the SVG with
+Validate_Passive_Tree.py.
+
+REQUIREMENTS
+------------
+Python 3.8 or newer (no extra packages — stdlib only).
+
+COMMANDS
+--------
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\SVGToJSON\svg_to_skilltree_json.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Might\MightPassiveTree.svg"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\SVGToJSON\svg_to_skilltree_json.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Resonance\ResonancePassiveTree.svg"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\SVGToJSON\svg_to_skilltree_json.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Agility\AgilityPassiveTree.svg"
+  python "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\SVGToJSON\svg_to_skilltree_json.py" "C:\Unreal\FP_5_7\Tools\MasterDatabase\SkillTree\Fortitude\FortitudePassiveTree.svg"
+
+The JSON is written to the same folder as the SVG with the same base name:
+  MightPassiveTree.svg  ->  MightPassiveTree.json
+
+
+WHAT THE SCRIPT READS FROM THE SVG
+------------------------------------
+
+NODE DATA
+  Each node shape needs a description set in Inkscape:
+    Object Properties (Ctrl+Shift+O) -> Description field
+  Paste the filled-out NodeTemplate.txt block there.
+
+  NodeIcon — paste the full UE 'Copy Reference' string, e.g.:
+    /Script/Engine.Texture2D'/Game/Blueprints/.../basicnodeicon.basicnodeicon'
+  The script strips the class prefix automatically.
+
+CONNECTIONS
+  Draw lines between nodes using the Connector tool (Ctrl+F2).
+  The script reads inkscape:connection-start / connection-end from every
+  connector path and builds ConnectedNodeTags for both endpoints.
+  Do NOT put connection data in the description block.
+
+POSITION
+  The script reads each shape's canvas centre (cx/cy for circles/ellipses,
+  x/y+width/height for rects) and sums any layer translate transforms.
+
+
+OUTPUT FORMAT
+-------------
+
+{
+  "nodes": [
+    {
+      "NodeTag":         "PassiveTree.Might.Core.1",
+      "NodeType":        "Minor",
+      "IsStartNode":     true,
+      "NodeName":        "Might Core",
+      "NodeDescription": "Entry point to the Might passive tree.",
+      "NodeIcon":        "/Game/Blueprints/UI/SkillTrees/Data/Icons/basicnodeicon.basicnodeicon",
+      "NodePosition":    { "X": 512.0, "Y": 300.0 },
+      "ConnectedNodeTags": ["PassiveTree.Might.IncreasedArmour.1"],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Primary.Might",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 1.0
+        }
+      ]
+    }
+  ]
+}
+
+
+MULTIPLE EFFECTS PER NODE
+--------------------------
+Repeat the effect lines once per effect in the description block.
+Each EffectType: line starts a new entry in the Effects array.
+Leave unused fields blank — they are omitted from the JSON.
+
+
+WORKFLOW — FULL PIPELINE
+--------------------------
+1. Design tree in Inkscape, set node descriptions (see NodeTemplate.txt).
+2. Validate:  python ValidatePassiveTree\Validate_Passive_Tree.py <svg>
+3. Export:    python SVGToJSON\svg_to_skilltree_json.py <svg>          <- YOU ARE HERE
+4. Add tags:  python ImportTreeTags\import_tree_tags.py <json>
+5. Rebuild in Visual Studio / UE.
+6. Import assets in UE Python console (see ImportSkillTreeAssets_howto.txt).
+
+
+OPTIONAL: EDITING NODE CONTENT IN EXCEL INSTEAD OF INKSCAPE
+--------------------------------------------------------------
+Filling in NodeName/NodeDescription/Icon/Effects by hand in Inkscape's
+description box doesn't scale past a few dozen nodes. See
+NodeDataTable\NodeDataTable_howto.txt for a workflow that keeps Inkscape
+responsible for position/connections only and moves all node content into
+a filterable/sortable .xlsx table:
+
+  python svg_to_skilltree_json.py <svg> <NodeData.xlsx>
+
+SEE ALSO
+--------
+NodeTemplate.txt                       — full field reference for node descriptions
+AttributeTagMap.txt                    — attribute tag names for EffectStatModAttributeType
+ValidatePassiveTree\Validate_Passive_Tree.py  — renumber, rename IDs, colour nodes
+ImportTreeTags\import_tree_tags.py     — add NodeTags to FP_GameplayTags.h/.cpp
+ImportSkillTreeAssets\ImportSkillTreeAssets_howto.txt  — create UE data assets
+NodeDataTable\NodeDataTable_howto.txt  — manage node content in Excel instead of Inkscape

@@ -1,0 +1,214 @@
+================================================================================
+  LIGHTNING COIL — SKILL TREE TAG REFERENCE
+  Generated from: LightningCoilTree.json
+================================================================================
+  Each node data asset needs:
+    NodeTag       →  SkillTree.LightningCoil.GroupName.#   (node identity)
+    Effect tags   →  SkillPassive.LightningCoil.EffectName (on each
+                     FFP_NodeEffect_SkillPassive in the Effects array)
+
+  The passive tag is written into PlayerState's SkillPassiveValues accumulator
+  on commit, and read back by the ability at cast time.
+================================================================================
+
+
+--------------------------------------------------------------------------------
+  DAMAGE  (7 nodes)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.Damage.1  →  .7
+  Effect tag   SkillPassive.LightningCoil.IncreasedDamage
+  Magnitude    0.08 per node  (8% increased damage)
+  Routes to    ExecCalc via SetByCaller.SkillBonus.IncreasedDamage
+  Connections  Linear chain. Damage.3 gates ExtraBolts.1.
+
+
+--------------------------------------------------------------------------------
+  INCREASED CRITICAL CHANCE  (8 nodes)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.IncreasedCritChance.1  →  .8
+  Effect tag   SkillPassive.LightningCoil.IncreasedCritChance
+  Magnitude    0.10 per node  (10% increased crit chance)
+  Routes to    ExecCalc via SetByCaller.SkillBonus.IncreasedCritChance
+  Connections  Linear chain. IncreasedCritChance.2 gates ChainCount.1.
+
+
+--------------------------------------------------------------------------------
+  BOLT AOE RADIUS  (6 nodes)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.BoltAoE.1  →  .6
+  Effect tag   SkillPassive.LightningCoil.BoltAoERadius
+  Magnitude    10.0 per node  (+10 cm per node to each bolt's impact sphere)
+  Routes to    UFP_GA_LightningCoil::ApplyBoltAoEDamage — added to BoltAoERadius
+  Connections  Linear chain from BoltAoE.1 (start node) through .6.
+               BoltAoE.5 gates Convergence.1.
+
+
+--------------------------------------------------------------------------------
+  CORRODED BUILDUP  (7 nodes)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.CorrodedBuildup.1  →  .7
+  Effect tag   SkillPassive.LightningCoil.CorrodedBuildup
+  Magnitude    2.0 per node  (+2 buildup applied per bolt hit)
+  Routes to    UFP_GA_LightningCoil::CauseDamage — sends
+               GameplayEvent.Debuff.Buildup.Corroded to target with
+               EventMagnitude = accumulated value.
+               UFP_GA_CorrodedPassive on the enemy intercepts this and triggers
+               the Corroded debuff (-10% armour) when threshold is crossed.
+  Connections  Linear chain from CorrodedBuildup.1 (start node) through .7.
+
+
+--------------------------------------------------------------------------------
+  CONVERGENCE  (3 nodes)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.Convergence.1  (Major, gated by BoltAoE.5)
+               SkillTree.LightningCoil.Convergence.2  (Minor)
+               SkillTree.LightningCoil.Convergence.3  (Minor)
+  Effect tags  Node 1:  SkillPassive.LightningCoil.ConvergenceRate  mag 0.10
+                        SkillPassive.LightningCoil.MoreDamage        mag -0.30
+               Node 2:  SkillPassive.LightningCoil.ConvergenceRate  mag 0.05
+               Node 3:  SkillPassive.LightningCoil.ConvergenceRate  mag 0.05
+  Routes to    UFP_GA_LightningCoil::GetCurrentConeAngle / OnBoltFired.
+               MoreDamage → ExecCalc via SetByCaller.SkillBonus.MoreDamage.
+  Notes        Node 1 enables convergence and imposes a 30% less damage penalty.
+               Each bolt narrows the cone by ConvergenceRate %. Floor = 5°.
+               Cone widens back to base after 0.5 s idle, over 2 s.
+               Max combined rate: 10% + 5% + 5% = 20% per bolt.
+
+
+--------------------------------------------------------------------------------
+  EXTRA BOLTS  (2 nodes — both Major start nodes)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.ExtraBolts.1  (gated by Damage.3)
+               SkillTree.LightningCoil.ExtraBolts.2
+  Effect tags  Node 1:  SkillPassive.LightningCoil.ExtraBolts   mag 1.0
+                        SkillPassive.LightningCoil.MoreDamage    mag -0.30
+               Node 2:  SkillPassive.LightningCoil.ExtraBolts   mag 1.0
+                        SkillPassive.LightningCoil.MoreDamage    mag -0.20
+  Routes to    UFP_GA_LightningCoil::GetEffectiveNumBolts — FMath::Max(base + extra, 1).
+               MoreDamage → ExecCalc via SetByCaller.SkillBonus.MoreDamage.
+  Notes        Each node adds 1 bolt but applies a stacking less-damage penalty.
+               ExtraBolts.1 gates SkillSpeed.1.
+
+
+--------------------------------------------------------------------------------
+  SKILL SPEED  (2 nodes)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.SkillSpeed.1  (gated by ExtraBolts.1)
+               SkillTree.LightningCoil.SkillSpeed.2  (gated by ExtraBolts.2 / SkillSpeed.1)
+  Effect tag   SkillPassive.LightningCoil.CastSpeed
+  Magnitude    0.05 per node  (5% increased skill speed)
+  Routes to    UFP_DamageGameplayAbility::GetEffectiveSkillRate via
+               Speed.Skill attribute accumulator.
+  Notes        *** SkillTree.LightningCoil.SkillSpeed.1 and .2 tags need to be
+               added to FP_GameplayTags.h/.cpp (not registered yet). ***
+               SkillPassive.LightningCoil.CastSpeed also needs registering.
+
+
+--------------------------------------------------------------------------------
+  DISTANCE LUCKY ROLLS  (1 node — Major start node)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.DistanceLuckyRolls.1
+  Effect tag   SkillPassive.LightningCoil.DistanceLuckyRolls
+  Magnitude    1.0  (+1 extra distance roll; base is 2 rolls, take furthest)
+  Routes to    UFP_GA_LightningCoil::GetRandomConePoint — rolls extra times,
+               keeps the furthest landing point.
+  Connections  Gates ConeLength.1.
+
+
+--------------------------------------------------------------------------------
+  CONE LENGTH  (2 nodes)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.ConeLength.1  (gated by DistanceLuckyRolls.1)
+               SkillTree.LightningCoil.ConeLength.2
+  Effect tag   SkillPassive.LightningCoil.ConeLength
+  Magnitude    100.0 per node  (+1 m / +100 cm to cone reach)
+  Routes to    UFP_GA_LightningCoil::GetRandomConePoint — added to ConeLength
+               before GetEffectiveConeParams.
+
+
+--------------------------------------------------------------------------------
+  CHAIN COUNT  (2 nodes — both Major)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.ChainCount.1  (gated by IncreasedCritChance.2)
+               SkillTree.LightningCoil.ChainCount.2  (gated by ChainRadius.3)
+  Effect tags  Node 1:  SkillPassive.LightningCoil.ChainCount   mag  1.0
+                        SkillPassive.LightningCoil.ExtraBolts   mag -1.0
+               Node 2:  SkillPassive.LightningCoil.ChainCount   mag  1.0
+  Routes to    UFP_GA_LightningCoil::FireBoltAtLocation — stacks on MaxChainCount;
+               enables chaining automatically when EffectiveChainCount > 0.
+               ExtraBolts -1 goes through GetEffectiveNumBolts (clamped to 1).
+  Notes        ChainCount.1 gates ChainRadius.1.
+
+
+--------------------------------------------------------------------------------
+  CHAIN RADIUS  (3 nodes)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.LightningCoil.ChainRadius.1  (gated by ChainCount.1)
+               SkillTree.LightningCoil.ChainRadius.2
+               SkillTree.LightningCoil.ChainRadius.3  (gates ChainCount.2)
+  Effect tag   SkillPassive.LightningCoil.ChainRadius
+  Magnitude    1.0 per node
+  Routes to    UFP_GA_LightningCoil::ChainBolt — added to ChainRadius property.
+  Notes        Magnitude 1.0 adds 1 cm to search radius. If this is intended as
+               metres, use magnitude 100.0 and update the node description, or
+               multiply by 100 in the ability. Current description says "+1 m"
+               but magnitude is 1.0 — verify intent.
+
+
+================================================================================
+  PASSIVE TAGS STILL AVAILABLE (not yet in the tree JSON)
+================================================================================
+  The following SkillPassive tags exist in code and the attribute map but have
+  no nodes in the current tree. Add nodes + SkillTree tags when designing
+  those branches.
+
+  SkillPassive.LightningCoil.IncreasedDamage          ← in tree (Damage group)
+  SkillPassive.LightningCoil.MoreDamage                ← in tree (Convergence/ExtraBolts penalty)
+  SkillPassive.LightningCoil.IncreasedCritChance       ← in tree
+  SkillPassive.LightningCoil.BoltAoERadius             ← in tree
+  SkillPassive.LightningCoil.CorrodedBuildup           ← in tree
+  SkillPassive.LightningCoil.ConvergenceRate           ← in tree
+  SkillPassive.LightningCoil.ExtraBolts                ← in tree
+  SkillPassive.LightningCoil.CastSpeed                 ← in tree (SkillSpeed nodes)
+  SkillPassive.LightningCoil.ConeLength                ← in tree
+  SkillPassive.LightningCoil.ChainCount                ← in tree
+  SkillPassive.LightningCoil.ChainRadius               ← in tree
+  SkillPassive.LightningCoil.DistanceLuckyRolls        ← in tree
+
+  --- NOT YET IN TREE ---
+  SkillPassive.LightningCoil.ConeAngle                 (flat half-angle addition)
+  SkillPassive.LightningCoil.IncreasedChemicalDamage   (via ExecCalc chemical bucket)
+  SkillPassive.LightningCoil.MoreChemicalDamage
+  SkillPassive.LightningCoil.CritChance                (flat base crit addition)
+  SkillPassive.LightningCoil.CritMultiplier
+  SkillPassive.LightningCoil.DamageLuckyRolls          (extra damage rolls, keep highest)
+  SkillPassive.LightningCoil.CorrodedEffectiveness
+  SkillPassive.LightningCoil.CorrodedThreshold
+  SkillPassive.LightningCoil.CorrodedDuration
+  SkillPassive.LightningCoil.AoEMultiplier
+  SkillPassive.LightningCoil.AdditionalRadius
+  SkillPassive.LightningCoil.IncreasedAoEDamage
+  SkillPassive.LightningCoil.MoreAoEDamage
+  SkillPassive.LightningCoil.ChemicalPenetration
+  SkillPassive.LightningCoil.ArmourPenetration
+  SkillPassive.LightningCoil.IncreasedAgainstCorroded
+  SkillPassive.LightningCoil.IncreasedDoT
+  SkillPassive.LightningCoil.MoreDoT
+  SkillPassive.LightningCoil.LifeOnHit
+
+
+================================================================================
+  ACTION ITEMS
+================================================================================
+  1. Add to FP_GameplayTags.h + FP_GameplayTags.cpp:
+       SkillTree_LightningCoil_SkillSpeed_1
+       SkillTree_LightningCoil_SkillSpeed_2
+       SkillPassive_LightningCoil_CastSpeed
+
+  2. ChainRadius magnitude mismatch: description says "+1 m" but magnitude is
+     1.0 (=1 cm in code). Either change magnitudes to 100.0 in the JSON or
+     multiply by 100 in UFP_GA_LightningCoil::ChainBolt.
+
+  3. ExtraBolts magnitude is 1.0 in JSON effects (correct for integer bolt count).
+
+================================================================================

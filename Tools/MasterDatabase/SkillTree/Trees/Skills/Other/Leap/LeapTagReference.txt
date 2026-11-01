@@ -1,0 +1,140 @@
+================================================================================
+  LEAP — SKILL TREE TAG REFERENCE
+================================================================================
+  Each node data asset needs:
+    NodeTag       →  SkillTree.Leap.GroupName.#      (node identity)
+    Effect tags   →  SkillPassive.Leap.EffectName    (on each
+                     FFP_NodeEffect_SkillPassive in the Effects array)
+
+  The passive tag is written into PlayerState's SkillPassiveValues accumulator
+  on commit, and read back by the ability at cast time.
+
+  Skill class:  UFP_GA_Leap  (AbilitySystem/Abilities/Movement/FP_GA_Leap)
+  Parent class: UFP_GA_MovementSkill → UFP_DamageGameplayAbility
+================================================================================
+
+
+--------------------------------------------------------------------------------
+  EXTRA RANGE  (3 nodes)
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.Leap.ExtraRange.1  →  .3
+  Effect tag   SkillPassive.Leap.ExtraRange
+  Magnitude    200.0 per node  (+200 cm / +2 m of leap distance per node)
+  Routes to    UFP_GA_Leap::GetEffectiveRange — added to BaseLeapRange (1200 cm).
+               Max range with all 3 nodes: 1800 cm (18 m).
+  Connections  Linear chain. ExtraRange.1 is a start node (or gated by entry).
+
+
+--------------------------------------------------------------------------------
+  EXPLOSIVE LANDING  (1 node — Major)
+--------------------------------------------------------------------------------
+  Node tag     SkillTree.Leap.ExplosiveLanding.1
+  Effect tag   SkillPassive.Leap.ExplosiveLanding
+  Magnitude    1.0  (flag — any value >0 enables the explosion)
+  Routes to    UFP_GA_Leap::ShouldDoExplosiveLanding / ApplyLandingExplosion.
+               Explosion radius base: 400 cm, scaled by AoE attribute modifiers.
+               Damage: uses DamageTypes map on the ability — set in BP defaults.
+  Connections  Major node. Suggest gating behind ExtraRange.2 or as a standalone
+               branch. ExplosiveLanding.1 can gate HeatCost.1.
+  Notes        The node unlocks AoE damage on landing. DamageEffectClass and
+               DamageTypes must be set in BP_GA_Leap defaults for damage to apply.
+
+
+--------------------------------------------------------------------------------
+  NO WINDUP  (1 node — Major, trade-off node)
+--------------------------------------------------------------------------------
+  Node tag     SkillTree.Leap.NoWindup.1
+  Effect tag   SkillPassive.Leap.NoWindup
+  Magnitude    1.0  (flag — any value >0 skips Montage_Windup)
+  Routes to    UFP_GA_Leap::ShouldSkipWindup — Blueprint skips PlayMontageAndWait
+               for Montage_Windup when true.
+  Trade-off    Enables instant escape use but imposes a cooldown on the skill.
+               The cooldown is intended to be implemented via a GE driven by the
+               CooldownDuration passive accumulator. Until then, set a fixed
+               cooldown in the BP or GE class.
+               CooldownDuration nodes let the player invest to reduce that penalty.
+  Connections  Major node. NoWindup.1 gates CooldownDuration.1.
+
+
+--------------------------------------------------------------------------------
+  HEAT COST  (6 nodes)
+  *** NOT YET IMPLEMENTED — tags registered, wiring deferred ***
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.Leap.HeatCost.1  →  .6
+  Effect tag   SkillPassive.Leap.HeatCost
+  Magnitude    TBD per node  (each node adds accumulated heat generated per cast)
+  Routes to    UFP_GA_Leap — NOT YET WIRED. When implemented, read
+               PS->GetSkillPassiveValue(SkillPassive.Leap.HeatCost) at cast time
+               and apply heat via the heat system.
+  Connections  TBD. Suggest gating HeatCost.1 behind ExplosiveLanding.1 to make
+               it a cost branch for the power upgrade.
+  Notes        Heat cost is a resource expenditure on each use. Higher heat cost
+               in exchange for other bonuses (e.g. damage, range) is the intended
+               design direction. Magnitudes to be decided with heat system design.
+
+
+--------------------------------------------------------------------------------
+  COOLDOWN DURATION  (4 nodes)
+  *** NOT YET IMPLEMENTED — tags registered, wiring deferred ***
+--------------------------------------------------------------------------------
+  Node tags    SkillTree.Leap.CooldownDuration.1  →  .4
+  Effect tag   SkillPassive.Leap.CooldownDuration
+  Magnitude    TBD per node  (negative seconds of cooldown reduction per node)
+  Routes to    UFP_GA_Leap — NOT YET WIRED. When implemented, the base cooldown
+               (imposed by NoWindup.1) should be reduced by the accumulated value
+               read from PS->GetSkillPassiveValue(SkillPassive.Leap.CooldownDuration).
+  Connections  Gated by NoWindup.1 — only relevant when the windup is disabled and
+               a cooldown is active.
+  Notes        These nodes let the player trade tree points to reduce the cooldown
+               penalty that comes with NoWindup. Magnitudes TBD once the cooldown
+               base duration is decided (e.g. if base = 4s, each node might give
+               -0.5s for a minimum of 2s with all 4 nodes).
+
+
+================================================================================
+  PASSIVE TAG SUMMARY
+================================================================================
+
+  Tag                                  Nodes    Status
+  ---                                  -----    ------
+  SkillPassive.Leap.ExtraRange         3        Wired — UFP_GA_Leap::GetEffectiveRange
+  SkillPassive.Leap.ExplosiveLanding   1        Wired — UFP_GA_Leap::ShouldDoExplosiveLanding
+                                                         UFP_GA_Leap::ApplyLandingExplosion
+  SkillPassive.Leap.NoWindup           1        Wired — UFP_GA_Leap::ShouldSkipWindup
+  SkillPassive.Leap.HeatCost           6        NOT WIRED — heat system pending
+  SkillPassive.Leap.CooldownDuration   4        NOT WIRED — cooldown GE pending
+
+
+================================================================================
+  ACTION ITEMS
+================================================================================
+  1. Set in BP_GA_Leap defaults:
+       SkillPassiveRootTag  = SkillPassive.Leap
+       DamageEffectClass    = (GE with damage modifier for explosive landing)
+       DamageTypes          = (physical or your preferred damage type)
+       BaseLeapRange        = 1200.0 (cm)
+       BaseExplosionRadius  = 400.0  (cm)
+       Montage_Windup       = (assign windup animation montage)
+
+  2. Implement BP flow:
+       GetLeapTarget → [if !ShouldSkipWindup] PlayMontageAndWait(Montage_Windup)
+       → LaunchCharacter toward target → WaitMovementModeChange (Walking)
+       → [if ShouldDoExplosiveLanding] ApplyLandingExplosion(CachedTarget)
+       → EndAbility
+
+  3. Wire HeatCost once the heat system is designed:
+       Read PS->GetSkillPassiveValue(SkillPassive.Leap.HeatCost) at cast time.
+       Apply heat via heat system GE or subsystem.
+
+  4. Wire CooldownDuration once NoWindup cooldown base is decided:
+       NoWindup.1 GE imposes BaseCooldown seconds.
+       CooldownDuration passive reduces it: effective = max(min, base - accumulated).
+
+  5. Design tree topology: start nodes, gate connections, major vs minor nodes.
+     Suggested structure:
+       [Start] ExtraRange.1 → .2 → .3
+       [Start] ExplosiveLanding.1 → HeatCost.1 → ... → .6
+                              ↘
+               (or standalone)  NoWindup.1 → CooldownDuration.1 → ... → .4
+
+================================================================================

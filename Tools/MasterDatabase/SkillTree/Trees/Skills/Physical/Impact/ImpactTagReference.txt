@@ -1,0 +1,261 @@
+================================================================================
+  IMPACT — SKILL TREE TAG REFERENCE
+  Generated from: ImpactTree_NodeData.xlsx (NodeDataTable workflow)
+================================================================================
+  Each node data asset needs:
+    NodeTag       →  SkillTree.Impact.GroupName.#   (node identity)
+    Effect tags   →  SkillPassive.Impact.EffectName (on each
+                     FFP_NodeEffect_SkillPassive in the Effects array)
+
+  The passive tag is written into PlayerState's SkillPassiveValues accumulator
+  on commit, and read back at cast time via AFP_PlayerState::GetSkillPassiveValue().
+
+  Every SkillPassive tag in this tree lives under the "SkillPassive.Impact"
+  root and every node's flavour text ends in "...with Impact" / "...with
+  Initial Impact" / "...with Secondary Impacts" — deliberately, so a bonus
+  from this tree can never leak into an unrelated skill. Wording convention:
+    Increased / Reduced  — the common, additive percent bucket (stacks
+                            linearly with other Increased/Reduced sources).
+    More / Less          — the rare, multiplicative bucket. Used sparingly
+                            (only on Major/Mastery nodes here) since it's
+                            stronger than Increased/Reduced for the same %.
+
+  71 nodes total. Distribution favours Initial Impact first, whole-skill
+  second, Secondary Impacts deliberately rarest (per design brief):
+    Initial Impact only : 29 nodes (6 core + 23 stat)
+    Whole skill          : 30 nodes (5 core + 25 stat)
+    Secondary Impacts only: 16 nodes (12 core + 4 stat, rarest by design)
+================================================================================
+
+
+--------------------------------------------------------------------------------
+  WHICH TAGS ARE ACTUALLY LIVE RIGHT NOW
+--------------------------------------------------------------------------------
+  This tree is bigger than the ability's current C++ — that's intentional
+  (design/content pass now, incremental wiring later, same as LightningCoil's
+  own "PASSIVE TAGS STILL AVAILABLE" backlog). Status per tag:
+
+  LIVE — already produces a real gameplay effect once Impact's Blueprint
+  defaults set SkillPassiveRootTag = "SkillPassive.Impact":
+    SkillPassive.Impact.InitialRadius              (UFP_GA_Impact, flat, METRES x100)
+    SkillPassive.Impact.SecondaryRadius             (UFP_GA_Impact, flat, METRES x100)
+    SkillPassive.Impact.InitialAreaOfEffect         (UFP_GA_Impact, percent, sqrt-scaled)
+    SkillPassive.Impact.SecondaryAreaOfEffect       (UFP_GA_Impact, percent, sqrt-scaled)
+    SkillPassive.Impact.MaxChainDepth               (UFP_GA_Impact)
+    SkillPassive.Impact.SecondaryDamageMultiplier   (UFP_GA_Impact)
+    SkillPassive.Impact.ChainDelayModifier          (UFP_GA_Impact)
+    SkillPassive.Impact.IncreasedDamage             (generic leaf — UFP_DamageGameplayAbility::AssignSkillPassiveBonuses)
+    SkillPassive.Impact.MoreDamage                  (generic leaf)
+    SkillPassive.Impact.IncreasedCritChance          (generic leaf)
+    SkillPassive.Impact.IncreasedPhysicalDamage      (dedicated bucket added this pass — SetByCaller.SkillBonus.IncreasedPhysicalDamage, mirrors the Chemical pattern)
+
+  CONTENT-ONLY — tag is registered and the node is fully authored, but no
+  C++ reads it yet. Silently does nothing until wired (this matches how
+  LightningCoil's ChainRadius/ConeAngle tags sat for a while before their
+  ability code caught up):
+    SkillPassive.Impact.InitialCritChance
+    SkillPassive.Impact.InitialCritMultiplier
+    SkillPassive.Impact.InitialPhysicalDamage
+    SkillPassive.Impact.InitialAreaDamage
+    SkillPassive.Impact.InitialBruisedMagnitude
+    SkillPassive.Impact.InitialMoreCritChance
+    SkillPassive.Impact.IncreasedMeleeDamage
+    SkillPassive.Impact.BruisedDuration
+    SkillPassive.Impact.ArmourPenetration
+    SkillPassive.Impact.LifeOnHit
+    SkillPassive.Impact.IncreasedAgainstBruised
+    SkillPassive.Impact.SecondaryCritChance
+    SkillPassive.Impact.SecondaryPhysicalDamage
+
+  Reasons these aren't live yet, briefly:
+    - Initial*/Secondary* scoped Crit/Physical/Area variants need the same
+      kind of dedicated SetByCaller bucket IncreasedPhysicalDamage just got,
+      but split by "did this hit come from the initial swing or a chained
+      detonation" — UFP_GA_Impact would need to stamp a different spec per
+      hit rather than sharing one generic AssignSkillPassiveBonuses pass.
+    - Bruised buildup/duration needs an Impact-scoped debuff pathway, the
+      same way LightningCoil's Corroded buildup works (send a
+      GameplayEvent.Debuff.Buildup.Bruised to the target with an
+      accumulated magnitude; a UFP_GA_BruisedPassive-equivalent on the
+      enemy intercepts it).
+    - ArmourPenetration / LifeOnHit need their own SetByCaller buckets in
+      ExecCalc_Damage.cpp — not yet requested/added.
+    - IncreasedMeleeDamage/AreaDamage deliberately do NOT reuse the global
+      Damage.Increased.Melee/AoE attributes — those are shared category
+      buckets any melee/AoE skill can already draw from (e.g. Might tree
+      nodes), and stamping Impact's spec with SkillTagMod.Melee/.AoE (see
+      below) already lets it benefit from them for free. A per-skill
+      "SkillPassive.Impact.IncreasedMeleeDamage" bucket would need new,
+      dedicated ExecCalc plumbing to stay Impact-exclusive.
+
+
+--------------------------------------------------------------------------------
+  CORE MECHANIC GROUPS (23 nodes)
+--------------------------------------------------------------------------------
+  Initial Area of Effect  (5, Minor, start)      "10% Area of Effect to Initial Impact."
+    SkillPassive.Impact.InitialAreaOfEffect, 0.10/node. UFP_GA_Impact applies
+    sqrt(1+sum) to the initial AoE radius (area-preserving circle scaling,
+    same convention as the base class's own GetEffectiveSphereRadius).
+    Gates Initial Radius (Major).
+
+  Initial Radius  (1, Major)                     "+3 Radius to Initial Impact."
+    SkillPassive.Impact.InitialRadius, magnitude 3.0 — stored in METRES,
+    UFP_GA_Impact multiplies by 100 before adding to BaseInitialRadius (cm).
+    Gates Secondary Area of Effect.
+
+  Secondary Area of Effect  (5, Minor)           "8% Area of Effect to Secondary Impacts."
+    SkillPassive.Impact.SecondaryAreaOfEffect, 0.08/node, same sqrt scaling
+    applied to the secondary/chained AoE radius. .3 gates Chain Depth.1.
+    Gates Secondary Radius (Major).
+
+  Secondary Radius  (1, Major)                   "+1 Radius to Secondary Impacts."
+    SkillPassive.Impact.SecondaryRadius, magnitude 1.0 (METRES, x100 in code).
+
+  Secondary/Chain Damage  (6, Minor, start)      "15% Increased Damage with Secondary Impacts."
+    SkillPassive.Impact.SecondaryDamageMultiplier, 0.15/node — bumped up
+    from the original 0.08 per the redesign (secondary damage is meant to
+    hit harder per point invested than a flat "Increased Damage" node).
+    .4 gates both Hasty and Patient Detonation. .6 gates Secondary Crit Chance.
+
+  Chain Depth  (2, Major)                        "+1 to Chained Secondary Impacts."
+    SkillPassive.Impact.MaxChainDepth, 1.0/node. .1 gates .2 and the
+    Mastery capstone.
+
+  Hasty Detonation  (1, Major, gated by SecondaryDamage.4)
+    "20% Reduced Damage with Secondary Impacts.\n30% Reduced Secondary Impact Chain Delay."
+    SecondaryDamageMultiplier -0.20, ChainDelayModifier -0.30.
+
+  Patient Detonation  (1, Major, gated by SecondaryDamage.4)
+    "20% Increased Damage with Secondary Impacts.\n30% Increased Secondary Impact Chain Delay."
+    SecondaryDamageMultiplier +0.20, ChainDelayModifier +0.30.
+    NOTE: the exact wording/sign pairing here (Hasty = less delay AND less
+    damage; Patient = more delay AND more damage) was inferred from the
+    original -30%/-20% and +30%/+20% design — flag if the intent was
+    actually reversed.
+
+  Mastery — Chain Reaction  (1, gated by ChainDepth.2)
+    "+1 Chained Secondary Impacts.\n10% More Impact Damage."
+    MaxChainDepth +1.0, MoreDamage +0.10 (live, generic leaf).
+
+
+--------------------------------------------------------------------------------
+  INITIAL-IMPACT STAT GROUPS  (23 nodes — favoured)
+--------------------------------------------------------------------------------
+  Initial Crit Chance  (6, Minor, start)     "5% Increased Critical Strike Chance with Initial Impact."
+    SkillPassive.Impact.InitialCritChance, 0.05/node. .3 gates Crit Multiplier.
+
+  Initial Crit Multiplier  (4, Minor, gated by CritChance.3)
+    "8% Increased Critical Strike Multiplier with Initial Impact."
+    SkillPassive.Impact.InitialCritMultiplier, 0.08/node. .4 gates the rare
+    More Crit Chance node.
+
+  Initial More Crit Chance  (1, Major, rare, gated by CritMultiplier.4)
+    "15% More Critical Strike Chance with Initial Impact."
+    SkillPassive.Impact.InitialMoreCritChance, 0.15.
+
+  Initial Physical Damage  (5, Minor, start)  "6% Increased Physical Damage with Initial Impact."
+    SkillPassive.Impact.InitialPhysicalDamage, 0.06/node. .3 gates Area Damage.
+
+  Initial Area Damage  (4, Minor, gated by PhysicalDamage.3)
+    "6% Increased Area Damage with Initial Impact."
+    SkillPassive.Impact.InitialAreaDamage, 0.06/node.
+
+  Initial Bruised Magnitude  (3, Minor, start)  "8% Increased Bruised Buildup with Initial Impact."
+    SkillPassive.Impact.InitialBruisedMagnitude, 0.08/node.
+
+
+--------------------------------------------------------------------------------
+  WHOLE-SKILL STAT GROUPS  (25 nodes — second favoured)
+--------------------------------------------------------------------------------
+  Increased Damage  (4, Minor, start)         "6% Increased Damage with Impact."
+    SkillPassive.Impact.IncreasedDamage, 0.06/node (live, generic leaf).
+    .3 gates Increased Melee Damage.
+
+  Increased Melee Damage  (2, Minor, gated by IncreasedDamage.3)
+    "6% Increased Melee Damage with Impact."
+    SkillPassive.Impact.IncreasedMeleeDamage, 0.06/node. Gates More Damage.
+
+  More Damage  (1, Major, rare, gated by IncreasedMeleeDamage.2)
+    "10% More Impact Damage."
+    SkillPassive.Impact.MoreDamage, 0.10 (live, generic leaf — stacks
+    additively with the Mastery node's own MoreDamage contribution).
+
+  Physical Damage (whole skill)  (2, Minor, start)  "6% Increased Physical Damage with Impact."
+    SkillPassive.Impact.IncreasedPhysicalDamage, 0.06/node (live — dedicated
+    SetByCaller.SkillBonus.IncreasedPhysicalDamage bucket added this pass).
+    Gates Increased Crit Chance (whole skill).
+
+  Increased Crit Chance (whole skill)  (3, Minor, gated by PhysicalDamage.2)
+    "5% Increased Critical Strike Chance with Impact."
+    SkillPassive.Impact.IncreasedCritChance, 0.05/node (live, generic leaf).
+
+  Bruised Duration  (3, Minor, start)         "10% Increased Bruised Duration with Impact."
+    SkillPassive.Impact.BruisedDuration, 0.10/node. .2 gates Armour Penetration.
+
+  Armour Penetration  (2, Minor, gated by BruisedDuration.2)
+    "5% Increased Armour Penetration with Impact."
+    SkillPassive.Impact.ArmourPenetration, 0.05/node.
+
+  Life on Hit  (2, Minor, start)              "+2 Life Gained on Hit with Impact."
+    SkillPassive.Impact.LifeOnHit, 2.0/node flat. Gates Increased Against Bruised.
+
+  Increased Against Bruised  (2, Minor, gated by LifeOnHit.2)
+    "10% Increased Damage with Impact against Bruised enemies."
+    SkillPassive.Impact.IncreasedAgainstBruised, 0.10/node.
+
+
+--------------------------------------------------------------------------------
+  SECONDARY-IMPACT STAT GROUPS  (4 nodes — deliberately rarest)
+--------------------------------------------------------------------------------
+  Secondary Crit Chance  (2, Minor, gated by SecondaryDamage.6)
+    "5% Increased Critical Strike Chance with Secondary Impacts."
+    SkillPassive.Impact.SecondaryCritChance, 0.05/node. Gates Secondary
+    Physical Damage.
+
+  Secondary Physical Damage  (2, Minor, gated by SecondaryCritChance.1)
+    "6% Increased Physical Damage with Secondary Impacts."
+    SkillPassive.Impact.SecondaryPhysicalDamage, 0.06/node.
+
+
+--------------------------------------------------------------------------------
+  TAGS REFERENCED BUT NOT PART OF THIS TREE
+--------------------------------------------------------------------------------
+  SkillTagMod.Chain / .Duration / .Melee / .AoE / .MeleeWeapon / .Mace —
+  stamped onto Impact's damage GameplayEffectSpec via UFP_SkillLibrary's
+  FFP_AbilityEntry.SkillModifierTags (editor data, not a skill-tree node).
+  Lets *external* sources (gear, Might's melee/AoE nodes, other passive
+  trees) grant generic bonuses that also apply to Impact. Add these to
+  Impact's SkillLibrary entry when it's configured in the editor.
+
+  Duration.Skill — the shared/global skill-duration attribute
+  (UFP_AttributeSet::SkillDuration). This tree does not spend a node on it
+  directly (an earlier draft did — removed per design feedback: increased
+  duration alone has no upside without a paired damage trade-off, and that
+  trade-off already exists via Hasty/Patient Detonation). Other trees or
+  gear can still feed Duration.Skill via a Stat Mod node; UFP_GA_Impact
+  already reads it in GetEffectiveChainDelay().
+
+
+================================================================================
+  ACTION ITEMS
+================================================================================
+  1. All C++ tags this tree references now exist in FP_GameplayTags.h/.cpp,
+     including the 19 new SkillPassive.Impact.* tags added this pass and 2
+     new SetByCaller.SkillBonus.*PhysicalDamage tags. Build verified green.
+
+  2. The SkillTree.Impact.* node tags themselves still do NOT exist yet —
+     added by ImportTreeTags\import_tree_tags.py once this tree is exported
+     to JSON (table_to_json.py), same as every other tree.
+
+  3. Impact's ability Blueprint defaults must set
+     SkillPassiveRootTag = "SkillPassive.Impact" for ANY of this tree's
+     Skill Passive nodes to have an effect (editor step, not done here).
+
+  4. See "WHICH TAGS ARE ACTUALLY LIVE RIGHT NOW" above for the follow-up
+     C++ work needed before the content-only tags do anything.
+
+  5. Positions in the xlsx are hand-placed on a 9-row grid, not yet given
+     an Inkscape pass — open ImpactTree.svg in Inkscape to fine-tune
+     layout/spacing before exporting JSON.
+
+================================================================================

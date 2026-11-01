@@ -1,0 +1,3126 @@
+{
+  "Weapon_Ranged": [
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedPhysicalDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedEnergyDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedExplosiveDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedChemicalDamage",
+      "PoolWeight": 50,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedRadiationDamage",
+      "PoolWeight": 50,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedPhysicalDamage",
+      "PoolWeight": 250,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedEnergyDamage",
+      "PoolWeight": 250,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedExplosiveDamage",
+      "PoolWeight": 250,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedChemicalDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedRadiationDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedPistolDamage",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedRifleDamage",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedShotgunDamage",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedGrenadeDamage",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedLauncherDamage",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedDroneDamage",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.GenericDamage",
+      "AffixID": "IncreasedProjectileDamage",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalStrikeChance",
+      "AffixID": "CriticalStrikeChance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedCriticalStrikeChance",
+      "AffixID": "IncreasedCriticalStrikeChance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalStrikeMultiplier",
+      "AffixID": "CriticalStrikeMultiplier",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "BruisedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "CorrodedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "IrradiatedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "ThermalDestabilizationEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "ConcussedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "BruisedThreshold",
+      "PoolWeight": 75,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "CorrodedThreshold",
+      "PoolWeight": 75,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "IrradiatedThreshold",
+      "PoolWeight": 75,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "ConcussedThreshold",
+      "PoolWeight": 75,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "BruisedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ConcussedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "IrradiatedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "CorrodedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ThermalInsulation",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    }
+  ],
+  "Weapon_Melee": [
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedPhysicalDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedChemicalDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedExplosiveDamage",
+      "PoolWeight": 50,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedPhysicalDamage",
+      "PoolWeight": 300,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedChemicalDamage",
+      "PoolWeight": 200,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedExplosiveDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedSwordDamage",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedAxeDamage",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedClubDamage",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.GenericDamage",
+      "AffixID": "IncreasedMeleeDamage",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalStrikeChance",
+      "AffixID": "CriticalStrikeChance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedCriticalStrikeChance",
+      "AffixID": "IncreasedCriticalStrikeChance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalStrikeMultiplier",
+      "AffixID": "CriticalStrikeMultiplier",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "BruisedEffectiveness",
+      "PoolWeight": 150,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "ConcussedEffectiveness",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "CorrodedEffectiveness",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "BruisedThreshold",
+      "PoolWeight": 150,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "ConcussedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "CorrodedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "BruisedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ConcussedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "IrradiatedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "CorrodedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ThermalInsulation",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    }
+  ],
+  "Weapon_Utility": [
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedEnergyDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedChemicalDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedEnergyDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedChemicalDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.GenericDamage",
+      "AffixID": "IncreasedAoEDamage",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalStrikeChance",
+      "AffixID": "CriticalStrikeChance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.ThermalMass",
+      "AffixID": "ThermalMass",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CoolingCoefficient",
+      "AffixID": "CoolingCoefficient",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "BruisedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "ConcussedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "IrradiatedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "CorrodedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "ThermalDestabilizationEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "BruisedThreshold",
+      "PoolWeight": 75,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "ConcussedThreshold",
+      "PoolWeight": 75,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "IrradiatedThreshold",
+      "PoolWeight": 75,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "CorrodedThreshold",
+      "PoolWeight": 75,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "BruisedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ConcussedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "IrradiatedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "CorrodedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ThermalInsulation",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    }
+  ],
+  "Headwear_Might": [
+    {
+      "GroupTag": "Group.Armour",
+      "AffixID": "Armour",
+      "PoolWeight": 300,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedArmour",
+      "AffixID": "IncreasedArmour",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HealthRegeneration",
+      "AffixID": "HealthRegeneration",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "BruisedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ConcussedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.BlockChance",
+      "AffixID": "BlockChance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.AmbientTemperature",
+      "AffixID": "AmbientTemperature",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ],
+  "Headwear_Agility": [
+    {
+      "GroupTag": "Group.ChanceToDodge",
+      "AffixID": "ChanceToDodge",
+      "PoolWeight": 300,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalHitResistance",
+      "AffixID": "CriticalHitResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "IrradiatedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "CorrodedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Armour",
+      "AffixID": "Armour",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.AmbientTemperature",
+      "AffixID": "AmbientTemperature",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "BruisedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "ConcussedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "IrradiatedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "CorrodedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ],
+  "BodyArmour_Might": [
+    {
+      "GroupTag": "Group.Armour",
+      "AffixID": "Armour",
+      "PoolWeight": 400,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedArmour",
+      "AffixID": "IncreasedArmour",
+      "PoolWeight": 300,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 250,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.ReducedDamageFromMelee",
+      "AffixID": "ReducedDamageFromMelee",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.ReducedDamageFromProjectiles",
+      "AffixID": "ReducedDamageFromProjectiles",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.ReducedDamageFromAoE",
+      "AffixID": "ReducedDamageFromAoE",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HealthRegeneration",
+      "AffixID": "HealthRegeneration",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DeferredDamageAmount",
+      "AffixID": "DeferredDamageAmount",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DeferredDamageTime",
+      "AffixID": "DeferredDamageTime",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.BlockChance",
+      "AffixID": "BlockChance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "BruisedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ConcussedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ],
+  "BodyArmour_Agility": [
+    {
+      "GroupTag": "Group.ChanceToDodge",
+      "AffixID": "ChanceToDodge",
+      "PoolWeight": 400,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 250,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalHitResistance",
+      "AffixID": "CriticalHitResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.ReducedDamageFromProjectiles",
+      "AffixID": "ReducedDamageFromProjectiles",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.ReducedDamageFromAoE",
+      "AffixID": "ReducedDamageFromAoE",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HealthRegeneration",
+      "AffixID": "HealthRegeneration",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "IrradiatedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "CorrodedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "BruisedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "ConcussedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "IrradiatedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "CorrodedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ],
+  "Gloves_Might": [
+    {
+      "GroupTag": "Group.Armour",
+      "AffixID": "Armour",
+      "PoolWeight": 250,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedArmour",
+      "AffixID": "IncreasedArmour",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedPhysicalDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedPhysicalDamage",
+      "PoolWeight": 200,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedUnarmedDamage",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "BruisedEffectiveness",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "BruisedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.BlockChance",
+      "AffixID": "BlockChance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ],
+  "Gloves_Agility": [
+    {
+      "GroupTag": "Group.ChanceToDodge",
+      "AffixID": "ChanceToDodge",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalStrikeChance",
+      "AffixID": "CriticalStrikeChance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedCriticalStrikeChance",
+      "AffixID": "IncreasedCriticalStrikeChance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalStrikeMultiplier",
+      "AffixID": "CriticalStrikeMultiplier",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalHitResistance",
+      "AffixID": "CriticalHitResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedPistolDamage",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedWeaponDamage",
+      "AffixID": "IncreasedRifleDamage",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ],
+  "Boots_Might": [
+    {
+      "GroupTag": "Group.Armour",
+      "AffixID": "Armour",
+      "PoolWeight": 300,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedArmour",
+      "AffixID": "IncreasedArmour",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.ReducedDamageFromMelee",
+      "AffixID": "ReducedDamageFromMelee",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HealthRegeneration",
+      "AffixID": "HealthRegeneration",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "BruisedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "BruisedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "ConcussedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "IrradiatedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "CorrodedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ],
+  "Boots_Agility": [
+    {
+      "GroupTag": "Group.ChanceToDodge",
+      "AffixID": "ChanceToDodge",
+      "PoolWeight": 350,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalHitResistance",
+      "AffixID": "CriticalHitResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "IrradiatedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "CorrodedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "BruisedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "ConcussedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "IrradiatedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "CorrodedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.ReducedDamageFromProjectiles",
+      "AffixID": "ReducedDamageFromProjectiles",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.ReducedDamageFromMelee",
+      "AffixID": "ReducedDamageFromMelee",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ],
+  "Belt": [
+    {
+      "GroupTag": "Group.HealthRegeneration",
+      "AffixID": "HealthRegeneration",
+      "PoolWeight": 300,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DeferredDamageAmount",
+      "AffixID": "DeferredDamageAmount",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DeferredDamageTime",
+      "AffixID": "DeferredDamageTime",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "BruisedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ConcussedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "IrradiatedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "CorrodedDuration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ThermalInsulation",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.ThermalMass",
+      "AffixID": "ThermalMass",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CoolingCoefficient",
+      "AffixID": "CoolingCoefficient",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 125,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.AmbientTemperature",
+      "AffixID": "AmbientTemperature",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "BruisedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "ConcussedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "IrradiatedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffThreshold",
+      "AffixID": "CorrodedThreshold",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ],
+  "Ring": [
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedPhysicalDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedEnergyDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedChemicalDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedRadiationDamage",
+      "PoolWeight": 75,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedExplosiveDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedPhysicalDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedEnergyDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedChemicalDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedRadiationDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedExplosiveDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.CriticalStrikeChance",
+      "AffixID": "CriticalStrikeChance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.IncreasedCriticalStrikeChance",
+      "AffixID": "IncreasedCriticalStrikeChance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "BruisedEffectiveness",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "ConcussedEffectiveness",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "IrradiatedEffectiveness",
+      "PoolWeight": 100,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "CorrodedEffectiveness",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "ThermalDestabilizationEffectiveness",
+      "PoolWeight": 100,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HealthRegeneration",
+      "AffixID": "HealthRegeneration",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ],
+  "Amulet": [
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedPhysicalDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedEnergyDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedChemicalDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.AddedDamage",
+      "AffixID": "AddedExplosiveDamage",
+      "PoolWeight": 100,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedPhysicalDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedEnergyDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedChemicalDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.IncreasedDamageType",
+      "AffixID": "IncreasedExplosiveDamage",
+      "PoolWeight": 150,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.CriticalStrikeChance",
+      "AffixID": "CriticalStrikeChance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CriticalStrikeMultiplier",
+      "AffixID": "CriticalStrikeMultiplier",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxPhysicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxEnergyResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxChemicalResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "PhysicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "EnergyResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ChemicalResistance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HealthRegeneration",
+      "AffixID": "HealthRegeneration",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.CoolingCoefficient",
+      "AffixID": "CoolingCoefficient",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.ThermalMass",
+      "AffixID": "ThermalMass",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "BruisedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Physical"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "ConcussedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Explosive"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "IrradiatedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Radiation"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "CorrodedEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Chemical"
+    },
+    {
+      "GroupTag": "Group.DebuffEffectiveness",
+      "AffixID": "ThermalDestabilizationEffectiveness",
+      "PoolWeight": 75,
+      "AffinityTag": "Energy"
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "BruisedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "IrradiatedDuration",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.DebuffDuration",
+      "AffixID": "ThermalInsulation",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "RadiationResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "ExplosiveResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.Resistance",
+      "AffixID": "OverheatResistance",
+      "PoolWeight": 100,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxRadiationResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.MaxResistance",
+      "AffixID": "MaxOverheatResistance",
+      "PoolWeight": 75,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalEnergyResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalChemicalResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalRadiationResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridPhysicalExplosiveResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyChemicalResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyRadiationResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridEnergyExplosiveResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalRadiationResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridChemicalExplosiveResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.HybridResistance",
+      "AffixID": "HybridRadiationExplosiveResistance",
+      "PoolWeight": 50,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.VitalMaxHitPoints",
+      "AffixID": "MaxHitPoints",
+      "PoolWeight": 200,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryMight",
+      "AffixID": "AddedMight",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryResonance",
+      "AffixID": "AddedResonance",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryAgility",
+      "AffixID": "AddedAgility",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    },
+    {
+      "GroupTag": "Group.PrimaryFortitude",
+      "AffixID": "AddedFortitude",
+      "PoolWeight": 150,
+      "AffinityTag": ""
+    }
+  ]
+}

@@ -38,6 +38,8 @@ def alt(n, a, b):   return [a if i % 2 == 0 else b for i in range(n)]
 def make_effects(effs):
     out = []
     for attr, mag, _ in effs:
+        if attr == "FLAG_TEXT":      # description-only line (extra text for a flag above it)
+            continue
         if attr.startswith("FLAG:"):
             out.append(Effect("Effect Flag", {"EffectFlagType": attr[5:]}))
         else:
@@ -247,6 +249,16 @@ def write(L: Layout, sktree: Path, reset=True):
         by[tag] = node.uid
     for a, b in L.edges:
         assert tree.connect(by[a], by[b]), (a, b)
+    # NodeTags must be unique across trees (UE asset names): shift colliding groups past the others.
+    from skilltree_editor.model import split_tag
+    from skilltree_editor.project import other_project_tags
+    reserved = {}
+    for t in other_project_tags(sktree.parents[2], sktree):
+        prefix, idx = split_tag(t)
+        if idx:
+            reserved.setdefault(prefix, set()).add(idx)
+    for old, new in tree.renumber(reserved):
+        print(f"  renumbered {old} -> {new}")
     m = proj.meta
     m.canvas_width = m.canvas_height = 3000.0
     proj.save(sktree)

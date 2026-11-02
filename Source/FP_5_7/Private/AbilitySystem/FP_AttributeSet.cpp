@@ -126,6 +126,8 @@ TagsToAttributes.Add(GameplayTags.Defence_Armour, GetArmourAttribute);
 TagsToAttributes.Add(GameplayTags.Defence_DodgeChance, GetChanceToDodgeAttribute);
 TagsToAttributes.Add(GameplayTags.Defence_BlockChance, GetBlockChanceAttribute);
 TagsToAttributes.Add(GameplayTags.Defence_BlockedDamage, GetBlockedDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Defence_Max_DodgeChance, GetMaxDodgeChanceAttribute);
+TagsToAttributes.Add(GameplayTags.Defence_Max_BlockChance, GetMaxBlockChanceAttribute);
 TagsToAttributes.Add(GameplayTags.Defence_DeferredDamageAmount, GetDeferredDamageAmountAttribute);
 TagsToAttributes.Add(GameplayTags.Defence_DeferredDamageTime, GetDeferredDamageTimeAttribute);
 TagsToAttributes.Add(GameplayTags.Defence_HealthRegeneration, GetHealthRegenerationAttribute);
@@ -328,6 +330,8 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, Armour, COND_None, REPNOTIFY_Al
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ChanceToDodge, COND_None, REPNOTIFY_Always)
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, BlockChance, COND_None, REPNOTIFY_Always)
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MaxDodgeChance, COND_None, REPNOTIFY_Always)
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MaxBlockChance, COND_None, REPNOTIFY_Always)
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, BlockedDamage, COND_None, REPNOTIFY_Always)
 
@@ -928,6 +932,16 @@ void UFP_AttributeSet::OnRep_ChanceToDodge(const FGameplayAttributeData& OldChan
 void UFP_AttributeSet::OnRep_BlockChance(const FGameplayAttributeData& OldBlockChance) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, BlockChance, OldBlockChance);
+}
+
+void UFP_AttributeSet::OnRep_MaxDodgeChance(const FGameplayAttributeData& OldMaxDodgeChance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MaxDodgeChance, OldMaxDodgeChance);
+}
+
+void UFP_AttributeSet::OnRep_MaxBlockChance(const FGameplayAttributeData& OldMaxBlockChance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MaxBlockChance, OldMaxBlockChance);
 }
 
 void UFP_AttributeSet::OnRep_BlockedDamage(const FGameplayAttributeData& OldBlockedDamage) const

@@ -18,6 +18,7 @@ TREES_DIR = SKILLTREE_DIR / "Trees"
 REFERENCE_DIR = SKILLTREE_DIR / "Reference"
 PIPELINE_DIR = SKILLTREE_DIR / "Pipeline"
 GAMEPLAY_TAGS_CPP = PROJECT_ROOT / "Source" / "FP_5_7" / "Private" / "FP_GameplayTags.cpp"
+NODE_TAGS_INI = PROJECT_ROOT / "Config" / "Tags" / "SkillTreeNodeTags.ini"   # data-only node tags
 ATTRIBUTE_TAG_MAP_CSV = REFERENCE_DIR / "AttributeTagMap.csv"
 CONTENT_DIR = PROJECT_ROOT / "Content"
 ICON_LIBRARY_DIR = CONTENT_DIR / "Assets" / "UIElements" / "Icons"

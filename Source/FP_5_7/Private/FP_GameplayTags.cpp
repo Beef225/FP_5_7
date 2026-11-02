@@ -1,13 +1,14 @@
 ﻿// Copyright JG
 
-
 #include "FP_GameplayTags.h"
 
 #include "GameplayTagsManager.h"
 
-
 FFP_GameplayTags FFP_GameplayTags::GameplayTags;
 
+// ~1250 AddNativeGameplayTag calls in one function exceed MSVC's optimizer size limit (C4883, an error
+// in UE builds). It runs once at startup, so build it unoptimized instead of splitting it up.
+UE_DISABLE_OPTIMIZATION
 void FFP_GameplayTags::InitializeGameplayTags()
 {
 
@@ -33,7 +34,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Limit of Heat Generation Before Freezing")
 		);
 
-
 	//Primary Attributes
 	GameplayTags.Attributes_Primary_Might = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Attributes.Primary.Might"), 
@@ -51,7 +51,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Attributes.Primary.Fortitude"), 
 		FString("Measure of Heartiness")
 		);
-
 
 	//Secondary Attributes
 	//Health
@@ -347,6 +346,14 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Defence.BlockChance"), 
 		FString("Chance to Block Damage")
 		);
+	GameplayTags.Defence_Max_DodgeChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Defence.Max.DodgeChance"),
+		FString("Dodge chance cap (base 75%; very few ways to raise it)")
+		);
+	GameplayTags.Defence_Max_BlockChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Defence.Max.BlockChance"),
+		FString("Block chance cap (base 75%; very few ways to raise it)")
+		);
 	GameplayTags.Defence_BlockedDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Defence.BlockedDamage"), 
 		FString("Amount of Damage Mitigated on Block")
@@ -634,7 +641,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Gain Life on Kill")
 		);
 
-
 	//Meta Attributes
 	//Damage
 	GameplayTags.MetaAttribute_IncomingDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -665,7 +671,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("GameplayEvent.DeferredDamage"),
 		FString("Sent by ExecCalc_Damage when a deferred damage split is computed")
 		);
-
 
 	//Misc Gameplay Tags
 	//Player Tags
@@ -1135,7 +1140,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Derived: skill comes from a Resonance weapon (Conduit, DroneController, Accelerator, Precision, Projector)")
 		);
 
-
 	//Skills
 	//Skills
 	GameplayTags.Skills_Energy_Firebolt = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -1304,7 +1308,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Location_EndlessSimulation = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Location.EndlessSimulation"), FString("Endless Simulation — the reused combat zone, entered at varying depth"));
 
-
 	//PassiveTree
 	GameplayTags.PassiveTree_Might = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("PassiveTree.Might"),
@@ -1321,1182 +1324,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.PassiveTree_Fortitude = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("PassiveTree.Fortitude"),
 		FString("Fortitude passive skill tree")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.1"),
-		FString("8% Increased Armour")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.2"),
-		FString("8% Increased Armour")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.3"),
-		FString("8% Increased Armour")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.4"),
-		FString("8% Increased Armour")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.1"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.2"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.3"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.4"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.5"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.6"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.1"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.2"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.3"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.4"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.5"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.6"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_Might_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.3"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Might_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.1"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Might_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.2"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Might_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.4"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Might_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.5"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Might_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.6"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.1"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.2"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.3"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.4"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.5"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.6"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.7"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_RelentlessStrength_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.RelentlessStrength.1"),
-		FString("10% Increased Melee Damage\n+2 Might")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_8 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.8"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_9 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.9"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_Outlasting_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Outlasting.1"),
-		FString("+5 to All Debuff Thresholds\n +1 Second to Deferred Damage Over Time")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.7"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_8 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.8"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_Might_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.7"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Might_8 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.8"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.7"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_8 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.8"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_10 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.10"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_11 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.11"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_12 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.12"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_IncreasedMelee_13 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedMelee.13"),
-		FString("5% Increased Melee Damage")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_9 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.9"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_10 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.10"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_11 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.11"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_12 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.12"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_BruisedConcussedThreshold_13 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.BruisedConcussedThreshold.13"),
-		FString("+5 to Bruised Threshold\n+5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_Might_9 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.9"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Might_10 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.10"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Might_11 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.11"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Might_12 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.12"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Might_13 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Might.13"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_9 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.9"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_10 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.10"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_11 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.11"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_12 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.12"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_DeferredDamage_13 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DeferredDamage.13"),
-		FString("2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.1"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_Fortitude_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.3"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.1"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.2"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.4"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.5"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.6"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_AllThreshold_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.2"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_Bulwark_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Bulwark.1"),
-		FString("8% Increased Hit Points, 12% Increased Armour")
-		);
-	GameplayTags.PassiveTree_NeverFall_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.NeverFall.1"),
-		FString("+2 to Fortitude, +4 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_Fortitude_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.7"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_8 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.8"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_9 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.9"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_10 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.10"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_11 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.11"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_12 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.12"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_Fortitude_13 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Fortitude.13"),
-		FString("+1 Fortitude")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.2"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.3"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.4"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.5"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.6"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.5"),
-		FString("+5 to Bruised Threshold, +5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.6"),
-		FString("+5 to Bruised Threshold, +5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_AllThreshold_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.1"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_AllThreshold_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.3"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_AllThreshold_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.4"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_AllThreshold_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.5"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_AllThreshold_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.6"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.7"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_8 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.8"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_9 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.9"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.7"),
-		FString("+5 to Bruised Threshold, +5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_8 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.8"),
-		FString("+5 to Bruised Threshold, +5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_AllThreshold_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.7"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_AllThreshold_8 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.8"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_10 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.10"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_11 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.11"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_12 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.12"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedHitPoints_13 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedHitPoints.13"),
-		FString("4% Increased Hit Points")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_9 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.9"),
-		FString("+5 to Bruised Threshold, +5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_10 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.10"),
-		FString("+5 to Bruised Threshold, +5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_11 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.11"),
-		FString("+5 to Bruised Threshold, +5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_12 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.12"),
-		FString("+5 to Bruised Threshold, +5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_IncreasedArmour_13 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.IncreasedArmour.13"),
-		FString("+5 to Bruised Threshold, +5 to Concussed Threshold")
-		);
-	GameplayTags.PassiveTree_AllThreshold_9 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.9"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_AllThreshold_10 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.10"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_AllThreshold_11 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.11"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_AllThreshold_12 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.12"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_AllThreshold_13 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AllThreshold.13"),
-		FString("+2 to All Debuff Thresholds")
-		);
-	GameplayTags.PassiveTree_Accelerator_AcceleratorDamage_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.AcceleratorDamage.1"),
-		FString("8% Increased Accelerator Damage")
-		);
-	GameplayTags.PassiveTree_Accelerator_AcceleratorDamage_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.AcceleratorDamage.2"),
-		FString("8% Increased Accelerator Damage")
-		);
-	GameplayTags.PassiveTree_Accelerator_AcceleratorDamage_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.AcceleratorDamage.3"),
-		FString("8% Increased Accelerator Damage")
-		);
-	GameplayTags.PassiveTree_Accelerator_AcceleratorDamage_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.AcceleratorDamage.4"),
-		FString("8% Increased Accelerator Damage")
-		);
-	GameplayTags.PassiveTree_Accelerator_AcceleratorDamage_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.AcceleratorDamage.5"),
-		FString("8% Increased Accelerator Damage")
-		);
-	GameplayTags.PassiveTree_Accelerator_AcceleratorDamage_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.AcceleratorDamage.6"),
-		FString("8% Increased Accelerator Damage")
-		);
-	GameplayTags.PassiveTree_Accelerator_AcceleratorDamage_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.AcceleratorDamage.7"),
-		FString("12% Increased Accelerator Damage, 5% More Accelerator Damage")
-		);
-	GameplayTags.PassiveTree_Accelerator_ParticleCharge_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.ParticleCharge.1"),
-		FString("8% Increased Energy Damage with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_ParticleCharge_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.ParticleCharge.2"),
-		FString("8% Increased Energy Damage with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_ParticleCharge_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.ParticleCharge.3"),
-		FString("8% Increased Energy Damage with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_ParticleCharge_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.ParticleCharge.4"),
-		FString("8% Increased Energy Damage with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_ParticleCharge_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.ParticleCharge.5"),
-		FString("15% Increased Energy Damage with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_PenetratorWheel_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.PenetratorWheel.1"),
-		FString("Penetrate 2% of Physical Resistance with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_PenetratorWheel_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.PenetratorWheel.2"),
-		FString("15% Critical Strike Multiplier with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_PenetratorWheel_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.PenetratorWheel.3"),
-		FString("Penetrate 2% of Physical Resistance with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_PenetratorWheel_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.PenetratorWheel.4"),
-		FString("15% Critical Strike Multiplier with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_PenetratorWheel_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.PenetratorWheel.5"),
-		FString("Penetrate 5% of Physical Resistance with Accelerator Weapons, 25% Critical Strike Multiplier with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_RailgunMastery_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.RailgunMastery.1"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Accelerator_RailgunMastery_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.RailgunMastery.2"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Accelerator_RailgunMastery_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.RailgunMastery.3"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Accelerator_RailgunMastery_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.RailgunMastery.4"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Accelerator_RailgunMastery_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.RailgunMastery.5"),
-		FString("25% Critical Strike Multiplier with Accelerator Weapons, 6% More Accelerator Damage")
-		);
-	GameplayTags.PassiveTree_Accelerator_VelocityRounds_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.VelocityRounds.1"),
-		FString("8% Increased Projectile Speed with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_VelocityRounds_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.VelocityRounds.2"),
-		FString("8% Increased Projectile Speed with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_VelocityRounds_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.VelocityRounds.3"),
-		FString("8% Increased Projectile Speed with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_VelocityRounds_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.VelocityRounds.4"),
-		FString("15% Increased Projectile Speed with Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Accelerator_VelocityRounds_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Accelerator.VelocityRounds.5"),
-		FString("Increases and Reductions to Projectile Speed also Increase Projectile Damage from Accelerator Weapons")
-		);
-	GameplayTags.PassiveTree_Axe_AxeDamage_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.AxeDamage.1"),
-		FString("8% Increased Axe Damage")
-		);
-	GameplayTags.PassiveTree_Axe_AxeDamage_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.AxeDamage.2"),
-		FString("8% Increased Axe Damage")
-		);
-	GameplayTags.PassiveTree_Axe_AxeDamage_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.AxeDamage.3"),
-		FString("8% Increased Axe Damage")
-		);
-	GameplayTags.PassiveTree_Axe_AxeDamage_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.AxeDamage.4"),
-		FString("8% Increased Axe Damage")
-		);
-	GameplayTags.PassiveTree_Axe_AxeDamage_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.AxeDamage.5"),
-		FString("8% Increased Axe Damage")
-		);
-	GameplayTags.PassiveTree_Axe_AxeDamage_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.AxeDamage.6"),
-		FString("8% Increased Axe Damage")
-		);
-	GameplayTags.PassiveTree_Axe_AxeDamage_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.AxeDamage.7"),
-		FString("12% Increased Axe Damage, 5% More Axe Damage")
-		);
-	GameplayTags.PassiveTree_Axe_BerserkersAxework_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.BerserkersAxework.1"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Axe_BerserkersAxework_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.BerserkersAxework.2"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Axe_BerserkersAxework_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.BerserkersAxework.3"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Axe_BerserkersAxework_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.BerserkersAxework.4"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Axe_BerserkersAxework_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.BerserkersAxework.5"),
-		FString("25% Critical Strike Multiplier with Axes, 6% More Axe Damage")
-		);
-	GameplayTags.PassiveTree_Axe_BleedWheel_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.BleedWheel.1"),
-		FString("8% Increased Damage Over Time with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_BleedWheel_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.BleedWheel.2"),
-		FString("10% Increased Bruised Debuff Effectiveness with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_BleedWheel_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.BleedWheel.3"),
-		FString("8% Increased Damage Over Time with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_BleedWheel_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.BleedWheel.4"),
-		FString("10% Increased Bruised Debuff Effectiveness with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_BleedWheel_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.BleedWheel.5"),
-		FString("15% Increased Damage Over Time with Axes, 20% Increased Bruised Debuff Effectiveness with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_CleaveWheel_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.CleaveWheel.1"),
-		FString("8% Increased Area of Effect with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_CleaveWheel_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.CleaveWheel.2"),
-		FString("15% Critical Strike Multiplier with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_CleaveWheel_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.CleaveWheel.3"),
-		FString("8% Increased Area of Effect with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_CleaveWheel_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.CleaveWheel.4"),
-		FString("15% Critical Strike Multiplier with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_CleaveWheel_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.CleaveWheel.5"),
-		FString("15% Increased Area of Effect with Axes, 25% Critical Strike Multiplier with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_Execute_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.Execute.1"),
-		FString("Kill Enemies with less than 5% of Life Remaining with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_ExecutionersEdge_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.ExecutionersEdge.1"),
-		FString("15% Critical Strike Multiplier with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_ExecutionersEdge_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.ExecutionersEdge.2"),
-		FString("15% Critical Strike Multiplier with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_ExecutionersEdge_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.ExecutionersEdge.3"),
-		FString("15% Critical Strike Multiplier with Axes")
-		);
-	GameplayTags.PassiveTree_Axe_ExecutionersEdge_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Axe.ExecutionersEdge.4"),
-		FString("30% Critical Strike Multiplier with Axes")
-		);
-	GameplayTags.PassiveTree_Bide_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Bide.1"),
-		FString("3% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_Bide_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Bide.2"),
-		FString("3% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_Bide_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Bide.3"),
-		FString("3% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_Bide_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Bide.4"),
-		FString("Damage Deffered Over 2 Additional Seconds, 25% Increased Damage while Taking Deffered Damage")
-		);
-	GameplayTags.PassiveTree_Endure_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Endure.1"),
-		FString("5% Increased Maximum Hit Points")
-		);
-	GameplayTags.PassiveTree_Endure_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Endure.2"),
-		FString("5% Increased Maximum Hit Points")
-		);
-	GameplayTags.PassiveTree_Endure_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Endure.3"),
-		FString("10% Increased Maximum Hit Points")
-		);
-	GameplayTags.PassiveTree_Mace_ArmorBreak_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.ArmorBreak.1"),
-		FString("Penetrate 2% of Armour with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_ArmorBreak_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.ArmorBreak.2"),
-		FString("Penetrate 2% of Armour with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_ArmorBreak_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.ArmorBreak.3"),
-		FString("Penetrate 2% of Armour with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_ArmorBreak_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.ArmorBreak.4"),
-		FString("Penetrate 2% of Armour with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_ArmorBreak_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.ArmorBreak.5"),
-		FString("Penetrate 5% of Armour with Maces, Penetrate 5% of All Resistances with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_GroundSlam_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.GroundSlam.1"),
-		FString("10% Increased Area of Effect with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_GroundSlam_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.GroundSlam.2"),
-		FString("10% Increased Area of Effect with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_GroundSlam_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.GroundSlam.3"),
-		FString("10% Area Damage with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_GroundSlam_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.GroundSlam.4"),
-		FString("10% Area Damage with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_GroundSlam_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.GroundSlam.5"),
-		FString("+3 Additional Area Radius with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_HeavySwing_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.HeavySwing.1"),
-		FString("15% Critical Strike Multiplier with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_HeavySwing_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.HeavySwing.2"),
-		FString("15% Critical Strike Multiplier with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_HeavySwing_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.HeavySwing.3"),
-		FString("25% Increased Critical Strike Chance with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_HeavySwing_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.HeavySwing.4"),
-		FString("25% Increased Critical Strike Chance with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_HeavySwing_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.HeavySwing.5"),
-		FString("+3% Base Critical Strike Chance with Maces, 35% Critical Strike Multiplier with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageA_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageA.1"),
-		FString("9% Increased Mace Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageA_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageA.2"),
-		FString("9% Increased Mace Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageA_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageA.3"),
-		FString("9% Increased Mace Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageA_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageA.4"),
-		FString("9% Increased Mace Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageA_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageA.5"),
-		FString("9% Increased Mace Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageA_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageA.6"),
-		FString("9% Increased Mace Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageA_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageA.7"),
-		FString("12% Increased Mace Damage, 5% Increased Movement Speed")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageB_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageB.1"),
-		FString("5% Increased Mace Damage, 5% Increased Area Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageB_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageB.2"),
-		FString("5% Increased Mace Damage, 5% Increased Area Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageB_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageB.3"),
-		FString("5% Increased Mace Damage, 5% Increased Area Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageB_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageB.4"),
-		FString("5% Increased Mace Damage, 5% Increased Area Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageB_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageB.5"),
-		FString("5% Increased Mace Damage, 5% Increased Area Damage")
-		);
-	GameplayTags.PassiveTree_Mace_MaceDamageB_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.MaceDamageB.6"),
-		FString("10% Increased Mace Damage, +1 Additional Area Radius")
-		);
-	GameplayTags.PassiveTree_Mace_SledgehammerMastery_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.SledgehammerMastery.1"),
-		FString("5% Reduced Heat Cost with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_SledgehammerMastery_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.SledgehammerMastery.2"),
-		FString("5% Reduced Heat Cost with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_SledgehammerMastery_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.SledgehammerMastery.3"),
-		FString("5% Increased Heat Cost with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_SledgehammerMastery_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.SledgehammerMastery.4"),
-		FString("5% Increased Heat Cost with Maces")
-		);
-	GameplayTags.PassiveTree_Mace_SledgehammerMastery_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.SledgehammerMastery.5"),
-		FString("+0.15 Thermal Mass")
-		);
-	GameplayTags.PassiveTree_Mace_StaggerWheel_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.StaggerWheel.1"),
-		FString("6% Increased Concussed Debuff Effectiveness")
-		);
-	GameplayTags.PassiveTree_Mace_StaggerWheel_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.StaggerWheel.2"),
-		FString("15% Increased Damage Against with Maces Concussed Enemies")
-		);
-	GameplayTags.PassiveTree_Mace_StaggerWheel_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.StaggerWheel.3"),
-		FString("6% Increased Concussed Debuff Effectiveness")
-		);
-	GameplayTags.PassiveTree_Mace_StaggerWheel_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.StaggerWheel.4"),
-		FString("15% Increased Damage with Maces Against Concussed Enemies")
-		);
-	GameplayTags.PassiveTree_Mace_StaggerWheel_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Mace.StaggerWheel.5"),
-		FString("15% Increased Concussed Debuff Effectiveness, 24% Increased Damage with Maces Against Concussed Enemies")
-		);
-	GameplayTags.PassiveTree_Ordnance_BlastWheel_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.BlastWheel.1"),
-		FString("8% Increased Area Damage with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_BlastWheel_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.BlastWheel.2"),
-		FString("10% Increased Area of Effect with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_BlastWheel_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.BlastWheel.3"),
-		FString("8% Increased Area Damage with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_BlastWheel_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.BlastWheel.4"),
-		FString("+2 Additional Area Radius with Ordnance , 20% Increased Area Damage with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_DevastatingImpact_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.DevastatingImpact.1"),
-		FString("15% Critical Strike Multiplier with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_DevastatingImpact_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.DevastatingImpact.2"),
-		FString("15% Critical Strike Multiplier with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_DevastatingImpact_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.DevastatingImpact.3"),
-		FString("20% Increased Critical Strike Chance with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_DevastatingImpact_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.DevastatingImpact.4"),
-		FString("20% Increased Critical Strike Chance with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_DevastatingImpact_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.DevastatingImpact.5"),
-		FString("2% Base Critical Strike Chance with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_ExplosivePenetration_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.ExplosivePenetration.1"),
-		FString("2% Explosive Resistance Penetration with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_ExplosivePenetration_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.ExplosivePenetration.2"),
-		FString("2% Explosive Resistance Penetration with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_ExplosivePenetration_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.ExplosivePenetration.3"),
-		FString("2% Explosive Resistance Penetration with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_ExplosivePenetration_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.ExplosivePenetration.4"),
-		FString("2% Explosive Resistance Penetration with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_ExplosivePenetration_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.ExplosivePenetration.5"),
-		FString("7% Explosive Resistance Penetration with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_HighExplosive_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.HighExplosive.1"),
-		FString("10% Increased Explosive Damage with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_HighExplosive_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.HighExplosive.2"),
-		FString("10% Increased Explosive Damage with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_HighExplosive_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.HighExplosive.3"),
-		FString("10% Increased Explosive Damage with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_HighExplosive_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.HighExplosive.4"),
-		FString("10% Increased Explosive Damage with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_HighExplosive_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.HighExplosive.5"),
-		FString("25% Increased Explosive Damage with Ordnance")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageA_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageA.1"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageA_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageA.2"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageA_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageA.3"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageA_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageA.4"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageA_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageA.5"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageA_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageA.6"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageA_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageA.7"),
-		FString("15% Increased Ordnance Damage, 20% Explosive Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageB_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageB.1"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageB_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageB.2"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageB_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageB.3"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageB_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageB.4"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageB_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageB.5"),
-		FString("8% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceDamageB_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceDamageB.6"),
-		FString("25% Increased Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceSpecialist_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceSpecialist.1"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceSpecialist_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceSpecialist.2"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceSpecialist_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceSpecialist.3"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceSpecialist_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceSpecialist.4"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceSpecialist_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceSpecialist.5"),
-		FString("+1 Might")
-		);
-	GameplayTags.PassiveTree_Ordnance_OrdnanceSpecialist_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Ordnance.OrdnanceSpecialist.6"),
-		FString("10% More Ordnance Damage")
-		);
-	GameplayTags.PassiveTree_Rifle_MarksmanWheel_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.MarksmanWheel.1"),
-		FString("10% Increased Critical Strike with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_MarksmanWheel_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.MarksmanWheel.2"),
-		FString("15% Increased Critical Strike Multiplier with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_MarksmanWheel_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.MarksmanWheel.3"),
-		FString("8% Increased Critical Strike with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_MarksmanWheel_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.MarksmanWheel.4"),
-		FString("15% Increased Critical Strike Multiplier with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_MarksmanWheel_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.MarksmanWheel.5"),
-		FString("+3% Base Critical Strike Chance with Rifles, 30% Critical Strike Multiplier with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_PenetratingRounds_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.PenetratingRounds.1"),
-		FString("+1 Extra Target Pierced with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_PenetratingRounds_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.PenetratingRounds.2"),
-		FString("+2 Extra Targets Pierced with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_RapidCycling_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RapidCycling.1"),
-		FString("4% Increased Skill Speed with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_RapidCycling_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RapidCycling.2"),
-		FString("4% Increased Skill Speed with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_RapidCycling_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RapidCycling.3"),
-		FString("4% Increased Skill Speed with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_RapidCycling_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RapidCycling.4"),
-		FString("4% Increased Skill Speed with Rifles")
-		);
-	GameplayTags.PassiveTree_Rifle_RapidCycling_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RapidCycling.5"),
-		FString("8% Increased Skill Speed with Rifles, Rifles Fire an Extra Projectile")
-		);
-	GameplayTags.PassiveTree_Rifle_RifleDamage_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RifleDamage.1"),
-		FString("7% Increased Rifle Damage")
-		);
-	GameplayTags.PassiveTree_Rifle_RifleDamage_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RifleDamage.2"),
-		FString("7% Increased Rifle Damage")
-		);
-	GameplayTags.PassiveTree_Rifle_RifleDamage_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RifleDamage.3"),
-		FString("7% Increased Rifle Damage")
-		);
-	GameplayTags.PassiveTree_Rifle_RifleDamage_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RifleDamage.4"),
-		FString("7% Increased Rifle Damage")
-		);
-	GameplayTags.PassiveTree_Rifle_RifleDamage_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RifleDamage.5"),
-		FString("7% Increased Rifle Damage")
-		);
-	GameplayTags.PassiveTree_Rifle_RifleDamage_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RifleDamage.6"),
-		FString("7% Increased Rifle Damage")
-		);
-	GameplayTags.PassiveTree_Rifle_RifleDamage_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RifleDamage.7"),
-		FString("10% Increased Rifle Damage, 5% More Rifle Damage")
-		);
-	GameplayTags.PassiveTree_Rifle_RiflemansMastery_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RiflemansMastery.1"),
-		FString("5% Increased Rifle Damage, +1 Might")
-		);
-	GameplayTags.PassiveTree_Rifle_RiflemansMastery_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RiflemansMastery.2"),
-		FString("5% Increased Rifle Damage, +1 Might")
-		);
-	GameplayTags.PassiveTree_Rifle_RiflemansMastery_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RiflemansMastery.3"),
-		FString("5% Increased Rifle Damage, +1 Might")
-		);
-	GameplayTags.PassiveTree_Rifle_RiflemansMastery_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RiflemansMastery.4"),
-		FString("5% Increased Rifle Damage, +1 Might")
-		);
-	GameplayTags.PassiveTree_Rifle_RiflemansMastery_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.Rifle.RiflemansMastery.5"),
-		FString("+25% Increased Area of Effect with Rifles, +4 Might")
-		);
-	GameplayTags.PassiveTree_RunningHot_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.RunningHot.1"),
-		FString("4% Increased Maximum Hit Points, 4% Overheat Resistance")
-		);
-	GameplayTags.PassiveTree_RunningHot_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.RunningHot.2"),
-		FString("4% Increased Maximum Hit Points, 4% Overheat Resistance")
-		);
-	GameplayTags.PassiveTree_RunningHot_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.RunningHot.3"),
-		FString("4% Increased Maximum Hit Points, 4% Overheat Resistance")
-		);
-	GameplayTags.PassiveTree_RunningHot_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.RunningHot.4"),
-		FString("1% of Hit Points Regenerated per Second, +5% Maximum Overheat Resistance")
-		);
-	GameplayTags.PassiveTree_SkillSpeed_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.SkillSpeed.1"),
-		FString("3% Increased Skill Speed")
-		);
-	GameplayTags.PassiveTree_SkillSpeed_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.SkillSpeed.2"),
-		FString("3% Increased Skill Speed")
-		);
-	GameplayTags.PassiveTree_SkillSpeed_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.SkillSpeed.3"),
-		FString("7% Increased Skill Speed")
-		);
-	GameplayTags.PassiveTree_SplicedMalacostraca_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.SplicedMalacostraca.1"),
-		FString("0.35% of Hit Points Regenerated per Second, 10% Increased Armour")
-		);
-	GameplayTags.PassiveTree_SplicedMalacostraca_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.SplicedMalacostraca.2"),
-		FString("0.35% of Hit Points Regenerated per Second, 10% Increased Armour")
-		);
-	GameplayTags.PassiveTree_SplicedMalacostraca_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.SplicedMalacostraca.3"),
-		FString("1% of Hit Points Regenerated per Second, 20% Increased Armour")
-		);
-	GameplayTags.PassiveTree_CarryOn_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.CarryOn.1"),
-		FString("0.35% of Hit Points Regenerated per Second, 2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_CarryOn_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.CarryOn.2"),
-		FString("0.35% of Hit Points Regenerated per Second, 2% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_CarryOn_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.CarryOn.3"),
-		FString("1% of Hit Points Regenerated per Second, 5% of Damage Deferred Over Time")
-		);
-	GameplayTags.PassiveTree_AblativeArmour_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AblativeArmour.1"),
-		FString("5% Explosive Resistance, 10% Increased Armour")
-		);
-	GameplayTags.PassiveTree_AblativeArmour_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AblativeArmour.2"),
-		FString("5% Explosive Resistance, 10% Increased Armour")
-		);
-	GameplayTags.PassiveTree_AblativeArmour_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.AblativeArmour.3"),
-		FString("Double the Effect of Armour Against Explosive Damage, +5% to Maximum Explosive Damage")
-		);
-	GameplayTags.PassiveTree_SplicedPlanariidae_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.SplicedPlanariidae.1"),
-		FString("0.5% of Hit Points Regenerated per Second")
-		);
-	GameplayTags.PassiveTree_SplicedPlanariidae_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.SplicedPlanariidae.2"),
-		FString("0.5% of Hit Points Regenerated per Second")
-		);
-	GameplayTags.PassiveTree_SplicedPlanariidae_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.SplicedPlanariidae.3"),
-		FString("0.5% of Hit Points Regenerated per Second")
-		);
-	GameplayTags.PassiveTree_SplicedPlanariidae_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.SplicedPlanariidae.4"),
-		FString("2% of Hit Points Regenerated per Second")
-		);
-	GameplayTags.PassiveTree_LiquidCooledSystems_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.LiquidCooledSystems.1"),
-		FString("Skills From Weapons That Require Might Cost Hit Points Instead of Heat, 300% Increased Skill Cost For Skills From Weapons That Require Might")
-		);
-	GameplayTags.PassiveTree_RestorativeNanites_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.RestorativeNanites.1"),
-		FString("Deferring Damage does not mitigate damage taken, Restore HP of the damage that would have been mitigated over your Deferred Damage Time")
-		);
-	GameplayTags.PassiveTree_DamageOverTime_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DamageOverTime.1"),
-		FString("6% Increased Damage Over Time")
-		);
-	GameplayTags.PassiveTree_DamageOverTime_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DamageOverTime.2"),
-		FString("6% Increased Damage Over Time")
-		);
-	GameplayTags.PassiveTree_DamageOverTime_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("PassiveTree.DamageOverTime.3"),
-		FString("10% Increased Damage Over Time Multiplier")
 		);
 
 	// -------------------------------------------------------------------------
@@ -2538,150 +1365,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("GameplayEvent.Debuff.Buildup.Corroded"),
 		FString("Sent to a target's ASC to apply corrode buildup — EventMagnitude = raw buildup amount")
 		);
-
-	//SkillTree
-	GameplayTags.SkillTree_LightningCoil_Damage_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.Damage.1"),
-		FString("8% Increased Damage")
-		);
-	GameplayTags.SkillTree_LightningCoil_Damage_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.Damage.2"),
-		FString("8% Increased Damage")
-		);
-	GameplayTags.SkillTree_LightningCoil_Damage_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.Damage.3"),
-		FString("8% Increased Damage")
-		);
-	GameplayTags.SkillTree_LightningCoil_Damage_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.Damage.4"),
-		FString("8% Increased Damage")
-		);
-	GameplayTags.SkillTree_LightningCoil_Damage_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.Damage.5"),
-		FString("8% Increased Damage")
-		);
-	GameplayTags.SkillTree_LightningCoil_Damage_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.Damage.6"),
-		FString("8% Increased Damage")
-		);
-	GameplayTags.SkillTree_LightningCoil_Damage_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.Damage.7"),
-		FString("8% Increased Damage")
-		);
-	GameplayTags.SkillTree_LightningCoil_IncreasedCritChance_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.IncreasedCritChance.1"),
-		FString("10% Increased Critical Chance")
-		);
-	GameplayTags.SkillTree_LightningCoil_IncreasedCritChance_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.IncreasedCritChance.2"),
-		FString("10% Increased Critical Chance")
-		);
-	GameplayTags.SkillTree_LightningCoil_IncreasedCritChance_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.IncreasedCritChance.3"),
-		FString("10% Increased Critical Chance")
-		);
-	GameplayTags.SkillTree_LightningCoil_IncreasedCritChance_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.IncreasedCritChance.4"),
-		FString("10% Increased Critical Chance")
-		);
-	GameplayTags.SkillTree_LightningCoil_IncreasedCritChance_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.IncreasedCritChance.5"),
-		FString("10% Increased Critical Chance")
-		);
-	GameplayTags.SkillTree_LightningCoil_IncreasedCritChance_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.IncreasedCritChance.6"),
-		FString("10% Increased Critical Chance")
-		);
-	GameplayTags.SkillTree_LightningCoil_IncreasedCritChance_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.IncreasedCritChance.7"),
-		FString("10% Increased Critical Chance")
-		);
-	GameplayTags.SkillTree_LightningCoil_IncreasedCritChance_8 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.IncreasedCritChance.8"),
-		FString("10% Increased Critical Chance")
-		);
-	GameplayTags.SkillTree_LightningCoil_BoltAoE_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.BoltAoE.1"),
-		FString("+10cm Bolt Area Of Effect Radius")
-		);
-	GameplayTags.SkillTree_LightningCoil_BoltAoE_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.BoltAoE.2"),
-		FString("+10cm Bolt Area Of Effect Radius")
-		);
-	GameplayTags.SkillTree_LightningCoil_BoltAoE_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.BoltAoE.3"),
-		FString("+10cm Bolt Area Of Effect Radius")
-		);
-	GameplayTags.SkillTree_LightningCoil_BoltAoE_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.BoltAoE.4"),
-		FString("+10cm Bolt Area Of Effect Radius")
-		);
-	GameplayTags.SkillTree_LightningCoil_BoltAoE_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.BoltAoE.5"),
-		FString("+10cm Bolt Area Of Effect Radius")
-		);
-	GameplayTags.SkillTree_LightningCoil_BoltAoE_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.BoltAoE.6"),
-		FString("+10cm Bolt Area Of Effect Radius")
-		);
-	GameplayTags.SkillTree_LightningCoil_CorrodedBuildup_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.CorrodedBuildup.1"),
-		FString("+2 to Corroded Buildup per bolt")
-		);
-	GameplayTags.SkillTree_LightningCoil_CorrodedBuildup_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.CorrodedBuildup.2"),
-		FString("+2 to Corroded Buildup per bolt")
-		);
-	GameplayTags.SkillTree_LightningCoil_CorrodedBuildup_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.CorrodedBuildup.3"),
-		FString("+2 to Corroded Buildup per bolt")
-		);
-	GameplayTags.SkillTree_LightningCoil_CorrodedBuildup_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.CorrodedBuildup.4"),
-		FString("+2 to Corroded Buildup per bolt")
-		);
-	GameplayTags.SkillTree_LightningCoil_CorrodedBuildup_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.CorrodedBuildup.5"),
-		FString("+2 to Corroded Buildup per bolt")
-		);
-	GameplayTags.SkillTree_LightningCoil_CorrodedBuildup_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.CorrodedBuildup.6"),
-		FString("+2 to Corroded Buildup per bolt")
-		);
-	GameplayTags.SkillTree_LightningCoil_CorrodedBuildup_7 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.CorrodedBuildup.7"),
-		FString("+2 to Corroded Buildup per bolt")
-		);
-	GameplayTags.SkillTree_LightningCoil_Convergence_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.Convergence.1"), FString("Cone Convergence — 10% per bolt, -30% more damage"));
-	GameplayTags.SkillTree_LightningCoil_Convergence_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.Convergence.2"), FString("Cone Convergence +5%"));
-	GameplayTags.SkillTree_LightningCoil_Convergence_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.Convergence.3"), FString("Cone Convergence +5%"));
-	GameplayTags.SkillTree_LightningCoil_ExtraBolts_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ExtraBolts.1"), FString("+1 Bolt"));
-	GameplayTags.SkillTree_LightningCoil_ExtraBolts_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ExtraBolts.2"), FString("+1 Bolt"));
-	GameplayTags.SkillTree_LightningCoil_ExtraBolts_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ExtraBolts.3"), FString("-1 Bolt (chain trade-off)"));
-	GameplayTags.SkillTree_LightningCoil_ConeLength_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ConeLength.1"), FString("+50cm Cone Length"));
-	GameplayTags.SkillTree_LightningCoil_ConeLength_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ConeLength.2"), FString("+50cm Cone Length"));
-	GameplayTags.SkillTree_LightningCoil_ConeLength_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ConeLength.3"), FString("+50cm Cone Length"));
-	GameplayTags.SkillTree_LightningCoil_ConeLength_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ConeLength.4"), FString("+50cm Cone Length"));
-	GameplayTags.SkillTree_LightningCoil_ConeLength_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ConeLength.5"), FString("+50cm Cone Length"));
-	GameplayTags.SkillTree_LightningCoil_ConeAngle_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ConeAngle.1"), FString("+5 degrees Cone Angle"));
-	GameplayTags.SkillTree_LightningCoil_ConeAngle_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ConeAngle.2"), FString("+5 degrees Cone Angle"));
-	GameplayTags.SkillTree_LightningCoil_ConeAngle_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ConeAngle.3"), FString("+5 degrees Cone Angle"));
-	GameplayTags.SkillTree_LightningCoil_ConeAngle_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ConeAngle.4"), FString("+5 degrees Cone Angle"));
-	GameplayTags.SkillTree_LightningCoil_ConeAngle_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ConeAngle.5"), FString("+5 degrees Cone Angle"));
-	GameplayTags.SkillTree_LightningCoil_ChainCount_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ChainCount.1"), FString("+1 Chain Jump"));
-	GameplayTags.SkillTree_LightningCoil_ChainCount_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ChainCount.2"), FString("+1 Chain Jump"));
-	GameplayTags.SkillTree_LightningCoil_ChainCount_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ChainCount.3"), FString("+1 Chain Jump"));
-	GameplayTags.SkillTree_LightningCoil_ChainRadius_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ChainRadius.1"), FString("+100cm Chain Radius"));
-	GameplayTags.SkillTree_LightningCoil_ChainRadius_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ChainRadius.2"), FString("+100cm Chain Radius"));
-	GameplayTags.SkillTree_LightningCoil_ChainRadius_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ChainRadius.3"), FString("+100cm Chain Radius"));
-	GameplayTags.SkillTree_LightningCoil_ChainRadius_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ChainRadius.4"), FString("+100cm Chain Radius"));
-	GameplayTags.SkillTree_LightningCoil_ChainRadius_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.ChainRadius.5"), FString("+100cm Chain Radius"));
-	GameplayTags.SkillTree_LightningCoil_DistanceLuckyRolls_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.DistanceLuckyRolls.1"), FString("+1 Distance Lucky Roll"));
-	GameplayTags.SkillTree_LightningCoil_DistanceLuckyRolls_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.DistanceLuckyRolls.2"), FString("+1 Distance Lucky Roll"));
-	GameplayTags.SkillTree_LightningCoil_DistanceLuckyRolls_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.DistanceLuckyRolls.3"), FString("+1 Distance Lucky Roll"));
-	GameplayTags.SkillTree_LightningCoil_DamageLuckyRolls_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.DamageLuckyRolls.1"), FString("+1 Damage Lucky Roll"));
-	GameplayTags.SkillTree_LightningCoil_DamageLuckyRolls_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.DamageLuckyRolls.2"), FString("+1 Damage Lucky Roll"));
-	GameplayTags.SkillTree_LightningCoil_DamageLuckyRolls_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("SkillTree.LightningCoil.DamageLuckyRolls.3"), FString("+1 Damage Lucky Roll"));
 
 	//SkillPassive
 	GameplayTags.SkillPassive_LightningCoil_IncreasedDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -2836,78 +1519,6 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.SkillPassive_Impact_SecondaryPhysicalDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SkillPassive.Impact.SecondaryPhysicalDamage"),
 		FString("Per-skill passive: increased physical damage, Secondary Impacts only (content-only — not yet routed to a SetByCaller bucket)")
-		);
-
-	GameplayTags.SkillTree_LightningCoil_SkillSpeed_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.SkillSpeed.1"),
-		FString("5% Increased Skill Speed")
-		);
-	GameplayTags.SkillTree_LightningCoil_SkillSpeed_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.LightningCoil.SkillSpeed.2"),
-		FString("5% Increased Skill Speed")
-		);
-
-	// ---- Leap SkillTree nodes ----
-	GameplayTags.SkillTree_Leap_ExtraRange_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.ExtraRange.1"),
-		FString("Extra 200cm leap range")
-		);
-	GameplayTags.SkillTree_Leap_ExtraRange_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.ExtraRange.2"),
-		FString("Extra 200cm leap range")
-		);
-	GameplayTags.SkillTree_Leap_ExtraRange_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.ExtraRange.3"),
-		FString("Extra 200cm leap range")
-		);
-	GameplayTags.SkillTree_Leap_ExplosiveLanding_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.ExplosiveLanding.1"),
-		FString("Deals explosive AoE damage on landing")
-		);
-	GameplayTags.SkillTree_Leap_NoWindup_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.NoWindup.1"),
-		FString("Removes windup animation before the leap")
-		);
-
-	GameplayTags.SkillTree_Leap_HeatCost_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.HeatCost.1"),
-		FString("Adds heat cost per cast")
-		);
-	GameplayTags.SkillTree_Leap_HeatCost_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.HeatCost.2"),
-		FString("Adds heat cost per cast")
-		);
-	GameplayTags.SkillTree_Leap_HeatCost_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.HeatCost.3"),
-		FString("Adds heat cost per cast")
-		);
-	GameplayTags.SkillTree_Leap_HeatCost_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.HeatCost.4"),
-		FString("Adds heat cost per cast")
-		);
-	GameplayTags.SkillTree_Leap_HeatCost_5 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.HeatCost.5"),
-		FString("Adds heat cost per cast")
-		);
-	GameplayTags.SkillTree_Leap_HeatCost_6 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.HeatCost.6"),
-		FString("Adds heat cost per cast")
-		);
-	GameplayTags.SkillTree_Leap_CooldownDuration_1 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.CooldownDuration.1"),
-		FString("Reduces cooldown duration")
-		);
-	GameplayTags.SkillTree_Leap_CooldownDuration_2 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.CooldownDuration.2"),
-		FString("Reduces cooldown duration")
-		);
-	GameplayTags.SkillTree_Leap_CooldownDuration_3 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.CooldownDuration.3"),
-		FString("Reduces cooldown duration")
-		);
-	GameplayTags.SkillTree_Leap_CooldownDuration_4 = UGameplayTagsManager::Get().AddNativeGameplayTag(
-		FName("SkillTree.Leap.CooldownDuration.4"),
-		FString("Reduces cooldown duration")
 		);
 
 	// ---- Leap SkillPassive values ----
@@ -3157,6 +1768,310 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Conversion.ProjectileSpeedToDamage.Accelerator"),
 		FString("Gated stat: Conversion.ProjectileSpeedToDamage only for skills with SkillTagMod.Accelerator")
 		);
+	GameplayTags.Critical_StrikeChance_Increased_Sword = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Increased.Sword"),
+		FString("Gated stat: Critical.StrikeChance.Increased only for skills with SkillTagMod.Sword")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Sword = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Sword"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Sword")
+		);
+	GameplayTags.Critical_StrikeChance_Base_Sword = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Base.Sword"),
+		FString("Gated stat: Critical.StrikeChance.Base only for skills with SkillTagMod.Sword")
+		);
+	GameplayTags.Speed_Skill_Sword = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Skill.Sword"),
+		FString("Gated stat: Speed.Skill only for skills with SkillTagMod.Sword")
+		);
+	GameplayTags.Penetration_Physical_Sword = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Physical.Sword"),
+		FString("Gated stat: Penetration.Physical only for skills with SkillTagMod.Sword")
+		);
+	GameplayTags.Penetration_Armour_Sword = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Armour.Sword"),
+		FString("Gated stat: Penetration.Armour only for skills with SkillTagMod.Sword")
+		);
+	GameplayTags.Damage_Increased_Physical_Sword = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Physical.Sword"),
+		FString("Gated stat: Damage.Increased.Physical only for skills with SkillTagMod.Sword")
+		);
+	GameplayTags.Speed_Skill_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Skill.Pistol"),
+		FString("Gated stat: Speed.Skill only for skills with SkillTagMod.Pistol")
+		);
+	GameplayTags.Heat_SkillCost_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Heat.SkillCost.Pistol"),
+		FString("Gated stat: Heat.SkillCost only for skills with SkillTagMod.Pistol")
+		);
+	GameplayTags.Critical_StrikeChance_Increased_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Increased.Pistol"),
+		FString("Gated stat: Critical.StrikeChance.Increased only for skills with SkillTagMod.Pistol")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Pistol"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Pistol")
+		);
+	GameplayTags.Critical_StrikeChance_Base_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Base.Pistol"),
+		FString("Gated stat: Critical.StrikeChance.Base only for skills with SkillTagMod.Pistol")
+		);
+	GameplayTags.Speed_Projectile_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Projectile.Pistol"),
+		FString("Gated stat: Speed.Projectile only for skills with SkillTagMod.Pistol")
+		);
+	GameplayTags.Penetration_Armour_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Armour.Pistol"),
+		FString("Gated stat: Penetration.Armour only for skills with SkillTagMod.Pistol")
+		);
+	GameplayTags.Damage_Increased_Physical_Pistol = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Physical.Pistol"),
+		FString("Gated stat: Damage.Increased.Physical only for skills with SkillTagMod.Pistol")
+		);
+	GameplayTags.Speed_Projectile_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Projectile.Rifle"),
+		FString("Gated stat: Speed.Projectile only for skills with SkillTagMod.Rifle")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Spear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Spear"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Spear")
+		);
+	GameplayTags.Critical_StrikeChance_Increased_Spear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Increased.Spear"),
+		FString("Gated stat: Critical.StrikeChance.Increased only for skills with SkillTagMod.Spear")
+		);
+	GameplayTags.Critical_StrikeChance_Base_Spear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Base.Spear"),
+		FString("Gated stat: Critical.StrikeChance.Base only for skills with SkillTagMod.Spear")
+		);
+	GameplayTags.AoE_Multiplier_Spear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.Multiplier.Spear"),
+		FString("Gated stat: AoE.Multiplier only for skills with SkillTagMod.Spear")
+		);
+	GameplayTags.Penetration_Physical_Precision = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Physical.Precision"),
+		FString("Gated stat: Penetration.Physical only for skills with SkillTagMod.Precision")
+		);
+	GameplayTags.Penetration_Energy_Precision = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Energy.Precision"),
+		FString("Gated stat: Penetration.Energy only for skills with SkillTagMod.Precision")
+		);
+	GameplayTags.Penetration_Armour_Precision = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Armour.Precision"),
+		FString("Gated stat: Penetration.Armour only for skills with SkillTagMod.Precision")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Precision = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Precision"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Precision")
+		);
+	GameplayTags.Critical_StrikeChance_Base_Precision = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Base.Precision"),
+		FString("Gated stat: Critical.StrikeChance.Base only for skills with SkillTagMod.Precision")
+		);
+	GameplayTags.Speed_Projectile_Precision = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Projectile.Precision"),
+		FString("Gated stat: Speed.Projectile only for skills with SkillTagMod.Precision")
+		);
+	GameplayTags.Conversion_ProjectileSpeedToDamage_Precision = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conversion.ProjectileSpeedToDamage.Precision"),
+		FString("Gated stat: Conversion.ProjectileSpeedToDamage only for skills with SkillTagMod.Precision")
+		);
+	GameplayTags.Damage_Increased_Energy_Conduit = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Energy.Conduit"),
+		FString("Gated stat: Damage.Increased.Energy only for skills with SkillTagMod.Conduit")
+		);
+	GameplayTags.Penetration_Energy_Conduit = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Energy.Conduit"),
+		FString("Gated stat: Penetration.Energy only for skills with SkillTagMod.Conduit")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstCorroded_Conduit = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstCorroded.Conduit"),
+		FString("Gated stat: Conditional.Damage.IncreasedAgainstCorroded only for skills with SkillTagMod.Conduit")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstIrradiated_Conduit = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstIrradiated.Conduit"),
+		FString("Gated stat: Conditional.Damage.IncreasedAgainstIrradiated only for skills with SkillTagMod.Conduit")
+		);
+	GameplayTags.Speed_Skill_Conduit = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Skill.Conduit"),
+		FString("Gated stat: Speed.Skill only for skills with SkillTagMod.Conduit")
+		);
+	GameplayTags.Heat_SkillCostEfficiency_Conduit = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Heat.SkillCostEfficiency.Conduit"),
+		FString("Gated stat: Heat.SkillCostEfficiency only for skills with SkillTagMod.Conduit")
+		);
+	GameplayTags.Speed_Skill_DroneController = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Skill.DroneController"),
+		FString("Gated stat: Speed.Skill only for skills with SkillTagMod.DroneController")
+		);
+	GameplayTags.Duration_Skill_DroneController = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Duration.Skill.DroneController"),
+		FString("Gated stat: Duration.Skill only for skills with SkillTagMod.DroneController")
+		);
+	GameplayTags.Critical_StrikeChance_Increased_DroneController = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Increased.DroneController"),
+		FString("Gated stat: Critical.StrikeChance.Increased only for skills with SkillTagMod.DroneController")
+		);
+	GameplayTags.Critical_StrikeMultiplier_DroneController = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.DroneController"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.DroneController")
+		);
+	GameplayTags.Critical_StrikeChance_Base_DroneController = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Base.DroneController"),
+		FString("Gated stat: Critical.StrikeChance.Base only for skills with SkillTagMod.DroneController")
+		);
+	GameplayTags.AoE_Multiplier_DroneController = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.Multiplier.DroneController"),
+		FString("Gated stat: AoE.Multiplier only for skills with SkillTagMod.DroneController")
+		);
+	GameplayTags.Damage_Increased_AoE_DroneController = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.AoE.DroneController"),
+		FString("Gated stat: Damage.Increased.AoE only for skills with SkillTagMod.DroneController")
+		);
+	GameplayTags.Penetration_Energy_Accelerator = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Energy.Accelerator"),
+		FString("Gated stat: Penetration.Energy only for skills with SkillTagMod.Accelerator")
+		);
+	GameplayTags.Damage_Increased_Energy_Precision = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Energy.Precision"),
+		FString("Gated stat: Damage.Increased.Energy only for skills with SkillTagMod.Precision")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstIrradiated_Precision = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstIrradiated.Precision"),
+		FString("Gated stat: Conditional.Damage.IncreasedAgainstIrradiated only for skills with SkillTagMod.Precision")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstCorroded_Precision = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstCorroded.Precision"),
+		FString("Gated stat: Conditional.Damage.IncreasedAgainstCorroded only for skills with SkillTagMod.Precision")
+		);
+	GameplayTags.DoT_Increased_Projector = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("DoT.Increased.Projector"),
+		FString("Gated stat: DoT.Increased only for skills with SkillTagMod.Projector")
+		);
+	GameplayTags.Duration_Skill_Projector = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Duration.Skill.Projector"),
+		FString("Gated stat: Duration.Skill only for skills with SkillTagMod.Projector")
+		);
+	GameplayTags.Damage_More_AgilityWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.AgilityWeapon"),
+		FString("Gated stat: Damage.More.Generic only for skills with SkillTagMod.AgilityWeapon")
+		);
+	GameplayTags.Critical_StrikeChance_Increased_Gauntlets = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Increased.Gauntlets"),
+		FString("Gated stat: Critical.StrikeChance.Increased only for skills with SkillTagMod.Gauntlets")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Gauntlets = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Gauntlets"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Gauntlets")
+		);
+	GameplayTags.Critical_StrikeChance_Base_Gauntlets = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Base.Gauntlets"),
+		FString("Gated stat: Critical.StrikeChance.Base only for skills with SkillTagMod.Gauntlets")
+		);
+	GameplayTags.Speed_Skill_Gauntlets = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Skill.Gauntlets"),
+		FString("Gated stat: Speed.Skill only for skills with SkillTagMod.Gauntlets")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstBruised_Gauntlets = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstBruised.Gauntlets"),
+		FString("Gated stat: Conditional.Damage.IncreasedAgainstBruised only for skills with SkillTagMod.Gauntlets")
+		);
+	GameplayTags.Penetration_Armour_Gauntlets = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Armour.Gauntlets"),
+		FString("Gated stat: Penetration.Armour only for skills with SkillTagMod.Gauntlets")
+		);
+	GameplayTags.Penetration_Physical_Gauntlets = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Physical.Gauntlets"),
+		FString("Gated stat: Penetration.Physical only for skills with SkillTagMod.Gauntlets")
+		);
+	GameplayTags.Penetration_Armour_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Armour.Axe"),
+		FString("Gated stat: Penetration.Armour only for skills with SkillTagMod.Axe")
+		);
+	GameplayTags.Penetration_Physical_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Physical.Axe"),
+		FString("Gated stat: Penetration.Physical only for skills with SkillTagMod.Axe")
+		);
+	GameplayTags.Damage_Increased_Physical_Axe = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Physical.Axe"),
+		FString("Gated stat: Damage.Increased.Physical only for skills with SkillTagMod.Axe")
+		);
+	GameplayTags.Critical_StrikeChance_Increased_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Increased.Shotgun"),
+		FString("Gated stat: Critical.StrikeChance.Increased only for skills with SkillTagMod.Shotgun")
+		);
+	GameplayTags.Critical_StrikeMultiplier_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeMultiplier.Shotgun"),
+		FString("Gated stat: Critical.StrikeMultiplier only for skills with SkillTagMod.Shotgun")
+		);
+	GameplayTags.Critical_StrikeChance_Base_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Critical.StrikeChance.Base.Shotgun"),
+		FString("Gated stat: Critical.StrikeChance.Base only for skills with SkillTagMod.Shotgun")
+		);
+	GameplayTags.Conditional_Damage_IncreasedAgainstConcussed_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conditional.Damage.IncreasedAgainstConcussed.Shotgun"),
+		FString("Gated stat: Conditional.Damage.IncreasedAgainstConcussed only for skills with SkillTagMod.Shotgun")
+		);
+	GameplayTags.Damage_Increased_Physical_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Physical.Shotgun"),
+		FString("Gated stat: Damage.Increased.Physical only for skills with SkillTagMod.Shotgun")
+		);
+	GameplayTags.Penetration_Physical_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Physical.Shotgun"),
+		FString("Gated stat: Penetration.Physical only for skills with SkillTagMod.Shotgun")
+		);
+	GameplayTags.Speed_Skill_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Skill.Shotgun"),
+		FString("Gated stat: Speed.Skill only for skills with SkillTagMod.Shotgun")
+		);
+	GameplayTags.Heat_SkillCost_Shotgun = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Heat.SkillCost.Shotgun"),
+		FString("Gated stat: Heat.SkillCost only for skills with SkillTagMod.Shotgun")
+		);
+	GameplayTags.Penetration_Physical_Spear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Physical.Spear"),
+		FString("Gated stat: Penetration.Physical only for skills with SkillTagMod.Spear")
+		);
+	GameplayTags.Penetration_Armour_Spear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Armour.Spear"),
+		FString("Gated stat: Penetration.Armour only for skills with SkillTagMod.Spear")
+		);
+	GameplayTags.Speed_Skill_Spear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Speed.Skill.Spear"),
+		FString("Gated stat: Speed.Skill only for skills with SkillTagMod.Spear")
+		);
+	GameplayTags.Damage_Increased_AoE_Spear = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.AoE.Spear"),
+		FString("Gated stat: Damage.Increased.AoE only for skills with SkillTagMod.Spear")
+		);
+	GameplayTags.AoE_Multiplier_Projector = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.Multiplier.Projector"),
+		FString("Gated stat: AoE.Multiplier only for skills with SkillTagMod.Projector")
+		);
+	GameplayTags.AoE_AdditionalRadius_Projector = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("AoE.AdditionalRadius.Projector"),
+		FString("Gated stat: AoE.AdditionalRadius only for skills with SkillTagMod.Projector")
+		);
+	GameplayTags.Heat_SkillCost_Projector = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Heat.SkillCost.Projector"),
+		FString("Gated stat: Heat.SkillCost only for skills with SkillTagMod.Projector")
+		);
+	GameplayTags.Damage_Increased_Chemical_Projector = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.Increased.Chemical.Projector"),
+		FString("Gated stat: Damage.Increased.Chemical only for skills with SkillTagMod.Projector")
+		);
+	GameplayTags.Penetration_Chemical_Projector = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Penetration.Chemical.Projector"),
+		FString("Gated stat: Penetration.Chemical only for skills with SkillTagMod.Projector")
+		);
+	GameplayTags.Damage_More_FortitudeWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.FortitudeWeapon"),
+		FString("Gated stat: Damage.More.Generic only for skills with SkillTagMod.FortitudeWeapon")
+		);
+	GameplayTags.Damage_More_ResonanceWeapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Damage.More.ResonanceWeapon"),
+		FString("Gated stat: Damage.More.Generic only for skills with SkillTagMod.ResonanceWeapon")
+		);
 
 	//SkillTreeFlags
 	GameplayTags.Flag_SkillTree_MightSkillsCostHPInsteadOfHeat = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -3175,6 +2090,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Flag.SkillTree.RecoupInsteadOfDefer"),
 		FString("Restorative Nanites: deferring does not mitigate; the deferred share is restored as life over Deferred Damage Time")
 		);
+	GameplayTags.Flag_SkillTree_Blur = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.Blur"),
+		FString("Blur: dodge chance doubled, cannot block, no armour (applies UFP_GE_Blur while present)")
+		);
 
 	//Execute
 	GameplayTags.Execute_Threshold = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -3182,3 +2101,4 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FString("Execute (cull) threshold: fraction of max life. A hit that leaves the target at or below it kills. Additive across sources")
 		);
 }
+UE_ENABLE_OPTIMIZATION

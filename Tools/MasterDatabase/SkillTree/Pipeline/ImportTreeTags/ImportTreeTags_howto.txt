@@ -4,8 +4,11 @@
 
 PURPOSE
 -------
-Reads a skill tree JSON file and adds any missing NodeTags to
-FP_GameplayTags.h and FP_GameplayTags.cpp in one pass.
+Reads a skill tree JSON file and registers any missing tags in one pass:
+  NodeTags           -> Config/Tags/SkillTreeNodeTags.ini  (restart the editor; no rebuild)
+  SkillPassive tags  -> FP_GameplayTags.h / .cpp            (rebuild)
+  Gated stat tags    -> FP_GameplayTags.h / .cpp            (rebuild)
+Rules for which tags go where: Tools/GameplayTags_README.md
 
 Run after exporting the JSON from the SVG.
 Tags that already exist in the singleton are skipped automatically —

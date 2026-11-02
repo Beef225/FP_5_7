@@ -38,7 +38,9 @@ To rebuild the venv: `py -m venv .venv` then `.venv\Scripts\pip install -r requi
 4. **Tools ▸ Renumber Tags** gives new or duplicate nodes unique `.N` indices. Indices that
    are already valid are kept, so existing UE assets keep their names.
 5. **Save** (Ctrl+S). This writes the `.sktree`, bumps the revision and re-exports the UE JSON.
-6. **Tools ▸ Register NodeTags in C++** runs `ImportTreeTags/import_tree_tags.py` (dry-run preview first).
+6. **Tools ▸ Register Tags** runs `ImportTreeTags/import_tree_tags.py` (dry-run preview first): NodeTags go to
+   `Config/Tags/SkillTreeNodeTags.ini` (restart the editor, no rebuild); SkillPassive and gated stat tags go to C++
+   (rebuild). See `Tools/GameplayTags_README.md`.
 7. Rebuild in UE, then run `FP_SkillTreeImporter` and point it at the JSON
    (*Tools ▸ Copy JSON Path* puts the path on your clipboard).
 

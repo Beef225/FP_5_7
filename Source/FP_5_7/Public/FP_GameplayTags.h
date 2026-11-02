@@ -9,6 +9,12 @@
 
 Gameplay Tags Singleton containing native GameplayTags
 
+WHERE DOES A TAG GO?  (full rules: Tools/GameplayTags_README.md)
+  - C++ code uses it by name (FFP_GameplayTags::Get().X)  -> here (Tools/add_gameplay_tag.py, rebuild).
+  - Data-only, e.g. skill-tree NodeTags PassiveTree.<Group>.<N> / SkillTree.<Skill>.<Group>.<N>
+    -> Config/Tags/SkillTreeNodeTags.ini (tree editor Tools > Register Tags; no rebuild).
+  Every member here makes ~35 files recompile when the header changes, so keep data-only tags out.
+
 */
 
 struct FFP_GameplayTags
@@ -24,13 +30,11 @@ FGameplayTag Attributes_Vital_Heat;
 FGameplayTag Attributes_Vital_MaxHeatThreshold;
 FGameplayTag Attributees_VitalMinHeatThreshold;
 
-
 //Primary Attributes
 FGameplayTag Attributes_Primary_Might;
 FGameplayTag Attributes_Primary_Resonance;
 FGameplayTag Attributes_Primary_Agility;
 FGameplayTag Attributes_Primary_Fortitude;
-
 
 //Secondary Attributes
 //Health
@@ -114,6 +118,8 @@ FGameplayTag Defence_Armour;
 FGameplayTag Defence_DodgeChance;
 FGameplayTag Defence_BlockChance;
 FGameplayTag Defence_BlockedDamage;
+FGameplayTag Defence_Max_DodgeChance;
+FGameplayTag Defence_Max_BlockChance;
 FGameplayTag Defence_DeferredDamageAmount;
 FGameplayTag Defence_DeferredDamageTime;
 FGameplayTag Defence_HealthRegeneration;
@@ -219,7 +225,6 @@ FGameplayTag Conditional_Damage_PerHeat;
 FGameplayTag Recovery_Life_OnHit;
 FGameplayTag Recovery_Life_OnKill;
 
-
 //Meta Attributes
 //Damage
 FGameplayTag MetaAttribute_IncomingDamage;
@@ -235,7 +240,6 @@ FGameplayTag SetByCaller_DeferredDamagePerTick;
 
 //Gameplay event sent by ExecCalc_Damage to trigger the deferred damage passive
 FGameplayTag GameplayEvent_DeferredDamage;
-
 
 //Misc Gameplay Tags
 //Player Tags
@@ -342,7 +346,6 @@ FGameplayTag SetByCaller_SkillBonus_MorePhysicalDamage;
 FGameplayTag SetByCaller_SkillBonus_CritChance;
 FGameplayTag SetByCaller_SkillBonus_IncreasedCritChance;
 FGameplayTag SetByCaller_SkillBonus_CritMultiplier;
-
 
 // ---------------------------------------------------------------------------
 // GATED-STAT TAG STANDARD (implemented 2026-10-31).
@@ -454,7 +457,6 @@ FGameplayTag SkillTagMod_AgilityWeapon;
 FGameplayTag SkillTagMod_FortitudeWeapon;
 FGameplayTag SkillTagMod_ResonanceWeapon;
 
-
 // -------------------------------------------------------------------------
 // Inventory
 // -------------------------------------------------------------------------
@@ -525,7 +527,6 @@ FGameplayTag Fragment_Skills;
 /** Identifies FFP_GripStanceFragment: applies a weapon grip style to the player on equip. */
 FGameplayTag Fragment_GripStance;
 
-
 // -------------------------------------------------------------------------
 // Equipment Slot Types  (parent tags — items use child tags under these)
 // -------------------------------------------------------------------------
@@ -588,362 +589,6 @@ FGameplayTag PassiveTree_Might;
 FGameplayTag PassiveTree_Resonance;
 FGameplayTag PassiveTree_Agility;
 FGameplayTag PassiveTree_Fortitude;
-FGameplayTag PassiveTree_IncreasedArmour_1;
-FGameplayTag PassiveTree_IncreasedArmour_2;
-FGameplayTag PassiveTree_IncreasedArmour_3;
-FGameplayTag PassiveTree_IncreasedArmour_4;
-FGameplayTag PassiveTree_IncreasedMelee_1;
-FGameplayTag PassiveTree_IncreasedMelee_2;
-FGameplayTag PassiveTree_IncreasedMelee_3;
-FGameplayTag PassiveTree_IncreasedMelee_4;
-FGameplayTag PassiveTree_IncreasedMelee_5;
-FGameplayTag PassiveTree_IncreasedMelee_6;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_1;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_2;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_3;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_4;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_5;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_6;
-FGameplayTag PassiveTree_Might_3;
-FGameplayTag PassiveTree_Might_1;
-FGameplayTag PassiveTree_Might_2;
-FGameplayTag PassiveTree_Might_4;
-FGameplayTag PassiveTree_Might_5;
-FGameplayTag PassiveTree_Might_6;
-FGameplayTag PassiveTree_DeferredDamage_1;
-FGameplayTag PassiveTree_DeferredDamage_2;
-FGameplayTag PassiveTree_DeferredDamage_3;
-FGameplayTag PassiveTree_DeferredDamage_4;
-FGameplayTag PassiveTree_DeferredDamage_5;
-FGameplayTag PassiveTree_DeferredDamage_6;
-FGameplayTag PassiveTree_IncreasedMelee_7;
-FGameplayTag PassiveTree_RelentlessStrength_1;
-FGameplayTag PassiveTree_IncreasedMelee_8;
-FGameplayTag PassiveTree_IncreasedMelee_9;
-FGameplayTag PassiveTree_Outlasting_1;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_7;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_8;
-FGameplayTag PassiveTree_Might_7;
-FGameplayTag PassiveTree_Might_8;
-FGameplayTag PassiveTree_DeferredDamage_7;
-FGameplayTag PassiveTree_DeferredDamage_8;
-FGameplayTag PassiveTree_IncreasedMelee_10;
-FGameplayTag PassiveTree_IncreasedMelee_11;
-FGameplayTag PassiveTree_IncreasedMelee_12;
-FGameplayTag PassiveTree_IncreasedMelee_13;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_9;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_10;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_11;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_12;
-FGameplayTag PassiveTree_BruisedConcussedThreshold_13;
-FGameplayTag PassiveTree_Might_9;
-FGameplayTag PassiveTree_Might_10;
-FGameplayTag PassiveTree_Might_11;
-FGameplayTag PassiveTree_Might_12;
-FGameplayTag PassiveTree_Might_13;
-FGameplayTag PassiveTree_DeferredDamage_9;
-FGameplayTag PassiveTree_DeferredDamage_10;
-FGameplayTag PassiveTree_DeferredDamage_11;
-FGameplayTag PassiveTree_DeferredDamage_12;
-FGameplayTag PassiveTree_DeferredDamage_13;
-FGameplayTag PassiveTree_IncreasedHitPoints_1;
-FGameplayTag PassiveTree_Fortitude_3;
-FGameplayTag PassiveTree_Fortitude_1;
-FGameplayTag PassiveTree_Fortitude_2;
-FGameplayTag PassiveTree_Fortitude_4;
-FGameplayTag PassiveTree_Fortitude_5;
-FGameplayTag PassiveTree_Fortitude_6;
-FGameplayTag PassiveTree_AllThreshold_2;
-FGameplayTag PassiveTree_Bulwark_1;
-FGameplayTag PassiveTree_NeverFall_1;
-FGameplayTag PassiveTree_Fortitude_7;
-FGameplayTag PassiveTree_Fortitude_8;
-FGameplayTag PassiveTree_Fortitude_9;
-FGameplayTag PassiveTree_Fortitude_10;
-FGameplayTag PassiveTree_Fortitude_11;
-FGameplayTag PassiveTree_Fortitude_12;
-FGameplayTag PassiveTree_Fortitude_13;
-FGameplayTag PassiveTree_IncreasedHitPoints_2;
-FGameplayTag PassiveTree_IncreasedHitPoints_3;
-FGameplayTag PassiveTree_IncreasedHitPoints_4;
-FGameplayTag PassiveTree_IncreasedHitPoints_5;
-FGameplayTag PassiveTree_IncreasedHitPoints_6;
-FGameplayTag PassiveTree_IncreasedArmour_5;
-FGameplayTag PassiveTree_IncreasedArmour_6;
-FGameplayTag PassiveTree_AllThreshold_1;
-FGameplayTag PassiveTree_AllThreshold_3;
-FGameplayTag PassiveTree_AllThreshold_4;
-FGameplayTag PassiveTree_AllThreshold_5;
-FGameplayTag PassiveTree_AllThreshold_6;
-FGameplayTag PassiveTree_IncreasedHitPoints_7;
-FGameplayTag PassiveTree_IncreasedHitPoints_8;
-FGameplayTag PassiveTree_IncreasedHitPoints_9;
-FGameplayTag PassiveTree_IncreasedArmour_7;
-FGameplayTag PassiveTree_IncreasedArmour_8;
-FGameplayTag PassiveTree_AllThreshold_7;
-FGameplayTag PassiveTree_AllThreshold_8;
-FGameplayTag PassiveTree_IncreasedHitPoints_10;
-FGameplayTag PassiveTree_IncreasedHitPoints_11;
-FGameplayTag PassiveTree_IncreasedHitPoints_12;
-FGameplayTag PassiveTree_IncreasedHitPoints_13;
-FGameplayTag PassiveTree_IncreasedArmour_9;
-FGameplayTag PassiveTree_IncreasedArmour_10;
-FGameplayTag PassiveTree_IncreasedArmour_11;
-FGameplayTag PassiveTree_IncreasedArmour_12;
-FGameplayTag PassiveTree_IncreasedArmour_13;
-FGameplayTag PassiveTree_AllThreshold_9;
-FGameplayTag PassiveTree_AllThreshold_10;
-FGameplayTag PassiveTree_AllThreshold_11;
-FGameplayTag PassiveTree_AllThreshold_12;
-FGameplayTag PassiveTree_AllThreshold_13;
-FGameplayTag PassiveTree_Accelerator_AcceleratorDamage_1;
-FGameplayTag PassiveTree_Accelerator_AcceleratorDamage_2;
-FGameplayTag PassiveTree_Accelerator_AcceleratorDamage_3;
-FGameplayTag PassiveTree_Accelerator_AcceleratorDamage_4;
-FGameplayTag PassiveTree_Accelerator_AcceleratorDamage_5;
-FGameplayTag PassiveTree_Accelerator_AcceleratorDamage_6;
-FGameplayTag PassiveTree_Accelerator_AcceleratorDamage_7;
-FGameplayTag PassiveTree_Accelerator_ParticleCharge_1;
-FGameplayTag PassiveTree_Accelerator_ParticleCharge_2;
-FGameplayTag PassiveTree_Accelerator_ParticleCharge_3;
-FGameplayTag PassiveTree_Accelerator_ParticleCharge_4;
-FGameplayTag PassiveTree_Accelerator_ParticleCharge_5;
-FGameplayTag PassiveTree_Accelerator_PenetratorWheel_1;
-FGameplayTag PassiveTree_Accelerator_PenetratorWheel_2;
-FGameplayTag PassiveTree_Accelerator_PenetratorWheel_3;
-FGameplayTag PassiveTree_Accelerator_PenetratorWheel_4;
-FGameplayTag PassiveTree_Accelerator_PenetratorWheel_5;
-FGameplayTag PassiveTree_Accelerator_RailgunMastery_1;
-FGameplayTag PassiveTree_Accelerator_RailgunMastery_2;
-FGameplayTag PassiveTree_Accelerator_RailgunMastery_3;
-FGameplayTag PassiveTree_Accelerator_RailgunMastery_4;
-FGameplayTag PassiveTree_Accelerator_RailgunMastery_5;
-FGameplayTag PassiveTree_Accelerator_VelocityRounds_1;
-FGameplayTag PassiveTree_Accelerator_VelocityRounds_2;
-FGameplayTag PassiveTree_Accelerator_VelocityRounds_3;
-FGameplayTag PassiveTree_Accelerator_VelocityRounds_4;
-FGameplayTag PassiveTree_Accelerator_VelocityRounds_5;
-FGameplayTag PassiveTree_Axe_AxeDamage_1;
-FGameplayTag PassiveTree_Axe_AxeDamage_2;
-FGameplayTag PassiveTree_Axe_AxeDamage_3;
-FGameplayTag PassiveTree_Axe_AxeDamage_4;
-FGameplayTag PassiveTree_Axe_AxeDamage_5;
-FGameplayTag PassiveTree_Axe_AxeDamage_6;
-FGameplayTag PassiveTree_Axe_AxeDamage_7;
-FGameplayTag PassiveTree_Axe_BerserkersAxework_1;
-FGameplayTag PassiveTree_Axe_BerserkersAxework_2;
-FGameplayTag PassiveTree_Axe_BerserkersAxework_3;
-FGameplayTag PassiveTree_Axe_BerserkersAxework_4;
-FGameplayTag PassiveTree_Axe_BerserkersAxework_5;
-FGameplayTag PassiveTree_Axe_BleedWheel_1;
-FGameplayTag PassiveTree_Axe_BleedWheel_2;
-FGameplayTag PassiveTree_Axe_BleedWheel_3;
-FGameplayTag PassiveTree_Axe_BleedWheel_4;
-FGameplayTag PassiveTree_Axe_BleedWheel_5;
-FGameplayTag PassiveTree_Axe_CleaveWheel_1;
-FGameplayTag PassiveTree_Axe_CleaveWheel_2;
-FGameplayTag PassiveTree_Axe_CleaveWheel_3;
-FGameplayTag PassiveTree_Axe_CleaveWheel_4;
-FGameplayTag PassiveTree_Axe_CleaveWheel_5;
-FGameplayTag PassiveTree_Axe_Execute_1;
-FGameplayTag PassiveTree_Axe_ExecutionersEdge_1;
-FGameplayTag PassiveTree_Axe_ExecutionersEdge_2;
-FGameplayTag PassiveTree_Axe_ExecutionersEdge_3;
-FGameplayTag PassiveTree_Axe_ExecutionersEdge_4;
-FGameplayTag PassiveTree_Bide_1;
-FGameplayTag PassiveTree_Bide_2;
-FGameplayTag PassiveTree_Bide_3;
-FGameplayTag PassiveTree_Bide_4;
-FGameplayTag PassiveTree_Endure_1;
-FGameplayTag PassiveTree_Endure_2;
-FGameplayTag PassiveTree_Endure_3;
-FGameplayTag PassiveTree_Mace_ArmorBreak_1;
-FGameplayTag PassiveTree_Mace_ArmorBreak_2;
-FGameplayTag PassiveTree_Mace_ArmorBreak_3;
-FGameplayTag PassiveTree_Mace_ArmorBreak_4;
-FGameplayTag PassiveTree_Mace_ArmorBreak_5;
-FGameplayTag PassiveTree_Mace_GroundSlam_1;
-FGameplayTag PassiveTree_Mace_GroundSlam_2;
-FGameplayTag PassiveTree_Mace_GroundSlam_3;
-FGameplayTag PassiveTree_Mace_GroundSlam_4;
-FGameplayTag PassiveTree_Mace_GroundSlam_5;
-FGameplayTag PassiveTree_Mace_HeavySwing_1;
-FGameplayTag PassiveTree_Mace_HeavySwing_2;
-FGameplayTag PassiveTree_Mace_HeavySwing_3;
-FGameplayTag PassiveTree_Mace_HeavySwing_4;
-FGameplayTag PassiveTree_Mace_HeavySwing_5;
-FGameplayTag PassiveTree_Mace_MaceDamageA_1;
-FGameplayTag PassiveTree_Mace_MaceDamageA_2;
-FGameplayTag PassiveTree_Mace_MaceDamageA_3;
-FGameplayTag PassiveTree_Mace_MaceDamageA_4;
-FGameplayTag PassiveTree_Mace_MaceDamageA_5;
-FGameplayTag PassiveTree_Mace_MaceDamageA_6;
-FGameplayTag PassiveTree_Mace_MaceDamageA_7;
-FGameplayTag PassiveTree_Mace_MaceDamageB_1;
-FGameplayTag PassiveTree_Mace_MaceDamageB_2;
-FGameplayTag PassiveTree_Mace_MaceDamageB_3;
-FGameplayTag PassiveTree_Mace_MaceDamageB_4;
-FGameplayTag PassiveTree_Mace_MaceDamageB_5;
-FGameplayTag PassiveTree_Mace_MaceDamageB_6;
-FGameplayTag PassiveTree_Mace_SledgehammerMastery_1;
-FGameplayTag PassiveTree_Mace_SledgehammerMastery_2;
-FGameplayTag PassiveTree_Mace_SledgehammerMastery_3;
-FGameplayTag PassiveTree_Mace_SledgehammerMastery_4;
-FGameplayTag PassiveTree_Mace_SledgehammerMastery_5;
-FGameplayTag PassiveTree_Mace_StaggerWheel_1;
-FGameplayTag PassiveTree_Mace_StaggerWheel_2;
-FGameplayTag PassiveTree_Mace_StaggerWheel_3;
-FGameplayTag PassiveTree_Mace_StaggerWheel_4;
-FGameplayTag PassiveTree_Mace_StaggerWheel_5;
-FGameplayTag PassiveTree_Ordnance_BlastWheel_1;
-FGameplayTag PassiveTree_Ordnance_BlastWheel_2;
-FGameplayTag PassiveTree_Ordnance_BlastWheel_3;
-FGameplayTag PassiveTree_Ordnance_BlastWheel_4;
-FGameplayTag PassiveTree_Ordnance_DevastatingImpact_1;
-FGameplayTag PassiveTree_Ordnance_DevastatingImpact_2;
-FGameplayTag PassiveTree_Ordnance_DevastatingImpact_3;
-FGameplayTag PassiveTree_Ordnance_DevastatingImpact_4;
-FGameplayTag PassiveTree_Ordnance_DevastatingImpact_5;
-FGameplayTag PassiveTree_Ordnance_ExplosivePenetration_1;
-FGameplayTag PassiveTree_Ordnance_ExplosivePenetration_2;
-FGameplayTag PassiveTree_Ordnance_ExplosivePenetration_3;
-FGameplayTag PassiveTree_Ordnance_ExplosivePenetration_4;
-FGameplayTag PassiveTree_Ordnance_ExplosivePenetration_5;
-FGameplayTag PassiveTree_Ordnance_HighExplosive_1;
-FGameplayTag PassiveTree_Ordnance_HighExplosive_2;
-FGameplayTag PassiveTree_Ordnance_HighExplosive_3;
-FGameplayTag PassiveTree_Ordnance_HighExplosive_4;
-FGameplayTag PassiveTree_Ordnance_HighExplosive_5;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageA_1;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageA_2;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageA_3;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageA_4;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageA_5;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageA_6;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageA_7;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageB_1;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageB_2;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageB_3;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageB_4;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageB_5;
-FGameplayTag PassiveTree_Ordnance_OrdnanceDamageB_6;
-FGameplayTag PassiveTree_Ordnance_OrdnanceSpecialist_1;
-FGameplayTag PassiveTree_Ordnance_OrdnanceSpecialist_2;
-FGameplayTag PassiveTree_Ordnance_OrdnanceSpecialist_3;
-FGameplayTag PassiveTree_Ordnance_OrdnanceSpecialist_4;
-FGameplayTag PassiveTree_Ordnance_OrdnanceSpecialist_5;
-FGameplayTag PassiveTree_Ordnance_OrdnanceSpecialist_6;
-FGameplayTag PassiveTree_Rifle_MarksmanWheel_1;
-FGameplayTag PassiveTree_Rifle_MarksmanWheel_2;
-FGameplayTag PassiveTree_Rifle_MarksmanWheel_3;
-FGameplayTag PassiveTree_Rifle_MarksmanWheel_4;
-FGameplayTag PassiveTree_Rifle_MarksmanWheel_5;
-FGameplayTag PassiveTree_Rifle_PenetratingRounds_1;
-FGameplayTag PassiveTree_Rifle_PenetratingRounds_2;
-FGameplayTag PassiveTree_Rifle_RapidCycling_1;
-FGameplayTag PassiveTree_Rifle_RapidCycling_2;
-FGameplayTag PassiveTree_Rifle_RapidCycling_3;
-FGameplayTag PassiveTree_Rifle_RapidCycling_4;
-FGameplayTag PassiveTree_Rifle_RapidCycling_5;
-FGameplayTag PassiveTree_Rifle_RifleDamage_1;
-FGameplayTag PassiveTree_Rifle_RifleDamage_2;
-FGameplayTag PassiveTree_Rifle_RifleDamage_3;
-FGameplayTag PassiveTree_Rifle_RifleDamage_4;
-FGameplayTag PassiveTree_Rifle_RifleDamage_5;
-FGameplayTag PassiveTree_Rifle_RifleDamage_6;
-FGameplayTag PassiveTree_Rifle_RifleDamage_7;
-FGameplayTag PassiveTree_Rifle_RiflemansMastery_1;
-FGameplayTag PassiveTree_Rifle_RiflemansMastery_2;
-FGameplayTag PassiveTree_Rifle_RiflemansMastery_3;
-FGameplayTag PassiveTree_Rifle_RiflemansMastery_4;
-FGameplayTag PassiveTree_Rifle_RiflemansMastery_5;
-FGameplayTag PassiveTree_RunningHot_1;
-FGameplayTag PassiveTree_RunningHot_2;
-FGameplayTag PassiveTree_RunningHot_3;
-FGameplayTag PassiveTree_RunningHot_4;
-FGameplayTag PassiveTree_SkillSpeed_1;
-FGameplayTag PassiveTree_SkillSpeed_2;
-FGameplayTag PassiveTree_SkillSpeed_3;
-FGameplayTag PassiveTree_SplicedMalacostraca_1;
-FGameplayTag PassiveTree_SplicedMalacostraca_2;
-FGameplayTag PassiveTree_SplicedMalacostraca_3;
-FGameplayTag PassiveTree_CarryOn_1;
-FGameplayTag PassiveTree_CarryOn_2;
-FGameplayTag PassiveTree_CarryOn_3;
-FGameplayTag PassiveTree_AblativeArmour_1;
-FGameplayTag PassiveTree_AblativeArmour_2;
-FGameplayTag PassiveTree_AblativeArmour_3;
-FGameplayTag PassiveTree_SplicedPlanariidae_1;
-FGameplayTag PassiveTree_SplicedPlanariidae_2;
-FGameplayTag PassiveTree_SplicedPlanariidae_3;
-FGameplayTag PassiveTree_SplicedPlanariidae_4;
-FGameplayTag PassiveTree_LiquidCooledSystems_1;
-FGameplayTag PassiveTree_RestorativeNanites_1;
-FGameplayTag PassiveTree_DamageOverTime_1;
-FGameplayTag PassiveTree_DamageOverTime_2;
-FGameplayTag PassiveTree_DamageOverTime_3;
-
-//SkillTree
-FGameplayTag SkillTree_LightningCoil_Damage_1;
-FGameplayTag SkillTree_LightningCoil_Damage_2;
-FGameplayTag SkillTree_LightningCoil_Damage_3;
-FGameplayTag SkillTree_LightningCoil_Damage_4;
-FGameplayTag SkillTree_LightningCoil_Damage_5;
-FGameplayTag SkillTree_LightningCoil_Damage_6;
-FGameplayTag SkillTree_LightningCoil_Damage_7;
-FGameplayTag SkillTree_LightningCoil_IncreasedCritChance_1;
-FGameplayTag SkillTree_LightningCoil_IncreasedCritChance_2;
-FGameplayTag SkillTree_LightningCoil_IncreasedCritChance_3;
-FGameplayTag SkillTree_LightningCoil_IncreasedCritChance_4;
-FGameplayTag SkillTree_LightningCoil_IncreasedCritChance_5;
-FGameplayTag SkillTree_LightningCoil_IncreasedCritChance_6;
-FGameplayTag SkillTree_LightningCoil_IncreasedCritChance_7;
-FGameplayTag SkillTree_LightningCoil_IncreasedCritChance_8;
-FGameplayTag SkillTree_LightningCoil_BoltAoE_1;
-FGameplayTag SkillTree_LightningCoil_BoltAoE_2;
-FGameplayTag SkillTree_LightningCoil_BoltAoE_3;
-FGameplayTag SkillTree_LightningCoil_BoltAoE_4;
-FGameplayTag SkillTree_LightningCoil_BoltAoE_5;
-FGameplayTag SkillTree_LightningCoil_BoltAoE_6;
-FGameplayTag SkillTree_LightningCoil_CorrodedBuildup_1;
-FGameplayTag SkillTree_LightningCoil_CorrodedBuildup_2;
-FGameplayTag SkillTree_LightningCoil_CorrodedBuildup_3;
-FGameplayTag SkillTree_LightningCoil_CorrodedBuildup_4;
-FGameplayTag SkillTree_LightningCoil_CorrodedBuildup_5;
-FGameplayTag SkillTree_LightningCoil_CorrodedBuildup_6;
-FGameplayTag SkillTree_LightningCoil_CorrodedBuildup_7;
-FGameplayTag SkillTree_LightningCoil_Convergence_1;
-FGameplayTag SkillTree_LightningCoil_Convergence_2;
-FGameplayTag SkillTree_LightningCoil_Convergence_3;
-FGameplayTag SkillTree_LightningCoil_ExtraBolts_1;
-FGameplayTag SkillTree_LightningCoil_ExtraBolts_2;
-FGameplayTag SkillTree_LightningCoil_ExtraBolts_3;
-FGameplayTag SkillTree_LightningCoil_ConeLength_1;
-FGameplayTag SkillTree_LightningCoil_ConeLength_2;
-FGameplayTag SkillTree_LightningCoil_ConeLength_3;
-FGameplayTag SkillTree_LightningCoil_ConeLength_4;
-FGameplayTag SkillTree_LightningCoil_ConeLength_5;
-FGameplayTag SkillTree_LightningCoil_ConeAngle_1;
-FGameplayTag SkillTree_LightningCoil_ConeAngle_2;
-FGameplayTag SkillTree_LightningCoil_ConeAngle_3;
-FGameplayTag SkillTree_LightningCoil_ConeAngle_4;
-FGameplayTag SkillTree_LightningCoil_ConeAngle_5;
-FGameplayTag SkillTree_LightningCoil_ChainCount_1;
-FGameplayTag SkillTree_LightningCoil_ChainCount_2;
-FGameplayTag SkillTree_LightningCoil_ChainCount_3;
-FGameplayTag SkillTree_LightningCoil_ChainRadius_1;
-FGameplayTag SkillTree_LightningCoil_ChainRadius_2;
-FGameplayTag SkillTree_LightningCoil_ChainRadius_3;
-FGameplayTag SkillTree_LightningCoil_ChainRadius_4;
-FGameplayTag SkillTree_LightningCoil_ChainRadius_5;
-FGameplayTag SkillTree_LightningCoil_DistanceLuckyRolls_1;
-FGameplayTag SkillTree_LightningCoil_DistanceLuckyRolls_2;
-FGameplayTag SkillTree_LightningCoil_DistanceLuckyRolls_3;
-FGameplayTag SkillTree_LightningCoil_DamageLuckyRolls_1;
-FGameplayTag SkillTree_LightningCoil_DamageLuckyRolls_2;
-FGameplayTag SkillTree_LightningCoil_DamageLuckyRolls_3;
-FGameplayTag SkillTree_LightningCoil_SkillSpeed_1;
-FGameplayTag SkillTree_LightningCoil_SkillSpeed_2;
 
 //SkillPassive
 FGameplayTag SkillPassive_LightningCoil_IncreasedDamage;
@@ -985,25 +630,6 @@ FGameplayTag SkillPassive_Impact_LifeOnHit;
 FGameplayTag SkillPassive_Impact_IncreasedAgainstBruised;
 FGameplayTag SkillPassive_Impact_SecondaryCritChance;
 FGameplayTag SkillPassive_Impact_SecondaryPhysicalDamage;
-
-	//SkillTree — Leap
-	FGameplayTag SkillTree_Leap_ExtraRange_1;
-	FGameplayTag SkillTree_Leap_ExtraRange_2;
-	FGameplayTag SkillTree_Leap_ExtraRange_3;
-	FGameplayTag SkillTree_Leap_ExplosiveLanding_1;
-	FGameplayTag SkillTree_Leap_NoWindup_1;
-
-	//SkillTree — Leap (continued)
-	FGameplayTag SkillTree_Leap_HeatCost_1;
-	FGameplayTag SkillTree_Leap_HeatCost_2;
-	FGameplayTag SkillTree_Leap_HeatCost_3;
-	FGameplayTag SkillTree_Leap_HeatCost_4;
-	FGameplayTag SkillTree_Leap_HeatCost_5;
-	FGameplayTag SkillTree_Leap_HeatCost_6;
-	FGameplayTag SkillTree_Leap_CooldownDuration_1;
-	FGameplayTag SkillTree_Leap_CooldownDuration_2;
-	FGameplayTag SkillTree_Leap_CooldownDuration_3;
-	FGameplayTag SkillTree_Leap_CooldownDuration_4;
 
 	//SkillPassive — Leap
 	FGameplayTag SkillPassive_Leap_ExtraRange;
@@ -1078,7 +704,6 @@ FGameplayTag SkillTree_LightningCoil_Grid_N249; FGameplayTag SkillTree_Lightning
 FGameplayTag SkillTree_LightningCoil_Grid_N253; FGameplayTag SkillTree_LightningCoil_Grid_N254; FGameplayTag SkillTree_LightningCoil_Grid_N255; FGameplayTag SkillTree_LightningCoil_Grid_N256;
 // ---- END GRID TEST TAGS ----
 
-
 //GatedStats
 FGameplayTag Damage_Increased_Energy_Accelerator;
 FGameplayTag Penetration_Physical_Accelerator;
@@ -1119,13 +744,89 @@ FGameplayTag AoE_Multiplier_Rifle;
 FGameplayTag Heat_SkillCost_MightWeapon;
 FGameplayTag Execute_Threshold_Axe;
 FGameplayTag Conversion_ProjectileSpeedToDamage_Accelerator;
+FGameplayTag Critical_StrikeChance_Increased_Sword;
+FGameplayTag Critical_StrikeMultiplier_Sword;
+FGameplayTag Critical_StrikeChance_Base_Sword;
+FGameplayTag Speed_Skill_Sword;
+FGameplayTag Penetration_Physical_Sword;
+FGameplayTag Penetration_Armour_Sword;
+FGameplayTag Damage_Increased_Physical_Sword;
+FGameplayTag Speed_Skill_Pistol;
+FGameplayTag Heat_SkillCost_Pistol;
+FGameplayTag Critical_StrikeChance_Increased_Pistol;
+FGameplayTag Critical_StrikeMultiplier_Pistol;
+FGameplayTag Critical_StrikeChance_Base_Pistol;
+FGameplayTag Speed_Projectile_Pistol;
+FGameplayTag Penetration_Armour_Pistol;
+FGameplayTag Damage_Increased_Physical_Pistol;
+FGameplayTag Speed_Projectile_Rifle;
+FGameplayTag Critical_StrikeMultiplier_Spear;
+FGameplayTag Critical_StrikeChance_Increased_Spear;
+FGameplayTag Critical_StrikeChance_Base_Spear;
+FGameplayTag AoE_Multiplier_Spear;
+FGameplayTag Penetration_Physical_Precision;
+FGameplayTag Penetration_Energy_Precision;
+FGameplayTag Penetration_Armour_Precision;
+FGameplayTag Critical_StrikeMultiplier_Precision;
+FGameplayTag Critical_StrikeChance_Base_Precision;
+FGameplayTag Speed_Projectile_Precision;
+FGameplayTag Conversion_ProjectileSpeedToDamage_Precision;
+FGameplayTag Damage_Increased_Energy_Conduit;
+FGameplayTag Penetration_Energy_Conduit;
+FGameplayTag Conditional_Damage_IncreasedAgainstCorroded_Conduit;
+FGameplayTag Conditional_Damage_IncreasedAgainstIrradiated_Conduit;
+FGameplayTag Speed_Skill_Conduit;
+FGameplayTag Heat_SkillCostEfficiency_Conduit;
+FGameplayTag Speed_Skill_DroneController;
+FGameplayTag Duration_Skill_DroneController;
+FGameplayTag Critical_StrikeChance_Increased_DroneController;
+FGameplayTag Critical_StrikeMultiplier_DroneController;
+FGameplayTag Critical_StrikeChance_Base_DroneController;
+FGameplayTag AoE_Multiplier_DroneController;
+FGameplayTag Damage_Increased_AoE_DroneController;
+FGameplayTag Penetration_Energy_Accelerator;
+FGameplayTag Damage_Increased_Energy_Precision;
+FGameplayTag Conditional_Damage_IncreasedAgainstIrradiated_Precision;
+FGameplayTag Conditional_Damage_IncreasedAgainstCorroded_Precision;
+FGameplayTag DoT_Increased_Projector;
+FGameplayTag Duration_Skill_Projector;
+FGameplayTag Damage_More_AgilityWeapon;
+FGameplayTag Critical_StrikeChance_Increased_Gauntlets;
+FGameplayTag Critical_StrikeMultiplier_Gauntlets;
+FGameplayTag Critical_StrikeChance_Base_Gauntlets;
+FGameplayTag Speed_Skill_Gauntlets;
+FGameplayTag Conditional_Damage_IncreasedAgainstBruised_Gauntlets;
+FGameplayTag Penetration_Armour_Gauntlets;
+FGameplayTag Penetration_Physical_Gauntlets;
+FGameplayTag Penetration_Armour_Axe;
+FGameplayTag Penetration_Physical_Axe;
+FGameplayTag Damage_Increased_Physical_Axe;
+FGameplayTag Critical_StrikeChance_Increased_Shotgun;
+FGameplayTag Critical_StrikeMultiplier_Shotgun;
+FGameplayTag Critical_StrikeChance_Base_Shotgun;
+FGameplayTag Conditional_Damage_IncreasedAgainstConcussed_Shotgun;
+FGameplayTag Damage_Increased_Physical_Shotgun;
+FGameplayTag Penetration_Physical_Shotgun;
+FGameplayTag Speed_Skill_Shotgun;
+FGameplayTag Heat_SkillCost_Shotgun;
+FGameplayTag Penetration_Physical_Spear;
+FGameplayTag Penetration_Armour_Spear;
+FGameplayTag Speed_Skill_Spear;
+FGameplayTag Damage_Increased_AoE_Spear;
+FGameplayTag AoE_Multiplier_Projector;
+FGameplayTag AoE_AdditionalRadius_Projector;
+FGameplayTag Heat_SkillCost_Projector;
+FGameplayTag Damage_Increased_Chemical_Projector;
+FGameplayTag Penetration_Chemical_Projector;
+FGameplayTag Damage_More_FortitudeWeapon;
+FGameplayTag Damage_More_ResonanceWeapon;
 
 //SkillTreeFlags
 FGameplayTag Flag_SkillTree_MightSkillsCostHPInsteadOfHeat;
 FGameplayTag Flag_SkillTree_IncreasedDamageTaken_WhileDeferring;
 FGameplayTag Flag_SkillTree_DoubleArmourVsExplosive;
 FGameplayTag Flag_SkillTree_RecoupInsteadOfDefer;
-
+FGameplayTag Flag_SkillTree_Blur;
 
 //Execute
 FGameplayTag Execute_Threshold;

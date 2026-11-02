@@ -2,6 +2,9 @@
 """
 add_gameplay_tag.py
 Adds a new native gameplay tag to FP_GameplayTags.h and FP_GameplayTags.cpp.
+Only for tags C++ code uses by name — see Tools/GameplayTags_README.md. Skill-tree NodeTags
+(PassiveTree.<Group>.<N> / SkillTree.<Skill>.<Group>.<N>) go in Config/Tags/SkillTreeNodeTags.ini
+via the tree editor's Tools > Register Tags; this script refuses them.
 
 Usage:
     python add_gameplay_tag.py <TagString> "<Description>" [SectionHint]
@@ -201,6 +204,11 @@ def main():
     args = parser.parse_args()
 
     tag_string  = args.tag.strip()
+    if re.match(r'^(PassiveTree|SkillTree)\.[A-Za-z0-9_.]+\.\d+$', tag_string):
+        print(f'ERROR: {tag_string} is a skill-tree NodeTag - those are data-only and live in')
+        print('       Config/Tags/SkillTreeNodeTags.ini (tree editor: Tools > Register Tags).')
+        print('       See Tools/GameplayTags_README.md.')
+        sys.exit(1)
     description = args.description.strip()
     var_name    = tag_to_var(tag_string)
     hint        = args.section if args.section else tag_string.split('.')[0]

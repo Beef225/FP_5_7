@@ -19,6 +19,8 @@ struct FP_DamageStatics
 
 	DECLARE_ATTRIBUTE_CAPTUREDEF(ChanceToDodge);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(BlockChance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MaxDodgeChance);
+	DECLARE_ATTRIBUTE_CAPTUREDEF(MaxBlockChance);
 	DECLARE_ATTRIBUTE_CAPTUREDEF(BlockedDamage);
 
 	DECLARE_ATTRIBUTE_CAPTUREDEF(ReducedDamageFromProjectiles);
@@ -121,6 +123,8 @@ struct FP_DamageStatics
 
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, ChanceToDodge, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, BlockChance, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MaxDodgeChance, Target, false);
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, MaxBlockChance, Target, false);
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, BlockedDamage, Target, false);
 
 		DEFINE_ATTRIBUTE_CAPTUREDEF(UFP_AttributeSet, ReducedDamageFromProjectiles, Target, false);
@@ -216,6 +220,8 @@ UExecCalc_Damage::UExecCalc_Damage()
 
 	RelevantAttributesToCapture.Add(DamageStatics().ChanceToDodgeDef);
 	RelevantAttributesToCapture.Add(DamageStatics().BlockChanceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MaxDodgeChanceDef);
+	RelevantAttributesToCapture.Add(DamageStatics().MaxBlockChanceDef);
 	RelevantAttributesToCapture.Add(DamageStatics().BlockedDamageDef);
 
 	RelevantAttributesToCapture.Add(DamageStatics().ReducedDamageFromProjectilesDef);
@@ -339,8 +345,10 @@ void UExecCalc_Damage::Execute_Implementation(
 	// -------------------------------------------------------
 	// 0) DODGE FIRST
 	// -------------------------------------------------------
+	// Capped by the target's MaxDodgeChance (Defence.Max.DodgeChance, base 0.75).
 	const float DodgeChanceRaw = GetCaptured(DamageStatics().ChanceToDodgeDef, 0.f);
-	const float DodgeChance = Clamp01(DodgeChanceRaw);
+	const float MaxDodgeChance = Clamp01(GetCaptured(DamageStatics().MaxDodgeChanceDef, 0.75f));
+	const float DodgeChance = FMath::Clamp(DodgeChanceRaw, 0.f, MaxDodgeChance);
 
 	const float DodgeRoll = FMath::FRand();
 	const bool bDodged = (DodgeChance > 0.f) && (DodgeRoll < DodgeChance);
@@ -350,8 +358,8 @@ void UExecCalc_Damage::Execute_Implementation(
 	
 	LogStep(TEXT("0) DodgeCheck"),
 		0.f,
-		FString::Printf(TEXT("DodgeChanceRaw=%.4f DodgeChance=%.4f Roll=%.4f Dodged=%s"),
-			DodgeChanceRaw, DodgeChance, DodgeRoll, bDodged ? TEXT("true") : TEXT("false")));
+		FString::Printf(TEXT("DodgeChanceRaw=%.4f Cap=%.4f DodgeChance=%.4f Roll=%.4f Dodged=%s"),
+			DodgeChanceRaw, MaxDodgeChance, DodgeChance, DodgeRoll, bDodged ? TEXT("true") : TEXT("false")));
 
 	if (bDodged)
 	{
@@ -550,8 +558,10 @@ void UExecCalc_Damage::Execute_Implementation(
 	// -------------------------------------------------------
 	// 4) BLOCK
 	// -------------------------------------------------------
+	// Capped by the target's MaxBlockChance (Defence.Max.BlockChance, base 0.75).
 	const float BlockChanceRaw = GetCaptured(DamageStatics().BlockChanceDef, 0.f);
-	const float BlockChance = Clamp01(BlockChanceRaw);
+	const float MaxBlockChance = Clamp01(GetCaptured(DamageStatics().MaxBlockChanceDef, 0.75f));
+	const float BlockChance = FMath::Clamp(BlockChanceRaw, 0.f, MaxBlockChance);
 
 	const float BlockRoll = FMath::FRand();
 	const bool bBlocked = (BlockChance > 0.f) && (BlockRoll < BlockChance);

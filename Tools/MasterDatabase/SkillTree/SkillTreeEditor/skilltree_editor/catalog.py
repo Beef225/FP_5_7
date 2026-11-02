@@ -1,8 +1,9 @@
 """Gameplay tag catalog — feeds autocomplete and validation.
 
 Sources:
-  FP_GameplayTags.cpp  — every native tag registered in C++ (+ its description)
-  AttributeTagMap.csv  — curated attribute list for Stat Mod effects
+  FP_GameplayTags.cpp     — every native tag registered in C++ (+ its description)
+  SkillTreeNodeTags.ini   — skill-tree NodeTags (data-only tags, Config/Tags)
+  AttributeTagMap.csv     — curated attribute list for Stat Mod effects
 """
 from __future__ import annotations
 
@@ -14,6 +15,7 @@ from pathlib import Path
 from . import config
 from .model import TAG_PATTERN
 
+_INI_TAG = re.compile(r'^GameplayTagList=\(Tag="([^"]+)"(?:,DevComment="((?:[^"\\]|\\.)*)")?\)', re.M)
 _NATIVE_TAG = re.compile(
     r'AddNativeGameplayTag\(\s*FName\("([^"]+)"\)\s*,\s*FString\("((?:[^"\\]|\\.)*)"\)',
     re.S,
@@ -73,8 +75,19 @@ class TagCatalog:
 
 
 def load_catalog(cpp_path: Path = config.GAMEPLAY_TAGS_CPP,
-                 csv_path: Path = config.ATTRIBUTE_TAG_MAP_CSV) -> TagCatalog:
+                 csv_path: Path = config.ATTRIBUTE_TAG_MAP_CSV,
+                 ini_path: Path = config.NODE_TAGS_INI) -> TagCatalog:
     cat = TagCatalog()
+
+    try:
+        text = ini_path.read_text(encoding="utf-8-sig", errors="replace")
+        for tag, desc in _INI_TAG.findall(text):
+            cat.registered.add(tag)
+            if desc:
+                cat.descriptions.setdefault(tag, desc)
+        cat.sources_ok["SkillTreeNodeTags.ini"] = True
+    except OSError:
+        cat.sources_ok["SkillTreeNodeTags.ini"] = False
 
     try:
         text = cpp_path.read_text(encoding="utf-8", errors="replace")

@@ -76,7 +76,8 @@ def validate(tree: SkillTree, catalog: TagCatalog, icons: IconLibrary,
                 add(ERROR, u, f"Duplicate NodeTag '{node.tag}' — run Tools ▸ Renumber Tags.")
             if other_tags and node.tag in other_tags:
                 add(ERROR, u, f"NodeTag '{node.tag}' is also used by tree '{other_tags[node.tag]}' — "
-                              "importing one would overwrite the other's UE node asset.")
+                              "importing one would overwrite the other's UE node asset. "
+                              "Tools ▸ Renumber Tags shifts this tree's group past the other tree's indices.")
             prefix, idx = split_tag(node.tag)
             if not idx:
                 add(WARNING, u, f"NodeTag '{node.tag}' has no index — run Tools ▸ Renumber Tags.")
@@ -123,7 +124,7 @@ def validate(tree: SkillTree, catalog: TagCatalog, icons: IconLibrary,
                         if base:
                             add(WARNING, u, f"{where}: gated stat '{value}' ({base}, only for skills with "
                                             f"{' + '.join(gates)}) — tag not registered yet: "
-                                            "Tools ▸ Register Tags in C++, then rebuild.")
+                                            "Tools ▸ Register Tags (C++), then rebuild.")
                         elif " " in value:
                             add(WARNING, u, f"{where}: attribute '{value}' contains a space — typo?")
                         else:
@@ -131,7 +132,7 @@ def validate(tree: SkillTree, catalog: TagCatalog, icons: IconLibrary,
                                             "(<attribute tag>.<SkillTagMod leaf>, e.g. Speed.Skill.Rifle).")
                     elif key == "EffectSkillPassiveTag":
                         add(WARNING, u, f"{where}: SkillPassive tag '{value}' is not registered — "
-                                        "Tools ▸ Register Tags in C++ adds it.")
+                                        "Tools ▸ Register Tags adds it (C++).")
                     else:
                         add(WARNING, u, f"{where}: tag '{value}' is not registered in FP_GameplayTags.cpp "
                                         "(add it, plus the code that reacts to it, in C++ by hand).")
@@ -140,8 +141,8 @@ def validate(tree: SkillTree, catalog: TagCatalog, icons: IconLibrary,
         _check_against_live(tree, live, live_version, add)
 
     if unregistered_tags:
-        add(INFO, None, f"{unregistered_tags} NodeTag(s) not yet in FP_GameplayTags.cpp — "
-                        "Tools ▸ Register Tags in C++ adds them.")
+        add(INFO, None, f"{unregistered_tags} NodeTag(s) not yet registered (Config/Tags/SkillTreeNodeTags.ini) — "
+                        "Tools ▸ Register Tags adds them.")
 
     issues.sort(key=lambda i: (SEVERITY_ORDER[i.severity], i.uid or 0))
     return issues

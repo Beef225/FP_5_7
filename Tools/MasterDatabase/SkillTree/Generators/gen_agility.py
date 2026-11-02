@@ -51,7 +51,9 @@ def arm(*names):
 
 # ---------------- masteries ----------------
 place_single(L, "Blur.1", "Mastery", base_minors, "Blur",
-             [flag("Flag.SkillTree.DoubleDodgeCannotBlock", "Your Chance to Dodge is Doubled\nYou cannot Block"),
+             [flag("Flag.SkillTree.Blur", "Your Chance to Dodge is Doubled"),
+              plain("Defence.Max.DodgeChance", 0.10, "+10% to Maximum Chance to Dodge"),
+              ("FLAG_TEXT", None, "You cannot Block\nYou have no Armour"),
               red("Health.Increased", -0.15, "Maximum Hit Points")],
              icon("body-swapping", "dodging"), pref_pos=(1500, 820))
 place_single(L, "MomentumEngine.1", "Mastery", base_minors, "Momentum Engine",

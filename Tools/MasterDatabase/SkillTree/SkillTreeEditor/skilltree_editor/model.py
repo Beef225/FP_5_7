@@ -229,12 +229,17 @@ class SkillTree:
             i += 1
         return f"{prefix}.{i}"
 
-    def renumber(self) -> list[tuple[str, str]]:
+    def renumber(self, reserved: dict[str, set[int]] | None = None) -> list[tuple[str, str]]:
         """Give every node a unique index within its prefix group.
 
         Valid, unique indices are kept (so already-imported UE assets keep their
         names); only placeholders (0 / missing) and duplicates get the next free one.
+
+        reserved: prefix -> indices already used by OTHER trees (same NodeTag = same UE asset).
+        A group that collides with them is shifted as a whole past the other tree's highest
+        index (order kept), e.g. SkillSpeed.1-13 here vs SkillSpeed.1-3 in Might -> SkillSpeed.4-16.
         """
+        reserved = reserved or {}
         groups: dict[str, list[tuple[Node, int | None]]] = {}
         for node in self.nodes.values():
             prefix, idx = split_tag(node.tag)
@@ -243,7 +248,19 @@ class SkillTree:
         for prefix, items in groups.items():
             if not prefix:
                 continue
-            used: set[int] = set()
+            taken = reserved.get(prefix, set())
+            if taken and any(idx in taken for _, idx in items if idx):
+                shift = max(taken)
+                shifted = []
+                for node, idx in items:
+                    if idx:
+                        new_tag = f"{prefix}.{idx + shift}"
+                        renames.append((node.tag, new_tag))
+                        node.tag = new_tag
+                        idx += shift
+                    shifted.append((node, idx))
+                items = shifted
+            used: set[int] = set(taken)
             needs: list[Node] = []
             for node, idx in items:
                 if idx and idx not in used:

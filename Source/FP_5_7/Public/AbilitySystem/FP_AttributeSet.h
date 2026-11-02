@@ -235,6 +235,14 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BlockChance, Category = "Se
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BlockedDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData BlockedDamage;
 
+// Caps (like Resistance.Max.*): ExecCalc_Damage clamps ChanceToDodge / BlockChance to these.
+// Base 0.75 from GE_FP_SecondaryAttributes; deliberately very few ways to raise them.
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxDodgeChance, Category = "Secondary Attributes")
+	FGameplayAttributeData MaxDodgeChance;
+
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxBlockChance, Category = "Secondary Attributes")
+	FGameplayAttributeData MaxBlockChance;
+
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_DeferredDamageAmount, Category = "Secondary Attributes")
 	FGameplayAttributeData DeferredDamageAmount;
 
@@ -657,6 +665,14 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_BlockChance(const FGameplayAttributeData& OldBlockChance) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, BlockChance)
+
+UFUNCTION()
+	void OnRep_MaxDodgeChance(const FGameplayAttributeData& OldMaxDodgeChance) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MaxDodgeChance)
+
+UFUNCTION()
+	void OnRep_MaxBlockChance(const FGameplayAttributeData& OldMaxBlockChance) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MaxBlockChance)
 
 UFUNCTION()
 	void OnRep_BlockedDamage(const FGameplayAttributeData& OldBlockedDamage) const;

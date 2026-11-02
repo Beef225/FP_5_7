@@ -12,17 +12,19 @@
 # =============================================================================
 """
 import_tree_tags.py
-Reads a skill tree JSON and adds any missing tags to FP_GameplayTags.h/.cpp.
+Reads a skill tree JSON and registers any missing tags. Where each kind goes: Tools/GameplayTags_README.md
 
-Two tag types are collected and inserted in separate C++ sections:
+  NodeTags       — every node's NodeTag (e.g. SkillTree.LightningCoil.Damage.1, PassiveTree.Bide.2)
+                   -> Config/Tags/SkillTreeNodeTags.ini   (data-only; no rebuild, restart the editor)
 
-  NodeTags       — every node's NodeTag (e.g. SkillTree.LightningCoil.Damage.1)
-                   Section determined by the first segment of the first NodeTag.
+  SkillPassive   — EffectSkillPassiveTag from any "Skill Passive" effect
+                   (e.g. SkillPassive.LightningCoil.IncreasedDamage) -> FP_GameplayTags.h/.cpp
+                   (C++ reads these by name).
 
-  SkillPassive   — EffectSkillPassiveTag from any effect where EffectType == "Skill Passive"
-                   (e.g. SkillPassive.LightningCoil.IncreasedDamage)
-                   Always inserted under the "SkillPassive" section.
-                   Duplicates across nodes are collected only once.
+  Gated stats    — Stat Mod tags like Speed.Skill.Rifle -> FP_GameplayTags.h/.cpp
+                   (UFP_AttributeSet::ResolveStatTag maps them onto the base attribute).
+
+The C++ files are only rewritten (with a .bak_ backup) when something is actually added to them.
 
 Usage:
     python import_tree_tags.py <path_to_json>
@@ -51,6 +53,9 @@ try:
 except ImportError:
     print('ERROR: cannot find add_gameplay_tag.py in', TOOLS_DIR)
     sys.exit(1)
+
+sys.path.insert(0, SCRIPT_DIR)
+import node_tags_ini  # noqa: E402
 
 
 # ---------------------------------------------------------------------------
@@ -109,8 +114,10 @@ def resolve_gated(tag, registered):
         gates.insert(0, gate)
         segs = segs[:-1]
         base = '.'.join(segs)
-        if base in registered:
-            return base, gates
+        # "Damage.More" -> "Damage.More.Generic", like UFP_AttributeSet::ResolveStatTag / the editor catalog
+        for cand in (base, base + '.Generic'):
+            if cand in registered:
+                return cand, gates
     return None, 'no registered base stat tag'
 
 
@@ -210,7 +217,11 @@ def insert_tags(h_lines, c_lines, tags, section_hint, dry_run, label):
 
     h_lines[h_insert_at:h_insert_at] = h_new
     c_lines[c_insert_at:c_insert_at] = c_new
+    insert_tags.changed = True
     return h_lines, c_lines
+
+
+insert_tags.changed = False
 
 
 # ---------------------------------------------------------------------------
@@ -260,9 +271,22 @@ def main():
     h_lines = agt.read_lines(agt.HEADER_PATH)
     c_lines = agt.read_lines(agt.CPP_PATH)
 
-    # Pass 1 — NodeTags (e.g. SkillTree section)
-    print('--- NodeTags ---')
-    h_lines, c_lines = insert_tags(h_lines, c_lines, node_tags, node_section, args.dry_run, 'NodeTags')
+    # Pass 1 — NodeTags -> Config/Tags/SkillTreeNodeTags.ini (not C++)
+    print(f'--- NodeTags -> {node_tags_ini.INI_PATH.relative_to(node_tags_ini.PROJECT_ROOT)} ---')
+    bad = [t for t, _, _ in node_tags if not node_tags_ini.is_node_tag(t)]
+    for t in bad:
+        print(f'  [NodeTags] WARNING: {t} does not look like a node tag (<Root>.<Group>.<N>) — skipped')
+    existing = node_tags_ini.read()
+    new_nodes = {t: d for t, _, d in node_tags if t not in bad and t not in existing}
+    if not new_nodes:
+        print('  [NodeTags] All node tags already registered — nothing to add.')
+    else:
+        print(f'  [NodeTags] {len(new_nodes)} tag(s) to add:')
+        for t in new_nodes:
+            print(f'    {t}')
+        if not args.dry_run:
+            node_tags_ini.add(new_nodes)
+            print('  [NodeTags] ini written — restart the editor to load them (no rebuild needed).')
 
     # Pass 2 — SkillPassive accumulator tags (SkillPassive section)
     print('\n--- SkillPassive Tags ---')
@@ -277,6 +301,10 @@ def main():
         print('\n=== DRY RUN complete — no files written ===')
         return
 
+    if not insert_tags.changed:
+        print('\nNo C++ tags to add — FP_GameplayTags.h/.cpp untouched.')
+        return
+
     bak_h = agt.backup(agt.HEADER_PATH)
     agt.write_lines(agt.HEADER_PATH, h_lines)
     print(f'\nHeader written.  Backup: {os.path.basename(bak_h)}')
@@ -285,14 +313,7 @@ def main():
     agt.write_lines(agt.CPP_PATH, c_lines)
     print(f'CPP written.     Backup: {os.path.basename(bak_c)}')
 
-    print('\nDone. Rebuild the project to register the new tags.')
-    print('\nNodeTags added:')
-    for ts, vn, _ in node_tags:
-        print(f'  FFP_GameplayTags::Get().{vn}')
-    if passive_tags:
-        print('\nSkillPassive tags added:')
-        for ts, vn, _ in passive_tags:
-            print(f'  FFP_GameplayTags::Get().{vn}')
+    print('\nDone. Rebuild the project to register the new C++ tags.')
 
 
 if __name__ == '__main__':

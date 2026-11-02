@@ -155,6 +155,14 @@ private:
 	void ApplyDeferredDamageTick(float Amount, UAbilitySystemComponent* SourceASC);
 	void ApplyRecoupTick(float Amount);
 
+	// ---- Flag-driven effects -------------------------------------------------------------
+	// Skill-tree Effect Flags are loose tags (FFP_NodeEffect_Flag). Flags whose effect is pure
+	// attribute changes map to an infinite native GE here; it is applied while the tag count > 0.
+	void RegisterFlagEffects();
+	void OnFlagEffectTagChanged(const FGameplayTag Tag, int32 NewCount);
+	TMap<FGameplayTag, TSubclassOf<UGameplayEffect>> FlagEffectClasses;
+	TMap<FGameplayTag, FActiveGameplayEffectHandle> ActiveFlagEffects;
+
 	TArray<FFP_DeferredDamageInstance> DeferredDamageInstances;
 	FTimerHandle DeferredDamageTimer;
 	double LastDeferredTickTime = 0.0;

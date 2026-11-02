@@ -12,6 +12,7 @@
 #include "TimerManager.h"
 #include "Engine/World.h"
 #include "Interaction/FP_CombatInterface.h"
+#include "AbilitySystem/Effects/FP_GE_Blur.h"
 
 void UFP_AbilitySystemComponent::AbilityActorInfoSet()
 {
@@ -23,6 +24,58 @@ void UFP_AbilitySystemComponent::AbilityActorInfoSet()
 		DeferredDamageTimeChangedHandle = GetGameplayAttributeValueChangeDelegate(
 			UFP_AttributeSet::GetDeferredDamageTimeAttribute()).AddUObject(
 				this, &UFP_AbilitySystemComponent::OnDeferredDamageTimeChanged);
+	}
+
+	RegisterFlagEffects();
+}
+
+void UFP_AbilitySystemComponent::RegisterFlagEffects()
+{
+	if (!FlagEffectClasses.IsEmpty())
+	{
+		return; // bind once
+	}
+	const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
+	FlagEffectClasses.Add(Tags.Flag_SkillTree_Blur, UFP_GE_Blur::StaticClass());
+
+	for (const TPair<FGameplayTag, TSubclassOf<UGameplayEffect>>& Pair : FlagEffectClasses)
+	{
+		RegisterGameplayTagEvent(Pair.Key, EGameplayTagEventType::NewOrRemoved).AddUObject(
+			this, &UFP_AbilitySystemComponent::OnFlagEffectTagChanged);
+		// Flag may already be present (e.g. tree allocated before the actor info was set).
+		if (GetTagCount(Pair.Key) > 0)
+		{
+			OnFlagEffectTagChanged(Pair.Key, GetTagCount(Pair.Key));
+		}
+	}
+}
+
+void UFP_AbilitySystemComponent::OnFlagEffectTagChanged(const FGameplayTag Tag, int32 NewCount)
+{
+	if (!IsOwnerActorAuthoritative())
+	{
+		return; // the active effect replicates to clients
+	}
+	const TSubclassOf<UGameplayEffect>* EffectClass = FlagEffectClasses.Find(Tag);
+	if (!EffectClass || !*EffectClass)
+	{
+		return;
+	}
+	FActiveGameplayEffectHandle& Handle = ActiveFlagEffects.FindOrAdd(Tag);
+	if (NewCount > 0 && !Handle.IsValid())
+	{
+		FGameplayEffectContextHandle Context = MakeEffectContext();
+		Context.AddSourceObject(GetOwner());
+		const FGameplayEffectSpecHandle Spec = MakeOutgoingSpec(*EffectClass, 1.f, Context);
+		if (Spec.IsValid())
+		{
+			Handle = ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
+		}
+	}
+	else if (NewCount <= 0 && Handle.IsValid())
+	{
+		RemoveActiveGameplayEffect(Handle);
+		Handle.Invalidate();
 	}
 }
 

@@ -10,9 +10,9 @@
     "author": "jakeg",
     "version": "0.1.0",
     "live_version": "",
-    "revision": 4,
+    "revision": 9,
     "created": "2026-10-31T16:49:43-04:00",
-    "modified": "2026-11-01T18:33:55-05:00",
+    "modified": "2026-11-01T20:05:36-05:00",
     "tag_root": "",
     "ue_asset_folder": "/Game/Blueprints/UI/SkillTrees/CharacterSkillTrees/Data/Nodes/Agility",
     "export_file": "",
@@ -33,12 +33,13 @@
       "NodeDescription": "6% Increased Movement Speed\n+3% Chance to Dodge\n+2 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/wind-slap.wind-slap",
       "NodePosition": {
-        "X": 230,
-        "Y": 1500
+        "X": 230.0,
+        "Y": 1500.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.13",
-        "PassiveTree.Evasion.13"
+        "PassiveTree.Evasion.13",
+        "PassiveTree.MomentumEngine.1"
       ],
       "Effects": [
         {
@@ -69,12 +70,13 @@
       "NodeDescription": "15% Increased Critical Strike Chance\n20% Critical Strike Multiplier",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crossed-swords.crossed-swords",
       "NodePosition": {
-        "X": 2770,
-        "Y": 1500
+        "X": 2770.0,
+        "Y": 1500.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.Blur.1",
         "PassiveTree.CriticalChance.13",
-        "PassiveTree.SkillSpeed.13"
+        "PassiveTree.SkillSpeed.16"
       ],
       "Effects": [
         {
@@ -122,13 +124,12 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 1278.3,
-        "Y": 1278.3
+        "X": 1280.0,
+        "Y": 1280.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.1",
         "PassiveTree.Agility.3",
-        "PassiveTree.Blur.1",
         "PassiveTree.Sword.Duelist.1"
       ],
       "Effects": [
@@ -148,13 +149,12 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 1146.7,
-        "Y": 1146.7
+        "X": 1150.0,
+        "Y": 1150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.2",
-        "PassiveTree.Agility.4",
-        "PassiveTree.Blur.1"
+        "PassiveTree.Agility.4"
       ],
       "Effects": [
         {
@@ -173,8 +173,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 1015.0,
-        "Y": 1015.0
+        "X": 1020.0,
+        "Y": 1020.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.3",
@@ -198,8 +198,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 883.3,
-        "Y": 883.3
+        "X": 880.0,
+        "Y": 880.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.4",
@@ -223,8 +223,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 751.7,
-        "Y": 751.7
+        "X": 750.0,
+        "Y": 750.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.5",
@@ -248,8 +248,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 620,
-        "Y": 620
+        "X": 620.0,
+        "Y": 620.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.6",
@@ -273,8 +273,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 564.3,
-        "Y": 745.7
+        "X": 560.0,
+        "Y": 750.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.7",
@@ -297,8 +297,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 508.6,
-        "Y": 871.4
+        "X": 510.0,
+        "Y": 870.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.10",
@@ -322,8 +322,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 452.9,
-        "Y": 997.1
+        "X": 450.0,
+        "Y": 1000.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.11",
@@ -346,8 +346,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 397.1,
-        "Y": 1122.9
+        "X": 400.0,
+        "Y": 1120.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.10",
@@ -370,8 +370,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 341.4,
-        "Y": 1248.6
+        "X": 340.0,
+        "Y": 1250.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.11",
@@ -394,8 +394,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 285.7,
-        "Y": 1374.3
+        "X": 290.0,
+        "Y": 1370.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.12",
@@ -442,13 +442,12 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 1278.3,
-        "Y": 1721.7
+        "X": 1280.0,
+        "Y": 1720.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.1",
-        "PassiveTree.Evasion.3",
-        "PassiveTree.MomentumEngine.1"
+        "PassiveTree.Evasion.3"
       ],
       "Effects": [
         {
@@ -467,13 +466,12 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 1146.7,
-        "Y": 1853.3
+        "X": 1150.0,
+        "Y": 1850.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.2",
-        "PassiveTree.Evasion.4",
-        "PassiveTree.MomentumEngine.1"
+        "PassiveTree.Evasion.4"
       ],
       "Effects": [
         {
@@ -492,8 +490,8 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 1015.0,
-        "Y": 1985.0
+        "X": 1020.0,
+        "Y": 1980.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.3",
@@ -518,8 +516,8 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 883.3,
-        "Y": 2116.7
+        "X": 880.0,
+        "Y": 2120.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.4",
@@ -542,8 +540,8 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 751.7,
-        "Y": 2248.3
+        "X": 750.0,
+        "Y": 2250.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.5",
@@ -567,8 +565,8 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 620,
-        "Y": 2380
+        "X": 620.0,
+        "Y": 2380.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Adrenaline.1",
@@ -593,8 +591,8 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 564.3,
-        "Y": 2254.3
+        "X": 560.0,
+        "Y": 2250.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.7",
@@ -617,8 +615,8 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 508.6,
-        "Y": 2128.6
+        "X": 510.0,
+        "Y": 2130.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Acrobatics.1",
@@ -642,8 +640,8 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 452.9,
-        "Y": 2002.9
+        "X": 450.0,
+        "Y": 2000.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.11",
@@ -667,8 +665,8 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 397.1,
-        "Y": 1877.1
+        "X": 400.0,
+        "Y": 1880.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.10",
@@ -691,8 +689,8 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 341.4,
-        "Y": 1751.4
+        "X": 340.0,
+        "Y": 1750.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.11",
@@ -715,8 +713,8 @@
       "NodeDescription": "+1% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 285.7,
-        "Y": 1625.7
+        "X": 290.0,
+        "Y": 1630.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.12",
@@ -764,8 +762,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 1721.7,
-        "Y": 1278.3
+        "X": 1720.0,
+        "Y": 1280.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.1",
@@ -789,8 +787,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 1853.3,
-        "Y": 1146.7
+        "X": 1850.0,
+        "Y": 1150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.2",
@@ -813,13 +811,13 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 1985.0,
-        "Y": 1015.0
+        "X": 1980.0,
+        "Y": 1020.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.3",
         "PassiveTree.CriticalChance.5",
-        "PassiveTree.Rifle.RifleDamage.1"
+        "PassiveTree.Rifle.RifleDamage.8"
       ],
       "Effects": [
         {
@@ -838,8 +836,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 2116.7,
-        "Y": 883.3
+        "X": 2120.0,
+        "Y": 880.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.4",
@@ -863,8 +861,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 2248.3,
-        "Y": 751.7
+        "X": 2250.0,
+        "Y": 750.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.5",
@@ -887,8 +885,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 2380,
-        "Y": 620
+        "X": 2380.0,
+        "Y": 620.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.6",
@@ -912,8 +910,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 2435.7,
-        "Y": 745.7
+        "X": 2440.0,
+        "Y": 750.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.7",
@@ -936,8 +934,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 2491.4,
-        "Y": 871.4
+        "X": 2490.0,
+        "Y": 870.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.10",
@@ -961,8 +959,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 2547.1,
-        "Y": 997.1
+        "X": 2550.0,
+        "Y": 1000.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.11",
@@ -986,8 +984,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 2602.9,
-        "Y": 1122.9
+        "X": 2600.0,
+        "Y": 1120.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.10",
@@ -1010,8 +1008,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 2658.6,
-        "Y": 1248.6
+        "X": 2660.0,
+        "Y": 1250.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.11",
@@ -1034,8 +1032,8 @@
       "NodeDescription": "5% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/on-target.on-target",
       "NodePosition": {
-        "X": 2714.3,
-        "Y": 1374.3
+        "X": 2710.0,
+        "Y": 1370.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.12",
@@ -1052,7 +1050,7 @@
       ]
     },
     {
-      "NodeTag": "PassiveTree.SkillSpeed.1",
+      "NodeTag": "PassiveTree.SkillSpeed.4",
       "NodeType": "Minor",
       "IsStartNode": true,
       "NodeName": "Skill Speed",
@@ -1063,81 +1061,6 @@
         "Y": 1590.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.SkillSpeed.2"
-      ],
-      "Effects": [
-        {
-          "EffectType": "Stat Mod",
-          "EffectStatModAttributeType": "Speed.Skill",
-          "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 0.02
-        }
-      ]
-    },
-    {
-      "NodeTag": "PassiveTree.SkillSpeed.2",
-      "NodeType": "Minor",
-      "IsStartNode": false,
-      "NodeName": "Skill Speed",
-      "NodeDescription": "2% Increased Skill Speed",
-      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
-      "NodePosition": {
-        "X": 1721.7,
-        "Y": 1721.7
-      },
-      "ConnectedNodeTags": [
-        "PassiveTree.Pistol.PistolDamage.1",
-        "PassiveTree.Rifle.BurstFire.1",
-        "PassiveTree.SkillSpeed.1",
-        "PassiveTree.SkillSpeed.3"
-      ],
-      "Effects": [
-        {
-          "EffectType": "Stat Mod",
-          "EffectStatModAttributeType": "Speed.Skill",
-          "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 0.02
-        }
-      ]
-    },
-    {
-      "NodeTag": "PassiveTree.SkillSpeed.3",
-      "NodeType": "Minor",
-      "IsStartNode": false,
-      "NodeName": "Skill Speed",
-      "NodeDescription": "2% Increased Skill Speed",
-      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
-      "NodePosition": {
-        "X": 1853.3,
-        "Y": 1853.3
-      },
-      "ConnectedNodeTags": [
-        "PassiveTree.SkillSpeed.2",
-        "PassiveTree.SkillSpeed.4"
-      ],
-      "Effects": [
-        {
-          "EffectType": "Stat Mod",
-          "EffectStatModAttributeType": "Speed.Skill",
-          "EffectStatModifierOp": "Add",
-          "EffectStatMagnitude": 0.02
-        }
-      ]
-    },
-    {
-      "NodeTag": "PassiveTree.SkillSpeed.4",
-      "NodeType": "Minor",
-      "IsStartNode": false,
-      "NodeName": "Skill Speed",
-      "NodeDescription": "2% Increased Skill Speed",
-      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
-      "NodePosition": {
-        "X": 1985.0,
-        "Y": 1985.0
-      },
-      "ConnectedNodeTags": [
-        "PassiveTree.Pistol.FanTheHammer.1",
-        "PassiveTree.SkillSpeed.3",
         "PassiveTree.SkillSpeed.5"
       ],
       "Effects": [
@@ -1157,11 +1080,12 @@
       "NodeDescription": "2% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2116.7,
-        "Y": 2116.7
+        "X": 1720.0,
+        "Y": 1720.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.Pistol.HollowPoints.1",
+        "PassiveTree.Pistol.PistolDamage.1",
+        "PassiveTree.Rifle.BurstFire.1",
         "PassiveTree.SkillSpeed.4",
         "PassiveTree.SkillSpeed.6"
       ],
@@ -1182,11 +1106,10 @@
       "NodeDescription": "2% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2248.3,
-        "Y": 2248.3
+        "X": 1850.0,
+        "Y": 1850.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.QuickenedReflexes.1",
         "PassiveTree.SkillSpeed.5",
         "PassiveTree.SkillSpeed.7"
       ],
@@ -1207,13 +1130,13 @@
       "NodeDescription": "2% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2380,
-        "Y": 2380
+        "X": 1980.0,
+        "Y": 1980.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.Pistol.FanTheHammer.1",
         "PassiveTree.SkillSpeed.6",
-        "PassiveTree.SkillSpeed.8",
-        "PassiveTree.Sword.FlowingStrikes.1"
+        "PassiveTree.SkillSpeed.8"
       ],
       "Effects": [
         {
@@ -1232,10 +1155,11 @@
       "NodeDescription": "2% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2435.7,
-        "Y": 2254.3
+        "X": 2120.0,
+        "Y": 2120.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.Pistol.HollowPoints.1",
         "PassiveTree.SkillSpeed.7",
         "PassiveTree.SkillSpeed.9"
       ],
@@ -1256,10 +1180,11 @@
       "NodeDescription": "2% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2491.4,
-        "Y": 2128.6
+        "X": 2250.0,
+        "Y": 2250.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.QuickenedReflexes.1",
         "PassiveTree.SkillSpeed.10",
         "PassiveTree.SkillSpeed.8"
       ],
@@ -1280,13 +1205,13 @@
       "NodeDescription": "2% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2547.1,
-        "Y": 2002.9
+        "X": 2380.0,
+        "Y": 2380.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.Precision.ExploitWeakness.1",
         "PassiveTree.SkillSpeed.11",
-        "PassiveTree.SkillSpeed.9"
+        "PassiveTree.SkillSpeed.9",
+        "PassiveTree.Sword.FlowingStrikes.1"
       ],
       "Effects": [
         {
@@ -1305,8 +1230,8 @@
       "NodeDescription": "2% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2602.9,
-        "Y": 1877.1
+        "X": 2440.0,
+        "Y": 2250.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.SkillSpeed.10",
@@ -1329,8 +1254,8 @@
       "NodeDescription": "2% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2658.6,
-        "Y": 1751.4
+        "X": 2490.0,
+        "Y": 2130.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.SkillSpeed.11",
@@ -1353,14 +1278,87 @@
       "NodeDescription": "2% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2714.3,
-        "Y": 1625.7
+        "X": 2550.0,
+        "Y": 2000.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Precision.ExploitWeakness.1",
+        "PassiveTree.SkillSpeed.12",
+        "PassiveTree.SkillSpeed.14"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.SkillSpeed.14",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Skill Speed",
+      "NodeDescription": "2% Increased Skill Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
+      "NodePosition": {
+        "X": 2600.0,
+        "Y": 1880.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.SkillSpeed.13",
+        "PassiveTree.SkillSpeed.15"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.SkillSpeed.15",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Skill Speed",
+      "NodeDescription": "2% Increased Skill Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
+      "NodePosition": {
+        "X": 2660.0,
+        "Y": 1750.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.SkillSpeed.14",
+        "PassiveTree.SkillSpeed.16"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Skill",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.SkillSpeed.16",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Skill Speed",
+      "NodeDescription": "2% Increased Skill Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
+      "NodePosition": {
+        "X": 2710.0,
+        "Y": 1630.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.KillingEdge.1",
         "PassiveTree.Lethality.1",
         "PassiveTree.Precision.KineticRounds.1",
-        "PassiveTree.SkillSpeed.12"
+        "PassiveTree.SkillSpeed.15"
       ],
       "Effects": [
         {
@@ -1376,21 +1374,26 @@
       "NodeType": "Mastery",
       "IsStartNode": false,
       "NodeName": "Blur",
-      "NodeDescription": "Your Chance to Dodge is Doubled\nYou cannot Block\n15% Reduced Maximum Hit Points",
+      "NodeDescription": "Your Chance to Dodge is Doubled\n+10% to Maximum Chance to Dodge\nYou cannot Block\nYou have no Armour\n15% Reduced Maximum Hit Points",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/body-swapping.body-swapping",
       "NodePosition": {
-        "X": 1470,
-        "Y": 910
+        "X": 2920.0,
+        "Y": 1490.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.Agility.2",
-        "PassiveTree.Agility.3"
+        "PassiveTree.KillingEdge.1"
       ],
       "Effects": [
         {
           "EffectType": "Effect Flag",
-          "EffectFlagType": "Flag.SkillTree.DoubleDodgeCannotBlock",
-          "EffectFlagTag": "Flag.SkillTree.DoubleDodgeCannotBlock"
+          "EffectFlagType": "Flag.SkillTree.Blur",
+          "EffectFlagTag": "Flag.SkillTree.Blur"
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defence.Max.DodgeChance",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
         },
         {
           "EffectType": "Stat Mod",
@@ -1408,12 +1411,11 @@
       "NodeDescription": "Increases and Reductions to Movement Speed also apply to Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/speedometer.speedometer",
       "NodePosition": {
-        "X": 1470,
-        "Y": 2090
+        "X": 80.0,
+        "Y": 1500.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.Evasion.2",
-        "PassiveTree.Evasion.3"
+        "PassiveTree.WindRunner.1"
       ],
       "Effects": [
         {
@@ -1432,7 +1434,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/broadsword.broadsword",
       "NodePosition": {
         "X": 620.0,
-        "Y": 517.0
+        "Y": 520.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.7",
@@ -1455,8 +1457,8 @@
       "NodeDescription": "8% Increased Sword Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/broadsword.broadsword",
       "NodePosition": {
-        "X": 552.0,
-        "Y": 480.9
+        "X": 550.0,
+        "Y": 480.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.SwordDamage.1",
@@ -1479,8 +1481,8 @@
       "NodeDescription": "8% Increased Sword Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/broadsword.broadsword",
       "NodePosition": {
-        "X": 544.0,
-        "Y": 404.3
+        "X": 540.0,
+        "Y": 400.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.SwordDamage.2",
@@ -1503,8 +1505,8 @@
       "NodeDescription": "8% Increased Sword Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/broadsword.broadsword",
       "NodePosition": {
-        "X": 603.0,
-        "Y": 354.8
+        "X": 600.0,
+        "Y": 350.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.SwordDamage.3",
@@ -1527,8 +1529,8 @@
       "NodeDescription": "8% Increased Sword Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/broadsword.broadsword",
       "NodePosition": {
-        "X": 677.0,
-        "Y": 376.0
+        "X": 680.0,
+        "Y": 380.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.SwordDamage.4",
@@ -1551,8 +1553,8 @@
       "NodeDescription": "8% Increased Sword Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/broadsword.broadsword",
       "NodePosition": {
-        "X": 700.8,
-        "Y": 449.2
+        "X": 700.0,
+        "Y": 450.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.SwordDamage.5",
@@ -1576,7 +1578,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-spin.sword-spin",
       "NodePosition": {
         "X": 620.0,
-        "Y": 435.0
+        "Y": 440.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.SwordDamage.6"
@@ -1604,8 +1606,8 @@
       "NodeDescription": "10% Increased Critical Strike Chance with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-clash.sword-clash",
       "NodePosition": {
-        "X": 2307.0,
-        "Y": 493.6
+        "X": 2310.0,
+        "Y": 490.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.7",
@@ -1628,8 +1630,8 @@
       "NodeDescription": "15% Critical Strike Multiplier with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-clash.sword-clash",
       "NodePosition": {
-        "X": 2203.9,
-        "Y": 462.7
+        "X": 2200.0,
+        "Y": 460.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.Riposte.1",
@@ -1652,8 +1654,8 @@
       "NodeDescription": "10% Increased Critical Strike Chance with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-clash.sword-clash",
       "NodePosition": {
-        "X": 2240.7,
-        "Y": 361.5
+        "X": 2240.0,
+        "Y": 360.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.Riposte.2",
@@ -1676,8 +1678,8 @@
       "NodeDescription": "15% Critical Strike Multiplier with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-clash.sword-clash",
       "NodePosition": {
-        "X": 2339.5,
-        "Y": 404.2
+        "X": 2340.0,
+        "Y": 400.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.Riposte.3",
@@ -1701,7 +1703,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-clash.sword-clash",
       "NodePosition": {
         "X": 2270.0,
-        "Y": 429.5
+        "Y": 430.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.Riposte.4"
@@ -1730,10 +1732,10 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-spin.sword-spin",
       "NodePosition": {
         "X": 2380.0,
-        "Y": 2491.0
+        "Y": 2490.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.SkillSpeed.7",
+        "PassiveTree.SkillSpeed.10",
         "PassiveTree.Sword.FlowingStrikes.2"
       ],
       "Effects": [
@@ -1753,8 +1755,8 @@
       "NodeDescription": "4% Increased Skill Speed with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-spin.sword-spin",
       "NodePosition": {
-        "X": 2453.9,
-        "Y": 2569.3
+        "X": 2450.0,
+        "Y": 2570.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.FlowingStrikes.1",
@@ -1777,8 +1779,8 @@
       "NodeDescription": "4% Increased Skill Speed with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-spin.sword-spin",
       "NodePosition": {
-        "X": 2371.4,
-        "Y": 2638.5
+        "X": 2370.0,
+        "Y": 2640.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.FlowingStrikes.2",
@@ -1801,8 +1803,8 @@
       "NodeDescription": "4% Increased Skill Speed with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-spin.sword-spin",
       "NodePosition": {
-        "X": 2307.1,
-        "Y": 2552.2
+        "X": 2310.0,
+        "Y": 2550.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.FlowingStrikes.3",
@@ -1826,7 +1828,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-spin.sword-spin",
       "NodePosition": {
         "X": 2380.0,
-        "Y": 2565.0
+        "Y": 2560.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.FlowingStrikes.4"
@@ -1854,8 +1856,8 @@
       "NodeDescription": "2% Physical Resistance Penetration with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-hilt.sword-hilt",
       "NodePosition": {
-        "X": 1166.6,
-        "Y": 1390.1
+        "X": 1170.0,
+        "Y": 1390.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.2",
@@ -1878,8 +1880,8 @@
       "NodeDescription": "2% Physical Resistance Penetration with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-hilt.sword-hilt",
       "NodePosition": {
-        "X": 1166.6,
-        "Y": 1477.7
+        "X": 1170.0,
+        "Y": 1480.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.Duelist.1",
@@ -1902,8 +1904,8 @@
       "NodeDescription": "2% Physical Resistance Penetration with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-hilt.sword-hilt",
       "NodePosition": {
-        "X": 1078.9,
-        "Y": 1477.7
+        "X": 1080.0,
+        "Y": 1480.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.Duelist.2",
@@ -1926,8 +1928,8 @@
       "NodeDescription": "5% Armour Penetration with Swords\n5% Physical Resistance Penetration with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sword-hilt.sword-hilt",
       "NodePosition": {
-        "X": 1078.9,
-        "Y": 1390.1
+        "X": 1080.0,
+        "Y": 1390.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.Duelist.3"
@@ -1955,8 +1957,8 @@
       "NodeDescription": "8% Increased Physical Damage with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
       "NodePosition": {
-        "X": 699.0,
-        "Y": 2516.8
+        "X": 700.0,
+        "Y": 2520.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.7",
@@ -1979,8 +1981,8 @@
       "NodeDescription": "8% Increased Physical Damage with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
       "NodePosition": {
-        "X": 783.7,
-        "Y": 2539.5
+        "X": 780.0,
+        "Y": 2540.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.Ronin.1",
@@ -2003,8 +2005,8 @@
       "NodeDescription": "8% Increased Physical Damage with Swords",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
       "NodePosition": {
-        "X": 761.0,
-        "Y": 2624.2
+        "X": 760.0,
+        "Y": 2620.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.Ronin.2",
@@ -2027,8 +2029,8 @@
       "NodeDescription": "5% More Sword Damage\n+2% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sword-brandish.sword-brandish",
       "NodePosition": {
-        "X": 676.3,
-        "Y": 2601.5
+        "X": 680.0,
+        "Y": 2600.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Sword.Ronin.3"
@@ -2056,12 +2058,12 @@
       "NodeDescription": "8% Increased Pistol Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/john-colburn/pistol-gun.pistol-gun",
       "NodePosition": {
-        "X": 1819.2,
-        "Y": 1624.1
+        "X": 1820.0,
+        "Y": 1620.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.PistolDamage.2",
-        "PassiveTree.SkillSpeed.2"
+        "PassiveTree.SkillSpeed.5"
       ],
       "Effects": [
         {
@@ -2080,8 +2082,8 @@
       "NodeDescription": "8% Increased Pistol Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/john-colburn/pistol-gun.pistol-gun",
       "NodePosition": {
-        "X": 1796.7,
-        "Y": 1550.5
+        "X": 1800.0,
+        "Y": 1550.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.PistolDamage.1",
@@ -2104,8 +2106,8 @@
       "NodeDescription": "8% Increased Pistol Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/john-colburn/pistol-gun.pistol-gun",
       "NodePosition": {
-        "X": 1845.2,
-        "Y": 1490.6
+        "X": 1850.0,
+        "Y": 1490.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.PistolDamage.2",
@@ -2128,8 +2130,8 @@
       "NodeDescription": "8% Increased Pistol Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/john-colburn/pistol-gun.pistol-gun",
       "NodePosition": {
-        "X": 1921.9,
-        "Y": 1497.3
+        "X": 1920.0,
+        "Y": 1500.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.PistolDamage.3",
@@ -2152,8 +2154,8 @@
       "NodeDescription": "8% Increased Pistol Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/john-colburn/pistol-gun.pistol-gun",
       "NodePosition": {
-        "X": 1959.2,
-        "Y": 1564.7
+        "X": 1960.0,
+        "Y": 1560.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.PistolDamage.4",
@@ -2176,8 +2178,8 @@
       "NodeDescription": "8% Increased Pistol Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/john-colburn/pistol-gun.pistol-gun",
       "NodePosition": {
-        "X": 1924.3,
-        "Y": 1633.3
+        "X": 1920.0,
+        "Y": 1630.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.PistolDamage.5",
@@ -2200,8 +2202,8 @@
       "NodeDescription": "12% Increased Pistol Damage\n5% More Pistol Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/revolver.revolver",
       "NodePosition": {
-        "X": 1877.2,
-        "Y": 1566.1
+        "X": 1880.0,
+        "Y": 1570.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.PistolDamage.6"
@@ -2229,12 +2231,12 @@
       "NodeDescription": "4% Increased Skill Speed with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bullets.bullets",
       "NodePosition": {
-        "X": 1881.8,
-        "Y": 2088.2
+        "X": 1880.0,
+        "Y": 2090.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.FanTheHammer.2",
-        "PassiveTree.SkillSpeed.4"
+        "PassiveTree.SkillSpeed.7"
       ],
       "Effects": [
         {
@@ -2253,8 +2255,8 @@
       "NodeDescription": "4% Increased Skill Speed with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bullets.bullets",
       "NodePosition": {
-        "X": 1878.6,
-        "Y": 2195.8
+        "X": 1880.0,
+        "Y": 2200.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.FanTheHammer.1",
@@ -2277,8 +2279,8 @@
       "NodeDescription": "4% Increased Skill Speed with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bullets.bullets",
       "NodePosition": {
-        "X": 1771.4,
-        "Y": 2186.5
+        "X": 1770.0,
+        "Y": 2190.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.FanTheHammer.2",
@@ -2301,8 +2303,8 @@
       "NodeDescription": "4% Increased Skill Speed with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bullets.bullets",
       "NodePosition": {
-        "X": 1787.0,
-        "Y": 2079.9
+        "X": 1790.0,
+        "Y": 2080.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.FanTheHammer.3",
@@ -2325,8 +2327,8 @@
       "NodeDescription": "8% Increased Skill Speed with Pistols\n10% Reduced Heat Cost with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/revolver.revolver",
       "NodePosition": {
-        "X": 1829.4,
-        "Y": 2140.6
+        "X": 1830.0,
+        "Y": 2140.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.FanTheHammer.4"
@@ -2354,8 +2356,8 @@
       "NodeDescription": "10% Increased Critical Strike Chance with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
       "NodePosition": {
-        "X": 2013.4,
-        "Y": 780.1
+        "X": 2010.0,
+        "Y": 780.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.5",
@@ -2378,8 +2380,8 @@
       "NodeDescription": "15% Critical Strike Multiplier with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
       "NodePosition": {
-        "X": 1905.8,
-        "Y": 777.0
+        "X": 1910.0,
+        "Y": 780.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.Deadshot.1",
@@ -2402,8 +2404,8 @@
       "NodeDescription": "10% Increased Critical Strike Chance with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
       "NodePosition": {
-        "X": 1915.2,
-        "Y": 669.7
+        "X": 1920.0,
+        "Y": 670.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.Deadshot.2",
@@ -2426,8 +2428,8 @@
       "NodeDescription": "15% Critical Strike Multiplier with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
       "NodePosition": {
-        "X": 2021.7,
-        "Y": 685.3
+        "X": 2020.0,
+        "Y": 690.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.Deadshot.3",
@@ -2450,8 +2452,8 @@
       "NodeDescription": "+3% Base Critical Strike Chance with Pistols\n25% Critical Strike Multiplier with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/headshot.headshot",
       "NodePosition": {
-        "X": 1961.1,
-        "Y": 727.8
+        "X": 1960.0,
+        "Y": 730.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.Deadshot.4"
@@ -2479,8 +2481,8 @@
       "NodeDescription": "8% Increased Projectile Speed with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 1126.7,
-        "Y": 2096.7
+        "X": 1130.0,
+        "Y": 2100.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.4",
@@ -2503,8 +2505,8 @@
       "NodeDescription": "8% Increased Projectile Speed with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 1214.4,
-        "Y": 2096.7
+        "X": 1210.0,
+        "Y": 2100.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.Outrider.1",
@@ -2527,8 +2529,8 @@
       "NodeDescription": "8% Increased Projectile Speed with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 1214.4,
-        "Y": 2184.4
+        "X": 1210.0,
+        "Y": 2180.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.Outrider.2",
@@ -2551,8 +2553,8 @@
       "NodeDescription": "15% Increased Projectile Speed with Pistols\n3% Increased Movement Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 1126.7,
-        "Y": 2184.4
+        "X": 1130.0,
+        "Y": 2180.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.Outrider.3"
@@ -2580,12 +2582,12 @@
       "NodeDescription": "2% Armour Penetration with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/heavy-bullets.heavy-bullets",
       "NodePosition": {
-        "X": 2228.4,
-        "Y": 2004.9
+        "X": 2230.0,
+        "Y": 2000.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.HollowPoints.2",
-        "PassiveTree.SkillSpeed.5"
+        "PassiveTree.SkillSpeed.8"
       ],
       "Effects": [
         {
@@ -2604,8 +2606,8 @@
       "NodeDescription": "2% Armour Penetration with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/heavy-bullets.heavy-bullets",
       "NodePosition": {
-        "X": 2228.4,
-        "Y": 1917.3
+        "X": 2230.0,
+        "Y": 1920.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.HollowPoints.1",
@@ -2628,8 +2630,8 @@
       "NodeDescription": "2% Armour Penetration with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/heavy-bullets.heavy-bullets",
       "NodePosition": {
-        "X": 2316.1,
-        "Y": 1917.3
+        "X": 2320.0,
+        "Y": 1920.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.HollowPoints.2",
@@ -2652,8 +2654,8 @@
       "NodeDescription": "5% Armour Penetration with Pistols\n15% Increased Physical Damage with Pistols",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/heavy-bullets.heavy-bullets",
       "NodePosition": {
-        "X": 2316.1,
-        "Y": 2004.9
+        "X": 2320.0,
+        "Y": 2000.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Pistol.HollowPoints.3"
@@ -2674,19 +2676,19 @@
       ]
     },
     {
-      "NodeTag": "PassiveTree.Rifle.RifleDamage.1",
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.8",
       "NodeType": "Minor",
       "IsStartNode": false,
       "NodeName": "Increased Rifle Damage",
       "NodeDescription": "7% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/ak47.ak47",
       "NodePosition": {
-        "X": 2082.6,
-        "Y": 1112.6
+        "X": 2080.0,
+        "Y": 1110.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.4",
-        "PassiveTree.Rifle.RifleDamage.2"
+        "PassiveTree.Rifle.RifleDamage.9"
       ],
       "Effects": [
         {
@@ -2698,19 +2700,19 @@
       ]
     },
     {
-      "NodeTag": "PassiveTree.Rifle.RifleDamage.2",
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.9",
       "NodeType": "Minor",
       "IsStartNode": false,
       "NodeName": "Increased Rifle Damage",
       "NodeDescription": "7% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/ak47.ak47",
       "NodePosition": {
-        "X": 2156.2,
-        "Y": 1090.1
+        "X": 2160.0,
+        "Y": 1090.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.Rifle.RifleDamage.1",
-        "PassiveTree.Rifle.RifleDamage.3"
+        "PassiveTree.Rifle.RifleDamage.10",
+        "PassiveTree.Rifle.RifleDamage.8"
       ],
       "Effects": [
         {
@@ -2722,19 +2724,19 @@
       ]
     },
     {
-      "NodeTag": "PassiveTree.Rifle.RifleDamage.3",
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.10",
       "NodeType": "Minor",
       "IsStartNode": false,
       "NodeName": "Increased Rifle Damage",
       "NodeDescription": "7% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/ak47.ak47",
       "NodePosition": {
-        "X": 2216.0,
-        "Y": 1138.5
+        "X": 2220.0,
+        "Y": 1140.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.Rifle.RifleDamage.2",
-        "PassiveTree.Rifle.RifleDamage.4"
+        "PassiveTree.Rifle.RifleDamage.11",
+        "PassiveTree.Rifle.RifleDamage.9"
       ],
       "Effects": [
         {
@@ -2746,19 +2748,19 @@
       ]
     },
     {
-      "NodeTag": "PassiveTree.Rifle.RifleDamage.4",
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.11",
       "NodeType": "Minor",
       "IsStartNode": false,
       "NodeName": "Increased Rifle Damage",
       "NodeDescription": "7% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/ak47.ak47",
       "NodePosition": {
-        "X": 2209.3,
-        "Y": 1215.2
+        "X": 2210.0,
+        "Y": 1220.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.Rifle.RifleDamage.3",
-        "PassiveTree.Rifle.RifleDamage.5"
+        "PassiveTree.Rifle.RifleDamage.10",
+        "PassiveTree.Rifle.RifleDamage.12"
       ],
       "Effects": [
         {
@@ -2770,19 +2772,19 @@
       ]
     },
     {
-      "NodeTag": "PassiveTree.Rifle.RifleDamage.5",
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.12",
       "NodeType": "Minor",
       "IsStartNode": false,
       "NodeName": "Increased Rifle Damage",
       "NodeDescription": "7% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/ak47.ak47",
       "NodePosition": {
-        "X": 2142.0,
-        "Y": 1252.6
+        "X": 2140.0,
+        "Y": 1250.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.Rifle.RifleDamage.4",
-        "PassiveTree.Rifle.RifleDamage.6"
+        "PassiveTree.Rifle.RifleDamage.11",
+        "PassiveTree.Rifle.RifleDamage.13"
       ],
       "Effects": [
         {
@@ -2794,19 +2796,19 @@
       ]
     },
     {
-      "NodeTag": "PassiveTree.Rifle.RifleDamage.6",
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.13",
       "NodeType": "Minor",
       "IsStartNode": false,
       "NodeName": "Increased Rifle Damage",
       "NodeDescription": "7% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/ak47.ak47",
       "NodePosition": {
-        "X": 2073.4,
-        "Y": 1217.6
+        "X": 2070.0,
+        "Y": 1220.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.Rifle.RifleDamage.5",
-        "PassiveTree.Rifle.RifleDamage.7"
+        "PassiveTree.Rifle.RifleDamage.12",
+        "PassiveTree.Rifle.RifleDamage.14"
       ],
       "Effects": [
         {
@@ -2818,18 +2820,18 @@
       ]
     },
     {
-      "NodeTag": "PassiveTree.Rifle.RifleDamage.7",
+      "NodeTag": "PassiveTree.Rifle.RifleDamage.14",
       "NodeType": "Major",
       "IsStartNode": false,
       "NodeName": "Commando",
       "NodeDescription": "10% Increased Rifle Damage\n5% More Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/ak47.ak47",
       "NodePosition": {
-        "X": 2140.6,
-        "Y": 1170.6
+        "X": 2140.0,
+        "Y": 1170.0
       },
       "ConnectedNodeTags": [
-        "PassiveTree.Rifle.RifleDamage.6"
+        "PassiveTree.Rifle.RifleDamage.13"
       ],
       "Effects": [
         {
@@ -2854,8 +2856,8 @@
       "NodeDescription": "8% Increased Projectile Speed with Rifles",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 1643.2,
-        "Y": 1199.8
+        "X": 1640.0,
+        "Y": 1200.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.2",
@@ -2878,8 +2880,8 @@
       "NodeDescription": "10% Increased Critical Strike Chance with Rifles",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 1535.6,
-        "Y": 1196.7
+        "X": 1540.0,
+        "Y": 1200.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.Ranger.1",
@@ -2902,8 +2904,8 @@
       "NodeDescription": "8% Increased Projectile Speed with Rifles",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 1545.0,
-        "Y": 1089.5
+        "X": 1540.0,
+        "Y": 1090.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.Ranger.2",
@@ -2926,8 +2928,8 @@
       "NodeDescription": "10% Increased Critical Strike Chance with Rifles",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 1651.5,
-        "Y": 1105.1
+        "X": 1650.0,
+        "Y": 1110.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.Ranger.3",
@@ -2950,8 +2952,8 @@
       "NodeDescription": "15% Increased Projectile Speed with Rifles\n25% Critical Strike Multiplier with Rifles",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crosshair-arrow.crosshair-arrow",
       "NodePosition": {
-        "X": 1590.9,
-        "Y": 1147.5
+        "X": 1590.0,
+        "Y": 1150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.Ranger.4"
@@ -2979,12 +2981,12 @@
       "NodeDescription": "4% Increased Skill Speed with Rifles",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bullets.bullets",
       "NodePosition": {
-        "X": 1584.8,
-        "Y": 1800.7
+        "X": 1580.0,
+        "Y": 1800.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.BurstFire.2",
-        "PassiveTree.SkillSpeed.2"
+        "PassiveTree.SkillSpeed.5"
       ],
       "Effects": [
         {
@@ -3003,8 +3005,8 @@
       "NodeDescription": "4% Increased Skill Speed with Rifles",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bullets.bullets",
       "NodePosition": {
-        "X": 1562.1,
-        "Y": 1885.4
+        "X": 1560.0,
+        "Y": 1890.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.BurstFire.1",
@@ -3027,8 +3029,8 @@
       "NodeDescription": "4% Increased Skill Speed with Rifles",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bullets.bullets",
       "NodePosition": {
-        "X": 1477.4,
-        "Y": 1862.7
+        "X": 1480.0,
+        "Y": 1860.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.BurstFire.2",
@@ -3051,8 +3053,8 @@
       "NodeDescription": "8% Increased Skill Speed with Rifles\n8% Increased Rifle Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bullets.bullets",
       "NodePosition": {
-        "X": 1500.1,
-        "Y": 1778.0
+        "X": 1500.0,
+        "Y": 1780.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Rifle.BurstFire.3"
@@ -3080,8 +3082,8 @@
       "NodeDescription": "2% Increased Movement Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thrown-spear.thrown-spear",
       "NodePosition": {
-        "X": 911.8,
-        "Y": 1881.8
+        "X": 910.0,
+        "Y": 1880.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.4",
@@ -3104,8 +3106,8 @@
       "NodeDescription": "6% Increased Spear Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thrown-spear.thrown-spear",
       "NodePosition": {
-        "X": 804.2,
-        "Y": 1878.6
+        "X": 800.0,
+        "Y": 1880.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.HitAndRun.1",
@@ -3128,8 +3130,8 @@
       "NodeDescription": "2% Increased Movement Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thrown-spear.thrown-spear",
       "NodePosition": {
-        "X": 813.5,
-        "Y": 1771.4
+        "X": 810.0,
+        "Y": 1770.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.HitAndRun.2",
@@ -3152,8 +3154,8 @@
       "NodeDescription": "6% Increased Spear Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thrown-spear.thrown-spear",
       "NodePosition": {
-        "X": 920.1,
-        "Y": 1787.0
+        "X": 920.0,
+        "Y": 1790.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.HitAndRun.3",
@@ -3176,8 +3178,8 @@
       "NodeDescription": "4% Increased Movement Speed\n+3% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thrown-spear.thrown-spear",
       "NodePosition": {
-        "X": 859.4,
-        "Y": 1829.4
+        "X": 860.0,
+        "Y": 1830.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.HitAndRun.4"
@@ -3205,8 +3207,8 @@
       "NodeDescription": "8% Increased Spear Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/spears.spears",
       "NodePosition": {
-        "X": 326.4,
-        "Y": 2075.9
+        "X": 330.0,
+        "Y": 2080.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.10",
@@ -3229,8 +3231,8 @@
       "NodeDescription": "8% Increased Spear Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/spears.spears",
       "NodePosition": {
-        "X": 295.5,
-        "Y": 2179.0
+        "X": 300.0,
+        "Y": 2180.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.Lancer.1",
@@ -3253,8 +3255,8 @@
       "NodeDescription": "8% Increased Spear Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/spears.spears",
       "NodePosition": {
-        "X": 194.4,
-        "Y": 2142.2
+        "X": 190.0,
+        "Y": 2140.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.Lancer.2",
@@ -3277,8 +3279,8 @@
       "NodeDescription": "8% Increased Spear Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/spears.spears",
       "NodePosition": {
-        "X": 237.0,
-        "Y": 2043.3
+        "X": 240.0,
+        "Y": 2040.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.Lancer.3",
@@ -3301,8 +3303,8 @@
       "NodeDescription": "4% More Spear Damage\n25% Critical Strike Multiplier with Spears",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/barbed-spear.barbed-spear",
       "NodePosition": {
-        "X": 262.3,
-        "Y": 2112.9
+        "X": 260.0,
+        "Y": 2110.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.Lancer.4"
@@ -3330,8 +3332,8 @@
       "NodeDescription": "10% Increased Critical Strike Chance with Spears",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/spear-feather.spear-feather",
       "NodePosition": {
-        "X": 1126.7,
-        "Y": 903.3
+        "X": 1130.0,
+        "Y": 900.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.4",
@@ -3354,8 +3356,8 @@
       "NodeDescription": "10% Increased Critical Strike Chance with Spears",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/spear-feather.spear-feather",
       "NodePosition": {
-        "X": 1126.7,
-        "Y": 815.6
+        "X": 1130.0,
+        "Y": 820.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.Dragoon.1",
@@ -3378,8 +3380,8 @@
       "NodeDescription": "10% Increased Critical Strike Chance with Spears",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/spear-feather.spear-feather",
       "NodePosition": {
-        "X": 1214.4,
-        "Y": 815.6
+        "X": 1210.0,
+        "Y": 820.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.Dragoon.2",
@@ -3402,8 +3404,8 @@
       "NodeDescription": "+2% Base Critical Strike Chance with Spears\n15% Increased Area of Effect with Spears",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/spear-feather.spear-feather",
       "NodePosition": {
-        "X": 1214.4,
-        "Y": 903.3
+        "X": 1210.0,
+        "Y": 900.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.Dragoon.3"
@@ -3431,8 +3433,8 @@
       "NodeDescription": "8% Increased Precision Weapon Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crosshair-arrow.crosshair-arrow",
       "NodePosition": {
-        "X": 2666.7,
-        "Y": 928.1
+        "X": 2670.0,
+        "Y": 930.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.10",
@@ -3455,8 +3457,8 @@
       "NodeDescription": "8% Increased Precision Weapon Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crosshair-arrow.crosshair-arrow",
       "NodePosition": {
-        "X": 2664.0,
-        "Y": 851.2
+        "X": 2660.0,
+        "Y": 850.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.PrecisionDamage.1",
@@ -3479,8 +3481,8 @@
       "NodeDescription": "8% Increased Precision Weapon Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crosshair-arrow.crosshair-arrow",
       "NodePosition": {
-        "X": 2726.3,
-        "Y": 805.9
+        "X": 2730.0,
+        "Y": 810.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.PrecisionDamage.2",
@@ -3503,8 +3505,8 @@
       "NodeDescription": "8% Increased Precision Weapon Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crosshair-arrow.crosshair-arrow",
       "NodePosition": {
-        "X": 2798.6,
-        "Y": 832.3
+        "X": 2800.0,
+        "Y": 830.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.PrecisionDamage.3",
@@ -3527,8 +3529,8 @@
       "NodeDescription": "8% Increased Precision Weapon Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crosshair-arrow.crosshair-arrow",
       "NodePosition": {
-        "X": 2817.2,
-        "Y": 907.0
+        "X": 2820.0,
+        "Y": 910.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.PrecisionDamage.4",
@@ -3551,8 +3553,8 @@
       "NodeDescription": "8% Increased Precision Weapon Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crosshair-arrow.crosshair-arrow",
       "NodePosition": {
-        "X": 2765.7,
-        "Y": 964.2
+        "X": 2770.0,
+        "Y": 960.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.PrecisionDamage.5",
@@ -3575,8 +3577,8 @@
       "NodeDescription": "12% Increased Precision Weapon Damage\n5% More Precision Weapon Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crosshair-arrow.crosshair-arrow",
       "NodePosition": {
-        "X": 2737.7,
-        "Y": 887.1
+        "X": 2740.0,
+        "Y": 890.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.PrecisionDamage.6"
@@ -3604,12 +3606,12 @@
       "NodeDescription": "2% Physical Resistance Penetration with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cracked-shield.cracked-shield",
       "NodePosition": {
-        "X": 2673.6,
-        "Y": 2075.9
+        "X": 2670.0,
+        "Y": 2080.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.ExploitWeakness.2",
-        "PassiveTree.SkillSpeed.10"
+        "PassiveTree.SkillSpeed.13"
       ],
       "Effects": [
         {
@@ -3628,8 +3630,8 @@
       "NodeDescription": "2% Energy Resistance Penetration with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cracked-shield.cracked-shield",
       "NodePosition": {
-        "X": 2778.3,
-        "Y": 2051.0
+        "X": 2780.0,
+        "Y": 2050.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.ExploitWeakness.1",
@@ -3652,8 +3654,8 @@
       "NodeDescription": "2% Physical Resistance Penetration with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cracked-shield.cracked-shield",
       "NodePosition": {
-        "X": 2797.0,
-        "Y": 2157.0
+        "X": 2800.0,
+        "Y": 2160.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.ExploitWeakness.2",
@@ -3676,8 +3678,8 @@
       "NodeDescription": "2% Energy Resistance Penetration with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cracked-shield.cracked-shield",
       "NodePosition": {
-        "X": 2690.1,
-        "Y": 2169.5
+        "X": 2690.0,
+        "Y": 2170.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.ExploitWeakness.3",
@@ -3700,8 +3702,8 @@
       "NodeDescription": "5% Armour Penetration with Precision Weapons\n5% Physical Resistance Penetration with Precision Weapons\n5% Energy Resistance Penetration with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cracked-shield.cracked-shield",
       "NodePosition": {
-        "X": 2737.7,
-        "Y": 2112.9
+        "X": 2740.0,
+        "Y": 2110.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.ExploitWeakness.4"
@@ -3735,8 +3737,8 @@
       "NodeDescription": "15% Critical Strike Multiplier with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/hood.hood",
       "NodePosition": {
-        "X": 438.3,
-        "Y": 1584.8
+        "X": 440.0,
+        "Y": 1580.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.13",
@@ -3759,8 +3761,8 @@
       "NodeDescription": "15% Critical Strike Multiplier with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/hood.hood",
       "NodePosition": {
-        "X": 482.2,
-        "Y": 1508.9
+        "X": 480.0,
+        "Y": 1510.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.Ghost.1",
@@ -3783,8 +3785,8 @@
       "NodeDescription": "15% Critical Strike Multiplier with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/hood.hood",
       "NodePosition": {
-        "X": 558.1,
-        "Y": 1552.7
+        "X": 560.0,
+        "Y": 1550.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.Ghost.2",
@@ -3807,8 +3809,8 @@
       "NodeDescription": "+3% Base Critical Strike Chance with Precision Weapons\n+2% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/hood.hood",
       "NodePosition": {
-        "X": 514.3,
-        "Y": 1628.7
+        "X": 510.0,
+        "Y": 1630.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.Ghost.3"
@@ -3836,12 +3838,12 @@
       "NodeDescription": "10% Increased Projectile Speed with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 2561.7,
-        "Y": 1584.8
+        "X": 2560.0,
+        "Y": 1580.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.KineticRounds.2",
-        "PassiveTree.SkillSpeed.13"
+        "PassiveTree.SkillSpeed.16"
       ],
       "Effects": [
         {
@@ -3860,8 +3862,8 @@
       "NodeDescription": "10% Increased Projectile Speed with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 2485.7,
-        "Y": 1628.7
+        "X": 2490.0,
+        "Y": 1630.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.KineticRounds.1",
@@ -3884,8 +3886,8 @@
       "NodeDescription": "10% Increased Projectile Speed with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 2441.9,
-        "Y": 1552.7
+        "X": 2440.0,
+        "Y": 1550.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.KineticRounds.2",
@@ -3908,8 +3910,8 @@
       "NodeDescription": "15% Increased Projectile Speed with Precision Weapons\n50% of Increases and Reductions to Projectile Speed also apply to Damage with Precision Weapons",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/laser-sparks.laser-sparks",
       "NodePosition": {
-        "X": 2517.8,
-        "Y": 1508.9
+        "X": 2520.0,
+        "Y": 1510.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Precision.KineticRounds.3"
@@ -3937,8 +3939,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 780.1,
-        "Y": 986.6
+        "X": 780.0,
+        "Y": 990.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.5",
@@ -3961,8 +3963,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 794.8,
-        "Y": 1070.2
+        "X": 790.0,
+        "Y": 1070.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.FleetArsenal.1",
@@ -3985,8 +3987,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 721.3,
-        "Y": 1112.6
+        "X": 720.0,
+        "Y": 1110.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.FleetArsenal.2",
@@ -4009,8 +4011,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 656.3,
-        "Y": 1058.0
+        "X": 660.0,
+        "Y": 1060.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.FleetArsenal.3",
@@ -4033,8 +4035,8 @@
       "NodeDescription": "+1 Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sprint.sprint",
       "NodePosition": {
-        "X": 685.3,
-        "Y": 978.3
+        "X": 690.0,
+        "Y": 980.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.FleetArsenal.4",
@@ -4057,8 +4059,8 @@
       "NodeDescription": "8% More Damage with Weapons that Require Agility",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crossed-swords.crossed-swords",
       "NodePosition": {
-        "X": 727.8,
-        "Y": 1038.9
+        "X": 730.0,
+        "Y": 1040.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.FleetArsenal.5"
@@ -4080,8 +4082,8 @@
       "NodeDescription": "+1.5% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 189.6,
-        "Y": 1681.2
+        "X": 190.0,
+        "Y": 1680.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.13",
@@ -4104,8 +4106,8 @@
       "NodeDescription": "+1.5% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 158.7,
-        "Y": 1784.3
+        "X": 160.0,
+        "Y": 1780.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.EvasiveManeuvers.1",
@@ -4128,8 +4130,8 @@
       "NodeDescription": "+1.5% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 57.6,
-        "Y": 1747.5
+        "X": 60.0,
+        "Y": 1750.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.EvasiveManeuvers.2",
@@ -4152,8 +4154,8 @@
       "NodeDescription": "+1.5% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 100.2,
-        "Y": 1648.7
+        "X": 100.0,
+        "Y": 1650.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.EvasiveManeuvers.3",
@@ -4176,8 +4178,8 @@
       "NodeDescription": "+4% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/dodging.dodging",
       "NodePosition": {
-        "X": 125.5,
-        "Y": 1718.2
+        "X": 130.0,
+        "Y": 1720.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.EvasiveManeuvers.4"
@@ -4199,8 +4201,8 @@
       "NodeDescription": "3% Increased Movement Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/boots.boots",
       "NodePosition": {
-        "X": 371.7,
-        "Y": 792.4
+        "X": 370.0,
+        "Y": 790.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.9",
@@ -4223,8 +4225,8 @@
       "NodeDescription": "3% Increased Movement Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/boots.boots",
       "NodePosition": {
-        "X": 287.0,
-        "Y": 815.1
+        "X": 290.0,
+        "Y": 820.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.FleetFooted.1",
@@ -4247,8 +4249,8 @@
       "NodeDescription": "3% Increased Movement Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/boots.boots",
       "NodePosition": {
-        "X": 264.4,
-        "Y": 730.4
+        "X": 260.0,
+        "Y": 730.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.FleetFooted.2",
@@ -4271,8 +4273,8 @@
       "NodeDescription": "6% Increased Movement Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/winged-leg.winged-leg",
       "NodePosition": {
-        "X": 349.0,
-        "Y": 707.7
+        "X": 350.0,
+        "Y": 710.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.FleetFooted.3"
@@ -4294,8 +4296,8 @@
       "NodeDescription": "+1% Chance to Dodge\n3% Increased Maximum Hit Points",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/body-swapping.body-swapping",
       "NodePosition": {
-        "X": 593.6,
-        "Y": 2151.3
+        "X": 590.0,
+        "Y": 2150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Acrobatics.2",
@@ -4324,8 +4326,8 @@
       "NodeDescription": "+1% Chance to Dodge\n3% Increased Maximum Hit Points",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/body-swapping.body-swapping",
       "NodePosition": {
-        "X": 669.5,
-        "Y": 2107.5
+        "X": 670.0,
+        "Y": 2110.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Acrobatics.1",
@@ -4354,8 +4356,8 @@
       "NodeDescription": "+1% Chance to Dodge\n3% Increased Maximum Hit Points",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/body-swapping.body-swapping",
       "NodePosition": {
-        "X": 713.3,
-        "Y": 2183.4
+        "X": 710.0,
+        "Y": 2180.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Acrobatics.2",
@@ -4384,8 +4386,8 @@
       "NodeDescription": "+3% Chance to Dodge\n6% Increased Maximum Hit Points",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/body-swapping.body-swapping",
       "NodePosition": {
-        "X": 637.4,
-        "Y": 2227.3
+        "X": 640.0,
+        "Y": 2230.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Acrobatics.3"
@@ -4413,8 +4415,8 @@
       "NodeDescription": "6% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/eyeball.eyeball",
       "NodePosition": {
-        "X": 2810.4,
-        "Y": 1318.8
+        "X": 2810.0,
+        "Y": 1320.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.13",
@@ -4437,8 +4439,8 @@
       "NodeDescription": "6% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/eyeball.eyeball",
       "NodePosition": {
-        "X": 2841.3,
-        "Y": 1215.7
+        "X": 2840.0,
+        "Y": 1220.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.KeenEye.1",
@@ -4461,8 +4463,8 @@
       "NodeDescription": "6% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/eyeball.eyeball",
       "NodePosition": {
-        "X": 2942.4,
-        "Y": 1252.5
+        "X": 2940.0,
+        "Y": 1250.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.KeenEye.2",
@@ -4485,8 +4487,8 @@
       "NodeDescription": "6% Increased Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/eyeball.eyeball",
       "NodePosition": {
-        "X": 2899.8,
-        "Y": 1351.3
+        "X": 2900.0,
+        "Y": 1350.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.KeenEye.3",
@@ -4509,8 +4511,8 @@
       "NodeDescription": "+1% Base Critical Strike Chance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/eyeball.eyeball",
       "NodePosition": {
-        "X": 2874.5,
-        "Y": 1281.8
+        "X": 2870.0,
+        "Y": 1280.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.KeenEye.4"
@@ -4532,12 +4534,12 @@
       "NodeDescription": "10% Critical Strike Multiplier",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/pointy-sword.pointy-sword",
       "NodePosition": {
-        "X": 2820.8,
-        "Y": 1687.2
+        "X": 2820.0,
+        "Y": 1690.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Lethality.2",
-        "PassiveTree.SkillSpeed.13"
+        "PassiveTree.SkillSpeed.16"
       ],
       "Effects": [
         {
@@ -4556,8 +4558,8 @@
       "NodeDescription": "10% Critical Strike Multiplier",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/pointy-sword.pointy-sword",
       "NodePosition": {
-        "X": 2905.5,
-        "Y": 1664.5
+        "X": 2910.0,
+        "Y": 1660.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Lethality.1",
@@ -4580,8 +4582,8 @@
       "NodeDescription": "10% Critical Strike Multiplier",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/pointy-sword.pointy-sword",
       "NodePosition": {
-        "X": 2928.2,
-        "Y": 1749.2
+        "X": 2930.0,
+        "Y": 1750.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Lethality.2",
@@ -4604,8 +4606,8 @@
       "NodeDescription": "25% Critical Strike Multiplier",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/death-zone.death-zone",
       "NodePosition": {
-        "X": 2843.5,
-        "Y": 1771.9
+        "X": 2840.0,
+        "Y": 1770.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Lethality.3"
@@ -4627,8 +4629,8 @@
       "NodeDescription": "8% Reduced Extra Damage Taken from Critical Strikes",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/meditation.meditation",
       "NodePosition": {
-        "X": 207.9,
-        "Y": 1296.5
+        "X": 210.0,
+        "Y": 1300.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.13",
@@ -4651,8 +4653,8 @@
       "NodeDescription": "8% Reduced Extra Damage Taken from Critical Strikes",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/meditation.meditation",
       "NodePosition": {
-        "X": 151.4,
-        "Y": 1239.9
+        "X": 150.0,
+        "Y": 1240.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Composure.1",
@@ -4675,8 +4677,8 @@
       "NodeDescription": "20% Reduced Extra Damage Taken from Critical Strikes\n+2% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/meditation.meditation",
       "NodePosition": {
-        "X": 86.3,
-        "Y": 1174.9
+        "X": 90.0,
+        "Y": 1170.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Composure.2"
@@ -4704,12 +4706,12 @@
       "NodeDescription": "3% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2136.6,
-        "Y": 2360.1
+        "X": 2140.0,
+        "Y": 2360.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.QuickenedReflexes.2",
-        "PassiveTree.SkillSpeed.6"
+        "PassiveTree.SkillSpeed.9"
       ],
       "Effects": [
         {
@@ -4728,8 +4730,8 @@
       "NodeDescription": "3% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2136.6,
-        "Y": 2447.7
+        "X": 2140.0,
+        "Y": 2450.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.QuickenedReflexes.1",
@@ -4752,8 +4754,8 @@
       "NodeDescription": "3% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2048.9,
-        "Y": 2447.7
+        "X": 2050.0,
+        "Y": 2450.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.QuickenedReflexes.2",
@@ -4776,8 +4778,8 @@
       "NodeDescription": "6% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-trio.lightning-trio",
       "NodePosition": {
-        "X": 2048.9,
-        "Y": 2360.1
+        "X": 2050.0,
+        "Y": 2360.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.QuickenedReflexes.3"
@@ -4799,8 +4801,8 @@
       "NodeDescription": "0.3% of Hit Points Regenerated per Second",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/heart-beats.heart-beats",
       "NodePosition": {
-        "X": 501.2,
-        "Y": 2411.8
+        "X": 500.0,
+        "Y": 2410.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Adrenaline.2",
@@ -4823,8 +4825,8 @@
       "NodeDescription": "0.3% of Hit Points Regenerated per Second",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/heart-beats.heart-beats",
       "NodePosition": {
-        "X": 457.4,
-        "Y": 2487.8
+        "X": 460.0,
+        "Y": 2490.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Adrenaline.1",
@@ -4847,8 +4849,8 @@
       "NodeDescription": "0.3% of Hit Points Regenerated per Second",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/heart-beats.heart-beats",
       "NodePosition": {
-        "X": 381.4,
-        "Y": 2443.9
+        "X": 380.0,
+        "Y": 2440.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Adrenaline.2",
@@ -4871,8 +4873,8 @@
       "NodeDescription": "1% of Hit Points Regenerated per Second\n4% Increased Skill Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/syringe.syringe",
       "NodePosition": {
-        "X": 425.3,
-        "Y": 2368.0
+        "X": 430.0,
+        "Y": 2370.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Adrenaline.3"
@@ -4900,8 +4902,8 @@
       "NodeDescription": "6% Increased Projectile Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/arrow-flights.arrow-flights",
       "NodePosition": {
-        "X": 2418.0,
-        "Y": 851.8
+        "X": 2420.0,
+        "Y": 850.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.CriticalChance.9",
@@ -4924,8 +4926,8 @@
       "NodeDescription": "6% Increased Projectile Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/arrow-flights.arrow-flights",
       "NodePosition": {
-        "X": 2323.3,
-        "Y": 902.8
+        "X": 2320.0,
+        "Y": 900.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.SteadyAim.1",
@@ -4948,8 +4950,8 @@
       "NodeDescription": "6% Increased Projectile Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/arrow-flights.arrow-flights",
       "NodePosition": {
-        "X": 2277.8,
-        "Y": 805.3
+        "X": 2280.0,
+        "Y": 810.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.SteadyAim.2",
@@ -4972,8 +4974,8 @@
       "NodeDescription": "6% Increased Projectile Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/arrow-flights.arrow-flights",
       "NodePosition": {
-        "X": 2377.8,
-        "Y": 765.5
+        "X": 2380.0,
+        "Y": 770.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.SteadyAim.3",
@@ -4996,8 +4998,8 @@
       "NodeDescription": "5% More Projectile Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crosshair-arrow.crosshair-arrow",
       "NodePosition": {
-        "X": 2346.5,
-        "Y": 832.6
+        "X": 2350.0,
+        "Y": 830.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.SteadyAim.4"
@@ -5019,8 +5021,8 @@
       "NodeDescription": "8% Increased Projectile Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 863.4,
-        "Y": 639.9
+        "X": 860.0,
+        "Y": 640.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.6",
@@ -5043,8 +5045,8 @@
       "NodeDescription": "8% Increased Projectile Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 863.4,
-        "Y": 552.3
+        "X": 860.0,
+        "Y": 550.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Momentum.1",
@@ -5067,8 +5069,8 @@
       "NodeDescription": "8% Increased Projectile Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/supersonic-bullet.supersonic-bullet",
       "NodePosition": {
-        "X": 951.1,
-        "Y": 552.3
+        "X": 950.0,
+        "Y": 550.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Momentum.2",
@@ -5091,8 +5093,8 @@
       "NodeDescription": "15% Increased Projectile Speed\n3% Increased Movement Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/comet-spark.comet-spark",
       "NodePosition": {
-        "X": 951.1,
-        "Y": 639.9
+        "X": 950.0,
+        "Y": 640.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Momentum.3"
@@ -5120,8 +5122,8 @@
       "NodeDescription": "4% Energy Resistance\n4% Chemical Resistance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/layered-armor.layered-armor",
       "NodePosition": {
-        "X": 888.5,
-        "Y": 2327.3
+        "X": 890.0,
+        "Y": 2330.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Evasion.6",
@@ -5150,8 +5152,8 @@
       "NodeDescription": "4% Energy Resistance\n4% Chemical Resistance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/layered-armor.layered-armor",
       "NodePosition": {
-        "X": 973.2,
-        "Y": 2304.6
+        "X": 970.0,
+        "Y": 2300.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.LightweightWeave.1",
@@ -5180,8 +5182,8 @@
       "NodeDescription": "4% Energy Resistance\n4% Chemical Resistance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/layered-armor.layered-armor",
       "NodePosition": {
-        "X": 995.9,
-        "Y": 2389.3
+        "X": 1000.0,
+        "Y": 2390.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.LightweightWeave.2",
@@ -5210,8 +5212,8 @@
       "NodeDescription": "+2% Maximum Energy Resistance\n+2% Maximum Chemical Resistance\n+2% Chance to Dodge",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/layered-armor.layered-armor",
       "NodePosition": {
-        "X": 911.2,
-        "Y": 2412.0
+        "X": 910.0,
+        "Y": 2410.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.LightweightWeave.3"

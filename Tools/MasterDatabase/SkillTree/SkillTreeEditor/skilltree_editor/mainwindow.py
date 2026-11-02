@@ -305,7 +305,7 @@ class MainWindow(QMainWindow):
                   tip="Count, list, total and highlight every node granting a stat / passive / flag")
         self._act(t, "&Renumber Tags (fix placeholders / duplicates)", self.renumber)
         t.addSeparator()
-        self._act(t, "Register Tags in C++ (node, SkillPassive, gated stat tags)…", self.register_tags)
+        self._act(t, "Register Tags (node tags → ini; SkillPassive / gated stats → C++)…", self.register_tags)
         self._act(t, "Copy Export JSON Path (for UE importer)", self.copy_json_path)
         self._act(t, "Reload Tag Catalog", self.reload_catalog)
 
@@ -1041,9 +1041,15 @@ class MainWindow(QMainWindow):
     # ---- tools ----------------------------------------------------------------------
 
     def renumber(self) -> None:
-        renames = self.scene.tree.renumber()
+        from .model import split_tag
+        reserved: dict[str, set[int]] = {}
+        for tag in self.other_tags:          # NodeTags owned by other trees
+            prefix, idx = split_tag(tag)
+            if idx:
+                reserved.setdefault(prefix, set()).add(idx)
+        renames = self.scene.tree.renumber(reserved)
         if not renames:
-            self.statusBar().showMessage("All tags already unique and indexed.", 3000)
+            self.statusBar().showMessage("All tags already unique, indexed and distinct from other trees.", 3000)
             return
         self.scene.refresh_nodes()
         self.inspector.refresh_fields()
@@ -1084,7 +1090,7 @@ class MainWindow(QMainWindow):
             return (proc.stdout or "") + (proc.stderr or "")
 
         preview = run("--dry-run")
-        dlg = OutputDialog("Register Tags — preview (dry run)", preview, "Write to FP_GameplayTags", self)
+        dlg = OutputDialog("Register Tags — preview (dry run)", preview, "Write tags", self)
         if dlg.exec():
             result = run()
             OutputDialog("Register Tags — result", result, None, self).exec()

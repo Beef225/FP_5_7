@@ -56,10 +56,10 @@ place_single(L, "Blur.1", "Mastery", base_minors, "Blur",
               ("FLAG_TEXT", None, "You cannot Block\nYou have no Armour"),
               red("Health.Increased", -0.15, "Maximum Hit Points")],
              icon("body-swapping", "dodging"), pref_pos=(1500, 820))
-place_single(L, "MomentumEngine.1", "Mastery", base_minors, "Momentum Engine",
-             [flag("Flag.SkillTree.MovementSpeedToSkillSpeed",
-                   "Increases and Reductions to Movement Speed also apply to Skill Speed")],
-             icon("speedometer", "fast-forward-button"), pref_pos=(1500, 2180))
+place_single(L, "PerpetualMotion.1", "Mastery", base_minors, "Perpetual Motion",
+             [flag("Flag.SkillTree.PerpetualMotion", "While Moving: 20% More Damage and +10% Chance to Dodge"),
+              ("FLAG_TEXT", None, "While Stationary: 30% Less Damage and you cannot Dodge")],
+             icon("run", "sprint"), pref_pos=(1500, 2180))
 
 C = []
 
@@ -178,6 +178,11 @@ cluster("Precision.KineticRounds", arm("SkillSpeed", "CriticalChance"),
                                   "50% of Increases and Reductions to Projectile Speed also apply to Damage with Precision Weapons")]),
         icon("supersonic-bullet"), icon("laser-sparks", "supersonic-bullet"))
 
+cluster("MomentumEngine", arm("SkillSpeed", "Agility"),
+        rep(2, "Movement Speed", [inc("Speed.Movement", 0.01, "Movement Speed")]),
+        ("Momentum Engine", [plain("Conversion.MovementSpeedToSkillSpeed", 0.25,
+                                   "25% of Increases and Reductions to Movement Speed also apply to Skill Speed")]),
+        icon("winged-leg", "boots"), icon("speedometer"))
 cluster("FleetArsenal", arm("Agility"),
         rep(5, "Agility", [AGI]),
         ("Fleet Arsenal", [more("Damage.More.AgilityWeapon", 0.08, "Damage with Weapons that Require Agility")]),

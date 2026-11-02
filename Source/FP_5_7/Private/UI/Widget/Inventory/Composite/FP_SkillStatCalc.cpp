@@ -132,10 +132,10 @@ float CalcEffectiveSpeed(const FFP_AbilityEntry& Entry, const AFP_PlayerState* P
 	if (Entry.BaseSkillSpeed <= 0.f) return 0.f;
 
 	const UAbilitySystemComponent* ASC = PS ? PS->GetAbilitySystemComponent() : nullptr;
-	float PlayerSpeed = GetAttr(ASC, UFP_AttributeSet::GetSkillSpeedAttribute());
-	if (FMath::IsNearlyZero(PlayerSpeed)) PlayerSpeed = 1.f;
-
-	return Entry.BaseSkillSpeed * PlayerSpeed;
+	// SkillSpeed is a bonus (0 = base speed), same as the abilities: x (1 + bonus).
+	const float Bonus = UFP_AttributeSet::GetEffectiveSkillSpeedBonus(
+		ASC, GetAttr(ASC, UFP_AttributeSet::GetSkillSpeedAttribute()));
+	return Entry.BaseSkillSpeed * FMath::Max(1.f + Bonus, 0.f);
 }
 
 float CalcDPS(const FFP_AbilityEntry& Entry, const AFP_PlayerState* PS)

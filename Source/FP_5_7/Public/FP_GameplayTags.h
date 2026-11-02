@@ -211,6 +211,7 @@ FGameplayTag Conversion_Damage_ExplosiveToPhysical;
 FGameplayTag Conversion_Defense_EnergyToRadiation;
 FGameplayTag Conversion_Defense_ChemicalToExplosive;
 FGameplayTag Conversion_ProjectileSpeedToDamage;
+FGameplayTag Conversion_MovementSpeedToSkillSpeed;
 
 //Conditional
 FGameplayTag Conditional_Damage_IncreasedAgainstBruised;
@@ -827,6 +828,7 @@ FGameplayTag Flag_SkillTree_IncreasedDamageTaken_WhileDeferring;
 FGameplayTag Flag_SkillTree_DoubleArmourVsExplosive;
 FGameplayTag Flag_SkillTree_RecoupInsteadOfDefer;
 FGameplayTag Flag_SkillTree_Blur;
+FGameplayTag Flag_SkillTree_PerpetualMotion;
 
 //Execute
 FGameplayTag Execute_Threshold;

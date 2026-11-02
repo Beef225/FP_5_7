@@ -15,6 +15,7 @@ cd Tools\MasterDatabase\SkillTree\SkillTreeEditor
 | `gen_agility.py` | Agility: twin-arrowhead (◁▷) base path + clusters. |
 | `gen_resonance.py` | Resonance: standing-wave base path + clusters. |
 | `gen_fortitude.py` | Fortitude: clusters only, hand-placed around the user-built shield base path (adds to the existing tree; refuses to run twice because the groups already exist). |
+| `agility_momentum_rework.py` | One-off in-place edit (2026-11-01): Momentum Engine mastery -> small cluster + major, slot becomes Perpetual Motion. Pattern for adding clusters to an existing tree without regenerating it. |
 | `render_tree.py` | Headless render of a tree to PNG for checking layouts. |
 
 **Warning:** `gen_agility.py --write` and `gen_resonance.py --write` *replace the whole tree* (base path included). Any edits made in the

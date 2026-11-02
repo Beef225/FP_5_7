@@ -357,6 +357,16 @@ void UExecCalc_DamageOverTime::Execute_Implementation(
 	float ChemicalDamage  = ComputeTypeDamage(SetByCallerChemical,  AddedChem, IncreasedChem, MoreChem);
 	float EnergyDamage    = ComputeTypeDamage(SetByCallerEnergy,    AddedEng,  IncreasedEng,  MoreEng);
 
+	// Perpetual Motion (attacker, sampled each tick): x1.20 while moving, x0.70 while stationary.
+	const float MotionMultiplier = UFP_AbilitySystemComponent::GetPerpetualMotionDamageMultiplier(SourceASC);
+	if (MotionMultiplier != 1.f)
+	{
+		for (float* TypeDamage : { &GenericDamage, &PhysicalDamage, &ExplosiveDamage, &RadiationDamage, &ChemicalDamage, &EnergyDamage })
+		{
+			*TypeDamage *= MotionMultiplier;
+		}
+	}
+
 	LogStep(TEXT("1) PerTypeOffense"),
 		GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage,
 		FString::Printf(TEXT("SBC(Gen=%.2f Phys=%.2f Expl=%.2f Rad=%.2f Chem=%.2f Eng=%.2f) IncDoT=%.4f MoreDoT=%.4f SpeedInc=%.4f"),

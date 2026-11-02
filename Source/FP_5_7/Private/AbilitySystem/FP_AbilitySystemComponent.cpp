@@ -382,6 +382,30 @@ float UFP_AbilitySystemComponent::GetPendingRecoup() const
 	return Total;
 }
 
+bool UFP_AbilitySystemComponent::IsAvatarMoving(const UAbilitySystemComponent* ASC)
+{
+	const AActor* Avatar = ASC ? ASC->GetAvatarActor() : nullptr;
+	return Avatar && Avatar->GetVelocity().Size2D() > PerpetualMotionMovingSpeed;
+}
+
+float UFP_AbilitySystemComponent::GetPerpetualMotionDamageMultiplier(const UAbilitySystemComponent* SourceASC)
+{
+	if (!SourceASC || !SourceASC->HasMatchingGameplayTag(FFP_GameplayTags::Get().Flag_SkillTree_PerpetualMotion))
+	{
+		return 1.f;
+	}
+	return IsAvatarMoving(SourceASC) ? 1.f + PerpetualMotionMovingMore : 1.f - PerpetualMotionStationaryLess;
+}
+
+float UFP_AbilitySystemComponent::ApplyPerpetualMotionDodge(const UAbilitySystemComponent* TargetASC, float DodgeChance)
+{
+	if (!TargetASC || !TargetASC->HasMatchingGameplayTag(FFP_GameplayTags::Get().Flag_SkillTree_PerpetualMotion))
+	{
+		return DodgeChance;
+	}
+	return IsAvatarMoving(TargetASC) ? DodgeChance + PerpetualMotionMovingDodge : 0.f;
+}
+
 bool UFP_AbilitySystemComponent::RecoupsDeferredDamage(const UAbilitySystemComponent* ASC)
 {
 	return ASC && ASC->HasMatchingGameplayTag(FFP_GameplayTags::Get().Flag_SkillTree_RecoupInsteadOfDefer);

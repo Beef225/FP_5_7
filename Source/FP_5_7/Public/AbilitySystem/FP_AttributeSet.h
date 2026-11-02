@@ -452,6 +452,11 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ExecuteThreshold, Category 
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ProjectileSpeedToDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData ProjectileSpeedToDamage;
 
+// Conversion.MovementSpeedToSkillSpeed (Momentum Engine): this fraction of MovementSpeed also counts as
+// SkillSpeed (0.25 = 25%). Read via UFP_AttributeSet::GetEffectiveSkillSpeedBonus.
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MovementSpeedToSkillSpeed, Category = "Secondary Attributes")
+	FGameplayAttributeData MovementSpeedToSkillSpeed;
+
 //Recovery
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_LifeGainedOnHit, Category = "Secondary Attributes")
 	FGameplayAttributeData LifeGainedOnHit;
@@ -939,6 +944,17 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_ProjectileSpeedToDamage(const FGameplayAttributeData& OldProjectileSpeedToDamage) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, ProjectileSpeedToDamage)
+
+UFUNCTION()
+	void OnRep_MovementSpeedToSkillSpeed(const FGameplayAttributeData& OldMovementSpeedToSkillSpeed) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, MovementSpeedToSkillSpeed)
+
+	/**
+	 * The skill-speed BONUS to use everywhere skill speed is applied (multiply by 1 + this):
+	 * SkillSpeedValue (pass the skill-filtered value when gated stats matter) plus
+	 * MovementSpeed x MovementSpeedToSkillSpeed (Momentum Engine).
+	 */
+	static float GetEffectiveSkillSpeedBonus(const UAbilitySystemComponent* ASC, float SkillSpeedValue);
 
 //Recovery
 UFUNCTION()

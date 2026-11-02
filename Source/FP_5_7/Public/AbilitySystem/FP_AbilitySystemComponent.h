@@ -123,6 +123,19 @@ public:
 
 	static constexpr float BideDamageTakenWhileDeferring = 0.25f;
 
+	// ---- Perpetual Motion (Flag.SkillTree.PerpetualMotion) ----------------------------------
+	// Moving = avatar horizontal speed above the threshold (filters jitter / knockback settle).
+	static constexpr float PerpetualMotionMovingSpeed   = 50.f;   // cm/s
+	static constexpr float PerpetualMotionMovingMore    = 0.20f;  // x1.20 damage while moving
+	static constexpr float PerpetualMotionStationaryLess = 0.30f; // x0.70 damage while stationary
+	static constexpr float PerpetualMotionMovingDodge   = 0.10f;  // +10% dodge while moving (before the cap)
+
+	static bool IsAvatarMoving(const UAbilitySystemComponent* ASC);
+	/** Separate damage multiplier for the ATTACKER (1 without the flag). */
+	static float GetPerpetualMotionDamageMultiplier(const UAbilitySystemComponent* SourceASC);
+	/** Adjusts the TARGET's raw dodge chance: +MovingDodge while moving, 0 while stationary. */
+	static float ApplyPerpetualMotionDodge(const UAbilitySystemComponent* TargetASC, float DodgeChance);
+
 	/** Drop all pending deferred damage without dealing it. */
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "FP|Deferred Damage")
 	void ClearDeferredDamage();

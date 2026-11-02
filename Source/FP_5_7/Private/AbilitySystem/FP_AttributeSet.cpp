@@ -213,6 +213,7 @@ TagsToAttributes.Add(GameplayTags.Conditional_Damage_IncreasedAgainstFrozen, Get
 TagsToAttributes.Add(GameplayTags.Conditional_Damage_PerHeat, GetIncreasedDamagePerHeatFromEquilibriumAttribute);
 TagsToAttributes.Add(GameplayTags.Execute_Threshold, GetExecuteThresholdAttribute);
 TagsToAttributes.Add(GameplayTags.Conversion_ProjectileSpeedToDamage, GetProjectileSpeedToDamageAttribute);
+TagsToAttributes.Add(GameplayTags.Conversion_MovementSpeedToSkillSpeed, GetMovementSpeedToSkillSpeedAttribute);
 
 //Recovery
 TagsToAttributes.Add(GameplayTags.Recovery_Life_OnHit, GetLifeGainedOnHitAttribute);
@@ -468,6 +469,7 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamageAgainstFrozen, C
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, IncreasedDamagePerHeatFromEquilibrium, COND_None, REPNOTIFY_Always)
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ExecuteThreshold, COND_None, REPNOTIFY_Always)
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ProjectileSpeedToDamage, COND_None, REPNOTIFY_Always)
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, MovementSpeedToSkillSpeed, COND_None, REPNOTIFY_Always)
 
 //Recovery
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, LifeGainedOnHit, COND_None, REPNOTIFY_Always)
@@ -1274,6 +1276,25 @@ void UFP_AttributeSet::OnRep_ExecuteThreshold(const FGameplayAttributeData& OldE
 void UFP_AttributeSet::OnRep_ProjectileSpeedToDamage(const FGameplayAttributeData& OldProjectileSpeedToDamage) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, ProjectileSpeedToDamage, OldProjectileSpeedToDamage);
+}
+
+void UFP_AttributeSet::OnRep_MovementSpeedToSkillSpeed(const FGameplayAttributeData& OldMovementSpeedToSkillSpeed) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, MovementSpeedToSkillSpeed, OldMovementSpeedToSkillSpeed);
+}
+
+float UFP_AttributeSet::GetEffectiveSkillSpeedBonus(const UAbilitySystemComponent* ASC, float SkillSpeedValue)
+{
+	if (!ASC)
+	{
+		return SkillSpeedValue;
+	}
+	const float Conversion = ASC->GetNumericAttribute(GetMovementSpeedToSkillSpeedAttribute());
+	if (Conversion == 0.f)
+	{
+		return SkillSpeedValue;
+	}
+	return SkillSpeedValue + ASC->GetNumericAttribute(GetMovementSpeedAttribute()) * Conversion;
 }
 
 //Recovery

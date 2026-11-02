@@ -600,6 +600,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Conversion.ProjectileSpeedToDamage"),
 		FString("Fraction of the skill's projectile speed modifiers also counted as increased damage (1.0 = 100%). Additive increased pool, direct hits and DoT")
 		);
+	GameplayTags.Conversion_MovementSpeedToSkillSpeed = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Conversion.MovementSpeedToSkillSpeed"),
+		FString("Momentum Engine: this fraction of MovementSpeed (increases and reductions) also counts as SkillSpeed")
+		);
 
 	//Conditional
 	GameplayTags.Conditional_Damage_IncreasedAgainstBruised = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -2093,6 +2097,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.Flag_SkillTree_Blur = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Flag.SkillTree.Blur"),
 		FString("Blur: dodge chance doubled, cannot block, no armour (applies UFP_GE_Blur while present)")
+		);
+	GameplayTags.Flag_SkillTree_PerpetualMotion = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.PerpetualMotion"),
+		FString("Perpetual Motion: more damage and dodge while moving, less damage and no dodge while stationary (UFP_AbilitySystemComponent::GetPerpetualMotion*, ExecCalc_Damage/DoT)")
 		);
 
 	//Execute

@@ -346,7 +346,9 @@ void UExecCalc_Damage::Execute_Implementation(
 	// 0) DODGE FIRST
 	// -------------------------------------------------------
 	// Capped by the target's MaxDodgeChance (Defence.Max.DodgeChance, base 0.75).
-	const float DodgeChanceRaw = GetCaptured(DamageStatics().ChanceToDodgeDef, 0.f);
+	// Perpetual Motion (target): +10% while moving, no dodge at all while stationary — before the cap.
+	const float DodgeChanceRaw = UFP_AbilitySystemComponent::ApplyPerpetualMotionDodge(
+		TargetASC, GetCaptured(DamageStatics().ChanceToDodgeDef, 0.f));
 	const float MaxDodgeChance = Clamp01(GetCaptured(DamageStatics().MaxDodgeChanceDef, 0.75f));
 	const float DodgeChance = FMath::Clamp(DodgeChanceRaw, 0.f, MaxDodgeChance);
 
@@ -487,9 +489,20 @@ void UExecCalc_Damage::Execute_Implementation(
 	float ChemicalDamage  = ComputeTypeDamage(SetByCallerChemical,  AddedChem, IncreasedGeneric + TotalIncreasedBonus, IncreasedChem + SkillBonusIncreasedChem, TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreChem + SkillBonusMoreChem);
 	float EnergyDamage    = ComputeTypeDamage(SetByCallerEnergy,    AddedEng,  IncreasedGeneric + TotalIncreasedBonus, IncreasedEng,                           TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreEng);
 
+	// Perpetual Motion (attacker): separate multiplier — x1.20 while moving, x0.70 while stationary.
+	const float MotionMultiplier = UFP_AbilitySystemComponent::GetPerpetualMotionDamageMultiplier(SourceASC);
+	if (MotionMultiplier != 1.f)
+	{
+		for (float* TypeDamage : { &GenericDamage, &PhysicalDamage, &ExplosiveDamage, &RadiationDamage, &ChemicalDamage, &EnergyDamage })
+		{
+			*TypeDamage *= MotionMultiplier;
+		}
+	}
+
 	LogStep(TEXT("1) PerTypeOffense"),
 		GenericDamage + PhysicalDamage + ExplosiveDamage + RadiationDamage + ChemicalDamage + EnergyDamage,
-		FString::Printf(TEXT("SBCC(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f) | SpeedInc=%.4f TakenInc=%.4f | Offense(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f)"),
+		FString::Printf(TEXT("Motion=%.2f | SBCC(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f) | SpeedInc=%.4f TakenInc=%.4f | Offense(Generic=%.4f Phys=%.4f Expl=%.4f Rad=%.4f Chem=%.4f Eng=%.4f)"),
+			MotionMultiplier,
 			SetByCallerGeneric, SetByCallerPhysical, SetByCallerExplosive, SetByCallerRadiation, SetByCallerChemical, SetByCallerEnergy,
 			SpeedIncreased, TakenIncreased,
 			GenericDamage, PhysicalDamage, ExplosiveDamage, RadiationDamage, ChemicalDamage, EnergyDamage));

@@ -42,7 +42,9 @@ float UFP_DamageGameplayAbility::GetSkillSpeedAttributeModifier() const
 
 	bool bFoundSkillSpeed = false;
 	const float SkillSpeedModifier = GetSourceAttributeValue(UFP_AttributeSet::GetSkillSpeedAttribute(), bFoundSkillSpeed);
-	const float AttributeMultiplier = bFoundSkillSpeed ? (1.f + SkillSpeedModifier) : 1.f;
+	const float AttributeMultiplier = bFoundSkillSpeed
+		? (1.f + UFP_AttributeSet::GetEffectiveSkillSpeedBonus(GetAbilitySystemComponentFromActorInfo(), SkillSpeedModifier))
+		: 1.f;
 
 	// Apply freeze ramp as a final independent multiplier so stacked skill speed
 	// cannot resist the chill effect.
@@ -160,7 +162,9 @@ float UFP_DamageGameplayAbility::GetEffectiveSkillRate(float BaseRate) const
 {
 	bool bFound = false;
 	const float SpeedDelta      = GetSourceAttributeValue(UFP_AttributeSet::GetSkillSpeedAttribute(), bFound);
-	const float SpeedMultiplier = bFound ? (1.f + SpeedDelta) : 1.f;
+	const float SpeedMultiplier = bFound
+		? (1.f + UFP_AttributeSet::GetEffectiveSkillSpeedBonus(GetAbilitySystemComponentFromActorInfo(), SpeedDelta))
+		: 1.f;
 
 	float FreezeMultiplier = 1.f;
 	if (const AFP_CharacterBase* CharBase = Cast<AFP_CharacterBase>(GetAvatarActorFromActorInfo()))

@@ -194,6 +194,7 @@ Increased damage against Frozen targets,Conditional.Damage.IncreasedAgainstFroze
 Increased damage per heat above equilibrium,Conditional.Damage.PerHeat,
 Execute threshold (fraction of target max life; 0.05 = 5%),Execute.Threshold,
 Projectile speed also counts as increased damage (1.0 = 100%),Conversion.ProjectileSpeedToDamage,
+Movement speed also counts as skill speed (0.25 = 25%),Conversion.MovementSpeedToSkillSpeed,
 ,,
 RECOVERY,,
 Life gained on hit,Recovery.Life.OnHit,SkillPassive.LightningCoil.LifeOnHit

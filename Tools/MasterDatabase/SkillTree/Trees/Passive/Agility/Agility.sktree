@@ -10,9 +10,9 @@
     "author": "jakeg",
     "version": "0.1.0",
     "live_version": "",
-    "revision": 9,
+    "revision": 10,
     "created": "2026-10-31T16:49:43-04:00",
-    "modified": "2026-11-01T20:05:36-05:00",
+    "modified": "2026-11-01T21:53:08-05:00",
     "tag_root": "",
     "ue_asset_folder": "/Game/Blueprints/UI/SkillTrees/CharacterSkillTrees/Data/Nodes/Agility",
     "export_file": "",
@@ -39,7 +39,7 @@
       "ConnectedNodeTags": [
         "PassiveTree.Agility.13",
         "PassiveTree.Evasion.13",
-        "PassiveTree.MomentumEngine.1"
+        "PassiveTree.PerpetualMotion.1"
       ],
       "Effects": [
         {
@@ -351,7 +351,8 @@
       },
       "ConnectedNodeTags": [
         "PassiveTree.Agility.10",
-        "PassiveTree.Agility.12"
+        "PassiveTree.Agility.12",
+        "PassiveTree.MomentumEngine.1"
       ],
       "Effects": [
         {
@@ -1404,12 +1405,12 @@
       ]
     },
     {
-      "NodeTag": "PassiveTree.MomentumEngine.1",
+      "NodeTag": "PassiveTree.PerpetualMotion.1",
       "NodeType": "Mastery",
       "IsStartNode": false,
-      "NodeName": "Momentum Engine",
-      "NodeDescription": "Increases and Reductions to Movement Speed also apply to Skill Speed",
-      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/speedometer.speedometer",
+      "NodeName": "Perpetual Motion",
+      "NodeDescription": "While Moving: 20% More Damage and +10% Chance to Dodge\nWhile Stationary: 30% Less Damage and you cannot Dodge",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/run.run",
       "NodePosition": {
         "X": 80.0,
         "Y": 1500.0
@@ -1420,8 +1421,8 @@
       "Effects": [
         {
           "EffectType": "Effect Flag",
-          "EffectFlagType": "Flag.SkillTree.MovementSpeedToSkillSpeed",
-          "EffectFlagTag": "Flag.SkillTree.MovementSpeedToSkillSpeed"
+          "EffectFlagType": "Flag.SkillTree.PerpetualMotion",
+          "EffectFlagTag": "Flag.SkillTree.PerpetualMotion"
         }
       ]
     },
@@ -5236,6 +5237,77 @@
           "EffectStatModAttributeType": "Defence.DodgeChance",
           "EffectStatModifierOp": "Add",
           "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.MomentumEngine.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Movement Speed",
+      "NodeDescription": "1% Increased Movement Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/winged-leg.winged-leg",
+      "NodePosition": {
+        "X": 511.7,
+        "Y": 1231.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Agility.11",
+        "PassiveTree.MomentumEngine.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Movement",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.01
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.MomentumEngine.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Movement Speed",
+      "NodeDescription": "1% Increased Movement Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/winged-leg.winged-leg",
+      "NodePosition": {
+        "X": 617.6,
+        "Y": 1275.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.MomentumEngine.1",
+        "PassiveTree.MomentumEngine.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Speed.Movement",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.01
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.MomentumEngine.3",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Momentum Engine",
+      "NodeDescription": "25% of Increases and Reductions to Movement Speed also apply to Skill Speed",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/speedometer.speedometer",
+      "NodePosition": {
+        "X": 511.7,
+        "Y": 1319.4
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.MomentumEngine.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Conversion.MovementSpeedToSkillSpeed",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.25
         }
       ]
     }

@@ -17,6 +17,7 @@ Saved/
 /Tools/MasterDatabase/*
 !/Tools/MasterDatabase/SkillTree/
 !/Tools/MasterDatabase/Affixes/
+!/Tools/MasterDatabase/JSONs/
 
 # Office lock files (open Excel workbooks)
 ~$*

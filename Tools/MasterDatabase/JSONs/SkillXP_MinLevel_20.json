@@ -1,0 +1,27 @@
+{
+  "_comment": "Skills accessible from player level 20. Ratio: ~3.16 char levels per skill level (60 levels of runway / 19 steps). Skill level 20 reached at character level 80. Thresholds = PlayerCumulativeXP(20 + round((N-1)*60/19)) - PlayerCumulativeXP(20).",
+  "LevelUpInformation": [
+    { "LevelUpRequirement": 0,           "SkillPointAward": 1 },
+    { "LevelUpRequirement": 0,           "SkillPointAward": 1 },
+    { "LevelUpRequirement": 1387184,     "SkillPointAward": 1 },
+    { "LevelUpRequirement": 3100747,     "SkillPointAward": 1 },
+    { "LevelUpRequirement": 5208637,     "SkillPointAward": 1 },
+    { "LevelUpRequirement": 8768284,     "SkillPointAward": 1 },
+    { "LevelUpRequirement": 12135472,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 16248359,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 21265218,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 27373887,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 34796308,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 47197894,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 58800255,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 72829209,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 89801720,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 110352027,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 135224195,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 176747974,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 215765803,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 263510020,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 322563802,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 396421240,   "SkillPointAward": 1 }
+  ]
+}

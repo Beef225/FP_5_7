@@ -1,0 +1,522 @@
+[
+  {
+    "Name": "IncreasedDamage",
+    "Attribute": "FP_AttributeSet.IncreasedDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "MoreDamage",
+    "Attribute": "FP_AttributeSet.MoreDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "AddedPhysicalDamage",
+    "Attribute": "FP_AttributeSet.AddedPhysicalDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedPhysicalDamage",
+    "Attribute": "FP_AttributeSet.IncreasedPhysicalDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "MorePhysicalDamage",
+    "Attribute": "FP_AttributeSet.MorePhysicalDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "AddedExplosiveDamage",
+    "Attribute": "FP_AttributeSet.AddedExplosiveDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedExplosiveDamage",
+    "Attribute": "FP_AttributeSet.IncreasedExplosiveDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "MoreExplosiveDamage",
+    "Attribute": "FP_AttributeSet.MoreExplosiveDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "AddedRadiationDamage",
+    "Attribute": "FP_AttributeSet.AddedRadiationDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedRadiationDamage",
+    "Attribute": "FP_AttributeSet.IncreasedRadiationDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "MoreRadiationDamage",
+    "Attribute": "FP_AttributeSet.MoreRadiationDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "AddedChemicalDamage",
+    "Attribute": "FP_AttributeSet.AddedChemicalDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedChemicalDamage",
+    "Attribute": "FP_AttributeSet.IncreasedChemicalDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "MoreChemicalDamage",
+    "Attribute": "FP_AttributeSet.MoreChemicalDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "AddedEnergyDamage",
+    "Attribute": "FP_AttributeSet.AddedEnergyDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedEnergyDamage",
+    "Attribute": "FP_AttributeSet.IncreasedEnergyDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "MoreEnergyDamage",
+    "Attribute": "FP_AttributeSet.MoreEnergyDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "PhysicalDamageResistance",
+    "Attribute": "FP_AttributeSet.PhysicalDamageResistance",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "PhysicalMaxResistance",
+    "Attribute": "FP_AttributeSet.PhysicalMaxResistance",
+    "InitialValue": 0.5
+  },
+  {
+    "Name": "ExplosiveDamageResistance",
+    "Attribute": "FP_AttributeSet.ExplosiveDamageResistance",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ExplosiveMaxResistance",
+    "Attribute": "FP_AttributeSet.ExplosiveMaxResistance",
+    "InitialValue": 0.5
+  },
+  {
+    "Name": "RadiationDamageResistance",
+    "Attribute": "FP_AttributeSet.RadiationDamageResistance",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "RadiationMaxResistance",
+    "Attribute": "FP_AttributeSet.RadiationMaxResistance",
+    "InitialValue": 0.5
+  },
+  {
+    "Name": "ChemicalDamageResistance",
+    "Attribute": "FP_AttributeSet.ChemicalDamageResistance",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ChemicalMaxResistance",
+    "Attribute": "FP_AttributeSet.ChemicalMaxResistance",
+    "InitialValue": 0.5
+  },
+  {
+    "Name": "EnergyDamageResistance",
+    "Attribute": "FP_AttributeSet.EnergyDamageResistance",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "EnergyMaxResistance",
+    "Attribute": "FP_AttributeSet.EnergyMaxResistance",
+    "InitialValue": 0.5
+  },
+  {
+    "Name": "OverheatDamageResistance",
+    "Attribute": "FP_AttributeSet.OverheatDamageResistance",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "OverheatMaxResistance",
+    "Attribute": "FP_AttributeSet.OverheatMaxResistance",
+    "InitialValue": 0.5
+  },
+  {
+    "Name": "CriticalStrikeChance",
+    "Attribute": "FP_AttributeSet.CriticalStrikeChance",
+    "InitialValue": 0.05
+  },
+  {
+    "Name": "IncreasedCriticalStrikeChance",
+    "Attribute": "FP_AttributeSet.IncreasedCriticalStrikeChance",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "CriticalStrikeMultiplier",
+    "Attribute": "FP_AttributeSet.CriticalStrikeMultiplier",
+    "InitialValue": 2.0
+  },
+  {
+    "Name": "Armour",
+    "Attribute": "FP_AttributeSet.Armour",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedArmour",
+    "Attribute": "FP_AttributeSet.IncreasedArmour",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ChanceToDodge",
+    "Attribute": "FP_AttributeSet.ChanceToDodge",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "BlockChance",
+    "Attribute": "FP_AttributeSet.BlockChance",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "MaxDodgeChance",
+    "Attribute": "FP_AttributeSet.MaxDodgeChance",
+    "InitialValue": 0.75
+  },
+  {
+    "Name": "MaxBlockChance",
+    "Attribute": "FP_AttributeSet.MaxBlockChance",
+    "InitialValue": 0.75
+  },
+  {
+    "Name": "BlockedDamage",
+    "Attribute": "FP_AttributeSet.BlockedDamage",
+    "InitialValue": 0.5
+  },
+  {
+    "Name": "DeferredDamageAmount",
+    "Attribute": "FP_AttributeSet.DeferredDamageAmount",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "DeferredDamageTime",
+    "Attribute": "FP_AttributeSet.DeferredDamageTime",
+    "InitialValue": 2.0
+  },
+  {
+    "Name": "HealthRegeneration",
+    "Attribute": "FP_AttributeSet.HealthRegeneration",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "CriticalHitResistance",
+    "Attribute": "FP_AttributeSet.CriticalHitResistance",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ReducedDamageFromProjectiles",
+    "Attribute": "FP_AttributeSet.ReducedDamageFromProjectiles",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ReducedDamageFromAoE",
+    "Attribute": "FP_AttributeSet.ReducedDamageFromAoE",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ReducedDamageFromMelee",
+    "Attribute": "FP_AttributeSet.ReducedDamageFromMelee",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "AmbientTemperature",
+    "Attribute": "FP_AttributeSet.AmbientTemperature",
+    "InitialValue": 20.0
+  },
+  {
+    "Name": "ThermalMass",
+    "Attribute": "FP_AttributeSet.ThermalMass",
+    "InitialValue": 40.0
+  },
+  {
+    "Name": "CoolingCoefficient",
+    "Attribute": "FP_AttributeSet.CoolingCoefficient",
+    "InitialValue": 0.02
+  },
+  {
+    "Name": "BruisedEffectiveness",
+    "Attribute": "FP_AttributeSet.BruisedEffectiveness",
+    "InitialValue": 1.0
+  },
+  {
+    "Name": "ConcussedEffectiveness",
+    "Attribute": "FP_AttributeSet.ConcussedEffectiveness",
+    "InitialValue": 1.0
+  },
+  {
+    "Name": "IrradiatedEffectiveness",
+    "Attribute": "FP_AttributeSet.IrradiatedEffectiveness",
+    "InitialValue": 1.0
+  },
+  {
+    "Name": "CorrodedEffectiveness",
+    "Attribute": "FP_AttributeSet.CorrodedEffectiveness",
+    "InitialValue": 1.0
+  },
+  {
+    "Name": "ThermalDestabalizationEffectiveness",
+    "Attribute": "FP_AttributeSet.ThermalDestabalizationEffectiveness",
+    "InitialValue": 1.0
+  },
+  {
+    "Name": "BruisedThreshold",
+    "Attribute": "FP_AttributeSet.BruisedThreshold",
+    "InitialValue": 100.0
+  },
+  {
+    "Name": "ConcussedThreshold",
+    "Attribute": "FP_AttributeSet.ConcussedThreshold",
+    "InitialValue": 100.0
+  },
+  {
+    "Name": "IrradiatedThreshold",
+    "Attribute": "FP_AttributeSet.IrradiatedThreshold",
+    "InitialValue": 100.0
+  },
+  {
+    "Name": "CorrodedThreshold",
+    "Attribute": "FP_AttributeSet.CorrodedThreshold",
+    "InitialValue": 100.0
+  },
+  {
+    "Name": "BruisedDuration",
+    "Attribute": "FP_AttributeSet.BruisedDuration",
+    "InitialValue": 4.0
+  },
+  {
+    "Name": "ConcussedDuration",
+    "Attribute": "FP_AttributeSet.ConcussedDuration",
+    "InitialValue": 4.0
+  },
+  {
+    "Name": "IrradiatedDuration",
+    "Attribute": "FP_AttributeSet.IrradiatedDuration",
+    "InitialValue": 4.0
+  },
+  {
+    "Name": "CorrodedDuration",
+    "Attribute": "FP_AttributeSet.CorrodedDuration",
+    "InitialValue": 4.0
+  },
+  {
+    "Name": "ThermalInsulation",
+    "Attribute": "FP_AttributeSet.ThermalInsulation",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "AreaOfEffectMulitplier",
+    "Attribute": "FP_AttributeSet.AreaOfEffectMulitplier",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "AreaOfEffectAdditionalRadius",
+    "Attribute": "FP_AttributeSet.AreaOfEffectAdditionalRadius",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "MovementSpeed",
+    "Attribute": "FP_AttributeSet.MovementSpeed",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "SkillSpeed",
+    "Attribute": "FP_AttributeSet.SkillSpeed",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "SkillDuration",
+    "Attribute": "FP_AttributeSet.SkillDuration",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "SkillMoveSpeedModifier",
+    "Attribute": "FP_AttributeSet.SkillMoveSpeedModifier",
+    "InitialValue": 0.5
+  },
+  {
+    "Name": "ProjectileSpeed",
+    "Attribute": "FP_AttributeSet.ProjectileSpeed",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "HeatCostEfficiency",
+    "Attribute": "FP_AttributeSet.HeatCostEfficiency",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedHeatCost",
+    "Attribute": "FP_AttributeSet.IncreasedHeatCost",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "FlatHeatCost",
+    "Attribute": "FP_AttributeSet.FlatHeatCost",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ExecuteThreshold",
+    "Attribute": "FP_AttributeSet.ExecuteThreshold",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ProjectileSpeedToDamage",
+    "Attribute": "FP_AttributeSet.ProjectileSpeedToDamage",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "MovementSpeedToSkillSpeed",
+    "Attribute": "FP_AttributeSet.MovementSpeedToSkillSpeed",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ItemQuantity",
+    "Attribute": "FP_AttributeSet.ItemQuantity",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ItemRarity",
+    "Attribute": "FP_AttributeSet.ItemRarity",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "WattsQuantity",
+    "Attribute": "FP_AttributeSet.WattsQuantity",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedDamageOverTime",
+    "Attribute": "FP_AttributeSet.IncreasedDamageOverTime",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "DamageOverTimeMultiplier",
+    "Attribute": "FP_AttributeSet.DamageOverTimeMultiplier",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ArmourPenetration",
+    "Attribute": "FP_AttributeSet.ArmourPenetration",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "PhysicalResistancePenetration",
+    "Attribute": "FP_AttributeSet.PhysicalResistancePenetration",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ExplosiveResistancePenetration",
+    "Attribute": "FP_AttributeSet.ExplosiveResistancePenetration",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "RadiationResistancePenetration",
+    "Attribute": "FP_AttributeSet.RadiationResistancePenetration",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ChemicalResistancePenetration",
+    "Attribute": "FP_AttributeSet.ChemicalResistancePenetration",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "EnergyResistancePenetration",
+    "Attribute": "FP_AttributeSet.EnergyResistancePenetration",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ProjectileTargetsPierced",
+    "Attribute": "FP_AttributeSet.ProjectileTargetsPierced",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ProjectileTargetsBounced",
+    "Attribute": "FP_AttributeSet.ProjectileTargetsBounced",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ProjectileCount",
+    "Attribute": "FP_AttributeSet.ProjectileCount",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "PhysicalDamageToEnergy",
+    "Attribute": "FP_AttributeSet.PhysicalDamageToEnergy",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ChemicalDamageToRadiation",
+    "Attribute": "FP_AttributeSet.ChemicalDamageToRadiation",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ExplosiveDamageToPhysical",
+    "Attribute": "FP_AttributeSet.ExplosiveDamageToPhysical",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "EnergyTakenAsRadiation",
+    "Attribute": "FP_AttributeSet.EnergyTakenAsRadiation",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "ChemicalTakenAsExplosive",
+    "Attribute": "FP_AttributeSet.ChemicalTakenAsExplosive",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedDamageAgainstBruised",
+    "Attribute": "FP_AttributeSet.IncreasedDamageAgainstBruised",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedDamageAgainstConcussed",
+    "Attribute": "FP_AttributeSet.IncreasedDamageAgainstConcussed",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedDamageAgainstIrradiated",
+    "Attribute": "FP_AttributeSet.IncreasedDamageAgainstIrradiated",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedDamageAgainstCorroded",
+    "Attribute": "FP_AttributeSet.IncreasedDamageAgainstCorroded",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedDamageAgainstOverheated",
+    "Attribute": "FP_AttributeSet.IncreasedDamageAgainstOverheated",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedDamageAgainstFrozen",
+    "Attribute": "FP_AttributeSet.IncreasedDamageAgainstFrozen",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "IncreasedDamagePerHeatFromEquilibrium",
+    "Attribute": "FP_AttributeSet.IncreasedDamagePerHeatFromEquilibrium",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "LifeGainedOnHit",
+    "Attribute": "FP_AttributeSet.LifeGainedOnHit",
+    "InitialValue": 0.0
+  },
+  {
+    "Name": "LifeGainedOnKill",
+    "Attribute": "FP_AttributeSet.LifeGainedOnKill",
+    "InitialValue": 0.0
+  }
+]

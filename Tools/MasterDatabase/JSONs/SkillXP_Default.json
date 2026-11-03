@@ -1,0 +1,26 @@
+{
+  "LevelUpInformation": [
+    { "LevelUpRequirement": 0,          "SkillPointAward": 1 },
+    { "LevelUpRequirement": 0,          "SkillPointAward": 1 },
+    { "LevelUpRequirement": 64000,      "SkillPointAward": 1 },
+    { "LevelUpRequirement": 750000,     "SkillPointAward": 1 },
+    { "LevelUpRequirement": 1600000,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 3044000,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 5500000,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 9000000,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 14000000,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 18000000,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 21000000,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 30500000,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 43700000,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 57800000,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 75900000,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 87000000,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 113400000,  "SkillPointAward": 1 },
+    { "LevelUpRequirement": 138300000,  "SkillPointAward": 1 },
+    { "LevelUpRequirement": 168400000,  "SkillPointAward": 1 },
+    { "LevelUpRequirement": 219000000,  "SkillPointAward": 1 },
+    { "LevelUpRequirement": 284830282,  "SkillPointAward": 1 },
+    { "LevelUpRequirement": 300000000,  "SkillPointAward": 1 }
+  ]
+}

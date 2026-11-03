@@ -1,0 +1,27 @@
+{
+  "_comment": "Skills accessible from player level 1. Ratio: 1 skill level per 4 character levels. Skill level 20 reached at character level ~77. Thresholds = PlayerCumulativeXP(1 + (N-1)*4).",
+  "LevelUpInformation": [
+    { "LevelUpRequirement": 0,          "SkillPointAward": 1 },
+    { "LevelUpRequirement": 0,          "SkillPointAward": 1 },
+    { "LevelUpRequirement": 6500,       "SkillPointAward": 1 },
+    { "LevelUpRequirement": 48000,      "SkillPointAward": 1 },
+    { "LevelUpRequirement": 752327,     "SkillPointAward": 1 },
+    { "LevelUpRequirement": 1923101,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 3473991,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 5533272,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 8252637,    "SkillPointAward": 1 },
+    { "LevelUpRequirement": 11812284,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 16460322,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 22525533,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 30417887,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 40650504,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 53867243,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 70897651,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 92845720,   "SkillPointAward": 1 },
+    { "LevelUpRequirement": 121164862,  "SkillPointAward": 1 },
+    { "LevelUpRequirement": 157700755,  "SkillPointAward": 1 },
+    { "LevelUpRequirement": 204938644,  "SkillPointAward": 1 },
+    { "LevelUpRequirement": 266554020,  "SkillPointAward": 1 },
+    { "LevelUpRequirement": 348378944,  "SkillPointAward": 1 }
+  ]
+}

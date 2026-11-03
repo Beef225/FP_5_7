@@ -1,0 +1,898 @@
+[
+  {
+    "AttributeTag": "Attributes.Vital.HitPoints",
+    "AttributeName": "HitPoints",
+    "AttributeDescription": "",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Attributes.Vital.MaxHitPoints",
+    "AttributeName": "MaxHitPoints",
+    "AttributeDescription": "",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Attributes.Vital.Heat",
+    "AttributeName": "Heat",
+    "AttributeDescription": "",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Attributes.Vital.MaxHeatThreshold",
+    "AttributeName": "MaxHeatThreshold",
+    "AttributeDescription": "",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Attributees.VitalMinHeatThreshold",
+    "AttributeName": "MinHeatThreshold",
+    "AttributeDescription": "",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Attributes.Primary.Might",
+    "AttributeName": "Might",
+    "AttributeDescription": "Might",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Attributes.Primary.Resonance",
+    "AttributeName": "Resonance",
+    "AttributeDescription": "Resonance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Attributes.Primary.Agility",
+    "AttributeName": "Agility",
+    "AttributeDescription": "Agility",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Attributes.Primary.Fortitude",
+    "AttributeName": "Fortitude",
+    "AttributeDescription": "Fortitude",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Increased.Generic",
+    "AttributeName": "IncreasedDamage",
+    "AttributeDescription": "Increase All Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.More.Generic",
+    "AttributeName": "MoreDamage",
+    "AttributeDescription": "More Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Added.Physical",
+    "AttributeName": "AddedPhysicalDamage",
+    "AttributeDescription": "Added Physical Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Increased.Physical",
+    "AttributeName": "IncreasedPhysicalDamage",
+    "AttributeDescription": "Increased Physical Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.More.Physical",
+    "AttributeName": "MorePhysicalDamage",
+    "AttributeDescription": "More Physical Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Added.Explosive",
+    "AttributeName": "AddedExplosiveDamage",
+    "AttributeDescription": "Added Explosive Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Increased.Explosive",
+    "AttributeName": "IncreasedExplosiveDamage",
+    "AttributeDescription": "Increased Explosive Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.More.Explosive",
+    "AttributeName": "MoreExplosiveDamage",
+    "AttributeDescription": "More Explosive Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Added.Radiation",
+    "AttributeName": "AddedRadiationDamage",
+    "AttributeDescription": "Added Radiation Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Increased.Radiation",
+    "AttributeName": "IncreasedRadiationDamage",
+    "AttributeDescription": "Increased Radiation Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.More.Radiation",
+    "AttributeName": "MoreRadiationDamage",
+    "AttributeDescription": "More Radiation Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Added.Chemical",
+    "AttributeName": "AddedChemicalDamage",
+    "AttributeDescription": "Added Chemical Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Increased.Chemical",
+    "AttributeName": "IncreasedChemicalDamage",
+    "AttributeDescription": "Increased Chemical Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.More.Chemical",
+    "AttributeName": "MoreChemicalDamage",
+    "AttributeDescription": "More Chemical Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Added.Energy",
+    "AttributeName": "AddedEnergyDamage",
+    "AttributeDescription": "Added Energy Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.Increased.Energy",
+    "AttributeName": "IncreasedEnergyDamage",
+    "AttributeDescription": "Increased Energy Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Damage.More.Energy",
+    "AttributeName": "MoreEnergyDamage",
+    "AttributeDescription": "More Energy Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Damage.Physical",
+    "AttributeName": "PhysicalDamageResistance",
+    "AttributeDescription": "Physical Damage Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Max.Physical",
+    "AttributeName": "PhysicalMaxResistance",
+    "AttributeDescription": "Physical Maximum Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Damage.Explosive",
+    "AttributeName": "ExplosiveDamageResistance",
+    "AttributeDescription": "Explosive Damage Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Max.Explosive",
+    "AttributeName": "ExplosiveMaxResistance",
+    "AttributeDescription": "Explosive Maximum Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Damage.Radiation",
+    "AttributeName": "RadiationDamageResistance",
+    "AttributeDescription": "Radiation Damage Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Max.Radiation",
+    "AttributeName": "RadiationMaxResistance",
+    "AttributeDescription": "Radiation Maximum Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Damage.Chemical",
+    "AttributeName": "ChemicalDamageResistance",
+    "AttributeDescription": "Chemical Damage Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Max.Chemical",
+    "AttributeName": "ChemicalMaxResistance",
+    "AttributeDescription": "Chemical Maximum Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Damage.Energy",
+    "AttributeName": "EnergyDamageResistance",
+    "AttributeDescription": "Energy Damage Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Max.Energy",
+    "AttributeName": "EnergyMaxResistance",
+    "AttributeDescription": "Energy Maximum Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Damage.Overheat",
+    "AttributeName": "OverheatDamageResistance",
+    "AttributeDescription": "Overheat Damage Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Resistance.Max.Overheat",
+    "AttributeName": "OverheatMaxResistance",
+    "AttributeDescription": "Overheat Maximum Resistance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Critical.StrikeChance.Base",
+    "AttributeName": "CriticalStrikeChance",
+    "AttributeDescription": "Base Critical Strike Chance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Critical.StrikeChance.Increased",
+    "AttributeName": "IncreasedCriticalStrikeChance",
+    "AttributeDescription": "Increased Critical Strike Chance",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Critical.StrikeMultiplier",
+    "AttributeName": "CriticalStrikeMultiplier",
+    "AttributeDescription": "Damage Multiplier on Critical Strike",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defence.Armour",
+    "AttributeName": "Armour",
+    "AttributeDescription": "Armour",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defense.IncreasedArmour",
+    "AttributeName": "IncreasedArmour",
+    "AttributeDescription": "Increased Armour",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defence.DodgeChance",
+    "AttributeName": "ChanceToDodge",
+    "AttributeDescription": "Chance to Dodge Hits",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defence.BlockChance",
+    "AttributeName": "BlockChance",
+    "AttributeDescription": "Chance To Block Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defence.Max.DodgeChance",
+    "AttributeName": "MaxDodgeChance",
+    "AttributeDescription": "Maximum Chance To Dodge",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defence.Max.BlockChance",
+    "AttributeName": "MaxBlockChance",
+    "AttributeDescription": "Maximum Chance To Block",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defence.BlockedDamage",
+    "AttributeName": "BlockedDamage",
+    "AttributeDescription": "Amount of Damage Mitigated on Block",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defence.DeferredDamageAmount",
+    "AttributeName": "DeferredDamageAmount",
+    "AttributeDescription": "of Damage Deffered Over Time",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defence.DeferredDamageTime",
+    "AttributeName": "DeferredDamageTime",
+    "AttributeDescription": "Seconds Deferred Damage is Taken Over",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defence.HealthRegeneration",
+    "AttributeName": "HealthRegeneration",
+    "AttributeDescription": "Health Regeneration",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 2
+  },
+  {
+    "AttributeTag": "Defense.CriticalHitResistance",
+    "AttributeName": "CriticalHitResistance",
+    "AttributeDescription": "Less Enemy Critical Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defense.ReducedDamage.Projectiles",
+    "AttributeName": "ReducedDamageFromProjectiles",
+    "AttributeDescription": "Reduced Damage From Projectiles",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defense.ReducedDamage.AoE",
+    "AttributeName": "ReducedDamageFromAoE",
+    "AttributeDescription": "Reduced Area of Effect Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Defense.ReduceeDamage.Melee",
+    "AttributeName": "ReducedDamageFromMelee",
+    "AttributeDescription": "Reduced Melee Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Heat.AmbientTemperature",
+    "AttributeName": "AmbientTemperature",
+    "AttributeDescription": "Enironment Tempurature",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Heat.ThermalMass",
+    "AttributeName": "ThermalMass",
+    "AttributeDescription": "Heat Capacity",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Heat.CoolingCoefficient",
+    "AttributeName": "CoolingCoefficient",
+    "AttributeDescription": "Rate of Heat Dissapation",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 2
+  },
+  {
+    "AttributeTag": "Heat.SkillCost",
+    "AttributeName": "IncreasedHeatCost",
+    "AttributeDescription": "Increased Skill Heat Cost",
+    "AttributeTooltipText": "Increases or reduces the heat cost of skills. 100% increased doubles the cost; negative values reduce it.",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Heat.SkillCostEfficiency",
+    "AttributeName": "HeatCostEfficiency",
+    "AttributeDescription": "Heat Cost Efficiency",
+    "AttributeTooltipText": "Skill heat cost is divided by (1 + efficiency). 100% efficiency halves the cost, 200% reduces it to a third.",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Heat.SkillCostFlat",
+    "AttributeName": "FlatHeatCost",
+    "AttributeDescription": "Heat Generated per Skill",
+    "AttributeTooltipText": "Flat heat added to each skill cast after efficiency. Negative values mean less heat generated.",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Execute.Threshold",
+    "AttributeName": "ExecuteThreshold",
+    "AttributeDescription": "Execute Threshold",
+    "AttributeTooltipText": "Hits that leave an enemy at or below this percentage of their maximum life kill them outright.",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conversion.ProjectileSpeedToDamage",
+    "AttributeName": "ProjectileSpeedToDamage",
+    "AttributeDescription": "Projectile Speed to Damage",
+    "AttributeTooltipText": "This percentage of your increases and reductions to projectile speed also applies to damage.",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conversion.MovementSpeedToSkillSpeed",
+    "AttributeName": "MovementSpeedToSkillSpeed",
+    "AttributeDescription": "Movement Speed Applied to Skill Speed",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Effectiveness.Bruised",
+    "AttributeName": "BruisedEffectiveness",
+    "AttributeDescription": "Bruised Effectiveness",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Effectiveness.Concussed",
+    "AttributeName": "ConcussedEffectiveness",
+    "AttributeDescription": "Concussed Effectiveness",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Effectiveness.Irradiated",
+    "AttributeName": "IrradiatedEffectiveness",
+    "AttributeDescription": "Irradiated Effectiveness",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Effectiveness.Corroded",
+    "AttributeName": "CorrodedEffectiveness",
+    "AttributeDescription": "Corroded Effectiveness",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Effectiveness.ThermalDestabalization",
+    "AttributeName": "ThermalDestabalizationEffectiveness",
+    "AttributeDescription": "Thermal Destabalization Effectiveness",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Threshold.Bruised",
+    "AttributeName": "BruisedThreshold",
+    "AttributeDescription": "Bruising Threshold",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Threshold.Concussed",
+    "AttributeName": "ConcussedThreshold",
+    "AttributeDescription": "Concussing Threshold",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Threshold.Irradiated",
+    "AttributeName": "IrradiatedThreshold",
+    "AttributeDescription": "Irradiating Threshold",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Threshold.Corroded",
+    "AttributeName": "CorrodedThreshold",
+    "AttributeDescription": "Corroding Threshold",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Duration.Bruised",
+    "AttributeName": "BruisedDuration",
+    "AttributeDescription": "Bruised Duration",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Duration.Concussed",
+    "AttributeName": "ConcussedDuration",
+    "AttributeDescription": "Concussed Duration",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Duration.Irradiated",
+    "AttributeName": "IrradiatedDuration",
+    "AttributeDescription": "Irradiated Duration",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.Duration.Corroded",
+    "AttributeName": "CorrodedDuration",
+    "AttributeDescription": "Corroded Duration",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Debuff.ThermalInsulation",
+    "AttributeName": "ThermalInsulation",
+    "AttributeDescription": "Thermal Insulation",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "AoE.Multiplier",
+    "AttributeName": "AreaOfEffectMulitplier",
+    "AttributeDescription": "Increased Area of effect",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "AoE.AdditionalRadius",
+    "AttributeName": "AreaOfEffectAdditionalRadius",
+    "AttributeDescription": "Increased Radius of AoE",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 1
+  },
+  {
+    "AttributeTag": "Speed.Movement",
+    "AttributeName": "MovementSpeed",
+    "AttributeDescription": "Movement Speed",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Speed.Skill",
+    "AttributeName": "SkillSpeed",
+    "AttributeDescription": "Faster Skill Speed",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Speed.Movement.DuringSkill",
+    "AttributeName": "SkillMoveSpeedModifier",
+    "AttributeDescription": "of Movement Speed during Skill",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Speed.Projectile",
+    "AttributeName": "ProjectileSpeed",
+    "AttributeDescription": "Increased Projectile Speed",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Item.Quantity",
+    "AttributeName": "ItemQuantity",
+    "AttributeDescription": "Item Quantity",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Item.Rarity",
+    "AttributeName": "ItemRarity",
+    "AttributeDescription": "Item Rarity",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Item.WattsQuantity",
+    "AttributeName": "WattsQuantity",
+    "AttributeDescription": "Watt Quantity",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "DoT.Increased",
+    "AttributeName": "IncreasedDamageOverTime",
+    "AttributeDescription": "Increased Damage OverTime",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "DoT.Multiplier",
+    "AttributeName": "DamageOverTimeMultiplier",
+    "AttributeDescription": "Damage Over Time Multiplier",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Penetration.Armour",
+    "AttributeName": "ArmourPenetration",
+    "AttributeDescription": "Armour Penetrated",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Penetration.Physical",
+    "AttributeName": "PhysicalResistancePenetration",
+    "AttributeDescription": "Physical Resistance Penetrated",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Penetration.Explosive",
+    "AttributeName": "ExplosiveResistancePenetration",
+    "AttributeDescription": "Explosive Resistance Penetrated",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Penetration.Radiation",
+    "AttributeName": "RadiationResistancePenetration",
+    "AttributeDescription": "Radiation Resistance Penetrated",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Penetration.Chemical",
+    "AttributeName": "ChemicalResistancePenetration",
+    "AttributeDescription": "Chemical Resistance Penetrated",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Penetration.Energy",
+    "AttributeName": "EnergyResistancePenetration",
+    "AttributeDescription": "Energy Resistance Penetrated",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Projectile.Pierce",
+    "AttributeName": "ProjectileTargetsPierced",
+    "AttributeDescription": "Targets Pierced by Projectile",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Projectile.Bounce",
+    "AttributeName": "ProjectileTargetsBounced",
+    "AttributeDescription": "Targets Projectile Bounce to",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Projectile.Count",
+    "AttributeName": "ProjectileCount",
+    "AttributeDescription": "Added Number of Projectiles",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conversion.Damage.PhysicalToEnergy",
+    "AttributeName": "PhysicalDamageToEnergy",
+    "AttributeDescription": "Physical Damage Converted to Energy",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conversion.Damage.ChemicalToRadiation",
+    "AttributeName": "ChemicalDamageToRadiation",
+    "AttributeDescription": "Chemical Damage Converted to Radiation",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conversion.Damage.ExplosiveToPhysical",
+    "AttributeName": "ExplosiveDamageToPhysical",
+    "AttributeDescription": "Explosive Damage Converted to Physical",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conversion.Defense.EnergyToRadiation",
+    "AttributeName": "EnergyTakenAsRadiation",
+    "AttributeDescription": "Energy Damage Taken As Radiation Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conversion.Defense.ChemicalToExplosive",
+    "AttributeName": "ChemicalTakenAsExplosive",
+    "AttributeDescription": "Chemical Damage taken As Explosive Damage",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conditional.Damage.IncreasedAgainstBruised",
+    "AttributeName": "IncreasedDamageAgainstBruised",
+    "AttributeDescription": "Increased Damage Against Bruised Targets",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conditional.Damage.IncreasedAgainstConcussed",
+    "AttributeName": "IncreasedDamageAgainstConcussed",
+    "AttributeDescription": "Increased Damage Against Concussed Targets",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conditional.Damage.IncreasedAgainstIrradiated",
+    "AttributeName": "IncreasedDamageAgainstIrradiated",
+    "AttributeDescription": "Increased Damage Against Irradiated Targets",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conditional.Damage.IncreasedAgainstCorroded",
+    "AttributeName": "IncreasedDamageAgainstCorroded",
+    "AttributeDescription": "Increased Damage Against Corroded Targets",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conditional.Damage.IncreasedAgainstOverheated",
+    "AttributeName": "IncreasedDamageAgainstOverheated",
+    "AttributeDescription": "Increased Damage Against Overheated Targets",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conditional.Damage.IncreasedAgainstFrozen",
+    "AttributeName": "IncreasedDamageAgainstFrozen",
+    "AttributeDescription": "Increased Damage Against Frozen Targets",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Conditional.Damage.PerHeat",
+    "AttributeName": "IncreasedDamagePerHeatFromEquilibrium",
+    "AttributeDescription": "Increased Damage Per Heat Away From Stable Tempurature",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Recovery.Life.OnHit",
+    "AttributeName": "LifeGainedOnHit",
+    "AttributeDescription": "Life Gained On Hit",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  },
+  {
+    "AttributeTag": "Recovery.Life.OnKill",
+    "AttributeName": "LifeGainedOnKill",
+    "AttributeDescription": "Life Gained On Kill",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Numerical",
+    "DecimalRoundTo": 0
+  }
+]

@@ -8,6 +8,9 @@
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "GameplayEffect.h"
 #include "GameplayEffectTypes.h"
+#include "AbilitySystemBlueprintLibrary.h"
+#include "FP_GameplayTags.h"
+#include "Libraries/FP_AbilitySystemLibrary.h"
 
 void UFP_GA_DebuffPassive_Base::ActivateAbility(
 	const FGameplayAbilitySpecHandle Handle,
@@ -26,6 +29,84 @@ void UFP_GA_DebuffPassive_Base::ActivateAbility(
 	);
 	Task->EventReceived.AddDynamic(this, &UFP_GA_DebuffPassive_Base::HandleBuildupEvent);
 	Task->ReadyForActivation();
+}
+
+void UFP_GA_DebuffPassive_Base::SpreadDebuffsOnDeath(AActor* DyingActor)
+{
+	if (!DyingActor || !DyingActor->HasAuthority())
+	{
+		return;
+	}
+	UAbilitySystemComponent* ASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(DyingActor);
+	if (!ASC)
+	{
+		return;
+	}
+
+	const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
+	struct FSpread
+	{
+		FGameplayTag       EventTag;
+		FGameplayAttribute ThresholdAttribute;
+		AActor*            Source;
+	};
+	TArray<FSpread> Spreads;
+	for (const FGameplayAbilitySpec& Spec : ASC->GetActivatableAbilities())
+	{
+		for (UGameplayAbility* Instance : Spec.GetAbilityInstances())
+		{
+			const UFP_GA_DebuffPassive_Base* Debuff = Cast<UFP_GA_DebuffPassive_Base>(Instance);
+			if (!Debuff || !Debuff->bDebuffActive || !Debuff->CachedSourceASC)
+			{
+				continue;
+			}
+			const FGameplayTag State = Debuff->GetStateTag();
+			if (State != Tags.State_Irradiated && State != Tags.State_Corroded)
+			{
+				continue;
+			}
+			if (!Debuff->CachedSourceASC->HasMatchingGameplayTag(Tags.Flag_SkillTree_SpreadStatusOnKill))
+			{
+				continue;
+			}
+			if (AActor* Source = Debuff->CachedSourceASC->GetAvatarActor())
+			{
+				Spreads.Add({ Debuff->GetBuildupEventTag(), Debuff->GetThresholdAttribute(), Source });
+			}
+		}
+	}
+	if (Spreads.IsEmpty())
+	{
+		return;
+	}
+
+	TArray<AActor*> Nearby;
+	UFP_AbilitySystemLibrary::GetLivePlayersWithinRadius(DyingActor, Nearby, { DyingActor },
+		CascadeFailureRadius, DyingActor->GetActorLocation());
+
+	for (const FSpread& Spread : Spreads)
+	{
+		for (AActor* Neighbour : Nearby)
+		{
+			if (!Neighbour || Neighbour == Spread.Source || !UFP_AbilitySystemLibrary::IsNotFriend(Spread.Source, Neighbour))
+			{
+				continue;
+			}
+			const UAbilitySystemComponent* NeighbourASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Neighbour);
+			if (!NeighbourASC)
+			{
+				continue;
+			}
+			const float Threshold = NeighbourASC->GetSet<UFP_AttributeSet>()
+				? NeighbourASC->GetNumericAttribute(Spread.ThresholdAttribute)
+				: 100.f;
+
+			FGameplayEventData EventData;
+			EventData.Instigator     = Spread.Source;
+			EventData.EventMagnitude = FMath::Max(Threshold, 1.f);
+			UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(Neighbour, Spread.EventTag, EventData);
+		}
+	}
 }
 
 void UFP_GA_DebuffPassive_Base::HandleBuildupEvent(FGameplayEventData Payload)

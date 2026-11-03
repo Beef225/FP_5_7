@@ -13,6 +13,7 @@
 #include "Engine/World.h"
 #include "Interaction/FP_CombatInterface.h"
 #include "AbilitySystem/Effects/FP_GE_Blur.h"
+#include "AbilitySystem/Effects/FP_GE_EndothermicRegen.h"
 
 void UFP_AbilitySystemComponent::AbilityActorInfoSet()
 {
@@ -37,6 +38,7 @@ void UFP_AbilitySystemComponent::RegisterFlagEffects()
 	}
 	const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
 	FlagEffectClasses.Add(Tags.Flag_SkillTree_Blur, UFP_GE_Blur::StaticClass());
+	FlagEffectClasses.Add(Tags.Flag_SkillTree_Endothermic, UFP_GE_EndothermicRegen::StaticClass());
 
 	for (const TPair<FGameplayTag, TSubclassOf<UGameplayEffect>>& Pair : FlagEffectClasses)
 	{
@@ -71,11 +73,26 @@ void UFP_AbilitySystemComponent::OnFlagEffectTagChanged(const FGameplayTag Tag, 
 		{
 			Handle = ApplyGameplayEffectSpecToSelf(*Spec.Data.Get());
 		}
+
+		// Endothermic: Heat starts full (just under Max, so Overheat does not trip).
+		if (Tag == FFP_GameplayTags::Get().Flag_SkillTree_Endothermic)
+		{
+			SetNumericAttributeBase(UFP_AttributeSet::GetHeatAttribute(),
+				GetEndothermicFullHeat(GetNumericAttribute(UFP_AttributeSet::GetMaxHeatThresholdAttribute())));
+		}
 	}
 	else if (NewCount <= 0 && Handle.IsValid())
 	{
 		RemoveActiveGameplayEffect(Handle);
 		Handle.Invalidate();
+
+		// Endothermic removed: Newton cooling's magnitude was cached at 0 and only recalculates when a
+		// captured attribute changes. Heat sits still at full, so nudge it to wake cooling back up.
+		if (Tag == FFP_GameplayTags::Get().Flag_SkillTree_Endothermic)
+		{
+			const FGameplayAttribute HeatAttr = UFP_AttributeSet::GetHeatAttribute();
+			SetNumericAttributeBase(HeatAttr, GetNumericAttributeBase(HeatAttr) - EndothermicFullEpsilon);
+		}
 	}
 }
 
@@ -380,6 +397,21 @@ float UFP_AbilitySystemComponent::GetPendingRecoup() const
 		}
 	}
 	return Total;
+}
+
+bool UFP_AbilitySystemComponent::IsEndothermic(const UAbilitySystemComponent* ASC)
+{
+	return ASC && ASC->HasMatchingGameplayTag(FFP_GameplayTags::Get().Flag_SkillTree_Endothermic);
+}
+
+bool UFP_AbilitySystemComponent::DealsOnlyRadiationDamage(const UAbilitySystemComponent* ASC)
+{
+	return ASC && ASC->HasMatchingGameplayTag(FFP_GameplayTags::Get().Flag_SkillTree_SpreadStatusOnKill);
+}
+
+bool UFP_AbilitySystemComponent::IsEndothermicHeatLocked(const UAbilitySystemComponent* ASC)
+{
+	return IsEndothermic(ASC) && ASC->GetNumericAttribute(UFP_AttributeSet::GetHeatAttribute()) < 0.f;
 }
 
 bool UFP_AbilitySystemComponent::IsAvatarMoving(const UAbilitySystemComponent* ASC)

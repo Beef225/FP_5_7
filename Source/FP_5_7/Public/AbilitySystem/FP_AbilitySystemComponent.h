@@ -136,6 +136,24 @@ public:
 	/** Adjusts the TARGET's raw dodge chance: +MovingDodge while moving, 0 while stationary. */
 	static float ApplyPerpetualMotionDodge(const UAbilitySystemComponent* TargetASC, float DodgeChance);
 
+	// ---- Endothermic (Flag.SkillTree.Endothermic) ---------------------------------------------
+	// Heat starts full and regenerates towards full (UFP_GE_EndothermicRegen); skills spend heat
+	// (cooling skills restore it); skills are locked while Heat < 0. "Full" sits a hair under
+	// MaxHeatThreshold so the Overheat check (Heat > Max) never trips at rest. Above Max the
+	// normal Newton cooling (UFP_MMC_HeatDissapation) runs until Heat is back under Max.
+	static constexpr float EndothermicRegenPerSecond = 0.20f;  // fraction of MaxHeatThreshold per second
+	static constexpr float EndothermicFullEpsilon    = 0.01f;  // full = Max - this
+
+	static bool IsEndothermic(const UAbilitySystemComponent* ASC);
+
+	// ---- Cascade Failure (Flag.SkillTree.SpreadStatusOnKill) ----------------------------------
+	// Spreading lives in UFP_GA_DebuffPassive_Base::SpreadDebuffsOnDeath. Drawback: the owner deals
+	// only Radiation damage (other types, Generic included, are zeroed in ExecCalc_Damage / DoT).
+	static bool DealsOnlyRadiationDamage(const UAbilitySystemComponent* ASC);
+	static float GetEndothermicFullHeat(float MaxHeatThreshold) { return FMath::Max(0.f, MaxHeatThreshold - EndothermicFullEpsilon); }
+	/** True when Endothermic is active and Heat is below 0: skills cannot be used. */
+	static bool IsEndothermicHeatLocked(const UAbilitySystemComponent* ASC);
+
 	/** Drop all pending deferred damage without dealing it. */
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category = "FP|Deferred Damage")
 	void ClearDeferredDamage();

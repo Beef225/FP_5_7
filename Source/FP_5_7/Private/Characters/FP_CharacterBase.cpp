@@ -9,6 +9,7 @@
 #include "Components/CapsuleComponent.h"
 #include "FP_5_7/FP_5_7.h"
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "AbilitySystem/Abilities/FP_GA_DebuffPassive_Base.h"
 #include "Kismet/GameplayStatics.h"
 #include "Materials/MaterialInstanceDynamic.h"
 
@@ -74,6 +75,12 @@ void AFP_CharacterBase::Die()
 		return;
 	}
 	bDead = true;
+
+	// Cascade Failure: spread Irradiated / Corroded before collision is turned off.
+	if (HasAuthority())
+	{
+		UFP_GA_DebuffPassive_Base::SpreadDebuffsOnDeath(this);
+	}
 
 	// Disable collision immediately so projectiles stop hitting during the death animation.
 	// MulticastHandleDeath will set the final physics-only state once the anim finishes.

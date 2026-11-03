@@ -138,13 +138,23 @@ bool UFP_GameplayAbility::ComputeSkillCost(const FGameplayAbilityActorInfo* Acto
 	{
 		OutHitPointCost = Paid;      // HP is always a loss, heating or cooling skill
 	}
-	else if (LevelCost > 0.f)
-	{
-		OutHeatCost = Paid;          // heat generated
-	}
 	else
 	{
-		OutHeatCost = LevelCost;     // cooling: not a cost, cost stats don't touch it
+		// Reversals never stack: any source that reverses a direction reverses it once.
+		//   Endothermic           : heating skills spend heat, cooling skills restore it
+		//   Cryoarethmetic Engine : heating skills lose heat; cooling skills unchanged
+		const bool bEndothermic   = UFP_AbilitySystemComponent::IsEndothermic(ASC);
+		const bool bReverseHeating = bEndothermic || ASC->HasMatchingGameplayTag(Tags.Flag_SkillTree_CryoarethmeticEngine);
+		const bool bReverseCooling = bEndothermic;
+
+		if (LevelCost > 0.f)
+		{
+			OutHeatCost = bReverseHeating ? -Paid : Paid;            // heat generated (or lost)
+		}
+		else
+		{
+			OutHeatCost = bReverseCooling ? -LevelCost : LevelCost;  // cooling: cost stats don't touch it
+		}
 	}
 	return true;
 }
@@ -186,7 +196,24 @@ void UFP_GameplayAbility::ApplyCost(const FGameplayAbilitySpecHandle Handle, con
 bool UFP_GameplayAbility::CheckCost(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, FGameplayTagContainer* OptionalRelevantTags) const
 {
 	float Heat = 0.f, HitPointCost = 0.f;
-	if (ComputeSkillCost(ActorInfo, GetAbilityLevel(Handle, ActorInfo), Heat, HitPointCost))
+	const bool bNativeCost = ComputeSkillCost(ActorInfo, GetAbilityLevel(Handle, ActorInfo), Heat, HitPointCost);
+
+	// Endothermic: no skills (anything with a heat cost, heating or cooling) while Heat < 0.
+	if ((bNativeCost || GetCostGameplayEffect())
+		&& UFP_AbilitySystemComponent::IsEndothermicHeatLocked(ActorInfo->AbilitySystemComponent.Get()))
+	{
+		if (OptionalRelevantTags)
+		{
+			const FGameplayTag& FailTag = UAbilitySystemGlobals::Get().ActivateFailCostTag;
+			if (FailTag.IsValid())
+			{
+				OptionalRelevantTags->AddTag(FailTag);
+			}
+		}
+		return false;
+	}
+
+	if (bNativeCost)
 	{
 		// Heat may go anywhere (overheating is a mechanic, not a block). HP costs may not kill.
 		const UAbilitySystemComponent* ASC = ActorInfo->AbilitySystemComponent.Get();

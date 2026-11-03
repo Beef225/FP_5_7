@@ -149,7 +149,9 @@ FGameplayTag Heat_SkillCostFlat;
 // Heat-generating skills add Paid to Heat. Cooling skills (negative Level) cool by
 // |Level| and cost stats do not touch them. Liquid Cooled Systems
 // (Flag.SkillTree.MightSkillsCostHPInsteadOfHeat) makes Might-weapon skills pay Paid
-// in HitPoints instead, whether they heat or cool. All three stats gate normally,
+// in HitPoints instead, whether they heat or cool. Endothermic reverses both directions
+// (heating skills spend heat, cooling skills restore it); Cryoarethmetic Engine reverses
+// heating skills only. Reversals never stack (taking both = Endothermic). All three stats gate normally,
 // e.g. Heat.SkillCost.Mace, Heat.SkillCostFlat.MightWeapon.
 FGameplayTag Heat_SkillCost;
 
@@ -829,6 +831,9 @@ FGameplayTag Flag_SkillTree_DoubleArmourVsExplosive;
 FGameplayTag Flag_SkillTree_RecoupInsteadOfDefer;
 FGameplayTag Flag_SkillTree_Blur;
 FGameplayTag Flag_SkillTree_PerpetualMotion;
+FGameplayTag Flag_SkillTree_Endothermic;
+FGameplayTag Flag_SkillTree_CryoarethmeticEngine;
+FGameplayTag Flag_SkillTree_SpreadStatusOnKill;
 
 //Execute
 FGameplayTag Execute_Threshold;

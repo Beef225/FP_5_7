@@ -2102,6 +2102,18 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Flag.SkillTree.PerpetualMotion"),
 		FString("Perpetual Motion: more damage and dodge while moving, less damage and no dodge while stationary (UFP_AbilitySystemComponent::GetPerpetualMotion*, ExecCalc_Damage/DoT)")
 		);
+	GameplayTags.Flag_SkillTree_Endothermic = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.Endothermic"),
+		FString("Endothermic: heat starts at max (just under), skills spend heat (cooling skills restore it), regen 20% of MaxHeat/s toward max, Newton cooling only above max, skills locked while Heat < 0 (UFP_GE_EndothermicRegen, UFP_MMC_HeatDissapation, UFP_GameplayAbility cost)")
+		);
+	GameplayTags.Flag_SkillTree_CryoarethmeticEngine = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.CryoarethmeticEngine"),
+		FString("Cryoarethmetic Engine: heat-generating skills lose heat instead (cooling skills unchanged). Never double-reverses with Endothermic (UFP_GameplayAbility::ComputeSkillCost)")
+		);
+	GameplayTags.Flag_SkillTree_SpreadStatusOnKill = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.SpreadStatusOnKill"),
+		FString("Cascade Failure: Irradiated/Corroded on an enemy that dies spread to nearby enemies (UFP_GA_DebuffPassive_Base::SpreadDebuffsOnDeath); the owner deals only Radiation damage (ExecCalc_Damage/DoT)")
+		);
 
 	//Execute
 	GameplayTags.Execute_Threshold = UGameplayTagsManager::Get().AddNativeGameplayTag(

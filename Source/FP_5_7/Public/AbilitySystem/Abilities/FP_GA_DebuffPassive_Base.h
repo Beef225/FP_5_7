@@ -41,6 +41,17 @@ public:
 		const FGameplayAbilityActivationInfo ActivationInfo,
 		const FGameplayEventData* TriggerEventData) override;
 
+	/**
+	 * Cascade Failure (Flag.SkillTree.SpreadStatusOnKill). Server only, called from AFP_CharacterBase::Die.
+	 * For each Irradiated / Corroded debuff active on DyingActor whose source has the flag, every live
+	 * enemy of that source within CascadeFailureRadius receives a buildup event equal to its own threshold
+	 * (instigator = the original source, so duration / effectiveness are the source's and a newly
+	 * debuffed enemy can cascade again). The receiver's normal rules still apply: already debuffed =
+	 * ignored, post-debuff immunity ramp scales the buildup.
+	 */
+	static void SpreadDebuffsOnDeath(AActor* DyingActor);
+	static constexpr float CascadeFailureRadius = 800.f; // cm
+
 protected:
 
 	// ---- Subclass interface -------------------------------------------------

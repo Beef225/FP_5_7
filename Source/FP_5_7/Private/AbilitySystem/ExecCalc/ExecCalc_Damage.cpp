@@ -489,6 +489,12 @@ void UExecCalc_Damage::Execute_Implementation(
 	float ChemicalDamage  = ComputeTypeDamage(SetByCallerChemical,  AddedChem, IncreasedGeneric + TotalIncreasedBonus, IncreasedChem + SkillBonusIncreasedChem, TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreChem + SkillBonusMoreChem);
 	float EnergyDamage    = ComputeTypeDamage(SetByCallerEnergy,    AddedEng,  IncreasedGeneric + TotalIncreasedBonus, IncreasedEng,                           TempDeltaIncrease, MoreGeneric + TotalMoreBonus, MoreEng);
 
+	// Cascade Failure (attacker): only Radiation damage is dealt.
+	if (UFP_AbilitySystemComponent::DealsOnlyRadiationDamage(SourceASC))
+	{
+		GenericDamage = PhysicalDamage = ExplosiveDamage = ChemicalDamage = EnergyDamage = 0.f;
+	}
+
 	// Perpetual Motion (attacker): separate multiplier — x1.20 while moving, x0.70 while stationary.
 	const float MotionMultiplier = UFP_AbilitySystemComponent::GetPerpetualMotionDamageMultiplier(SourceASC);
 	if (MotionMultiplier != 1.f)

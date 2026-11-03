@@ -3,6 +3,7 @@
 
 #include "AbilitySystem/ModMagCalcs/FP_MMC_HeatDissapation.h"
 #include "AbilitySystem/FP_AttributeSet.h"
+#include "AbilitySystem/FP_AbilitySystemComponent.h"
 
 UFP_MMC_HeatDissapation::UFP_MMC_HeatDissapation()
 {
@@ -25,6 +26,11 @@ UFP_MMC_HeatDissapation::UFP_MMC_HeatDissapation()
 	HeatDef.AttributeSource = EGameplayEffectAttributeCaptureSource::Target;
 	HeatDef.bSnapshot = false;
 	RelevantAttributesToCapture.Add(HeatDef);
+
+	MaxHeatThresholdDef.AttributeToCapture = UFP_AttributeSet::GetMaxHeatThresholdAttribute();
+	MaxHeatThresholdDef.AttributeSource = EGameplayEffectAttributeCaptureSource::Target;
+	MaxHeatThresholdDef.bSnapshot = false;
+	RelevantAttributesToCapture.Add(MaxHeatThresholdDef);
 }
 
 float UFP_MMC_HeatDissapation::CalculateBaseMagnitude_Implementation(const FGameplayEffectSpec& Spec) const
@@ -52,6 +58,19 @@ float UFP_MMC_HeatDissapation::CalculateBaseMagnitude_Implementation(const FGame
 
 	float Heat = 0.f;
 	GetCapturedAttributeMagnitude(HeatDef, Spec, EvaluationParameters, Heat);
+
+	// Endothermic: no Newton cooling at or below Max (UFP_GE_EndothermicRegen holds Heat just under it).
+	// Above Max (overheated) cooling runs as normal until Heat is back under Max.
+	// Self-applied effect, so the instigator ASC is the owner.
+	if (UFP_AbilitySystemComponent::IsEndothermic(Spec.GetContext().GetInstigatorAbilitySystemComponent()))
+	{
+		float MaxHeat = 0.f;
+		GetCapturedAttributeMagnitude(MaxHeatThresholdDef, Spec, EvaluationParameters, MaxHeat);
+		if (Heat <= MaxHeat)
+		{
+			return 0.f;
+		}
+	}
 
 	const float DissipationValue = CoolingCoefficient * ThermalMass * (Heat - AmbientTemperature) * GEPeriod;
 	return DissipationValue;

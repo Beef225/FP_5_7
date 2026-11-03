@@ -7,6 +7,8 @@
 #include "AbilitySystem/Data/FP_SkillLevelUpInfo.h"
 #include "AbilitySystemComponent.h"
 #include "Player/FP_PlayerState.h"
+#include "AbilitySystem/FP_AbilitySystemComponent.h"
+#include "FP_GameplayTags.h"
 
 // ---------------------------------------------------------------------------
 // Internal helpers
@@ -72,8 +74,13 @@ float CalcAvgDamage(const FFP_AbilityEntry& Entry, const AFP_PlayerState* PS)
 
 	// Sum average (min+max)/2 across all damage types at current skill level
 	float EffectiveBase = 0.f;
+	const bool bRadiationOnly = UFP_AbilitySystemComponent::DealsOnlyRadiationDamage(ASC); // Cascade Failure
 	for (const auto& Pair : CDO->GetDamageTypes())
 	{
+		if (bRadiationOnly && !Pair.Key.MatchesTagExact(FFP_GameplayTags::Get().Damage_Radiation))
+		{
+			continue;
+		}
 		const float Min = Pair.Value.DamageMin.GetValueAtLevel(static_cast<float>(SkillLevel));
 		const float Max = Pair.Value.DamageMax.GetValueAtLevel(static_cast<float>(SkillLevel));
 		EffectiveBase += (FMath::Min(Min, Max) + FMath::Max(Min, Max)) * 0.5f;

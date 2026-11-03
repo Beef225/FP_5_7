@@ -26,5 +26,6 @@ private:
 	FGameplayEffectAttributeCaptureDefinition CoolingCoefficientDef;
 	FGameplayEffectAttributeCaptureDefinition HeatDef;
 	FGameplayEffectAttributeCaptureDefinition MaxHeatThresholdDef; // Endothermic: cooling only above Max
+	FGameplayEffectAttributeCaptureDefinition HeatRetentionDef;
 
 };

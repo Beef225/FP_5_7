@@ -245,6 +245,11 @@
     "InitialValue": 0.02
   },
   {
+    "Name": "HeatRetention",
+    "Attribute": "FP_AttributeSet.HeatRetention",
+    "InitialValue": 0.0
+  },
+  {
     "Name": "BruisedEffectiveness",
     "Attribute": "FP_AttributeSet.BruisedEffectiveness",
     "InitialValue": 1.0

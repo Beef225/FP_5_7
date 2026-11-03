@@ -418,6 +418,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Heat.SkillCostFlat"),
 		FString("Flat heat per cast, applied after efficiency. Negative = less heat generated (-5 = 5 less heat)")
 		);
+	GameplayTags.Heat_Retention = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Heat.Retention"),
+		FString("Heat retention: Newton cooling is divided by (1 + this), floored at -0.9. +1.0 = half cooling rate, -0.5 = double. Like Heat.SkillCostEfficiency (FP_HeatModel.h)")
+		);
 
 	//Debuff
 	GameplayTags.Debuff_Effectiveness_Bruised = UGameplayTagsManager::Get().AddNativeGameplayTag(

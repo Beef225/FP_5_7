@@ -8,6 +8,7 @@
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "AbilitySystemGlobals.h"
 #include "FP_GameplayTags.h"
+#include "AbilitySystem/FP_HeatModel.h"
 
 namespace
 {
@@ -155,6 +156,9 @@ bool UFP_GameplayAbility::ComputeSkillCost(const FGameplayAbilityActorInfo* Acto
 		{
 			OutHeatCost = bReverseCooling ? -LevelCost : LevelCost;  // cooling: cost stats don't touch it
 		}
+
+		// Thermal Mass buffers every skill heat change, either direction (FP_HeatModel.h).
+		OutHeatCost *= FPHeat::MassFactor(ASC->GetNumericAttribute(UFP_AttributeSet::GetThermalMassAttribute()));
 	}
 	return true;
 }

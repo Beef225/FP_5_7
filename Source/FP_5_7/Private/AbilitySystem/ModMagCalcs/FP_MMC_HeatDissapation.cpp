@@ -4,6 +4,7 @@
 #include "AbilitySystem/ModMagCalcs/FP_MMC_HeatDissapation.h"
 #include "AbilitySystem/FP_AttributeSet.h"
 #include "AbilitySystem/FP_AbilitySystemComponent.h"
+#include "AbilitySystem/FP_HeatModel.h"
 
 UFP_MMC_HeatDissapation::UFP_MMC_HeatDissapation()
 {
@@ -31,6 +32,11 @@ UFP_MMC_HeatDissapation::UFP_MMC_HeatDissapation()
 	MaxHeatThresholdDef.AttributeSource = EGameplayEffectAttributeCaptureSource::Target;
 	MaxHeatThresholdDef.bSnapshot = false;
 	RelevantAttributesToCapture.Add(MaxHeatThresholdDef);
+
+	HeatRetentionDef.AttributeToCapture = UFP_AttributeSet::GetHeatRetentionAttribute();
+	HeatRetentionDef.AttributeSource = EGameplayEffectAttributeCaptureSource::Target;
+	HeatRetentionDef.bSnapshot = false;
+	RelevantAttributesToCapture.Add(HeatRetentionDef);
 }
 
 float UFP_MMC_HeatDissapation::CalculateBaseMagnitude_Implementation(const FGameplayEffectSpec& Spec) const
@@ -50,11 +56,9 @@ float UFP_MMC_HeatDissapation::CalculateBaseMagnitude_Implementation(const FGame
 
 	float ThermalMass = 0.f;
 	GetCapturedAttributeMagnitude(ThermalMassDef, Spec, EvaluationParameters, ThermalMass);
-	ThermalMass = FMath::Max(0.f, ThermalMass);
 
 	float CoolingCoefficient = 0.f;
 	GetCapturedAttributeMagnitude(CoolingCoefficientDef, Spec, EvaluationParameters, CoolingCoefficient);
-	CoolingCoefficient = FMath::Max(0.f, CoolingCoefficient);
 
 	float Heat = 0.f;
 	GetCapturedAttributeMagnitude(HeatDef, Spec, EvaluationParameters, Heat);
@@ -72,6 +76,11 @@ float UFP_MMC_HeatDissapation::CalculateBaseMagnitude_Implementation(const FGame
 		}
 	}
 
-	const float DissipationValue = CoolingCoefficient * ThermalMass * (Heat - AmbientTemperature) * GEPeriod;
+	float HeatRetention = 0.f;
+	GetCapturedAttributeMagnitude(HeatRetentionDef, Spec, EvaluationParameters, HeatRetention);
+
+	// Newton cooling: more Thermal Mass and more Heat Retention both slow it (FP_HeatModel.h).
+	const float DissipationValue = FPHeat::CoolingRate(CoolingCoefficient, ThermalMass, HeatRetention)
+		* (Heat - AmbientTemperature) * GEPeriod;
 	return DissipationValue;
 }

@@ -464,6 +464,14 @@
     "DecimalRoundTo": 2
   },
   {
+    "AttributeTag": "Heat.Retention",
+    "AttributeName": "HeatRetention",
+    "AttributeDescription": "Heat Retention",
+    "AttributeTooltipText": "TooltipTextHere",
+    "DisplayType": "Percentage",
+    "DecimalRoundTo": 0
+  },
+  {
     "AttributeTag": "Heat.SkillCost",
     "AttributeName": "IncreasedHeatCost",
     "AttributeDescription": "Increased Skill Heat Cost",

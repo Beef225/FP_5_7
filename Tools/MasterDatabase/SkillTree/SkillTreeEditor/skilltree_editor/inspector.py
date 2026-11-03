@@ -78,7 +78,7 @@ class EffectEditor(QGroupBox):
                 if not value:
                     self.effect.values[key] = "Add"
                 w.activated.connect(lambda _i, k=key, w=w: self._set(k, w.currentText()))
-                w.setToolTip("Add = flat bonus.  Multiply = fraction (0.10 = +10%).")
+                w.setToolTip("Add = flat bonus.  Multiply = raw multiplier: 1.10 = 10% increased, 0.90 = 10% reduced (several on one stat add up as 1 + sum(m - 1)).")
                 self.form.addRow(FIELD_LABELS[key], w)
             elif key == "EffectStatMagnitude":
                 w = QLineEdit("" if value in (None, "") else f"{value:g}" if isinstance(value, (int, float)) else str(value))

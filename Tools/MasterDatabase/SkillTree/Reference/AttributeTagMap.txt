@@ -22,6 +22,7 @@ Attributes.Vital.HitPoints                    Current hit points
 Attributes.Vital.MaxHitPoints                 Maximum hit points
 Attributes.Vital.Heat                         Current heat level
 Attributes.Vital.MaxHeatThreshold             Max heat before damage
+Attributees.VitalMinHeatThreshold             Min heat (negative) before freezing; tag name typo is the real tag
 
 --- PRIMARY ---
 Attributes.Primary.Might                      Strength stat
@@ -133,8 +134,9 @@ Defense.ReduceeDamage.Melee                   Reduced damage from melee  (Add)
 
 --- HEAT ---
 Heat.AmbientTemperature                       Environment temperature  (Add)
-Heat.ThermalMass                              Heat capacity  (Add)
+Heat.ThermalMass                              Heat capacity: skill heat x 40/mass, cooling x 40/mass  (Add)
 Heat.CoolingCoefficient                       Heat dissipation rate  (Add)
+Heat.Retention                                Cooling rate / (1 + value), 1.0 = half, -0.5 = double, floor -0.9  (Add)
 Heat.SkillCost                                Heat cost of skills, -reduces/+increases  (Add)
 Heat.SkillCostEfficiency                      Heat cost efficiency, cost / (1 + value)  (Add)
 Heat.SkillCostFlat                            Flat heat per cast after efficiency, -5 = 5 less  (Add)

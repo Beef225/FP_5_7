@@ -143,6 +143,7 @@ TagsToAttributes.Add(GameplayTags.Defense_ReduceeDamage_Melee, GetReducedDamageF
 TagsToAttributes.Add(GameplayTags.Heat_AmbientTemperature, GetAmbientTemperatureAttribute);
 TagsToAttributes.Add(GameplayTags.Heat_ThermalMass, GetThermalMassAttribute);
 TagsToAttributes.Add(GameplayTags.Heat_CoolingCoefficient, GetCoolingCoefficientAttribute);
+TagsToAttributes.Add(GameplayTags.Heat_Retention, GetHeatRetentionAttribute);
 
 //Debuff
 TagsToAttributes.Add(GameplayTags.Debuff_Effectiveness_Bruised, GetBruisedEffectivenessAttribute);
@@ -359,6 +360,7 @@ DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, AmbientTemperature, COND_None, 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, ThermalMass, COND_None, REPNOTIFY_Always)
 
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, CoolingCoefficient, COND_None, REPNOTIFY_Always)
+DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, HeatRetention, COND_None, REPNOTIFY_Always)
 
 //Debuff
 DOREPLIFETIME_CONDITION_NOTIFY(UFP_AttributeSet, BruisedEffectiveness, COND_None, REPNOTIFY_Always)
@@ -1006,6 +1008,11 @@ void UFP_AttributeSet::OnRep_ThermalMass(const FGameplayAttributeData& OldTherma
 void UFP_AttributeSet::OnRep_CoolingCoefficient(const FGameplayAttributeData& OldCoolingCoefficient) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, CoolingCoefficient, OldCoolingCoefficient);
+}
+
+void UFP_AttributeSet::OnRep_HeatRetention(const FGameplayAttributeData& OldHeatRetention) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UFP_AttributeSet, HeatRetention, OldHeatRetention);
 }
 
 //Debuff

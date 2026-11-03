@@ -16,6 +16,8 @@ cd Tools\MasterDatabase\SkillTree\SkillTreeEditor
 | `gen_resonance.py` | Resonance: standing-wave base path + clusters. |
 | `gen_fortitude.py` | Fortitude: clusters only, hand-placed around the user-built shield base path (adds to the existing tree; refuses to run twice because the groups already exist). |
 | `agility_momentum_rework.py` | One-off in-place edit (2026-11-01): Momentum Engine mastery -> small cluster + major, slot becomes Perpetual Motion. Pattern for adding clusters to an existing tree without regenerating it. |
+| `add_heat_resist_clusters.py` | In-place edit (2026-11-02): 30 heat-band / cooling / thermal-mass / reduced-efficiency / resistance clusters across all four trees. Adds `incm`/`redm` (Multiply op: 1.10 = 10% increased) usage. Refuses to run twice. |
+| `migrate_cooling_to_retention.py` | One-off (2026-11-02): cooling nodes moved from Multiply on `Heat.CoolingCoefficient` to Add on `Heat.Retention`. |
 | `render_tree.py` | Headless render of a tree to PNG for checking layouts. |
 
 **Warning:** `gen_agility.py --write` and `gen_resonance.py --write` *replace the whole tree* (base path included). Any edits made in the

@@ -10,9 +10,9 @@
     "author": "jakeg",
     "version": "0.1.0",
     "live_version": "",
-    "revision": 3,
+    "revision": 5,
     "created": "2026-10-31T16:49:43-04:00",
-    "modified": "2026-11-01T18:14:53-05:00",
+    "modified": "2026-11-02T20:42:05-05:00",
     "tag_root": "",
     "ue_asset_folder": "/Game/Blueprints/UI/SkillTrees/CharacterSkillTrees/Data/Nodes/Fortitude",
     "export_file": "",
@@ -999,7 +999,8 @@
       },
       "ConnectedNodeTags": [
         "PassiveTree.AllThreshold.6",
-        "PassiveTree.AllThreshold.8"
+        "PassiveTree.AllThreshold.8",
+        "PassiveTree.Heatproof.1"
       ],
       "Effects": [
         {
@@ -1107,6 +1108,7 @@
         "Y": 300.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.DenseCore.1",
         "PassiveTree.IncreasedHitPoints.10",
         "PassiveTree.IncreasedHitPoints.12",
         "PassiveTree.IncreasedHitPoints.5"
@@ -1132,6 +1134,7 @@
         "Y": 300.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.Fortified.1",
         "PassiveTree.IncreasedHitPoints.11",
         "PassiveTree.IncreasedHitPoints.13",
         "PassiveTree.ThermalBallast.1"
@@ -1234,7 +1237,8 @@
       "ConnectedNodeTags": [
         "PassiveTree.IncreasedArmour.10",
         "PassiveTree.IncreasedArmour.12",
-        "PassiveTree.IncreasedArmour.5"
+        "PassiveTree.IncreasedArmour.5",
+        "PassiveTree.ThermalPlating.1"
       ],
       "Effects": [
         {
@@ -1257,6 +1261,7 @@
         "Y": 300.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.HeavyFrame.1",
         "PassiveTree.IncreasedArmour.11",
         "PassiveTree.IncreasedArmour.13",
         "PassiveTree.Stalwart.1"
@@ -1307,6 +1312,7 @@
         "Y": 2320.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.ColdIron.1",
         "PassiveTree.Fortitude.10",
         "PassiveTree.Fortitude.5",
         "PassiveTree.Fortitude.6"
@@ -1356,6 +1362,7 @@
         "Y": 2630.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.Coolant.1",
         "PassiveTree.Fortitude.10",
         "PassiveTree.Fortitude.12",
         "PassiveTree.Projector.Saturation.1"
@@ -1475,7 +1482,8 @@
       },
       "ConnectedNodeTags": [
         "PassiveTree.AllThreshold.11",
-        "PassiveTree.AllThreshold.9"
+        "PassiveTree.AllThreshold.9",
+        "PassiveTree.Insulation.1"
       ],
       "Effects": [
         {
@@ -1785,8 +1793,8 @@
       "NodeDescription": "12% Increased Gauntlets Damage\n5% More Gauntlets Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/mailed-fist.mailed-fist",
       "NodePosition": {
-        "X": 540,
-        "Y": 760
+        "X": 540.0,
+        "Y": 760.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Gauntlets.GauntletDamage.6"
@@ -1910,8 +1918,8 @@
       "NodeDescription": "+3% Base Critical Strike Chance with Gauntlets\n25% Critical Strike Multiplier with Gauntlets",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thor-fist.thor-fist",
       "NodePosition": {
-        "X": 540,
-        "Y": 1060
+        "X": 540.0,
+        "Y": 1060.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Gauntlets.Haymaker.4"
@@ -2035,8 +2043,8 @@
       "NodeDescription": "8% Increased Skill Speed with Gauntlets\n10% Increased Gauntlets Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/punch-blast.punch-blast",
       "NodePosition": {
-        "X": 540,
-        "Y": 1360
+        "X": 540.0,
+        "Y": 1360.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Gauntlets.Flurry.4"
@@ -2160,8 +2168,8 @@
       "NodeDescription": "15% Increased Bruised Debuff Effectiveness\n24% Increased Damage with Gauntlets Against Bruised Enemies",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shatter.shatter",
       "NodePosition": {
-        "X": 540,
-        "Y": 1640
+        "X": 540.0,
+        "Y": 1640.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Gauntlets.BoneBreaker.4"
@@ -2434,8 +2442,8 @@
       "NodeDescription": "12% Increased Axe Damage\n5% More Axe Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/axe-in-log.axe-in-log",
       "NodePosition": {
-        "X": 1090,
-        "Y": 1480
+        "X": 1090.0,
+        "Y": 1480.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Axe.Hewing.6"
@@ -2559,8 +2567,8 @@
       "NodeDescription": "5% Armour Penetration with Axes\n5% Physical Resistance Penetration with Axes",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sharp-axe.sharp-axe",
       "NodePosition": {
-        "X": 950,
-        "Y": 1000
+        "X": 950.0,
+        "Y": 1000.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Axe.Sunder.4"
@@ -2684,8 +2692,8 @@
       "NodeDescription": "15% Increased Damage Over Time with Axes\n10% Increased Bruised Debuff Effectiveness",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bleeding-wound.bleeding-wound",
       "NodePosition": {
-        "X": 830,
-        "Y": 1630
+        "X": 830.0,
+        "Y": 1630.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Axe.Bloodletting.4"
@@ -2910,8 +2918,8 @@
       "NodeDescription": "5% More Maximum Hit Points",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/crowned-heart.crowned-heart",
       "NodePosition": {
-        "X": 850,
-        "Y": 760
+        "X": 850.0,
+        "Y": 760.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Vitality.4"
@@ -3255,8 +3263,8 @@
       "NodeDescription": "12% Increased Shotgun Damage\n5% More Shotgun Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/sawed-off-shotgun.sawed-off-shotgun",
       "NodePosition": {
-        "X": 2460,
-        "Y": 760
+        "X": 2460.0,
+        "Y": 760.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Shotgun.ShotgunDamage.6"
@@ -3380,8 +3388,8 @@
       "NodeDescription": "+3% Base Critical Strike Chance with Shotguns\n25% Critical Strike Multiplier with Shotguns",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/skoll/bullseye.bullseye",
       "NodePosition": {
-        "X": 2460,
-        "Y": 1060
+        "X": 2460.0,
+        "Y": 1060.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Shotgun.PointBlank.4"
@@ -3505,8 +3513,8 @@
       "NodeDescription": "15% Increased Concussed Debuff Effectiveness\n24% Increased Damage with Shotguns Against Concussed Enemies",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/earth-crack.earth-crack",
       "NodePosition": {
-        "X": 2460,
-        "Y": 1360
+        "X": 2460.0,
+        "Y": 1360.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Shotgun.KnockdownRounds.4"
@@ -3630,8 +3638,8 @@
       "NodeDescription": "20% Increased Physical Damage with Shotguns\n5% Physical Resistance Penetration with Shotguns",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/heavy-bullets.heavy-bullets",
       "NodePosition": {
-        "X": 2460,
-        "Y": 1640
+        "X": 2460.0,
+        "Y": 1640.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Shotgun.Buckshot.4"
@@ -3904,8 +3912,8 @@
       "NodeDescription": "12% Increased Spear Damage\n5% More Spear Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/barbed-spear.barbed-spear",
       "NodePosition": {
-        "X": 1910,
-        "Y": 1480
+        "X": 1910.0,
+        "Y": 1480.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.SpearDamage.6"
@@ -4029,8 +4037,8 @@
       "NodeDescription": "5% Armour Penetration with Spears\n5% Physical Resistance Penetration with Spears",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/spear-hook.spear-hook",
       "NodePosition": {
-        "X": 2050,
-        "Y": 1000
+        "X": 2050.0,
+        "Y": 1000.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.Skewer.4"
@@ -4154,8 +4162,8 @@
       "NodeDescription": "+3% Base Critical Strike Chance with Spears\n3% Increased Movement Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thrown-spear.thrown-spear",
       "NodePosition": {
-        "X": 2170,
-        "Y": 1630
+        "X": 2170.0,
+        "Y": 1630.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Spear.Lunge.4"
@@ -4481,8 +4489,8 @@
       "NodeDescription": "15% Increased Armour\n10% Reduced Extra Damage Taken from Critical Strikes",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/layered-armor.layered-armor",
       "NodePosition": {
-        "X": 2150,
-        "Y": 760
+        "X": 2150.0,
+        "Y": 760.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.ReinforcedPlating.4"
@@ -4725,8 +4733,8 @@
       "NodeDescription": "12% Increased Projector Damage\n5% More Projector Damage",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/ringed-beam.ringed-beam",
       "NodePosition": {
-        "X": 870,
-        "Y": 2200
+        "X": 870.0,
+        "Y": 2200.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Projector.ProjectorDamage.6"
@@ -4850,8 +4858,8 @@
       "NodeDescription": "15% Increased Damage Over Time with Projectors\n10% Increased Skill Duration with Projectors",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/beams-aura.beams-aura",
       "NodePosition": {
-        "X": 1070,
-        "Y": 2420
+        "X": 1070.0,
+        "Y": 2420.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Projector.Saturation.4"
@@ -4975,8 +4983,8 @@
       "NodeDescription": "+2 Additional Area Radius with Projectors\n10% Increased Area of Effect with Projectors",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sinusoidal-beam.sinusoidal-beam",
       "NodePosition": {
-        "X": 1270,
-        "Y": 2590
+        "X": 1270.0,
+        "Y": 2590.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Projector.WideAperture.4"
@@ -5100,8 +5108,8 @@
       "NodeDescription": "15% Reduced Heat Cost with Projectors\n+3% Maximum Overheat Resistance",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thermometer-scale.thermometer-scale",
       "NodePosition": {
-        "X": 2130,
-        "Y": 2200
+        "X": 2130.0,
+        "Y": 2200.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Projector.HeatExchanger.4"
@@ -5225,8 +5233,8 @@
       "NodeDescription": "15% Increased Corroded Debuff Effectiveness\n5% Chemical Resistance Penetration with Projectors",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/bubbling-beam.bubbling-beam",
       "NodePosition": {
-        "X": 1930,
-        "Y": 2420
+        "X": 1930.0,
+        "Y": 2420.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Projector.CausticLens.4"
@@ -5374,8 +5382,8 @@
       "NodeDescription": "8% More Damage with Weapons that Require Fortitude",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil-impact.anvil-impact",
       "NodePosition": {
-        "X": 1730,
-        "Y": 2590
+        "X": 1730.0,
+        "Y": 2590.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.UnyieldingArsenal.5"
@@ -6130,7 +6138,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stone-block.stone-block",
       "NodePosition": {
         "X": 1070.0,
-        "Y": 150
+        "Y": 150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.IncreasedHitPoints.12",
@@ -6154,7 +6162,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stone-block.stone-block",
       "NodePosition": {
         "X": 1150.0,
-        "Y": 150
+        "Y": 150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.ThermalBallast.1",
@@ -6178,7 +6186,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stone-block.stone-block",
       "NodePosition": {
         "X": 1230.0,
-        "Y": 150
+        "Y": 150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.ThermalBallast.2",
@@ -6202,7 +6210,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil.anvil",
       "NodePosition": {
         "X": 1320.0,
-        "Y": 150
+        "Y": 150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.ThermalBallast.3"
@@ -6231,7 +6239,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/muscle-up.muscle-up",
       "NodePosition": {
         "X": 1930.0,
-        "Y": 150
+        "Y": 150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.IncreasedArmour.12",
@@ -6255,7 +6263,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/muscle-up.muscle-up",
       "NodePosition": {
         "X": 1850.0,
-        "Y": 150
+        "Y": 150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Stalwart.1",
@@ -6279,7 +6287,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/muscle-up.muscle-up",
       "NodePosition": {
         "X": 1770.0,
-        "Y": 150
+        "Y": 150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Stalwart.2",
@@ -6303,7 +6311,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/stone-bust.stone-bust",
       "NodePosition": {
         "X": 1680.0,
-        "Y": 150
+        "Y": 150.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Stalwart.3"
@@ -6325,8 +6333,8 @@
       "NodeDescription": "+8 Bruised Threshold\n+8 Concussed Threshold\n+8 Irradiated Threshold\n+8 Corroded Threshold",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-echoes.shield-echoes",
       "NodePosition": {
-        "X": 1500,
-        "Y": 1980
+        "X": 1500.0,
+        "Y": 1980.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.AllThreshold.1",
@@ -6367,8 +6375,8 @@
       "NodeDescription": "8% Increased Maximum Hit Points\n+2 Fortitude",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/locked-fortress.locked-fortress",
       "NodePosition": {
-        "X": 230,
-        "Y": 1725
+        "X": 230.0,
+        "Y": 1725.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.Fortitude.8",
@@ -6397,8 +6405,8 @@
       "NodeDescription": "15% Increased Armour\n+5 Bruised Threshold\n+5 Concussed Threshold",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armoured-shell.armoured-shell",
       "NodePosition": {
-        "X": 2770,
-        "Y": 1725
+        "X": 2770.0,
+        "Y": 1725.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.AllThreshold.8",
@@ -6433,8 +6441,8 @@
       "NodeDescription": "Gain Armour equal to 20% of your Maximum Hit Points\n10% Reduced Maximum Hit Points",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/metal-scales.metal-scales",
       "NodePosition": {
-        "X": 1500,
-        "Y": 1050
+        "X": 1500.0,
+        "Y": 1050.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.IncreasedArmour.2",
@@ -6462,8 +6470,8 @@
       "NodeDescription": "You cannot be Bruised or Concussed\n10% Reduced Movement Speed",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/charging-bull.charging-bull",
       "NodePosition": {
-        "X": 1500,
-        "Y": 2610
+        "X": 1500.0,
+        "Y": 2610.0
       },
       "ConnectedNodeTags": [
         "PassiveTree.AllThreshold.12",
@@ -6480,6 +6488,904 @@
           "EffectStatModAttributeType": "Speed.Movement",
           "EffectStatModifierOp": "Add",
           "EffectStatMagnitude": -0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalPlating.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Maximum Heat",
+      "NodeDescription": "+5 to Maximum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thermometer-scale.thermometer-scale",
+      "NodePosition": {
+        "X": 2370.0,
+        "Y": 388.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedArmour.11",
+        "PassiveTree.ThermalPlating.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalPlating.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Maximum Heat",
+      "NodeDescription": "+5 to Maximum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thermometer-scale.thermometer-scale",
+      "NodePosition": {
+        "X": 2432.0,
+        "Y": 450.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ThermalPlating.1",
+        "PassiveTree.ThermalPlating.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalPlating.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Maximum Heat",
+      "NodeDescription": "+5 to Maximum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thermometer-scale.thermometer-scale",
+      "NodePosition": {
+        "X": 2370.0,
+        "Y": 512.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ThermalPlating.2",
+        "PassiveTree.ThermalPlating.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalPlating.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Thermal Plating",
+      "NodeDescription": "+15 to Maximum Heat Threshold\n10% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/armor-upgrade.armor-upgrade",
+      "NodePosition": {
+        "X": 2308.0,
+        "Y": 450.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ThermalPlating.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ColdIron.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Minimum Heat",
+      "NodeDescription": "-5 to Minimum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/ice-cube.ice-cube",
+      "NodePosition": {
+        "X": 513.0,
+        "Y": 2407.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ColdIron.2",
+        "PassiveTree.Fortitude.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributees.VitalMinHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ColdIron.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Minimum Heat",
+      "NodeDescription": "-5 to Minimum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/ice-cube.ice-cube",
+      "NodePosition": {
+        "X": 513.0,
+        "Y": 2494.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ColdIron.1",
+        "PassiveTree.ColdIron.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributees.VitalMinHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ColdIron.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Minimum Heat",
+      "NodeDescription": "-5 to Minimum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/ice-cube.ice-cube",
+      "NodePosition": {
+        "X": 425.3,
+        "Y": 2494.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ColdIron.2",
+        "PassiveTree.ColdIron.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributees.VitalMinHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ColdIron.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Cold Iron",
+      "NodeDescription": "-15 to Minimum Heat Threshold\n+10 Thermal Mass",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/anvil.anvil",
+      "NodePosition": {
+        "X": 425.3,
+        "Y": 2407.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ColdIron.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributees.VitalMinHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.ThermalMass",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 10
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DenseCore.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Thermal Mass",
+      "NodeDescription": "+5 Thermal Mass",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stone-block.stone-block",
+      "NodePosition": {
+        "X": 630.0,
+        "Y": 388.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DenseCore.2",
+        "PassiveTree.IncreasedHitPoints.11"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.ThermalMass",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DenseCore.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Thermal Mass",
+      "NodeDescription": "+5 Thermal Mass",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stone-block.stone-block",
+      "NodePosition": {
+        "X": 692.0,
+        "Y": 450.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DenseCore.1",
+        "PassiveTree.DenseCore.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.ThermalMass",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DenseCore.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Thermal Mass",
+      "NodeDescription": "+5 Thermal Mass",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stone-block.stone-block",
+      "NodePosition": {
+        "X": 630.0,
+        "Y": 512.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DenseCore.2",
+        "PassiveTree.DenseCore.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.ThermalMass",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DenseCore.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Dense Core",
+      "NodeDescription": "15% Increased Thermal Mass\n5% Increased Maximum Hit Points",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/stone-sphere.stone-sphere",
+      "NodePosition": {
+        "X": 568.0,
+        "Y": 450.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DenseCore.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.ThermalMass",
+          "EffectStatModifierOp": "Multiply",
+          "EffectStatMagnitude": 1.15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Health.Increased",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeavyFrame.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Thermal Mass",
+      "NodeDescription": "6% Increased Thermal Mass",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/metal-bar.metal-bar",
+      "NodePosition": {
+        "X": 1957.8,
+        "Y": 362.2
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeavyFrame.2",
+        "PassiveTree.IncreasedArmour.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.ThermalMass",
+          "EffectStatModifierOp": "Multiply",
+          "EffectStatMagnitude": 1.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeavyFrame.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Thermal Mass",
+      "NodeDescription": "6% Increased Thermal Mass",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/metal-bar.metal-bar",
+      "NodePosition": {
+        "X": 1957.8,
+        "Y": 449.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeavyFrame.1",
+        "PassiveTree.HeavyFrame.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.ThermalMass",
+          "EffectStatModifierOp": "Multiply",
+          "EffectStatMagnitude": 1.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeavyFrame.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Increased Thermal Mass",
+      "NodeDescription": "6% Increased Thermal Mass",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/metal-bar.metal-bar",
+      "NodePosition": {
+        "X": 1870.1,
+        "Y": 449.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeavyFrame.2",
+        "PassiveTree.HeavyFrame.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.ThermalMass",
+          "EffectStatModifierOp": "Multiply",
+          "EffectStatMagnitude": 1.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeavyFrame.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Heavy Frame",
+      "NodeDescription": "+20 Thermal Mass\n10% Increased Armour",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/weight-crush.weight-crush",
+      "NodePosition": {
+        "X": 1870.1,
+        "Y": 362.2
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeavyFrame.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.ThermalMass",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 20
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Defense.IncreasedArmour",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Coolant.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cooling Rate",
+      "NodeDescription": "6% Reduced Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/fire-extinguisher.fire-extinguisher",
+      "NodePosition": {
+        "X": 936.0,
+        "Y": 2706.2
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Coolant.2",
+        "PassiveTree.Fortitude.11"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Coolant.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cooling Rate",
+      "NodeDescription": "6% Reduced Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/fire-extinguisher.fire-extinguisher",
+      "NodePosition": {
+        "X": 958.7,
+        "Y": 2790.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Coolant.1",
+        "PassiveTree.Coolant.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Coolant.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cooling Rate",
+      "NodeDescription": "6% Reduced Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/fire-extinguisher.fire-extinguisher",
+      "NodePosition": {
+        "X": 874.0,
+        "Y": 2813.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Coolant.2",
+        "PassiveTree.Coolant.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Coolant.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Coolant",
+      "NodeDescription": "15% Reduced Heat Retention\n5% Overheat Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/ice-shield.ice-shield",
+      "NodePosition": {
+        "X": 851.3,
+        "Y": 2728.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Coolant.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Overheat",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Insulation.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Retention",
+      "NodeDescription": "6% Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-shield.fire-shield",
+      "NodePosition": {
+        "X": 2284.0,
+        "Y": 2556.2
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.10",
+        "PassiveTree.Insulation.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Insulation.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Retention",
+      "NodeDescription": "6% Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-shield.fire-shield",
+      "NodePosition": {
+        "X": 2368.7,
+        "Y": 2578.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Insulation.1",
+        "PassiveTree.Insulation.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Insulation.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Retention",
+      "NodeDescription": "6% Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-shield.fire-shield",
+      "NodePosition": {
+        "X": 2346.0,
+        "Y": 2663.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Insulation.2",
+        "PassiveTree.Insulation.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Insulation.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Insulation",
+      "NodeDescription": "15% Heat Retention\n+10 to Maximum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/heavy-helm.heavy-helm",
+      "NodePosition": {
+        "X": 2261.3,
+        "Y": 2640.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Insulation.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 10
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Heatproof.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Overheat Resistance",
+      "NodeDescription": "4% Overheat Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-shield.fire-shield",
+      "NodePosition": {
+        "X": 2718.8,
+        "Y": 2011.8
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.AllThreshold.7",
+        "PassiveTree.Heatproof.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Overheat",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Heatproof.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Overheat Resistance",
+      "NodeDescription": "4% Overheat Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-shield.fire-shield",
+      "NodePosition": {
+        "X": 2794.7,
+        "Y": 1968.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Heatproof.1",
+        "PassiveTree.Heatproof.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Overheat",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Heatproof.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Overheat Resistance",
+      "NodeDescription": "4% Overheat Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-shield.fire-shield",
+      "NodePosition": {
+        "X": 2838.6,
+        "Y": 2043.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Heatproof.2",
+        "PassiveTree.Heatproof.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Overheat",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Heatproof.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Heatproof",
+      "NodeDescription": "+2% Maximum Overheat Resistance\n8% Overheat Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/firewall.firewall",
+      "NodePosition": {
+        "X": 2762.6,
+        "Y": 2087.8
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Heatproof.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Overheat",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Overheat",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortified.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "All Resistances",
+      "NodeDescription": "2% Physical Resistance\n2% Explosive Resistance\n2% Radiation Resistance\n2% Chemical Resistance\n2% Energy Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shieldcomb.shieldcomb",
+      "NodePosition": {
+        "X": 1042.2,
+        "Y": 362.2
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortified.2",
+        "PassiveTree.IncreasedHitPoints.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortified.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "All Resistances",
+      "NodeDescription": "2% Physical Resistance\n2% Explosive Resistance\n2% Radiation Resistance\n2% Chemical Resistance\n2% Energy Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shieldcomb.shieldcomb",
+      "NodePosition": {
+        "X": 1129.9,
+        "Y": 362.2
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortified.1",
+        "PassiveTree.Fortified.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortified.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "All Resistances",
+      "NodeDescription": "2% Physical Resistance\n2% Explosive Resistance\n2% Radiation Resistance\n2% Chemical Resistance\n2% Energy Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shieldcomb.shieldcomb",
+      "NodePosition": {
+        "X": 1129.9,
+        "Y": 449.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortified.2",
+        "PassiveTree.Fortified.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Fortified.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Fortified",
+      "NodeDescription": "+1% Maximum Physical Resistance\n+1% Maximum Explosive Resistance\n+1% Maximum Radiation Resistance\n+1% Maximum Chemical Resistance\n+1% Maximum Energy Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/shield-reflect.shield-reflect",
+      "NodePosition": {
+        "X": 1042.2,
+        "Y": 449.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Fortified.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.01
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.01
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.01
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.01
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.01
         }
       ]
     }

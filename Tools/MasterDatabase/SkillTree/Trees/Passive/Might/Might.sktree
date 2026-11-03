@@ -10,9 +10,9 @@
     "author": "jakeg",
     "version": "0.1.0",
     "live_version": "",
-    "revision": 13,
+    "revision": 15,
     "created": "2026-10-31T16:49:43-04:00",
-    "modified": "2026-11-01T17:57:54-05:00",
+    "modified": "2026-11-02T20:42:05-05:00",
     "tag_root": "",
     "ue_asset_folder": "/Game/Blueprints/UI/SkillTrees/CharacterSkillTrees/Data/Nodes/Might",
     "export_file": "",
@@ -1563,6 +1563,7 @@
       "ConnectedNodeTags": [
         "PassiveTree.BruisedConcussedThreshold.11",
         "PassiveTree.BruisedConcussedThreshold.13",
+        "PassiveTree.Hardened.1",
         "PassiveTree.Rifle.RiflemansMastery.1"
       ],
       "Effects": [
@@ -1897,7 +1898,8 @@
       "ConnectedNodeTags": [
         "PassiveTree.Axe.AxeDamage.1",
         "PassiveTree.DeferredDamage.11",
-        "PassiveTree.DeferredDamage.9"
+        "PassiveTree.DeferredDamage.9",
+        "PassiveTree.HeatShielding.1"
       ],
       "Effects": [
         {
@@ -1920,6 +1922,7 @@
         "Y": 2552.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.BlastShielding.1",
         "PassiveTree.DeferredDamage.10",
         "PassiveTree.DeferredDamage.12"
       ],
@@ -2366,7 +2369,8 @@
       },
       "ConnectedNodeTags": [
         "PassiveTree.BruisedConcussedThreshold.13",
-        "PassiveTree.IncreasedMelee.12"
+        "PassiveTree.IncreasedMelee.12",
+        "PassiveTree.Ventilation.1"
       ],
       "Effects": [
         {
@@ -2389,6 +2393,7 @@
         "Y": 1298.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.Grounding.1",
         "PassiveTree.IncreasedMelee.1",
         "PassiveTree.IncreasedMelee.3",
         "PassiveTree.SkillSpeed.1"
@@ -3650,6 +3655,7 @@
         "Y": 2648.0
       },
       "ConnectedNodeTags": [
+        "PassiveTree.Furnace.1",
         "PassiveTree.Might.11",
         "PassiveTree.Might.13"
       ],
@@ -3827,7 +3833,8 @@
       },
       "ConnectedNodeTags": [
         "PassiveTree.Might.6",
-        "PassiveTree.Might.8"
+        "PassiveTree.Might.8",
+        "PassiveTree.Smoulder.1"
       ],
       "Effects": [
         {
@@ -6160,6 +6167,635 @@
           "EffectStatModAttributeType": "DoT.Multiplier",
           "EffectStatModifierOp": "Add",
           "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Furnace.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Stoked Furnace",
+      "NodeDescription": "5% Reduced Heat Cost Efficiency\n3% Increased Physical Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-bowl.fire-bowl",
+      "NodePosition": {
+        "X": 1155.2,
+        "Y": 2495.4
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Furnace.2",
+        "PassiveTree.Might.12"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCostEfficiency",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Furnace.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Stoked Furnace",
+      "NodeDescription": "5% Reduced Heat Cost Efficiency\n3% Increased Physical Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-bowl.fire-bowl",
+      "NodePosition": {
+        "X": 1111.3,
+        "Y": 2419.4
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Furnace.1",
+        "PassiveTree.Furnace.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCostEfficiency",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Furnace.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Stoked Furnace",
+      "NodeDescription": "5% Reduced Heat Cost Efficiency\n3% Increased Physical Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-bowl.fire-bowl",
+      "NodePosition": {
+        "X": 1187.3,
+        "Y": 2375.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Furnace.2",
+        "PassiveTree.Furnace.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCostEfficiency",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Furnace.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Furnace",
+      "NodeDescription": "15% Reduced Heat Cost Efficiency\n10% Increased Physical Damage\n10% Increased Explosive Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/furnace.furnace",
+      "NodePosition": {
+        "X": 1231.1,
+        "Y": 2451.5
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Furnace.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCostEfficiency",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeatShielding.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Maximum Heat",
+      "NodeDescription": "+5 to Maximum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thermometer-scale.thermometer-scale",
+      "NodePosition": {
+        "X": 2221.9,
+        "Y": 2361.8
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeferredDamage.10",
+        "PassiveTree.HeatShielding.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeatShielding.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Maximum Heat",
+      "NodeDescription": "+5 to Maximum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thermometer-scale.thermometer-scale",
+      "NodePosition": {
+        "X": 2116.0,
+        "Y": 2317.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeatShielding.1",
+        "PassiveTree.HeatShielding.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeatShielding.3",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Heat Shielding",
+      "NodeDescription": "+10 to Maximum Heat Threshold\n5% Overheat Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-shield.fire-shield",
+      "NodePosition": {
+        "X": 2221.9,
+        "Y": 2274.1
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeatShielding.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 10
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Overheat",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ventilation.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cooling Rate",
+      "NodeDescription": "6% Reduced Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/steam.steam",
+      "NodePosition": {
+        "X": 1367.7,
+        "Y": 454.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.IncreasedMelee.13",
+        "PassiveTree.Ventilation.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ventilation.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cooling Rate",
+      "NodeDescription": "6% Reduced Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/steam.steam",
+      "NodePosition": {
+        "X": 1437.4,
+        "Y": 545.5
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ventilation.1",
+        "PassiveTree.Ventilation.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Ventilation.3",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Ventilation",
+      "NodeDescription": "15% Reduced Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/steam-locomotive.steam-locomotive",
+      "NodePosition": {
+        "X": 1323.8,
+        "Y": 530.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Ventilation.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.15
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Smoulder.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Retention",
+      "NodeDescription": "6% Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-zone.fire-zone",
+      "NodePosition": {
+        "X": 198.9,
+        "Y": 1898.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Might.7",
+        "PassiveTree.Smoulder.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Smoulder.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Retention",
+      "NodeDescription": "6% Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-zone.fire-zone",
+      "NodePosition": {
+        "X": 93.0,
+        "Y": 1854.2
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Smoulder.1",
+        "PassiveTree.Smoulder.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Smoulder.3",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Smoulder",
+      "NodeDescription": "15% Heat Retention\n8% Increased Explosive Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/lava.lava",
+      "NodePosition": {
+        "X": 136.9,
+        "Y": 1960.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Smoulder.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Hardened.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Physical Resistance",
+      "NodeDescription": "4% Physical Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/metal-scales.metal-scales",
+      "NodePosition": {
+        "X": 1844.8,
+        "Y": 500.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BruisedConcussedThreshold.12",
+        "PassiveTree.Hardened.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Hardened.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Physical Resistance",
+      "NodeDescription": "4% Physical Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/metal-scales.metal-scales",
+      "NodePosition": {
+        "X": 1888.7,
+        "Y": 576.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Hardened.1",
+        "PassiveTree.Hardened.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Hardened.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Physical Resistance",
+      "NodeDescription": "4% Physical Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/metal-scales.metal-scales",
+      "NodePosition": {
+        "X": 1812.7,
+        "Y": 620.4
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Hardened.2",
+        "PassiveTree.Hardened.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Hardened.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Hardened",
+      "NodeDescription": "+2% Maximum Physical Resistance\n8% Physical Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/armor-vest.armor-vest",
+      "NodePosition": {
+        "X": 1768.9,
+        "Y": 544.5
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Hardened.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Physical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BlastShielding.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Explosive Resistance",
+      "NodeDescription": "4% Explosive Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/blast.blast",
+      "NodePosition": {
+        "X": 2138.1,
+        "Y": 2670.8
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BlastShielding.2",
+        "PassiveTree.DeferredDamage.11"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BlastShielding.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Explosive Resistance",
+      "NodeDescription": "4% Explosive Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/blast.blast",
+      "NodePosition": {
+        "X": 2214.0,
+        "Y": 2714.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BlastShielding.1",
+        "PassiveTree.BlastShielding.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BlastShielding.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Explosive Resistance",
+      "NodeDescription": "4% Explosive Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/sbed/blast.blast",
+      "NodePosition": {
+        "X": 2170.1,
+        "Y": 2790.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BlastShielding.2",
+        "PassiveTree.BlastShielding.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.BlastShielding.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Blast Shielding",
+      "NodeDescription": "+2% Maximum Explosive Resistance\n8% Explosive Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/explosion-rays.explosion-rays",
+      "NodePosition": {
+        "X": 2094.2,
+        "Y": 2746.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.BlastShielding.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Explosive",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Grounding.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Energy Resistance",
+      "NodeDescription": "4% Energy Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-arc.lightning-arc",
+      "NodePosition": {
+        "X": 1265.3,
+        "Y": 1186.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Grounding.2",
+        "PassiveTree.IncreasedMelee.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Grounding.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Energy Resistance",
+      "NodeDescription": "4% Energy Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-arc.lightning-arc",
+      "NodePosition": {
+        "X": 1309.2,
+        "Y": 1080.4
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Grounding.1",
+        "PassiveTree.Grounding.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Grounding.3",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Grounding",
+      "NodeDescription": "+1% Maximum Energy Resistance\n6% Energy Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-shield.lightning-shield",
+      "NodePosition": {
+        "X": 1353.0,
+        "Y": 1186.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Grounding.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.01
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
         }
       ]
     }

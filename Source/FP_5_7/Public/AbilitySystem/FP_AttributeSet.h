@@ -278,6 +278,10 @@ UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ThermalMass, Category = "Se
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CoolingCoefficient, Category = "Secondary Attributes")
 	FGameplayAttributeData CoolingCoefficient;
 
+// Heat.Retention: cooling rate / (1 + this), floored at -0.9 (see FP_HeatModel.h). + = keeps heat, - = sheds it.
+UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HeatRetention, Category = "Secondary Attributes")
+	FGameplayAttributeData HeatRetention;
+
 //Debuff
 UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BruisedEffectiveness, Category = "Secondary Attributes")
 	FGameplayAttributeData BruisedEffectiveness;
@@ -728,6 +732,10 @@ UFUNCTION()
 UFUNCTION()
 	void OnRep_CoolingCoefficient(const FGameplayAttributeData& OldCoolingCoefficient) const;
 	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, CoolingCoefficient)
+
+UFUNCTION()
+	void OnRep_HeatRetention(const FGameplayAttributeData& OldHeatRetention) const;
+	ATTRIBUTE_ACCESSORS(UFP_AttributeSet, HeatRetention)
 
 //Debuff
 UFUNCTION()

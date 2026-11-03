@@ -29,6 +29,10 @@ def red(a, v, w):   return (a, v, f"{pct(v)} Reduced {w}")
 def flat(a, v, w):  return (a, v, f"+{v:g} {w}")
 def plain(a, v, t): return (a, v, t)
 def flag(tag, t):   return ("FLAG:" + tag, None, t)
+# Multiply op (GAS MultiplyAdditive): magnitude is the raw multiplier, several sum as 1 + sum(m - 1),
+# so they behave like the "increased" pool for that attribute. 1.10 = 10% increased, 0.90 = 10% reduced.
+def incm(a, v, w):  return ("MUL:" + a, round(1 + v, 4), f"{pct(v)} Increased {w}")
+def redm(a, v, w):  return ("MUL:" + a, round(1 - v, 4), f"{pct(v)} Reduced {w}")
 def res(k, v):      return plain(f"Resistance.Damage.{k}", v, f"{pct(v)} {k} Resistance")
 def maxres(k, v):   return plain(f"Resistance.Max.{k}", v, f"+{pct(v)} Maximum {k} Resistance")
 def rep(n, name, effs): return [(name, effs)] * n
@@ -40,7 +44,10 @@ def make_effects(effs):
     for attr, mag, _ in effs:
         if attr == "FLAG_TEXT":      # description-only line (extra text for a flag above it)
             continue
-        if attr.startswith("FLAG:"):
+        if attr.startswith("MUL:"):
+            out.append(Effect("Stat Mod", {"EffectStatModAttributeType": attr[4:], "EffectStatModifierOp": "Multiply",
+                                           "EffectStatMagnitude": mag}))
+        elif attr.startswith("FLAG:"):
             out.append(Effect("Effect Flag", {"EffectFlagType": attr[5:]}))
         else:
             out.append(Effect("Stat Mod", {"EffectStatModAttributeType": attr, "EffectStatModifierOp": "Add",

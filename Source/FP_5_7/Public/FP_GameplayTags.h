@@ -137,6 +137,7 @@ FGameplayTag Heat_ThermalMass;
 FGameplayTag Heat_CoolingCoefficient;
 FGameplayTag Heat_SkillCostEfficiency;
 FGameplayTag Heat_SkillCostFlat;
+FGameplayTag Heat_Retention;
 // SKILL HEAT COST (UFP_GameplayAbility::ComputeSkillCost). Per cast:
 //   Level  = Entry.BaseHeatCost * (1 + Library.HeatCostPerLevel * (SkillLevel - 1))
 //            + SkillPassive.<Skill>.HeatCost (skill tree)
@@ -151,7 +152,8 @@ FGameplayTag Heat_SkillCostFlat;
 // (Flag.SkillTree.MightSkillsCostHPInsteadOfHeat) makes Might-weapon skills pay Paid
 // in HitPoints instead, whether they heat or cool. Endothermic reverses both directions
 // (heating skills spend heat, cooling skills restore it); Cryoarethmetic Engine reverses
-// heating skills only. Reversals never stack (taking both = Endothermic). All three stats gate normally,
+// heating skills only. Reversals never stack (taking both = Endothermic). Finally the heat change is
+// scaled by Thermal Mass (x 40 / ThermalMass, FP_HeatModel.h), either direction. All three stats gate normally,
 // e.g. Heat.SkillCost.Mace, Heat.SkillCostFlat.MightWeapon.
 FGameplayTag Heat_SkillCost;
 

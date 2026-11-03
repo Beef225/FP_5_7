@@ -248,6 +248,7 @@
       },
       "ConnectedNodeTags": [
         "PassiveTree.DroneController.DroneDamage.1",
+        "PassiveTree.HeatRetention.1",
         "PassiveTree.Resonance.3",
         "PassiveTree.Resonance.5"
       ],
@@ -369,6 +370,7 @@
         "Y": 1924.4
       },
       "ConnectedNodeTags": [
+        "PassiveTree.Capacitance.1",
         "PassiveTree.Resonance.10",
         "PassiveTree.Resonance.8"
       ],
@@ -593,7 +595,8 @@
       "ConnectedNodeTags": [
         "PassiveTree.Conduit.Channeler.1",
         "PassiveTree.HeatEfficiency.3",
-        "PassiveTree.HeatEfficiency.5"
+        "PassiveTree.HeatEfficiency.5",
+        "PassiveTree.ThermalHeadroom.1"
       ],
       "Effects": [
         {
@@ -666,6 +669,7 @@
       },
       "ConnectedNodeTags": [
         "PassiveTree.HeatEfficiency.6",
+        "PassiveTree.Radiator.1",
         "PassiveTree.WaveNode.1"
       ],
       "Effects": [
@@ -738,6 +742,7 @@
         "Y": 867.5
       },
       "ConnectedNodeTags": [
+        "PassiveTree.DeepFreeze.1",
         "PassiveTree.HeatEfficiency.11",
         "PassiveTree.HeatEfficiency.9"
       ],
@@ -969,7 +974,8 @@
       "ConnectedNodeTags": [
         "PassiveTree.Conduit.ConduitDamage.1",
         "PassiveTree.ElementalDamage.3",
-        "PassiveTree.ElementalDamage.5"
+        "PassiveTree.ElementalDamage.5",
+        "PassiveTree.Volatility.1"
       ],
       "Effects": [
         {
@@ -1224,7 +1230,8 @@
       "ConnectedNodeTags": [
         "PassiveTree.Conduit.ArcFlash.1",
         "PassiveTree.ElementalDamage.10",
-        "PassiveTree.ElementalDamage.12"
+        "PassiveTree.ElementalDamage.12",
+        "PassiveTree.ThermalRunaway.1"
       ],
       "Effects": [
         {
@@ -1460,6 +1467,7 @@
       },
       "ConnectedNodeTags": [
         "PassiveTree.Conduit.Catalyst.1",
+        "PassiveTree.LeadLining.1",
         "PassiveTree.StatusEffectiveness.3",
         "PassiveTree.StatusEffectiveness.5"
       ],
@@ -1766,6 +1774,7 @@
         "Y": 1287.3
       },
       "ConnectedNodeTags": [
+        "PassiveTree.Chelation.1",
         "PassiveTree.ResonantCascade.1",
         "PassiveTree.StatusEffectiveness.13"
       ],
@@ -5396,6 +5405,987 @@
           "EffectFlagTag": "Flag.SkillTree.CryoarethmeticEngine"
         }
       ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalHeadroom.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Maximum Heat",
+      "NodeDescription": "+5 to Maximum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thermometer-scale.thermometer-scale",
+      "NodePosition": {
+        "X": 1113.0,
+        "Y": 2387.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeatEfficiency.4",
+        "PassiveTree.ThermalHeadroom.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalHeadroom.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Maximum Heat",
+      "NodeDescription": "+5 to Maximum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thermometer-scale.thermometer-scale",
+      "NodePosition": {
+        "X": 1113.0,
+        "Y": 2474.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ThermalHeadroom.1",
+        "PassiveTree.ThermalHeadroom.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalHeadroom.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Maximum Heat",
+      "NodeDescription": "+5 to Maximum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/thermometer-scale.thermometer-scale",
+      "NodePosition": {
+        "X": 1025.3,
+        "Y": 2474.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ThermalHeadroom.2",
+        "PassiveTree.ThermalHeadroom.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalHeadroom.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Thermal Headroom",
+      "NodeDescription": "+15 to Maximum Heat Threshold\n5% Overheat Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/thermometer-hot.thermometer-hot",
+      "NodePosition": {
+        "X": 1025.3,
+        "Y": 2387.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ThermalHeadroom.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Overheat",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeepFreeze.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Minimum Heat",
+      "NodeDescription": "-5 to Minimum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/snowflake-1.snowflake-1",
+      "NodePosition": {
+        "X": 802.0,
+        "Y": 823.5
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeepFreeze.2",
+        "PassiveTree.HeatEfficiency.10"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributees.VitalMinHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeepFreeze.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Minimum Heat",
+      "NodeDescription": "-5 to Minimum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/snowflake-1.snowflake-1",
+      "NodePosition": {
+        "X": 824.7,
+        "Y": 738.8
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeepFreeze.1",
+        "PassiveTree.DeepFreeze.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributees.VitalMinHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeepFreeze.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Minimum Heat",
+      "NodeDescription": "-5 to Minimum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/snowflake-1.snowflake-1",
+      "NodePosition": {
+        "X": 909.4,
+        "Y": 761.5
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeepFreeze.2",
+        "PassiveTree.DeepFreeze.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributees.VitalMinHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -5
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.DeepFreeze.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Deep Freeze",
+      "NodeDescription": "-15 to Minimum Heat Threshold\n5% Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/frozen-orb.frozen-orb",
+      "NodePosition": {
+        "X": 886.7,
+        "Y": 846.2
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.DeepFreeze.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributees.VitalMinHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Volatility.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Volatile Core",
+      "NodeDescription": "5% Reduced Maximum Heat Threshold\n3% Increased Energy Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/lightning-flame.lightning-flame",
+      "NodePosition": {
+        "X": 1911.7,
+        "Y": 588.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ElementalDamage.4",
+        "PassiveTree.Volatility.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Multiply",
+          "EffectStatMagnitude": 0.95
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Volatility.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Volatile Core",
+      "NodeDescription": "5% Reduced Maximum Heat Threshold\n3% Increased Energy Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/lightning-flame.lightning-flame",
+      "NodePosition": {
+        "X": 1911.7,
+        "Y": 500.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Volatility.1",
+        "PassiveTree.Volatility.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Multiply",
+          "EffectStatMagnitude": 0.95
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Volatility.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Volatile Core",
+      "NodeDescription": "5% Reduced Maximum Heat Threshold\n3% Increased Energy Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/lightning-flame.lightning-flame",
+      "NodePosition": {
+        "X": 1999.4,
+        "Y": 500.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Volatility.2",
+        "PassiveTree.Volatility.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Multiply",
+          "EffectStatMagnitude": 0.95
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Volatility.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Volatility",
+      "NodeDescription": "12% Reduced Maximum Heat Threshold\n+5 to Minimum Heat Threshold\n8% Increased Energy Damage\n8% Increased Chemical Damage\n8% Increased Radiation Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/heat-haze.heat-haze",
+      "NodePosition": {
+        "X": 1999.4,
+        "Y": 588.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Volatility.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Multiply",
+          "EffectStatMagnitude": 0.88
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributees.VitalMinHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 5
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalRunaway.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Runaway Reaction",
+      "NodeDescription": "5% Reduced Heat Cost Efficiency\n3% Increased Radiation Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-ring.fire-ring",
+      "NodePosition": {
+        "X": 2281.2,
+        "Y": 2331.8
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ElementalDamage.11",
+        "PassiveTree.ThermalRunaway.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCostEfficiency",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalRunaway.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Runaway Reaction",
+      "NodeDescription": "5% Reduced Heat Cost Efficiency\n3% Increased Radiation Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-ring.fire-ring",
+      "NodePosition": {
+        "X": 2237.4,
+        "Y": 2407.8
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ThermalRunaway.1",
+        "PassiveTree.ThermalRunaway.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCostEfficiency",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalRunaway.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Runaway Reaction",
+      "NodeDescription": "5% Reduced Heat Cost Efficiency\n3% Increased Radiation Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fire-ring.fire-ring",
+      "NodePosition": {
+        "X": 2161.4,
+        "Y": 2363.9
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ThermalRunaway.2",
+        "PassiveTree.ThermalRunaway.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCostEfficiency",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.05
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.03
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.ThermalRunaway.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Thermal Runaway",
+      "NodeDescription": "15% Reduced Heat Cost Efficiency\n10% Increased Energy Damage\n10% Increased Chemical Damage\n10% Increased Radiation Damage",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/fireball.fireball",
+      "NodePosition": {
+        "X": 2205.3,
+        "Y": 2288.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.ThermalRunaway.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCostEfficiency",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.15
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Damage.Increased.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.1
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Radiator.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cooling Rate",
+      "NodeDescription": "8% Reduced Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/steam.steam",
+      "NodePosition": {
+        "X": 1088.2,
+        "Y": 1633.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeatEfficiency.7",
+        "PassiveTree.Radiator.2"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Radiator.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cooling Rate",
+      "NodeDescription": "8% Reduced Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/steam.steam",
+      "NodePosition": {
+        "X": 1110.9,
+        "Y": 1549.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Radiator.1",
+        "PassiveTree.Radiator.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Radiator.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Cooling Rate",
+      "NodeDescription": "8% Reduced Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/steam.steam",
+      "NodePosition": {
+        "X": 1195.6,
+        "Y": 1571.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Radiator.2",
+        "PassiveTree.Radiator.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Radiator.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Radiator",
+      "NodeDescription": "20% Reduced Heat Retention\n5% Heat Cost Efficiency",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/steam-blast.steam-blast",
+      "NodePosition": {
+        "X": 1172.9,
+        "Y": 1656.4
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Radiator.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": -0.2
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.SkillCostEfficiency",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.05
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeatRetention.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Retention",
+      "NodeDescription": "8% Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/fireplace.fireplace",
+      "NodePosition": {
+        "X": 1287.0,
+        "Y": 613.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeatRetention.2",
+        "PassiveTree.Resonance.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeatRetention.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Retention",
+      "NodeDescription": "8% Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/fireplace.fireplace",
+      "NodePosition": {
+        "X": 1287.0,
+        "Y": 525.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeatRetention.1",
+        "PassiveTree.HeatRetention.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeatRetention.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Heat Retention",
+      "NodeDescription": "8% Heat Retention",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/fireplace.fireplace",
+      "NodePosition": {
+        "X": 1374.7,
+        "Y": 525.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeatRetention.2",
+        "PassiveTree.HeatRetention.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.HeatRetention.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Heat Retention",
+      "NodeDescription": "20% Heat Retention\n+10 to Maximum Heat Threshold",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/furnace.furnace",
+      "NodePosition": {
+        "X": 1374.7,
+        "Y": 613.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.HeatRetention.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Heat.Retention",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.2
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Attributes.Vital.MaxHeatThreshold",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 10
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.LeadLining.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Radiation Resistance",
+      "NodeDescription": "4% Radiation Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sun-radiations.sun-radiations",
+      "NodePosition": {
+        "X": 1688.3,
+        "Y": 2411.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.LeadLining.2",
+        "PassiveTree.StatusEffectiveness.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.LeadLining.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Radiation Resistance",
+      "NodeDescription": "4% Radiation Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sun-radiations.sun-radiations",
+      "NodePosition": {
+        "X": 1688.3,
+        "Y": 2499.4
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.LeadLining.1",
+        "PassiveTree.LeadLining.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.LeadLining.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Radiation Resistance",
+      "NodeDescription": "4% Radiation Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/sun-radiations.sun-radiations",
+      "NodePosition": {
+        "X": 1600.6,
+        "Y": 2499.4
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.LeadLining.2",
+        "PassiveTree.LeadLining.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.LeadLining.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Lead Lining",
+      "NodeDescription": "+2% Maximum Radiation Resistance\n8% Radiation Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/lead-pipe.lead-pipe",
+      "NodePosition": {
+        "X": 1600.6,
+        "Y": 2411.7
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.LeadLining.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Chelation.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Chemical Resistance",
+      "NodeDescription": "4% Chemical Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chemical-drop.chemical-drop",
+      "NodePosition": {
+        "X": 2801.2,
+        "Y": 1328.2
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Chelation.2",
+        "PassiveTree.StatusEffectiveness.14"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Chelation.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Chemical Resistance",
+      "NodeDescription": "4% Chemical Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chemical-drop.chemical-drop",
+      "NodePosition": {
+        "X": 2877.2,
+        "Y": 1284.4
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Chelation.1",
+        "PassiveTree.Chelation.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Chelation.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Chemical Resistance",
+      "NodeDescription": "4% Chemical Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chemical-drop.chemical-drop",
+      "NodePosition": {
+        "X": 2921.0,
+        "Y": 1360.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Chelation.2",
+        "PassiveTree.Chelation.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Chelation.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Chelation",
+      "NodeDescription": "+2% Maximum Chemical Resistance\n8% Chemical Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/chemical-tank.chemical-tank",
+      "NodePosition": {
+        "X": 2845.1,
+        "Y": 1404.1
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Chelation.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Chemical",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.08
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Capacitance.1",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Energy Resistance",
+      "NodeDescription": "4% Energy Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-shield.lightning-shield",
+      "NodePosition": {
+        "X": 837.2,
+        "Y": 2000.6
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Capacitance.2",
+        "PassiveTree.Resonance.9"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Capacitance.2",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Energy Resistance",
+      "NodeDescription": "4% Energy Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-shield.lightning-shield",
+      "NodePosition": {
+        "X": 921.9,
+        "Y": 2023.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Capacitance.1",
+        "PassiveTree.Capacitance.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Capacitance.3",
+      "NodeType": "Minor",
+      "IsStartNode": false,
+      "NodeName": "Energy Resistance",
+      "NodeDescription": "4% Energy Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-shield.lightning-shield",
+      "NodePosition": {
+        "X": 899.2,
+        "Y": 2108.0
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Capacitance.2",
+        "PassiveTree.Capacitance.4"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
+    },
+    {
+      "NodeTag": "PassiveTree.Capacitance.4",
+      "NodeType": "Major",
+      "IsStartNode": false,
+      "NodeName": "Capacitance",
+      "NodeDescription": "+2% Maximum Energy Resistance\n6% Energy Resistance\n4% Radiation Resistance",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/lightning-dissipation.lightning-dissipation",
+      "NodePosition": {
+        "X": 814.5,
+        "Y": 2085.3
+      },
+      "ConnectedNodeTags": [
+        "PassiveTree.Capacitance.3"
+      ],
+      "Effects": [
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Max.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.02
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Energy",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.06
+        },
+        {
+          "EffectType": "Stat Mod",
+          "EffectStatModAttributeType": "Resistance.Damage.Radiation",
+          "EffectStatModifierOp": "Add",
+          "EffectStatMagnitude": 0.04
+        }
+      ]
     }
   ],
   "treeInfo": {
@@ -5403,11 +6393,11 @@
     "treeType": "Passive",
     "version": "0.1.0",
     "liveVersion": "",
-    "revision": 8,
+    "revision": 10,
     "canvasSize": {
       "X": 3000.0,
       "Y": 3000.0
     },
-    "exported": "2026-11-02T20:01:13-05:00"
+    "exported": "2026-11-02T20:42:05-05:00"
   }
 }

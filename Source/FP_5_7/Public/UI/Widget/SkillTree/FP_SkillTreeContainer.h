@@ -29,7 +29,11 @@ class UCanvasPanel;
  *      Text_PointsSpent, Text_PointsAvailable, (optional) Canvas_Popup.
  *   3. Add tab buttons in BP; on click call SwitchToTree(Index).
  *   4. Implement OnCommitClicked / OnCancelClicked / OnTreeSwitched as needed.
- *   5. Call LoadAllocatedState(TreeIndex, Tags) for each tree on widget open.
+ *   5. Saved allocations are loaded from the PlayerState on construct (and again on
+ *      OnSkillStateLoaded); Confirm writes them back via SetSkillTreeAllocatedNodes.
+ *
+ * Points: available = attribute points invested in the tree's attribute − nodes allocated
+ * in that tree. Clicks past that are refused unless the PlayerState debug bypass is on.
  */
 UCLASS(Abstract, BlueprintType, Blueprintable)
 class FP_5_7_API UFP_SkillTreeContainer : public UFP_UserWidget
@@ -144,6 +148,13 @@ private:
 	void ShowNodePopup(UFP_SkillTreeNode* Node);
 	void HideNodePopup();
 	void UpdatePointsDisplay(int32 PendingCount);
+
+	/** Pushes every tree's saved allocation from the PlayerState into its widget. */
+	void LoadAllFromPlayerState();
+	/** Re-reads available points for the active tree and pushes the budget to it. */
+	void RefreshActivePoints();
+	bool IgnoresPointCost() const;
+	void HandleSkillStateLoaded();
 
 	UFUNCTION() void HandleConfirmClicked();
 	UFUNCTION() void HandleCancelClicked();

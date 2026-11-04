@@ -146,6 +146,9 @@ public:
 
 	static bool IsEndothermic(const UAbilitySystemComponent* ASC);
 
+	// ---- Iron Flesh (Flag.SkillTree.ArmourFromMaxHitPoints): UFP_GE_IronFlesh ----------------
+	static constexpr float IronFleshArmourPerMaxHitPoint = 2.0f; // 200% of Maximum Hit Points as Armour
+
 	// ---- Cascade Failure (Flag.SkillTree.SpreadStatusOnKill) ----------------------------------
 	// Spreading lives in UFP_GA_DebuffPassive_Base::SpreadDebuffsOnDeath. Drawback: the owner deals
 	// only Radiation damage (other types, Generic included, are zeroed in ExecCalc_Damage / DoT).

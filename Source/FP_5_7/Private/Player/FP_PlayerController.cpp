@@ -416,6 +416,11 @@ void AFP_PlayerController::OnPossess(APawn* InPawn)
 				// Must come after LoadGrantedSkills so the skill-grant guard works.
 				SaveSys->LoadSkillTreeState(this, PS);
 
+				// Level transitions start at full health. The vital init filled HP before the saved
+				// points / tree nodes raised MaxHP, so top it up now. (Gear restored afterwards by
+				// the inventory component refills again.)
+				PS->RefillHitPointsToMax();
+
 				// Tell all already-constructed frames to re-read from the now-populated PS map.
 				// This corrects any stale startup-ability bindings set by the early OnAbilitiesGiven fallback.
 				PS->OnSkillStateLoaded.Broadcast();

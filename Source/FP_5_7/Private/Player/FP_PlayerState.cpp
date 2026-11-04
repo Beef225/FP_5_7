@@ -109,7 +109,7 @@ void AFP_PlayerState::OnRep_AttributePoints(int32 OldAttributePoints)
 	OnAttributePointsChangedDelegate.Broadcast(AttributePoints);
 }
 
-int32 AFP_PlayerState::GetPassivePointsForTree(const FGameplayTag& TreeTag) const
+int32 AFP_PlayerState::GetInvestedPointsForPassiveTree(const FGameplayTag& TreeTag) const
 {
 	const FFP_GameplayTags& T = FFP_GameplayTags::Get();
 	if (TreeTag == T.PassiveTree_Might)     return MightPassivePoints;
@@ -119,17 +119,24 @@ int32 AFP_PlayerState::GetPassivePointsForTree(const FGameplayTag& TreeTag) cons
 	return 0;
 }
 
-void AFP_PlayerState::SpendPassivePoints(const FGameplayTag& TreeTag, int32 Amount)
+int32 AFP_PlayerState::GetPassivePointsForTree(const FGameplayTag& TreeTag) const
 {
-	const FFP_GameplayTags& T = FFP_GameplayTags::Get();
-	FGameplayTag AttrTag;
-	if      (TreeTag == T.PassiveTree_Might)     AttrTag = T.Attributes_Primary_Might;
-	else if (TreeTag == T.PassiveTree_Resonance) AttrTag = T.Attributes_Primary_Resonance;
-	else if (TreeTag == T.PassiveTree_Agility)   AttrTag = T.Attributes_Primary_Agility;
-	else if (TreeTag == T.PassiveTree_Fortitude) AttrTag = T.Attributes_Primary_Fortitude;
+	return GetInvestedPointsForPassiveTree(TreeTag) - GetSkillTreeNodesForTree(TreeTag).Num();
+}
 
-	if (AttrTag.IsValid())
-		AddToPassivePoints(AttrTag, -Amount);
+static TAutoConsoleVariable<bool> CVarSkillTreeIgnorePointCost(
+	TEXT("FP.SkillTree.IgnorePointCost"),
+	false,
+	TEXT("1 = skill trees and passive trees can allocate nodes without available points (debug)."),
+	ECVF_Cheat);
+
+bool AFP_PlayerState::ShouldIgnoreSkillTreePointCost() const
+{
+#if UE_BUILD_SHIPPING
+	return false;
+#else
+	return bDebug_IgnoreSkillTreePointCost || CVarSkillTreeIgnorePointCost.GetValueOnGameThread();
+#endif
 }
 
 void AFP_PlayerState::AddToPassivePoints(const FGameplayTag& AttributeTag, int32 InPoints)
@@ -423,12 +430,48 @@ void AFP_PlayerState::LoadSkillTreeState(APlayerController* PC,
 {
 	SkillTreeAllocatedNodes = SavedState;
 
-	if (!PC || !SkillLibrary) return;
+	if (!PC) return;
+
+	auto ApplyNodes = [PC](const UFP_SkillTreeWidget* CDO, const FGameplayTagContainer& AllocatedTags)
+	{
+		for (const FGameplayTag& NodeTag : AllocatedTags)
+		{
+			for (UFP_SkillTreeNodeData* NodeData : CDO->NodeDataAssets)
+			{
+				if (!NodeData || NodeData->NodeTag != NodeTag) continue;
+				NodeData->AllocateEffects(PC);
+				break;
+			}
+		}
+	};
 
 	for (const TTuple<FGameplayTag, FGameplayTagContainer>& Pair : SavedState)
 	{
 		const FGameplayTag&           TreeTag       = Pair.Key;
 		const FGameplayTagContainer&  AllocatedTags = Pair.Value;
+
+		// Passive trees (PassiveTree.X): always active, no skill-grant guard.
+		bool bPassiveTree = false;
+		for (const TSubclassOf<UFP_SkillTreeWidget>& TreeClass : PassiveTreeWidgetClasses)
+		{
+			const UFP_SkillTreeWidget* CDO = TreeClass ? GetDefault<UFP_SkillTreeWidget>(TreeClass) : nullptr;
+			if (!CDO || CDO->GetTreeTag() != TreeTag) continue;
+			ApplyNodes(CDO, AllocatedTags);
+			bPassiveTree = true;
+			break;
+		}
+		if (bPassiveTree) continue;
+
+		const FFP_GameplayTags& T = FFP_GameplayTags::Get();
+		if (TreeTag == T.PassiveTree_Might || TreeTag == T.PassiveTree_Resonance
+			|| TreeTag == T.PassiveTree_Agility || TreeTag == T.PassiveTree_Fortitude)
+		{
+			UE_LOG(LogTemp, Warning,
+				TEXT("FP_PlayerState: saved nodes for %s but no matching class in PassiveTreeWidgetClasses — effects not re-applied."),
+				*TreeTag.ToString());
+			continue;
+		}
+		if (!SkillLibrary) continue;
 
 		// Find the ability entry whose skill tree matches this tree tag.
 		for (const FFP_AbilityEntry& Entry : SkillLibrary->AbilityEntries)
@@ -511,6 +554,15 @@ float AFP_PlayerState::GetSkillPassiveValue(const FGameplayTag& PassiveTag) cons
 {
 	const float* Found = SkillPassiveValues.Find(PassiveTag);
 	return Found ? *Found : 0.f;
+}
+
+void AFP_PlayerState::RefillHitPointsToMax()
+{
+	if (!HasAuthority() || !AbilitySystemComponent) return;
+
+	const float MaxHP = AbilitySystemComponent->GetNumericAttribute(UFP_AttributeSet::GetMaxHitPointsAttribute());
+	if (MaxHP > 0.f)
+		AbilitySystemComponent->SetNumericAttributeBase(UFP_AttributeSet::GetHitPointsAttribute(), MaxHP);
 }
 
 void AFP_PlayerState::LoadAllocatedPoints(int32 InUnspent, int32 InMight, int32 InResonance, int32 InAgility, int32 InFortitude)

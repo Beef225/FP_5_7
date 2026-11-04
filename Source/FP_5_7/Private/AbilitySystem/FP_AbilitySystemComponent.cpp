@@ -14,6 +14,7 @@
 #include "Interaction/FP_CombatInterface.h"
 #include "AbilitySystem/Effects/FP_GE_Blur.h"
 #include "AbilitySystem/Effects/FP_GE_EndothermicRegen.h"
+#include "AbilitySystem/Effects/FP_GE_IronFlesh.h"
 
 void UFP_AbilitySystemComponent::AbilityActorInfoSet()
 {
@@ -39,6 +40,7 @@ void UFP_AbilitySystemComponent::RegisterFlagEffects()
 	const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
 	FlagEffectClasses.Add(Tags.Flag_SkillTree_Blur, UFP_GE_Blur::StaticClass());
 	FlagEffectClasses.Add(Tags.Flag_SkillTree_Endothermic, UFP_GE_EndothermicRegen::StaticClass());
+	FlagEffectClasses.Add(Tags.Flag_SkillTree_ArmourFromMaxHitPoints, UFP_GE_IronFlesh::StaticClass());
 
 	for (const TPair<FGameplayTag, TSubclassOf<UGameplayEffect>>& Pair : FlagEffectClasses)
 	{

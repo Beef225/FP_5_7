@@ -68,6 +68,13 @@ void UFP_SkillTreePanel::OpenForSkill(TSubclassOf<UFP_SkillTreeWidget> TreeWidge
 
 	ActiveTree->LoadAllocatedState(AllocatedNodes);
 
+	if (const AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>())
+	{
+		ActiveTree->SetPointBudget(PS->ShouldIgnoreSkillTreePointCost()
+			? INDEX_NONE
+			: FMath::Max(0, PS->GetSkillPoints(CachedSkillTag)));
+	}
+
 	WireActiveTree();
 
 	if (Text_SkillName)
@@ -144,8 +151,9 @@ void UFP_SkillTreePanel::UpdatePointsDisplay(int32 PendingCount)
 		}
 	}
 
+	const bool bIgnoreCost = PS && PS->ShouldIgnoreSkillTreePointCost();
 	if (Button_Confirm)
-		Button_Confirm->SetIsEnabled(PendingCount > 0 && Remaining >= 0);
+		Button_Confirm->SetIsEnabled(PendingCount > 0 && (bIgnoreCost || Remaining >= 0));
 }
 
 // ---------------------------------------------------------------------------
@@ -158,6 +166,16 @@ void UFP_SkillTreePanel::HandleConfirmClicked()
 
 	const int32            PointsToSpend = ActiveTree->GetPendingCount();
 	const FGameplayTag     TreeTag       = ActiveTree->GetTreeTag();
+
+	// Re-check against the live pool (button state could be stale).
+	if (const AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>())
+	{
+		if (!PS->ShouldIgnoreSkillTreePointCost() && PointsToSpend > PS->GetSkillPoints(CachedSkillTag))
+		{
+			UpdatePointsDisplay(PointsToSpend);
+			return;
+		}
+	}
 
 	ActiveTree->CommitPendingNodes();
 	const FGameplayTagContainer Allocated = ActiveTree->GetAllocatedNodeTags();

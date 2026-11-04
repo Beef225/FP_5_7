@@ -42,10 +42,15 @@ void UFP_SkillTreeContainer::NativeConstruct()
 	Switcher_Trees->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 
 	if (AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>())
+	{
 		PS->OnPassivePointsChangedDelegate.AddUObject(
 			this, &UFP_SkillTreeContainer::HandlePassivePointsChanged);
+		PS->OnSkillStateLoaded.AddUObject(
+			this, &UFP_SkillTreeContainer::HandleSkillStateLoaded);
+	}
 
 	SpawnTreeWidgets();
+	LoadAllFromPlayerState();
 
 	// Wire the initially-active tree and seed points display
 	WireActiveTree();
@@ -165,10 +170,46 @@ void UFP_SkillTreeContainer::WireActiveTree()
 	Active->OnNodeHoverChangedDelegate.AddUObject(
 		this, &UFP_SkillTreeContainer::HandleNodeHoverChanged);
 
-	if (AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>())
+	RefreshActivePoints();
+}
+
+void UFP_SkillTreeContainer::LoadAllFromPlayerState()
+{
+	const AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>();
+	if (!PS) return;
+
+	for (UFP_SkillTreeWidget* Tree : TreeWidgets)
+	{
+		if (!Tree) continue;
+		// NativeConstruct on the tree may not have run yet; LoadAllocatedState needs nodes spawned.
+		if (Tree->GetSpawnedNodeCount() == 0)
+			Tree->PopulateTree();
+		Tree->LoadAllocatedState(PS->GetSkillTreeNodesForTree(Tree->GetTreeTag()));
+	}
+}
+
+bool UFP_SkillTreeContainer::IgnoresPointCost() const
+{
+	const AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>();
+	return PS && PS->ShouldIgnoreSkillTreePointCost();
+}
+
+void UFP_SkillTreeContainer::RefreshActivePoints()
+{
+	UFP_SkillTreeWidget* Active = GetActiveTreeWidget();
+	if (!Active) return;
+
+	if (const AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>())
 		CachedAvailablePoints = PS->GetPassivePointsForTree(Active->GetTreeTag());
 
-	UpdatePointsDisplay(Active->GetPendingCount());
+	Active->SetPointBudget(IgnoresPointCost() ? INDEX_NONE : FMath::Max(0, CachedAvailablePoints));
+	HandlePendingCountChanged(Active->GetPendingCount());
+}
+
+void UFP_SkillTreeContainer::HandleSkillStateLoaded()
+{
+	LoadAllFromPlayerState();
+	RefreshActivePoints();
 }
 
 void UFP_SkillTreeContainer::UnwireTree(UFP_SkillTreeWidget* Tree)
@@ -304,18 +345,15 @@ FReply UFP_SkillTreeContainer::NativeOnMouseMove(
 void UFP_SkillTreeContainer::HandlePendingCountChanged(int32 NewCount)
 {
 	const bool bHasPending = NewCount > 0;
-	if (Button_Confirm) Button_Confirm->SetIsEnabled(bHasPending);
+	const bool bAffordable = IgnoresPointCost() || NewCount <= CachedAvailablePoints;
+	if (Button_Confirm) Button_Confirm->SetIsEnabled(bHasPending && bAffordable);
 	if (Button_Cancel)  Button_Cancel->SetIsEnabled(bHasPending);
 	UpdatePointsDisplay(NewCount);
 }
 
 void UFP_SkillTreeContainer::HandlePassivePointsChanged(FGameplayTag Tag, int32 NewPoints)
 {
-	UFP_SkillTreeWidget* Active = GetActiveTreeWidget();
-	if (!Active) return;
-	if (AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>())
-		CachedAvailablePoints = PS->GetPassivePointsForTree(Active->GetTreeTag());
-	UpdatePointsDisplay(Active->GetPendingCount());
+	RefreshActivePoints();
 }
 
 void UFP_SkillTreeContainer::UpdatePointsDisplay(int32 PendingCount)
@@ -342,12 +380,25 @@ void UFP_SkillTreeContainer::HandleConfirmClicked()
 	UFP_SkillTreeWidget* Active = GetActiveTreeWidget();
 	if (!Active) return;
 
+	AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>();
+	if (!PS) return;
+
 	const int32 PointsToSpend = Active->GetPendingCount();
+	if (PointsToSpend <= 0) return;
+
+	// Re-check against the live pool (button state could be stale).
+	if (!IgnoresPointCost() && PointsToSpend > PS->GetPassivePointsForTree(Active->GetTreeTag()))
+	{
+		RefreshActivePoints();
+		return;
+	}
+
 	Active->CommitPendingNodes();
 
-	if (PointsToSpend > 0)
-		if (AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>())
-			PS->SpendPassivePoints(Active->GetTreeTag(), PointsToSpend);
+	// Points are derived (invested − allocated), so storing the allocation is the spend.
+	// SaveActiveCharacter writes this map to the save record.
+	PS->SetSkillTreeAllocatedNodes(Active->GetTreeTag(), Active->GetAllocatedNodeTags());
+	RefreshActivePoints();
 
 	OnCommitClicked();
 }

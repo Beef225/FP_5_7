@@ -10,9 +10,9 @@
     "author": "jakeg",
     "version": "0.1.0",
     "live_version": "",
-    "revision": 10,
+    "revision": 12,
     "created": "2026-10-31T16:49:43-04:00",
-    "modified": "2026-11-02T20:42:05-05:00",
+    "modified": "2026-11-02T20:58:57-05:00",
     "tag_root": "",
     "ue_asset_folder": "/Game/Blueprints/UI/SkillTrees/CharacterSkillTrees/Data/Nodes/Resonance",
     "export_file": "",
@@ -1824,7 +1824,7 @@
       "IsStartNode": false,
       "NodeName": "Endothermic",
       "NodeDescription": "Your Heat starts at its Maximum Threshold and Skills spend Heat instead of generating it\nHeat regenerates back towards the Maximum over time\nRegenerate 20% of your Maximum Heat Threshold Per Second\nYou cannot use Skills while your Heat is below 0",
-      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/snowflake-2.snowflake-2",
+      "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/cold-heart.cold-heart",
       "NodePosition": {
         "X": 155.31,
         "Y": 1387.3
@@ -5958,7 +5958,7 @@
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/delapouite/steam.steam",
       "NodePosition": {
         "X": 1195.6,
-        "Y": 1571.7
+        "Y": 1572.38
       },
       "ConnectedNodeTags": [
         "PassiveTree.Radiator.2",

@@ -10,9 +10,9 @@
     "author": "jakeg",
     "version": "0.1.0",
     "live_version": "",
-    "revision": 5,
+    "revision": 7,
     "created": "2026-10-31T16:49:43-04:00",
-    "modified": "2026-11-02T20:42:05-05:00",
+    "modified": "2026-11-02T21:02:05-05:00",
     "tag_root": "",
     "ue_asset_folder": "/Game/Blueprints/UI/SkillTrees/CharacterSkillTrees/Data/Nodes/Fortitude",
     "export_file": "",
@@ -62,7 +62,6 @@
       "ConnectedNodeTags": [
         "PassiveTree.IncreasedHitPoints.1",
         "PassiveTree.IncreasedHitPoints.3",
-        "PassiveTree.IronFlesh.1",
         "PassiveTree.ThickSkin.1"
       ],
       "Effects": [
@@ -211,7 +210,6 @@
       "ConnectedNodeTags": [
         "PassiveTree.IncreasedArmour.1",
         "PassiveTree.IncreasedArmour.3",
-        "PassiveTree.IronFlesh.1",
         "PassiveTree.PlatedHide.1"
       ],
       "Effects": [
@@ -1162,7 +1160,8 @@
       "ConnectedNodeTags": [
         "PassiveTree.BlastPadding.1",
         "PassiveTree.Bulwark.1",
-        "PassiveTree.IncreasedHitPoints.12"
+        "PassiveTree.IncreasedHitPoints.12",
+        "PassiveTree.IronFlesh.1"
       ],
       "Effects": [
         {
@@ -1289,7 +1288,8 @@
       "ConnectedNodeTags": [
         "PassiveTree.AdaptiveShielding.1",
         "PassiveTree.Bulwark.1",
-        "PassiveTree.IncreasedArmour.12"
+        "PassiveTree.IncreasedArmour.12",
+        "PassiveTree.IronFlesh.1"
       ],
       "Effects": [
         {
@@ -6438,15 +6438,15 @@
       "NodeType": "Mastery",
       "IsStartNode": false,
       "NodeName": "Iron Flesh",
-      "NodeDescription": "Gain Armour equal to 20% of your Maximum Hit Points\n10% Reduced Maximum Hit Points",
+      "NodeDescription": "Gain Armour equal to 200% of your Maximum Hit Points\n10% Reduced Maximum Hit Points",
       "NodeIcon": "/Game/Assets/UIElements/Icons/game-icons_net_png/icons/ffffff/000000/1x1/lorc/metal-scales.metal-scales",
       "NodePosition": {
-        "X": 1500.0,
-        "Y": 1050.0
+        "X": 1499.83,
+        "Y": 365.11
       },
       "ConnectedNodeTags": [
-        "PassiveTree.IncreasedArmour.2",
-        "PassiveTree.IncreasedHitPoints.2"
+        "PassiveTree.IncreasedArmour.13",
+        "PassiveTree.IncreasedHitPoints.13"
       ],
       "Effects": [
         {

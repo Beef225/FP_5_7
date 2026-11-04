@@ -53,11 +53,22 @@ public:
 	FORCEINLINE int32 GetAgilityPassivePoints() const { return AgilityPassivePoints; }
 	FORCEINLINE int32 GetFortitudePassivePoints() const { return FortitudePassivePoints; }
 
-	/** Returns available unspent points for the given PassiveTree.X tag. */
+	/**
+	 * Unspent points for a PassiveTree.X tag = attribute points invested in that attribute
+	 * minus nodes allocated in that tree. Can go negative when allocated with the debug bypass.
+	 * (The invested count is never decremented — it also restores the attribute on load.)
+	 */
 	int32 GetPassivePointsForTree(const FGameplayTag& TreeTag) const;
 
-	/** Deducts points from the pool for the given PassiveTree.X tag. */
-	void SpendPassivePoints(const FGameplayTag& TreeTag, int32 Amount);
+	/** Attribute points invested in the attribute that feeds this PassiveTree.X tag (0 for other tags). */
+	int32 GetInvestedPointsForPassiveTree(const FGameplayTag& TreeTag) const;
+
+	/**
+	 * Debug: allow skill-tree / passive-tree allocation beyond the available points.
+	 * True when bDebug_IgnoreSkillTreePointCost is ticked on this PlayerState BP or the
+	 * console variable FP.SkillTree.IgnorePointCost is 1. Always false in Shipping.
+	 */
+	bool ShouldIgnoreSkillTreePointCost() const;
 
 	/** MonsterLevel = -1 means no penalty (e.g. quest rewards). */
 	void AddSkillXP(int32 InXP, int32 MonsterLevel = -1);
@@ -145,7 +156,7 @@ public:
 	/** Returns the total accumulated value for PassiveTag, or 0 if no nodes have been allocated for it. */
 	float GetSkillPassiveValue(const FGameplayTag& PassiveTag) const;
 
-	/** Stores the committed node set for a skill tree (called by UFP_SkillTreePanel on confirm). */
+	/** Stores the committed node set for a skill tree or passive tree (Panel / Container on confirm). Saved by SaveActiveCharacter. */
 	void SetSkillTreeAllocatedNodes(const FGameplayTag& TreeTag, const FGameplayTagContainer& Nodes);
 
 	/** Returns the full skill-tree allocation map for serialisation (C++ only). */
@@ -182,12 +193,31 @@ public:
 	 * Call this from OnPossess, after InitializeDefaultAttributes has run.
 	 */
 	void LoadAllocatedPoints(int32 InUnspent, int32 InMight, int32 InResonance, int32 InAgility, int32 InFortitude);
+
+	/**
+	 * Sets HitPoints to the current MaxHitPoints (authority only).
+	 * Used after a level load: DefaultVitalAttributes fills HP before saved points, tree nodes
+	 * and gear raise MaxHP, so it must be topped up once those are applied.
+	 */
+	void RefillHitPointsToMax();
 	
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<UFP_LevelUpInfo> LevelUpInfo;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Abilities", meta=(AllowPrivateAccess = "true"))
 	TObjectPtr<UFP_SkillLibrary> SkillLibrary;
+
+	/**
+	 * The four passive tree widget BPs (WBP_SkillTree_Might/Resonance/Agility/Fortitude).
+	 * Used on load to re-apply the effects of saved passive-tree nodes — the tree UI may not
+	 * exist yet, so the node data is read from each class's defaults. Order does not matter.
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "Skill Tree")
+	TArray<TSubclassOf<class UFP_SkillTreeWidget>> PassiveTreeWidgetClasses;
+
+	/** Debug: allow allocating tree nodes without available points (see ShouldIgnoreSkillTreePointCost). */
+	UPROPERTY(EditDefaultsOnly, Category = "Skill Tree|Debug")
+	bool bDebug_IgnoreSkillTreePointCost = false;
 
 	
 protected:

@@ -77,6 +77,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Skill Tree")
 	int32 GetSpawnedNodeCount() const { return SpawnedNodes.Num(); }
 
+	/**
+	 * Max number of nodes that can be pending at once (the points available).
+	 * INDEX_NONE = unlimited (debug bypass). Set by the Container / Panel that owns the tree.
+	 * Lowering it below the current pending count does not drop pending nodes;
+	 * the owner's Confirm button guards that case.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Skill Tree")
+	void SetPointBudget(int32 InBudget) { PointBudget = InBudget; }
+
+	UFUNCTION(BlueprintCallable, Category="Skill Tree")
+	int32 GetPointBudget() const { return PointBudget; }
+
 	/** Fired whenever the pending count changes — subscribe to drive button states. */
 	UPROPERTY(BlueprintAssignable, Category="Skill Tree")
 	FOnSkillTreePendingCountChanged OnPendingCountChangedDelegate;
@@ -104,6 +116,10 @@ protected:
 	/** Called after CommitPendingNodes succeeds. */
 	UFUNCTION(BlueprintImplementableEvent, Category="Skill Tree")
 	void OnNodesCommitted(const TArray<FGameplayTag>& CommittedTags);
+
+	/** Called when a click is refused because every available point is already pending (sound / flash hook). */
+	UFUNCTION(BlueprintImplementableEvent, Category="Skill Tree")
+	void OnNotEnoughPoints(const FGameplayTag& NodeTag);
 
 	// ---- Config ------------------------------------------------------------
 
@@ -187,4 +203,5 @@ private:
 
 	FGameplayTagContainer AllocatedNodeTags;
 	TArray<FGameplayTag>  PendingNodeTags;
+	int32                 PointBudget = INDEX_NONE;
 };

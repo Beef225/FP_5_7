@@ -836,6 +836,8 @@ FGameplayTag Flag_SkillTree_PerpetualMotion;
 FGameplayTag Flag_SkillTree_Endothermic;
 FGameplayTag Flag_SkillTree_CryoarethmeticEngine;
 FGameplayTag Flag_SkillTree_SpreadStatusOnKill;
+FGameplayTag Flag_SkillTree_ImmuneToBruisedAndConcussed;
+FGameplayTag Flag_SkillTree_ArmourFromMaxHitPoints;
 
 //Execute
 FGameplayTag Execute_Threshold;

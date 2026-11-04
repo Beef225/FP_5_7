@@ -112,6 +112,11 @@ private:
 	UFUNCTION()
 	void HandleBuildupEvent(FGameplayEventData Payload);
 
+	/** Unstoppable (Flag.SkillTree.ImmuneToBruisedAndConcussed): Bruised / Concussed cannot be applied. */
+	bool IsImmune() const;
+	/** Gaining the immunity flag ends an active Bruised / Concussed at once. */
+	void OnImmunityFlagChanged(const FGameplayTag Tag, int32 NewCount);
+
 	void ApplyDebuff(UAbilitySystemComponent* SourceASC);
 	void RemoveDebuff();
 	void OnDecayTimerExpired();

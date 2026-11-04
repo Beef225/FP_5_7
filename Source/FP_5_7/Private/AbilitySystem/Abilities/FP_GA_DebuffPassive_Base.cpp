@@ -29,6 +29,51 @@ void UFP_GA_DebuffPassive_Base::ActivateAbility(
 	);
 	Task->EventReceived.AddDynamic(this, &UFP_GA_DebuffPassive_Base::HandleBuildupEvent);
 	Task->ReadyForActivation();
+
+	// Unstoppable only covers Bruised and Concussed.
+	const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
+	const FGameplayTag State = GetStateTag();
+	if (State == Tags.State_Bruised || State == Tags.State_Concussed)
+	{
+		if (UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo())
+		{
+			ASC->RegisterGameplayTagEvent(Tags.Flag_SkillTree_ImmuneToBruisedAndConcussed, EGameplayTagEventType::NewOrRemoved)
+				.AddUObject(this, &UFP_GA_DebuffPassive_Base::OnImmunityFlagChanged);
+		}
+	}
+}
+
+bool UFP_GA_DebuffPassive_Base::IsImmune() const
+{
+	const FFP_GameplayTags& Tags = FFP_GameplayTags::Get();
+	const FGameplayTag State = GetStateTag();
+	if (State != Tags.State_Bruised && State != Tags.State_Concussed)
+	{
+		return false;
+	}
+	const UAbilitySystemComponent* ASC = GetAbilitySystemComponentFromActorInfo();
+	return ASC && ASC->HasMatchingGameplayTag(Tags.Flag_SkillTree_ImmuneToBruisedAndConcussed);
+}
+
+void UFP_GA_DebuffPassive_Base::OnImmunityFlagChanged(const FGameplayTag Tag, int32 NewCount)
+{
+	if (NewCount <= 0)
+	{
+		return;
+	}
+	CurrentBuildup = 0.f;
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(DecayTimerHandle);
+		if (bDebuffActive)
+		{
+			World->GetTimerManager().ClearTimer(DebuffDurationHandle);
+		}
+	}
+	if (bDebuffActive)
+	{
+		RemoveDebuff();
+	}
 }
 
 void UFP_GA_DebuffPassive_Base::SpreadDebuffsOnDeath(AActor* DyingActor)
@@ -113,6 +158,11 @@ void UFP_GA_DebuffPassive_Base::HandleBuildupEvent(FGameplayEventData Payload)
 {
 	if (bDebuffActive)
 	{
+		return;
+	}
+	if (IsImmune())
+	{
+		CurrentBuildup = 0.f;
 		return;
 	}
 

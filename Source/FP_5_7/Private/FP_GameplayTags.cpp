@@ -2118,6 +2118,14 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Flag.SkillTree.SpreadStatusOnKill"),
 		FString("Cascade Failure: Irradiated/Corroded on an enemy that dies spread to nearby enemies (UFP_GA_DebuffPassive_Base::SpreadDebuffsOnDeath); the owner deals only Radiation damage (ExecCalc_Damage/DoT)")
 		);
+	GameplayTags.Flag_SkillTree_ImmuneToBruisedAndConcussed = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.ImmuneToBruisedAndConcussed"),
+		FString("Unstoppable: cannot be Bruised or Concussed; buildup is ignored and an active one ends when the flag is gained (UFP_GA_DebuffPassive_Base)")
+		);
+	GameplayTags.Flag_SkillTree_ArmourFromMaxHitPoints = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Flag.SkillTree.ArmourFromMaxHitPoints"),
+		FString("Iron Flesh: gain Armour equal to IronFleshArmourPerMaxHitPoint x Maximum Hit Points (UFP_GE_IronFlesh, live; Increased Armour applies to it)")
+		);
 
 	//Execute
 	GameplayTags.Execute_Threshold = UGameplayTagsManager::Get().AddNativeGameplayTag(

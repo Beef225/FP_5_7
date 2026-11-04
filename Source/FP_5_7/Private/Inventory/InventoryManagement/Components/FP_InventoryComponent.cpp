@@ -17,6 +17,7 @@
 #include "UI/Widget/Inventory/GridSlots/FP_EquippedGridSlot.h"
 #include "UI/Widget/Inventory/SlottedItems/FP_SlottedItem.h"
 #include "UI/Widget/Inventory/HoverItem/FP_HoverItem.h"
+#include "Player/FP_PlayerState.h"
 
 UFP_InventoryComponent::UFP_InventoryComponent()
 {
@@ -424,6 +425,11 @@ void UFP_InventoryComponent::RestoreInventoryState(UFP_InventorySaveData* SaveDa
 		if (FFP_GripStanceFragment* GripFrag = Item->GetItemManifestMutable().GetFragmentOfTypeMutable<FFP_GripStanceFragment>())
 			GripFrag->OnEquip(PC);
 	}
+
+	// Restored gear can raise MaxHP — level transitions start at full health.
+	if (!SaveData->EquippedItems.IsEmpty())
+		if (AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>())
+			PS->RefillHitPointsToMax();
 
 	// --- Restore hover item ---
 	if (SaveData->bHasHoverItem)

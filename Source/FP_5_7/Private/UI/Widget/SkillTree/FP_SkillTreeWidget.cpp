@@ -202,7 +202,16 @@ void UFP_SkillTreeWidget::HandleNodeClicked(UFP_SkillTreeNode* Node)
 	// UFP_SkillTreeNode already toggled its own state (Available→Pending / Pending→Available).
 	// Mirror that in our pending list.
 	if (Node->GetCurrentState() == ESkillTreeNodeState::Pending)
+	{
+		// Out of points: undo the node's toggle and refuse.
+		if (PointBudget != INDEX_NONE && PendingNodeTags.Num() >= PointBudget)
+		{
+			Node->SetState(ESkillTreeNodeState::Available);
+			OnNotEnoughPoints(Tag);
+			return;
+		}
 		PendingNodeTags.AddUnique(Tag);
+	}
 	else
 		PendingNodeTags.Remove(Tag);
 

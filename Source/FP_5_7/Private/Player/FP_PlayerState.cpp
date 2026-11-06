@@ -139,6 +139,75 @@ bool AFP_PlayerState::ShouldIgnoreSkillTreePointCost() const
 #endif
 }
 
+bool AFP_PlayerState::VerifyPassiveTreePoints(const FGameplayTag& TreeTag) const
+{
+	const FFP_GameplayTags& T = FFP_GameplayTags::Get();
+	const FGameplayTag Trees[] = { T.PassiveTree_Might, T.PassiveTree_Resonance, T.PassiveTree_Agility, T.PassiveTree_Fortitude };
+
+	bool bOk = true;
+	int32 TotalInvested = 0;
+
+	for (const FGameplayTag& Tree : Trees)
+	{
+		const int32 Invested  = GetInvestedPointsForPassiveTree(Tree);
+		const int32 Allocated = GetSkillTreeNodesForTree(Tree).Num();
+		TotalInvested += Invested;
+
+		if (TreeTag.IsValid() && Tree != TreeTag) continue;
+
+		if (Allocated > Invested)
+		{
+			bOk = false;
+			UE_LOG(LogTemp, Warning,
+				TEXT("PassiveTree points [%s]: invested %d, allocated %d -> over-allocated by %d%s. Refunds give no points until allocated <= invested."),
+				*Tree.ToString(), Invested, Allocated, Allocated - Invested,
+				ShouldIgnoreSkillTreePointCost() ? TEXT(" (debug bypass on)") : TEXT(" (debug bypass OFF — unexpected)"));
+		}
+		else
+		{
+			UE_LOG(LogTemp, Log, TEXT("PassiveTree points [%s]: invested %d, allocated %d, available %d"),
+				*Tree.ToString(), Invested, Allocated, Invested - Allocated);
+		}
+	}
+
+	// Overall: every attribute point the levels have awarded is either unspent or invested in a tree.
+	// (AFP_AttributeSet awards LevelUpInformation[OldLevel] once per level-up event.)
+	if (LevelUpInfo)
+	{
+		int32 Expected = 0;
+		for (int32 L = 1; L < Level; ++L)
+		{
+			if (LevelUpInfo->LevelUpInformation.IsValidIndex(L))
+				Expected += LevelUpInfo->LevelUpInformation[L].AttributePointAward;
+		}
+		const int32 Actual = TotalInvested + AttributePoints;
+		if (Actual != Expected)
+		{
+			bOk = false;
+			UE_LOG(LogTemp, Warning,
+				TEXT("PassiveTree points: invested %d + unspent %d = %d, but level %d should have awarded %d (diff %+d). "
+				     "Expected after multi-level jumps (one award per level-up event), old saves, or debug point grants."),
+				TotalInvested, AttributePoints, Actual, Level, Expected, Actual - Expected);
+		}
+	}
+
+	return bOk;
+}
+
+static FAutoConsoleCommandWithWorld GVerifyPassiveTreePointsCmd(
+	TEXT("FP.SkillTree.VerifyPoints"),
+	TEXT("Logs invested / allocated / available passive tree points for each local player and checks them against the level awards."),
+	FConsoleCommandWithWorldDelegate::CreateLambda([](UWorld* World)
+	{
+		if (!World) return;
+		for (FConstPlayerControllerIterator It = World->GetPlayerControllerIterator(); It; ++It)
+		{
+			if (const APlayerController* PC = It->Get())
+				if (const AFP_PlayerState* PS = PC->GetPlayerState<AFP_PlayerState>())
+					PS->VerifyPassiveTreePoints();
+		}
+	}));
+
 void AFP_PlayerState::AddToPassivePoints(const FGameplayTag& AttributeTag, int32 InPoints)
 {
 	const FFP_GameplayTags& GameplayTags = FFP_GameplayTags::Get();

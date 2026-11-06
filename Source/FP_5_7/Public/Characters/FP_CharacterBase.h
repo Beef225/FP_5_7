@@ -36,6 +36,9 @@ public:
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+
+	/** Muzzle / weapon-tip socket name on weapon meshes (used by GetCombatSocketLocation and weapon FX). */
+	FName GetWeaponTipSocketName() const { return WeaponTipSocketName; }
 	
 	
 	virtual UAnimMontage* GetDeathMontage_Implementation() override;

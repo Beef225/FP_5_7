@@ -24,6 +24,8 @@ DECLARE_MULTICAST_DELEGATE_TwoParams(FOnSkillTreeNodeHoverChanged, class UFP_Ski
  *   Available   — button enabled; icon pulses gently between white and PulseColor on a sine wave.
  *   Pending     — button enabled; pulse stopped; icon tint = PendingTint.
  *   Allocated   — button disabled; icon tint = AllocatedTint (slightly bright/warm).
+ *   Removable   — (respec) button enabled; icon pulses between AllocatedTint and RemovablePulseColor.
+ *   PendingRemoval — (respec) button enabled; icon tint = PendingRemovalTint.
  *
  * Designers subclass in Blueprint and implement OnStateChanged to add any
  * additional visual responses (border swap, size scale, particle, etc.).
@@ -86,6 +88,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Node|Tints")
 	FLinearColor PulseColor = FLinearColor(1.0f, 0.95f, 0.7f, 1.f);
 
+	/** Respec: upper colour of the Removable pulse (lower is AllocatedTint). */
+	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Node|Tints")
+	FLinearColor RemovablePulseColor = FLinearColor(1.0f, 0.45f, 0.35f, 1.f);
+
+	/** Respec: icon tint when the node is marked for refund. */
+	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Node|Tints")
+	FLinearColor PendingRemovalTint = FLinearColor(0.6f, 0.15f, 0.12f, 1.f);
+
 	/** How much of PulseColor is mixed in at peak (0–1). */
 	UPROPERTY(EditDefaultsOnly, Category="Skill Tree Node|Tints", meta=(ClampMin="0.0", ClampMax="1.0"))
 	float PulseIntensity = 0.35f;
@@ -112,6 +122,8 @@ private:
 
 	void ApplyIconTint(const FLinearColor& Tint) const;
 
-	float PulseTime    = 0.f;
-	bool  bPulseActive = false;
+	float        PulseTime    = 0.f;
+	bool         bPulseActive = false;
+	FLinearColor PulseLow     = FLinearColor::White;
+	FLinearColor PulseHigh    = FLinearColor::White;
 };

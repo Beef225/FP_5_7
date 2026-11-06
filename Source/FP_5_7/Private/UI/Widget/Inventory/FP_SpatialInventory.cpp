@@ -133,6 +133,7 @@ UFP_ItemDescription* UFP_SpatialInventory::GetItemDescription()
 {
 	if (!IsValid(ItemDescription))
 	{
+		checkf(ItemDescriptionClass, TEXT("%s: ItemDescriptionClass is not set"), *GetName());
 		ItemDescription = CreateWidget<UFP_ItemDescription>(GetOwningPlayer(), ItemDescriptionClass);
 		ItemDescription->SetVisibility(ESlateVisibility::Collapsed);
 
@@ -176,6 +177,7 @@ void UFP_SpatialInventory::EquippedGridSlotClicked(UFP_EquippedGridSlot* Equippe
 		EquipmentTypeTag,
 		Grid->GetTileSize()
 	);
+	if (!IsValid(EquippedSlottedItem)) return; // slot misconfigured (logged by OnItemEquipped); keep the hover item
 	EquippedSlottedItem->SetOwningInventory(this);
 	EquippedSlottedItem->OnEquippedSlottedItemClicked.AddDynamic(this, &ThisClass::EquippedSlottedItemClicked);
 

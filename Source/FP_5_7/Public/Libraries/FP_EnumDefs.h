@@ -158,4 +158,8 @@ enum class ESkillTreeNodeState : uint8
 	Available  UMETA(DisplayName="Available"),
 	Pending    UMETA(DisplayName="Pending"),
 	Allocated  UMETA(DisplayName="Allocated"),
+	/** Respec mode: allocated, and can be refunded without disconnecting other allocated nodes. */
+	Removable      UMETA(DisplayName="Removable"),
+	/** Respec mode: marked for refund — removed on Confirm, kept on Cancel. */
+	PendingRemoval UMETA(DisplayName="Pending Removal"),
 };

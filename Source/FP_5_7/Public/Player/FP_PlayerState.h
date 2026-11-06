@@ -70,6 +70,16 @@ public:
 	 */
 	bool ShouldIgnoreSkillTreePointCost() const;
 
+	/**
+	 * Logs and sanity-checks passive tree points (invalid TreeTag = all four trees):
+	 *   per tree  — invested (from the character screen), allocated, available; warns when
+	 *               allocated > invested (only possible via the debug bypass).
+	 *   overall   — invested across all trees + unspent attribute points vs the total the
+	 *               LevelUpInfo awards up to the current level.
+	 * Returns true when everything matches. Console: FP.SkillTree.VerifyPoints
+	 */
+	bool VerifyPassiveTreePoints(const FGameplayTag& TreeTag = FGameplayTag()) const;
+
 	/** MonsterLevel = -1 means no penalty (e.g. quest rewards). */
 	void AddSkillXP(int32 InXP, int32 MonsterLevel = -1);
 

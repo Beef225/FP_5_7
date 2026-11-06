@@ -37,7 +37,7 @@ void UFP_SkillTreeNode::NativeTick(const FGeometry& MyGeometry, float InDeltaTim
 	PulseTime += InDeltaTime;
 	// Sine wave: oscillates 0→1→0 at PulseSpeed Hz
 	const float Alpha = FMath::Sin(PulseTime * PulseSpeed * UE_TWO_PI) * 0.5f + 0.5f;
-	ApplyIconTint(FMath::Lerp(FLinearColor::White, PulseColor, Alpha * PulseIntensity));
+	ApplyIconTint(FMath::Lerp(PulseLow, PulseHigh, Alpha * PulseIntensity));
 }
 
 void UFP_SkillTreeNode::Populate(const UFP_SkillTreeNodeData* InNodeData, ESkillTreeNodeState InState)
@@ -66,7 +66,22 @@ void UFP_SkillTreeNode::SetState(ESkillTreeNodeState InState)
 	case ESkillTreeNodeState::Available:
 		if (Button_Node) Button_Node->SetIsEnabled(true);
 		ApplyIconTint(FLinearColor::White);
+		PulseLow     = FLinearColor::White;
+		PulseHigh    = PulseColor;
 		bPulseActive = true;     // NativeTick drives the animation
+		break;
+
+	case ESkillTreeNodeState::Removable:
+		if (Button_Node) Button_Node->SetIsEnabled(true);
+		ApplyIconTint(AllocatedTint);
+		PulseLow     = AllocatedTint;
+		PulseHigh    = RemovablePulseColor;
+		bPulseActive = true;
+		break;
+
+	case ESkillTreeNodeState::PendingRemoval:
+		if (Button_Node) Button_Node->SetIsEnabled(true);
+		ApplyIconTint(PendingRemovalTint);
 		break;
 
 	case ESkillTreeNodeState::Pending:
@@ -104,6 +119,17 @@ void UFP_SkillTreeNode::HandleButtonClicked()
 
 	case ESkillTreeNodeState::Pending:
 		SetState(ESkillTreeNodeState::Available);
+		OnNodeClicked.Broadcast(this);
+		break;
+
+	// Respec mode — the tree widget validates and may revert the toggle.
+	case ESkillTreeNodeState::Removable:
+		SetState(ESkillTreeNodeState::PendingRemoval);
+		OnNodeClicked.Broadcast(this);
+		break;
+
+	case ESkillTreeNodeState::PendingRemoval:
+		SetState(ESkillTreeNodeState::Removable);
 		OnNodeClicked.Broadcast(this);
 		break;
 

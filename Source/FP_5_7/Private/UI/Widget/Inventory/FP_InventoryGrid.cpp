@@ -129,6 +129,7 @@ UUserWidget* UFP_InventoryGrid::GetVisibleCursorWidget()
 	if (!IsValid(GetOwningPlayer())) return nullptr;
 	if (!IsValid(VisibleCursorWidget))
 	{
+		if (!VisibleCursorWidgetClass) return nullptr; // optional: no class = default OS cursor
 		VisibleCursorWidget = CreateWidget<UUserWidget>(GetOwningPlayer(), VisibleCursorWidgetClass);
 	}
 	return VisibleCursorWidget;
@@ -139,6 +140,7 @@ UUserWidget* UFP_InventoryGrid::GetHiddenCursorWidget()
 	if (!IsValid(GetOwningPlayer())) return nullptr;
 	if (!IsValid(HiddenCursorWidget))
 	{
+		if (!HiddenCursorWidgetClass) return nullptr; // optional: no class = default OS cursor
 		HiddenCursorWidget = CreateWidget<UUserWidget>(GetOwningPlayer(), HiddenCursorWidgetClass);
 	}
 	return HiddenCursorWidget;

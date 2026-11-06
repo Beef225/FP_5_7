@@ -62,7 +62,34 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category="DodgeRoll|MoveSpeed")
 	TSubclassOf<UGameplayEffect> MoveSpeedEffectClass;
 
+	/**
+	 * Safety net: if the ability is still active this long after the longest roll montage
+	 * should have finished, it is force-ended. Guards against a montage that gets interrupted
+	 * or cancelled without the Blueprint ending the ability — which would otherwise leave the
+	 * roll's tags (rotation cancelled, movement locked) and the infinite move-speed GE on forever.
+	 */
+	UPROPERTY(EditDefaultsOnly, Category="DodgeRoll|Safety", meta=(ClampMin="0.1"))
+	float SafetyTimeoutPadding = 0.5f;
+
+protected:
+
+	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle,
+		const FGameplayAbilityActorInfo* ActorInfo,
+		const FGameplayAbilityActivationInfo ActivationInfo,
+		const FGameplayEventData* TriggerEventData) override;
+
+	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle,
+		const FGameplayAbilityActorInfo* ActorInfo,
+		const FGameplayAbilityActivationInfo ActivationInfo,
+		bool bReplicateEndAbility, bool bWasCancelled) override;
+
 private:
 
+	/** Removes every active MoveSpeedEffectClass GE on the owner (not just our handle) — catches leaks. */
+	void RemoveAllMoveSpeedEffects();
+	float GetLongestMontageLength() const;
+	void OnSafetyTimeout();
+
 	FActiveGameplayEffectHandle MoveSpeedHandle;
+	FTimerHandle                SafetyTimerHandle;
 };

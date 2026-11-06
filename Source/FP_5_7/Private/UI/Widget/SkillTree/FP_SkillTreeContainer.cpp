@@ -27,6 +27,8 @@ void UFP_SkillTreeContainer::NativeConstruct()
 		Button_Confirm->OnClicked.AddDynamic(this, &UFP_SkillTreeContainer::HandleConfirmClicked);
 	if (Button_Cancel)
 		Button_Cancel->OnClicked.AddDynamic(this, &UFP_SkillTreeContainer::HandleCancelClicked);
+	if (Button_Respec)
+		Button_Respec->OnClicked.AddDynamic(this, &UFP_SkillTreeContainer::HandleRespecClicked);
 
 	if (Button_Confirm) Button_Confirm->SetIsEnabled(false);
 	if (Button_Cancel)  Button_Cancel->SetIsEnabled(false);
@@ -136,6 +138,13 @@ void UFP_SkillTreeContainer::SwitchToTree(int32 Index)
 	const int32 TreeCount = Switcher_Trees ? Switcher_Trees->GetChildrenCount() : 0;
 	if (Index < 0 || Index >= TreeCount || Index == ActiveTreeIndex) return;
 
+	// Leaving a tree mid-respec discards its pending refunds.
+	if (UFP_SkillTreeWidget* Old = GetActiveTreeWidget(); Old && Old->IsInRespecMode())
+	{
+		Old->SetRespecMode(false);
+		OnRespecModeChanged(false);
+	}
+
 	UnwireTree(GetActiveTreeWidget());
 	HideNodePopup();
 
@@ -203,7 +212,33 @@ void UFP_SkillTreeContainer::RefreshActivePoints()
 		CachedAvailablePoints = PS->GetPassivePointsForTree(Active->GetTreeTag());
 
 	Active->SetPointBudget(IgnoresPointCost() ? INDEX_NONE : FMath::Max(0, CachedAvailablePoints));
-	HandlePendingCountChanged(Active->GetPendingCount());
+	HandlePendingCountChanged(Active->GetPendingChangeCount());
+}
+
+bool UFP_SkillTreeContainer::IsInRespecMode() const
+{
+	const UFP_SkillTreeWidget* Active = GetActiveTreeWidget();
+	return Active && Active->IsInRespecMode();
+}
+
+void UFP_SkillTreeContainer::SetRespecMode(bool bEnable)
+{
+	UFP_SkillTreeWidget* Active = GetActiveTreeWidget();
+	if (!Active || Active->IsInRespecMode() == bEnable) return;
+
+	HideNodePopup();
+	Active->SetRespecMode(bEnable);   // broadcasts the pending count → buttons + display refresh
+	OnRespecModeChanged(bEnable);
+}
+
+void UFP_SkillTreeContainer::ToggleRespecMode()
+{
+	SetRespecMode(!IsInRespecMode());
+}
+
+void UFP_SkillTreeContainer::HandleRespecClicked()
+{
+	ToggleRespecMode();
 }
 
 void UFP_SkillTreeContainer::HandleSkillStateLoaded()
@@ -345,9 +380,18 @@ FReply UFP_SkillTreeContainer::NativeOnMouseMove(
 void UFP_SkillTreeContainer::HandlePendingCountChanged(int32 NewCount)
 {
 	const bool bHasPending = NewCount > 0;
-	const bool bAffordable = IgnoresPointCost() || NewCount <= CachedAvailablePoints;
-	if (Button_Confirm) Button_Confirm->SetIsEnabled(bHasPending && bAffordable);
-	if (Button_Cancel)  Button_Cancel->SetIsEnabled(bHasPending);
+	if (IsInRespecMode())
+	{
+		// Refunds never need points; Cancel stays live so respec can be exited with no changes.
+		if (Button_Confirm) Button_Confirm->SetIsEnabled(bHasPending);
+		if (Button_Cancel)  Button_Cancel->SetIsEnabled(true);
+	}
+	else
+	{
+		const bool bAffordable = IgnoresPointCost() || NewCount <= CachedAvailablePoints;
+		if (Button_Confirm) Button_Confirm->SetIsEnabled(bHasPending && bAffordable);
+		if (Button_Cancel)  Button_Cancel->SetIsEnabled(bHasPending);
+	}
 	UpdatePointsDisplay(NewCount);
 }
 
@@ -361,18 +405,26 @@ void UFP_SkillTreeContainer::UpdatePointsDisplay(int32 PendingCount)
 	UFP_SkillTreeWidget* Active = GetActiveTreeWidget();
 	if (!Active) return;
 
-	const int32 Spent = Active->GetAllocatedNodeTags().Num();
+	const int32 Spent    = Active->GetAllocatedNodeTags().Num();
+	const bool  bRespec  = Active->IsInRespecMode();
 
 	if (Text_PointsSpent)
 	{
-		const FText SpentText = PendingCount > 0
-			? FText::FromString(FString::Printf(TEXT("%d+%d"), Spent, PendingCount))
-			: FText::AsNumber(Spent);
+		FText SpentText = FText::AsNumber(Spent);
+		if (PendingCount > 0)
+			SpentText = FText::FromString(bRespec
+				? FString::Printf(TEXT("%d-%d"), Spent, PendingCount)
+				: FString::Printf(TEXT("%d+%d"), Spent, PendingCount));
 		Text_PointsSpent->SetText(SpentText);
 	}
 
+	// Available is derived (invested − allocated), so a refund only shows as a point once the
+	// tree is back under the invested count — debug over-allocations never create points.
 	if (Text_PointsAvailable)
-		Text_PointsAvailable->SetText(FText::AsNumber(FMath::Max(0, CachedAvailablePoints - PendingCount)));
+	{
+		const int32 Available = bRespec ? CachedAvailablePoints + PendingCount : CachedAvailablePoints - PendingCount;
+		Text_PointsAvailable->SetText(FText::AsNumber(FMath::Max(0, Available)));
+	}
 }
 
 void UFP_SkillTreeContainer::HandleConfirmClicked()
@@ -382,6 +434,21 @@ void UFP_SkillTreeContainer::HandleConfirmClicked()
 
 	AFP_PlayerState* PS = GetOwningPlayerState<AFP_PlayerState>();
 	if (!PS) return;
+
+	// --- Respec: refund the marked nodes ---
+	if (Active->IsInRespecMode())
+	{
+		if (Active->GetPendingRemovalCount() <= 0) return;
+
+		Active->CommitPendingRemovals();   // deallocates effects, leaves respec mode
+		PS->SetSkillTreeAllocatedNodes(Active->GetTreeTag(), Active->GetAllocatedNodeTags());
+		OnRespecModeChanged(false);
+		RefreshActivePoints();
+		PS->VerifyPassiveTreePoints(Active->GetTreeTag());
+
+		OnCommitClicked();
+		return;
+	}
 
 	const int32 PointsToSpend = Active->GetPendingCount();
 	if (PointsToSpend <= 0) return;
@@ -399,13 +466,16 @@ void UFP_SkillTreeContainer::HandleConfirmClicked()
 	// SaveActiveCharacter writes this map to the save record.
 	PS->SetSkillTreeAllocatedNodes(Active->GetTreeTag(), Active->GetAllocatedNodeTags());
 	RefreshActivePoints();
+	PS->VerifyPassiveTreePoints(Active->GetTreeTag());
 
 	OnCommitClicked();
 }
 
 void UFP_SkillTreeContainer::HandleCancelClicked()
 {
-	if (UFP_SkillTreeWidget* Active = GetActiveTreeWidget())
+	if (IsInRespecMode())
+		SetRespecMode(false);   // discards pending refunds
+	else if (UFP_SkillTreeWidget* Active = GetActiveTreeWidget())
 		Active->CancelPendingNodes();
 	OnCancelClicked();
 }

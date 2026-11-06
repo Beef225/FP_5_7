@@ -142,7 +142,17 @@ void UFP_AbilitySystemComponent::AddInputTagToSkill(const FGameplayTag& SkillTag
 			DynTags.AddTag(InputTag);
 			MarkAbilitySpecDirty(Spec);
 		}
-		break;
+		return;
+	}
+
+	// No granted ability's first Skill/Skills asset tag matched: the slot is assigned in the UI but the
+	// key will do nothing. Usual causes: the GA's Asset Tags don't match the Skill Library tag, or the
+	// skill isn't granted (weapon not equipped / no SkillAbility in the library entry).
+	UE_LOG(LogTemp, Verbose, TEXT("[SKILL INPUT] No granted ability has skill tag '%s' — input '%s' not bound. Granted skill tags:"),
+		*SkillTag.ToString(), *InputTag.ToString());
+	for (const FGameplayAbilitySpec& Spec : GetActivatableAbilities())
+	{
+		UE_LOG(LogTemp, Verbose, TEXT("    %s -> '%s'"), *GetNameSafe(Spec.Ability), *GetAbilityTagFromSpec(Spec).ToString());
 	}
 }
 

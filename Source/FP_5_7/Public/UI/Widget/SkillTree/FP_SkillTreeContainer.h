@@ -59,6 +59,20 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Skill Tree Container")
 	void ResetView();
 
+	/**
+	 * Respec mode on the active tree: allocated nodes at the ends of chains can be clicked to
+	 * mark them for refund. Confirm refunds them, Cancel leaves respec mode with no change.
+	 * Entering discards any pending allocations. Button_Respec toggles this.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Skill Tree Container|Respec")
+	void SetRespecMode(bool bEnable);
+
+	UFUNCTION(BlueprintCallable, Category="Skill Tree Container|Respec")
+	void ToggleRespecMode();
+
+	UFUNCTION(BlueprintPure, Category="Skill Tree Container|Respec")
+	bool IsInRespecMode() const;
+
 protected:
 	virtual void NativeConstruct() override;
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
@@ -83,6 +97,10 @@ protected:
 	/** Fired after SwitchToTree changes the active tree. */
 	UFUNCTION(BlueprintImplementableEvent, Category="Skill Tree Container")
 	void OnTreeSwitched(int32 NewIndex);
+
+	/** Fired when the active tree enters or leaves respec mode (swap button label, tint, etc.). */
+	UFUNCTION(BlueprintImplementableEvent, Category="Skill Tree Container|Respec")
+	void OnRespecModeChanged(bool bInRespecMode);
 
 	// ---- Config ----------------------------------------------------------------
 
@@ -116,6 +134,10 @@ protected:
 
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UButton> Button_Cancel;
+
+	/** Optional: toggles respec mode on the active tree. */
+	UPROPERTY(meta=(BindWidgetOptional))
+	TObjectPtr<UButton> Button_Respec;
 
 	/** Shows allocated count; pending shown as e.g. "12+2". */
 	UPROPERTY(meta=(BindWidget))
@@ -158,6 +180,7 @@ private:
 
 	UFUNCTION() void HandleConfirmClicked();
 	UFUNCTION() void HandleCancelClicked();
+	UFUNCTION() void HandleRespecClicked();
 	UFUNCTION() void HandlePendingCountChanged(int32 NewCount);
 	UFUNCTION() void HandlePassivePointsChanged(FGameplayTag Tag, int32 NewPoints);
 	void HandleNodeHoverChanged(UFP_SkillTreeNode* Node, bool bEntered);

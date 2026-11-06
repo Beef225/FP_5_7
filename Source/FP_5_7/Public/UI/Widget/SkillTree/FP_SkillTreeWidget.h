@@ -89,7 +89,33 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Skill Tree")
 	int32 GetPointBudget() const { return PointBudget; }
 
-	/** Fired whenever the pending count changes — subscribe to drive button states. */
+	// ---- Respec ------------------------------------------------------------
+
+	/**
+	 * Enter / leave respec mode. Entering cancels any pending allocations; leaving discards
+	 * pending removals. In respec mode only allocated nodes react: those whose removal keeps
+	 * every other allocated node connected to a starter are Removable; clicking marks them
+	 * PendingRemoval (click again to keep). CommitPendingRemovals applies the refunds.
+	 */
+	UFUNCTION(BlueprintCallable, Category="Skill Tree|Respec")
+	void SetRespecMode(bool bEnable);
+
+	UFUNCTION(BlueprintPure, Category="Skill Tree|Respec")
+	bool IsInRespecMode() const { return bRespecMode; }
+
+	UFUNCTION(BlueprintPure, Category="Skill Tree|Respec")
+	int32 GetPendingRemovalCount() const { return PendingRemovalTags.Num(); }
+
+	/** Deallocates every node marked for removal, removes it from the allocated set and leaves respec mode. */
+	UFUNCTION(BlueprintCallable, Category="Skill Tree|Respec")
+	void CommitPendingRemovals();
+
+	/** Pending adds, or pending removals in respec mode — what OnPendingCountChangedDelegate reports. */
+	UFUNCTION(BlueprintPure, Category="Skill Tree")
+	int32 GetPendingChangeCount() const { return bRespecMode ? PendingRemovalTags.Num() : PendingNodeTags.Num(); }
+
+	/** Fired whenever the pending count changes — subscribe to drive button states.
+	 *  In respec mode the count is pending removals (see GetPendingChangeCount). */
 	UPROPERTY(BlueprintAssignable, Category="Skill Tree")
 	FOnSkillTreePendingCountChanged OnPendingCountChangedDelegate;
 
@@ -120,6 +146,14 @@ protected:
 	/** Called when a click is refused because every available point is already pending (sound / flash hook). */
 	UFUNCTION(BlueprintImplementableEvent, Category="Skill Tree")
 	void OnNotEnoughPoints(const FGameplayTag& NodeTag);
+
+	/** Called after CommitPendingRemovals refunds nodes. */
+	UFUNCTION(BlueprintImplementableEvent, Category="Skill Tree|Respec")
+	void OnNodesRefunded(const TArray<FGameplayTag>& RefundedTags);
+
+	/** Called when respec mode is entered or left. */
+	UFUNCTION(BlueprintImplementableEvent, Category="Skill Tree|Respec")
+	void OnRespecModeChanged(bool bInRespecMode);
 
 	// ---- Config ------------------------------------------------------------
 
@@ -180,7 +214,18 @@ private:
 	void SpawnNodeWidget(const UFP_SkillTreeNodeData* Data);
 	ESkillTreeNodeState ComputeState(const UFP_SkillTreeNodeData* Data) const;
 	void RecomputeAllStates();
+	void BroadcastPendingCount();
 	TSubclassOf<UFP_SkillTreeNode> ClassForType(ESkillTreeNodeType Type) const;
+
+	/** Allocated nodes not marked for removal. */
+	TSet<FGameplayTag> GetRemainingAllocated() const;
+	/** Nodes in Set reachable from a starter node through Set. */
+	TSet<FGameplayTag> GetReachableFromStarters(const TSet<FGameplayTag>& Set) const;
+	/** Respec: removing Tag keeps every currently-connected allocated node connected. */
+	bool CanRemove(const FGameplayTag& Tag, const TSet<FGameplayTag>& Remaining,
+	               const TSet<FGameplayTag>& ReachableNow) const;
+	/** Respec: un-marking Tag would leave it connected (starter, or a neighbour still remains). */
+	bool CanRestore(const FGameplayTag& Tag, const TSet<FGameplayTag>& Remaining) const;
 
 	UFUNCTION()
 	void HandleNodeClicked(UFP_SkillTreeNode* Node);
@@ -204,4 +249,11 @@ private:
 	FGameplayTagContainer AllocatedNodeTags;
 	TArray<FGameplayTag>  PendingNodeTags;
 	int32                 PointBudget = INDEX_NONE;
+
+	/** Undirected adjacency built from ConnectionPairs (node lists may only name one side). */
+	TMap<FGameplayTag, TArray<FGameplayTag>> Adjacency;
+	TSet<FGameplayTag>                       StarterTags;
+
+	bool                 bRespecMode = false;
+	TArray<FGameplayTag> PendingRemovalTags;
 };

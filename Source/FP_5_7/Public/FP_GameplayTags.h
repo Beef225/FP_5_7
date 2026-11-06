@@ -310,6 +310,7 @@ FGameplayTag Skills_Rotation_Cancelled;
 FGameplayTag Skill_MoveSpeed_Diminished;
 FGameplayTag Skill_MoveSpeed_None;
 FGameplayTag Skills_Status_Equipped;
+FGameplayTag Skills_Physical_BurstFire;
 
 //Montage
 FGameplayTag Montage_Skill_Weapon;
@@ -635,6 +636,27 @@ FGameplayTag SkillPassive_Impact_LifeOnHit;
 FGameplayTag SkillPassive_Impact_IncreasedAgainstBruised;
 FGameplayTag SkillPassive_Impact_SecondaryCritChance;
 FGameplayTag SkillPassive_Impact_SecondaryPhysicalDamage;
+FGameplayTag SkillPassive_BurstFire_IncreasedPhysicalDamage;
+FGameplayTag SkillPassive_BurstFire_IncreasedDamage;
+FGameplayTag SkillPassive_BurstFire_BruisedBuildup;
+FGameplayTag SkillPassive_BurstFire_PierceDamage;
+FGameplayTag SkillPassive_BurstFire_PierceCount;
+FGameplayTag SkillPassive_BurstFire_ChainRadius;
+FGameplayTag SkillPassive_BurstFire_ChainCount;
+FGameplayTag SkillPassive_BurstFire_ChainDamage;
+FGameplayTag SkillPassive_BurstFire_BurstInterval;
+FGameplayTag SkillPassive_BurstFire_ExtraRounds;
+FGameplayTag SkillPassive_BurstFire_MoreDamage;
+FGameplayTag SkillPassive_BurstFire_Spread;
+FGameplayTag SkillPassive_BurstFire_FocusFire;
+FGameplayTag SkillPassive_BurstFire_IncreasedCritChance;
+FGameplayTag SkillPassive_BurstFire_FinalRoundDamage;
+FGameplayTag SkillPassive_BurstFire_ProjectileSpeed;
+FGameplayTag SkillPassive_BurstFire_FragmentCount;
+FGameplayTag SkillPassive_BurstFire_FragmentDamage;
+FGameplayTag SkillPassive_BurstFire_CritMultiplier;
+FGameplayTag SkillPassive_BurstFire_Volley;
+FGameplayTag SkillPassive_BurstFire_Overpenetration;
 
 	//SkillPassive — Leap
 	FGameplayTag SkillPassive_Leap_ExtraRange;

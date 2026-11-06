@@ -895,6 +895,10 @@ void FFP_GameplayTags::InitializeGameplayTags()
 		FName("Skills.Status.Equipped"), 
 		FString("Added Tag to Equipped Skills")
 		);
+	GameplayTags.Skills_Physical_BurstFire = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Skills.Physical.BurstFire"),
+		FString("Burst Fire: rifle physical projectile burst")
+		);
 
 	//Montage
 	GameplayTags.Montage_Skill_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -1527,6 +1531,90 @@ void FFP_GameplayTags::InitializeGameplayTags()
 	GameplayTags.SkillPassive_Impact_SecondaryPhysicalDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("SkillPassive.Impact.SecondaryPhysicalDamage"),
 		FString("Per-skill passive: increased physical damage, Secondary Impacts only (content-only — not yet routed to a SetByCaller bucket)")
+		);
+	GameplayTags.SkillPassive_BurstFire_IncreasedPhysicalDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.IncreasedPhysicalDamage"),
+		FString("Per-skill passive: Increased Physical Damage")
+		);
+	GameplayTags.SkillPassive_BurstFire_IncreasedDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.IncreasedDamage"),
+		FString("Per-skill passive: Increased Damage")
+		);
+	GameplayTags.SkillPassive_BurstFire_BruisedBuildup = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.BruisedBuildup"),
+		FString("Per-skill passive: Bruised Buildup")
+		);
+	GameplayTags.SkillPassive_BurstFire_PierceDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.PierceDamage"),
+		FString("Per-skill passive: Pierce Damage")
+		);
+	GameplayTags.SkillPassive_BurstFire_PierceCount = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.PierceCount"),
+		FString("Per-skill passive: Pierce Count")
+		);
+	GameplayTags.SkillPassive_BurstFire_ChainRadius = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.ChainRadius"),
+		FString("Per-skill passive: Chain Radius")
+		);
+	GameplayTags.SkillPassive_BurstFire_ChainCount = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.ChainCount"),
+		FString("Per-skill passive: Chain Count")
+		);
+	GameplayTags.SkillPassive_BurstFire_ChainDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.ChainDamage"),
+		FString("Per-skill passive: Chain Damage")
+		);
+	GameplayTags.SkillPassive_BurstFire_BurstInterval = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.BurstInterval"),
+		FString("Per-skill passive: Burst Interval")
+		);
+	GameplayTags.SkillPassive_BurstFire_ExtraRounds = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.ExtraRounds"),
+		FString("Per-skill passive: Extra Rounds")
+		);
+	GameplayTags.SkillPassive_BurstFire_MoreDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.MoreDamage"),
+		FString("Per-skill passive: More Damage")
+		);
+	GameplayTags.SkillPassive_BurstFire_Spread = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.Spread"),
+		FString("Per-skill passive: Spread")
+		);
+	GameplayTags.SkillPassive_BurstFire_FocusFire = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.FocusFire"),
+		FString("Per-skill passive: Focus Fire")
+		);
+	GameplayTags.SkillPassive_BurstFire_IncreasedCritChance = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.IncreasedCritChance"),
+		FString("Per-skill passive: Increased Crit Chance")
+		);
+	GameplayTags.SkillPassive_BurstFire_FinalRoundDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.FinalRoundDamage"),
+		FString("Per-skill passive: Final Round Damage")
+		);
+	GameplayTags.SkillPassive_BurstFire_ProjectileSpeed = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.ProjectileSpeed"),
+		FString("Per-skill passive: Projectile Speed")
+		);
+	GameplayTags.SkillPassive_BurstFire_FragmentCount = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.FragmentCount"),
+		FString("Per-skill passive: Fragment Count")
+		);
+	GameplayTags.SkillPassive_BurstFire_FragmentDamage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.FragmentDamage"),
+		FString("Per-skill passive: Fragment Damage")
+		);
+	GameplayTags.SkillPassive_BurstFire_CritMultiplier = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.CritMultiplier"),
+		FString("Per-skill passive: Crit Multiplier")
+		);
+	GameplayTags.SkillPassive_BurstFire_Volley = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.Volley"),
+		FString("Per-skill passive: Volley")
+		);
+	GameplayTags.SkillPassive_BurstFire_Overpenetration = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("SkillPassive.BurstFire.Overpenetration"),
+		FString("Per-skill passive: Overpenetration")
 		);
 
 	// ---- Leap SkillPassive values ----

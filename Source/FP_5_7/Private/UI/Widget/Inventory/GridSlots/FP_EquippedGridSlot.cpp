@@ -53,7 +53,7 @@ FReply UFP_EquippedGridSlot::NativeOnMouseButtonDown(const FGeometry& InGeometry
 
 UFP_EquippedSlottedItem* UFP_EquippedGridSlot::OnItemEquipped(UFP_InventoryItem* Item, const FGameplayTag& EquipmentTag, float TileSize)
 {
-	if (!EquipmentTag.MatchesTagExact(EquipmentTypeTag)) return nullptr;
+	if (!IsValid(Item) || !EquipmentTag.MatchesTagExact(EquipmentTypeTag)) return nullptr;
 
 	const FFP_GridFragment* GridFragment = Item->GetItemManifest().GetFragmentOfType<FFP_GridFragment>();
 	if (!GridFragment) return nullptr;
@@ -63,16 +63,24 @@ UFP_EquippedSlottedItem* UFP_EquippedGridSlot::OnItemEquipped(UFP_InventoryItem*
 	const float IconTileWidth = TileSize - GridFragment->GetGridPadding() * 2;
 	const FVector2D DrawSize = FVector2D(GridDimensions.X, GridDimensions.Y) * IconTileWidth;
 
+	const FFP_ImageFragment* ImageFragment = Item->GetItemManifest().GetFragmentOfType<FFP_ImageFragment>();
+	if (!ImageFragment) return nullptr;
+
+	if (!EquippedSlottedItemClass)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s (slot %s): EquippedSlottedItemClass is not set — set it on this slot in the inventory widget."),
+			*GetName(), *EquipmentTypeTag.ToString());
+		return nullptr;
+	}
+
 	EquippedSlottedItem = CreateWidget<UFP_EquippedSlottedItem>(GetOwningPlayer(), EquippedSlottedItemClass);
+	if (!EquippedSlottedItem) return nullptr;
 
 	EquippedSlottedItem->SetInventoryItem(Item);
 	EquippedSlottedItem->SetEquipmentTypeTag(EquipmentTag);
 	EquippedSlottedItem->UpdateStackCount(0);
 
 	SetInventoryItem(Item);
-
-	const FFP_ImageFragment* ImageFragment = Item->GetItemManifest().GetFragmentOfType<FFP_ImageFragment>();
-	if (!ImageFragment) return nullptr;
 
 	FSlateBrush Brush;
 	Brush.SetResourceObject(ImageFragment->GetIcon());

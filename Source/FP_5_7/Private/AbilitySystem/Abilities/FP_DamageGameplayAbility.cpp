@@ -260,7 +260,8 @@ void UFP_DamageGameplayAbility::AssignSkillPassiveBonuses(FGameplayEffectSpecHan
 		else if (Leaf == TEXT("HeatCost"))                 continue; // read by the native skill cost, not the damage spec
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("AssignSkillPassiveBonuses [%s]: unrecognised leaf [%s] — no bucket mapped"),
+			// Mechanic leaves (chain depth, extra rounds, ...) are read by the skill itself, not the damage spec.
+			UE_LOG(LogTemp, Verbose, TEXT("AssignSkillPassiveBonuses [%s]: leaf [%s] has no damage bucket (read by the skill)"),
 				*GetName(), *Leaf);
 		}
 

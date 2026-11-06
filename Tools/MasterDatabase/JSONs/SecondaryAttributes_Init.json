@@ -347,7 +347,7 @@
   {
     "Name": "SkillMoveSpeedModifier",
     "Attribute": "FP_AttributeSet.SkillMoveSpeedModifier",
-    "InitialValue": 0.5
+    "InitialValue": 0.25
   },
   {
     "Name": "ProjectileSpeed",
